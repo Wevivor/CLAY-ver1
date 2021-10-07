@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "102337574115",
+    "project_id": "clay-36ada",
+    "storage_bucket": "clay-36ada.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:102337574115:android:6746a67be6c8f2176cc1d6",
+        "android_client_info": {
+          "package_name": "com.wevivor.clay"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "102337574115-1rvl9jmajufj3g79botqmbgs1q045d4m.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.wevivor.clay",
+            "certificate_hash": "38b47f3be6ed2871a8837acb5566a71acb6d7470"
+          }
+        },
+        {
+          "client_id": "102337574115-bkgv365p459a2eh2gg1hu3el05486bqp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqMcF8yC7S9XPgP5If2FGXmz7SG3GXgTY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "102337574115-bkgv365p459a2eh2gg1hu3el05486bqp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">102337574115-bkgv365p459a2eh2gg1hu3el05486bqp.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">102337574115</string>
+    <string name="google_api_key" translatable="false">AIzaSyDqMcF8yC7S9XPgP5If2FGXmz7SG3GXgTY</string>
+    <string name="google_app_id" translatable="false">1:102337574115:android:6746a67be6c8f2176cc1d6</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDqMcF8yC7S9XPgP5If2FGXmz7SG3GXgTY</string>
+    <string name="google_storage_bucket" translatable="false">clay-36ada.appspot.com</string>
+    <string name="project_id" translatable="false">clay-36ada</string>
+</resources>
