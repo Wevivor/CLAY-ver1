@@ -2,6 +2,8 @@
     package="com.wevivor.clay">
      <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
   
+  <!-- android:launchMode="singleInstance" -->
+            
    <application
         android:label="clay"
         android:icon="@mipmap/ic_launcher">

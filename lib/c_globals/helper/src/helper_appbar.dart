@@ -29,15 +29,6 @@ class AppbarHelper {
   // }
 
 //APPbar의 오른쪽 아이콘 리스트.
-  void _showBS(context, child) {
-    showModalBottomSheet(
-        context: context,
-        enableDrag: false,
-        builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
-          return child;
-        });
-  }
 
   Widget vwIcon(BuildContext context,
       {IconData? iconData, Color color = Colors.black, Function? onTap}) {
