@@ -6,15 +6,14 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:get/get.dart';
 
-class BottomSheetLink extends StatelessWidget with AppbarHelper {
+class BottomSheetShare extends StatelessWidget with AppbarHelper {
   final onMenu;
-  BottomSheetLink({
+  BottomSheetShare({
     this.onMenu,
   });
 
   @override
   Widget build(BuildContext context) {
-    final node = FocusScope.of(context);
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[

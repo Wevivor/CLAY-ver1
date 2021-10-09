@@ -1,8 +1,8 @@
 import 'package:clay/c_config/config.dart';
 import 'package:flutter/material.dart';
 
-class DecorationInputHelper {
-  DecorationInputHelper._();
+class DecoInputHelper {
+  DecoInputHelper._();
 
   static InputDecoration inputDecoration(
       {String? hint,

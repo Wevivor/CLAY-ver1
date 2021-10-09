@@ -119,79 +119,89 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
   }
 
   Widget vwBoardMenu(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          heightSpace(2.0),
-          Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
-          heightSpace(49),
-          HanListTile(
-            onTap: () {
-              //SUBJECT : BS: 상단 고정
-              //TODO: 데이터베이스고정.
-              Get.back();
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-            title: Text('상단고정'),
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        heightSpace(2.0),
+        Container(
+            alignment: Alignment.bottomCenter,
+            height: 11,
+            child: Image.asset(Const.assets + 'images/rect_40.png')),
+        heightSpace(34),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
           ),
-          HanListTile(
-            onTap: () {
-              //SUBJECT : BS: 공유 권한 변경
-              //TODO: 패딩조정.
-              Get.back();
-              _showBS(context, vwBoardShare(context));
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-            title: Text('공유'),
+          onTap: () {
+            //SUBJECT : BS: 상단 고정
+            //TODO: 데이터베이스고정.
+            Get.back();
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
+          title: Text('상단고정'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
           ),
-          HanListTile(
-            onTap: () {
-              //SUBJECT : BS: 보드 체인지
-              //TODO: 공유....
-              Get.back();
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-            title: Text('보드정보 수정'),
+          onTap: () {
+            //SUBJECT : BS: 공유 권한 변경
+            //TODO: 패딩조정.
+            Get.back();
+            _showBS(context, vwBoardShare(context));
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
+          title: Text('공유'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
           ),
-          HanListTile(
-            onTap: () async {
-              //SUBJECT : BS: 보드 삭제
-              //TODO: 삭제....
-              Get.back();
-              // AppHelper.show
-              // Get.toNamed('/yaggwan/2');
-              var _responce = false;
-              await DialogHelper.MessageDialog(
-                context,
-                (context) => DeleteDialog(
-                  title: '보드를 삭제하시겠습니까?',
-                  deleteTitle: '삭제',
-                  okTitle: '취소',
-                  okTap: () {
-                    _responce = false;
-                  },
-                  deleteTap: () {
-                    _responce = true;
-                  },
-                ),
-              );
-              if (_responce) {
-                AppHelper.showMessage('보드를 삭제');
-              }
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-            title: Text('삭제'),
+          onTap: () {
+            //SUBJECT : BS: 보드 체인지
+            //TODO: 공유....
+            Get.back();
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
+          title: Text('보드정보 수정'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
           ),
-        ],
-      ),
+          onTap: () async {
+            //SUBJECT : BS: 보드 삭제
+            //TODO: 삭제....
+            Get.back();
+            // AppHelper.show
+            // Get.toNamed('/yaggwan/2');
+            var _responce = false;
+            await DialogHelper.MessageDialog(
+              context,
+              (context) => DeleteDialog(
+                title: '보드를 삭제하시겠습니까?',
+                deleteTitle: '삭제',
+                okTitle: '취소',
+                okTap: () {
+                  _responce = false;
+                },
+                deleteTap: () {
+                  _responce = true;
+                },
+              ),
+            );
+            if (_responce) {
+              AppHelper.showMessage('보드를 삭제');
+            }
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
+          title: Text('삭제'),
+        ),
+      ],
     );
   }
 
@@ -323,10 +333,13 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
 
   void _showBS(context, child) {
     showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
         context: context,
         enableDrag: false,
         builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
           return child;
         });
   }

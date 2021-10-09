@@ -1,12 +1,11 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/controllers/controllers.dart';
 import 'package:clay/controllers/globals/globals.dart';
 import 'package:clay/page/ui_board.dart';
 import 'package:clay/page/ui_content.dart';
 import 'package:clay/part/part_bs/part_bs.dart';
-import 'package:clay/part/part_bs/src/part_bs_menu_from_share.dart';
-import 'package:clay/part/part_home/part_home.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
@@ -25,9 +24,13 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   List<SharedMediaFile>? _sharedFiles;
   String? _sharedText;
   bool _isSharedOpen = false;
+  final _controller = Get.put(BestListController());
+
   @override
   void initState() {
     super.initState();
+
+    initFetch();
 
     // For sharing images coming from outside the app while the app is in the memory
     _intentDataStreamSubscription = ReceiveSharingIntent.getMediaStream()
@@ -82,6 +85,11 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     });
   }
 
+  Future<void> initFetch() async {
+    _controller.cache = [];
+    await _controller.fetchItems();
+  }
+
   Widget vwBoardMenuFromShare(BuildContext context) {
     return Container(
       decoration: new BoxDecoration(
@@ -96,8 +104,18 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
               alignment: Alignment.bottomCenter,
               height: 11,
               child: Image.asset(Const.assets + 'images/rect_40.png')),
-          vwBSAppBar(
-            title: '바로 분류하기',
+          AppBar(
+            elevation: 0.0,
+            leading: null,
+            automaticallyImplyLeading: false,
+            title: Text(
+              '바로 분류하기',
+              style: TextStyle(
+                fontWeight: FontWeight.normal,
+                color: Colors.black,
+              ),
+            ),
+            centerTitle: true,
             actions: [
               Container(
                 alignment: Alignment.center,
@@ -120,17 +138,67 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
               widthSpace(18.87),
             ],
           ),
-          HanListTile(
-            onTap: () async {
-              //SUBJECT : 공유상태에서 앱 종료하기.
-              //TODO:
+          GetBuilder<BestListController>(builder: (controller) {
+            print('================================');
+            return Container(
+              height: 64,
+              padding: EdgeInsets.only(left: 19),
+              child: HanListView(
+                isSliver: false,
+                direction: Axis.horizontal,
+                controller: controller,
+                itemBuilder: (context, idx) {
+                  final cache = BestListController.to.cache;
 
-              Get.reset();
-              await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-            title: Text('바로 분류하기'),
+                  return Container(
+                    height: 54,
+                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        ImageWidget(
+                          holder: Const.assets + 'icon/hart.png',
+                          height: 28,
+                          width: 28,
+                          onTap: () {
+                            Get.toNamed('/collect_detail?index=$idx');
+                          },
+                        ),
+                        Container(
+                          alignment: Alignment.center,
+                          child: Text(
+                            'test',
+                            textAlign: TextAlign.center,
+                            style: baseStyle.copyWith(
+                                fontSize: 12,
+                                color: Color(0xFF3A3A3A),
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            );
+          }),
+          heightSpace(16.0),
+          Container(
+            width: 158 + 20,
+            height: 32,
+            alignment: Alignment.center,
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Color(0xFFF6F6F6),
+            ),
+            padding: const EdgeInsets.only(
+              top: 8,
+              bottom: 8,
+              left: 35.0,
+              right: 34.0,
+            ),
+            child: Text('코멘트 입력하기'),
           ),
+          heightSpace(16.0),
         ],
       ),
     );
@@ -251,12 +319,9 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   //TODO: 글쓰기 메뉴 만들기
 
   Widget vwBoardMenu(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-      child: Column(
+    return
+
+          Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           heightSpace(2.0),
@@ -278,6 +343,10 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             centerTitle: true,
           ),
           HanListTile(
+            padding: EdgeInsets.only(
+              left: 19.0,
+              bottom: 26.17,
+            ),
             onTap: () {
               //SUBJECT : BS:
               //TODO: 새보드 만들기.
@@ -288,13 +357,18 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                 },
               ));
             },
-            leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
+            leading: Image.asset(Const.assets + 'icon/myboard_on.png'),
             title: Text('새 보드'),
           ),
           HanListTile(
+            padding: EdgeInsets.only(
+              left: 19.0,
+              bottom: 26.17,
+            ),
             onTap: () {
               //SUBJECT : BS
               //TODO: 웹 링크.
+
               Get.back();
               _showBS(context, BottomSheetLink(
                 onMenu: () {
@@ -306,6 +380,10 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             title: Text('웹 링크'),
           ),
           HanListTile(
+            padding: EdgeInsets.only(
+              left: 19.0,
+              bottom: 26.17,
+            ),
             onTap: () {
               //SUBJECT : BS:
               //TODO: 사진
@@ -320,6 +398,10 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             title: Text('사진/비디오'),
           ),
           HanListTile(
+            padding: EdgeInsets.only(
+              left: 19.0,
+              bottom: 26.17,
+            ),
             onTap: () async {
               //SUBJECT : BS
               //TODO: 메모
@@ -334,27 +416,44 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             title: Text('메모'),
           ),
         ],
-      ),
+      // ),
     );
   }
 
   void _showBS(context, child) {
     showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
         context: context,
-        enableDrag: false,
         builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
-          return child;
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
         });
   }
 
   void _showBSFromShare(context, child) {
     showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        backgroundColor: Colors.white,
         context: context,
-        enableDrag: false,
         builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
-          return child;
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
         }).then((value) async {
       Get.reset();
       await SystemChannels.platform.invokeMethod('SystemNavigator.pop');

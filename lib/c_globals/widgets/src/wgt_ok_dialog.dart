@@ -22,52 +22,57 @@ class DeleteDialog extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(20),
       ),
-      child: ListView(
-        shrinkWrap: true,
-        children: <Widget>[
-          heightSpace(20.0),
-          Container(
-              width: double.infinity,
-              alignment: Alignment.center,
-              child: Text(
-                title,
-                style: baseStyle.copyWith(fontSize: 20, color: Colors.black45),
-              )),
-          heightSpace(20.0),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Container(
+      child: Container(
+        width: 228,
+        height: 170,
+        child: ListView(
+          shrinkWrap: true,
+          children: <Widget>[
+            heightSpace(20.0),
+            Container(
+                width: double.infinity,
                 alignment: Alignment.center,
-                child: TextButton(
-                  onPressed: () {
-                    if (deleteTap != null) deleteTap!();
-                    Get.back();
-                  },
-                  child: Text(
-                    deleteTitle,
-                    style:
-                        baseStyle.copyWith(fontSize: 12, color: Colors.black45),
+                child: Text(
+                  title,
+                  style:
+                      baseStyle.copyWith(fontSize: 20, color: Colors.black45),
+                )),
+            heightSpace(20.0),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      if (deleteTap != null) deleteTap!();
+                      Get.back();
+                    },
+                    child: Text(
+                      deleteTitle,
+                      style: baseStyle.copyWith(
+                          fontSize: 12, color: Colors.black45),
+                    ),
                   ),
                 ),
-              ),
-              Container(
-                alignment: Alignment.center,
-                child: TextButton(
-                  onPressed: () {
-                    if (okTap != null) okTap!();
-                    Get.back();
-                  },
-                  child: Text(
-                    okTitle,
-                    style:
-                        baseStyle.copyWith(fontSize: 12, color: Colors.black45),
+                Container(
+                  alignment: Alignment.center,
+                  child: TextButton(
+                    onPressed: () {
+                      if (okTap != null) okTap!();
+                      Get.back();
+                    },
+                    child: Text(
+                      okTitle,
+                      style: baseStyle.copyWith(
+                          fontSize: 12, color: Colors.black45),
+                    ),
                   ),
                 ),
-              ),
-            ],
-          ),
-        ],
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

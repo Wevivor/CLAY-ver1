@@ -13,8 +13,8 @@ class DecoHelper {
   );
   static final BoxDecoration roundDeco = BoxDecoration(
     shape: BoxShape.rectangle,
-    borderRadius: BorderRadius.all(Radius.circular(50)),
-    border: Border.all(width: 1, color: Color(0xFFC1C1C1)),
+    borderRadius: BorderRadius.all(Radius.circular(10)),
+    // border: Border.all(width: 1, color: Color(0xFFC1C1C1)),
   );
 
   static final BoxDecoration roundGrDeco = BoxDecoration(
