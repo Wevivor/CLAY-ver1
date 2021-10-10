@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 import '../../part_home.dart';
+import 'wgt_board_item.dart';
 
 // ignore: must_be_immutable
 class ContentListPART extends StatelessWidget with AppbarHelper {

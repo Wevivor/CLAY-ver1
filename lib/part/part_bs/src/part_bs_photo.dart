@@ -6,6 +6,8 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:get/get.dart';
 
+import 'wgt_bs_board_item.dart';
+
 class BottomSheetPhoto extends StatelessWidget with AppbarHelper {
   final onMenu;
   BottomSheetPhoto({
@@ -164,7 +166,7 @@ class BottomSheetPhoto extends StatelessWidget with AppbarHelper {
           vwTitle('저장할 보드 선택하기'),
           heightSpace(10.0),
           Container(
-            height: 64,
+            height: 62 + 16,
             padding: EdgeInsets.only(left: 19),
             child: HanListView(
               isSliver: false,
@@ -173,33 +175,17 @@ class BottomSheetPhoto extends StatelessWidget with AppbarHelper {
               itemBuilder: (context, idx) {
                 final cache = BoardListController.to.cache;
 
-                return Container(
-                  height: 54,
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ImageWidget(
-                        holder: Const.assets + 'icon/hart.png',
-                        height: 28,
-                        width: 28,
-                        onTap: () {
-                          Get.toNamed('/collect_detail?index=$idx');
-                        },
+                return Row(
+                  children: [
+                    Container(
+                      // height: 62 + 20 + 10,
+                      child: BSBoardItemWidget(
+                        title: '새로운 보드',
+                        category: '새보드',
                       ),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'test',
-                          textAlign: TextAlign.center,
-                          style: baseStyle.copyWith(
-                              fontSize: 12,
-                              color: Color(0xFF3A3A3A),
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ],
-                  ),
+                    ),
+                    widthSpace(24.0),
+                  ],
                 );
               },
             ),

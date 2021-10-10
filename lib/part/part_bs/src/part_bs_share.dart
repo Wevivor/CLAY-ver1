@@ -14,182 +14,66 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        heightSpace(2.0),
-        Container(
-            alignment: Alignment.bottomCenter,
-            height: 11,
-            child: Image.asset(Const.assets + 'images/rect_40.png')),
-        vwBSAppBar(
-          onBack: () {
-            Get.back();
-            if (onMenu != null) onMenu();
-          },
-          title: '링크로 추가하기',
-          actions: [
-            Container(
-              alignment: Alignment.center,
-              // color: Colors.red,
-              child: InkWell(
-                onTap: () {
-                  // FindController.to.searchWord = '';
-                  // FindController.to.update();
-                  Get.back();
-                },
-                child: Text(
-                  '완료',
-                  style: baseStyle.copyWith(
-                      fontSize: 13,
-                      color: Color(0xff017BFE),
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-            ),
-            widthSpace(18.87),
-          ],
-        ),
-        heightSpace(22.0),
-        vwTitle('웹 링크'),
-        heightSpace(11.0),
-        Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Container(
-            height: 38,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
-            child: TextFormField(
-              maxLines: 1,
-              onTap: () {},
-
-              // style: accountEditTextStyle,
-              decoration: kInputDecoration.copyWith(
-                fillColor: Color(0xFFF6F6F6),
-                hintText: '|웹 링크 주소를 입력해 주세요.',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
-                isDense: true,
-              ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
-              onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
-              },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
-            ),
-          ),
-        ),
-        heightSpace(16.0),
-        vwTitle('코멘트'),
-        heightSpace(11.0),
-        Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Container(
-            height: 38,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
-            child: TextFormField(
-              maxLines: 1,
-              onTap: () {},
-
-              // style: accountEditTextStyle,
-              decoration: kInputDecoration.copyWith(
-                fillColor: Color(0xFFF6F6F6),
-                hintText: '|콘텐츠에 남기고 싶은 말을 써주세요.',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
-                isDense: true,
-              ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
-              onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
-              },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
-            ),
-          ),
-        ),
-        heightSpace(16.0),
-        vwTitle('저장할 보드 선택하기'),
-        heightSpace(10.0),
-        Container(
-          height: 64,
-          padding: EdgeInsets.only(left: 19),
-          child: HanListView(
-            isSliver: false,
-            direction: Axis.horizontal,
-            controller: BoardListController.to,
-            itemBuilder: (context, idx) {
-              final cache = BoardListController.to.cache;
-
-              return Container(
-                height: 54,
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ImageWidget(
-                      holder: Const.assets + 'icon/hart.png',
-                      height: 28,
-                      width: 28,
-                      onTap: () {
-                        Get.toNamed('/collect_detail?index=$idx');
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'test',
-                        textAlign: TextAlign.center,
-                        style: baseStyle.copyWith(
-                            fontSize: 12,
-                            color: Color(0xFF3A3A3A),
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                  ],
-                ),
-              );
+    final node = FocusScope.of(context);
+    return Container(
+      decoration: new BoxDecoration(
+          color: Colors.white,
+          borderRadius: new BorderRadius.only(
+              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          heightSpace(2.0),
+          Container(
+              alignment: Alignment.bottomCenter,
+              height: 11,
+              child: Image.asset(Const.assets + 'images/rect_40.png')),
+          vwBSAppBar(
+            onBack: () {
+              Get.back();
+              if (onMenu != null) onMenu();
             },
+            title: '공유방식 선택',
+            actions: [
+              Container(
+                alignment: Alignment.center,
+                // color: Colors.red,
+                child: InkWell(
+                  onTap: () {
+                    // FindController.to.searchWord = '';
+                    // FindController.to.update();
+                    Get.back();
+                  },
+                  child: Text(
+                    '공유하기',
+                    style: baseStyle.copyWith(
+                        fontSize: 13,
+                        color: Color(0xff017BFE),
+                        fontWeight: FontWeight.w400),
+                  ),
+                ),
+              ),
+              widthSpace(18.87),
+            ],
           ),
-        ),
-        heightSpace(16.0),
-      ],
+          HanListTile(
+            onTap: () {
+              //SUBJECT : 상단 고정
+              //TODO: 데이터베이스고정.
+            },
+            leading: Image.asset(Const.assets + 'icon/radio_off.png'),
+            title: Text('읽기 허용'),
+          ),
+          HanListTile(
+            onTap: () {
+              //SUBJECT : 공유 방법
+              //TODO: 공유....
+            },
+            leading: Image.asset(Const.assets + 'icon/radio_on.png'),
+            title: Text('편집 허용'),
+          ),
+        ],
+      ),
     );
   }
 

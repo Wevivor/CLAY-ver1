@@ -319,103 +319,101 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   //TODO: 글쓰기 메뉴 만들기
 
   Widget vwBoardMenu(BuildContext context) {
-    return
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        heightSpace(2.0),
+        Container(
+            alignment: Alignment.bottomCenter,
+            height: 11,
+            child: Image.asset(Const.assets + 'images/rect_40.png')),
+        AppBar(
+          elevation: 0.0,
+          leading: null,
+          automaticallyImplyLeading: false,
+          title: Text(
+            '추가하기',
+            style: TextStyle(
+              fontWeight: FontWeight.normal,
+              color: Colors.black,
+            ),
+          ),
+          centerTitle: true,
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () {
+            //SUBJECT : BS:
+            //TODO: 새보드 만들기.
+            Get.back();
+            _showBS(context, BottomSheetNewBoard(
+              onMenu: () {
+                _showBS(context, vwBoardMenu(context));
+              },
+            ));
+          },
+          leading: Image.asset(Const.assets + 'icon/myboard_on.png'),
+          title: Text('새 보드'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () {
+            //SUBJECT : BS
+            //TODO: 웹 링크.
 
-          Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          heightSpace(2.0),
-          Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
-          AppBar(
-            elevation: 0.0,
-            leading: null,
-            automaticallyImplyLeading: false,
-            title: Text(
-              '추가하기',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
-              ),
-            ),
-            centerTitle: true,
+            Get.back();
+            _showBS(context, BottomSheetLink(
+              onMenu: () {
+                _showBS(context, vwBoardMenu(context));
+              },
+            ));
+          },
+          leading: Image.asset(Const.assets + 'icon/web_link.png'),
+          title: Text('웹 링크'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
           ),
-          HanListTile(
-            padding: EdgeInsets.only(
-              left: 19.0,
-              bottom: 26.17,
-            ),
-            onTap: () {
-              //SUBJECT : BS:
-              //TODO: 새보드 만들기.
-              Get.back();
-              _showBS(context, BottomSheetNewBoard(
-                onMenu: () {
-                  _showBS(context, vwBoardMenu(context));
-                },
-              ));
-            },
-            leading: Image.asset(Const.assets + 'icon/myboard_on.png'),
-            title: Text('새 보드'),
+          onTap: () {
+            //SUBJECT : BS:
+            //TODO: 사진
+            Get.back();
+            _showBS(context, BottomSheetPhoto(
+              onMenu: () {
+                _showBS(context, vwBoardMenu(context));
+              },
+            ));
+          },
+          leading: Image.asset(Const.assets + 'icon/photo.png'),
+          title: Text('사진/비디오'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
           ),
-          HanListTile(
-            padding: EdgeInsets.only(
-              left: 19.0,
-              bottom: 26.17,
-            ),
-            onTap: () {
-              //SUBJECT : BS
-              //TODO: 웹 링크.
-
-              Get.back();
-              _showBS(context, BottomSheetLink(
-                onMenu: () {
-                  _showBS(context, vwBoardMenu(context));
-                },
-              ));
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-            title: Text('웹 링크'),
-          ),
-          HanListTile(
-            padding: EdgeInsets.only(
-              left: 19.0,
-              bottom: 26.17,
-            ),
-            onTap: () {
-              //SUBJECT : BS:
-              //TODO: 사진
-              Get.back();
-              _showBS(context, BottomSheetPhoto(
-                onMenu: () {
-                  _showBS(context, vwBoardMenu(context));
-                },
-              ));
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-            title: Text('사진/비디오'),
-          ),
-          HanListTile(
-            padding: EdgeInsets.only(
-              left: 19.0,
-              bottom: 26.17,
-            ),
-            onTap: () async {
-              //SUBJECT : BS
-              //TODO: 메모
-              Get.back();
-              _showBS(context, BottomSheetMemo(
-                onMenu: () {
-                  _showBS(context, vwBoardMenu(context));
-                },
-              ));
-            },
-            leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-            title: Text('메모'),
-          ),
-        ],
+          onTap: () async {
+            //SUBJECT : BS
+            //TODO: 메모
+            Get.back();
+            _showBS(context, BottomSheetMemo(
+              onMenu: () {
+                _showBS(context, vwBoardMenu(context));
+              },
+            ));
+          },
+          leading: Image.asset(Const.assets + 'icon/memo.png'),
+          title: Text('메모'),
+        ),
+      ],
       // ),
     );
   }
