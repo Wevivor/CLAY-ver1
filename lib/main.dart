@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/controllers/globals/globals.dart';
+import 'package:clay/page/sub_language.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,11 +13,11 @@ import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
 import 'controllers/controllers.dart';
 import 'page/sub_post.dart';
-import 'page/ui_board_my.dart';
 import 'page/ui_board.dart';
 import 'page/ui_content.dart';
 import 'page/ui_han_bott_navi.dart';
 import 'page/ui_login_google.dart';
+import 'page/ui_profile.dart';
 import 'page/ui_push.dart';
 import 'page/ui_search.dart';
 import 'page/ui_setting.dart';
@@ -156,16 +157,11 @@ class AppRoutes {
     //Upload ----------------------------------
     //---------------------------------------
 
-    GetPage(
-      name: '/post_ins',
-      transition: Transition.noTransition,
-      page: () => PostWriteSUB(),
-    ),
-    GetPage(
-      name: '/board',
-      transition: Transition.noTransition,
-      page: () => BoradMyUI(),
-    ),
+    // GetPage(
+    //   name: '/board',
+    //   transition: Transition.noTransition,
+    //   page: () => BoradMyUI(),
+    // ),
     // GetPage(
     //   name: '/brd_content',
     //   transition: Transition.noTransition,
@@ -208,10 +204,14 @@ class AppRoutes {
     //---------------------------------------
     //setting
     //---------------------------------------
-    // GetPage(
-    //     name: '/profile',
-    //     transition: Transition.noTransition,
-    //     page: () => ProfileUI()),
+    GetPage(
+        name: '/profile',
+        transition: Transition.noTransition,
+        page: () => ProfileUI()),
+    GetPage(
+        name: '/language',
+        transition: Transition.noTransition,
+        page: () => LanguageSUB()),
 
     // GetPage(
     //     name: '/profile_edit',

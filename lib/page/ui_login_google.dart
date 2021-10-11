@@ -56,106 +56,109 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
 
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Container(
-        padding: EdgeInsets.only(left: 24, right: 24),
-        alignment: Alignment.center,
-        child: ListView(
-          shrinkWrap: true,
-          children: <Widget>[
-            ///상위 타이틀.
-            Container(
-              height: MySize.safeHeight / 2,
-              child: LoginTitleWidget(themeData),
-            ),
-
-            /// 로그인 버턴
-            Container(
-              height: MySize.safeHeight / 2,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  StackWithButton(
-                    // loading: LoadingController.to,
-                    child: SnsWideWidget(
-                      title: '구글로 로그인',
-                      assetName: 'assets/sns_login/google_wide.png',
-                      onTap: () async {
-                        LoadingController.to.isLoading = true;
-
-                        try {
-                          await AuthController.to.signInWithGoogle();
-                          User? _user = AuthController.to.getUser;
-
-                          final _exist = await HanUserInfoController.to
-                              .actionExistByEmail(_user?.email ?? '');
-                          print(
-                              '----------------actionExistByEmail ${_exist.toString()}------------------');
-                          if (_exist == null) {
-                            final _profile = ProfileDto(
-                              uid: _user?.uid,
-                              email: _user?.email ?? '',
-                              displayName: _user?.displayName,
-                              photoURL: _user?.photoURL,
-                              level: 3,
-                              dtCreated: DateTime.now(),
-                              dtUpdated: DateTime.now(),
-                            );
-
-                            final _detail = UserDetailDto(
-                              phone: '010-5391-3862',
-                              intro: null,
-                              // isPush: false,
-                              // token: null,
-                            );
-
-                            final _regiInfo = UserRegiInfoDto(
-                                isProvision: false,
-                                isPersonInfo: false,
-                                isReceive: false);
-
-                            final _userInfo = HanUserInfoDto(
-                                uid: _user?.uid,
-                                profile: _profile,
-                                info: _detail,
-                                regiInfo: _regiInfo,
-                                isDisabled: false,
-                                cntVisit: 0,
-                                level: 3,
-                                following: ListCntDto(cnt: 0, lists: []),
-                                dtCreated: DateTime.now(),
-                                dtUpdated: DateTime.now());
-
-                            HanUserInfoController.to.actionCreate(_userInfo);
-                          }
-                          print(
-                              '---------------actionVisitInc ${_exist.toString()}--------------------');
-
-                          await HanUserInfoController.to.actionVisitInc();
-
-                          Get.toNamed('/main_menu');
-                        } on FirebaseAuthException catch (e) {
-                          print(
-                              '============ FirebaseAuthException ${e.toString()}=================');
-                          if (['user-cancelled', 'user-not-found']
-                              .contains(e.code)) {
-                            AppHelper.showMessage(
-                                ExceptionMessages.messages(e.code));
-                          }
-                        } catch (e) {
-                          print(
-                              '============ ERROR CHekc CATCH ${e.toString()}=================');
-                          AppHelper.showMessage(e.toString());
-                        } finally {
-                          LoadingController.to.isLoading = false;
-                        }
-                      },
-                    ),
-                  ),
-                  heightSpace(16.0),
-                ],
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: GlobalStyle.configStatusTheme,
+        child: Container(
+          padding: EdgeInsets.only(left: 24, right: 24),
+          alignment: Alignment.center,
+          child: ListView(
+            shrinkWrap: true,
+            children: <Widget>[
+              ///상위 타이틀.
+              Container(
+                height: MySize.safeHeight / 2,
+                child: LoginTitleWidget(themeData),
               ),
-            ),
-          ],
+
+              /// 로그인 버턴
+              Container(
+                height: MySize.safeHeight / 2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    StackWithButton(
+                      // loading: LoadingController.to,
+                      child: SnsWideWidget(
+                        title: '구글로 로그인',
+                        assetName: 'assets/sns_login/google_wide.png',
+                        onTap: () async {
+                          LoadingController.to.isLoading = true;
+
+                          try {
+                            await AuthController.to.signInWithGoogle();
+                            User? _user = AuthController.to.getUser;
+
+                            final _exist = await HanUserInfoController.to
+                                .actionExistByEmail(_user?.email ?? '');
+                            print(
+                                '----------------actionExistByEmail ${_exist.toString()}------------------');
+                            if (_exist == null) {
+                              final _profile = ProfileDto(
+                                uid: _user?.uid,
+                                email: _user?.email ?? '',
+                                displayName: _user?.displayName,
+                                photoURL: _user?.photoURL,
+                                level: 3,
+                                dtCreated: DateTime.now(),
+                                dtUpdated: DateTime.now(),
+                              );
+
+                              final _detail = UserDetailDto(
+                                phone: '010-5391-3862',
+                                intro: null,
+                                // isPush: false,
+                                // token: null,
+                              );
+
+                              final _regiInfo = UserRegiInfoDto(
+                                  isProvision: false,
+                                  isPersonInfo: false,
+                                  isReceive: false);
+
+                              final _userInfo = HanUserInfoDto(
+                                  uid: _user?.uid,
+                                  profile: _profile,
+                                  info: _detail,
+                                  regiInfo: _regiInfo,
+                                  isDisabled: false,
+                                  cntVisit: 0,
+                                  level: 3,
+                                  following: ListCntDto(cnt: 0, lists: []),
+                                  dtCreated: DateTime.now(),
+                                  dtUpdated: DateTime.now());
+
+                              HanUserInfoController.to.actionCreate(_userInfo);
+                            }
+                            print(
+                                '---------------actionVisitInc ${_exist.toString()}--------------------');
+
+                            await HanUserInfoController.to.actionVisitInc();
+
+                            Get.toNamed('/main_menu');
+                          } on FirebaseAuthException catch (e) {
+                            print(
+                                '============ FirebaseAuthException ${e.toString()}=================');
+                            if (['user-cancelled', 'user-not-found']
+                                .contains(e.code)) {
+                              AppHelper.showMessage(
+                                  ExceptionMessages.messages(e.code));
+                            }
+                          } catch (e) {
+                            print(
+                                '============ ERROR CHekc CATCH ${e.toString()}=================');
+                            AppHelper.showMessage(e.toString());
+                          } finally {
+                            LoadingController.to.isLoading = false;
+                          }
+                        },
+                      ),
+                    ),
+                    heightSpace(16.0),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

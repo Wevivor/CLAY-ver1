@@ -72,12 +72,6 @@ class SearchHan<T> extends SearchDelegate<String> {
       SearchKeyWordListController.to.insertNode(keyword);
       Future.microtask(() => close(context, query));
       return Container();
-      // Get.back();
-      // return buildSuggestions(context);
-      // return GetBuilder<FindController>(
-      //   init: FindController(client: http.Client()),
-      //   builder: (_) => vwApiResult(context),
-      // );
     } else
       return buildSuggestions(context);
   }
@@ -187,8 +181,6 @@ class SearchHan<T> extends SearchDelegate<String> {
               ),
               onTap: () {
                 query = _.cache[i].word ?? '';
-                // FindController.to.cache = [];
-                // FindController.to.fetchItems(term: query);
 
                 close(context, query);
               });

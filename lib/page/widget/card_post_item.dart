@@ -6,26 +6,46 @@ import 'package:flutter/rendering.dart';
 
 class PostItemCard extends StatelessWidget {
   String? imgUrl;
-  int contentKind;
+  String? category;
   String? title;
   String? holder;
   bool isFavor;
   int cntFavor;
   Function? onTap;
+  Function? onMore;
   static String stand_stock_image = '';
 
   PostItemCard({
     this.imgUrl,
     this.holder,
-    this.contentKind = 0,
+    this.category,
     this.title,
     required this.isFavor,
     this.cntFavor = 0,
     this.onTap,
+    this.onMore,
   });
+  final contentStyle = TextStyle(
+    fontSize: 13,
+    color: Color(0xFF676767),
+    fontWeight: FontWeight.normal,
+    height: 1.2,
+    letterSpacing: 0.05,
+  );
   @override
   Widget build(BuildContext context) {
-    var _imgKind = null;
+    var holder = '';
+    switch (category) {
+      case '업무':
+        holder = 'icon/pencil_small.png';
+        break;
+      case '계발':
+        holder = 'icon/medal_small.png';
+        break;
+      case '좋아':
+        holder = 'icon/hart_small.png';
+        break;
+    }
 
     return InkWell(
       onTap: () {
@@ -34,6 +54,7 @@ class PostItemCard extends StatelessWidget {
       child: Container(
         constraints: BoxConstraints.expand(),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Container(
@@ -50,66 +71,52 @@ class PostItemCard extends StatelessWidget {
                 ),
               ),
             ),
-            Text(title ?? '',
-                style: baseStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black,
-                )),
+            Row(
+              children: [
+                if (category != null)
+                  Container(
+                    width: 13,
+                    height: 13,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.circular(14),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.1),
+                          blurRadius: 10.0,
+                          offset: Offset(0, 2),
+                        ),
+                      ],
+                    ),
+                    child: Image.asset(Const.assets + holder),
+                  ),
+                widthSpace(4.0),
+                Text(
+                  title ?? '',
+                  style: contentStyle,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                Expanded(
+                  child: Container(),
+                ),
+                InkWell(
+                  onTap: () {
+                    if (onMore != null) onMore!();
+                  },
+                  child: Container(
+                    width: 22,
+                    alignment: Alignment.bottomRight,
+                    child: Image.asset(
+                      Const.assets + 'icon/dot_vertical_black.png',
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
-
-      // Column(
-      //   children: [
-      //     Stack(
-      //       // fit: StackFit.expand,
-      //       children: [
-      //         Container(
-      //           constraints: BoxConstraints.expand(),
-      //           child: ClipRRect(
-      //             borderRadius: BorderRadius.circular(15.0),
-      //             child: imgUrl != null
-      //                 ? Image.network(
-      //                     imgUrl ?? '$stand_stock_image',
-      //                     fit: BoxFit.fill,
-      //                   )
-      //                 : Image.asset(
-      //                     holder ?? '',
-      //                     fit: BoxFit.fill,
-      //                   ),
-      //           ),
-      //         ),
-      //         Positioned(
-      //           bottom: -10.5,
-      //           left: 10.5,
-      //           child: Container(
-      //             child: Row(
-      //               crossAxisAlignment: CrossAxisAlignment.center,
-      //               children: [
-      //                 widthSpace(4.83),
-      //                 Text(Const.numFormat.format(cntFavor),
-      //                     style: baseStyle.copyWith(
-      //                       fontSize: 12,
-      //                       fontWeight: FontWeight.normal,
-      //                       color: Color(0xFFF6F5FF),
-      //                     )),
-
-      //                 /// 비디오 일때
-      //               ],
-      //             ),
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //     Text(title ?? '',
-      //         style: baseStyle.copyWith(
-      //           fontSize: 12,
-      //           fontWeight: FontWeight.normal,
-      //           color: Color(0xFFF6F5FF),
-      //         )),
-      //   ],
-      // ),
     );
   }
 }

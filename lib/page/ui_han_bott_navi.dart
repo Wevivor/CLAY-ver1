@@ -40,8 +40,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         print("===================>Shared: 1) " +
             (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
       });
-      // WidgetsBinding.instance!
-      //     .addPostFrameCallback((_) => _showBS(context, vwBoardMenu(context)));
     }, onError: (err) {
       print("getIntentDataStream error: $err");
     });
@@ -60,27 +58,33 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         ReceiveSharingIntent.getTextStream().listen((String value) {
       setState(() {
         _sharedText = value;
-        print("===================> Shared:3) $_sharedText");
+        print("===================> Shared:3 URLS) $_sharedText");
+        if (value == null) {
+          _isSharedOpen = false;
+        } else {
+          _isSharedOpen = true;
+
+          WidgetsBinding.instance!.addPostFrameCallback(
+              (_) => _showBSFromShare(context, vwBoardMenuFromShare(context)));
+        }
       });
-      // WidgetsBinding.instance!
-      //     .addPostFrameCallback((_) => _showBS(context, vwBoardMenu(context)));
     }, onError: (err) {
       print("getLinkStream error: $err");
     });
 
     // For sharing or opening urls/text coming from outside the app while the app is closed
     ReceiveSharingIntent.getInitialText().then((String? value) {
+      print("===================> Shared:0) $value");
       setState(() {
         _sharedText = value;
         if (value == null) {
           _isSharedOpen = false;
         } else {
           _isSharedOpen = true;
+
           WidgetsBinding.instance!.addPostFrameCallback(
               (_) => _showBSFromShare(context, vwBoardMenuFromShare(context)));
         }
-
-        print("---------->Shared: $_sharedText");
       });
     });
   }
@@ -122,8 +126,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                 // color: Colors.red,
                 child: InkWell(
                   onTap: () {
-                    // FindController.to.searchWord = '';
-                    // FindController.to.update();
                     Get.back();
                   },
                   child: Text(
@@ -306,6 +308,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         return BoardUI();
 
       case 1:
+        // Future.microtask(() => _showBS(context, vwBoardMenu(context)));
         return Container();
 
       case 2:

@@ -72,12 +72,6 @@ class SearchAppDelegate<T> extends SearchDelegate<String> {
       SearchKeyWordListController.to.insertNode(keyword);
       Future.microtask(() => close(context, query));
       return Container();
-      // Get.back();
-      // return buildSuggestions(context);
-      // return GetBuilder<FindController>(
-      //   init: FindController(client: http.Client()),
-      //   builder: (_) => vwApiResult(context),
-      // );
     } else
       return buildSuggestions(context);
   }

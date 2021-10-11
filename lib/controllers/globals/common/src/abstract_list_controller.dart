@@ -42,7 +42,6 @@ abstract class AbsListController<T> extends GetxController {
         ];
       }
       if (isLastPage) hasMore = false;
-      update();
     } on GenericHttpException catch (e) {
       print(e);
     } catch (e) {

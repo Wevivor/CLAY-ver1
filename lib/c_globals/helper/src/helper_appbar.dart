@@ -1,4 +1,5 @@
 import 'package:clay/c_config/config.dart';
+import 'package:clay/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -149,6 +150,13 @@ class AppbarHelper {
     ];
   }
 
+  Color getBg() {
+    if (ThemeController.to.isLightOn)
+      return Colors.white;
+    else
+      return Colors.black;
+  }
+
   Widget vwSubBar(BuildContext context,
       {String? title,
       bool? isCenter = true,
@@ -167,15 +175,6 @@ class AppbarHelper {
             // color: themeData.appBarTheme.iconTheme?.color,
           ),
           onPressed: () {
-            // Future.delayed(Duration(milliseconds: 300)).then((_) {
-            //   SystemChrome.setSystemUIOverlayStyle(
-            //     const SystemUiOverlayStyle(
-            //       systemNavigationBarColor: Colors.black12,
-            //     ),
-            //   );
-            // });
-            // Navigator.of(context).pop();
-
             Get.back();
           },
         ),

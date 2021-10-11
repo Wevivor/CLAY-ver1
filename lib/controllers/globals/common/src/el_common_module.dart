@@ -31,7 +31,7 @@ class ElCommonModule {
 
   Future<List<dynamic>> listFilter(final query, final body) async {
     print('-------> ${Uri.parse(Const.elasticEndPoint + query)}');
-    print('-------> ${body}');
+    print('-------> ${jsonEncode(body)}');
     try {
       final _response = await http.post(
         Uri.parse(Const.elasticEndPoint + query),

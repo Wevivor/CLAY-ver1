@@ -21,10 +21,14 @@ class PushUI extends StatelessWidget with AppbarHelper {
             child: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0.0,
-              leading: null,
-              centerTitle: false,
+              leading: IconButton(
+                  icon: Icon(Icons.chevron_left),
+                  onPressed: () async {
+                    Get.back();
+                  }),
+              centerTitle: true,
               title: Text(
-                '기록',
+                '받은 알림',
                 style: appBarStyle,
               ),
             )),

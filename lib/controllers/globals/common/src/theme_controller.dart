@@ -7,12 +7,12 @@ import 'package:get_storage/get_storage.dart';
 
 class ThemeController extends GetxController {
   static ThemeController get to => Get.find();
-  final theme = "system".obs;
+  final theme = "light".obs;
   final store = GetStorage();
   late ThemeMode _themeMode;
 
   ThemeMode get themeMode => _themeMode;
-  String get currentTheme => theme.value;
+  String get current => theme.value;
 
   Future<void> setThemeMode(String value) async {
     theme.value = value;
@@ -40,14 +40,21 @@ class ThemeController extends GetxController {
   }
 
   // checks whether darkmode is set via system or previously by user
-  bool get isDarkModeOn {
-    if (currentTheme == 'system') {
+  bool get isDarkOn {
+    if (current == 'system') {
       if (WidgetsBinding.instance?.window.platformBrightness ==
           Brightness.dark) {
         return true;
       }
     }
-    if (currentTheme == 'dark') {
+    if (current == 'dark') {
+      return true;
+    }
+    return false;
+  }
+
+  bool get isLightOn {
+    if (current == 'light') {
       return true;
     }
     return false;

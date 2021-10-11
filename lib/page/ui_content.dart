@@ -2,6 +2,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/app/home/src/list_content_controller.dart';
+import 'package:clay/part/part_bs/part_bs.dart';
 import 'package:clay/part/part_home/part_home.dart';
 import 'package:clay/controllers/controllers.dart';
 
@@ -80,7 +81,7 @@ class _ContentUIState extends State<ContentUI>
                     height: 32.0,
                     width: 32.0,
                     onTap: () {
-                      Get.toNamed('/setting');
+                      Get.toNamed('/profile');
                       AppHelper.showMessage('설정..');
                     },
                     holder: 'assets/icon/account.png'),

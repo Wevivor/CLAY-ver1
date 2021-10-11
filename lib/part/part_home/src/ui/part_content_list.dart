@@ -64,28 +64,19 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
               //SUBJECT:보드 만들기
               //TODO : 보드 위젯 이후에 작업
 
-              return Container(
-                height: 124.0,
-                padding: EdgeInsets.only(top: 20, bottom: 20),
-                child: PostItemCard(
-                  imgUrl: item.imgUrl,
-                  contentKind: item.contentKind,
-                  cntFavor: item.favorite.cnt,
-                  isFavor: exist == null ? false : true,
-                  // holder: cache[index].img,
-                  onTap: () async {
-                    final postInfo = cache[index];
-                    print('------------>${postInfo.id}');
-                    final _controller = Get.put(PostController());
-                    await _controller.fetchItem(id: postInfo.id);
-                    // final _authorController = Get.put(PostAuthorController(
-                    //     uid: postInfo.uid, excludedId: item.id ?? ''));
-                    // PostAuthorController.to.cache = [];
-                    // await _authorController.fetchItems();
-
-                    Get.to(() => PostSUB(item: postInfo));
-                  },
-                ),
+              return Column(
+                children: [
+                  ContentListItemWidget(
+                    title: 'eng) 무야호~미니오븐으로6가지 맛 미니바스크 치즈케이크 입니다.',
+                    date: '2021.03.22',
+                    contentText:
+                        '안녕하세요 진영입니다:-) 오늘은 간단하지만 정말 맛있는 바스크치즈케이크를 들고 왔습니다.',
+                    holder: Const.assets + 'images/smpl_list1.png',
+                  ),
+                  Divider(
+                    color: Color(0xFFEEEFF2),
+                  )
+                ],
               );
             }),
       );

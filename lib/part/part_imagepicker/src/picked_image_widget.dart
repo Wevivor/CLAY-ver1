@@ -31,11 +31,10 @@ class PickedImageWidget extends StatelessWidget {
       return Container(
         width: width,
         height: height,
-        child: ClipOval(
-            child: Image(
+        child: Image(
           image: imageProvider,
           fit: BoxFit.cover,
-        )),
+        ),
       );
     });
   }

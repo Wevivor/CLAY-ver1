@@ -1,8 +1,7 @@
-import 'package:clay/controllers/app/apps.dart';
+import 'package:clay/c_config/config.dart';
+import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/globals/globals.dart';
-import 'package:clay/page/sub_post.dart';
-import 'package:clay/page/widget/card_post_item.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:clay/part/part_search/src/wgt_search_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -17,62 +16,42 @@ class SearchInitPART extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      physics: ScrollPhysics(),
-      child: Column(
-        children: [
-          ///--------------------------
-          ///타이틀
-          ///-------------------------
+    return
 
-          ///--------------------------
-          /// 브랜드 핀테스트 리스트
-          ///-------------------------
-          GetBuilder<FindController>(
-            builder: (controller) => new StaggeredGridView.countBuilder(
-              physics: NeverScrollableScrollPhysics(),
-              primary: false,
-              shrinkWrap: true,
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              crossAxisCount: 2,
-              mainAxisSpacing: 15.0,
-              crossAxisSpacing: 15.0,
-              // itemCount: 8,
-              itemCount: FindController.to.hasMore
-                  ? FindController.to.cache.length + 1
-                  : FindController.to.cache.length,
-              itemBuilder: (context, index) {
-                // final controller = PostListController.to;
-                final cache = controller.cache;
-                final item = cache[index];
-                if (item == null) return Container();
+        ///--------------------------
+        /// 검색된 리스트
+        ///-------------------------
+        GetBuilder<FindController>(builder: (controller) {
+      return Container(
+        padding: const EdgeInsets.only(left: 10.0, right: 20.0),
+        child: HanListView(
+          controller: FindController.to,
+          isSliver: false,
+          direction: Axis.vertical,
+          itemBuilder: (context, idx) {
+            final cache = FindController.to.cache;
+            final size = FindController.to.cache.length;
+            //SUBJECT:보드 만들기
+            //TODO : 보드 위젯 이후에 작업
 
-                final favorLists = item.favorite?.lists;
-                final exist = favorLists?.firstWhere(
-                    (element) => element == AuthController.to.getUser?.uid,
-                    orElse: () {
-                  return null;
-                });
-
-                return PostItemCard(
-                  imgUrl: item.imageUrl,
-                  contentKind: item.contentKind,
-                  cntFavor: item.favorite?.cnt ?? 0,
-                  isFavor: exist == null ? false : true,
-                  // imgUrl: cache[index].img,
-                  onTap: () {
-                    final postInfo = cache[index];
-                    Get.to(() => PostSUB(item: postInfo));
-                  },
-                );
-              },
-              staggeredTileBuilder: (int index) =>
-                  new StaggeredTile.count(1, index.isEven ? 1.2 : 1.8),
-            ),
-          ),
-        ],
-      ),
-    );
+            return Column(
+              children: [
+                SearchItemWidget(
+                  title: 'eng) 무야호~미니오븐으로6가지맛 미니바스',
+                  date: '2021.03.22',
+                  contentText:
+                      '안녕하세요 진영입니다:-) 오늘은 간단하지만 정말 맛있는 바스크치즈케이크를 들고 왔습니다.',
+                  holder: Const.assets + 'images/smpl_list1.png',
+                ),
+                Divider(
+                  color: Color(0xFFEEEFF2),
+                )
+              ],
+            );
+          },
+        ),
+      );
+    });
   }
 
   Widget getSearchField() {

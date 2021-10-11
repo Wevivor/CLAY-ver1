@@ -13,137 +13,206 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 
 class SettingUI extends StatelessWidget with AppbarHelper {
   final tileTitleStyle = baseStyle.copyWith(
-      fontSize: 16, color: Color(0xFF333333), fontWeight: FontWeight.normal);
-  final tileTrailingStyle = baseStyle.copyWith(
-      fontSize: 14, color: Color(0xFF333333), fontWeight: FontWeight.normal);
+      fontSize: 13,
+      color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
+      fontWeight: FontWeight.normal);
+  final titleStyle = baseStyle.copyWith(
+      fontSize: 12,
+      color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
+      fontWeight: FontWeight.w700);
 
-  final tileTrailingWeakStyle = baseStyle.copyWith(
-      fontSize: 14, color: Color(0xFF828282), fontWeight: FontWeight.normal);
+  Color getGrayBg() {
+    return ThemeController.to.isLightOn
+        ? Color(0xFFF6F6F6)
+        : Colors.grey[400] ?? Colors.grey;
+  }
+
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
     Get.put(PushAlarmController('userinfos'));
     final appbarHeight = 0 + kToolbarHeight;
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(appbarHeight),
-        //SUBJECT : 앱바의 액션
-        child: vwAppBar(
-          title: 'Account',
-          actions: [
-            ImageButton(
-                height: 32.0,
-                width: 32.0,
-                onTap: () {
-                  Get.toNamed('/search');
-
-                  AppHelper.showMessage('설정..');
-                },
-                holder: 'assets/icon/search.png'),
-            widthSpace(10.0),
-            ImageButton(
-                height: 32.0,
-                width: 32.0,
-                onTap: () {
-                  Get.toNamed('/setting');
-                },
-                holder: 'assets/icon/baseline-account-circle.png'),
-            widthSpace(10.0),
-          ],
-        ),
-      ),
-      body: Stack(
-        children: <Widget>[
-          Container(
-            padding: EdgeInsets.only(left: 14, right: 14.0),
-            child: GetBuilder<HanUserInfoController>(
-              builder: (_) => ListView(
-                physics: NeverScrollableScrollPhysics(),
-                children: <Widget>[
-                  heightSpace(27.0),
-                  //SUBJECT: 프로필 정보
-                  //TODO: 프로필 정보
-                  //// ---------------------------------
-                  /// 프로파일 정보
-                  //// ---------------------------------
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10.0),
-                    child: Container(
-                      decoration: DecoHelper.roundDeco.copyWith(
-                        color: Color(0xFFF8F8F8),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      padding: EdgeInsets.only(
-                          left: 27, top: 23.0, right: 14, bottom: 13),
-                      child: ProfileMiddleWidget(
-                        onTap: () {
-                          // Get.toNamed('/profile_edit');
-                        },
-                        displayName: 'Pretium at',
-                      ),
-                    ),
-                  ),
-
-                  heightSpace(20.0),
-                  vwTitle('Tutorial'),
-                  //이미지 링크 리스트
-
-                  heightSpace(33.0),
-                  vwTitle('More settings'),
-                  heightSpace(12.0),
-                  Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10.0),
-                    child: Container(
-                      padding: EdgeInsets.only(
-                        left: 24,
-                      ),
-                      decoration: DecoHelper.roundDeco.copyWith(
-                        color: Color(0xFFF8F8F8),
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: ListView(
-                        shrinkWrap: true,
-                        children: [
-                          ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            dense: true,
-                            title: Text(
-                              '공지사항',
-                              style: tileTitleStyle,
-                            ),
-                            // trailing: Icon(MdiIcons.chevronRight),
-                          ),
-                          ListTile(
-                            onTap: () {
-                              Get.toNamed('/push');
-                            },
-                            contentPadding: EdgeInsets.zero,
-                            dense: true,
-                            title: Text(
-                              '알림 관리',
-                              style: tileTitleStyle,
-                            ),
-                          ),
-                          ListTile(
-                            contentPadding: EdgeInsets.zero,
-                            dense: true,
-                            title: Text(
-                              '문의하기/도움말',
-                              style: tileTitleStyle,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
+    return GetBuilder<ThemeController>(builder: (_) {
+      return Scaffold(
+        appBar: PreferredSize(
+            preferredSize: Size.fromHeight(appbarHeight),
+            //SUBJECT : 앱바의 액션
+            child: AppBar(
+              automaticallyImplyLeading: false,
+              elevation: 0.0,
+              leading: IconButton(
+                  icon: Icon(Icons.chevron_left),
+                  onPressed: () async {
+                    Get.back();
+                  }),
+              centerTitle: true,
+              title: Text(
+                '설정',
+                style: ThemeController.to.isLightOn
+                    ? appBarStyle
+                    : appBarStyleDark,
               ),
+              backgroundColor:
+                  ThemeController.to.isLightOn ? Colors.white : Colors.black,
+            )),
+        body: Container(
+          color: getBg(),
+          child: GetBuilder<HanUserInfoController>(
+            builder: (_) => ListView(
+              physics: NeverScrollableScrollPhysics(),
+              children: <Widget>[
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+                Container(
+                  color: getGrayBg(),
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20.0, top: 17, bottom: 17),
+                  child: Container(
+                    child: HanListTile(
+                      padding: EdgeInsets.zero,
+                      leading: Text(
+                        '일반',
+                        style: tileTitleStyle,
+                      ),
+                      // trailing: Icon(MdiIcons.chevronRight),
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20.0, top: 17, bottom: 17),
+                  child: Container(
+                    child: HanListTile(
+                      padding: EdgeInsets.zero,
+                      onTap: () {
+                        // Get.toNamed('/push');
+                        if (ThemeController.to.isLightOn)
+                          ThemeController.to.setThemeMode('dark');
+                        else
+                          ThemeController.to.setThemeMode('light');
+                      },
+                      leading: Text(
+                        '어두운 테마',
+                        style: tileTitleStyle,
+                      ),
+                      trailing: Container(
+                        height: 16,
+                        child: Switch(
+                            value: ThemeController.to.isLightOn == true,
+                            onChanged: (value) {
+                              if (value)
+                                ThemeController.to.setThemeMode('light');
+                              else
+                                ThemeController.to.setThemeMode('dark');
+                            }),
+                      ),
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20.0, top: 17, bottom: 17),
+                  child: HanListTile(
+                    padding: EdgeInsets.zero,
+                    onTap: () {
+                      Get.toNamed('/language');
+                    },
+                    leading: Text(
+                      '연어 설정',
+                      style: tileTitleStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.chevron_right,
+                      color: Color(0xff707070),
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+                Container(
+                  color: getGrayBg(),
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20.0, top: 17, bottom: 17),
+                  child: HanListTile(
+                    padding: EdgeInsets.zero,
+                    leading: Text(
+                      '알림',
+                      style: tileTitleStyle,
+                    ),
+                    // trailing: Icon(MdiIcons.chevronRight),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20.0, top: 17, bottom: 17),
+                  child: HanListTile(
+                    padding: EdgeInsets.zero,
+                    leading: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '활동 알림',
+                          style: tileTitleStyle,
+                        ),
+                        Text(
+                          '게시물 리마인드, 추가, 추천 등 ',
+                          style: tileTitleStyle.copyWith(
+                              fontSize: 11, color: Color(0xFF707070)),
+                        ),
+                      ],
+                    ),
+                    trailing: Switch(value: true, onChanged: (value) {}),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+                Container(
+                  padding: EdgeInsets.only(
+                      left: 20, right: 20.0, top: 17, bottom: 17),
+                  child: HanListTile(
+                    padding: EdgeInsets.zero,
+                    onTap: () {
+                      Get.toNamed('/push');
+                    },
+                    leading: Text(
+                      '리마인드 알림 관리',
+                      style: tileTitleStyle,
+                    ),
+                    trailing: Icon(
+                      Icons.chevron_right,
+                      color: Color(0xff707070),
+                    ),
+                  ),
+                ),
+                Divider(
+                  thickness: 1,
+                  height: 1,
+                ),
+              ],
             ),
           ),
-          Positioned(bottom: 5.0, right: 20.0, child: AppVersionWidget()),
-        ],
-      ),
-    );
+        ),
+        bottomNavigationBar: BNBarWidget(),
+      );
+    });
   }
 
   Widget vwTitle(final title) {

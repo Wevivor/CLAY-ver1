@@ -11,9 +11,6 @@ class FindController extends AbsListController
     with ElCommonModule, FbSearchHistoryModule, FbCommonModule {
   late dynamic _instance;
   List<dynamic> history = [];
-  final List<String> selected = [];
-  final int maxItems = 3;
-  final int minItems = 1;
   FindController({
     int pageSize = 30,
   }) : super(pageSize) {
@@ -21,67 +18,6 @@ class FindController extends AbsListController
     searchWord = '';
     history = [];
     searchWord = '';
-    _state01 = true.obs;
-    _state02 = true.obs;
-    _state03 = true.obs;
-
-    selected.add('video');
-    selected.add('image');
-    selected.add('store');
-  }
-  RxBool _state01 = false.obs;
-  RxBool _state02 = false.obs;
-  RxBool _state03 = false.obs;
-
-  bool get state01 => _state01.value;
-  bool get state02 => _state02.value;
-  bool get state03 => _state03.value;
-
-  bool toggle(String item) {
-    if (contains(item)) {
-      return remove(item);
-    } else {
-      return add(item);
-    }
-  }
-
-  bool add(String item) {
-    if (selected.length < maxItems) {
-      selected.add(item);
-      update();
-      return true;
-    }
-    return false;
-  }
-
-  bool remove(String item) {
-    if (selected.length > minItems) {
-      selected.removeWhere((x) => x == item);
-      update();
-      return true;
-    }
-    return false;
-  }
-
-  bool contains(String media) {
-    return selected.any((x) => x == media);
-  }
-
-  set state01(bool state) {
-    if (toggle('store')) {
-      _state01.value = state;
-      update();
-    }
-  }
-
-  set state02(bool state) {
-    if (toggle('image')) _state02.value = state;
-  }
-
-  set state03(bool state) {
-    if (toggle('video')) {
-      _state03.value = state;
-    }
   }
 
   var searchWord = '';
@@ -94,18 +30,7 @@ class FindController extends AbsListController
     String? searchTerm,
   }) async {
     var _contentKind = [];
-    if (state01) {}
-    if (state02) {
-      _contentKind = [..._contentKind, 1];
-    }
-    if (state03) {
-      _contentKind = [..._contentKind, 2];
-    }
     String? searchQuery = null;
-    // if (searchTerm == null || searchTerm.isEmpty)
-    //   searchQuery = '''''';
-    // else
-    //   searchQuery = '''''';
     final bodyJSON = {
       "query": {
         "bool": {
@@ -114,14 +39,14 @@ class FindController extends AbsListController
               : {
                   "prefix": {"title": searchTerm}
                 },
-          "filter": {
-            "terms": {"contentKind": _contentKind}
-          },
+          // "filter": {
+          //   "terms": {"contentKind": _contentKind}
+          // },
         },
       },
-      "sort": [
-        {"cntView": "desc"}
-      ]
+      // "sort": [
+      //   {"cntView": "desc"}
+      // ]
     };
 
     final lists = await listFilter('/afada_posts/_search', bodyJSON);

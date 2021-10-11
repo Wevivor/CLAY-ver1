@@ -52,108 +52,86 @@ class _BoardUIState extends State<BoardUI>
             .removeWhere((element) => element == 'home');
         return Future.value(true);
       },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: PreferredSize(
-            preferredSize: Size.fromHeight(appbarHeight),
-            //SUBJECT : 앱바의 액션
-            child: vwAppBar(
-              title: 'CLAY',
-              actions: [
-                ImageButton(
-                    height: 32.0,
-                    width: 32.0,
-                    onTap: () {
-                      Get.toNamed('/search');
-                    },
-                    holder: 'assets/icon/search.png'),
-                widthSpace(10.0),
-                ImageButton(
-                    height: 32.0,
-                    width: 32.0,
-                    onTap: () {
-                      Get.toNamed('/setting');
-                      AppHelper.showMessage('설정..');
-                    },
-                    holder: 'assets/icon/account.png'),
-                widthSpace(10.0),
-              ],
-            ),
+      child: Scaffold(
+        appBar: PreferredSize(
+          preferredSize: Size.fromHeight(appbarHeight),
+          //SUBJECT : 앱바의 액션
+          child: vwAppBar(
+            title: 'CLAY',
+            actions: [
+              ImageButton(
+                  height: 32.0,
+                  width: 32.0,
+                  onTap: () {
+                    Get.toNamed('/search');
+                  },
+                  holder: 'assets/icon/search.png'),
+              widthSpace(10.0),
+              ImageButton(
+                  height: 32.0,
+                  width: 32.0,
+                  onTap: () {
+                    Get.toNamed('/profile');
+                    AppHelper.showMessage('설정..');
+                  },
+                  holder: 'assets/icon/account.png'),
+              widthSpace(10.0),
+            ],
           ),
-          backgroundColor: Colors.white,
-          // body: GetBuilder<MyBoardListController>(builder: (controller) {
-          //   return Column(
-          //     children: [
-          //       Row(
-          //         children: [
-          //           CategoryButton(
-          //             index: 0,
-          //             selected: controller.selected,
-          //             onTap: (value) {
-          //               controller.selected = value;
-          //               // _.cache = [];
-          //               // _.fetchItems(term: _.searchWord);
-          //             },
-          //           ),
-          //         ],
-          //       ),
-          //       MyBoardListPART(),
-          //     ],
-          //   );
-          // }),
-          body: Container(
-            padding: EdgeInsets.only(left: 18, right: 18),
-            child: Column(
-              children: [
-                Obx(() {
-                  final controller = BoardListController.to;
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      CategoryButton(
-                        index: 0,
-                        selected: controller.selected,
-                        onTap: (value) {
-                          controller.selected = value;
-                          // _.cache = [];
-                          // _.fetchItems(term: _.searchWord);
-                        },
-                      ),
-                      CategoryButton(
-                        index: 1,
-                        selected: controller.selected,
-                        onTap: (value) {
-                          controller.selected = value;
-                          // _.cache = [];
-                          // _.fetchItems(term: _.searchWord);
-                        },
-                      ),
-                      CategoryButton(
-                        index: 2,
-                        selected: controller.selected,
-                        onTap: (value) {
-                          controller.selected = value;
-                          // _.cache = [];
-                          // _.fetchItems(term: _.searchWord);
-                        },
-                      ),
-                      CategoryButton(
-                        index: 3,
-                        title: null,
-                        selected: controller.selected,
-                        onTap: (value) {
-                          controller.selected = value;
-                          // _.cache = [];
-                          // _.fetchItems(term: _.searchWord);
-                        },
-                      ),
-                    ],
-                  );
-                }),
-                heightSpace(20.0),
-                Expanded(child: BoardListPART()),
-              ],
-            ),
+        ),
+        backgroundColor: Colors.white,
+        body: Container(
+          padding: EdgeInsets.only(left: 18, right: 18),
+          child: Column(
+            children: [
+              Obx(() {
+                final controller = BoardListController.to;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    CategoryButton(
+                      index: 0,
+                      selected: controller.selected,
+                      onTap: (value) {
+                        controller.selected = value;
+                        // _.cache = [];
+                        // _.fetchItems(term: _.searchWord);
+                      },
+                    ),
+                    CategoryButton(
+                      index: 1,
+                      selected: controller.selected,
+                      onTap: (value) {
+                        controller.selected = value;
+                        // _.cache = [];
+                        // _.fetchItems(term: _.searchWord);
+                      },
+                    ),
+                    CategoryButton(
+                      index: 2,
+                      selected: controller.selected,
+                      onTap: (value) {
+                        controller.selected = value;
+                        // _.cache = [];
+                        // _.fetchItems(term: _.searchWord);
+                      },
+                    ),
+                    CategoryButton(
+                      index: 3,
+                      title: null,
+                      selected: controller.selected,
+                      onTap: (value) {
+                        controller.selected = value;
+                        // _.cache = [];
+                        // _.fetchItems(term: _.searchWord);
+                      },
+                    ),
+                  ],
+                );
+              }),
+              heightSpace(20.0),
+              Expanded(child: BoardListPART()),
+            ],
           ),
         ),
       ),

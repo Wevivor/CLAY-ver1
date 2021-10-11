@@ -37,8 +37,6 @@ class BottomSheetLink extends StatelessWidget with AppbarHelper {
               // color: Colors.red,
               child: InkWell(
                 onTap: () {
-                  // FindController.to.searchWord = '';
-                  // FindController.to.update();
                   Get.back();
                 },
                 child: Text(
@@ -53,7 +51,7 @@ class BottomSheetLink extends StatelessWidget with AppbarHelper {
             widthSpace(18.87),
           ],
         ),
-        heightSpace(22.0),
+        heightSpace(35.0),
         vwTitle('웹 링크'),
         heightSpace(11.0),
         Padding(

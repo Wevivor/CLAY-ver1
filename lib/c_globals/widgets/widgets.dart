@@ -12,3 +12,4 @@ export 'src/btn_category_text.dart';
 export 'src/btn_stack.dart';
 export 'src/wgt_ok_dialog.dart';
 export 'src/wgt_image.dart';
+export 'src/wgt_bott_navi.dart';

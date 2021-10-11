@@ -31,7 +31,21 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
           vwBSAppBar(
             onBack: () {
               Get.back();
+
+              //SUBJECT: 바텀시트 색상...
+
               if (onMenu != null) onMenu();
+              // Future.delayed(
+              //     Duration(milliseconds: 200),
+              //     () =>
+              //         // SystemChrome.setSystemUIOverlayStyle(
+              //         //     SystemUiOverlayStyle.dark));
+              //         SystemChrome.setSystemUIOverlayStyle(
+              //             SystemUiOverlayStyle.light.copyWith(
+              //                 systemNavigationBarColor: Color(0xFFEEEEEE),
+              //                 // systemNavigationBarColor: Colors.transparent,
+              //                 systemNavigationBarIconBrightness:
+              //                     Brightness.dark)));
             },
             title: '공유방식 선택',
             actions: [
@@ -39,10 +53,21 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                 alignment: Alignment.center,
                 // color: Colors.red,
                 child: InkWell(
-                  onTap: () {
-                    // FindController.to.searchWord = '';
-                    // FindController.to.update();
+                  onTap: () async {
                     Get.back();
+
+                    await Share.share('https://www.naver.com');
+                    Future.delayed(
+                        Duration(milliseconds: 300),
+                        () =>
+                            // SystemChrome.setSystemUIOverlayStyle(
+                            //     SystemUiOverlayStyle.dark));
+                            SystemChrome.setSystemUIOverlayStyle(
+                                SystemUiOverlayStyle.light.copyWith(
+                                    systemNavigationBarColor: Color(0xFFEEEEEE),
+                                    // systemNavigationBarColor: Colors.transparent,
+                                    systemNavigationBarIconBrightness:
+                                        Brightness.dark)));
                   },
                   child: Text(
                     '공유하기',
@@ -57,6 +82,7 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
             ],
           ),
           HanListTile(
+            padding: EdgeInsets.only(left: 47.0),
             onTap: () {
               //SUBJECT : 상단 고정
               //TODO: 데이터베이스고정.
@@ -64,7 +90,9 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
             leading: Image.asset(Const.assets + 'icon/radio_off.png'),
             title: Text('읽기 허용'),
           ),
+          heightSpace(34.0),
           HanListTile(
+            padding: EdgeInsets.only(left: 47.0),
             onTap: () {
               //SUBJECT : 공유 방법
               //TODO: 공유....
@@ -72,6 +100,7 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
             leading: Image.asset(Const.assets + 'icon/radio_on.png'),
             title: Text('편집 허용'),
           ),
+          heightSpace(37.0),
         ],
       ),
     );

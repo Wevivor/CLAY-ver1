@@ -8,6 +8,7 @@ import 'package:clay/controllers/globals/globals.dart';
 import 'package:clay/models/models.dart';
 import 'package:clay/page/sub_post.dart';
 import 'package:clay/page/widget/card_post_item.dart';
+import 'package:clay/part/part_bs/part_bs.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -78,7 +79,7 @@ class ContentPintestPART extends StatelessWidget with AppbarHelper {
             return PostItemCard(
               title: '베란다 텃밭에서 방울 ...',
               imgUrl: item.imgUrl,
-              contentKind: item.contentKind,
+              category: '좋아',
               cntFavor: item.favorite.cnt,
               isFavor: exist == null ? false : true,
               // holder: cache[index].img,
@@ -93,6 +94,10 @@ class ContentPintestPART extends StatelessWidget with AppbarHelper {
                 // await _authorController.fetchItems();
 
                 Get.to(() => PostSUB(item: postInfo));
+                // Get.to(() => PostSUB(item: index));
+              },
+              onMore: () {
+                _showBS(context, vwBoardMenu(context));
               },
             );
           },
@@ -105,158 +110,122 @@ class ContentPintestPART extends StatelessWidget with AppbarHelper {
     );
   }
 
-  Widget vwEnd() {
-    return Container(
-      decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          heightSpace(2.0),
-          Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
-          // heightSpace(18),
-          AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.chevron_left),
-            ),
-            centerTitle: true,
-            title: Text(
-              '보드변경',
-              style: baseStyle.copyWith(
-                  fontSize: 18,
-                  color: Color(0xFF2F2F2F),
-                  fontWeight: FontWeight.bold),
-            ),
-            elevation: 0.0,
-            actions: [
-              Container(
-                alignment: Alignment.center,
-                // color: Colors.red,
-                child: InkWell(
-                  onTap: () {
-                    // FindController.to.searchWord = '';
-                    // FindController.to.update();
-                    Get.back();
-                  },
-                  child: Text(
-                    '완료',
-                    style: baseStyle.copyWith(
-                        fontSize: 13,
-                        color: Color(0xff017BFE),
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
+  Widget vwBoardMenu(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        heightSpace(2.0),
+        Container(
+            alignment: Alignment.bottomCenter,
+            height: 11,
+            child: Image.asset(Const.assets + 'images/rect_40.png')),
+        heightSpace(34),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () {
+            //SUBJECT : BS: 상단 고정
+            //TODO: 데이터베이스고정.
+            Get.back();
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
+          title: Text('상단고정'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () {
+            //SUBJECT : BS: 공유 권한 변경
+            //TODO: 패딩조정.
+            Get.back();
+            _showBS(context, BottomSheetShare(onMenu: () {
+              _showBS(context, vwBoardMenu(context));
+            }));
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
+          title: Text('공유'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () {
+            //SUBJECT : BS: 보드 체인지
+            //TODO: 공유....
+            Get.back();
+            AppHelper.showMessage('리마인드 알람 관리');
+            // _showBS(context, BottomSheetBoardInfo(onMenu: () {
+            //   _showBS(context, vwBoardMenu(context));
+            // }));
+          },
+          leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
+          title: Text('알람 설정'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () {
+            //SUBJECT : BS: 보드 체인지
+            //TODO: 공유....
+            Get.back();
+            _showBS(context, BottomSheetBoardInfo(onMenu: () {
+              _showBS(context, vwBoardMenu(context));
+            }));
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
+          title: Text('보드정보 수정'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () async {
+            //SUBJECT : BS: 보드 삭제
+            //TODO: 삭제....
+            Get.back();
+            var _responce = false;
+            await DialogHelper.MessageDialog(
+              context,
+              (context) => DeleteDialog(
+                title: '보드를 삭제하시겠습니까?',
+                deleteTitle: '삭제',
+                okTitle: '취소',
+                okTap: () {
+                  _responce = false;
+                },
+                deleteTap: () {
+                  _responce = true;
+                },
               ),
-              widthSpace(18.87),
-            ],
-          ),
-          vwTitle('기존보드'),
-          Container(
-            height: 54 + 8 + 11,
-            padding: EdgeInsets.only(left: 20),
-            child: HanListView(
-              isSliver: false,
-              direction: Axis.horizontal,
-              controller: BoardListController.to,
-              itemBuilder: (context, idx) {
-                final cache = BoardListController.to.cache;
-
-                return Container(
-                  height: 54,
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ImageNodecWidget(
-                        holder: Const.assets + 'icon/hart.png',
-                        height: 28,
-                        width: 28,
-                        onTap: () {
-                          Get.toNamed('/collect_detail?index=$idx');
-                        },
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'test',
-                          textAlign: TextAlign.center,
-                          style: baseStyle.copyWith(
-                              fontSize: 12,
-                              color: Color(0xFF3A3A3A),
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-
-          heightSpace(16),
-
-          vwTitle('변경할 보드'),
-          heightSpace(10),
-          Container(
-            height: 54 + 8 + 11,
-            padding: EdgeInsets.only(left: 20),
-            child: HanListView(
-              isSliver: false,
-              direction: Axis.horizontal,
-              controller: BoardListController.to,
-              itemBuilder: (context, idx) {
-                final cache = BoardListController.to.cache;
-
-                return Container(
-                  height: 54,
-                  padding: EdgeInsets.symmetric(vertical: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      ImageNodecWidget(
-                        holder: Const.assets + 'icon/hart.png',
-                        height: 28,
-                        width: 28,
-                        onTap: () {
-                          Get.toNamed('/collect_detail?index=$idx');
-                        },
-                      ),
-                      Container(
-                        alignment: Alignment.center,
-                        child: Text(
-                          'test',
-                          textAlign: TextAlign.center,
-                          style: baseStyle.copyWith(
-                              fontSize: 12,
-                              color: Color(0xFF3A3A3A),
-                              fontWeight: FontWeight.normal),
-                        ),
-                      ),
-                    ],
-                  ),
-                );
-              },
-            ),
-          ),
-        ],
-      ),
+            );
+            if (_responce) {
+              AppHelper.showMessage('보드를 삭제');
+            }
+          },
+          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
+          title: Text('삭제'),
+        ),
+      ],
     );
   }
 
   void _showBS(context, child) {
     showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
         context: context,
         enableDrag: false,
         builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
           return child;
         });
   }

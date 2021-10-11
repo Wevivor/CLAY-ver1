@@ -4,6 +4,7 @@ import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/part/part_imagepicker/part_imagepicker.dart';
 import 'package:get/get.dart';
 
 import 'wgt_bs_board_item.dart';
@@ -13,10 +14,11 @@ class BottomSheetPhoto extends StatelessWidget with AppbarHelper {
   BottomSheetPhoto({
     this.onMenu,
   });
-
+  final dialogController = Get.lazyPut(() => CarmeraDailogController());
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
+    Get.lazyPut(() => PickedImageController());
     return Container(
       decoration: new BoxDecoration(
           color: Colors.white,
@@ -42,8 +44,6 @@ class BottomSheetPhoto extends StatelessWidget with AppbarHelper {
                 // color: Colors.red,
                 child: InkWell(
                   onTap: () {
-                    // FindController.to.searchWord = '';
-                    // FindController.to.update();
                     Get.back();
                   },
                   child: Text(
@@ -65,8 +65,45 @@ class BottomSheetPhoto extends StatelessWidget with AppbarHelper {
               left: 25.0,
             ),
             alignment: Alignment.centerLeft,
-            child: ImageWidget(
-              holder: Const.assets + 'images/smpl_img1.png',
+            child: Stack(
+              children: [
+                PickedImageWidget(
+                  MySize.getScaledSizeHeight(120),
+                  MySize.getScaledSizeHeight(120),
+                  imgHolder: Const.assets + 'images/smpl_img1.png',
+                ),
+                Positioned(
+                  top: MySize.size0,
+                  left: MySize.size0,
+                  child: InkWell(
+                    child: Container(
+                      height: 120,
+                      width: 120,
+                    ),
+                    onTap: () async {
+                      await showDialog(
+                          context: context,
+                          builder: (BuildContext context) =>
+                              CameraPickerDialog());
+
+                      //카메라에 앨범에서 서 이미지를 피커함.
+                      await PickedHelper.pickedImage(
+                          CarmeraDailogController.to.selector,
+                          target: 'profile_image');
+
+                      //SUBJECT: 이미지 픽업
+                      //TODO: 이미지 쓰넴일 생성 및 업로드.
+                      final _file = PickedImageController.to.file;
+
+                      if (_file != null) {
+                        await GetStorage().write('profile_image', _file.path);
+                        // final uploadURL = await StoreUserInfoController.to
+                        //     .uploadFile(File(_file.path));
+                      }
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           heightSpace(10.0),

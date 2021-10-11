@@ -66,6 +66,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                           cntShare: 0,
                           category: '업무',
                           onMore: () {
+                            // Future.microtask()
                             _showBS(context, vwBoardMenu(context));
                             AppHelper.showMessage('모어');
                           },

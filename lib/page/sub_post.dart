@@ -8,346 +8,405 @@ import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
+import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:math' as math;
 
 import 'widget/card_post_item.dart';
 
 class PostSUB extends StatelessWidget with AppbarHelper {
-  final PostInfo? item;
+  // final PostInfo? item;
+  final item;
   PostSUB({this.item});
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
-    // Get.put(BookmarkController());
-    Get.put(FavorController());
-    Get.lazyPut(() => FindController());
 
     double topPadding = MediaQuery.of(context).padding.top + 0.0;
+    //TODO 컨텐트 타입.
+    final listType = item;
     return Scaffold(
-      body: Stack(
-        children: [
-          NestedScrollView(
-              floatHeaderSlivers: false,
-              headerSliverBuilder: (context, innerBoxIsScrolled) {
-                return <Widget>[
-                  SliverOverlapAbsorber(
-                    handle: NestedScrollView.sliverOverlapAbsorberHandleFor(
-                        context),
-                    sliver: SliverAppBar(
-                      automaticallyImplyLeading: true,
-                      title: null,
-                      centerTitle: true,
-                      floating: true,
-                      snap: true,
-                      pinned: true,
-                      leading: IconButton(
-                          onPressed: () {
-                            Get.back();
-                          },
-                          icon: Icon(
-                            Icons.arrow_back,
-                            color: Colors.white,
-                          )),
-                      actions: [
-                        IconButton(
-                            onPressed: () {
-                              AppHelper.showMessage('팡법 메뉴');
-                            },
-                            icon: Icon(
-                              Icons.more_horiz,
-                              color: Colors.white,
-                            ))
-                      ],
-                      elevation: 4.0,
-                      expandedHeight: 360,
-                      flexibleSpace: FlexibleSpaceBar(
-                        collapseMode: CollapseMode.pin,
-                        background: Stack(
-                          fit: StackFit.expand,
-                          children: <Widget>[
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                  horizontal: 5, vertical: 20),
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                image: DecorationImage(
-                                    image: Image.network(
-                                            item?.imgUrl ?? Const.postHolder)
-                                        .image,
-                                    fit: BoxFit.cover),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      bottom: PreferredSize(
-                        preferredSize: Size.fromHeight(0),
-                        child: Container(),
-                      ),
-                    ),
-                  ),
-                ];
-              },
-              body: Builder(
-                builder: (BuildContext context) {
-                  return CustomScrollView(
-                      scrollDirection: Axis.vertical,
-                      slivers: <Widget>[
-                        SliverOverlapInjector(
-                          handle:
-                              NestedScrollView.sliverOverlapAbsorberHandleFor(
-                                  context),
-                        ),
-                        SliverToBoxAdapter(
-                          child:
-                              GetBuilder<PostController>(builder: (controller) {
-                            final profile = controller.item.profile;
-                            final _info = controller.item.info;
-                            ;
-                            final summary = PostSummary(
-                              id: _info.id,
-                              imgUrl: _info.imgUrl,
-                              uid: _info.uid,
-                              title: _info.title,
-                              content: _info.content,
-                              contentKind: _info.contentKind,
-                              cntView: _info.cntView,
-                              thumbnails: _info.thumbnails,
-                              dtCreated: _info.dtCreated,
-                              dtUpdated: _info.dtUpdated,
-                            );
-
-                            return Container(
-                              /// 프로파일 정보
-                              child: PreferredSize(
-                                preferredSize: Size.fromHeight(MySize.size32),
-                                child: Container(
-                                  padding: EdgeInsets.only(left: 14, right: 14),
-                                ),
-                              ),
-                            );
-                          }),
-                        ),
-                        SliverToBoxAdapter(
-                          child: heightSpace(14),
-                        ),
-                        SliverToBoxAdapter(
-                          child: GetBuilder<PostController>(
-                            builder: (controller) => Container(
-                              height: 40.0,
-                              padding: EdgeInsets.only(left: 14, right: 14),
-                              constraints:
-                                  BoxConstraints(maxHeight: 40, minHeight: 20),
-                              child: Text(
-                                controller.item.info.content,
-                                style: detailStyle.copyWith(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.normal,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-
-                        // // /// TODO 착용제품
-                        SliverToBoxAdapter(
-                          child: vwProductGrid(context),
-                        ),
-                        SliverToBoxAdapter(
-                          child: heightSpace(50),
-                        ),
-
-                        ///TODO 제품 리스트.
-                        SliverToBoxAdapter(
-                          child: Container(
-                            padding: EdgeInsets.only(left: 14, right: 14),
-                            child: Row(
-                              children: [
-                                GetBuilder<PostController>(
-                                  builder: (controller) => Text(
-                                    '${controller.item.profile.displayName}의 다른 게시물',
-                                    style: detailStyle.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                                Expanded(child: Container()),
-                                InkWell(
-                                  onTap: () {
-                                    Get.toNamed('/profile_other');
-                                  },
-                                  child: Text(
-                                    '더보기',
-                                    style: detailStyle.copyWith(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            // trailing: Text('더보기'),
-                          ),
-                        ),
-                        SliverToBoxAdapter(
-                          child: heightSpace(20),
-                        ),
-                      ]);
-                },
-              )),
-          // vwProductDetail(context),
-        ],
-      ),
-    );
-  }
-
-  vwProductGrid(BuildContext context) {
-    return Container(
-      height: 55 * 2 + 10,
-      child: GridView.builder(
-        itemCount: PostController.to.item.product.length,
-        scrollDirection: Axis.horizontal,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisSpacing: 24.0,
-          crossAxisSpacing: 10.0,
-          crossAxisCount: 2,
-          childAspectRatio: 50 / 298,
+      appBar: AppBar(
+        automaticallyImplyLeading: true,
+        elevation: 0.0,
+        leading: IconButton(
+          onPressed: () {
+            Get.back();
+          },
+          icon: Icon(Icons.chevron_left),
         ),
-        itemBuilder: (BuildContext context, int idx) {
-          final controller = PostController.to;
-          final cache = controller.item.product;
-          return Container(
-            // height: (MySize.safeWidth - 14 * 5) / 5.5,
-            // color: Colors.red,
-            height: 55,
-            width: 298,
-            child: ListTile(
-              onTap: () async {
-                final _controller = Get.put(ProductController());
-                await _controller.fetchItem(id: cache[idx].id);
+      ),
+      body: IndexedStack(index: listType, children: [
+        appLink(context),
+        photo(context),
+        memo(context),
+      ]),
+    );
+  }
 
-                // _showProudcyBS(context, cache[idx]);
-                // _showProductBS(context);
-                // Get.toNamed('/product');
-              },
-              dense: true,
-              leading: Container(
-                child: ImageRoundWidget(
-                  width: 48,
-                  height: 48,
-                  round: 5.0,
-                  imgUrl: cache[idx].imgUrl,
-                  // holder: 'assets/images/product_g_05.png',
-                ),
-              ),
-              title: Text(
-                // 'Yeezy Boost 500',
-                cache[idx].title,
-                style: detailStyle.copyWith(
-                  fontSize: 14,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              subtitle: Text(
-                // 'ADIDAS',
-                cache[idx].detail,
-                style: detailStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              trailing: Text(
-                // '289,000 원',
-                '${cache[idx].price} 원',
-                style: detailStyle.copyWith(
-                  fontSize: 12,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
+  Widget memo(BuildContext context) {
+    Get.put(PostController());
+    final node = FocusScope.of(context);
+
+    return Column(
+      children: [
+        vwTitle('Title'),
+        heightSpace(2.0),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: Container(
+            height: 38,
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Color(0xFFF6F6F6),
             ),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 16.0,
+            ),
+            child: TextFormField(
+              maxLines: 1,
+              onTap: () {},
+
+              // style: accountEditTextStyle,
+              decoration: kInputDecoration.copyWith(
+                fillColor: Color(0xFFF6F6F6),
+                hintText: '스타트업 코딩 페스티벌 |',
+                hintStyle: baseStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color(
+                      0xFFCACACA,
+                    )),
+                isDense: true,
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.newline,
+              onEditingComplete: () => node.unfocus(),
+              // controller: CertificateEditController.to.buyController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '체결 금액을 입력해 주세요';
+                }
+                return null;
+              },
+              // inputFormatters: <TextInputFormatter>[
+              //   NumericTextFormatter(),
+              //   LengthLimitingTextInputFormatter(13),
+              // ],
+            ),
+          ),
+        ),
+        heightSpace(62.0),
+        Container(
+          padding: EdgeInsets.only(left: 25, right: 25),
+          height: 189,
+          child: Text(
+            '리테일 기업의 경쟁력을 강화하기 위해서는 온·오프라인을 융합하고 ‘고객경험’을 중시해야 한다. 《리테일 4.0》에서는 이를 실천하기 위한 10가지 법칙을 제시한다. 그리고 실제 이 법칙을 적용하고 있는 아마존, 디즈니랜드, HSBC, 시세이도, 파타고니아 등의 글로벌 기업 |',
+            style: baseStyle.copyWith(
+              color: Color(0xFF707070),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget photo(BuildContext context) {
+    Get.put(PostController());
+    final node = FocusScope.of(context);
+
+    return Column(
+      children: [
+        vwTitle('Title'),
+        heightSpace(2.0),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: Container(
+            height: 38,
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Color(0xFFF6F6F6),
+            ),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 16.0,
+            ),
+            child: TextFormField(
+              maxLines: 1,
+              onTap: () {},
+
+              // style: accountEditTextStyle,
+              decoration: kInputDecoration.copyWith(
+                fillColor: Color(0xFFF6F6F6),
+                hintText: '베이킹 완성작 |',
+                hintStyle: baseStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color(
+                      0xFFCACACA,
+                    )),
+                isDense: true,
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.newline,
+              onEditingComplete: () => node.unfocus(),
+              // controller: CertificateEditController.to.buyController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '체결 금액을 입력해 주세요';
+                }
+                return null;
+              },
+              // inputFormatters: <TextInputFormatter>[
+              //   NumericTextFormatter(),
+              //   LengthLimitingTextInputFormatter(13),
+              // ],
+            ),
+          ),
+        ),
+        vwTitle('Comment'),
+        heightSpace(10.0),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: Container(
+            height: 38,
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Color(0xFFF6F6F6),
+            ),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 16.0,
+            ),
+            child: TextFormField(
+              maxLines: 1,
+              onTap: () {},
+
+              // style: accountEditTextStyle,
+              decoration: kInputDecoration.copyWith(
+                fillColor: Color(0xFFF6F6F6),
+                hintText: '코멘트를 입력하세요.',
+                hintStyle: baseStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color(
+                      0xFFCACACA,
+                    )),
+                isDense: true,
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.newline,
+              onEditingComplete: () => node.unfocus(),
+              // controller: CertificateEditController.to.buyController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '체결 금액을 입력해 주세요';
+                }
+                return null;
+              },
+              // inputFormatters: <TextInputFormatter>[
+              //   NumericTextFormatter(),
+              //   LengthLimitingTextInputFormatter(13),
+              // ],
+            ),
+          ),
+        ),
+        heightSpace(13.0),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ImageWidget(
+                height: 320,
+                width: 320,
+                holder: Const.assets + 'images/smpl_list2.png',
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget appLink(BuildContext context) {
+    Get.put(PostController());
+    final node = FocusScope.of(context);
+
+    return Column(
+      children: [
+        vwTitle('Title'),
+        heightSpace(2.0),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: Container(
+            height: 38,
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Color(0xFFF6F6F6),
+            ),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 16.0,
+            ),
+            child: TextFormField(
+              maxLines: 1,
+              onTap: () {},
+
+              // style: accountEditTextStyle,
+              decoration: kInputDecoration.copyWith(
+                fillColor: Color(0xFFF6F6F6),
+                hintText: '|웹 링크 주소를 입력해 주세요.',
+                hintStyle: baseStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color(
+                      0xFFCACACA,
+                    )),
+                isDense: true,
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.newline,
+              onEditingComplete: () => node.unfocus(),
+              // controller: CertificateEditController.to.buyController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '체결 금액을 입력해 주세요';
+                }
+                return null;
+              },
+              // inputFormatters: <TextInputFormatter>[
+              //   NumericTextFormatter(),
+              //   LengthLimitingTextInputFormatter(13),
+              // ],
+            ),
+          ),
+        ),
+        vwTitle('Comment'),
+        heightSpace(2.0),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: Container(
+            height: 38,
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Color(0xFFF6F6F6),
+            ),
+            padding: const EdgeInsets.only(
+              left: 12.0,
+              right: 16.0,
+            ),
+            child: TextFormField(
+              maxLines: 1,
+              onTap: () {},
+
+              // style: accountEditTextStyle,
+              decoration: kInputDecoration.copyWith(
+                fillColor: Color(0xFFF6F6F6),
+                hintText: '|웹 링크 주소를 입력해 주세요.',
+                hintStyle: baseStyle.copyWith(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: Color(
+                      0xFFCACACA,
+                    )),
+                isDense: true,
+              ),
+              keyboardType: TextInputType.text,
+              textInputAction: TextInputAction.newline,
+              onEditingComplete: () => node.unfocus(),
+              // controller: CertificateEditController.to.buyController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return '체결 금액을 입력해 주세요';
+                }
+                return null;
+              },
+              // inputFormatters: <TextInputFormatter>[
+              //   NumericTextFormatter(),
+              //   LengthLimitingTextInputFormatter(13),
+              // ],
+            ),
+          ),
+        ),
+        heightSpace(15.0),
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ImageWidget(
+                height: 13.5,
+                width: 14.06,
+                holder: Const.assets + 'icon/icon_share.png',
+              ),
+              Text(
+                'www.instagram.com',
+                style: baseStyle.copyWith(
+                  color: Color(0xFF707070),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.solid,
+                ),
+              ),
+              widthSpace(14.0),
+            ],
+          ),
+        ),
+        Expanded(
+          child: Container(
+            child: buildWebview(context),
+          ),
+        )
+      ],
+    );
+  }
+
+  final Completer<WebViewController> _controller =
+      Completer<WebViewController>();
+  JavascriptChannel _toasterJavascriptChannel(BuildContext context) {
+    return JavascriptChannel(
+        name: 'Toaster',
+        onMessageReceived: (JavascriptMessage message) {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(content: Text(message.message)),
           );
-        },
-      ),
-    );
+        });
   }
 
-  // void _showProudcyBS(context, final item) {
-  //   showModalBottomSheet(
-  //     isDismissible: true,
-  //     backgroundColor: Colors.transparent,
-  //     shape: ContinuousRectangleBorder(
-  //         side: BorderSide(color: Colors.black),
-  //         borderRadius: BorderRadius.only(
-  //             topLeft: Radius.circular(24), topRight: Radius.circular(24))),
-  //     isScrollControlled: true,
-  //     context: context,
-  //     enableDrag: false,
-  //     builder: (BuildContext buildContext) {
-  //       return Container(
-  //           child: DraggableScrollableSheet(
-  //         initialChildSize: 0.2,
-
-  //         // initialChildSize: 1,
-  //         minChildSize: 0.2,
-  //         maxChildSize: 0.9,
-  //         builder: (BuildContext context, controller) {
-  //           return ProductDetailSUB(scrollcontroller: controller, item: item);
-  //         },
-  //       ));
-  //     },
-  //   );
-  // }
-
-/*
-  Widget vwProductDetail(context, final item) {
-    return DraggableScrollableSheet(
-      initialChildSize: 0.2,
-
-      // initialChildSize: 1,
-      minChildSize: 0.2,
-      maxChildSize: 0.9,
-      builder: (BuildContext context, controller) {
-        return ProductDetailSUB(scrollcontroller: controller, item: item);
+  Widget buildWebview(BuildContext context) {
+    return WebView(
+      initialUrl: 'https://www.instagram.com',
+      javascriptMode: JavascriptMode.unrestricted,
+      onWebViewCreated: (WebViewController webViewController) {
+        _controller.complete(webViewController);
       },
+      // TODO(iskakaushik): Remove this when collection literals makes it to stable.
+      // ignore: prefer_collection_literals
+      javascriptChannels: <JavascriptChannel>[
+        _toasterJavascriptChannel(context),
+      ].toSet(),
+      navigationDelegate: (NavigationRequest request) {
+        if (request.url.startsWith('https://www.instagram.com')) {
+          print('blocking navigation to $request}');
+          return NavigationDecision.prevent;
+        }
+        print('allowing navigation to $request');
+        return NavigationDecision.navigate;
+      },
+      onPageStarted: (String url) {
+        print('Page started loading: $url');
+      },
+      onPageFinished: (String url) {
+        print('Page finished loading: $url');
+      },
+      gestureNavigationEnabled: true,
     );
   }
-*/
-  SliverPersistentHeader makeHeader(Widget widget) {
-    return SliverPersistentHeader(
-      pinned: true,
-      delegate: _SliverAppBarDelegate(
-        minHeight: kToolbarHeight,
-        maxHeight: kToolbarHeight,
-        child: Container(color: Colors.white, child: widget),
+
+  Widget vwTitle(final title) {
+    return Container(
+      padding: EdgeInsets.only(left: 16),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        title,
+        style: baseStyle.copyWith(
+            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
       ),
     );
-  }
-}
-
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate({
-    required this.minHeight,
-    required this.maxHeight,
-    required this.child,
-  });
-  final double minHeight;
-  final double maxHeight;
-  final Widget child;
-  @override
-  double get minExtent => minHeight;
-  @override
-  double get maxExtent => math.max(maxHeight, minHeight);
-  @override
-  Widget build(
-      BuildContext context, double shrinkOffset, bool overlapsContent) {
-    return new SizedBox.expand(child: child);
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return maxHeight != oldDelegate.maxHeight ||
-        minHeight != oldDelegate.minHeight ||
-        child != oldDelegate.child;
   }
 }

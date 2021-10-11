@@ -18,6 +18,7 @@ class SearchUI extends StatelessWidget {
     MySize().init(context);
 
     final _controller = Get.put(FindController());
+    _controller.fetchItems();
 
     final profileHeight = 70.0;
     return Scaffold(
@@ -46,7 +47,7 @@ class SearchUI extends StatelessWidget {
                         child: Container(
                           color: Colors.white,
                           padding: EdgeInsets.only(
-                              left: 16.0, right: 16.0, top: 16.0, bottom: 10.0),
+                              left: 18.0, right: 18.7, top: 16.0, bottom: 10.0),
                           child: InkWell(
                             child: Container(
                               // width: MySize.safeWidth,
@@ -57,7 +58,7 @@ class SearchUI extends StatelessWidget {
                                 border: Border.all(
                                     width: 0.1, color: Color(0xFFf2f2f2)),
                                 borderRadius: BorderRadius.all(Radius.circular(
-                                        100.0) //         <--- border radius here
+                                        10.0) //         <--- border radius here
                                     ),
                               ), //       <--- BoxDecoration here
                               child: Row(
@@ -74,8 +75,6 @@ class SearchUI extends StatelessWidget {
                                         : FindController.to.searchWord,
                                   ),
                                   Expanded(child: widthSpace(10.0)),
-                                  // if (FindController
-                                  //     .to.searchWord.isNotEmpty)
                                 ],
                               ),
                             ),
@@ -93,20 +92,15 @@ class SearchUI extends StatelessWidget {
                               //TODO : 검색어 조건 설정
                               FindController.to.searchWord = result ?? '';
                               FindController.to.cache = [];
-                              // FindController.to.own = false;
-                              // FindController.to.support = false;
-                              // FindController.to.member = false;
 
                               await FindController.to.fetchItems(term: result);
                             },
                           ),
                         ),
                       ),
-                      widthSpace(12.17),
+                      // widthSpace(12.17),
                       InkWell(
                         onTap: () {
-                          // FindController.to.searchWord = '';
-                          // FindController.to.update();
                           Get.back();
                         },
                         child: Text(
@@ -128,17 +122,14 @@ class SearchUI extends StatelessWidget {
         ),
       ),
       backgroundColor: Color(0xFFf2f2f2),
-      body:
 
-          ///--------------------------
-          /// best UI의 컴색 필터 임
-          ///-------------------------
-
-          Column(
+      ///--------------------------
+      ///  컴색 필터 임
+      ///-------------------------
+      body: Column(
         children: [
           Flexible(
-            child: GetBuilder<FindController>(
-                init: FindController(), builder: (_) => SearchInitPART()),
+            child: GetBuilder<FindController>(builder: (_) => SearchInitPART()),
           ),
         ],
       ),

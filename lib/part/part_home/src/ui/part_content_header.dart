@@ -19,6 +19,7 @@ import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
 
 import '../../part_home.dart';
+import 'wgt_profile_ovlay_list.dart';
 
 // ignore: must_be_immutable
 class ContentHeaderPART extends StatelessWidget with AppbarHelper {
@@ -53,7 +54,55 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
                   fontWeight: FontWeight.w700),
             ),
           ),
-          heightSpace(32.0),
+          heightSpace(10.0),
+          Container(
+            padding: const EdgeInsets.only(top: 10.0, right: 18.0),
+            alignment: Alignment.centerLeft,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ProfileOvlayListWidget(
+                    images: [
+                      '예림',
+                      'Post',
+                      'Post',
+                      '2+',
+                      // 'assets/images/avatar-3.jpg',
+                      // 'assets/images/avatar-5.jpg',
+                      // 'assets/images/avatar-2.jpg',
+                      // 'assets/images/avatar-3.jpg',
+                      // 'assets/images/avatar-5.jpg',
+                      // 'assets/images/avatar-2.jpg',
+                      // 'assets/images/avatar-3.jpg',
+                      // 'assets/images/avatar-5.jpg',
+                      // 'assets/images/avatar-2.jpg',
+                      // 'assets/images/avatar-3.jpg',
+                    ],
+                    enabledOverlayBorder: true,
+                    overlayBorderColor: Colors.white,
+                    overlayBorderThickness: 1.0,
+                    leftFraction: 0.7,
+                    size: 35.0),
+                // InkWell(
+                //   onTap: () {
+                //     // final _controller = Get.put(
+                //     //     ChatParticListController(client: http.Client()));
+                //     // _controller.fetchItems();
+                //     // Get.toNamed('/chat_partic');
+                //   },
+                //   child: Text(
+                //     '...더보기',
+                //     style: baseStyle.copyWith(
+                //         fontWeight: FontWeight.bold,
+                //         fontSize: 12,
+                //         color: Color(0XFF959595)),
+                //   ),
+                // )
+              ],
+            ),
+          ),
+
+          heightSpace(19.0),
         ],
       ),
     );

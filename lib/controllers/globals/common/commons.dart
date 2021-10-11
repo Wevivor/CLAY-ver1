@@ -13,3 +13,4 @@ export 'src/bott_navi_controller.dart';
 export 'src/fb_common_module.dart';
 export 'src/fb_strage_module.dart';
 export 'src/fb_auth_module.dart';
+export 'src/language_controller.dart';

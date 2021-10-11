@@ -15,10 +15,10 @@ class GlobalStyle {
 
   static final configStatusTheme = SystemUiOverlayStyle(
       statusBarBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.dark,
+      statusBarIconBrightness: Brightness.light,
       statusBarColor: Colors.white,
-      systemNavigationBarIconBrightness: Brightness.light,
-      systemNavigationBarColor: Colors.black);
+      systemNavigationBarIconBrightness: Brightness.dark,
+      systemNavigationBarColor: Color(0xFFEEEEEE));
 
   /// ----------------------------------------------
   ///  스타일
@@ -36,33 +36,9 @@ const TextStyle baseStyle = TextStyle(
   fontSize: 13,
   color: SOFT_GREY,
 );
-const List<Color> gradientColors = [
-  Color(0xFF7703F1),
-  Color(0xFF750BF6),
-  Color(0xFF692AF6),
-  Color(0xFF5F42FA),
-  Color(0xFF615EE8),
-];
-const List<Color> gradient02Colors = [
-  Color(0xFF615EE8),
-  Color(0xFF5F42FA),
-  Color(0xFF692AF6),
-  Color(0xFF750BF6),
-  Color(0xFF7703F1),
-];
-const LinearGradient gradient = LinearGradient(
-  begin: Alignment.centerLeft,
-  end: Alignment.centerRight,
-  colors: gradientColors,
-);
-const LinearGradient gradientReverse = LinearGradient(
-  begin: Alignment.centerRight,
-  end: Alignment.centerLeft,
-  colors: gradientColors,
-);
 
 ///-----------------
-/// 홈 세팅 (아카페)
+/// 홈 세팅
 /// --------------------
 const TextStyle appBarStyle = TextStyle(
   fontFamily: 'Roboto',
@@ -70,9 +46,15 @@ const TextStyle appBarStyle = TextStyle(
   fontWeight: FontWeight.bold,
   color: Colors.black,
 );
+const TextStyle appBarStyleDark = TextStyle(
+  fontFamily: 'Roboto',
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+  color: Colors.white,
+);
 
 ///-----------------
-/// 상세페이지 세팅 (아카페)
+/// 상세페이지 세팅
 /// --------------------
 
 const TextStyle detailStyle = TextStyle(
@@ -83,7 +65,7 @@ const TextStyle detailStyle = TextStyle(
 );
 
 ///-----------------
-/// 회원 Signin 세팅 (아카페)
+/// 회원 Signin 세팅
 /// --------------------
 
 const TextStyle singinStyle = TextStyle(
@@ -101,7 +83,7 @@ const TextStyle registerStyle = TextStyle(
 );
 
 ///-----------------
-/// 서치 세팅 (아카페)
+/// 서치 세팅
 /// --------------------
 const TextStyle btnTextStyle = TextStyle(
   fontFamily: 'Roboto',
@@ -110,7 +92,7 @@ const TextStyle btnTextStyle = TextStyle(
 );
 
 ///-----------------
-/// 홈 세팅 (아카페)
+/// 홈 세팅
 /// --------------------
 const TextStyle tabStyle = TextStyle(
   fontFamily: 'Roboto',
@@ -126,7 +108,7 @@ const TextStyle homeTitleStyle = TextStyle(
 );
 
 ///-----------------
-/// 드로우 세팅 (아카페)
+/// 드로우 세팅
 /// --------------------
 const TextStyle drawerStyle = TextStyle(
   fontFamily: 'Roboto',
@@ -145,7 +127,7 @@ const TabBarTheme tabBarTheme = TabBarTheme(
 );
 
 ///-----------------
-/// 포스 세팅 (아카페)
+/// 포스 세팅
 /// --------------------
 Color getButtonColor(Set<MaterialState> states) {
   const Set<MaterialState> interactiveStates = <MaterialState>{

@@ -42,8 +42,6 @@ class BottomSheetMemo extends StatelessWidget with AppbarHelper {
                 // color: Colors.red,
                 child: InkWell(
                   onTap: () {
-                    // FindController.to.searchWord = '';
-                    // FindController.to.update();
                     Get.back();
                   },
                   child: Text(
