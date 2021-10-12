@@ -55,11 +55,11 @@ Map<String, dynamic> _$$_BoardInfoDtoToJson(_$_BoardInfoDto instance) =>
 
 _$_ShareDto _$$_ShareDtoFromJson(Map<String, dynamic> json) => _$_ShareDto(
       sharer: ProfileDto.fromJson(json['sharer'] as Map<String, dynamic>),
-      level: json['level'] as int,
+      shareLevel: json['shareLevel'] as int,
     );
 
 Map<String, dynamic> _$$_ShareDtoToJson(_$_ShareDto instance) =>
     <String, dynamic>{
       'sharer': instance.sharer.toJson(),
-      'level': instance.level,
+      'shareLevel': instance.shareLevel,
     };

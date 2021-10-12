@@ -1,5 +1,5 @@
 import 'package:clay/c_globals/utils/utils.dart';
-import 'package:clay/models/users/users_dtos.dart';
+import 'package:clay/models/models.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'contents.dart';

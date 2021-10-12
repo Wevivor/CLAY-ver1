@@ -1,5 +1,4 @@
 import 'package:clay/c_globals/utils/utils.dart';
-import 'package:clay/models/users/users_dtos.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../models.dart';
@@ -61,12 +60,12 @@ class BoardInfo with _$BoardInfo {
 class Share with _$Share {
   factory Share({
     required Profile sharer,
-    required int level,
+    required int shareLevel,
   }) = _Share;
   Share._();
 
   ShareDto toDto() => ShareDto(
         sharer: sharer.toDto(),
-        level: level,
+        shareLevel: shareLevel,
       );
 }

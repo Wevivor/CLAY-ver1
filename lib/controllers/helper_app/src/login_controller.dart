@@ -132,30 +132,30 @@ class LoginController extends GetxController with FbAuthModule, Validator {
   //   }
   // }
 
-  Future<bool> actionLogin() async {
-    if (GetPlatform.isAndroid) {
-      ///TODO 메인 이동.
+  // Future<bool> actionLogin() async {
+  //   if (GetPlatform.isAndroid) {
+  //     ///TODO 메인 이동.
 
-      try {
-        await signinWithEmail(emailController.text, pswdController.text);
-        print('Login Controller signinWithEmail ');
-        return true;
-      } on FirebaseAuthException catch (e) {
-        if (['user-cancelled', 'user-not-found', 'wrong-password']
-            .contains(e.code)) {
-          AppHelper.showMessage(ExceptionMessages.messages(e.code));
-        }
-        print('==========================================>');
-        print('Login Controller actionLogin ${e.toString()}');
-        print('==========================================>');
-        throw e;
-      } finally {
-        LoadingController.to.isLoading = false;
-      }
-    }
-    isLoginSuccess.value = false;
-    return false;
-  }
+  //     try {
+  //       await signinWithEmail(emailController.text, pswdController.text);
+  //       print('Login Controller signinWithEmail ');
+  //       return true;
+  //     } on FirebaseAuthException catch (e) {
+  //       if (['user-cancelled', 'user-not-found', 'wrong-password']
+  //           .contains(e.code)) {
+  //         AppHelper.showMessage(ExceptionMessages.messages(e.code));
+  //       }
+  //       print('==========================================>');
+  //       print('Login Controller actionLogin ${e.toString()}');
+  //       print('==========================================>');
+  //       throw e;
+  //     } finally {
+  //       LoadingController.to.isLoading = false;
+  //     }
+  //   }
+  //   isLoginSuccess.value = false;
+  //   return false;
+  // }
 
   Future<dynamic?> actionCredntial() async {
     if (GetPlatform.isAndroid) {
@@ -172,17 +172,17 @@ class LoginController extends GetxController with FbAuthModule, Validator {
     return null;
   }
 
-  Future<void> actionResetPswd() async {
-    try {
-      await sendPasswordResetEmail(email: emailController.text.trim());
-    } on FirebaseAuthException catch (e) {
-      if (['user-cancelled', 'user-not-found'].contains(e.code)) {
-        AppHelper.showMessage(ExceptionMessages.messages(e.code));
-      } else
-        AppHelper.showMessage(ExceptionMessages.messages(e.code));
-    } catch (e) {
-      //TODO Analysis
-      print(e);
-    }
-  }
+  // Future<void> actionResetPswd() async {
+  //   try {
+  //     await sendPasswordResetEmail(email: emailController.text.trim());
+  //   } on FirebaseAuthException catch (e) {
+  //     if (['user-cancelled', 'user-not-found'].contains(e.code)) {
+  //       AppHelper.showMessage(ExceptionMessages.messages(e.code));
+  //     } else
+  //       AppHelper.showMessage(ExceptionMessages.messages(e.code));
+  //   } catch (e) {
+  //     //TODO Analysis
+  //     print(e);
+  //   }
+  // }
 }

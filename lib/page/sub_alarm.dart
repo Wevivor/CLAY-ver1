@@ -3,12 +3,11 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/controllers/helper_app/helper_app.dart';
+import 'package:clay/part/part_app/part_app.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
-import 'package:clay/part/part_imagepicker/part_imagepicker.dart';
-import 'package:clay/part/part_push/part_push.dart';
 
 class AlarmSUB extends StatelessWidget with AppbarHelper {
   final _formKey = GlobalKey<FormState>();

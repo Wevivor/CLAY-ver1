@@ -2,8 +2,8 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/part/part_app/part_app.dart';
 
-import 'package:clay/part/part_profile/part_profile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

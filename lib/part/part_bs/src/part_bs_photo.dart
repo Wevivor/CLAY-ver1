@@ -4,7 +4,7 @@ import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
-import 'package:clay/part/part_imagepicker/part_imagepicker.dart';
+import 'package:clay/part/part_app/part_imagepicker/part_imagepicker.dart';
 import 'package:get/get.dart';
 
 import 'wgt_bs_board_item.dart';

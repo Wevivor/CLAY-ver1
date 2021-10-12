@@ -1,5 +1,4 @@
 import 'package:clay/c_globals/utils/utils.dart';
-import 'package:clay/models/users/users_dtos.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../models.dart';
@@ -72,7 +71,7 @@ class ShareDto with _$ShareDto {
   @JsonSerializable(explicitToJson: true)
   factory ShareDto({
     required ProfileDto sharer,
-    required int level,
+    required int shareLevel,
   }) = _ShareDto;
   ShareDto._();
   factory ShareDto.fromJson(Map<String, dynamic> json) =>
@@ -80,6 +79,6 @@ class ShareDto with _$ShareDto {
 
   Share toDomain() => Share(
         sharer: sharer.toDomain(),
-        level: level,
+        shareLevel: shareLevel,
       );
 }

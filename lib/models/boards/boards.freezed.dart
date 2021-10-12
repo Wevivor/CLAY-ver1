@@ -634,10 +634,10 @@ abstract class _BoardInfo extends BoardInfo {
 class _$ShareTearOff {
   const _$ShareTearOff();
 
-  _Share call({required Profile sharer, required int level}) {
+  _Share call({required Profile sharer, required int shareLevel}) {
     return _Share(
       sharer: sharer,
-      level: level,
+      shareLevel: shareLevel,
     );
   }
 }
@@ -648,7 +648,7 @@ const $Share = _$ShareTearOff();
 /// @nodoc
 mixin _$Share {
   Profile get sharer => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError;
+  int get shareLevel => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ShareCopyWith<Share> get copyWith => throw _privateConstructorUsedError;
@@ -658,7 +658,7 @@ mixin _$Share {
 abstract class $ShareCopyWith<$Res> {
   factory $ShareCopyWith(Share value, $Res Function(Share) then) =
       _$ShareCopyWithImpl<$Res>;
-  $Res call({Profile sharer, int level});
+  $Res call({Profile sharer, int shareLevel});
 
   $ProfileCopyWith<$Res> get sharer;
 }
@@ -674,16 +674,16 @@ class _$ShareCopyWithImpl<$Res> implements $ShareCopyWith<$Res> {
   @override
   $Res call({
     Object? sharer = freezed,
-    Object? level = freezed,
+    Object? shareLevel = freezed,
   }) {
     return _then(_value.copyWith(
       sharer: sharer == freezed
           ? _value.sharer
           : sharer // ignore: cast_nullable_to_non_nullable
               as Profile,
-      level: level == freezed
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      shareLevel: shareLevel == freezed
+          ? _value.shareLevel
+          : shareLevel // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -701,7 +701,7 @@ abstract class _$ShareCopyWith<$Res> implements $ShareCopyWith<$Res> {
   factory _$ShareCopyWith(_Share value, $Res Function(_Share) then) =
       __$ShareCopyWithImpl<$Res>;
   @override
-  $Res call({Profile sharer, int level});
+  $Res call({Profile sharer, int shareLevel});
 
   @override
   $ProfileCopyWith<$Res> get sharer;
@@ -719,16 +719,16 @@ class __$ShareCopyWithImpl<$Res> extends _$ShareCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sharer = freezed,
-    Object? level = freezed,
+    Object? shareLevel = freezed,
   }) {
     return _then(_Share(
       sharer: sharer == freezed
           ? _value.sharer
           : sharer // ignore: cast_nullable_to_non_nullable
               as Profile,
-      level: level == freezed
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      shareLevel: shareLevel == freezed
+          ? _value.shareLevel
+          : shareLevel // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -737,16 +737,16 @@ class __$ShareCopyWithImpl<$Res> extends _$ShareCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Share extends _Share {
-  _$_Share({required this.sharer, required this.level}) : super._();
+  _$_Share({required this.sharer, required this.shareLevel}) : super._();
 
   @override
   final Profile sharer;
   @override
-  final int level;
+  final int shareLevel;
 
   @override
   String toString() {
-    return 'Share(sharer: $sharer, level: $level)';
+    return 'Share(sharer: $sharer, shareLevel: $shareLevel)';
   }
 
   @override
@@ -755,15 +755,16 @@ class _$_Share extends _Share {
         (other is _Share &&
             (identical(other.sharer, sharer) ||
                 const DeepCollectionEquality().equals(other.sharer, sharer)) &&
-            (identical(other.level, level) ||
-                const DeepCollectionEquality().equals(other.level, level)));
+            (identical(other.shareLevel, shareLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareLevel, shareLevel)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(sharer) ^
-      const DeepCollectionEquality().hash(level);
+      const DeepCollectionEquality().hash(shareLevel);
 
   @JsonKey(ignore: true)
   @override
@@ -772,13 +773,13 @@ class _$_Share extends _Share {
 }
 
 abstract class _Share extends Share {
-  factory _Share({required Profile sharer, required int level}) = _$_Share;
+  factory _Share({required Profile sharer, required int shareLevel}) = _$_Share;
   _Share._() : super._();
 
   @override
   Profile get sharer => throw _privateConstructorUsedError;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get shareLevel => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ShareCopyWith<_Share> get copyWith => throw _privateConstructorUsedError;

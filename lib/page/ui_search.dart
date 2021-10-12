@@ -1,8 +1,7 @@
 // sub_search
 import 'package:clay/c_config/config.dart';
 import 'package:clay/controllers/controllers.dart';
-import 'package:clay/part/part_search/part_search.dart';
-import 'package:clay/part/part_search/src/part_search_init.dart';
+import 'package:clay/part/part_app/part_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;

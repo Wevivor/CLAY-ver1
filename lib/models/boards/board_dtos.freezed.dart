@@ -700,10 +700,10 @@ ShareDto _$ShareDtoFromJson(Map<String, dynamic> json) {
 class _$ShareDtoTearOff {
   const _$ShareDtoTearOff();
 
-  _ShareDto call({required ProfileDto sharer, required int level}) {
+  _ShareDto call({required ProfileDto sharer, required int shareLevel}) {
     return _ShareDto(
       sharer: sharer,
-      level: level,
+      shareLevel: shareLevel,
     );
   }
 
@@ -718,7 +718,7 @@ const $ShareDto = _$ShareDtoTearOff();
 /// @nodoc
 mixin _$ShareDto {
   ProfileDto get sharer => throw _privateConstructorUsedError;
-  int get level => throw _privateConstructorUsedError;
+  int get shareLevel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -730,7 +730,7 @@ mixin _$ShareDto {
 abstract class $ShareDtoCopyWith<$Res> {
   factory $ShareDtoCopyWith(ShareDto value, $Res Function(ShareDto) then) =
       _$ShareDtoCopyWithImpl<$Res>;
-  $Res call({ProfileDto sharer, int level});
+  $Res call({ProfileDto sharer, int shareLevel});
 
   $ProfileDtoCopyWith<$Res> get sharer;
 }
@@ -746,16 +746,16 @@ class _$ShareDtoCopyWithImpl<$Res> implements $ShareDtoCopyWith<$Res> {
   @override
   $Res call({
     Object? sharer = freezed,
-    Object? level = freezed,
+    Object? shareLevel = freezed,
   }) {
     return _then(_value.copyWith(
       sharer: sharer == freezed
           ? _value.sharer
           : sharer // ignore: cast_nullable_to_non_nullable
               as ProfileDto,
-      level: level == freezed
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      shareLevel: shareLevel == freezed
+          ? _value.shareLevel
+          : shareLevel // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -773,7 +773,7 @@ abstract class _$ShareDtoCopyWith<$Res> implements $ShareDtoCopyWith<$Res> {
   factory _$ShareDtoCopyWith(_ShareDto value, $Res Function(_ShareDto) then) =
       __$ShareDtoCopyWithImpl<$Res>;
   @override
-  $Res call({ProfileDto sharer, int level});
+  $Res call({ProfileDto sharer, int shareLevel});
 
   @override
   $ProfileDtoCopyWith<$Res> get sharer;
@@ -791,16 +791,16 @@ class __$ShareDtoCopyWithImpl<$Res> extends _$ShareDtoCopyWithImpl<$Res>
   @override
   $Res call({
     Object? sharer = freezed,
-    Object? level = freezed,
+    Object? shareLevel = freezed,
   }) {
     return _then(_ShareDto(
       sharer: sharer == freezed
           ? _value.sharer
           : sharer // ignore: cast_nullable_to_non_nullable
               as ProfileDto,
-      level: level == freezed
-          ? _value.level
-          : level // ignore: cast_nullable_to_non_nullable
+      shareLevel: shareLevel == freezed
+          ? _value.shareLevel
+          : shareLevel // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -810,7 +810,7 @@ class __$ShareDtoCopyWithImpl<$Res> extends _$ShareDtoCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$_ShareDto extends _ShareDto {
-  _$_ShareDto({required this.sharer, required this.level}) : super._();
+  _$_ShareDto({required this.sharer, required this.shareLevel}) : super._();
 
   factory _$_ShareDto.fromJson(Map<String, dynamic> json) =>
       _$$_ShareDtoFromJson(json);
@@ -818,11 +818,11 @@ class _$_ShareDto extends _ShareDto {
   @override
   final ProfileDto sharer;
   @override
-  final int level;
+  final int shareLevel;
 
   @override
   String toString() {
-    return 'ShareDto(sharer: $sharer, level: $level)';
+    return 'ShareDto(sharer: $sharer, shareLevel: $shareLevel)';
   }
 
   @override
@@ -831,15 +831,16 @@ class _$_ShareDto extends _ShareDto {
         (other is _ShareDto &&
             (identical(other.sharer, sharer) ||
                 const DeepCollectionEquality().equals(other.sharer, sharer)) &&
-            (identical(other.level, level) ||
-                const DeepCollectionEquality().equals(other.level, level)));
+            (identical(other.shareLevel, shareLevel) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareLevel, shareLevel)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(sharer) ^
-      const DeepCollectionEquality().hash(level);
+      const DeepCollectionEquality().hash(shareLevel);
 
   @JsonKey(ignore: true)
   @override
@@ -853,7 +854,7 @@ class _$_ShareDto extends _ShareDto {
 }
 
 abstract class _ShareDto extends ShareDto {
-  factory _ShareDto({required ProfileDto sharer, required int level}) =
+  factory _ShareDto({required ProfileDto sharer, required int shareLevel}) =
       _$_ShareDto;
   _ShareDto._() : super._();
 
@@ -862,7 +863,7 @@ abstract class _ShareDto extends ShareDto {
   @override
   ProfileDto get sharer => throw _privateConstructorUsedError;
   @override
-  int get level => throw _privateConstructorUsedError;
+  int get shareLevel => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ShareDtoCopyWith<_ShareDto> get copyWith =>

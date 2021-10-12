@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/part/part_app/part_app.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,6 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/models/models.dart';
-
-import '../part/part_signin/src/login_title_widget.dart';
-import '../part/part_signin/src/sns_wide_widget.dart';
 
 class LoginGoogleUI extends StatelessWidget with AppbarHelper {
   late ThemeData themeData;
@@ -158,6 +156,45 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                       ),
                     ),
                     heightSpace(16.0),
+                    StackWithButton(
+                      child: SnsWideWidget(
+                        title: '',
+                        assetName: 'assets/sns_login/wide_kakao.png',
+                        onTap: () async {
+                          // try {
+                          //   await AuthController.to.signInWithKAKAO();
+                          // } catch (e) {
+                          //   print('======: {e.toString()}');
+                          // }
+                        },
+                      ),
+                    ),
+                    heightSpace(16.0),
+                    StackWithButton(
+                      child: SnsWideWidget(
+                        title: '',
+                        assetName: 'assets/sns_login/wide_naver.png',
+                        onTap: () {},
+                      ),
+                    ),
+
+                    //  InkWell(
+                    //     splashColor: Colors.yellow,
+                    //     onTap: () {
+
+                    //     },
+                    //     child: _isLoadingKAKAO
+                    //         ? stackWithButton(SnsWideButton(
+                    //             title: _signup ? '카카오로 간편가입' : '카카오로 로그인',
+                    //             assetFilename:
+                    //                 'assets/sns_login/kakao_wide.png'))
+                    //         : SnsWideButton(
+                    //             title: _signup ? '카카오로 간편가입' : '카카오로 로그인',
+                    //             assetFilename:
+                    //                 'assets/sns_login/kakao_wide.png'),
+                    //     // : buttonCustomKAKAO(),
+                    //   ),
+                    heightSpace(20.0),
                   ],
                 ),
               ),
