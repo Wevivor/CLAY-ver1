@@ -1,4 +1,4 @@
-import 'package:clay/controllers/globals/globals.dart';
+import 'package:clay/controllers/common/commons.dart';
 import 'package:flutter/material.dart';
 
 class StackWithButton extends StatelessWidget {

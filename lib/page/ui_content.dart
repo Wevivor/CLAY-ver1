@@ -1,15 +1,13 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/app/home/src/list_content_controller.dart';
-import 'package:clay/part/part_bs/part_bs.dart';
+import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/part/part_home/part_home.dart';
 import 'package:clay/controllers/controllers.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 //SUBJECT: 컨텐츠 화면
 //TODO : 컨텐트
@@ -38,7 +36,7 @@ class _ContentUIState extends State<ContentUI>
   }
 
   final contentCategoryListController = Get.put(
-    ContentCategoryListController(),
+    ContentCtgListController(),
   );
   final contentListController = Get.put(
     ContentListController(),
@@ -96,7 +94,7 @@ class _ContentUIState extends State<ContentUI>
                   // color: Colors.red,
                   height: 30 + 4,
                   padding: EdgeInsets.only(left: 20),
-                  child: GetBuilder<ContentCategoryListController>(
+                  child: GetBuilder<ContentCtgListController>(
                       builder: (controller) {
                     return HanListView(
                       isSliver: false,

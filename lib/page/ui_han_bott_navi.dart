@@ -1,14 +1,13 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/controllers.dart';
-import 'package:clay/controllers/globals/globals.dart';
+import 'package:clay/controllers/common/commons.dart';
+import 'package:clay/controllers/home/homes.dart';
 import 'package:clay/page/ui_board.dart';
 import 'package:clay/page/ui_content.dart';
 import 'package:clay/part/part_bs/part_bs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'ui_search.dart';
@@ -24,7 +23,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   List<SharedMediaFile>? _sharedFiles;
   String? _sharedText;
   bool _isSharedOpen = false;
-  final _controller = Get.put(BestListController());
+  final _controller = Get.put(BoardListController());
 
   @override
   void initState() {
@@ -140,7 +139,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
               widthSpace(18.87),
             ],
           ),
-          GetBuilder<BestListController>(builder: (controller) {
+          GetBuilder<BoardListController>(builder: (controller) {
             print('================================');
             return Container(
               height: 64,
@@ -150,7 +149,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                 direction: Axis.horizontal,
                 controller: controller,
                 itemBuilder: (context, idx) {
-                  final cache = BestListController.to.cache;
+                  final cache = BoardListController.to.cache;
 
                   return Container(
                     height: 54,

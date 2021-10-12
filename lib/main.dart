@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:clay/c_config/libarays.dart';
-import 'package:clay/controllers/globals/globals.dart';
 import 'package:clay/page/sub_language.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +10,9 @@ import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
+import 'controllers/common/commons.dart';
 import 'controllers/controllers.dart';
 import 'page/sub_post.dart';
-import 'page/ui_board.dart';
 import 'page/ui_content.dart';
 import 'page/ui_han_bott_navi.dart';
 import 'page/ui_login_google.dart';

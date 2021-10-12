@@ -1,14 +1,10 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/app/home/homes.dart';
+import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/controllers/controllers.dart';
-
-import 'package:clay/controllers/globals/globals.dart';
 import 'package:clay/models/models.dart';
-import 'package:clay/page/sub_post.dart';
-import 'package:clay/page/widget/card_post_item.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +18,7 @@ import 'wgt_board_item.dart';
 // ignore: must_be_immutable
 class ContentListPART extends StatelessWidget with AppbarHelper {
   final bestController = Get.put(
-    BestListController(),
+    BoardListController(),
   );
   ContentListPART();
   Future<void> initFetch() async {
@@ -38,7 +34,7 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
         ///--------------------------
         /// 일반 리스트
         ///-------------------------
-        GetBuilder<BestListController>(builder: (controller) {
+        GetBuilder<BoardListController>(builder: (controller) {
       final cache = controller.cache;
       final loading = controller.loading;
       return Container(
@@ -50,16 +46,16 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
             direction: Axis.vertical,
             itemBuilder: (context, index) {
               final cache = controller.cache;
-              PostInfo item = cache[index];
+              Content item = cache[index];
 
               if (item == null) return Container();
-              final favorLists = item.favorite.lists;
+              // final favorLists = item.favorite.lists;
 
-              final exist = favorLists.firstWhere(
-                  (element) => element == AuthController.to.getUser?.uid,
-                  orElse: () {
-                return null;
-              });
+              // final exist = favorLists.firstWhere(
+              //     (element) => element == AuthController.to.getUser?.uid,
+              //     orElse: () {
+              //   return null;
+              // });
 
               //SUBJECT:보드 만들기
               //TODO : 보드 위젯 이후에 작업

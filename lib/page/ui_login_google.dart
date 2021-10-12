@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:math';
 
+import 'package:clay/controllers/common/commons.dart';
+import 'package:clay/controllers/controllers.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,6 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/globals/globals.dart';
 import 'package:clay/models/models.dart';
 
 import '../part/part_signin/src/login_title_widget.dart';
@@ -100,32 +101,35 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                                 photoURL: _user?.photoURL,
                                 level: 3,
                                 dtCreated: DateTime.now(),
-                                dtUpdated: DateTime.now(),
+                                // dtUpdated: DateTime.now(),
                               );
 
-                              final _detail = UserDetailDto(
-                                phone: '010-5391-3862',
-                                intro: null,
-                                // isPush: false,
-                                // token: null,
-                              );
+                              // final _detail = UserDetailDto(
+                              //   phone: '010-5391-3862',
+                              //   intro: null,
+                              //   // isPush: false,
+                              //   // token: null,
+                              // );
 
-                              final _regiInfo = UserRegiInfoDto(
-                                  isProvision: false,
-                                  isPersonInfo: false,
-                                  isReceive: false);
+                              // final _regiInfo = UserRegiInfoDto(
+                              //     isProvision: false,
+                              //     isPersonInfo: false,
+                              //     isReceive: false);
 
                               final _userInfo = HanUserInfoDto(
-                                  uid: _user?.uid,
-                                  profile: _profile,
-                                  info: _detail,
-                                  regiInfo: _regiInfo,
-                                  isDisabled: false,
-                                  cntVisit: 0,
-                                  level: 3,
-                                  following: ListCntDto(cnt: 0, lists: []),
-                                  dtCreated: DateTime.now(),
-                                  dtUpdated: DateTime.now());
+                                uid: _user?.uid,
+                                profile: _profile,
+                                phone: '010-5391-3862',
+                                intro: null,
+                                // info: _detail,
+                                // regiInfo: _regiInfo,
+                                isDisabled: false,
+                                cntVisit: 0,
+                                level: 3,
+                                // following: ListCntDto(cnt: 0, lists: []),
+                                dtCreated: DateTime.now(),
+                                // dtUpdated: DateTime.now(),
+                              );
 
                               HanUserInfoController.to.actionCreate(_userInfo);
                             }

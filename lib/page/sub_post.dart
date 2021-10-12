@@ -1,17 +1,10 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/app/apps.dart';
-import 'package:clay/controllers/globals/globals.dart';
-import 'package:clay/models/models.dart';
+import 'package:clay/controllers/controllers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 import 'package:webview_flutter/webview_flutter.dart';
-import 'dart:math' as math;
-
-import 'widget/card_post_item.dart';
 
 class PostSUB extends StatelessWidget with AppbarHelper {
   // final PostInfo? item;
@@ -44,7 +37,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
   }
 
   Widget memo(BuildContext context) {
-    Get.put(PostController());
+    Get.put(ContentCtgListController());
     final node = FocusScope.of(context);
 
     return Column(
@@ -111,7 +104,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
   }
 
   Widget photo(BuildContext context) {
-    Get.put(PostController());
+    // Get.put(PostController());
     final node = FocusScope.of(context);
 
     return Column(
@@ -226,7 +219,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
   }
 
   Widget appLink(BuildContext context) {
-    Get.put(PostController());
+    // Get.put(PostController());
     final node = FocusScope.of(context);
 
     return Column(

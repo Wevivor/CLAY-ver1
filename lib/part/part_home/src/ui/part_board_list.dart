@@ -1,7 +1,6 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/app/home/homes.dart';
 import 'package:clay/controllers/controllers.dart';
 
 import 'package:clay/page/ui_borad_content.dart';

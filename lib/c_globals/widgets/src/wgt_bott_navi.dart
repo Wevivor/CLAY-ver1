@@ -1,15 +1,9 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/controllers.dart';
-import 'package:clay/controllers/globals/globals.dart';
-import 'package:clay/page/ui_board.dart';
-import 'package:clay/page/ui_content.dart';
-import 'package:clay/part/part_bs/part_bs.dart';
+import 'package:clay/controllers/common/commons.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
-import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 class BNBarWidget extends StatefulWidget {
   @override

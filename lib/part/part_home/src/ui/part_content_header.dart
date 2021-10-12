@@ -1,24 +1,13 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
-import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/app/home/homes.dart';
 import 'package:clay/controllers/controllers.dart';
 
-import 'package:clay/controllers/globals/globals.dart';
-import 'package:clay/models/models.dart';
-import 'package:clay/page/sub_post.dart';
-import 'package:clay/page/ui_borad_content.dart';
-import 'package:clay/page/widget/card_post_item.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
 
-import '../../part_home.dart';
 import 'wgt_profile_ovlay_list.dart';
 
 // ignore: must_be_immutable

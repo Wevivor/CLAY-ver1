@@ -1,15 +1,12 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/app/apps.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/controllers/helper_app/helper_app.dart';
 
-import 'package:clay/part/part_profile/part_profile.dart';
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class ProfileUI extends StatelessWidget with AppbarHelper {
   final tileTitleStyle = baseStyle.copyWith(

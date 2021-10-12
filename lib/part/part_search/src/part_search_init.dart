@@ -1,12 +1,11 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/globals/globals.dart';
+import 'package:clay/controllers/controllers.dart';
 import 'package:clay/part/part_search/src/wgt_search_item.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // import 'package:material_floating_search_bar/material_floating_search_bar.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 

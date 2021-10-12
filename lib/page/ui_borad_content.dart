@@ -2,13 +2,10 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
-import 'package:clay/controllers/globals/globals.dart';
-import 'package:clay/models/models.dart';
 import 'package:clay/part/part_bs/part_bs.dart';
 import 'package:clay/part/part_home/part_home.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 import 'package:get/get.dart';
 
