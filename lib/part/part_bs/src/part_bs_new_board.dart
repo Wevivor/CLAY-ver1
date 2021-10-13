@@ -4,6 +4,7 @@ import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/models/models.dart';
 import 'package:get/get.dart';
 
 import 'wgt_bs_board_item.dart';
@@ -36,7 +37,28 @@ class BottomSheetNewBoard extends StatelessWidget with AppbarHelper {
               alignment: Alignment.center,
               // color: Colors.red,
               child: InkWell(
-                onTap: () {
+                onTap: () async {
+                  final _controller = Get.put(BoardController());
+                  final _profile = HanUserInfoController.to.toProfile();
+                  final _info = BoardInfoDto(
+                    boardName: 'Testing',
+                    boardColor: 'FF000000',
+                    boardBadge: '좋아',
+                    contentsCount: 0,
+                    shareCheck: false,
+                    isFixed: false,
+                    shareCount: 0,
+                    registerDate: DateTime.now(),
+                  );
+                  final _item = BoardDto(
+                    boardCreator: _profile.toDto(),
+                    info: _info,
+                    shareCheck: false,
+                    registerDate: DateTime.now(),
+                  );
+
+                  await _controller.actionIns(_item);
+
                   Get.back();
                 },
                 child: Text(

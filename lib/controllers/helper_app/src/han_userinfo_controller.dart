@@ -78,7 +78,7 @@ class HanUserInfoController extends GetxController
 
   Future<void> actionVisitInc() async {
     try {
-      final docRef = await _instance.collection(MENU_POS).doc(userInfo?.uid);
+      final docRef = await _instance.collection(MENU_POS).doc(userInfo?.userId);
 
       await docRef.update({'cntVisit': FieldValue.increment(1)});
     } catch (e) {
@@ -121,7 +121,7 @@ class HanUserInfoController extends GetxController
     print('==============> ' + DateTime.now().toIso8601String());
     try {
       await updateFb(
-          id: dto.uid ?? '', instance: _instance, path: MENU_POS, dto: dto);
+          id: dto.userId ?? '', instance: _instance, path: MENU_POS, dto: dto);
       userInfo = dto.toDomain();
       update();
     } catch (e) {
@@ -135,7 +135,7 @@ class HanUserInfoController extends GetxController
       final _result = await existQuery(
           instance: _instance,
           path: MENU_POS,
-          target: 'profile.email',
+          target: 'profile.user_email',
           source: userEmail);
 
       if (_result != null) {

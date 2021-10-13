@@ -20,7 +20,6 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
   Widget build(BuildContext context) {
     MySize().init(context);
     Get.put(PushAlarmController('userinfos'));
-    Get.put(BoardListController());
     final appbarHeight = 0 + kToolbarHeight;
     return Scaffold(
       appBar: PreferredSize(

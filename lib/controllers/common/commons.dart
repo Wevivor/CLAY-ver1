@@ -1,4 +1,4 @@
-export 'src/abstract_item_controller.dart';
+export 'src/abs_item_controller.dart';
 export 'src/abstract_list_controller.dart';
 export 'src/auth_controller.dart';
 export 'src/theme_controller.dart';

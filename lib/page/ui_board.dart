@@ -21,25 +21,21 @@ class _BoardUIState extends State<BoardUI>
   @override
   void initState() {
     super.initState();
-    initProfile();
+    initFetch();
   }
 
-  final profileListController = Get.put(
-    ProfileListController(),
+  final listController = Get.put(
+    BoardListController(),
   );
-  Future<void> initProfile() async {
-    profileListController.cache = [];
-    await profileListController.fetchItems();
+  Future<void> initFetch() async {
+    listController.cache = [];
+    await listController.fetchItems();
   }
 
   @override
   void dispose() {
     super.dispose();
   }
-
-  late TabBar _tabBar;
-  int _tabIndex = 0;
-  late TabController _tabController;
 
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ class FbUserInfoMoudle {
       required String path,
       required HanUserInfoDto item}) async {
     try {
-      final docRef = instance.collection('$path').doc(item.profile.uid);
+      final docRef = instance.collection('$path').doc(item.profile.userId);
 
       await docRef.set(item.toJson(), SetOptions(merge: true));
     } catch (e) {

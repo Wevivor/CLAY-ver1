@@ -11,25 +11,27 @@ part 'board_dtos.g.dart';
 class BoardDto with _$BoardDto {
   @JsonSerializable(explicitToJson: true)
   factory BoardDto({
-    String? id,
+    @JsonKey(name: 'board_id') String? boardId,
     required BoardInfoDto info,
-    required ProfileDto creator,
-    ShareDto? shareInfo,
-    required bool isShare,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtCreated,
+    @JsonKey(name: 'board_creator') required ProfileDto boardCreator,
+    @JsonKey(name: 'share') ShareDto? shareInfo,
+    @JsonKey(name: 'share_check') required bool shareCheck,
+    @JsonKey(name: 'board_comment') List<dynamic>? boardComment,
+    @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime registerDate,
   }) = _BoardDto;
   BoardDto._();
 
   factory BoardDto.fromJson(Map<String, dynamic> json) =>
       _$BoardDtoFromJson(json);
   Board toDomain() => Board(
-        id: id,
+        boardId: boardId,
         info: info.toDomain(),
-        creator: creator.toDomain(),
+        boardCreator: boardCreator.toDomain(),
         shareInfo: shareInfo?.toDomain(),
-        isShare: isShare,
-        dtCreated: dtCreated,
+        shareCheck: shareCheck,
+        boardComment: boardComment,
+        registerDate: registerDate,
       );
 }
 
@@ -37,16 +39,17 @@ class BoardDto with _$BoardDto {
 class BoardInfoDto with _$BoardInfoDto {
   @JsonSerializable(explicitToJson: true)
   factory BoardInfoDto({
-    required String id,
-    required String name,
-    required String color,
-    required String badge,
-    required String link,
-    List<dynamic>? comment,
-    required int cntContent,
-    required bool isShare,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtCreated,
+    @JsonKey(name: 'board_id') String? boardId,
+    @JsonKey(name: 'is_fixed') @Default(false) bool isFixed,
+    @JsonKey(name: 'board_name') required String boardName,
+    @JsonKey(name: 'board_color') required String boardColor,
+    @JsonKey(name: 'board_badge') required String boardBadge,
+    @JsonKey(name: 'board_unique_link') String? boardUnquieLink,
+    @JsonKey(name: 'contents_count') required int contentsCount,
+    @JsonKey(name: 'share_check') required bool shareCheck,
+    @JsonKey(name: 'share_count') int? shareCount,
+    @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime registerDate,
     // List<Comment>? comments;
   }) = _BoardInfoDto;
   BoardInfoDto._();
@@ -54,15 +57,16 @@ class BoardInfoDto with _$BoardInfoDto {
       _$BoardInfoDtoFromJson(json);
 
   BoardInfo toDomain() => BoardInfo(
-        id: id,
-        name: name,
-        color: color,
-        badge: badge,
-        link: link,
-        comment: comment,
-        cntContent: cntContent,
-        isShare: isShare,
-        dtCreated: dtCreated,
+        boardId: boardId,
+        isFixed: isFixed,
+        boardName: boardName,
+        boardColor: boardColor,
+        boardBadge: boardBadge,
+        boardUnquieLink: boardUnquieLink,
+        contentsCount: contentsCount,
+        shareCheck: shareCheck,
+        shareCount: shareCount,
+        registerDate: registerDate,
       );
 }
 
@@ -71,7 +75,7 @@ class ShareDto with _$ShareDto {
   @JsonSerializable(explicitToJson: true)
   factory ShareDto({
     required ProfileDto sharer,
-    required int shareLevel,
+    @JsonKey(name: 'share_level') required int shareLevel,
   }) = _ShareDto;
   ShareDto._();
   factory ShareDto.fromJson(Map<String, dynamic> json) =>

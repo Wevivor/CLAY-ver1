@@ -7,59 +7,64 @@ part of 'board_dtos.dart';
 // **************************************************************************
 
 _$_BoardDto _$$_BoardDtoFromJson(Map<String, dynamic> json) => _$_BoardDto(
-      id: json['id'] as String?,
+      boardId: json['board_id'] as String?,
       info: BoardInfoDto.fromJson(json['info'] as Map<String, dynamic>),
-      creator: ProfileDto.fromJson(json['creator'] as Map<String, dynamic>),
-      shareInfo: json['shareInfo'] == null
+      boardCreator:
+          ProfileDto.fromJson(json['board_creator'] as Map<String, dynamic>),
+      shareInfo: json['share'] == null
           ? null
-          : ShareDto.fromJson(json['shareInfo'] as Map<String, dynamic>),
-      isShare: json['isShare'] as bool,
-      dtCreated: Fbconverter.fromJson(json['dtCreated']),
+          : ShareDto.fromJson(json['share'] as Map<String, dynamic>),
+      shareCheck: json['share_check'] as bool,
+      boardComment: json['board_comment'] as List<dynamic>?,
+      registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
 Map<String, dynamic> _$$_BoardDtoToJson(_$_BoardDto instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'board_id': instance.boardId,
       'info': instance.info.toJson(),
-      'creator': instance.creator.toJson(),
-      'shareInfo': instance.shareInfo?.toJson(),
-      'isShare': instance.isShare,
-      'dtCreated': Fbconverter.toJson(instance.dtCreated),
+      'board_creator': instance.boardCreator.toJson(),
+      'share': instance.shareInfo?.toJson(),
+      'share_check': instance.shareCheck,
+      'board_comment': instance.boardComment,
+      'register_date': Fbconverter.toJson(instance.registerDate),
     };
 
 _$_BoardInfoDto _$$_BoardInfoDtoFromJson(Map<String, dynamic> json) =>
     _$_BoardInfoDto(
-      id: json['id'] as String,
-      name: json['name'] as String,
-      color: json['color'] as String,
-      badge: json['badge'] as String,
-      link: json['link'] as String,
-      comment: json['comment'] as List<dynamic>?,
-      cntContent: json['cntContent'] as int,
-      isShare: json['isShare'] as bool,
-      dtCreated: Fbconverter.fromJson(json['dtCreated']),
+      boardId: json['board_id'] as String?,
+      isFixed: json['is_fixed'] as bool? ?? false,
+      boardName: json['board_name'] as String,
+      boardColor: json['board_color'] as String,
+      boardBadge: json['board_badge'] as String,
+      boardUnquieLink: json['board_unique_link'] as String?,
+      contentsCount: json['contents_count'] as int,
+      shareCheck: json['share_check'] as bool,
+      shareCount: json['share_count'] as int?,
+      registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
 Map<String, dynamic> _$$_BoardInfoDtoToJson(_$_BoardInfoDto instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'color': instance.color,
-      'badge': instance.badge,
-      'link': instance.link,
-      'comment': instance.comment,
-      'cntContent': instance.cntContent,
-      'isShare': instance.isShare,
-      'dtCreated': Fbconverter.toJson(instance.dtCreated),
+      'board_id': instance.boardId,
+      'is_fixed': instance.isFixed,
+      'board_name': instance.boardName,
+      'board_color': instance.boardColor,
+      'board_badge': instance.boardBadge,
+      'board_unique_link': instance.boardUnquieLink,
+      'contents_count': instance.contentsCount,
+      'share_check': instance.shareCheck,
+      'share_count': instance.shareCount,
+      'register_date': Fbconverter.toJson(instance.registerDate),
     };
 
 _$_ShareDto _$$_ShareDtoFromJson(Map<String, dynamic> json) => _$_ShareDto(
       sharer: ProfileDto.fromJson(json['sharer'] as Map<String, dynamic>),
-      shareLevel: json['shareLevel'] as int,
+      shareLevel: json['share_level'] as int,
     );
 
 Map<String, dynamic> _$$_ShareDtoToJson(_$_ShareDto instance) =>
     <String, dynamic>{
       'sharer': instance.sharer.toJson(),
-      'shareLevel': instance.shareLevel,
+      'share_level': instance.shareLevel,
     };

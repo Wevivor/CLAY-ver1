@@ -8,46 +8,46 @@ part of 'users_dtos.dart';
 
 _$_HanUserInfoDto _$$_HanUserInfoDtoFromJson(Map<String, dynamic> json) =>
     _$_HanUserInfoDto(
-      uid: json['uid'] as String?,
+      userId: json['user_id'] as String?,
       profile: ProfileDto.fromJson(json['profile'] as Map<String, dynamic>),
-      isDisabled: json['isDisabled'] as bool?,
+      isDisabled: json['is_disabled'] as bool?,
       level: json['level'] as int?,
-      phone: json['phone'] as String?,
+      userPhone: json['user_phone'] as String?,
       intro: json['intro'] as String?,
-      cntVisit: json['cntVisit'] as int,
+      cntVisit: json['cnt_visit'] as int,
       token: json['token'] as String?,
-      dtCreated: Fbconverter.fromJson(json['dtCreated']),
+      registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
 Map<String, dynamic> _$$_HanUserInfoDtoToJson(_$_HanUserInfoDto instance) =>
     <String, dynamic>{
-      'uid': instance.uid,
+      'user_id': instance.userId,
       'profile': instance.profile.toJson(),
-      'isDisabled': instance.isDisabled,
+      'is_disabled': instance.isDisabled,
       'level': instance.level,
-      'phone': instance.phone,
+      'user_phone': instance.userPhone,
       'intro': instance.intro,
-      'cntVisit': instance.cntVisit,
+      'cnt_visit': instance.cntVisit,
       'token': instance.token,
-      'dtCreated': Fbconverter.toJson(instance.dtCreated),
+      'register_date': Fbconverter.toJson(instance.registerDate),
     };
 
 _$_ProfileDto _$$_ProfileDtoFromJson(Map<String, dynamic> json) =>
     _$_ProfileDto(
-      uid: json['uid'] as String?,
-      email: json['email'] as String,
-      displayName: json['displayName'] as String?,
-      photoURL: json['photoURL'] as String?,
+      userId: json['user_id'] as String?,
+      userEmail: json['user_email'] as String,
+      userName: json['user_name'] as String?,
+      profileImg: json['profile_img'] as String?,
       level: json['level'] as int?,
-      dtCreated: Fbconverter.fromJson(json['dtCreated']),
+      registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
 Map<String, dynamic> _$$_ProfileDtoToJson(_$_ProfileDto instance) =>
     <String, dynamic>{
-      'uid': instance.uid,
-      'email': instance.email,
-      'displayName': instance.displayName,
-      'photoURL': instance.photoURL,
+      'user_id': instance.userId,
+      'user_email': instance.userEmail,
+      'user_name': instance.userName,
+      'profile_img': instance.profileImg,
       'level': instance.level,
-      'dtCreated': Fbconverter.toJson(instance.dtCreated),
+      'register_date': Fbconverter.toJson(instance.registerDate),
     };

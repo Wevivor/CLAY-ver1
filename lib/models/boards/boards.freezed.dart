@@ -18,19 +18,21 @@ class _$BoardTearOff {
   const _$BoardTearOff();
 
   _Board call(
-      {String? id,
+      {String? boardId,
       required BoardInfo info,
-      required Profile creator,
+      required Profile boardCreator,
       Share? shareInfo,
-      required bool isShare,
-      required DateTime dtCreated}) {
+      List<dynamic>? boardComment,
+      required bool shareCheck,
+      required DateTime registerDate}) {
     return _Board(
-      id: id,
+      boardId: boardId,
       info: info,
-      creator: creator,
+      boardCreator: boardCreator,
       shareInfo: shareInfo,
-      isShare: isShare,
-      dtCreated: dtCreated,
+      boardComment: boardComment,
+      shareCheck: shareCheck,
+      registerDate: registerDate,
     );
   }
 }
@@ -40,12 +42,13 @@ const $Board = _$BoardTearOff();
 
 /// @nodoc
 mixin _$Board {
-  String? get id => throw _privateConstructorUsedError;
+  String? get boardId => throw _privateConstructorUsedError;
   BoardInfo get info => throw _privateConstructorUsedError;
-  Profile get creator => throw _privateConstructorUsedError;
+  Profile get boardCreator => throw _privateConstructorUsedError;
   Share? get shareInfo => throw _privateConstructorUsedError;
-  bool get isShare => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  List<dynamic>? get boardComment => throw _privateConstructorUsedError;
+  bool get shareCheck => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BoardCopyWith<Board> get copyWith => throw _privateConstructorUsedError;
@@ -56,15 +59,16 @@ abstract class $BoardCopyWith<$Res> {
   factory $BoardCopyWith(Board value, $Res Function(Board) then) =
       _$BoardCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
+      {String? boardId,
       BoardInfo info,
-      Profile creator,
+      Profile boardCreator,
       Share? shareInfo,
-      bool isShare,
-      DateTime dtCreated});
+      List<dynamic>? boardComment,
+      bool shareCheck,
+      DateTime registerDate});
 
   $BoardInfoCopyWith<$Res> get info;
-  $ProfileCopyWith<$Res> get creator;
+  $ProfileCopyWith<$Res> get boardCreator;
   $ShareCopyWith<$Res>? get shareInfo;
 }
 
@@ -78,37 +82,42 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? boardId = freezed,
     Object? info = freezed,
-    Object? creator = freezed,
+    Object? boardCreator = freezed,
     Object? shareInfo = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? boardComment = freezed,
+    Object? shareCheck = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
               as String?,
       info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as BoardInfo,
-      creator: creator == freezed
-          ? _value.creator
-          : creator // ignore: cast_nullable_to_non_nullable
+      boardCreator: boardCreator == freezed
+          ? _value.boardCreator
+          : boardCreator // ignore: cast_nullable_to_non_nullable
               as Profile,
       shareInfo: shareInfo == freezed
           ? _value.shareInfo
           : shareInfo // ignore: cast_nullable_to_non_nullable
               as Share?,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      boardComment: boardComment == freezed
+          ? _value.boardComment
+          : boardComment // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -121,9 +130,9 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
   }
 
   @override
-  $ProfileCopyWith<$Res> get creator {
-    return $ProfileCopyWith<$Res>(_value.creator, (value) {
-      return _then(_value.copyWith(creator: value));
+  $ProfileCopyWith<$Res> get boardCreator {
+    return $ProfileCopyWith<$Res>(_value.boardCreator, (value) {
+      return _then(_value.copyWith(boardCreator: value));
     });
   }
 
@@ -145,17 +154,18 @@ abstract class _$BoardCopyWith<$Res> implements $BoardCopyWith<$Res> {
       __$BoardCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
+      {String? boardId,
       BoardInfo info,
-      Profile creator,
+      Profile boardCreator,
       Share? shareInfo,
-      bool isShare,
-      DateTime dtCreated});
+      List<dynamic>? boardComment,
+      bool shareCheck,
+      DateTime registerDate});
 
   @override
   $BoardInfoCopyWith<$Res> get info;
   @override
-  $ProfileCopyWith<$Res> get creator;
+  $ProfileCopyWith<$Res> get boardCreator;
   @override
   $ShareCopyWith<$Res>? get shareInfo;
 }
@@ -171,37 +181,42 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? boardId = freezed,
     Object? info = freezed,
-    Object? creator = freezed,
+    Object? boardCreator = freezed,
     Object? shareInfo = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? boardComment = freezed,
+    Object? shareCheck = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_Board(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
               as String?,
       info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as BoardInfo,
-      creator: creator == freezed
-          ? _value.creator
-          : creator // ignore: cast_nullable_to_non_nullable
+      boardCreator: boardCreator == freezed
+          ? _value.boardCreator
+          : boardCreator // ignore: cast_nullable_to_non_nullable
               as Profile,
       shareInfo: shareInfo == freezed
           ? _value.shareInfo
           : shareInfo // ignore: cast_nullable_to_non_nullable
               as Share?,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      boardComment: boardComment == freezed
+          ? _value.boardComment
+          : boardComment // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -211,63 +226,71 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
 
 class _$_Board extends _Board {
   _$_Board(
-      {this.id,
+      {this.boardId,
       required this.info,
-      required this.creator,
+      required this.boardCreator,
       this.shareInfo,
-      required this.isShare,
-      required this.dtCreated})
+      this.boardComment,
+      required this.shareCheck,
+      required this.registerDate})
       : super._();
 
   @override
-  final String? id;
+  final String? boardId;
   @override
   final BoardInfo info;
   @override
-  final Profile creator;
+  final Profile boardCreator;
   @override
   final Share? shareInfo;
   @override
-  final bool isShare;
+  final List<dynamic>? boardComment;
   @override
-  final DateTime dtCreated;
+  final bool shareCheck;
+  @override
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'Board(id: $id, info: $info, creator: $creator, shareInfo: $shareInfo, isShare: $isShare, dtCreated: $dtCreated)';
+    return 'Board(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, boardComment: $boardComment, shareCheck: $shareCheck, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Board &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.boardId, boardId) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardId, boardId)) &&
             (identical(other.info, info) ||
                 const DeepCollectionEquality().equals(other.info, info)) &&
-            (identical(other.creator, creator) ||
+            (identical(other.boardCreator, boardCreator) ||
                 const DeepCollectionEquality()
-                    .equals(other.creator, creator)) &&
+                    .equals(other.boardCreator, boardCreator)) &&
             (identical(other.shareInfo, shareInfo) ||
                 const DeepCollectionEquality()
                     .equals(other.shareInfo, shareInfo)) &&
-            (identical(other.isShare, isShare) ||
+            (identical(other.boardComment, boardComment) ||
                 const DeepCollectionEquality()
-                    .equals(other.isShare, isShare)) &&
-            (identical(other.dtCreated, dtCreated) ||
+                    .equals(other.boardComment, boardComment)) &&
+            (identical(other.shareCheck, shareCheck) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.shareCheck, shareCheck)) &&
+            (identical(other.registerDate, registerDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(boardId) ^
       const DeepCollectionEquality().hash(info) ^
-      const DeepCollectionEquality().hash(creator) ^
+      const DeepCollectionEquality().hash(boardCreator) ^
       const DeepCollectionEquality().hash(shareInfo) ^
-      const DeepCollectionEquality().hash(isShare) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(boardComment) ^
+      const DeepCollectionEquality().hash(shareCheck) ^
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -277,26 +300,29 @@ class _$_Board extends _Board {
 
 abstract class _Board extends Board {
   factory _Board(
-      {String? id,
+      {String? boardId,
       required BoardInfo info,
-      required Profile creator,
+      required Profile boardCreator,
       Share? shareInfo,
-      required bool isShare,
-      required DateTime dtCreated}) = _$_Board;
+      List<dynamic>? boardComment,
+      required bool shareCheck,
+      required DateTime registerDate}) = _$_Board;
   _Board._() : super._();
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get boardId => throw _privateConstructorUsedError;
   @override
   BoardInfo get info => throw _privateConstructorUsedError;
   @override
-  Profile get creator => throw _privateConstructorUsedError;
+  Profile get boardCreator => throw _privateConstructorUsedError;
   @override
   Share? get shareInfo => throw _privateConstructorUsedError;
   @override
-  bool get isShare => throw _privateConstructorUsedError;
+  List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  bool get shareCheck => throw _privateConstructorUsedError;
+  @override
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BoardCopyWith<_Board> get copyWith => throw _privateConstructorUsedError;
@@ -307,25 +333,27 @@ class _$BoardInfoTearOff {
   const _$BoardInfoTearOff();
 
   _BoardInfo call(
-      {required String id,
-      required String name,
-      required String color,
-      required String badge,
-      required String link,
-      List<dynamic>? comment,
-      required int cntContent,
-      required bool isShare,
-      required DateTime dtCreated}) {
+      {String? boardId,
+      bool isFixed = false,
+      required String boardName,
+      required String boardColor,
+      required String boardBadge,
+      String? boardUnquieLink,
+      required int contentsCount,
+      required bool shareCheck,
+      int? shareCount,
+      required DateTime registerDate}) {
     return _BoardInfo(
-      id: id,
-      name: name,
-      color: color,
-      badge: badge,
-      link: link,
-      comment: comment,
-      cntContent: cntContent,
-      isShare: isShare,
-      dtCreated: dtCreated,
+      boardId: boardId,
+      isFixed: isFixed,
+      boardName: boardName,
+      boardColor: boardColor,
+      boardBadge: boardBadge,
+      boardUnquieLink: boardUnquieLink,
+      contentsCount: contentsCount,
+      shareCheck: shareCheck,
+      shareCount: shareCount,
+      registerDate: registerDate,
     );
   }
 }
@@ -335,15 +363,16 @@ const $BoardInfo = _$BoardInfoTearOff();
 
 /// @nodoc
 mixin _$BoardInfo {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get color => throw _privateConstructorUsedError;
-  String get badge => throw _privateConstructorUsedError;
-  String get link => throw _privateConstructorUsedError;
-  List<dynamic>? get comment => throw _privateConstructorUsedError;
-  int get cntContent => throw _privateConstructorUsedError;
-  bool get isShare => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  String? get boardId => throw _privateConstructorUsedError;
+  bool get isFixed => throw _privateConstructorUsedError;
+  String get boardName => throw _privateConstructorUsedError;
+  String get boardColor => throw _privateConstructorUsedError;
+  String get boardBadge => throw _privateConstructorUsedError;
+  String? get boardUnquieLink => throw _privateConstructorUsedError;
+  int get contentsCount => throw _privateConstructorUsedError;
+  bool get shareCheck => throw _privateConstructorUsedError;
+  int? get shareCount => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BoardInfoCopyWith<BoardInfo> get copyWith =>
@@ -355,15 +384,16 @@ abstract class $BoardInfoCopyWith<$Res> {
   factory $BoardInfoCopyWith(BoardInfo value, $Res Function(BoardInfo) then) =
       _$BoardInfoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String name,
-      String color,
-      String badge,
-      String link,
-      List<dynamic>? comment,
-      int cntContent,
-      bool isShare,
-      DateTime dtCreated});
+      {String? boardId,
+      bool isFixed,
+      String boardName,
+      String boardColor,
+      String boardBadge,
+      String? boardUnquieLink,
+      int contentsCount,
+      bool shareCheck,
+      int? shareCount,
+      DateTime registerDate});
 }
 
 /// @nodoc
@@ -376,52 +406,57 @@ class _$BoardInfoCopyWithImpl<$Res> implements $BoardInfoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? color = freezed,
-    Object? badge = freezed,
-    Object? link = freezed,
-    Object? comment = freezed,
-    Object? cntContent = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? boardId = freezed,
+    Object? isFixed = freezed,
+    Object? boardName = freezed,
+    Object? boardColor = freezed,
+    Object? boardBadge = freezed,
+    Object? boardUnquieLink = freezed,
+    Object? contentsCount = freezed,
+    Object? shareCheck = freezed,
+    Object? shareCount = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
-      badge: badge == freezed
-          ? _value.badge
-          : badge // ignore: cast_nullable_to_non_nullable
-              as String,
-      link: link == freezed
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: comment == freezed
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      cntContent: cntContent == freezed
-          ? _value.cntContent
-          : cntContent // ignore: cast_nullable_to_non_nullable
-              as int,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isFixed: isFixed == freezed
+          ? _value.isFixed
+          : isFixed // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      boardName: boardName == freezed
+          ? _value.boardName
+          : boardName // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardColor: boardColor == freezed
+          ? _value.boardColor
+          : boardColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardBadge: boardBadge == freezed
+          ? _value.boardBadge
+          : boardBadge // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardUnquieLink: boardUnquieLink == freezed
+          ? _value.boardUnquieLink
+          : boardUnquieLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shareCount: shareCount == freezed
+          ? _value.shareCount
+          : shareCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -434,15 +469,16 @@ abstract class _$BoardInfoCopyWith<$Res> implements $BoardInfoCopyWith<$Res> {
       __$BoardInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String name,
-      String color,
-      String badge,
-      String link,
-      List<dynamic>? comment,
-      int cntContent,
-      bool isShare,
-      DateTime dtCreated});
+      {String? boardId,
+      bool isFixed,
+      String boardName,
+      String boardColor,
+      String boardBadge,
+      String? boardUnquieLink,
+      int contentsCount,
+      bool shareCheck,
+      int? shareCount,
+      DateTime registerDate});
 }
 
 /// @nodoc
@@ -456,52 +492,57 @@ class __$BoardInfoCopyWithImpl<$Res> extends _$BoardInfoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? color = freezed,
-    Object? badge = freezed,
-    Object? link = freezed,
-    Object? comment = freezed,
-    Object? cntContent = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? boardId = freezed,
+    Object? isFixed = freezed,
+    Object? boardName = freezed,
+    Object? boardColor = freezed,
+    Object? boardBadge = freezed,
+    Object? boardUnquieLink = freezed,
+    Object? contentsCount = freezed,
+    Object? shareCheck = freezed,
+    Object? shareCount = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_BoardInfo(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
-      badge: badge == freezed
-          ? _value.badge
-          : badge // ignore: cast_nullable_to_non_nullable
-              as String,
-      link: link == freezed
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: comment == freezed
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      cntContent: cntContent == freezed
-          ? _value.cntContent
-          : cntContent // ignore: cast_nullable_to_non_nullable
-              as int,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isFixed: isFixed == freezed
+          ? _value.isFixed
+          : isFixed // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      boardName: boardName == freezed
+          ? _value.boardName
+          : boardName // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardColor: boardColor == freezed
+          ? _value.boardColor
+          : boardColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardBadge: boardBadge == freezed
+          ? _value.boardBadge
+          : boardBadge // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardUnquieLink: boardUnquieLink == freezed
+          ? _value.boardUnquieLink
+          : boardUnquieLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shareCount: shareCount == freezed
+          ? _value.shareCount
+          : shareCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -511,81 +552,94 @@ class __$BoardInfoCopyWithImpl<$Res> extends _$BoardInfoCopyWithImpl<$Res>
 
 class _$_BoardInfo extends _BoardInfo {
   _$_BoardInfo(
-      {required this.id,
-      required this.name,
-      required this.color,
-      required this.badge,
-      required this.link,
-      this.comment,
-      required this.cntContent,
-      required this.isShare,
-      required this.dtCreated})
+      {this.boardId,
+      this.isFixed = false,
+      required this.boardName,
+      required this.boardColor,
+      required this.boardBadge,
+      this.boardUnquieLink,
+      required this.contentsCount,
+      required this.shareCheck,
+      this.shareCount,
+      required this.registerDate})
       : super._();
 
   @override
-  final String id;
+  final String? boardId;
+  @JsonKey(defaultValue: false)
   @override
-  final String name;
+  final bool isFixed;
   @override
-  final String color;
+  final String boardName;
   @override
-  final String badge;
+  final String boardColor;
   @override
-  final String link;
+  final String boardBadge;
   @override
-  final List<dynamic>? comment;
+  final String? boardUnquieLink;
   @override
-  final int cntContent;
+  final int contentsCount;
   @override
-  final bool isShare;
+  final bool shareCheck;
   @override
-  final DateTime dtCreated;
+  final int? shareCount;
+  @override
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'BoardInfo(id: $id, name: $name, color: $color, badge: $badge, link: $link, comment: $comment, cntContent: $cntContent, isShare: $isShare, dtCreated: $dtCreated)';
+    return 'BoardInfo(boardId: $boardId, isFixed: $isFixed, boardName: $boardName, boardColor: $boardColor, boardBadge: $boardBadge, boardUnquieLink: $boardUnquieLink, contentsCount: $contentsCount, shareCheck: $shareCheck, shareCount: $shareCount, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _BoardInfo &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.color, color) ||
-                const DeepCollectionEquality().equals(other.color, color)) &&
-            (identical(other.badge, badge) ||
-                const DeepCollectionEquality().equals(other.badge, badge)) &&
-            (identical(other.link, link) ||
-                const DeepCollectionEquality().equals(other.link, link)) &&
-            (identical(other.comment, comment) ||
+            (identical(other.boardId, boardId) ||
                 const DeepCollectionEquality()
-                    .equals(other.comment, comment)) &&
-            (identical(other.cntContent, cntContent) ||
+                    .equals(other.boardId, boardId)) &&
+            (identical(other.isFixed, isFixed) ||
                 const DeepCollectionEquality()
-                    .equals(other.cntContent, cntContent)) &&
-            (identical(other.isShare, isShare) ||
+                    .equals(other.isFixed, isFixed)) &&
+            (identical(other.boardName, boardName) ||
                 const DeepCollectionEquality()
-                    .equals(other.isShare, isShare)) &&
-            (identical(other.dtCreated, dtCreated) ||
+                    .equals(other.boardName, boardName)) &&
+            (identical(other.boardColor, boardColor) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.boardColor, boardColor)) &&
+            (identical(other.boardBadge, boardBadge) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardBadge, boardBadge)) &&
+            (identical(other.boardUnquieLink, boardUnquieLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardUnquieLink, boardUnquieLink)) &&
+            (identical(other.contentsCount, contentsCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsCount, contentsCount)) &&
+            (identical(other.shareCheck, shareCheck) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareCheck, shareCheck)) &&
+            (identical(other.shareCount, shareCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareCount, shareCount)) &&
+            (identical(other.registerDate, registerDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(color) ^
-      const DeepCollectionEquality().hash(badge) ^
-      const DeepCollectionEquality().hash(link) ^
-      const DeepCollectionEquality().hash(comment) ^
-      const DeepCollectionEquality().hash(cntContent) ^
-      const DeepCollectionEquality().hash(isShare) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(boardId) ^
+      const DeepCollectionEquality().hash(isFixed) ^
+      const DeepCollectionEquality().hash(boardName) ^
+      const DeepCollectionEquality().hash(boardColor) ^
+      const DeepCollectionEquality().hash(boardBadge) ^
+      const DeepCollectionEquality().hash(boardUnquieLink) ^
+      const DeepCollectionEquality().hash(contentsCount) ^
+      const DeepCollectionEquality().hash(shareCheck) ^
+      const DeepCollectionEquality().hash(shareCount) ^
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -595,35 +649,38 @@ class _$_BoardInfo extends _BoardInfo {
 
 abstract class _BoardInfo extends BoardInfo {
   factory _BoardInfo(
-      {required String id,
-      required String name,
-      required String color,
-      required String badge,
-      required String link,
-      List<dynamic>? comment,
-      required int cntContent,
-      required bool isShare,
-      required DateTime dtCreated}) = _$_BoardInfo;
+      {String? boardId,
+      bool isFixed,
+      required String boardName,
+      required String boardColor,
+      required String boardBadge,
+      String? boardUnquieLink,
+      required int contentsCount,
+      required bool shareCheck,
+      int? shareCount,
+      required DateTime registerDate}) = _$_BoardInfo;
   _BoardInfo._() : super._();
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  String? get boardId => throw _privateConstructorUsedError;
   @override
-  String get name => throw _privateConstructorUsedError;
+  bool get isFixed => throw _privateConstructorUsedError;
   @override
-  String get color => throw _privateConstructorUsedError;
+  String get boardName => throw _privateConstructorUsedError;
   @override
-  String get badge => throw _privateConstructorUsedError;
+  String get boardColor => throw _privateConstructorUsedError;
   @override
-  String get link => throw _privateConstructorUsedError;
+  String get boardBadge => throw _privateConstructorUsedError;
   @override
-  List<dynamic>? get comment => throw _privateConstructorUsedError;
+  String? get boardUnquieLink => throw _privateConstructorUsedError;
   @override
-  int get cntContent => throw _privateConstructorUsedError;
+  int get contentsCount => throw _privateConstructorUsedError;
   @override
-  bool get isShare => throw _privateConstructorUsedError;
+  bool get shareCheck => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  int? get shareCount => throw _privateConstructorUsedError;
+  @override
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BoardInfoCopyWith<_BoardInfo> get copyWith =>

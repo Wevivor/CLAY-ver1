@@ -100,7 +100,7 @@ class ProfileUserInfoController extends GetxController
     print('==============> ' + DateTime.now().toIso8601String());
     try {
       await updateFb(
-          id: dto.uid ?? '', instance: _instance, path: MENU_POS, dto: dto);
+          id: dto.userId ?? '', instance: _instance, path: MENU_POS, dto: dto);
       userInfo = dto.toDomain();
       update();
     } catch (e) {

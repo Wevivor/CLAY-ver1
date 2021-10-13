@@ -29,8 +29,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   void initState() {
     super.initState();
 
-    initFetch();
-
     // For sharing images coming from outside the app while the app is in the memory
     _intentDataStreamSubscription = ReceiveSharingIntent.getMediaStream()
         .listen((List<SharedMediaFile> value) {
@@ -86,11 +84,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         }
       });
     });
-  }
-
-  Future<void> initFetch() async {
-    _controller.cache = [];
-    await _controller.fetchItems();
   }
 
   Widget vwBoardMenuFromShare(BuildContext context) {

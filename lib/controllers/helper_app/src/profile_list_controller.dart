@@ -44,7 +44,7 @@ class ProfileListController extends AbsListController
 
     final lists = await listFilter('/afada_userinfos/_search', bodyJSON);
     return lists.map((jsonList) {
-      return Profile.fromJson(jsonList['_source']);
+      return ProfileDto.fromJson(jsonList['_source']).toDomain();
     }).toList();
   }
 
@@ -76,7 +76,7 @@ class ProfileListController extends AbsListController
 
     final lists = await listFilter('/userinfos/_search', bodyJSON);
     return lists.map((jsonList) {
-      return Profile.fromJson(jsonList['_source']);
+      return ProfileDto.fromJson(jsonList['_source']).toDomain();
     }).toList();
   }
 

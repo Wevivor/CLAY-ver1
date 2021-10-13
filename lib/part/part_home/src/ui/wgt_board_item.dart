@@ -16,6 +16,7 @@ class BoardItemWidget extends StatelessWidget {
   final Color? boardColor;
   final onMore;
   final onTap;
+  final isFix;
 
   BoardItemWidget({
     this.title = '',
@@ -23,6 +24,7 @@ class BoardItemWidget extends StatelessWidget {
     this.cntShare = '',
     this.category = '',
     this.onMore,
+    this.isFix = false,
     this.onTap,
     this.boardColor = Colors.yellow,
   });
@@ -65,9 +67,20 @@ class BoardItemWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   heightSpace(12.0),
-                  Text(
-                    title,
-                    style: titleStyle,
+                  Row(
+                    children: [
+                      Text(
+                        title,
+                        style: titleStyle,
+                      ),
+                      widthSpace(4.0),
+                      if (isFix)
+                        ImageWidget(
+                          height: 18.87,
+                          width: 18.87,
+                          holder: Const.assets + 'icon/icon_pin_fix.png',
+                        )
+                    ],
                   ),
                   heightSpace(3.0),
                   cntShare > 0

@@ -26,6 +26,8 @@ class Const {
   static String elasticEndPoint =
       'https://72bd870ab02e4f95b27df41768619f18.ap-northeast-2.aws.elastic-cloud.com:9243';
 
+  static const apiKey =
+      'ApiKey aUFuNnNIc0JjZTVEbUJ1RHlQT186SWhlMks4TXZRV0twby0wV1NjX2hWZw==';
   static Map<String, String> headers = {
     "Content-type": "application/json",
     'Authorization':

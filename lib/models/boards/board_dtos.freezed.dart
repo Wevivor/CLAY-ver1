@@ -22,20 +22,27 @@ class _$BoardDtoTearOff {
   const _$BoardDtoTearOff();
 
   _BoardDto call(
-      {String? id,
+      {@JsonKey(name: 'board_id')
+          String? boardId,
       required BoardInfoDto info,
-      required ProfileDto creator,
-      ShareDto? shareInfo,
-      required bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) {
+      @JsonKey(name: 'board_creator')
+          required ProfileDto boardCreator,
+      @JsonKey(name: 'share')
+          ShareDto? shareInfo,
+      @JsonKey(name: 'share_check')
+          required bool shareCheck,
+      @JsonKey(name: 'board_comment')
+          List<dynamic>? boardComment,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) {
     return _BoardDto(
-      id: id,
+      boardId: boardId,
       info: info,
-      creator: creator,
+      boardCreator: boardCreator,
       shareInfo: shareInfo,
-      isShare: isShare,
-      dtCreated: dtCreated,
+      shareCheck: shareCheck,
+      boardComment: boardComment,
+      registerDate: registerDate,
     );
   }
 
@@ -49,13 +56,22 @@ const $BoardDto = _$BoardDtoTearOff();
 
 /// @nodoc
 mixin _$BoardDto {
-  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_id')
+  String? get boardId => throw _privateConstructorUsedError;
   BoardInfoDto get info => throw _privateConstructorUsedError;
-  ProfileDto get creator => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_creator')
+  ProfileDto get boardCreator => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share')
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
-  bool get isShare => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_check')
+  bool get shareCheck => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_comment')
+  List<dynamic>? get boardComment => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -68,16 +84,22 @@ abstract class $BoardDtoCopyWith<$Res> {
   factory $BoardDtoCopyWith(BoardDto value, $Res Function(BoardDto) then) =
       _$BoardDtoCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
+      {@JsonKey(name: 'board_id')
+          String? boardId,
       BoardInfoDto info,
-      ProfileDto creator,
-      ShareDto? shareInfo,
-      bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      @JsonKey(name: 'board_creator')
+          ProfileDto boardCreator,
+      @JsonKey(name: 'share')
+          ShareDto? shareInfo,
+      @JsonKey(name: 'share_check')
+          bool shareCheck,
+      @JsonKey(name: 'board_comment')
+          List<dynamic>? boardComment,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 
   $BoardInfoDtoCopyWith<$Res> get info;
-  $ProfileDtoCopyWith<$Res> get creator;
+  $ProfileDtoCopyWith<$Res> get boardCreator;
   $ShareDtoCopyWith<$Res>? get shareInfo;
 }
 
@@ -91,37 +113,42 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? boardId = freezed,
     Object? info = freezed,
-    Object? creator = freezed,
+    Object? boardCreator = freezed,
     Object? shareInfo = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? shareCheck = freezed,
+    Object? boardComment = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
               as String?,
       info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as BoardInfoDto,
-      creator: creator == freezed
-          ? _value.creator
-          : creator // ignore: cast_nullable_to_non_nullable
+      boardCreator: boardCreator == freezed
+          ? _value.boardCreator
+          : boardCreator // ignore: cast_nullable_to_non_nullable
               as ProfileDto,
       shareInfo: shareInfo == freezed
           ? _value.shareInfo
           : shareInfo // ignore: cast_nullable_to_non_nullable
               as ShareDto?,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      boardComment: boardComment == freezed
+          ? _value.boardComment
+          : boardComment // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -134,9 +161,9 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
   }
 
   @override
-  $ProfileDtoCopyWith<$Res> get creator {
-    return $ProfileDtoCopyWith<$Res>(_value.creator, (value) {
-      return _then(_value.copyWith(creator: value));
+  $ProfileDtoCopyWith<$Res> get boardCreator {
+    return $ProfileDtoCopyWith<$Res>(_value.boardCreator, (value) {
+      return _then(_value.copyWith(boardCreator: value));
     });
   }
 
@@ -158,18 +185,24 @@ abstract class _$BoardDtoCopyWith<$Res> implements $BoardDtoCopyWith<$Res> {
       __$BoardDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
+      {@JsonKey(name: 'board_id')
+          String? boardId,
       BoardInfoDto info,
-      ProfileDto creator,
-      ShareDto? shareInfo,
-      bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      @JsonKey(name: 'board_creator')
+          ProfileDto boardCreator,
+      @JsonKey(name: 'share')
+          ShareDto? shareInfo,
+      @JsonKey(name: 'share_check')
+          bool shareCheck,
+      @JsonKey(name: 'board_comment')
+          List<dynamic>? boardComment,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 
   @override
   $BoardInfoDtoCopyWith<$Res> get info;
   @override
-  $ProfileDtoCopyWith<$Res> get creator;
+  $ProfileDtoCopyWith<$Res> get boardCreator;
   @override
   $ShareDtoCopyWith<$Res>? get shareInfo;
 }
@@ -185,37 +218,42 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? boardId = freezed,
     Object? info = freezed,
-    Object? creator = freezed,
+    Object? boardCreator = freezed,
     Object? shareInfo = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? shareCheck = freezed,
+    Object? boardComment = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_BoardDto(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
               as String?,
       info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
               as BoardInfoDto,
-      creator: creator == freezed
-          ? _value.creator
-          : creator // ignore: cast_nullable_to_non_nullable
+      boardCreator: boardCreator == freezed
+          ? _value.boardCreator
+          : boardCreator // ignore: cast_nullable_to_non_nullable
               as ProfileDto,
       shareInfo: shareInfo == freezed
           ? _value.shareInfo
           : shareInfo // ignore: cast_nullable_to_non_nullable
               as ShareDto?,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      boardComment: boardComment == freezed
+          ? _value.boardComment
+          : boardComment // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -226,68 +264,89 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_BoardDto extends _BoardDto {
   _$_BoardDto(
-      {this.id,
+      {@JsonKey(name: 'board_id')
+          this.boardId,
       required this.info,
-      required this.creator,
-      this.shareInfo,
-      required this.isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.dtCreated})
+      @JsonKey(name: 'board_creator')
+          required this.boardCreator,
+      @JsonKey(name: 'share')
+          this.shareInfo,
+      @JsonKey(name: 'share_check')
+          required this.shareCheck,
+      @JsonKey(name: 'board_comment')
+          this.boardComment,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required this.registerDate})
       : super._();
 
   factory _$_BoardDto.fromJson(Map<String, dynamic> json) =>
       _$$_BoardDtoFromJson(json);
 
   @override
-  final String? id;
+  @JsonKey(name: 'board_id')
+  final String? boardId;
   @override
   final BoardInfoDto info;
   @override
-  final ProfileDto creator;
+  @JsonKey(name: 'board_creator')
+  final ProfileDto boardCreator;
   @override
+  @JsonKey(name: 'share')
   final ShareDto? shareInfo;
   @override
-  final bool isShare;
+  @JsonKey(name: 'share_check')
+  final bool shareCheck;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  final DateTime dtCreated;
+  @JsonKey(name: 'board_comment')
+  final List<dynamic>? boardComment;
+  @override
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'BoardDto(id: $id, info: $info, creator: $creator, shareInfo: $shareInfo, isShare: $isShare, dtCreated: $dtCreated)';
+    return 'BoardDto(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, shareCheck: $shareCheck, boardComment: $boardComment, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _BoardDto &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+            (identical(other.boardId, boardId) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardId, boardId)) &&
             (identical(other.info, info) ||
                 const DeepCollectionEquality().equals(other.info, info)) &&
-            (identical(other.creator, creator) ||
+            (identical(other.boardCreator, boardCreator) ||
                 const DeepCollectionEquality()
-                    .equals(other.creator, creator)) &&
+                    .equals(other.boardCreator, boardCreator)) &&
             (identical(other.shareInfo, shareInfo) ||
                 const DeepCollectionEquality()
                     .equals(other.shareInfo, shareInfo)) &&
-            (identical(other.isShare, isShare) ||
+            (identical(other.shareCheck, shareCheck) ||
                 const DeepCollectionEquality()
-                    .equals(other.isShare, isShare)) &&
-            (identical(other.dtCreated, dtCreated) ||
+                    .equals(other.shareCheck, shareCheck)) &&
+            (identical(other.boardComment, boardComment) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.boardComment, boardComment)) &&
+            (identical(other.registerDate, registerDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(boardId) ^
       const DeepCollectionEquality().hash(info) ^
-      const DeepCollectionEquality().hash(creator) ^
+      const DeepCollectionEquality().hash(boardCreator) ^
       const DeepCollectionEquality().hash(shareInfo) ^
-      const DeepCollectionEquality().hash(isShare) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(shareCheck) ^
+      const DeepCollectionEquality().hash(boardComment) ^
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -302,30 +361,46 @@ class _$_BoardDto extends _BoardDto {
 
 abstract class _BoardDto extends BoardDto {
   factory _BoardDto(
-      {String? id,
+      {@JsonKey(name: 'board_id')
+          String? boardId,
       required BoardInfoDto info,
-      required ProfileDto creator,
-      ShareDto? shareInfo,
-      required bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) = _$_BoardDto;
+      @JsonKey(name: 'board_creator')
+          required ProfileDto boardCreator,
+      @JsonKey(name: 'share')
+          ShareDto? shareInfo,
+      @JsonKey(name: 'share_check')
+          required bool shareCheck,
+      @JsonKey(name: 'board_comment')
+          List<dynamic>? boardComment,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) = _$_BoardDto;
   _BoardDto._() : super._();
 
   factory _BoardDto.fromJson(Map<String, dynamic> json) = _$_BoardDto.fromJson;
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_id')
+  String? get boardId => throw _privateConstructorUsedError;
   @override
   BoardInfoDto get info => throw _privateConstructorUsedError;
   @override
-  ProfileDto get creator => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_creator')
+  ProfileDto get boardCreator => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'share')
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   @override
-  bool get isShare => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_check')
+  bool get shareCheck => throw _privateConstructorUsedError;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_comment')
+  List<dynamic>? get boardComment => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BoardDtoCopyWith<_BoardDto> get copyWith =>
@@ -341,26 +416,37 @@ class _$BoardInfoDtoTearOff {
   const _$BoardInfoDtoTearOff();
 
   _BoardInfoDto call(
-      {required String id,
-      required String name,
-      required String color,
-      required String badge,
-      required String link,
-      List<dynamic>? comment,
-      required int cntContent,
-      required bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) {
+      {@JsonKey(name: 'board_id')
+          String? boardId,
+      @JsonKey(name: 'is_fixed')
+          bool isFixed = false,
+      @JsonKey(name: 'board_name')
+          required String boardName,
+      @JsonKey(name: 'board_color')
+          required String boardColor,
+      @JsonKey(name: 'board_badge')
+          required String boardBadge,
+      @JsonKey(name: 'board_unique_link')
+          String? boardUnquieLink,
+      @JsonKey(name: 'contents_count')
+          required int contentsCount,
+      @JsonKey(name: 'share_check')
+          required bool shareCheck,
+      @JsonKey(name: 'share_count')
+          int? shareCount,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) {
     return _BoardInfoDto(
-      id: id,
-      name: name,
-      color: color,
-      badge: badge,
-      link: link,
-      comment: comment,
-      cntContent: cntContent,
-      isShare: isShare,
-      dtCreated: dtCreated,
+      boardId: boardId,
+      isFixed: isFixed,
+      boardName: boardName,
+      boardColor: boardColor,
+      boardBadge: boardBadge,
+      boardUnquieLink: boardUnquieLink,
+      contentsCount: contentsCount,
+      shareCheck: shareCheck,
+      shareCount: shareCount,
+      registerDate: registerDate,
     );
   }
 
@@ -374,16 +460,29 @@ const $BoardInfoDto = _$BoardInfoDtoTearOff();
 
 /// @nodoc
 mixin _$BoardInfoDto {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get color => throw _privateConstructorUsedError;
-  String get badge => throw _privateConstructorUsedError;
-  String get link => throw _privateConstructorUsedError;
-  List<dynamic>? get comment => throw _privateConstructorUsedError;
-  int get cntContent => throw _privateConstructorUsedError;
-  bool get isShare => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_id')
+  String? get boardId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_fixed')
+  bool get isFixed => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_name')
+  String get boardName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_color')
+  String get boardColor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_badge')
+  String get boardBadge => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_unique_link')
+  String? get boardUnquieLink => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_count')
+  int get contentsCount => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_check')
+  bool get shareCheck => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_count')
+  int? get shareCount => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -397,16 +496,26 @@ abstract class $BoardInfoDtoCopyWith<$Res> {
           BoardInfoDto value, $Res Function(BoardInfoDto) then) =
       _$BoardInfoDtoCopyWithImpl<$Res>;
   $Res call(
-      {String id,
-      String name,
-      String color,
-      String badge,
-      String link,
-      List<dynamic>? comment,
-      int cntContent,
-      bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      {@JsonKey(name: 'board_id')
+          String? boardId,
+      @JsonKey(name: 'is_fixed')
+          bool isFixed,
+      @JsonKey(name: 'board_name')
+          String boardName,
+      @JsonKey(name: 'board_color')
+          String boardColor,
+      @JsonKey(name: 'board_badge')
+          String boardBadge,
+      @JsonKey(name: 'board_unique_link')
+          String? boardUnquieLink,
+      @JsonKey(name: 'contents_count')
+          int contentsCount,
+      @JsonKey(name: 'share_check')
+          bool shareCheck,
+      @JsonKey(name: 'share_count')
+          int? shareCount,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 }
 
 /// @nodoc
@@ -419,52 +528,57 @@ class _$BoardInfoDtoCopyWithImpl<$Res> implements $BoardInfoDtoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? color = freezed,
-    Object? badge = freezed,
-    Object? link = freezed,
-    Object? comment = freezed,
-    Object? cntContent = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? boardId = freezed,
+    Object? isFixed = freezed,
+    Object? boardName = freezed,
+    Object? boardColor = freezed,
+    Object? boardBadge = freezed,
+    Object? boardUnquieLink = freezed,
+    Object? contentsCount = freezed,
+    Object? shareCheck = freezed,
+    Object? shareCount = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
-      badge: badge == freezed
-          ? _value.badge
-          : badge // ignore: cast_nullable_to_non_nullable
-              as String,
-      link: link == freezed
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: comment == freezed
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      cntContent: cntContent == freezed
-          ? _value.cntContent
-          : cntContent // ignore: cast_nullable_to_non_nullable
-              as int,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isFixed: isFixed == freezed
+          ? _value.isFixed
+          : isFixed // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      boardName: boardName == freezed
+          ? _value.boardName
+          : boardName // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardColor: boardColor == freezed
+          ? _value.boardColor
+          : boardColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardBadge: boardBadge == freezed
+          ? _value.boardBadge
+          : boardBadge // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardUnquieLink: boardUnquieLink == freezed
+          ? _value.boardUnquieLink
+          : boardUnquieLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shareCount: shareCount == freezed
+          ? _value.shareCount
+          : shareCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -478,16 +592,26 @@ abstract class _$BoardInfoDtoCopyWith<$Res>
       __$BoardInfoDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String id,
-      String name,
-      String color,
-      String badge,
-      String link,
-      List<dynamic>? comment,
-      int cntContent,
-      bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      {@JsonKey(name: 'board_id')
+          String? boardId,
+      @JsonKey(name: 'is_fixed')
+          bool isFixed,
+      @JsonKey(name: 'board_name')
+          String boardName,
+      @JsonKey(name: 'board_color')
+          String boardColor,
+      @JsonKey(name: 'board_badge')
+          String boardBadge,
+      @JsonKey(name: 'board_unique_link')
+          String? boardUnquieLink,
+      @JsonKey(name: 'contents_count')
+          int contentsCount,
+      @JsonKey(name: 'share_check')
+          bool shareCheck,
+      @JsonKey(name: 'share_count')
+          int? shareCount,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 }
 
 /// @nodoc
@@ -502,52 +626,57 @@ class __$BoardInfoDtoCopyWithImpl<$Res> extends _$BoardInfoDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? name = freezed,
-    Object? color = freezed,
-    Object? badge = freezed,
-    Object? link = freezed,
-    Object? comment = freezed,
-    Object? cntContent = freezed,
-    Object? isShare = freezed,
-    Object? dtCreated = freezed,
+    Object? boardId = freezed,
+    Object? isFixed = freezed,
+    Object? boardName = freezed,
+    Object? boardColor = freezed,
+    Object? boardBadge = freezed,
+    Object? boardUnquieLink = freezed,
+    Object? contentsCount = freezed,
+    Object? shareCheck = freezed,
+    Object? shareCount = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_BoardInfoDto(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: name == freezed
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: color == freezed
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as String,
-      badge: badge == freezed
-          ? _value.badge
-          : badge // ignore: cast_nullable_to_non_nullable
-              as String,
-      link: link == freezed
-          ? _value.link
-          : link // ignore: cast_nullable_to_non_nullable
-              as String,
-      comment: comment == freezed
-          ? _value.comment
-          : comment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
-      cntContent: cntContent == freezed
-          ? _value.cntContent
-          : cntContent // ignore: cast_nullable_to_non_nullable
-              as int,
-      isShare: isShare == freezed
-          ? _value.isShare
-          : isShare // ignore: cast_nullable_to_non_nullable
+      boardId: boardId == freezed
+          ? _value.boardId
+          : boardId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isFixed: isFixed == freezed
+          ? _value.isFixed
+          : isFixed // ignore: cast_nullable_to_non_nullable
               as bool,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      boardName: boardName == freezed
+          ? _value.boardName
+          : boardName // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardColor: boardColor == freezed
+          ? _value.boardColor
+          : boardColor // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardBadge: boardBadge == freezed
+          ? _value.boardBadge
+          : boardBadge // ignore: cast_nullable_to_non_nullable
+              as String,
+      boardUnquieLink: boardUnquieLink == freezed
+          ? _value.boardUnquieLink
+          : boardUnquieLink // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      shareCheck: shareCheck == freezed
+          ? _value.shareCheck
+          : shareCheck // ignore: cast_nullable_to_non_nullable
+              as bool,
+      shareCount: shareCount == freezed
+          ? _value.shareCount
+          : shareCount // ignore: cast_nullable_to_non_nullable
+              as int?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -558,86 +687,119 @@ class __$BoardInfoDtoCopyWithImpl<$Res> extends _$BoardInfoDtoCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_BoardInfoDto extends _BoardInfoDto {
   _$_BoardInfoDto(
-      {required this.id,
-      required this.name,
-      required this.color,
-      required this.badge,
-      required this.link,
-      this.comment,
-      required this.cntContent,
-      required this.isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.dtCreated})
+      {@JsonKey(name: 'board_id')
+          this.boardId,
+      @JsonKey(name: 'is_fixed')
+          this.isFixed = false,
+      @JsonKey(name: 'board_name')
+          required this.boardName,
+      @JsonKey(name: 'board_color')
+          required this.boardColor,
+      @JsonKey(name: 'board_badge')
+          required this.boardBadge,
+      @JsonKey(name: 'board_unique_link')
+          this.boardUnquieLink,
+      @JsonKey(name: 'contents_count')
+          required this.contentsCount,
+      @JsonKey(name: 'share_check')
+          required this.shareCheck,
+      @JsonKey(name: 'share_count')
+          this.shareCount,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required this.registerDate})
       : super._();
 
   factory _$_BoardInfoDto.fromJson(Map<String, dynamic> json) =>
       _$$_BoardInfoDtoFromJson(json);
 
   @override
-  final String id;
+  @JsonKey(name: 'board_id')
+  final String? boardId;
   @override
-  final String name;
+  @JsonKey(name: 'is_fixed')
+  final bool isFixed;
   @override
-  final String color;
+  @JsonKey(name: 'board_name')
+  final String boardName;
   @override
-  final String badge;
+  @JsonKey(name: 'board_color')
+  final String boardColor;
   @override
-  final String link;
+  @JsonKey(name: 'board_badge')
+  final String boardBadge;
   @override
-  final List<dynamic>? comment;
+  @JsonKey(name: 'board_unique_link')
+  final String? boardUnquieLink;
   @override
-  final int cntContent;
+  @JsonKey(name: 'contents_count')
+  final int contentsCount;
   @override
-  final bool isShare;
+  @JsonKey(name: 'share_check')
+  final bool shareCheck;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  final DateTime dtCreated;
+  @JsonKey(name: 'share_count')
+  final int? shareCount;
+  @override
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'BoardInfoDto(id: $id, name: $name, color: $color, badge: $badge, link: $link, comment: $comment, cntContent: $cntContent, isShare: $isShare, dtCreated: $dtCreated)';
+    return 'BoardInfoDto(boardId: $boardId, isFixed: $isFixed, boardName: $boardName, boardColor: $boardColor, boardBadge: $boardBadge, boardUnquieLink: $boardUnquieLink, contentsCount: $contentsCount, shareCheck: $shareCheck, shareCount: $shareCount, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _BoardInfoDto &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.name, name) ||
-                const DeepCollectionEquality().equals(other.name, name)) &&
-            (identical(other.color, color) ||
-                const DeepCollectionEquality().equals(other.color, color)) &&
-            (identical(other.badge, badge) ||
-                const DeepCollectionEquality().equals(other.badge, badge)) &&
-            (identical(other.link, link) ||
-                const DeepCollectionEquality().equals(other.link, link)) &&
-            (identical(other.comment, comment) ||
+            (identical(other.boardId, boardId) ||
                 const DeepCollectionEquality()
-                    .equals(other.comment, comment)) &&
-            (identical(other.cntContent, cntContent) ||
+                    .equals(other.boardId, boardId)) &&
+            (identical(other.isFixed, isFixed) ||
                 const DeepCollectionEquality()
-                    .equals(other.cntContent, cntContent)) &&
-            (identical(other.isShare, isShare) ||
+                    .equals(other.isFixed, isFixed)) &&
+            (identical(other.boardName, boardName) ||
                 const DeepCollectionEquality()
-                    .equals(other.isShare, isShare)) &&
-            (identical(other.dtCreated, dtCreated) ||
+                    .equals(other.boardName, boardName)) &&
+            (identical(other.boardColor, boardColor) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.boardColor, boardColor)) &&
+            (identical(other.boardBadge, boardBadge) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardBadge, boardBadge)) &&
+            (identical(other.boardUnquieLink, boardUnquieLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardUnquieLink, boardUnquieLink)) &&
+            (identical(other.contentsCount, contentsCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsCount, contentsCount)) &&
+            (identical(other.shareCheck, shareCheck) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareCheck, shareCheck)) &&
+            (identical(other.shareCount, shareCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareCount, shareCount)) &&
+            (identical(other.registerDate, registerDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(name) ^
-      const DeepCollectionEquality().hash(color) ^
-      const DeepCollectionEquality().hash(badge) ^
-      const DeepCollectionEquality().hash(link) ^
-      const DeepCollectionEquality().hash(comment) ^
-      const DeepCollectionEquality().hash(cntContent) ^
-      const DeepCollectionEquality().hash(isShare) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(boardId) ^
+      const DeepCollectionEquality().hash(isFixed) ^
+      const DeepCollectionEquality().hash(boardName) ^
+      const DeepCollectionEquality().hash(boardColor) ^
+      const DeepCollectionEquality().hash(boardBadge) ^
+      const DeepCollectionEquality().hash(boardUnquieLink) ^
+      const DeepCollectionEquality().hash(contentsCount) ^
+      const DeepCollectionEquality().hash(shareCheck) ^
+      const DeepCollectionEquality().hash(shareCount) ^
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -652,40 +814,64 @@ class _$_BoardInfoDto extends _BoardInfoDto {
 
 abstract class _BoardInfoDto extends BoardInfoDto {
   factory _BoardInfoDto(
-      {required String id,
-      required String name,
-      required String color,
-      required String badge,
-      required String link,
-      List<dynamic>? comment,
-      required int cntContent,
-      required bool isShare,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) = _$_BoardInfoDto;
+      {@JsonKey(name: 'board_id')
+          String? boardId,
+      @JsonKey(name: 'is_fixed')
+          bool isFixed,
+      @JsonKey(name: 'board_name')
+          required String boardName,
+      @JsonKey(name: 'board_color')
+          required String boardColor,
+      @JsonKey(name: 'board_badge')
+          required String boardBadge,
+      @JsonKey(name: 'board_unique_link')
+          String? boardUnquieLink,
+      @JsonKey(name: 'contents_count')
+          required int contentsCount,
+      @JsonKey(name: 'share_check')
+          required bool shareCheck,
+      @JsonKey(name: 'share_count')
+          int? shareCount,
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) = _$_BoardInfoDto;
   _BoardInfoDto._() : super._();
 
   factory _BoardInfoDto.fromJson(Map<String, dynamic> json) =
       _$_BoardInfoDto.fromJson;
 
   @override
-  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_id')
+  String? get boardId => throw _privateConstructorUsedError;
   @override
-  String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_fixed')
+  bool get isFixed => throw _privateConstructorUsedError;
   @override
-  String get color => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_name')
+  String get boardName => throw _privateConstructorUsedError;
   @override
-  String get badge => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_color')
+  String get boardColor => throw _privateConstructorUsedError;
   @override
-  String get link => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_badge')
+  String get boardBadge => throw _privateConstructorUsedError;
   @override
-  List<dynamic>? get comment => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_unique_link')
+  String? get boardUnquieLink => throw _privateConstructorUsedError;
   @override
-  int get cntContent => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_count')
+  int get contentsCount => throw _privateConstructorUsedError;
   @override
-  bool get isShare => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_check')
+  bool get shareCheck => throw _privateConstructorUsedError;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_count')
+  int? get shareCount => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BoardInfoDtoCopyWith<_BoardInfoDto> get copyWith =>
@@ -700,7 +886,9 @@ ShareDto _$ShareDtoFromJson(Map<String, dynamic> json) {
 class _$ShareDtoTearOff {
   const _$ShareDtoTearOff();
 
-  _ShareDto call({required ProfileDto sharer, required int shareLevel}) {
+  _ShareDto call(
+      {required ProfileDto sharer,
+      @JsonKey(name: 'share_level') required int shareLevel}) {
     return _ShareDto(
       sharer: sharer,
       shareLevel: shareLevel,
@@ -718,6 +906,7 @@ const $ShareDto = _$ShareDtoTearOff();
 /// @nodoc
 mixin _$ShareDto {
   ProfileDto get sharer => throw _privateConstructorUsedError;
+  @JsonKey(name: 'share_level')
   int get shareLevel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -730,7 +919,7 @@ mixin _$ShareDto {
 abstract class $ShareDtoCopyWith<$Res> {
   factory $ShareDtoCopyWith(ShareDto value, $Res Function(ShareDto) then) =
       _$ShareDtoCopyWithImpl<$Res>;
-  $Res call({ProfileDto sharer, int shareLevel});
+  $Res call({ProfileDto sharer, @JsonKey(name: 'share_level') int shareLevel});
 
   $ProfileDtoCopyWith<$Res> get sharer;
 }
@@ -773,7 +962,7 @@ abstract class _$ShareDtoCopyWith<$Res> implements $ShareDtoCopyWith<$Res> {
   factory _$ShareDtoCopyWith(_ShareDto value, $Res Function(_ShareDto) then) =
       __$ShareDtoCopyWithImpl<$Res>;
   @override
-  $Res call({ProfileDto sharer, int shareLevel});
+  $Res call({ProfileDto sharer, @JsonKey(name: 'share_level') int shareLevel});
 
   @override
   $ProfileDtoCopyWith<$Res> get sharer;
@@ -810,7 +999,10 @@ class __$ShareDtoCopyWithImpl<$Res> extends _$ShareDtoCopyWithImpl<$Res>
 
 @JsonSerializable(explicitToJson: true)
 class _$_ShareDto extends _ShareDto {
-  _$_ShareDto({required this.sharer, required this.shareLevel}) : super._();
+  _$_ShareDto(
+      {required this.sharer,
+      @JsonKey(name: 'share_level') required this.shareLevel})
+      : super._();
 
   factory _$_ShareDto.fromJson(Map<String, dynamic> json) =>
       _$$_ShareDtoFromJson(json);
@@ -818,6 +1010,7 @@ class _$_ShareDto extends _ShareDto {
   @override
   final ProfileDto sharer;
   @override
+  @JsonKey(name: 'share_level')
   final int shareLevel;
 
   @override
@@ -854,8 +1047,9 @@ class _$_ShareDto extends _ShareDto {
 }
 
 abstract class _ShareDto extends ShareDto {
-  factory _ShareDto({required ProfileDto sharer, required int shareLevel}) =
-      _$_ShareDto;
+  factory _ShareDto(
+      {required ProfileDto sharer,
+      @JsonKey(name: 'share_level') required int shareLevel}) = _$_ShareDto;
   _ShareDto._() : super._();
 
   factory _ShareDto.fromJson(Map<String, dynamic> json) = _$_ShareDto.fromJson;
@@ -863,6 +1057,7 @@ abstract class _ShareDto extends ShareDto {
   @override
   ProfileDto get sharer => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'share_level')
   int get shareLevel => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

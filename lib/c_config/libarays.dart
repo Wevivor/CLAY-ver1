@@ -11,6 +11,9 @@ export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_storage/firebase_storage.dart';
 // export 'package:firebase_database/firebase_database.dart';
 
+//API
+import 'package:dio/dio.dart';
+
 //화면 관련 라이버러리
 export 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 export 'dart:async';

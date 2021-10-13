@@ -7,15 +7,15 @@ part 'users.freezed.dart';
 @freezed
 abstract class HanUserInfo with _$HanUserInfo {
   const factory HanUserInfo({
-    String? uid,
+    String? userId,
     required Profile profile,
     bool? isDisabled,
     int? level,
-    required int cntVisit,
-    String? phone,
+    String? userPhone,
     String? intro,
+    required int cntVisit,
     String? token,
-    required DateTime dtCreated,
+    required DateTime registerDate,
   }) = _HanUserInfo;
 
   // HanUserInfoDto toDto() => HanUserInfoDto(
@@ -38,33 +38,21 @@ abstract class HanUserInfo with _$HanUserInfo {
 class Profile with _$Profile {
   //사용자 아바타 정보
   factory Profile({
-    String? uid,
-    required String email,
-    String? displayName,
-    String? photoURL,
-    required DateTime dtCreated,
+    String? userId,
+    required String userEmail,
+    String? userName,
+    String? profileImg,
     int? level,
+    required DateTime registerDate,
   }) = _Profile;
   Profile._();
 
-  factory Profile.fromJson(Map<String, dynamic> json) {
-    return Profile(
-      uid: json['uid'] as String?,
-      email: json['email'] as String,
-      displayName: json['displayName'] as String?,
-      photoURL: json['photoURL'] as String?,
-      // isPush: json['isPush'] as bool?,
-      // token: json['token'] as String?,
-      level: json['level'] as int?,
-      dtCreated: DateTime.parse(json['dtCreated']),
-    );
-  }
   ProfileDto toDto() => ProfileDto(
-        uid: uid,
-        email: email,
-        displayName: displayName,
-        photoURL: photoURL,
-        dtCreated: dtCreated,
+        userId: userId,
+        userEmail: userEmail,
+        userName: userName,
+        profileImg: profileImg,
+        registerDate: registerDate,
         level: level,
       );
 }

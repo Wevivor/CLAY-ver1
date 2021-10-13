@@ -22,26 +22,30 @@ class _$HanUserInfoDtoTearOff {
   const _$HanUserInfoDtoTearOff();
 
   _HanUserInfoDto call(
-      {String? uid,
+      {@JsonKey(name: 'user_id')
+          String? userId,
       required ProfileDto profile,
-      bool? isDisabled,
+      @JsonKey(name: 'is_disabled')
+          bool? isDisabled,
       int? level,
-      String? phone,
+      @JsonKey(name: 'user_phone')
+          String? userPhone,
       String? intro,
-      required int cntVisit,
+      @JsonKey(name: 'cnt_visit')
+          required int cntVisit,
       String? token,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) {
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) {
     return _HanUserInfoDto(
-      uid: uid,
+      userId: userId,
       profile: profile,
       isDisabled: isDisabled,
       level: level,
-      phone: phone,
+      userPhone: userPhone,
       intro: intro,
       cntVisit: cntVisit,
       token: token,
-      dtCreated: dtCreated,
+      registerDate: registerDate,
     );
   }
 
@@ -55,16 +59,23 @@ const $HanUserInfoDto = _$HanUserInfoDtoTearOff();
 
 /// @nodoc
 mixin _$HanUserInfoDto {
-  String? get uid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String? get userId => throw _privateConstructorUsedError;
   ProfileDto get profile => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_disabled')
   bool? get isDisabled => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
-  String? get phone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_phone')
+  String? get userPhone => throw _privateConstructorUsedError;
   String? get intro => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -78,16 +89,20 @@ abstract class $HanUserInfoDtoCopyWith<$Res> {
           HanUserInfoDto value, $Res Function(HanUserInfoDto) then) =
       _$HanUserInfoDtoCopyWithImpl<$Res>;
   $Res call(
-      {String? uid,
+      {@JsonKey(name: 'user_id')
+          String? userId,
       ProfileDto profile,
-      bool? isDisabled,
+      @JsonKey(name: 'is_disabled')
+          bool? isDisabled,
       int? level,
-      String? phone,
+      @JsonKey(name: 'user_phone')
+          String? userPhone,
       String? intro,
-      int cntVisit,
+      @JsonKey(name: 'cnt_visit')
+          int cntVisit,
       String? token,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 
   $ProfileDtoCopyWith<$Res> get profile;
 }
@@ -103,20 +118,20 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? uid = freezed,
+    Object? userId = freezed,
     Object? profile = freezed,
     Object? isDisabled = freezed,
     Object? level = freezed,
-    Object? phone = freezed,
+    Object? userPhone = freezed,
     Object? intro = freezed,
     Object? cntVisit = freezed,
     Object? token = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       profile: profile == freezed
           ? _value.profile
@@ -130,9 +145,9 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
-      phone: phone == freezed
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      userPhone: userPhone == freezed
+          ? _value.userPhone
+          : userPhone // ignore: cast_nullable_to_non_nullable
               as String?,
       intro: intro == freezed
           ? _value.intro
@@ -146,9 +161,9 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -169,16 +184,20 @@ abstract class _$HanUserInfoDtoCopyWith<$Res>
       __$HanUserInfoDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? uid,
+      {@JsonKey(name: 'user_id')
+          String? userId,
       ProfileDto profile,
-      bool? isDisabled,
+      @JsonKey(name: 'is_disabled')
+          bool? isDisabled,
       int? level,
-      String? phone,
+      @JsonKey(name: 'user_phone')
+          String? userPhone,
       String? intro,
-      int cntVisit,
+      @JsonKey(name: 'cnt_visit')
+          int cntVisit,
       String? token,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 
   @override
   $ProfileDtoCopyWith<$Res> get profile;
@@ -197,20 +216,20 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? uid = freezed,
+    Object? userId = freezed,
     Object? profile = freezed,
     Object? isDisabled = freezed,
     Object? level = freezed,
-    Object? phone = freezed,
+    Object? userPhone = freezed,
     Object? intro = freezed,
     Object? cntVisit = freezed,
     Object? token = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_HanUserInfoDto(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       profile: profile == freezed
           ? _value.profile
@@ -224,9 +243,9 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
-      phone: phone == freezed
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      userPhone: userPhone == freezed
+          ? _value.userPhone
+          : userPhone // ignore: cast_nullable_to_non_nullable
               as String?,
       intro: intro == freezed
           ? _value.intro
@@ -240,9 +259,9 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -253,52 +272,63 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_HanUserInfoDto extends _HanUserInfoDto {
   _$_HanUserInfoDto(
-      {this.uid,
+      {@JsonKey(name: 'user_id')
+          this.userId,
       required this.profile,
-      this.isDisabled,
+      @JsonKey(name: 'is_disabled')
+          this.isDisabled,
       this.level,
-      this.phone,
+      @JsonKey(name: 'user_phone')
+          this.userPhone,
       this.intro,
-      required this.cntVisit,
+      @JsonKey(name: 'cnt_visit')
+          required this.cntVisit,
       this.token,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.dtCreated})
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required this.registerDate})
       : super._();
 
   factory _$_HanUserInfoDto.fromJson(Map<String, dynamic> json) =>
       _$$_HanUserInfoDtoFromJson(json);
 
   @override
-  final String? uid;
+  @JsonKey(name: 'user_id')
+  final String? userId;
   @override
   final ProfileDto profile;
   @override
+  @JsonKey(name: 'is_disabled')
   final bool? isDisabled;
   @override
   final int? level;
   @override
-  final String? phone;
+  @JsonKey(name: 'user_phone')
+  final String? userPhone;
   @override
   final String? intro;
   @override
+  @JsonKey(name: 'cnt_visit')
   final int cntVisit;
   @override
   final String? token;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  final DateTime dtCreated;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'HanUserInfoDto(uid: $uid, profile: $profile, isDisabled: $isDisabled, level: $level, phone: $phone, intro: $intro, cntVisit: $cntVisit, token: $token, dtCreated: $dtCreated)';
+    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _HanUserInfoDto &&
-            (identical(other.uid, uid) ||
-                const DeepCollectionEquality().equals(other.uid, uid)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.profile, profile) ||
                 const DeepCollectionEquality()
                     .equals(other.profile, profile)) &&
@@ -307,8 +337,9 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
                     .equals(other.isDisabled, isDisabled)) &&
             (identical(other.level, level) ||
                 const DeepCollectionEquality().equals(other.level, level)) &&
-            (identical(other.phone, phone) ||
-                const DeepCollectionEquality().equals(other.phone, phone)) &&
+            (identical(other.userPhone, userPhone) ||
+                const DeepCollectionEquality()
+                    .equals(other.userPhone, userPhone)) &&
             (identical(other.intro, intro) ||
                 const DeepCollectionEquality().equals(other.intro, intro)) &&
             (identical(other.cntVisit, cntVisit) ||
@@ -316,23 +347,23 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
                     .equals(other.cntVisit, cntVisit)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(uid) ^
+      const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(profile) ^
       const DeepCollectionEquality().hash(isDisabled) ^
       const DeepCollectionEquality().hash(level) ^
-      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(userPhone) ^
       const DeepCollectionEquality().hash(intro) ^
       const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(token) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -347,40 +378,51 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
 
 abstract class _HanUserInfoDto extends HanUserInfoDto {
   factory _HanUserInfoDto(
-      {String? uid,
+      {@JsonKey(name: 'user_id')
+          String? userId,
       required ProfileDto profile,
-      bool? isDisabled,
+      @JsonKey(name: 'is_disabled')
+          bool? isDisabled,
       int? level,
-      String? phone,
+      @JsonKey(name: 'user_phone')
+          String? userPhone,
       String? intro,
-      required int cntVisit,
+      @JsonKey(name: 'cnt_visit')
+          required int cntVisit,
       String? token,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) = _$_HanUserInfoDto;
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) = _$_HanUserInfoDto;
   _HanUserInfoDto._() : super._();
 
   factory _HanUserInfoDto.fromJson(Map<String, dynamic> json) =
       _$_HanUserInfoDto.fromJson;
 
   @override
-  String? get uid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String? get userId => throw _privateConstructorUsedError;
   @override
   ProfileDto get profile => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'is_disabled')
   bool? get isDisabled => throw _privateConstructorUsedError;
   @override
   int? get level => throw _privateConstructorUsedError;
   @override
-  String? get phone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_phone')
+  String? get userPhone => throw _privateConstructorUsedError;
   @override
   String? get intro => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
   @override
   String? get token => throw _privateConstructorUsedError;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HanUserInfoDtoCopyWith<_HanUserInfoDto> get copyWith =>
@@ -396,20 +438,24 @@ class _$ProfileDtoTearOff {
   const _$ProfileDtoTearOff();
 
   _ProfileDto call(
-      {String? uid,
-      required String email,
-      String? displayName,
-      String? photoURL,
+      {@JsonKey(name: 'user_id')
+          String? userId,
+      @JsonKey(name: 'user_email')
+          required String userEmail,
+      @JsonKey(name: 'user_name')
+          String? userName,
+      @JsonKey(name: 'profile_img')
+          String? profileImg,
       int? level,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) {
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) {
     return _ProfileDto(
-      uid: uid,
-      email: email,
-      displayName: displayName,
-      photoURL: photoURL,
+      userId: userId,
+      userEmail: userEmail,
+      userName: userName,
+      profileImg: profileImg,
       level: level,
-      dtCreated: dtCreated,
+      registerDate: registerDate,
     );
   }
 
@@ -423,14 +469,21 @@ const $ProfileDto = _$ProfileDtoTearOff();
 
 /// @nodoc
 mixin _$ProfileDto {
-  String? get uid => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String? get displayName => throw _privateConstructorUsedError;
-  String? get photoURL => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String? get userId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_email')
+  String get userEmail => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_name')
+  String? get userName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_img')
+  String? get profileImg => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError; // bool? isPush,
 // String? token,
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -444,13 +497,17 @@ abstract class $ProfileDtoCopyWith<$Res> {
           ProfileDto value, $Res Function(ProfileDto) then) =
       _$ProfileDtoCopyWithImpl<$Res>;
   $Res call(
-      {String? uid,
-      String email,
-      String? displayName,
-      String? photoURL,
+      {@JsonKey(name: 'user_id')
+          String? userId,
+      @JsonKey(name: 'user_email')
+          String userEmail,
+      @JsonKey(name: 'user_name')
+          String? userName,
+      @JsonKey(name: 'profile_img')
+          String? profileImg,
       int? level,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 }
 
 /// @nodoc
@@ -463,37 +520,37 @@ class _$ProfileDtoCopyWithImpl<$Res> implements $ProfileDtoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? email = freezed,
-    Object? displayName = freezed,
-    Object? photoURL = freezed,
+    Object? userId = freezed,
+    Object? userEmail = freezed,
+    Object? userName = freezed,
+    Object? profileImg = freezed,
     Object? level = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      userEmail: userEmail == freezed
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoURL: photoURL == freezed
-          ? _value.photoURL
-          : photoURL // ignore: cast_nullable_to_non_nullable
+      profileImg: profileImg == freezed
+          ? _value.profileImg
+          : profileImg // ignore: cast_nullable_to_non_nullable
               as String?,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -506,13 +563,17 @@ abstract class _$ProfileDtoCopyWith<$Res> implements $ProfileDtoCopyWith<$Res> {
       __$ProfileDtoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? uid,
-      String email,
-      String? displayName,
-      String? photoURL,
+      {@JsonKey(name: 'user_id')
+          String? userId,
+      @JsonKey(name: 'user_email')
+          String userEmail,
+      @JsonKey(name: 'user_name')
+          String? userName,
+      @JsonKey(name: 'profile_img')
+          String? profileImg,
       int? level,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          DateTime registerDate});
 }
 
 /// @nodoc
@@ -527,37 +588,37 @@ class __$ProfileDtoCopyWithImpl<$Res> extends _$ProfileDtoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? email = freezed,
-    Object? displayName = freezed,
-    Object? photoURL = freezed,
+    Object? userId = freezed,
+    Object? userEmail = freezed,
+    Object? userName = freezed,
+    Object? profileImg = freezed,
     Object? level = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_ProfileDto(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      userEmail: userEmail == freezed
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoURL: photoURL == freezed
-          ? _value.photoURL
-          : photoURL // ignore: cast_nullable_to_non_nullable
+      profileImg: profileImg == freezed
+          ? _value.profileImg
+          : profileImg // ignore: cast_nullable_to_non_nullable
               as String?,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -568,68 +629,80 @@ class __$ProfileDtoCopyWithImpl<$Res> extends _$ProfileDtoCopyWithImpl<$Res>
 @JsonSerializable(explicitToJson: true)
 class _$_ProfileDto extends _ProfileDto {
   _$_ProfileDto(
-      {this.uid,
-      required this.email,
-      this.displayName,
-      this.photoURL,
+      {@JsonKey(name: 'user_id')
+          this.userId,
+      @JsonKey(name: 'user_email')
+          required this.userEmail,
+      @JsonKey(name: 'user_name')
+          this.userName,
+      @JsonKey(name: 'profile_img')
+          this.profileImg,
       this.level,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.dtCreated})
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required this.registerDate})
       : super._();
 
   factory _$_ProfileDto.fromJson(Map<String, dynamic> json) =>
       _$$_ProfileDtoFromJson(json);
 
   @override
-  final String? uid;
+  @JsonKey(name: 'user_id')
+  final String? userId;
   @override
-  final String email;
+  @JsonKey(name: 'user_email')
+  final String userEmail;
   @override
-  final String? displayName;
+  @JsonKey(name: 'user_name')
+  final String? userName;
   @override
-  final String? photoURL;
+  @JsonKey(name: 'profile_img')
+  final String? profileImg;
   @override
   final int? level;
   @override // bool? isPush,
 // String? token,
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  final DateTime dtCreated;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'ProfileDto(uid: $uid, email: $email, displayName: $displayName, photoURL: $photoURL, level: $level, dtCreated: $dtCreated)';
+    return 'ProfileDto(userId: $userId, userEmail: $userEmail, userName: $userName, profileImg: $profileImg, level: $level, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _ProfileDto &&
-            (identical(other.uid, uid) ||
-                const DeepCollectionEquality().equals(other.uid, uid)) &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.displayName, displayName) ||
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.userEmail, userEmail) ||
                 const DeepCollectionEquality()
-                    .equals(other.displayName, displayName)) &&
-            (identical(other.photoURL, photoURL) ||
+                    .equals(other.userEmail, userEmail)) &&
+            (identical(other.userName, userName) ||
                 const DeepCollectionEquality()
-                    .equals(other.photoURL, photoURL)) &&
+                    .equals(other.userName, userName)) &&
+            (identical(other.profileImg, profileImg) ||
+                const DeepCollectionEquality()
+                    .equals(other.profileImg, profileImg)) &&
             (identical(other.level, level) ||
                 const DeepCollectionEquality().equals(other.level, level)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(uid) ^
-      const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(displayName) ^
-      const DeepCollectionEquality().hash(photoURL) ^
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(userEmail) ^
+      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(profileImg) ^
       const DeepCollectionEquality().hash(level) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -644,32 +717,43 @@ class _$_ProfileDto extends _ProfileDto {
 
 abstract class _ProfileDto extends ProfileDto {
   factory _ProfileDto(
-      {String? uid,
-      required String email,
-      String? displayName,
-      String? photoURL,
+      {@JsonKey(name: 'user_id')
+          String? userId,
+      @JsonKey(name: 'user_email')
+          required String userEmail,
+      @JsonKey(name: 'user_name')
+          String? userName,
+      @JsonKey(name: 'profile_img')
+          String? profileImg,
       int? level,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) = _$_ProfileDto;
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+          required DateTime registerDate}) = _$_ProfileDto;
   _ProfileDto._() : super._();
 
   factory _ProfileDto.fromJson(Map<String, dynamic> json) =
       _$_ProfileDto.fromJson;
 
   @override
-  String? get uid => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_id')
+  String? get userId => throw _privateConstructorUsedError;
   @override
-  String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_email')
+  String get userEmail => throw _privateConstructorUsedError;
   @override
-  String? get displayName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user_name')
+  String? get userName => throw _privateConstructorUsedError;
   @override
-  String? get photoURL => throw _privateConstructorUsedError;
+  @JsonKey(name: 'profile_img')
+  String? get profileImg => throw _privateConstructorUsedError;
   @override
   int? get level => throw _privateConstructorUsedError;
   @override // bool? isPush,
 // String? token,
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProfileDtoCopyWith<_ProfileDto> get copyWith =>

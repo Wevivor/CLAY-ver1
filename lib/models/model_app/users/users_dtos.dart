@@ -10,16 +10,16 @@ part 'users_dtos.g.dart';
 class HanUserInfoDto with _$HanUserInfoDto {
   @JsonSerializable(explicitToJson: true)
   factory HanUserInfoDto({
-    String? uid,
+    @JsonKey(name: 'user_id') String? userId,
     required ProfileDto profile,
-    bool? isDisabled,
+    @JsonKey(name: 'is_disabled') bool? isDisabled,
     int? level,
-    String? phone,
+    @JsonKey(name: 'user_phone') String? userPhone,
     String? intro,
-    required int cntVisit,
+    @JsonKey(name: 'cnt_visit') required int cntVisit,
     String? token,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtCreated,
+    @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime registerDate,
   }) = _HanUserInfoDto;
 
   factory HanUserInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -27,13 +27,13 @@ class HanUserInfoDto with _$HanUserInfoDto {
 
   const HanUserInfoDto._();
   HanUserInfo toDomain() => HanUserInfo(
-        uid: uid,
+        userId: userId,
         profile: profile.toDomain(),
         cntVisit: cntVisit,
         isDisabled: isDisabled,
         level: level,
         token: token,
-        dtCreated: dtCreated,
+        registerDate: registerDate,
       );
 }
 
@@ -42,24 +42,25 @@ class ProfileDto with _$ProfileDto {
   //사용자 아바타 정보
   @JsonSerializable(explicitToJson: true)
   factory ProfileDto({
-    String? uid,
-    required String email,
-    String? displayName,
-    String? photoURL,
+    @JsonKey(name: 'user_id') String? userId,
+    @JsonKey(name: 'user_email') required String userEmail,
+    @JsonKey(name: 'user_name') String? userName,
+    @JsonKey(name: 'profile_img') String? profileImg,
     int? level,
     // bool? isPush,
     // String? token,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtCreated,
+    @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime registerDate,
   }) = _ProfileDto;
   const ProfileDto._();
   factory ProfileDto.fromJson(Map<String, dynamic> json) =>
       _$ProfileDtoFromJson(json);
   Profile toDomain() => Profile(
-        uid: uid,
-        email: email,
-        displayName: displayName,
+        userId: userId,
+        userEmail: userEmail,
+        userName: userName,
+        profileImg: profileImg,
         level: level,
-        dtCreated: dtCreated,
+        registerDate: registerDate,
       );
 }

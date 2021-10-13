@@ -47,15 +47,10 @@ class FbCommonModule {
     try {
       var docRef;
       var newItem;
-      // if (Const.isTest) {
-      //   docRef = instance.collection('$path').doc(item.id);
-      //   newItem = item;
-      // } else {
       docRef = instance.collection('$path').doc();
-      // newItem = item.copyWith.info(id: docRef.id);
       //TODO 여러가지의 경우 info 인지 아닌지?
-      newItem = item.copyWith(id: docRef.id);
-      // }
+      newItem =
+          item.copyWith(id: docRef.id, info: item.info.copyWith(id: docRef.id));
       await docRef.set(newItem.toJson(), SetOptions(merge: true));
     } catch (e) {
       print('===>' + e.toString());
@@ -108,6 +103,19 @@ class FbCommonModule {
       dynamic dto}) async {
     try {
       await instance.collection('$path').doc(id).update(dto.toJson());
+    } catch (e) {
+      print('===>' + e.toString());
+      throw e;
+    }
+  }
+
+  Future<void> updateInfoFb(
+      {required FirebaseFirestore instance,
+      required String path,
+      required String id,
+      dynamic info}) async {
+    try {
+      await instance.collection('$path').doc(id).update(info);
     } catch (e) {
       print('===>' + e.toString());
       throw e;

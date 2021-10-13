@@ -89,16 +89,17 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
 
                             final _exist = await HanUserInfoController.to
                                 .actionExistByEmail(_user?.email ?? '');
+
                             print(
                                 '----------------actionExistByEmail ${_exist.toString()}------------------');
                             if (_exist == null) {
                               final _profile = ProfileDto(
-                                uid: _user?.uid,
-                                email: _user?.email ?? '',
-                                displayName: _user?.displayName,
-                                photoURL: _user?.photoURL,
+                                userId: _user?.uid,
+                                userEmail: _user?.email ?? '',
+                                userName: _user?.displayName,
+                                profileImg: _user?.photoURL,
                                 level: 3,
-                                dtCreated: DateTime.now(),
+                                registerDate: DateTime.now(),
                                 // dtUpdated: DateTime.now(),
                               );
 
@@ -115,9 +116,9 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                               //     isReceive: false);
 
                               final _userInfo = HanUserInfoDto(
-                                uid: _user?.uid,
+                                userId: _user?.uid,
                                 profile: _profile,
-                                phone: '010-5391-3862',
+                                userPhone: '010-5391-3862',
                                 intro: null,
                                 // info: _detail,
                                 // regiInfo: _regiInfo,
@@ -125,7 +126,7 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                                 cntVisit: 0,
                                 level: 3,
                                 // following: ListCntDto(cnt: 0, lists: []),
-                                dtCreated: DateTime.now(),
+                                registerDate: DateTime.now(),
                                 // dtUpdated: DateTime.now(),
                               );
 
@@ -134,7 +135,7 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                             print(
                                 '---------------actionVisitInc ${_exist.toString()}--------------------');
 
-                            await HanUserInfoController.to.actionVisitInc();
+                            // await HanUserInfoController.to.actionVisitInc();
 
                             Get.toNamed('/main_menu');
                           } on FirebaseAuthException catch (e) {

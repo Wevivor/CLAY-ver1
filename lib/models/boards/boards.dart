@@ -8,51 +8,56 @@ part 'boards.freezed.dart';
 @freezed
 class Board with _$Board {
   factory Board({
-    String? id,
+    String? boardId,
     required BoardInfo info,
-    required Profile creator,
+    required Profile boardCreator,
     Share? shareInfo,
-    required bool isShare,
-    required DateTime dtCreated,
+    List<dynamic>? boardComment,
+    required bool shareCheck,
+    required DateTime registerDate,
   }) = _Board;
   Board._();
 
   BoardDto toDto() => BoardDto(
-        id: id,
+        boardId: boardId,
         info: info.toDto(),
-        creator: creator.toDto(),
+        boardCreator: boardCreator.toDto(),
         shareInfo: shareInfo?.toDto(),
-        isShare: isShare,
-        dtCreated: dtCreated,
+        shareCheck: shareCheck,
+        boardComment: boardComment,
+        registerDate: registerDate,
       );
 }
 
 @freezed
 class BoardInfo with _$BoardInfo {
   factory BoardInfo({
-    required String id,
-    required String name,
-    required String color,
-    required String badge,
-    required String link,
-    List<dynamic>? comment,
-    required int cntContent,
-    required bool isShare,
-    required DateTime dtCreated,
+    String? boardId,
+    @Default(false) bool isFixed,
+    required String boardName,
+    required String boardColor,
+    required String boardBadge,
+    String? boardUnquieLink,
+    required int contentsCount,
+    required bool shareCheck,
+    int? shareCount,
+    required DateTime registerDate,
     // List<Comment>? comments;
   }) = _BoardInfo;
   BoardInfo._();
 
   BoardInfoDto toDto() => BoardInfoDto(
-        id: id,
-        name: name,
-        color: color,
-        badge: badge,
-        link: link,
-        comment: comment,
-        cntContent: cntContent,
-        isShare: isShare,
-        dtCreated: dtCreated,
+        boardId: boardId,
+        boardName: boardName,
+        isFixed: isFixed,
+        boardColor: boardColor,
+        boardBadge: boardBadge,
+        boardUnquieLink: boardUnquieLink,
+        // comment: comment,
+        contentsCount: contentsCount,
+        shareCheck: shareCheck,
+        shareCount: shareCount,
+        registerDate: registerDate,
       );
 }
 

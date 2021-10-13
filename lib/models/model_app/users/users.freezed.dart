@@ -18,25 +18,25 @@ class _$HanUserInfoTearOff {
   const _$HanUserInfoTearOff();
 
   _HanUserInfo call(
-      {String? uid,
+      {String? userId,
       required Profile profile,
       bool? isDisabled,
       int? level,
-      required int cntVisit,
-      String? phone,
+      String? userPhone,
       String? intro,
+      required int cntVisit,
       String? token,
-      required DateTime dtCreated}) {
+      required DateTime registerDate}) {
     return _HanUserInfo(
-      uid: uid,
+      userId: userId,
       profile: profile,
       isDisabled: isDisabled,
       level: level,
-      cntVisit: cntVisit,
-      phone: phone,
+      userPhone: userPhone,
       intro: intro,
+      cntVisit: cntVisit,
       token: token,
-      dtCreated: dtCreated,
+      registerDate: registerDate,
     );
   }
 }
@@ -46,15 +46,15 @@ const $HanUserInfo = _$HanUserInfoTearOff();
 
 /// @nodoc
 mixin _$HanUserInfo {
-  String? get uid => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   Profile get profile => throw _privateConstructorUsedError;
   bool? get isDisabled => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
-  int get cntVisit => throw _privateConstructorUsedError;
-  String? get phone => throw _privateConstructorUsedError;
+  String? get userPhone => throw _privateConstructorUsedError;
   String? get intro => throw _privateConstructorUsedError;
+  int get cntVisit => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HanUserInfoCopyWith<HanUserInfo> get copyWith =>
@@ -67,15 +67,15 @@ abstract class $HanUserInfoCopyWith<$Res> {
           HanUserInfo value, $Res Function(HanUserInfo) then) =
       _$HanUserInfoCopyWithImpl<$Res>;
   $Res call(
-      {String? uid,
+      {String? userId,
       Profile profile,
       bool? isDisabled,
       int? level,
-      int cntVisit,
-      String? phone,
+      String? userPhone,
       String? intro,
+      int cntVisit,
       String? token,
-      DateTime dtCreated});
+      DateTime registerDate});
 
   $ProfileCopyWith<$Res> get profile;
 }
@@ -90,20 +90,20 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? uid = freezed,
+    Object? userId = freezed,
     Object? profile = freezed,
     Object? isDisabled = freezed,
     Object? level = freezed,
-    Object? cntVisit = freezed,
-    Object? phone = freezed,
+    Object? userPhone = freezed,
     Object? intro = freezed,
+    Object? cntVisit = freezed,
     Object? token = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       profile: profile == freezed
           ? _value.profile
@@ -117,25 +117,25 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
-      cntVisit: cntVisit == freezed
-          ? _value.cntVisit
-          : cntVisit // ignore: cast_nullable_to_non_nullable
-              as int,
-      phone: phone == freezed
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      userPhone: userPhone == freezed
+          ? _value.userPhone
+          : userPhone // ignore: cast_nullable_to_non_nullable
               as String?,
       intro: intro == freezed
           ? _value.intro
           : intro // ignore: cast_nullable_to_non_nullable
               as String?,
+      cntVisit: cntVisit == freezed
+          ? _value.cntVisit
+          : cntVisit // ignore: cast_nullable_to_non_nullable
+              as int,
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -156,15 +156,15 @@ abstract class _$HanUserInfoCopyWith<$Res>
       __$HanUserInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? uid,
+      {String? userId,
       Profile profile,
       bool? isDisabled,
       int? level,
-      int cntVisit,
-      String? phone,
+      String? userPhone,
       String? intro,
+      int cntVisit,
       String? token,
-      DateTime dtCreated});
+      DateTime registerDate});
 
   @override
   $ProfileCopyWith<$Res> get profile;
@@ -182,20 +182,20 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? uid = freezed,
+    Object? userId = freezed,
     Object? profile = freezed,
     Object? isDisabled = freezed,
     Object? level = freezed,
-    Object? cntVisit = freezed,
-    Object? phone = freezed,
+    Object? userPhone = freezed,
     Object? intro = freezed,
+    Object? cntVisit = freezed,
     Object? token = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_HanUserInfo(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
       profile: profile == freezed
           ? _value.profile
@@ -209,25 +209,25 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
-      cntVisit: cntVisit == freezed
-          ? _value.cntVisit
-          : cntVisit // ignore: cast_nullable_to_non_nullable
-              as int,
-      phone: phone == freezed
-          ? _value.phone
-          : phone // ignore: cast_nullable_to_non_nullable
+      userPhone: userPhone == freezed
+          ? _value.userPhone
+          : userPhone // ignore: cast_nullable_to_non_nullable
               as String?,
       intro: intro == freezed
           ? _value.intro
           : intro // ignore: cast_nullable_to_non_nullable
               as String?,
+      cntVisit: cntVisit == freezed
+          ? _value.cntVisit
+          : cntVisit // ignore: cast_nullable_to_non_nullable
+              as int,
       token: token == freezed
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -237,18 +237,18 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
 
 class _$_HanUserInfo implements _HanUserInfo {
   const _$_HanUserInfo(
-      {this.uid,
+      {this.userId,
       required this.profile,
       this.isDisabled,
       this.level,
-      required this.cntVisit,
-      this.phone,
+      this.userPhone,
       this.intro,
+      required this.cntVisit,
       this.token,
-      required this.dtCreated});
+      required this.registerDate});
 
   @override
-  final String? uid;
+  final String? userId;
   @override
   final Profile profile;
   @override
@@ -256,27 +256,27 @@ class _$_HanUserInfo implements _HanUserInfo {
   @override
   final int? level;
   @override
-  final int cntVisit;
-  @override
-  final String? phone;
+  final String? userPhone;
   @override
   final String? intro;
   @override
+  final int cntVisit;
+  @override
   final String? token;
   @override
-  final DateTime dtCreated;
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'HanUserInfo(uid: $uid, profile: $profile, isDisabled: $isDisabled, level: $level, cntVisit: $cntVisit, phone: $phone, intro: $intro, token: $token, dtCreated: $dtCreated)';
+    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _HanUserInfo &&
-            (identical(other.uid, uid) ||
-                const DeepCollectionEquality().equals(other.uid, uid)) &&
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
             (identical(other.profile, profile) ||
                 const DeepCollectionEquality()
                     .equals(other.profile, profile)) &&
@@ -285,32 +285,33 @@ class _$_HanUserInfo implements _HanUserInfo {
                     .equals(other.isDisabled, isDisabled)) &&
             (identical(other.level, level) ||
                 const DeepCollectionEquality().equals(other.level, level)) &&
+            (identical(other.userPhone, userPhone) ||
+                const DeepCollectionEquality()
+                    .equals(other.userPhone, userPhone)) &&
+            (identical(other.intro, intro) ||
+                const DeepCollectionEquality().equals(other.intro, intro)) &&
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
-            (identical(other.phone, phone) ||
-                const DeepCollectionEquality().equals(other.phone, phone)) &&
-            (identical(other.intro, intro) ||
-                const DeepCollectionEquality().equals(other.intro, intro)) &&
             (identical(other.token, token) ||
                 const DeepCollectionEquality().equals(other.token, token)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(uid) ^
+      const DeepCollectionEquality().hash(userId) ^
       const DeepCollectionEquality().hash(profile) ^
       const DeepCollectionEquality().hash(isDisabled) ^
       const DeepCollectionEquality().hash(level) ^
-      const DeepCollectionEquality().hash(cntVisit) ^
-      const DeepCollectionEquality().hash(phone) ^
+      const DeepCollectionEquality().hash(userPhone) ^
       const DeepCollectionEquality().hash(intro) ^
+      const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(token) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -320,18 +321,18 @@ class _$_HanUserInfo implements _HanUserInfo {
 
 abstract class _HanUserInfo implements HanUserInfo {
   const factory _HanUserInfo(
-      {String? uid,
+      {String? userId,
       required Profile profile,
       bool? isDisabled,
       int? level,
-      required int cntVisit,
-      String? phone,
+      String? userPhone,
       String? intro,
+      required int cntVisit,
       String? token,
-      required DateTime dtCreated}) = _$_HanUserInfo;
+      required DateTime registerDate}) = _$_HanUserInfo;
 
   @override
-  String? get uid => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   @override
   Profile get profile => throw _privateConstructorUsedError;
   @override
@@ -339,15 +340,15 @@ abstract class _HanUserInfo implements HanUserInfo {
   @override
   int? get level => throw _privateConstructorUsedError;
   @override
-  int get cntVisit => throw _privateConstructorUsedError;
-  @override
-  String? get phone => throw _privateConstructorUsedError;
+  String? get userPhone => throw _privateConstructorUsedError;
   @override
   String? get intro => throw _privateConstructorUsedError;
   @override
+  int get cntVisit => throw _privateConstructorUsedError;
+  @override
   String? get token => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$HanUserInfoCopyWith<_HanUserInfo> get copyWith =>
@@ -359,19 +360,19 @@ class _$ProfileTearOff {
   const _$ProfileTearOff();
 
   _Profile call(
-      {String? uid,
-      required String email,
-      String? displayName,
-      String? photoURL,
-      required DateTime dtCreated,
-      int? level}) {
+      {String? userId,
+      required String userEmail,
+      String? userName,
+      String? profileImg,
+      int? level,
+      required DateTime registerDate}) {
     return _Profile(
-      uid: uid,
-      email: email,
-      displayName: displayName,
-      photoURL: photoURL,
-      dtCreated: dtCreated,
+      userId: userId,
+      userEmail: userEmail,
+      userName: userName,
+      profileImg: profileImg,
       level: level,
+      registerDate: registerDate,
     );
   }
 }
@@ -381,12 +382,12 @@ const $Profile = _$ProfileTearOff();
 
 /// @nodoc
 mixin _$Profile {
-  String? get uid => throw _privateConstructorUsedError;
-  String get email => throw _privateConstructorUsedError;
-  String? get displayName => throw _privateConstructorUsedError;
-  String? get photoURL => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
+  String get userEmail => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
+  String? get profileImg => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ProfileCopyWith<Profile> get copyWith => throw _privateConstructorUsedError;
@@ -397,12 +398,12 @@ abstract class $ProfileCopyWith<$Res> {
   factory $ProfileCopyWith(Profile value, $Res Function(Profile) then) =
       _$ProfileCopyWithImpl<$Res>;
   $Res call(
-      {String? uid,
-      String email,
-      String? displayName,
-      String? photoURL,
-      DateTime dtCreated,
-      int? level});
+      {String? userId,
+      String userEmail,
+      String? userName,
+      String? profileImg,
+      int? level,
+      DateTime registerDate});
 }
 
 /// @nodoc
@@ -415,38 +416,38 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
 
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? email = freezed,
-    Object? displayName = freezed,
-    Object? photoURL = freezed,
-    Object? dtCreated = freezed,
+    Object? userId = freezed,
+    Object? userEmail = freezed,
+    Object? userName = freezed,
+    Object? profileImg = freezed,
     Object? level = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      userEmail: userEmail == freezed
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoURL: photoURL == freezed
-          ? _value.photoURL
-          : photoURL // ignore: cast_nullable_to_non_nullable
+      profileImg: profileImg == freezed
+          ? _value.profileImg
+          : profileImg // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -457,12 +458,12 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       __$ProfileCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? uid,
-      String email,
-      String? displayName,
-      String? photoURL,
-      DateTime dtCreated,
-      int? level});
+      {String? userId,
+      String userEmail,
+      String? userName,
+      String? profileImg,
+      int? level,
+      DateTime registerDate});
 }
 
 /// @nodoc
@@ -476,38 +477,38 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? uid = freezed,
-    Object? email = freezed,
-    Object? displayName = freezed,
-    Object? photoURL = freezed,
-    Object? dtCreated = freezed,
+    Object? userId = freezed,
+    Object? userEmail = freezed,
+    Object? userName = freezed,
+    Object? profileImg = freezed,
     Object? level = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_Profile(
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      userId: userId == freezed
+          ? _value.userId
+          : userId // ignore: cast_nullable_to_non_nullable
               as String?,
-      email: email == freezed
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
+      userEmail: userEmail == freezed
+          ? _value.userEmail
+          : userEmail // ignore: cast_nullable_to_non_nullable
               as String,
-      displayName: displayName == freezed
-          ? _value.displayName
-          : displayName // ignore: cast_nullable_to_non_nullable
+      userName: userName == freezed
+          ? _value.userName
+          : userName // ignore: cast_nullable_to_non_nullable
               as String?,
-      photoURL: photoURL == freezed
-          ? _value.photoURL
-          : photoURL // ignore: cast_nullable_to_non_nullable
+      profileImg: profileImg == freezed
+          ? _value.profileImg
+          : profileImg // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
-              as DateTime,
       level: level == freezed
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
+              as DateTime,
     ));
   }
 }
@@ -516,62 +517,63 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
 
 class _$_Profile extends _Profile {
   _$_Profile(
-      {this.uid,
-      required this.email,
-      this.displayName,
-      this.photoURL,
-      required this.dtCreated,
-      this.level})
+      {this.userId,
+      required this.userEmail,
+      this.userName,
+      this.profileImg,
+      this.level,
+      required this.registerDate})
       : super._();
 
   @override
-  final String? uid;
+  final String? userId;
   @override
-  final String email;
+  final String userEmail;
   @override
-  final String? displayName;
+  final String? userName;
   @override
-  final String? photoURL;
-  @override
-  final DateTime dtCreated;
+  final String? profileImg;
   @override
   final int? level;
+  @override
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'Profile(uid: $uid, email: $email, displayName: $displayName, photoURL: $photoURL, dtCreated: $dtCreated, level: $level)';
+    return 'Profile(userId: $userId, userEmail: $userEmail, userName: $userName, profileImg: $profileImg, level: $level, registerDate: $registerDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other is _Profile &&
-            (identical(other.uid, uid) ||
-                const DeepCollectionEquality().equals(other.uid, uid)) &&
-            (identical(other.email, email) ||
-                const DeepCollectionEquality().equals(other.email, email)) &&
-            (identical(other.displayName, displayName) ||
+            (identical(other.userId, userId) ||
+                const DeepCollectionEquality().equals(other.userId, userId)) &&
+            (identical(other.userEmail, userEmail) ||
                 const DeepCollectionEquality()
-                    .equals(other.displayName, displayName)) &&
-            (identical(other.photoURL, photoURL) ||
+                    .equals(other.userEmail, userEmail)) &&
+            (identical(other.userName, userName) ||
                 const DeepCollectionEquality()
-                    .equals(other.photoURL, photoURL)) &&
-            (identical(other.dtCreated, dtCreated) ||
+                    .equals(other.userName, userName)) &&
+            (identical(other.profileImg, profileImg) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)) &&
+                    .equals(other.profileImg, profileImg)) &&
             (identical(other.level, level) ||
-                const DeepCollectionEquality().equals(other.level, level)));
+                const DeepCollectionEquality().equals(other.level, level)) &&
+            (identical(other.registerDate, registerDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(uid) ^
-      const DeepCollectionEquality().hash(email) ^
-      const DeepCollectionEquality().hash(displayName) ^
-      const DeepCollectionEquality().hash(photoURL) ^
-      const DeepCollectionEquality().hash(dtCreated) ^
-      const DeepCollectionEquality().hash(level);
+      const DeepCollectionEquality().hash(userId) ^
+      const DeepCollectionEquality().hash(userEmail) ^
+      const DeepCollectionEquality().hash(userName) ^
+      const DeepCollectionEquality().hash(profileImg) ^
+      const DeepCollectionEquality().hash(level) ^
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -581,26 +583,26 @@ class _$_Profile extends _Profile {
 
 abstract class _Profile extends Profile {
   factory _Profile(
-      {String? uid,
-      required String email,
-      String? displayName,
-      String? photoURL,
-      required DateTime dtCreated,
-      int? level}) = _$_Profile;
+      {String? userId,
+      required String userEmail,
+      String? userName,
+      String? profileImg,
+      int? level,
+      required DateTime registerDate}) = _$_Profile;
   _Profile._() : super._();
 
   @override
-  String? get uid => throw _privateConstructorUsedError;
+  String? get userId => throw _privateConstructorUsedError;
   @override
-  String get email => throw _privateConstructorUsedError;
+  String get userEmail => throw _privateConstructorUsedError;
   @override
-  String? get displayName => throw _privateConstructorUsedError;
+  String? get userName => throw _privateConstructorUsedError;
   @override
-  String? get photoURL => throw _privateConstructorUsedError;
-  @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  String? get profileImg => throw _privateConstructorUsedError;
   @override
   int? get level => throw _privateConstructorUsedError;
+  @override
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ProfileCopyWith<_Profile> get copyWith =>
