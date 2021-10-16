@@ -38,7 +38,7 @@ class FindController extends AbsListController
           "must": (searchTerm == null || searchTerm.isEmpty)
               ? {"match_all": {}}
               : {
-                  "prefix": {"title": searchTerm}
+                  "prefix": {"info.contents_title": searchTerm}
                 },
           // "filter": {
           //   "terms": {"contentKind": _contentKind}
@@ -52,44 +52,8 @@ class FindController extends AbsListController
 
     final lists = await listFilter('/clay_contents/_search', bodyJSON);
     return lists.map((jsonList) {
-      return ContentDto.fromJson(jsonList['_source']).toDomain();
+      return ContentsDto.fromJson(jsonList['_source']).toDomain();
     }).toList();
-  }
-
-  // void addFbStore(String query) {
-  //   if (query.isNotEmpty) {
-  //     // final word = FindWord('1', query, DateTime.now());
-  //     final word = FindWord('1', query, '');
-  //     history.add(word);
-  //     update();
-  //   }
-  // }
-  ///--------------------------------------
-  /// 액션 부분
-  ///--------------------------------------
-  ///Post에서 읽어오는 것 임.
-  Future<void> actionfresh(String id) async {
-    // try {
-
-    final _item =
-        await readFb(id: id, instance: _instance, path: 'home/datas/posts');
-
-    if (_item == null) {
-      throw Exception('error');
-    }
-    final _post = ContentDto.fromJson(_item).toDomain();
-    var existIndex = cache.indexWhere(
-      (element) => element.id == id,
-    );
-
-    if (existIndex >= 0) {
-      cache[existIndex] = _post.info;
-    }
-
-    // final info = PostInfo.fromJson((_info.info));
-    this.item = _post;
-    update();
-    return;
   }
 
   @override

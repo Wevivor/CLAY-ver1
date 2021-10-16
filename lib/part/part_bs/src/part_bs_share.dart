@@ -1,10 +1,12 @@
 // ignore: must_be_immutable
 import 'package:clay/c_config/config.dart';
-import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/models/models.dart';
 import 'package:get/get.dart';
+import 'package:share/share.dart' as share;
+import 'package:sprintf/sprintf.dart';
 
 class BottomSheetShare extends StatelessWidget with AppbarHelper {
   final onMenu;
@@ -12,98 +14,137 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
     this.onMenu,
   });
 
+  // await BoardController.to.actionPin(fix: !_fixed!);
+
+  // await BoardListController.to
+  //     .actionUpdateItem(BoardController.to.boardItem);
+  // Get.back();
   @override
   Widget build(BuildContext context) {
-    final node = FocusScope.of(context);
-    return Container(
-      decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          heightSpace(2.0),
-          Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
-          vwBSAppBar(
-            onBack: () {
-              Get.back();
+    return GetBuilder<BoardController>(builder: (controller) {
+      Board? board = controller.boardItem;
+      final _shareCheck = board?.shareCheck;
+      return Container(
+        decoration: new BoxDecoration(
+            color: Colors.white,
+            borderRadius: new BorderRadius.only(
+                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            heightSpace(2.0),
+            Container(
+                alignment: Alignment.bottomCenter,
+                height: 11,
+                child: Image.asset(Const.assets + 'images/rect_40.png')),
+            vwBSAppBar(
+              onBack: () {
+                Get.back();
 
-              //SUBJECT: 바텀시트 색상...
+                //SUBJECT: 바텀시트 색상...
 
-              if (onMenu != null) onMenu();
-              // Future.delayed(
-              //     Duration(milliseconds: 200),
-              //     () =>
-              //         // SystemChrome.setSystemUIOverlayStyle(
-              //         //     SystemUiOverlayStyle.dark));
-              //         SystemChrome.setSystemUIOverlayStyle(
-              //             SystemUiOverlayStyle.light.copyWith(
-              //                 systemNavigationBarColor: Color(0xFFEEEEEE),
-              //                 // systemNavigationBarColor: Colors.transparent,
-              //                 systemNavigationBarIconBrightness:
-              //                     Brightness.dark)));
-            },
-            title: '공유방식 선택',
-            actions: [
-              Container(
-                alignment: Alignment.center,
-                // color: Colors.red,
-                child: InkWell(
-                  onTap: () async {
-                    Get.back();
+                if (onMenu != null) onMenu();
+                Future.delayed(
+                    Duration(milliseconds: 300),
+                    () =>
+                        // SystemChrome.setSystemUIOverlayStyle(
+                        //     SystemUiOverlayStyle.dark));
+                        SystemChrome.setSystemUIOverlayStyle(
+                            SystemUiOverlayStyle.light.copyWith(
+                                systemNavigationBarColor: Color(0xFFEEEEEE),
+                                // systemNavigationBarColor: Colors.transparent,
+                                systemNavigationBarIconBrightness:
+                                    Brightness.dark)));
+              },
+              title: '공유방식 선택',
+              actions: [
+                Container(
+                  alignment: Alignment.center,
+                  // color: Colors.red,
+                  child: InkWell(
+                    onTap: () async {
+                      if (_shareCheck! <= 0) {
+                        AppHelper.showMessage('공유방식을 선택해 주세요');
+                        return;
+                      }
+                      Get.back();
+                      final _boardUrl =
+                          sprintf('%s/%s', [Const.clayBaseUrl, board?.boardId]);
 
-                    await Share.share('https://www.naver.com');
-                    Future.delayed(
-                        Duration(milliseconds: 300),
-                        () =>
-                            // SystemChrome.setSystemUIOverlayStyle(
-                            //     SystemUiOverlayStyle.dark));
-                            SystemChrome.setSystemUIOverlayStyle(
-                                SystemUiOverlayStyle.light.copyWith(
-                                    systemNavigationBarColor: Color(0xFFEEEEEE),
-                                    // systemNavigationBarColor: Colors.transparent,
-                                    systemNavigationBarIconBrightness:
-                                        Brightness.dark)));
-                  },
-                  child: Text(
-                    '공유하기',
-                    style: baseStyle.copyWith(
-                        fontSize: 13,
-                        color: Color(0xff017BFE),
-                        fontWeight: FontWeight.w400),
+                      BoardController.to.actionUpdate();
+
+                      // await share.Share.share('https://www.naver.com');
+                      await share.Share.share(_boardUrl);
+                      Future.delayed(
+                          Duration(milliseconds: 300),
+                          () =>
+                              // SystemChrome.setSystemUIOverlayStyle(
+                              //     SystemUiOverlayStyle.dark));
+                              SystemChrome.setSystemUIOverlayStyle(
+                                  SystemUiOverlayStyle.light.copyWith(
+                                      systemNavigationBarColor:
+                                          Color(0xFFEEEEEE),
+                                      // systemNavigationBarColor: Colors.transparent,
+                                      systemNavigationBarIconBrightness:
+                                          Brightness.dark)));
+                    },
+                    child: Text(
+                      '공유하기',
+                      style: baseStyle.copyWith(
+                          fontSize: 13,
+                          color: Color(0xff017BFE),
+                          fontWeight: FontWeight.w400),
+                    ),
                   ),
                 ),
-              ),
-              widthSpace(18.87),
-            ],
-          ),
-          HanListTile(
-            padding: EdgeInsets.only(left: 47.0),
-            onTap: () {
-              //SUBJECT : 상단 고정
-              //TODO: 데이터베이스고정.
-            },
-            leading: Image.asset(Const.assets + 'icon/radio_off.png'),
-            title: Text('읽기 허용'),
-          ),
-          heightSpace(34.0),
-          HanListTile(
-            padding: EdgeInsets.only(left: 47.0),
-            onTap: () {
-              //SUBJECT : 공유 방법
-              //TODO: 공유....
-            },
-            leading: Image.asset(Const.assets + 'icon/radio_on.png'),
-            title: Text('편집 허용'),
-          ),
-          heightSpace(37.0),
-        ],
-      ),
-    );
+                widthSpace(18.87),
+              ],
+            ),
+            HanListTile(
+              padding: EdgeInsets.only(left: 47.0),
+              onTap: () async {
+                //SUBJECT : 공유 설정
+                //TODO: 데이터베이스고정.
+                // final _newBoard = board?.copyWith(
+                //     shareCheck: 1, info: board!.info.copyWith(shareCheck: 1));
+                // controller.boardItem = _newBoard;
+                // controller.update();
+                controller.actionChangeShare(1);
+
+                await BoardListController.to
+                    .actionUpdateItem(controller.boardItem);
+              },
+              leading: _shareCheck == 1
+                  ? Image.asset(Const.assets + 'icon/radio_on.png')
+                  : Image.asset(Const.assets + 'icon/radio_off.png'),
+              title: Text('읽기 허용'),
+            ),
+            heightSpace(34.0),
+            HanListTile(
+              padding: EdgeInsets.only(left: 47.0),
+              onTap: () async {
+                //SUBJECT : 공유 방법
+                //TODO: 공유....
+
+                // final _newBoard = board?.copyWith(
+                //     shareCheck: 2, info: board!.info.copyWith(shareCheck: 2));
+                // controller.boardItem = _newBoard;
+                // controller.update();
+                controller.actionChangeShare(2);
+
+                await BoardListController.to
+                    .actionUpdateItem(controller.boardItem);
+              },
+              leading: _shareCheck == 2
+                  ? Image.asset(Const.assets + 'icon/radio_on.png')
+                  : Image.asset(Const.assets + 'icon/radio_off.png'),
+              title: Text('편집 허용'),
+            ),
+            heightSpace(37.0),
+          ],
+        ),
+      );
+    });
   }
 
   Widget vwTitle(final title) {

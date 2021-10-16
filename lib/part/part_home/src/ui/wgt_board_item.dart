@@ -106,7 +106,7 @@ class BoardItemWidget extends StatelessWidget {
                   },
                   icon: Icon(Icons.more_vert, color: Colors.white),
                 ),
-                if (category == '')
+                if (category == '선택안함')
                   Container(
                     child: ImageWidget(
                       height: 22,
@@ -114,7 +114,7 @@ class BoardItemWidget extends StatelessWidget {
                       holder: Const.assets + 'icon/no_choice.png',
                     ),
                   ),
-                if (category == '업무')
+                if (category == '일/공부')
                   Container(
                     // color: Colors.red,
                     child: ImageWidget(
@@ -123,7 +123,7 @@ class BoardItemWidget extends StatelessWidget {
                       holder: Const.assets + 'icon/pencil_small.png',
                     ),
                   ),
-                if (category == '계발')
+                if (category == '자기계발')
                   Container(
                     child: ImageWidget(
                       height: 22,
@@ -131,7 +131,7 @@ class BoardItemWidget extends StatelessWidget {
                       holder: Const.assets + 'icon/medal_small.png',
                     ),
                   ),
-                if (category == '좋아')
+                if (category == 'LIKE')
                   Container(
                     child: ImageWidget(
                       height: 22,

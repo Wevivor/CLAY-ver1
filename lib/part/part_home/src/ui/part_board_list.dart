@@ -31,8 +31,6 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             child: GetBuilder<BoardListController>(builder: (controller) {
               final cache = controller.cache;
               final loading = controller.loading;
-              print(
-                  ' ==========> MyBoardListController Exist ${cache.toString()}');
 
               return Container(
                 // padding: const EdgeInsets.only(left: 2.0, right: 2.0),
@@ -53,20 +51,20 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                       children: [
                         BoardItemWidget(
                           onTap: () {
-                            Get.to(() => BoardContentUI(board: '1'));
+                            Get.to(() => BoardContentUI(board: item.boardId));
                           },
                           boardColor:
                               Color(int.parse(item.info.boardColor, radix: 16)),
                           title: item.info.boardName,
                           cnt: item.info.contentsCount,
                           cntShare: 0,
-                          category: item.info.contentsCount,
                           isFix: item.info.isFixed,
+                          category: item.info.boardBadge,
                           onMore: () {
                             Get.put(BoardController());
                             BoardController.to.boardItem = item;
                             // Future.microtask()
-                            _showBS(context, vwBoardMenu(context, item));
+                            _showBS(context, vwBoardMenu(context));
                             AppHelper.showMessage('모어');
                           },
                         ),
@@ -85,7 +83,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
     );
   }
 
-  Widget vwBoardMenu(BuildContext context, info) {
+  Widget vwBoardMenu(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -126,7 +124,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             //TODO: 패딩조정.
             Get.back();
             _showBS(context, BottomSheetShare(onMenu: () {
-              _showBS(context, vwBoardMenu(context, info));
+              _showBS(context, vwBoardMenu(context));
             }));
           },
           leading: Image.asset(Const.assets + 'icon/icon_share.png'),
@@ -139,10 +137,14 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
           ),
           onTap: () {
             //SUBJECT : BS: 보드 체인지
-            //TODO: 공유....
+            //TODO: 보드 정보
             Get.back();
+            BoardInfo? infoDto = BoardController.to.boardItem?.info;
+            BoardController.to.boardNameController.text =
+                infoDto?.boardName ?? '';
+
             _showBS(context, BottomSheetBoardInfo(onMenu: () {
-              _showBS(context, vwBoardMenu(context, info));
+              _showBS(context, vwBoardMenu(context));
             }));
           },
           leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
@@ -176,8 +178,10 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             //SUBJECT: 보드 삭제
             //TODO: 다이어로르 처리, boardList 를 refresh
             if (_responce) {
-              await BoardController.to.actionDelete(info.id);
-              BoardListController.to.actionDeleteItem(info.id);
+              Board? _info = BoardController.to.boardItem;
+
+              await BoardController.to.actionDelete(_info?.boardId);
+              BoardListController.to.actionDeleteItem(_info?.boardId);
             }
           },
           leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),

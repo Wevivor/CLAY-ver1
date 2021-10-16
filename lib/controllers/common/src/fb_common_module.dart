@@ -109,6 +109,21 @@ class FbCommonModule {
     }
   }
 
+  Future<void> setFb(
+      {required FirebaseFirestore instance,
+      required String path,
+      required String id,
+      dynamic dto}) async {
+    try {
+      await instance.collection('$path').doc(id).set(
+            dto,
+          );
+    } catch (e) {
+      print('===>' + e.toString());
+      throw e;
+    }
+  }
+
   Future<void> updateInfoFb(
       {required FirebaseFirestore instance,
       required String path,

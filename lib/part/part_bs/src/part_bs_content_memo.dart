@@ -2,15 +2,18 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
-import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/models/models.dart';
 import 'package:get/get.dart';
 
+import 'part_board_select.dart';
 import 'wgt_bs_board_item.dart';
 
-class BottomSheetMemo extends StatelessWidget with AppbarHelper {
+class BottomSheetContentMemo extends StatelessWidget
+    with AppbarHelper, BSValidator {
   final onMenu;
-  BottomSheetMemo({
+  BottomSheetContentMemo({
     this.onMenu,
   });
 
@@ -41,8 +44,60 @@ class BottomSheetMemo extends StatelessWidget with AppbarHelper {
                 alignment: Alignment.center,
                 // color: Colors.red,
                 child: InkWell(
-                  onTap: () {
+                  onTap: () async {
+                    final _memo = ContentsController.to.memoController.text;
+
+                    if (memo(_memo) != null || _memo.isEmpty) {
+                      AppHelper.showMessage(messages['memo'] ?? '');
+                      return;
+                    }
+                    final _title = ContentsController.to.titleController.text;
+
+                    if (title(_title) != null || _title.isEmpty) {
+                      AppHelper.showMessage(messages['title'] ?? '');
+                      return;
+                    }
+
+                    if (BoardListMySelectController.to.selected < 0) {
+                      AppHelper.showMessage(messages['board_select'] ?? '');
+                      return;
+                    }
+
+                    //SUBJECT: 컨텐츠
+                    //TODO: 링크로 추가하기
+                    final _boardInfo = BoardListMySelectController.to.boardInfo;
+
+                    final _controller = Get.put(ContentsController());
+                    final _profile = HanUserInfoController.to.toProfile();
+                    final _info = ContentsInfoDto(
+                      //  contentsId: contentsId,
+                      contentsTitle: _title,
+                      contentsUrl: '',
+                      contentsImages: '',
+                      contentsDescription: _memo,
+                      contentsComment: '',
+                      thumbnails: null,
+                      contentsUniqueLink: '',
+                      ContentsCreateDate: DateTime.now(),
+                      ContentsUpdateDate: DateTime.now(),
+                    );
+
+                    //SUBJECT comment 타입 변경 필요
+                    //TODO: comment 타입 변경
+                    final _item = ContentsDto(
+                      boardInfo: _boardInfo?.toDto(),
+                      userInfo: _profile.toDto(),
+                      info: _info,
+                      contentsAllviewCount: 0,
+                      contentsMyviewCount: 0,
+                      contentsAlarmCheck: 0,
+                      shareInfo: null,
+                      contentsComment: null,
+                      ContentsCreateDate: DateTime.now(),
+                      ContentsUpdateDate: DateTime.now(),
+                    );
                     Get.back();
+                    await _controller.actionIns(_item);
                   },
                   child: Text(
                     '완료',
@@ -75,16 +130,19 @@ class BottomSheetMemo extends StatelessWidget with AppbarHelper {
                       0xFFCACACA,
                     )),
                 isDense: true,
+                errorText: null,
+                errorStyle: TextStyle(
+                  color: Colors.transparent,
+                  fontSize: 0,
+                  height: 0,
+                ),
               ),
               keyboardType: TextInputType.multiline,
               textInputAction: TextInputAction.newline,
               onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
+              controller: ContentsController.to.memoController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
+                return memo(value);
               },
             ),
           ),
@@ -105,8 +163,6 @@ class BottomSheetMemo extends StatelessWidget with AppbarHelper {
               child: TextFormField(
                 maxLines: 1,
                 onTap: () {},
-
-                // style: accountEditTextStyle,
                 decoration: kInputDecoration.copyWith(
                   fillColor: Color(0xFFF6F6F6),
                   hintText: '| 콘텐츠의 제목을 입력해 주세요.',
@@ -117,52 +173,27 @@ class BottomSheetMemo extends StatelessWidget with AppbarHelper {
                         0xFFCACACA,
                       )),
                   isDense: true,
+                  errorText: null,
+                  errorStyle: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 0,
+                    height: 0,
+                  ),
                 ),
                 keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.newline,
+                textInputAction: TextInputAction.done,
                 onEditingComplete: () => node.unfocus(),
-                // controller: CertificateEditController.to.buyController,
+                controller: ContentsController.to.titleController,
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return '체결 금액을 입력해 주세요';
-                  }
-                  return null;
+                  return title(value);
                 },
-                // inputFormatters: <TextInputFormatter>[
-                //   NumericTextFormatter(),
-                //   LengthLimitingTextInputFormatter(13),
-                // ],
               ),
             ),
           ),
           heightSpace(16.0),
           vwTitle('저장할 보드 선택하기'),
           heightSpace(10.0),
-          Container(
-            height: 62 + 16,
-            padding: EdgeInsets.only(left: 19),
-            child: HanListView(
-              isSliver: false,
-              direction: Axis.horizontal,
-              controller: BoardListController.to,
-              itemBuilder: (context, idx) {
-                final cache = BoardListController.to.cache;
-
-                return Row(
-                  children: [
-                    Container(
-                      // height: 62 + 20 + 10,
-                      child: BSBoardItemWidget(
-                        title: '새로운 보드',
-                        category: '새보드',
-                      ),
-                    ),
-                    widthSpace(24.0),
-                  ],
-                );
-              },
-            ),
-          ),
+          BoardSelectPART(onTap: () {}),
           heightSpace(16.0),
         ],
       ),

@@ -2,14 +2,19 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
+import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:get/get.dart';
 
+import 'part_board_class_select.dart';
+import 'wgt_bs_badge_item.dart';
 import 'wgt_choice_color.dart';
 
-class BottomSheetBoardInfo extends StatelessWidget with AppbarHelper {
+class BottomSheetBoardInfo extends StatelessWidget
+    with AppbarHelper, BSValidator {
   final onMenu;
+  final _formKey = GlobalKey<FormState>();
   BottomSheetBoardInfo({
     this.onMenu,
   });
@@ -36,7 +41,56 @@ class BottomSheetBoardInfo extends StatelessWidget with AppbarHelper {
               alignment: Alignment.center,
               // color: Colors.red,
               child: InkWell(
-                onTap: () {
+                onTap: () async {
+                  FocusScope.of(context).unfocus();
+
+                  if (_formKey.currentState == null ||
+                      _formKey.currentState?.validate() == false) {
+                    AppHelper.showMessage(messages['board_name'] ?? '');
+                    return;
+                  }
+
+                  final _controller = BoardController.to;
+                  _controller
+                      .actionChangeName(_controller.boardNameController.text);
+                  final exist = ['자기계발', '일/공부', 'LIKE', '선택안함'].firstWhere(
+                      (element) =>
+                          element == _controller.boardItem?.info.boardBadge,
+                      orElse: () {
+                    return '';
+                  });
+                  if (exist == '') {
+                    AppHelper.showMessage('배치를 선택해 주세요');
+                    return;
+                  }
+
+                  final _color = [
+                    'FFfc5e20',
+                    'FFffc700',
+                    'FF159b4d',
+                    'FF1b9dfc',
+                    'FF9a71bb',
+                    'FF9a71bb',
+                    'FFff78d9',
+                    'FFcaf2ff',
+                    'FF9dffd0',
+                    'FFc1a27c',
+                    'FFfff1a7',
+                    'FFfff1a7'
+                  ].firstWhere(
+                      (element) =>
+                          element == _controller.boardItem?.info.boardColor,
+                      orElse: () {
+                    return '';
+                  });
+                  if (_color == '') {
+                    AppHelper.showMessage('색상을 선택해 주세요');
+                    return;
+                  }
+
+                  await _controller.actionUpdate();
+                  await BoardListController.to
+                      .actionUpdateItem(BoardController.to.boardItem);
                   Get.back();
                 },
                 child: Text(
@@ -59,45 +113,48 @@ class BottomSheetBoardInfo extends StatelessWidget with AppbarHelper {
         heightSpace(10.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Container(
-            height: 38,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
-            child: TextFormField(
-              maxLines: 1,
-              onTap: () {},
-
-              // style: accountEditTextStyle,
-              decoration: kInputDecoration.copyWith(
-                fillColor: Color(0xFFF6F6F6),
-                hintText: '홈베이킹 레시피|',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
-                isDense: true,
+          child: Form(
+            key: _formKey,
+            child: Container(
+              height: 38,
+              decoration: DecoHelper.roundDeco.copyWith(
+                color: Color(0xFFF6F6F6),
               ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
-              onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
-              },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
+              padding: const EdgeInsets.only(
+                left: 12.0,
+                right: 16.0,
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                onTap: () {},
+
+                // style: accountEditTextStyle,
+                decoration: kInputDecoration.copyWith(
+                  fillColor: Color(0xFFF6F6F6),
+                  //  contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                  hintText: '홈베이킹 레시피|',
+                  hintStyle: baseStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Color(
+                        0xFFCACACA,
+                      )),
+                  isDense: true,
+                  errorText: null,
+                  errorStyle: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 0,
+                    height: 0,
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () => node.unfocus(),
+                controller: BoardController.to.boardNameController,
+                validator: (value) {
+                  return boardName(value);
+                },
+              ),
             ),
           ),
         ),
@@ -107,47 +164,11 @@ class BottomSheetBoardInfo extends StatelessWidget with AppbarHelper {
           child: vwTitle('배치 선택'),
         ),
         heightSpace(10.0),
-
-        Container(
-          height: 64,
-          padding: EdgeInsets.only(left: 19),
-          child: HanListView(
-            isSliver: false,
-            direction: Axis.horizontal,
-            controller: BoardListController.to,
-            itemBuilder: (context, idx) {
-              final cache = BoardListController.to.cache;
-              return Container(
-                height: 54,
-                padding: EdgeInsets.symmetric(vertical: 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    ImageWidget(
-                      holder: Const.assets + 'icon/hart.png',
-                      height: 28,
-                      width: 28,
-                      onTap: () {
-                        Get.toNamed('/collect_detail?index=$idx');
-                      },
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text(
-                        'test',
-                        textAlign: TextAlign.center,
-                        style: baseStyle.copyWith(
-                            fontSize: 12,
-                            color: Color(0xFF3A3A3A),
-                            fontWeight: FontWeight.normal),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: BoardClassSelectPART(onTap: () {}),
         ),
+
         heightSpace(16.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
@@ -160,63 +181,116 @@ class BottomSheetBoardInfo extends StatelessWidget with AppbarHelper {
           child: Column(
             children: [
               Divider(height: 1),
-              Container(
-                padding:
-                    EdgeInsets.only(left: 0, right: 0, top: 19, bottom: 15),
-                alignment: Alignment.center,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFfc5e20),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFffc700),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFF159b4d),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFF1b9dfc),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFF9a71bb),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFF9a71bb),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      // crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFff78d9),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFcaf2ff),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFF9dffd0),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFc1a27c),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFfff1a7),
-                        ),
-                        BSChoiceColorWidget(
-                          boardColor: Color(0xFFfff1a7),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+              GetBuilder<BoardController>(builder: (controller) {
+                final _selectColor = Color(int.parse(
+                    controller.boardItem!.info.boardColor,
+                    radix: 16));
+                return Container(
+                  padding:
+                      EdgeInsets.only(left: 0, right: 0, top: 19, bottom: 15),
+                  alignment: Alignment.center,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFfc5e20');
+                            },
+                            boardColor: Color(0xFFfc5e20),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFffc700');
+                            },
+                            boardColor: Color(0xFFffc700),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FF159b4d');
+                            },
+                            boardColor: Color(0xFF159b4d),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FF1b9dfc');
+                            },
+                            boardColor: Color(0xFF1b9dfc),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FF9a71bb');
+                            },
+                            boardColor: Color(0xFF9a71bb),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FF9a71bb');
+                            },
+                            boardColor: Color(0xFF9a71bb),
+                            selectColor: _selectColor,
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFff78d9');
+                            },
+                            boardColor: Color(0xFFff78d9),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFcaf2ff');
+                            },
+                            boardColor: Color(0xFFcaf2ff),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FF9dffd0');
+                            },
+                            boardColor: Color(0xFF9dffd0),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFc1a27c');
+                            },
+                            boardColor: Color(0xFFc1a27c),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFfff1a7');
+                            },
+                            boardColor: Color(0xFFfff1a7),
+                            selectColor: _selectColor,
+                          ),
+                          BSChoiceColorWidget(
+                            onTap: () async {
+                              controller.actionChangeColor('FFfff1a7');
+                            },
+                            boardColor: Color(0xFFfff1a7),
+                            selectColor: _selectColor,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              }),
             ],
           ),
         ),
@@ -225,13 +299,30 @@ class BottomSheetBoardInfo extends StatelessWidget with AppbarHelper {
         //SUBJECT: 스위치 버턴.
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Row(
-            children: [
-              vwTitle('공유하기'),
-              Flexible(child: Container()),
-              Switch(value: false, onChanged: (value) {}),
-            ],
-          ),
+          child: GetBuilder<BoardController>(builder: (controller) {
+            var _value = false;
+            if (controller.boardItem?.shareCheck == 1 ||
+                controller.boardItem?.shareCheck == 2) _value = true;
+            return HanListTile(
+              onTap: () {
+                if (controller.boardItem?.shareCheck == 1 ||
+                    controller.boardItem?.shareCheck == 2)
+                  controller.actionChangeShare(0);
+                else
+                  controller.actionChangeShare(1);
+              },
+              padding: EdgeInsets.zero,
+              leading: vwTitle('공유하기'),
+              trailing: Switch(
+                  value: _value,
+                  onChanged: (value) {
+                    if (value)
+                      controller.actionChangeShare(1);
+                    else
+                      controller.actionChangeShare(0);
+                  }),
+            );
+          }),
         ),
         heightSpace(16.0),
       ],

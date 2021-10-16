@@ -1,4 +1,5 @@
 export 'src/validator.dart';
+export 'src/bs_validator.dart';
 export 'src/exception_messages.dart';
 export 'src/errors_message.dart';
 export 'src/number_text_formatter.dart';

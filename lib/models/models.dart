@@ -1,5 +1,4 @@
-export 'content/contents.dart';
-export 'content/content_dtos.dart';
+
 export 'model_app/push/push.dart';
 export 'model_app/push/push_dto.dart';
 export 'model_app/search/find_word.dart';
@@ -12,3 +11,5 @@ export 'model_app/users/users_dtos.dart';
 
 export 'boards/board_dtos.dart';
 export 'boards/boards.dart';
+export 'content/contents.dart';
+export 'content/content_dtos.dart';

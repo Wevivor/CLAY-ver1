@@ -2,19 +2,22 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
+import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:clay/models/models.dart';
 import 'package:get/get.dart';
 
+import 'part_board_class_select.dart';
 import 'wgt_bs_board_item.dart';
 
-class BottomSheetNewBoard extends StatelessWidget with AppbarHelper {
+class BottomSheetNewBoard extends StatelessWidget
+    with AppbarHelper, BSValidator {
   final onMenu;
   BottomSheetNewBoard({
     this.onMenu,
   });
-
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -38,26 +41,27 @@ class BottomSheetNewBoard extends StatelessWidget with AppbarHelper {
               // color: Colors.red,
               child: InkWell(
                 onTap: () async {
-                  final _controller = Get.put(BoardController());
-                  final _profile = HanUserInfoController.to.toProfile();
-                  final _info = BoardInfoDto(
-                    boardName: 'Testing',
-                    boardColor: 'FF000000',
-                    boardBadge: '좋아',
-                    contentsCount: 0,
-                    shareCheck: false,
-                    isFixed: false,
-                    shareCount: 0,
-                    registerDate: DateTime.now(),
-                  );
-                  final _item = BoardDto(
-                    boardCreator: _profile.toDto(),
-                    info: _info,
-                    shareCheck: false,
-                    registerDate: DateTime.now(),
-                  );
+                  FocusScope.of(context).unfocus();
+                  if (_formKey.currentState == null ||
+                      _formKey.currentState?.validate() == false) {
+                    AppHelper.showMessage(messages['board_name'] ?? '');
+                    return;
+                  }
+                  final _controller = BoardController.to;
+                  _controller
+                      .actionChangeName(_controller.boardNameController.text);
+                  final exist = ['자기계발', '일/공부', 'LIKE', '선택안함'].firstWhere(
+                      (element) =>
+                          element == _controller.boardItem?.info.boardBadge,
+                      orElse: () {
+                    return '';
+                  });
+                  if (exist == '') {
+                    AppHelper.showMessage('배치를 선택해 주세요');
+                    return;
+                  }
 
-                  await _controller.actionIns(_item);
+                  await _controller.actionIns(_controller.boardItem!.toDto());
 
                   Get.back();
                 },
@@ -81,45 +85,47 @@ class BottomSheetNewBoard extends StatelessWidget with AppbarHelper {
         heightSpace(10.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Container(
-            height: 38,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
-            child: TextFormField(
-              maxLines: 1,
-              onTap: () {},
-
-              // style: accountEditTextStyle,
-              decoration: kInputDecoration.copyWith(
-                fillColor: Color(0xFFF6F6F6),
-                hintText: '|“DIY”, “레시피”와 같은 제목을 추가하세요.',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
-                isDense: true,
+          child: Form(
+            key: _formKey,
+            child: Container(
+              height: 38,
+              decoration: DecoHelper.roundDeco.copyWith(
+                color: Color(0xFFF6F6F6),
               ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
-              onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
-              },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
+              padding: const EdgeInsets.only(
+                left: 12.0,
+                right: 16.0,
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                onTap: () {},
+
+                // style: accountEditTextStyle,
+                decoration: kInputDecoration.copyWith(
+                  fillColor: Color(0xFFF6F6F6),
+                  hintText: '|“DIY”, “레시피”와 같은 제목을 추가하세요.',
+                  hintStyle: baseStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Color(
+                        0xFFCACACA,
+                      )),
+                  isDense: true,
+                  errorText: null,
+                  errorStyle: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 0,
+                    height: 0,
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () => node.unfocus(),
+                controller: BoardController.to.boardNameController,
+                validator: (value) {
+                  return boardName(value);
+                },
+              ),
             ),
           ),
         ),
@@ -129,30 +135,9 @@ class BottomSheetNewBoard extends StatelessWidget with AppbarHelper {
           child: vwTitle('보드에 배치 달기'),
         ),
         heightSpace(10.0),
-        Container(
-          height: 62 + 16,
-          padding: EdgeInsets.only(left: 19),
-          child: HanListView(
-            isSliver: false,
-            direction: Axis.horizontal,
-            controller: BoardListController.to,
-            itemBuilder: (context, idx) {
-              final cache = BoardListController.to.cache;
-
-              return Row(
-                children: [
-                  Container(
-                    // height: 62 + 20 + 10,
-                    child: BSBoardItemWidget(
-                      title: '새로운 보드',
-                      category: '새보드',
-                    ),
-                  ),
-                  widthSpace(24.0),
-                ],
-              );
-            },
-          ),
+        Padding(
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: BoardClassSelectPART(onTap: () {}),
         ),
         heightSpace(16.0),
       ],

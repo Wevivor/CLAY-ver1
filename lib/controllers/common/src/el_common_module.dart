@@ -32,8 +32,7 @@ class ElCommonModule {
   }
 
   Future<List<dynamic>> listFilter(final query, final body) async {
-    print('-------> ${Uri.parse(Const.elasticEndPoint + query)}');
-    print('-------> ${jsonEncode(body)}');
+    print('--------listFilter---------');
     try {
       Dio dio = new Dio();
 

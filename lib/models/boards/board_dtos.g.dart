@@ -14,7 +14,7 @@ _$_BoardDto _$$_BoardDtoFromJson(Map<String, dynamic> json) => _$_BoardDto(
       shareInfo: json['share'] == null
           ? null
           : ShareDto.fromJson(json['share'] as Map<String, dynamic>),
-      shareCheck: json['share_check'] as bool,
+      shareCheck: json['share_check'] as int,
       boardComment: json['board_comment'] as List<dynamic>?,
       registerDate: Fbconverter.fromJson(json['register_date']),
     );
@@ -39,7 +39,7 @@ _$_BoardInfoDto _$$_BoardInfoDtoFromJson(Map<String, dynamic> json) =>
       boardBadge: json['board_badge'] as String,
       boardUnquieLink: json['board_unique_link'] as String?,
       contentsCount: json['contents_count'] as int,
-      shareCheck: json['share_check'] as bool,
+      shareCheck: json['share_check'] as int,
       shareCount: json['share_count'] as int?,
       registerDate: Fbconverter.fromJson(json['register_date']),
     );

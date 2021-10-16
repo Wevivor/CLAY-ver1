@@ -14,498 +14,654 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$ContentTearOff {
-  const _$ContentTearOff();
+class _$ContentsTearOff {
+  const _$ContentsTearOff();
 
-  _Content call(
-      {String? id,
-      required ContentInfo info,
-      required Profile profile,
-      required DateTime dtCreated,
-      required DateTime dtUpdated,
-      String? kind}) {
-    return _Content(
-      id: id,
+  _Contents call(
+      {String? contentsId,
+      required ContentsInfo info,
+      required Profile userInfo,
+      required int contentsAllviewCount,
+      required int contentsMyviewCount,
+      required int contentsAlarmCheck,
+      BoardInfo? boardInfo,
+      ShareDto? shareInfo,
+      List<dynamic>? contentsComment,
+      required DateTime ContentsCreateDate,
+      required DateTime ContentsUpdateDate}) {
+    return _Contents(
+      contentsId: contentsId,
       info: info,
-      profile: profile,
-      dtCreated: dtCreated,
-      dtUpdated: dtUpdated,
-      kind: kind,
+      userInfo: userInfo,
+      contentsAllviewCount: contentsAllviewCount,
+      contentsMyviewCount: contentsMyviewCount,
+      contentsAlarmCheck: contentsAlarmCheck,
+      boardInfo: boardInfo,
+      shareInfo: shareInfo,
+      contentsComment: contentsComment,
+      ContentsCreateDate: ContentsCreateDate,
+      ContentsUpdateDate: ContentsUpdateDate,
     );
   }
 }
 
 /// @nodoc
-const $Content = _$ContentTearOff();
+const $Contents = _$ContentsTearOff();
 
 /// @nodoc
-mixin _$Content {
-  String? get id => throw _privateConstructorUsedError;
-  ContentInfo get info => throw _privateConstructorUsedError;
-  Profile get profile => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
-  DateTime get dtUpdated => throw _privateConstructorUsedError;
-  String? get kind => throw _privateConstructorUsedError;
+mixin _$Contents {
+  String? get contentsId => throw _privateConstructorUsedError;
+  ContentsInfo get info => throw _privateConstructorUsedError;
+  Profile get userInfo => throw _privateConstructorUsedError;
+  int get contentsAllviewCount => throw _privateConstructorUsedError;
+  int get contentsMyviewCount => throw _privateConstructorUsedError;
+  int get contentsAlarmCheck => throw _privateConstructorUsedError;
+  BoardInfo? get boardInfo => throw _privateConstructorUsedError;
+  ShareDto? get shareInfo => throw _privateConstructorUsedError;
+  List<dynamic>? get contentsComment => throw _privateConstructorUsedError;
+  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ContentCopyWith<Content> get copyWith => throw _privateConstructorUsedError;
+  $ContentsCopyWith<Contents> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ContentCopyWith<$Res> {
-  factory $ContentCopyWith(Content value, $Res Function(Content) then) =
-      _$ContentCopyWithImpl<$Res>;
+abstract class $ContentsCopyWith<$Res> {
+  factory $ContentsCopyWith(Contents value, $Res Function(Contents) then) =
+      _$ContentsCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
-      ContentInfo info,
-      Profile profile,
-      DateTime dtCreated,
-      DateTime dtUpdated,
-      String? kind});
+      {String? contentsId,
+      ContentsInfo info,
+      Profile userInfo,
+      int contentsAllviewCount,
+      int contentsMyviewCount,
+      int contentsAlarmCheck,
+      BoardInfo? boardInfo,
+      ShareDto? shareInfo,
+      List<dynamic>? contentsComment,
+      DateTime ContentsCreateDate,
+      DateTime ContentsUpdateDate});
 
-  $ContentInfoCopyWith<$Res> get info;
-  $ProfileCopyWith<$Res> get profile;
+  $ContentsInfoCopyWith<$Res> get info;
+  $ProfileCopyWith<$Res> get userInfo;
+  $BoardInfoCopyWith<$Res>? get boardInfo;
+  $ShareDtoCopyWith<$Res>? get shareInfo;
 }
 
 /// @nodoc
-class _$ContentCopyWithImpl<$Res> implements $ContentCopyWith<$Res> {
-  _$ContentCopyWithImpl(this._value, this._then);
+class _$ContentsCopyWithImpl<$Res> implements $ContentsCopyWith<$Res> {
+  _$ContentsCopyWithImpl(this._value, this._then);
 
-  final Content _value;
+  final Contents _value;
   // ignore: unused_field
-  final $Res Function(Content) _then;
+  final $Res Function(Contents) _then;
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? contentsId = freezed,
     Object? info = freezed,
-    Object? profile = freezed,
-    Object? dtCreated = freezed,
-    Object? dtUpdated = freezed,
-    Object? kind = freezed,
+    Object? userInfo = freezed,
+    Object? contentsAllviewCount = freezed,
+    Object? contentsMyviewCount = freezed,
+    Object? contentsAlarmCheck = freezed,
+    Object? boardInfo = freezed,
+    Object? shareInfo = freezed,
+    Object? contentsComment = freezed,
+    Object? ContentsCreateDate = freezed,
+    Object? ContentsUpdateDate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
       info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
-              as ContentInfo,
-      profile: profile == freezed
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
+              as ContentsInfo,
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
               as Profile,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      contentsAllviewCount: contentsAllviewCount == freezed
+          ? _value.contentsAllviewCount
+          : contentsAllviewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentsMyviewCount: contentsMyviewCount == freezed
+          ? _value.contentsMyviewCount
+          : contentsMyviewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentsAlarmCheck: contentsAlarmCheck == freezed
+          ? _value.contentsAlarmCheck
+          : contentsAlarmCheck // ignore: cast_nullable_to_non_nullable
+              as int,
+      boardInfo: boardInfo == freezed
+          ? _value.boardInfo
+          : boardInfo // ignore: cast_nullable_to_non_nullable
+              as BoardInfo?,
+      shareInfo: shareInfo == freezed
+          ? _value.shareInfo
+          : shareInfo // ignore: cast_nullable_to_non_nullable
+              as ShareDto?,
+      contentsComment: contentsComment == freezed
+          ? _value.contentsComment
+          : contentsComment // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      ContentsCreateDate: ContentsCreateDate == freezed
+          ? _value.ContentsCreateDate
+          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dtUpdated: dtUpdated == freezed
-          ? _value.dtUpdated
-          : dtUpdated // ignore: cast_nullable_to_non_nullable
+      ContentsUpdateDate: ContentsUpdateDate == freezed
+          ? _value.ContentsUpdateDate
+          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      kind: kind == freezed
-          ? _value.kind
-          : kind // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 
   @override
-  $ContentInfoCopyWith<$Res> get info {
-    return $ContentInfoCopyWith<$Res>(_value.info, (value) {
+  $ContentsInfoCopyWith<$Res> get info {
+    return $ContentsInfoCopyWith<$Res>(_value.info, (value) {
       return _then(_value.copyWith(info: value));
     });
   }
 
   @override
-  $ProfileCopyWith<$Res> get profile {
-    return $ProfileCopyWith<$Res>(_value.profile, (value) {
-      return _then(_value.copyWith(profile: value));
+  $ProfileCopyWith<$Res> get userInfo {
+    return $ProfileCopyWith<$Res>(_value.userInfo, (value) {
+      return _then(_value.copyWith(userInfo: value));
+    });
+  }
+
+  @override
+  $BoardInfoCopyWith<$Res>? get boardInfo {
+    if (_value.boardInfo == null) {
+      return null;
+    }
+
+    return $BoardInfoCopyWith<$Res>(_value.boardInfo!, (value) {
+      return _then(_value.copyWith(boardInfo: value));
+    });
+  }
+
+  @override
+  $ShareDtoCopyWith<$Res>? get shareInfo {
+    if (_value.shareInfo == null) {
+      return null;
+    }
+
+    return $ShareDtoCopyWith<$Res>(_value.shareInfo!, (value) {
+      return _then(_value.copyWith(shareInfo: value));
     });
   }
 }
 
 /// @nodoc
-abstract class _$ContentCopyWith<$Res> implements $ContentCopyWith<$Res> {
-  factory _$ContentCopyWith(_Content value, $Res Function(_Content) then) =
-      __$ContentCopyWithImpl<$Res>;
+abstract class _$ContentsCopyWith<$Res> implements $ContentsCopyWith<$Res> {
+  factory _$ContentsCopyWith(_Contents value, $Res Function(_Contents) then) =
+      __$ContentsCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
-      ContentInfo info,
-      Profile profile,
-      DateTime dtCreated,
-      DateTime dtUpdated,
-      String? kind});
+      {String? contentsId,
+      ContentsInfo info,
+      Profile userInfo,
+      int contentsAllviewCount,
+      int contentsMyviewCount,
+      int contentsAlarmCheck,
+      BoardInfo? boardInfo,
+      ShareDto? shareInfo,
+      List<dynamic>? contentsComment,
+      DateTime ContentsCreateDate,
+      DateTime ContentsUpdateDate});
 
   @override
-  $ContentInfoCopyWith<$Res> get info;
+  $ContentsInfoCopyWith<$Res> get info;
   @override
-  $ProfileCopyWith<$Res> get profile;
+  $ProfileCopyWith<$Res> get userInfo;
+  @override
+  $BoardInfoCopyWith<$Res>? get boardInfo;
+  @override
+  $ShareDtoCopyWith<$Res>? get shareInfo;
 }
 
 /// @nodoc
-class __$ContentCopyWithImpl<$Res> extends _$ContentCopyWithImpl<$Res>
-    implements _$ContentCopyWith<$Res> {
-  __$ContentCopyWithImpl(_Content _value, $Res Function(_Content) _then)
-      : super(_value, (v) => _then(v as _Content));
+class __$ContentsCopyWithImpl<$Res> extends _$ContentsCopyWithImpl<$Res>
+    implements _$ContentsCopyWith<$Res> {
+  __$ContentsCopyWithImpl(_Contents _value, $Res Function(_Contents) _then)
+      : super(_value, (v) => _then(v as _Contents));
 
   @override
-  _Content get _value => super._value as _Content;
+  _Contents get _value => super._value as _Contents;
 
   @override
   $Res call({
-    Object? id = freezed,
+    Object? contentsId = freezed,
     Object? info = freezed,
-    Object? profile = freezed,
-    Object? dtCreated = freezed,
-    Object? dtUpdated = freezed,
-    Object? kind = freezed,
+    Object? userInfo = freezed,
+    Object? contentsAllviewCount = freezed,
+    Object? contentsMyviewCount = freezed,
+    Object? contentsAlarmCheck = freezed,
+    Object? boardInfo = freezed,
+    Object? shareInfo = freezed,
+    Object? contentsComment = freezed,
+    Object? ContentsCreateDate = freezed,
+    Object? ContentsUpdateDate = freezed,
   }) {
-    return _then(_Content(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+    return _then(_Contents(
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
       info: info == freezed
           ? _value.info
           : info // ignore: cast_nullable_to_non_nullable
-              as ContentInfo,
-      profile: profile == freezed
-          ? _value.profile
-          : profile // ignore: cast_nullable_to_non_nullable
+              as ContentsInfo,
+      userInfo: userInfo == freezed
+          ? _value.userInfo
+          : userInfo // ignore: cast_nullable_to_non_nullable
               as Profile,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      contentsAllviewCount: contentsAllviewCount == freezed
+          ? _value.contentsAllviewCount
+          : contentsAllviewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentsMyviewCount: contentsMyviewCount == freezed
+          ? _value.contentsMyviewCount
+          : contentsMyviewCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      contentsAlarmCheck: contentsAlarmCheck == freezed
+          ? _value.contentsAlarmCheck
+          : contentsAlarmCheck // ignore: cast_nullable_to_non_nullable
+              as int,
+      boardInfo: boardInfo == freezed
+          ? _value.boardInfo
+          : boardInfo // ignore: cast_nullable_to_non_nullable
+              as BoardInfo?,
+      shareInfo: shareInfo == freezed
+          ? _value.shareInfo
+          : shareInfo // ignore: cast_nullable_to_non_nullable
+              as ShareDto?,
+      contentsComment: contentsComment == freezed
+          ? _value.contentsComment
+          : contentsComment // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>?,
+      ContentsCreateDate: ContentsCreateDate == freezed
+          ? _value.ContentsCreateDate
+          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dtUpdated: dtUpdated == freezed
-          ? _value.dtUpdated
-          : dtUpdated // ignore: cast_nullable_to_non_nullable
+      ContentsUpdateDate: ContentsUpdateDate == freezed
+          ? _value.ContentsUpdateDate
+          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      kind: kind == freezed
-          ? _value.kind
-          : kind // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
 
 /// @nodoc
 
-class _$_Content extends _Content {
-  _$_Content(
-      {this.id,
+class _$_Contents extends _Contents {
+  _$_Contents(
+      {this.contentsId,
       required this.info,
-      required this.profile,
-      required this.dtCreated,
-      required this.dtUpdated,
-      this.kind})
+      required this.userInfo,
+      required this.contentsAllviewCount,
+      required this.contentsMyviewCount,
+      required this.contentsAlarmCheck,
+      this.boardInfo,
+      this.shareInfo,
+      this.contentsComment,
+      required this.ContentsCreateDate,
+      required this.ContentsUpdateDate})
       : super._();
 
   @override
-  final String? id;
+  final String? contentsId;
   @override
-  final ContentInfo info;
+  final ContentsInfo info;
   @override
-  final Profile profile;
+  final Profile userInfo;
   @override
-  final DateTime dtCreated;
+  final int contentsAllviewCount;
   @override
-  final DateTime dtUpdated;
+  final int contentsMyviewCount;
   @override
-  final String? kind;
+  final int contentsAlarmCheck;
+  @override
+  final BoardInfo? boardInfo;
+  @override
+  final ShareDto? shareInfo;
+  @override
+  final List<dynamic>? contentsComment;
+  @override
+  final DateTime ContentsCreateDate;
+  @override
+  final DateTime ContentsUpdateDate;
 
   @override
   String toString() {
-    return 'Content(id: $id, info: $info, profile: $profile, dtCreated: $dtCreated, dtUpdated: $dtUpdated, kind: $kind)';
+    return 'Contents(contentsId: $contentsId, info: $info, userInfo: $userInfo, contentsAllviewCount: $contentsAllviewCount, contentsMyviewCount: $contentsMyviewCount, contentsAlarmCheck: $contentsAlarmCheck, boardInfo: $boardInfo, shareInfo: $shareInfo, contentsComment: $contentsComment, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _Content &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
+        (other is _Contents &&
+            (identical(other.contentsId, contentsId) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsId, contentsId)) &&
             (identical(other.info, info) ||
                 const DeepCollectionEquality().equals(other.info, info)) &&
-            (identical(other.profile, profile) ||
+            (identical(other.userInfo, userInfo) ||
                 const DeepCollectionEquality()
-                    .equals(other.profile, profile)) &&
-            (identical(other.dtCreated, dtCreated) ||
+                    .equals(other.userInfo, userInfo)) &&
+            (identical(other.contentsAllviewCount, contentsAllviewCount) ||
+                const DeepCollectionEquality().equals(
+                    other.contentsAllviewCount, contentsAllviewCount)) &&
+            (identical(other.contentsMyviewCount, contentsMyviewCount) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)) &&
-            (identical(other.dtUpdated, dtUpdated) ||
+                    .equals(other.contentsMyviewCount, contentsMyviewCount)) &&
+            (identical(other.contentsAlarmCheck, contentsAlarmCheck) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtUpdated, dtUpdated)) &&
-            (identical(other.kind, kind) ||
-                const DeepCollectionEquality().equals(other.kind, kind)));
+                    .equals(other.contentsAlarmCheck, contentsAlarmCheck)) &&
+            (identical(other.boardInfo, boardInfo) ||
+                const DeepCollectionEquality()
+                    .equals(other.boardInfo, boardInfo)) &&
+            (identical(other.shareInfo, shareInfo) ||
+                const DeepCollectionEquality()
+                    .equals(other.shareInfo, shareInfo)) &&
+            (identical(other.contentsComment, contentsComment) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsComment, contentsComment)) &&
+            (identical(other.ContentsCreateDate, ContentsCreateDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.ContentsCreateDate, ContentsCreateDate)) &&
+            (identical(other.ContentsUpdateDate, ContentsUpdateDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.ContentsUpdateDate, ContentsUpdateDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
+      const DeepCollectionEquality().hash(contentsId) ^
       const DeepCollectionEquality().hash(info) ^
-      const DeepCollectionEquality().hash(profile) ^
-      const DeepCollectionEquality().hash(dtCreated) ^
-      const DeepCollectionEquality().hash(dtUpdated) ^
-      const DeepCollectionEquality().hash(kind);
+      const DeepCollectionEquality().hash(userInfo) ^
+      const DeepCollectionEquality().hash(contentsAllviewCount) ^
+      const DeepCollectionEquality().hash(contentsMyviewCount) ^
+      const DeepCollectionEquality().hash(contentsAlarmCheck) ^
+      const DeepCollectionEquality().hash(boardInfo) ^
+      const DeepCollectionEquality().hash(shareInfo) ^
+      const DeepCollectionEquality().hash(contentsComment) ^
+      const DeepCollectionEquality().hash(ContentsCreateDate) ^
+      const DeepCollectionEquality().hash(ContentsUpdateDate);
 
   @JsonKey(ignore: true)
   @override
-  _$ContentCopyWith<_Content> get copyWith =>
-      __$ContentCopyWithImpl<_Content>(this, _$identity);
+  _$ContentsCopyWith<_Contents> get copyWith =>
+      __$ContentsCopyWithImpl<_Contents>(this, _$identity);
 }
 
-abstract class _Content extends Content {
-  factory _Content(
-      {String? id,
-      required ContentInfo info,
-      required Profile profile,
-      required DateTime dtCreated,
-      required DateTime dtUpdated,
-      String? kind}) = _$_Content;
-  _Content._() : super._();
+abstract class _Contents extends Contents {
+  factory _Contents(
+      {String? contentsId,
+      required ContentsInfo info,
+      required Profile userInfo,
+      required int contentsAllviewCount,
+      required int contentsMyviewCount,
+      required int contentsAlarmCheck,
+      BoardInfo? boardInfo,
+      ShareDto? shareInfo,
+      List<dynamic>? contentsComment,
+      required DateTime ContentsCreateDate,
+      required DateTime ContentsUpdateDate}) = _$_Contents;
+  _Contents._() : super._();
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get contentsId => throw _privateConstructorUsedError;
   @override
-  ContentInfo get info => throw _privateConstructorUsedError;
+  ContentsInfo get info => throw _privateConstructorUsedError;
   @override
-  Profile get profile => throw _privateConstructorUsedError;
+  Profile get userInfo => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  int get contentsAllviewCount => throw _privateConstructorUsedError;
   @override
-  DateTime get dtUpdated => throw _privateConstructorUsedError;
+  int get contentsMyviewCount => throw _privateConstructorUsedError;
   @override
-  String? get kind => throw _privateConstructorUsedError;
+  int get contentsAlarmCheck => throw _privateConstructorUsedError;
+  @override
+  BoardInfo? get boardInfo => throw _privateConstructorUsedError;
+  @override
+  ShareDto? get shareInfo => throw _privateConstructorUsedError;
+  @override
+  List<dynamic>? get contentsComment => throw _privateConstructorUsedError;
+  @override
+  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  @override
+  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ContentCopyWith<_Content> get copyWith =>
+  _$ContentsCopyWith<_Contents> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-class _$ContentInfoTearOff {
-  const _$ContentInfoTearOff();
+class _$ContentsInfoTearOff {
+  const _$ContentsInfoTearOff();
 
-  _ContentInfo call(
-      {String? id,
-      String? imgUrl,
-      String? uid,
-      String? title,
-      String? content,
-      required int contentKind,
-      required int cntView,
+  _ContentsInfo call(
+      {String? contentsId,
+      String? contentsTitle,
+      String? contentsUrl,
+      String? contentsImages,
+      String? contentsDescription,
+      String? contentsComment,
+      String? contentsUniqueLink,
       List<String?>? thumbnails,
-      required DateTime dtCreated,
-      required DateTime dtUpdated}) {
-    return _ContentInfo(
-      id: id,
-      imgUrl: imgUrl,
-      uid: uid,
-      title: title,
-      content: content,
-      contentKind: contentKind,
-      cntView: cntView,
+      required DateTime ContentsCreateDate,
+      required DateTime ContentsUpdateDate}) {
+    return _ContentsInfo(
+      contentsId: contentsId,
+      contentsTitle: contentsTitle,
+      contentsUrl: contentsUrl,
+      contentsImages: contentsImages,
+      contentsDescription: contentsDescription,
+      contentsComment: contentsComment,
+      contentsUniqueLink: contentsUniqueLink,
       thumbnails: thumbnails,
-      dtCreated: dtCreated,
-      dtUpdated: dtUpdated,
+      ContentsCreateDate: ContentsCreateDate,
+      ContentsUpdateDate: ContentsUpdateDate,
     );
   }
 }
 
 /// @nodoc
-const $ContentInfo = _$ContentInfoTearOff();
+const $ContentsInfo = _$ContentsInfoTearOff();
 
 /// @nodoc
-mixin _$ContentInfo {
-  String? get id => throw _privateConstructorUsedError;
-  String? get imgUrl => throw _privateConstructorUsedError;
-  String? get uid => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get content => throw _privateConstructorUsedError;
-  int get contentKind => throw _privateConstructorUsedError;
-  int get cntView => throw _privateConstructorUsedError;
+mixin _$ContentsInfo {
+  String? get contentsId => throw _privateConstructorUsedError;
+  String? get contentsTitle => throw _privateConstructorUsedError;
+  String? get contentsUrl => throw _privateConstructorUsedError;
+  String? get contentsImages => throw _privateConstructorUsedError;
+  String? get contentsDescription => throw _privateConstructorUsedError;
+  String? get contentsComment => throw _privateConstructorUsedError;
+  String? get contentsUniqueLink => throw _privateConstructorUsedError;
   List<String?>? get thumbnails => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
-  DateTime get dtUpdated => throw _privateConstructorUsedError;
+  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $ContentInfoCopyWith<ContentInfo> get copyWith =>
+  $ContentsInfoCopyWith<ContentsInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $ContentInfoCopyWith<$Res> {
-  factory $ContentInfoCopyWith(
-          ContentInfo value, $Res Function(ContentInfo) then) =
-      _$ContentInfoCopyWithImpl<$Res>;
+abstract class $ContentsInfoCopyWith<$Res> {
+  factory $ContentsInfoCopyWith(
+          ContentsInfo value, $Res Function(ContentsInfo) then) =
+      _$ContentsInfoCopyWithImpl<$Res>;
   $Res call(
-      {String? id,
-      String? imgUrl,
-      String? uid,
-      String? title,
-      String? content,
-      int contentKind,
-      int cntView,
+      {String? contentsId,
+      String? contentsTitle,
+      String? contentsUrl,
+      String? contentsImages,
+      String? contentsDescription,
+      String? contentsComment,
+      String? contentsUniqueLink,
       List<String?>? thumbnails,
-      DateTime dtCreated,
-      DateTime dtUpdated});
+      DateTime ContentsCreateDate,
+      DateTime ContentsUpdateDate});
 }
 
 /// @nodoc
-class _$ContentInfoCopyWithImpl<$Res> implements $ContentInfoCopyWith<$Res> {
-  _$ContentInfoCopyWithImpl(this._value, this._then);
+class _$ContentsInfoCopyWithImpl<$Res> implements $ContentsInfoCopyWith<$Res> {
+  _$ContentsInfoCopyWithImpl(this._value, this._then);
 
-  final ContentInfo _value;
+  final ContentsInfo _value;
   // ignore: unused_field
-  final $Res Function(ContentInfo) _then;
+  final $Res Function(ContentsInfo) _then;
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? imgUrl = freezed,
-    Object? uid = freezed,
-    Object? title = freezed,
-    Object? content = freezed,
-    Object? contentKind = freezed,
-    Object? cntView = freezed,
+    Object? contentsId = freezed,
+    Object? contentsTitle = freezed,
+    Object? contentsUrl = freezed,
+    Object? contentsImages = freezed,
+    Object? contentsDescription = freezed,
+    Object? contentsComment = freezed,
+    Object? contentsUniqueLink = freezed,
     Object? thumbnails = freezed,
-    Object? dtCreated = freezed,
-    Object? dtUpdated = freezed,
+    Object? ContentsCreateDate = freezed,
+    Object? ContentsUpdateDate = freezed,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
-      imgUrl: imgUrl == freezed
-          ? _value.imgUrl
-          : imgUrl // ignore: cast_nullable_to_non_nullable
+      contentsTitle: contentsTitle == freezed
+          ? _value.contentsTitle
+          : contentsTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      contentsUrl: contentsUrl == freezed
+          ? _value.contentsUrl
+          : contentsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      contentsImages: contentsImages == freezed
+          ? _value.contentsImages
+          : contentsImages // ignore: cast_nullable_to_non_nullable
               as String?,
-      content: content == freezed
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      contentsDescription: contentsDescription == freezed
+          ? _value.contentsDescription
+          : contentsDescription // ignore: cast_nullable_to_non_nullable
               as String?,
-      contentKind: contentKind == freezed
-          ? _value.contentKind
-          : contentKind // ignore: cast_nullable_to_non_nullable
-              as int,
-      cntView: cntView == freezed
-          ? _value.cntView
-          : cntView // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentsComment: contentsComment == freezed
+          ? _value.contentsComment
+          : contentsComment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentsUniqueLink: contentsUniqueLink == freezed
+          ? _value.contentsUniqueLink
+          : contentsUniqueLink // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnails: thumbnails == freezed
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
               as List<String?>?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      ContentsCreateDate: ContentsCreateDate == freezed
+          ? _value.ContentsCreateDate
+          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dtUpdated: dtUpdated == freezed
-          ? _value.dtUpdated
-          : dtUpdated // ignore: cast_nullable_to_non_nullable
+      ContentsUpdateDate: ContentsUpdateDate == freezed
+          ? _value.ContentsUpdateDate
+          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$ContentInfoCopyWith<$Res>
-    implements $ContentInfoCopyWith<$Res> {
-  factory _$ContentInfoCopyWith(
-          _ContentInfo value, $Res Function(_ContentInfo) then) =
-      __$ContentInfoCopyWithImpl<$Res>;
+abstract class _$ContentsInfoCopyWith<$Res>
+    implements $ContentsInfoCopyWith<$Res> {
+  factory _$ContentsInfoCopyWith(
+          _ContentsInfo value, $Res Function(_ContentsInfo) then) =
+      __$ContentsInfoCopyWithImpl<$Res>;
   @override
   $Res call(
-      {String? id,
-      String? imgUrl,
-      String? uid,
-      String? title,
-      String? content,
-      int contentKind,
-      int cntView,
+      {String? contentsId,
+      String? contentsTitle,
+      String? contentsUrl,
+      String? contentsImages,
+      String? contentsDescription,
+      String? contentsComment,
+      String? contentsUniqueLink,
       List<String?>? thumbnails,
-      DateTime dtCreated,
-      DateTime dtUpdated});
+      DateTime ContentsCreateDate,
+      DateTime ContentsUpdateDate});
 }
 
 /// @nodoc
-class __$ContentInfoCopyWithImpl<$Res> extends _$ContentInfoCopyWithImpl<$Res>
-    implements _$ContentInfoCopyWith<$Res> {
-  __$ContentInfoCopyWithImpl(
-      _ContentInfo _value, $Res Function(_ContentInfo) _then)
-      : super(_value, (v) => _then(v as _ContentInfo));
+class __$ContentsInfoCopyWithImpl<$Res> extends _$ContentsInfoCopyWithImpl<$Res>
+    implements _$ContentsInfoCopyWith<$Res> {
+  __$ContentsInfoCopyWithImpl(
+      _ContentsInfo _value, $Res Function(_ContentsInfo) _then)
+      : super(_value, (v) => _then(v as _ContentsInfo));
 
   @override
-  _ContentInfo get _value => super._value as _ContentInfo;
+  _ContentsInfo get _value => super._value as _ContentsInfo;
 
   @override
   $Res call({
-    Object? id = freezed,
-    Object? imgUrl = freezed,
-    Object? uid = freezed,
-    Object? title = freezed,
-    Object? content = freezed,
-    Object? contentKind = freezed,
-    Object? cntView = freezed,
+    Object? contentsId = freezed,
+    Object? contentsTitle = freezed,
+    Object? contentsUrl = freezed,
+    Object? contentsImages = freezed,
+    Object? contentsDescription = freezed,
+    Object? contentsComment = freezed,
+    Object? contentsUniqueLink = freezed,
     Object? thumbnails = freezed,
-    Object? dtCreated = freezed,
-    Object? dtUpdated = freezed,
+    Object? ContentsCreateDate = freezed,
+    Object? ContentsUpdateDate = freezed,
   }) {
-    return _then(_ContentInfo(
-      id: id == freezed
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
+    return _then(_ContentsInfo(
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
-      imgUrl: imgUrl == freezed
-          ? _value.imgUrl
-          : imgUrl // ignore: cast_nullable_to_non_nullable
+      contentsTitle: contentsTitle == freezed
+          ? _value.contentsTitle
+          : contentsTitle // ignore: cast_nullable_to_non_nullable
               as String?,
-      uid: uid == freezed
-          ? _value.uid
-          : uid // ignore: cast_nullable_to_non_nullable
+      contentsUrl: contentsUrl == freezed
+          ? _value.contentsUrl
+          : contentsUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      title: title == freezed
-          ? _value.title
-          : title // ignore: cast_nullable_to_non_nullable
+      contentsImages: contentsImages == freezed
+          ? _value.contentsImages
+          : contentsImages // ignore: cast_nullable_to_non_nullable
               as String?,
-      content: content == freezed
-          ? _value.content
-          : content // ignore: cast_nullable_to_non_nullable
+      contentsDescription: contentsDescription == freezed
+          ? _value.contentsDescription
+          : contentsDescription // ignore: cast_nullable_to_non_nullable
               as String?,
-      contentKind: contentKind == freezed
-          ? _value.contentKind
-          : contentKind // ignore: cast_nullable_to_non_nullable
-              as int,
-      cntView: cntView == freezed
-          ? _value.cntView
-          : cntView // ignore: cast_nullable_to_non_nullable
-              as int,
+      contentsComment: contentsComment == freezed
+          ? _value.contentsComment
+          : contentsComment // ignore: cast_nullable_to_non_nullable
+              as String?,
+      contentsUniqueLink: contentsUniqueLink == freezed
+          ? _value.contentsUniqueLink
+          : contentsUniqueLink // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnails: thumbnails == freezed
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
               as List<String?>?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      ContentsCreateDate: ContentsCreateDate == freezed
+          ? _value.ContentsCreateDate
+          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      dtUpdated: dtUpdated == freezed
-          ? _value.dtUpdated
-          : dtUpdated // ignore: cast_nullable_to_non_nullable
+      ContentsUpdateDate: ContentsUpdateDate == freezed
+          ? _value.ContentsUpdateDate
+          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -513,134 +669,138 @@ class __$ContentInfoCopyWithImpl<$Res> extends _$ContentInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ContentInfo extends _ContentInfo {
-  _$_ContentInfo(
-      {this.id,
-      this.imgUrl,
-      this.uid,
-      this.title,
-      this.content,
-      required this.contentKind,
-      required this.cntView,
+class _$_ContentsInfo extends _ContentsInfo {
+  _$_ContentsInfo(
+      {this.contentsId,
+      this.contentsTitle,
+      this.contentsUrl,
+      this.contentsImages,
+      this.contentsDescription,
+      this.contentsComment,
+      this.contentsUniqueLink,
       this.thumbnails,
-      required this.dtCreated,
-      required this.dtUpdated})
+      required this.ContentsCreateDate,
+      required this.ContentsUpdateDate})
       : super._();
 
   @override
-  final String? id;
+  final String? contentsId;
   @override
-  final String? imgUrl;
+  final String? contentsTitle;
   @override
-  final String? uid;
+  final String? contentsUrl;
   @override
-  final String? title;
+  final String? contentsImages;
   @override
-  final String? content;
+  final String? contentsDescription;
   @override
-  final int contentKind;
+  final String? contentsComment;
   @override
-  final int cntView;
+  final String? contentsUniqueLink;
   @override
   final List<String?>? thumbnails;
   @override
-  final DateTime dtCreated;
+  final DateTime ContentsCreateDate;
   @override
-  final DateTime dtUpdated;
+  final DateTime ContentsUpdateDate;
 
   @override
   String toString() {
-    return 'ContentInfo(id: $id, imgUrl: $imgUrl, uid: $uid, title: $title, content: $content, contentKind: $contentKind, cntView: $cntView, thumbnails: $thumbnails, dtCreated: $dtCreated, dtUpdated: $dtUpdated)';
+    return 'ContentsInfo(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _ContentInfo &&
-            (identical(other.id, id) ||
-                const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.imgUrl, imgUrl) ||
-                const DeepCollectionEquality().equals(other.imgUrl, imgUrl)) &&
-            (identical(other.uid, uid) ||
-                const DeepCollectionEquality().equals(other.uid, uid)) &&
-            (identical(other.title, title) ||
-                const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.content, content) ||
+        (other is _ContentsInfo &&
+            (identical(other.contentsId, contentsId) ||
                 const DeepCollectionEquality()
-                    .equals(other.content, content)) &&
-            (identical(other.contentKind, contentKind) ||
+                    .equals(other.contentsId, contentsId)) &&
+            (identical(other.contentsTitle, contentsTitle) ||
                 const DeepCollectionEquality()
-                    .equals(other.contentKind, contentKind)) &&
-            (identical(other.cntView, cntView) ||
+                    .equals(other.contentsTitle, contentsTitle)) &&
+            (identical(other.contentsUrl, contentsUrl) ||
                 const DeepCollectionEquality()
-                    .equals(other.cntView, cntView)) &&
+                    .equals(other.contentsUrl, contentsUrl)) &&
+            (identical(other.contentsImages, contentsImages) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsImages, contentsImages)) &&
+            (identical(other.contentsDescription, contentsDescription) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsDescription, contentsDescription)) &&
+            (identical(other.contentsComment, contentsComment) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsComment, contentsComment)) &&
+            (identical(other.contentsUniqueLink, contentsUniqueLink) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsUniqueLink, contentsUniqueLink)) &&
             (identical(other.thumbnails, thumbnails) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnails, thumbnails)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.ContentsCreateDate, ContentsCreateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)) &&
-            (identical(other.dtUpdated, dtUpdated) ||
+                    .equals(other.ContentsCreateDate, ContentsCreateDate)) &&
+            (identical(other.ContentsUpdateDate, ContentsUpdateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtUpdated, dtUpdated)));
+                    .equals(other.ContentsUpdateDate, ContentsUpdateDate)));
   }
 
   @override
   int get hashCode =>
       runtimeType.hashCode ^
-      const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(imgUrl) ^
-      const DeepCollectionEquality().hash(uid) ^
-      const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(content) ^
-      const DeepCollectionEquality().hash(contentKind) ^
-      const DeepCollectionEquality().hash(cntView) ^
+      const DeepCollectionEquality().hash(contentsId) ^
+      const DeepCollectionEquality().hash(contentsTitle) ^
+      const DeepCollectionEquality().hash(contentsUrl) ^
+      const DeepCollectionEquality().hash(contentsImages) ^
+      const DeepCollectionEquality().hash(contentsDescription) ^
+      const DeepCollectionEquality().hash(contentsComment) ^
+      const DeepCollectionEquality().hash(contentsUniqueLink) ^
       const DeepCollectionEquality().hash(thumbnails) ^
-      const DeepCollectionEquality().hash(dtCreated) ^
-      const DeepCollectionEquality().hash(dtUpdated);
+      const DeepCollectionEquality().hash(ContentsCreateDate) ^
+      const DeepCollectionEquality().hash(ContentsUpdateDate);
 
   @JsonKey(ignore: true)
   @override
-  _$ContentInfoCopyWith<_ContentInfo> get copyWith =>
-      __$ContentInfoCopyWithImpl<_ContentInfo>(this, _$identity);
+  _$ContentsInfoCopyWith<_ContentsInfo> get copyWith =>
+      __$ContentsInfoCopyWithImpl<_ContentsInfo>(this, _$identity);
 }
 
-abstract class _ContentInfo extends ContentInfo {
-  factory _ContentInfo(
-      {String? id,
-      String? imgUrl,
-      String? uid,
-      String? title,
-      String? content,
-      required int contentKind,
-      required int cntView,
+abstract class _ContentsInfo extends ContentsInfo {
+  factory _ContentsInfo(
+      {String? contentsId,
+      String? contentsTitle,
+      String? contentsUrl,
+      String? contentsImages,
+      String? contentsDescription,
+      String? contentsComment,
+      String? contentsUniqueLink,
       List<String?>? thumbnails,
-      required DateTime dtCreated,
-      required DateTime dtUpdated}) = _$_ContentInfo;
-  _ContentInfo._() : super._();
+      required DateTime ContentsCreateDate,
+      required DateTime ContentsUpdateDate}) = _$_ContentsInfo;
+  _ContentsInfo._() : super._();
 
   @override
-  String? get id => throw _privateConstructorUsedError;
+  String? get contentsId => throw _privateConstructorUsedError;
   @override
-  String? get imgUrl => throw _privateConstructorUsedError;
+  String? get contentsTitle => throw _privateConstructorUsedError;
   @override
-  String? get uid => throw _privateConstructorUsedError;
+  String? get contentsUrl => throw _privateConstructorUsedError;
   @override
-  String? get title => throw _privateConstructorUsedError;
+  String? get contentsImages => throw _privateConstructorUsedError;
   @override
-  String? get content => throw _privateConstructorUsedError;
+  String? get contentsDescription => throw _privateConstructorUsedError;
   @override
-  int get contentKind => throw _privateConstructorUsedError;
+  String? get contentsComment => throw _privateConstructorUsedError;
   @override
-  int get cntView => throw _privateConstructorUsedError;
+  String? get contentsUniqueLink => throw _privateConstructorUsedError;
   @override
   List<String?>? get thumbnails => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
   @override
-  DateTime get dtUpdated => throw _privateConstructorUsedError;
+  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ContentInfoCopyWith<_ContentInfo> get copyWith =>
+  _$ContentsInfoCopyWith<_ContentsInfo> get copyWith =>
       throw _privateConstructorUsedError;
 }

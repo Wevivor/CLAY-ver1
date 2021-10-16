@@ -1,40 +1,30 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:clay/models/models.dart';
+import 'package:clay/part/part_bs/part_bs.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:http/http.dart' as http;
-
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 
 import '../../part_home.dart';
-import 'wgt_board_item.dart';
 
 // ignore: must_be_immutable
 class ContentListPART extends StatelessWidget with AppbarHelper {
-  final bestController = Get.put(
-    BoardListController(),
-  );
   ContentListPART();
-  Future<void> initFetch() async {
-    bestController.cache = [];
-    await bestController.fetchItems();
-  }
 
   @override
   Widget build(BuildContext context) {
-    initFetch();
     return
 
         ///--------------------------
         /// 일반 리스트
         ///-------------------------
-        GetBuilder<BoardListController>(builder: (controller) {
+        GetBuilder<ContentListController>(builder: (controller) {
       final cache = controller.cache;
       final loading = controller.loading;
       return Container(
@@ -46,16 +36,9 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
             direction: Axis.vertical,
             itemBuilder: (context, index) {
               final cache = controller.cache;
-              Content item = cache[index];
+              Contents item = cache[index];
 
               if (item == null) return Container();
-              // final favorLists = item.favorite.lists;
-
-              // final exist = favorLists.firstWhere(
-              //     (element) => element == AuthController.to.getUser?.uid,
-              //     orElse: () {
-              //   return null;
-              // });
 
               //SUBJECT:보드 만들기
               //TODO : 보드 위젯 이후에 작업
@@ -63,10 +46,25 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
               return Column(
                 children: [
                   ContentListItemWidget(
-                    title: 'eng) 무야호~미니오븐으로6가지 맛 미니바스크 치즈케이크 입니다.',
-                    date: '2021.03.22',
-                    contentText:
-                        '안녕하세요 진영입니다:-) 오늘은 간단하지만 정말 맛있는 바스크치즈케이크를 들고 왔습니다.',
+                    onMore: () {
+                      final _controller =
+                          Get.put(BoardListMySelectController());
+                      _controller.cache = [];
+                      _controller.selected = -1;
+                      _controller.fetchItems();
+                      _showBS(
+                          context,
+                          BottomSheetBoardChange(
+                            current: item,
+                          ));
+                    },
+                    // title: 'eng) 무야호~미니오븐으로6가지 맛 미니바스크 치즈케이크 입니다.',
+                    title: item.info.contentsTitle,
+
+                    date: Jiffy(item.info.ContentsCreateDate)
+                        .format('yyyy-MM-dd'),
+                    contentText: item.info.contentsDescription,
+                    imgUrl: item.info.contentsImages,
                     holder: Const.assets + 'images/smpl_list1.png',
                   ),
                   Divider(
@@ -77,5 +75,15 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
             }),
       );
     });
+  }
+
+  void _showBS(context, child) {
+    showModalBottomSheet(
+        context: context,
+        enableDrag: false,
+        builder: (BuildContext buildContext) {
+          final node = FocusScope.of(context);
+          return child;
+        });
   }
 }

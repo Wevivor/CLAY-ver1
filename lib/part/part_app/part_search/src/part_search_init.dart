@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 // import 'package:material_floating_search_bar/material_floating_search_bar.dart';
 
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 
 import 'wgt_search_item.dart';
 
@@ -21,37 +22,37 @@ class SearchInitPART extends StatelessWidget {
         ///--------------------------
         /// 검색된 리스트
         ///-------------------------
-        GetBuilder<FindController>(builder: (controller) {
-      return Container(
-        padding: const EdgeInsets.only(left: 10.0, right: 20.0),
-        child: HanListView(
-          controller: FindController.to,
-          isSliver: false,
-          direction: Axis.vertical,
-          itemBuilder: (context, idx) {
-            final cache = FindController.to.cache;
-            final size = FindController.to.cache.length;
-            //SUBJECT:보드 만들기
-            //TODO : 보드 위젯 이후에 작업
+        Container(
+      padding: const EdgeInsets.only(left: 10.0, right: 20.0),
+      child: HanListView(
+        controller: FindController.to,
+        isSliver: false,
+        direction: Axis.vertical,
+        itemBuilder: (context, idx) {
+          final cache = FindController.to.cache;
+          final size = FindController.to.cache.length;
+          print('====== Seachr : $size');
+          final item = cache[idx];
+          //SUBJECT:보드 만들기
+          //TODO : 보드 위젯 이후에 작업
 
-            return Column(
-              children: [
-                SearchItemWidget(
-                  title: 'eng) 무야호~미니오븐으로6가지맛 미니바스',
-                  date: '2021.03.22',
-                  contentText:
-                      '안녕하세요 진영입니다:-) 오늘은 간단하지만 정말 맛있는 바스크치즈케이크를 들고 왔습니다.',
-                  holder: Const.assets + 'images/smpl_list1.png',
-                ),
-                Divider(
-                  color: Color(0xFFEEEFF2),
-                )
-              ],
-            );
-          },
-        ),
-      );
-    });
+          return Column(
+            children: [
+              SearchItemWidget(
+                holder: Const.assets + 'images/smpl_list1.png',
+                title: item.info.contentsTitle,
+                date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
+                contentText: item.info.contentsDescription,
+                imgUrl: item.info.contentsImages,
+              ),
+              Divider(
+                color: Color(0xFFEEEFF2),
+              )
+            ],
+          );
+        },
+      ),
+    );
   }
 
   Widget getSearchField() {

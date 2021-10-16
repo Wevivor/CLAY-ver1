@@ -2,7 +2,9 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/common/commons.dart';
+import 'package:clay/controllers/controllers.dart';
 import 'package:clay/controllers/home/homes.dart';
+import 'package:clay/models/models.dart';
 import 'package:clay/page/ui_board.dart';
 import 'package:clay/page/ui_content.dart';
 import 'package:clay/part/part_bs/part_bs.dart';
@@ -263,6 +265,9 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                           onTap: () {
                             BottomNaviController.to.index = 1;
                             BottomNaviController.to.update();
+                            Get.put(BoardListMySelectController());
+                            BoardListMySelectController.to.cache = [];
+                            BoardListMySelectController.to.fetchItems();
                             _showBS(context, vwBoardMenu(context));
                           },
                         ),
@@ -344,6 +349,29 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             //SUBJECT : BS:
             //TODO: 새보드 만들기.
             Get.back();
+
+            final _controller = Get.put(BoardController());
+            final _profile = HanUserInfoController.to.toProfile();
+            final _info = BoardInfoDto(
+              boardName: '',
+              boardColor: 'FFfc5e20',
+              boardBadge: '',
+              contentsCount: 0,
+              shareCheck: 0,
+              isFixed: false,
+              shareCount: 0,
+              registerDate: DateTime.now(),
+            );
+            final _item = BoardDto(
+              boardCreator: _profile.toDto(),
+              info: _info,
+              shareCheck: 0,
+              registerDate: DateTime.now(),
+            );
+
+            _controller.boardItem = _item.toDomain();
+            _controller.boardNameController.text = '';
+
             _showBS(context, BottomSheetNewBoard(
               onMenu: () {
                 _showBS(context, vwBoardMenu(context));
@@ -363,7 +391,36 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             //TODO: 웹 링크.
 
             Get.back();
-            _showBS(context, BottomSheetLink(
+
+            final _controller = Get.put(ContentsController());
+            // final _profile = HanUserInfoController.to.toProfile();
+            // final _info = ContentsInfoDto(
+            //   contentsTitle: '',
+            //   contentsUrl: '',
+            //   contentsImages: '',
+            //   contentsDescription: '',
+            //   contentsComment: '',
+            //   thumbnails: null,
+            //   contentsUniqueLink: '',
+            //   ContentsCreateDate: DateTime.now(),
+            //   ContentsUpdateDate: DateTime.now(),
+            // );
+            // final _item = ContentsDto(
+            //   boardInfo: null,
+            //   userInfo: _profile.toDto(),
+            //   info: _info,
+            //   contentsAllviewCount: 0,
+            //   contentsMyviewCount: 0,
+            //   contentsAlarmCheck: 0,
+            //   shareInfo: null,
+            //   contentsComment: null,
+            //   ContentsCreateDate: DateTime.now(),
+            //   ContentsUpdateDate: DateTime.now(),
+            // );
+            _controller.initTextController();
+
+            BoardListMySelectController.to.selected = -1;
+            _showBS(context, BottomSheetContentLink(
               onMenu: () {
                 _showBS(context, vwBoardMenu(context));
               },
@@ -380,8 +437,12 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           onTap: () {
             //SUBJECT : BS:
             //TODO: 사진
+
             Get.back();
-            _showBS(context, BottomSheetPhoto(
+            final _controller = Get.put(ContentsController());
+            _controller.initTextController();
+            BoardListMySelectController.to.selected = -1;
+            _showBS(context, BottomSheetContentPhoto(
               onMenu: () {
                 _showBS(context, vwBoardMenu(context));
               },
@@ -398,8 +459,13 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           onTap: () async {
             //SUBJECT : BS
             //TODO: 메모
+            final _controller = Get.put(ContentsController());
+            _controller.initTextController();
+
+            BoardListMySelectController.to.selected = -1;
+
             Get.back();
-            _showBS(context, BottomSheetMemo(
+            _showBS(context, BottomSheetContentMemo(
               onMenu: () {
                 _showBS(context, vwBoardMenu(context));
               },

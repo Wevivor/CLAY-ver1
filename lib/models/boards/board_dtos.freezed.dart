@@ -30,7 +30,7 @@ class _$BoardDtoTearOff {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
-          required bool shareCheck,
+          required int shareCheck,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -64,7 +64,7 @@ mixin _$BoardDto {
   @JsonKey(name: 'share')
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   @JsonKey(name: 'share_check')
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   @JsonKey(name: 'board_comment')
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   @JsonKey(
@@ -92,7 +92,7 @@ abstract class $BoardDtoCopyWith<$Res> {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
-          bool shareCheck,
+          int shareCheck,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -141,7 +141,7 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       boardComment: boardComment == freezed
           ? _value.boardComment
           : boardComment // ignore: cast_nullable_to_non_nullable
@@ -193,7 +193,7 @@ abstract class _$BoardDtoCopyWith<$Res> implements $BoardDtoCopyWith<$Res> {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
-          bool shareCheck,
+          int shareCheck,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -246,7 +246,7 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       boardComment: boardComment == freezed
           ? _value.boardComment
           : boardComment // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ class _$_BoardDto extends _BoardDto {
   final ShareDto? shareInfo;
   @override
   @JsonKey(name: 'share_check')
-  final bool shareCheck;
+  final int shareCheck;
   @override
   @JsonKey(name: 'board_comment')
   final List<dynamic>? boardComment;
@@ -369,7 +369,7 @@ abstract class _BoardDto extends BoardDto {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
-          required bool shareCheck,
+          required int shareCheck,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -391,7 +391,7 @@ abstract class _BoardDto extends BoardDto {
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'share_check')
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'board_comment')
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
@@ -431,7 +431,7 @@ class _$BoardInfoDtoTearOff {
       @JsonKey(name: 'contents_count')
           required int contentsCount,
       @JsonKey(name: 'share_check')
-          required bool shareCheck,
+          required int shareCheck,
       @JsonKey(name: 'share_count')
           int? shareCount,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -475,7 +475,7 @@ mixin _$BoardInfoDto {
   @JsonKey(name: 'contents_count')
   int get contentsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'share_check')
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   @JsonKey(name: 'share_count')
   int? get shareCount => throw _privateConstructorUsedError;
   @JsonKey(
@@ -511,7 +511,7 @@ abstract class $BoardInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'contents_count')
           int contentsCount,
       @JsonKey(name: 'share_check')
-          bool shareCheck,
+          int shareCheck,
       @JsonKey(name: 'share_count')
           int? shareCount,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -571,7 +571,7 @@ class _$BoardInfoDtoCopyWithImpl<$Res> implements $BoardInfoDtoCopyWith<$Res> {
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       shareCount: shareCount == freezed
           ? _value.shareCount
           : shareCount // ignore: cast_nullable_to_non_nullable
@@ -607,7 +607,7 @@ abstract class _$BoardInfoDtoCopyWith<$Res>
       @JsonKey(name: 'contents_count')
           int contentsCount,
       @JsonKey(name: 'share_check')
-          bool shareCheck,
+          int shareCheck,
       @JsonKey(name: 'share_count')
           int? shareCount,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -669,7 +669,7 @@ class __$BoardInfoDtoCopyWithImpl<$Res> extends _$BoardInfoDtoCopyWithImpl<$Res>
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       shareCount: shareCount == freezed
           ? _value.shareCount
           : shareCount // ignore: cast_nullable_to_non_nullable
@@ -735,7 +735,7 @@ class _$_BoardInfoDto extends _BoardInfoDto {
   final int contentsCount;
   @override
   @JsonKey(name: 'share_check')
-  final bool shareCheck;
+  final int shareCheck;
   @override
   @JsonKey(name: 'share_count')
   final int? shareCount;
@@ -829,7 +829,7 @@ abstract class _BoardInfoDto extends BoardInfoDto {
       @JsonKey(name: 'contents_count')
           required int contentsCount,
       @JsonKey(name: 'share_check')
-          required bool shareCheck,
+          required int shareCheck,
       @JsonKey(name: 'share_count')
           int? shareCount,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -862,7 +862,7 @@ abstract class _BoardInfoDto extends BoardInfoDto {
   int get contentsCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'share_check')
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'share_count')
   int? get shareCount => throw _privateConstructorUsedError;

@@ -60,6 +60,9 @@ class _BoardUIState extends State<BoardUI>
                   height: 32.0,
                   width: 32.0,
                   onTap: () {
+                    final _controller = Get.put(FindController());
+                    _controller.cache = [];
+                    _controller.fetchItems();
                     Get.toNamed('/search');
                   },
                   holder: 'assets/icon/search.png'),
@@ -89,38 +92,38 @@ class _BoardUIState extends State<BoardUI>
                     CategoryButton(
                       index: 0,
                       selected: controller.selected,
-                      onTap: (value) {
+                      onTap: (value) async {
                         controller.selected = value;
-                        // _.cache = [];
-                        // _.fetchItems(term: _.searchWord);
+                        controller.cache = [];
+                        await controller.fetchItems(term: '');
                       },
                     ),
                     CategoryButton(
                       index: 1,
                       selected: controller.selected,
-                      onTap: (value) {
+                      onTap: (value) async {
                         controller.selected = value;
-                        // _.cache = [];
-                        // _.fetchItems(term: _.searchWord);
+                        controller.cache = [];
+                        await controller.fetchItems(term: '일/공부');
                       },
                     ),
                     CategoryButton(
                       index: 2,
                       selected: controller.selected,
-                      onTap: (value) {
+                      onTap: (value) async {
                         controller.selected = value;
-                        // _.cache = [];
-                        // _.fetchItems(term: _.searchWord);
+                        controller.cache = [];
+                        await controller.fetchItems(term: '자기계발');
                       },
                     ),
                     CategoryButton(
                       index: 3,
                       title: null,
                       selected: controller.selected,
-                      onTap: (value) {
+                      onTap: (value) async {
                         controller.selected = value;
-                        // _.cache = [];
-                        // _.fetchItems(term: _.searchWord);
+                        controller.cache = [];
+                        await controller.fetchItems(term: 'LIKE');
                       },
                     ),
                   ],

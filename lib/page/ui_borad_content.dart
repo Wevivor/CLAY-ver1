@@ -29,8 +29,11 @@ class _BoardContentUIState extends State<BoardContentUI>
   }
 
   Future<void> initFetch() async {
-    Get.put(ContentListController());
+    final _controller = Get.put(ContentListController());
+    _controller.boardId = widget.board;
+    _controller.cache = [];
     await ContentListController.to.fetchItems();
+    debugPrint('--------- BoardContentUI initFetch-----------');
   }
 
   @override
@@ -113,6 +116,8 @@ class _BoardContentUIState extends State<BoardContentUI>
                     alignment: Alignment.center,
                     child: InkWell(
                       onTap: () {
+                        final _controller = Get.put(BoardController());
+
                         _showBS(context, BottomSheetShare());
                       },
                       child: Container(

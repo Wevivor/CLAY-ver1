@@ -16,9 +16,6 @@ class SearchUI extends StatelessWidget {
   Widget build(BuildContext context) {
     MySize().init(context);
 
-    final _controller = Get.put(FindController());
-    _controller.fetchItems();
-
     final profileHeight = 70.0;
     return Scaffold(
       appBar: PreferredSize(
@@ -93,6 +90,7 @@ class SearchUI extends StatelessWidget {
                               FindController.to.cache = [];
 
                               await FindController.to.fetchItems(term: result);
+                              FindController.to.update();
                             },
                           ),
                         ),
@@ -131,17 +129,6 @@ class SearchUI extends StatelessWidget {
             child: GetBuilder<FindController>(builder: (_) => SearchInitPART()),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget getSearchField() {
-    // String text = getStringValue(LanguageKey.searchForPhotos, context);
-    return Container(
-      decoration: new BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-        border: Border.all(width: 1.2, color: Colors.white),
       ),
     );
   }

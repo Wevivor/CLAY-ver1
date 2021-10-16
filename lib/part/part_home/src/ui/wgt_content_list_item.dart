@@ -12,12 +12,14 @@ class ContentListItemWidget extends StatelessWidget {
   final contentText; // 내용
   final imgUrl;
   final holder; // 이미지 URL
+  final onMore;
   ContentListItemWidget({
     this.title,
     this.date,
     this.contentText,
     this.imgUrl,
     this.holder = 'images/no_image.png',
+    this.onMore,
   });
   final titleStyle = TextStyle(
     fontSize: 16,
@@ -61,10 +63,15 @@ class ContentListItemWidget extends StatelessWidget {
                 flex: 18,
               ),
               Expanded(
-                child: Container(
-                  alignment: Alignment.bottomRight,
-                  child: Image.asset(
-                    Const.assets + 'icon/dot_vertical_black.png',
+                child: InkWell(
+                  onTap: () {
+                    if (onMore != null) onMore();
+                  },
+                  child: Container(
+                    alignment: Alignment.bottomRight,
+                    child: Image.asset(
+                      Const.assets + 'icon/dot_vertical_black.png',
+                    ),
                   ),
                 ),
                 flex: 1,

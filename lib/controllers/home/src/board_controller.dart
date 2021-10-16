@@ -16,7 +16,14 @@ class BoardController extends AbsItemController with FbCommonModule {
   BoardController() {
     _instance = FirebaseFirestore.instance;
   }
+  final TextEditingController boardNameController = TextEditingController();
   static BoardController get to => Get.find();
+
+  @override
+  void onClose() {
+    boardNameController.dispose();
+    super.onClose();
+  }
 
   //---------------------------------
   //------------------기본 CRUD 프로토콜
@@ -68,6 +75,21 @@ class BoardController extends AbsItemController with FbCommonModule {
     }
   }
 
+  Future<void> actionUpdate() async {
+    try {
+      await updateFb(
+          instance: _instance,
+          path: MENU_POS,
+          id: boardItem?.boardId ?? '',
+          dto: boardItem?.toDto());
+    } catch (e) {
+      throw Exception('error ${e.toString()}');
+    } finally {
+      update();
+      LoadingController.to.isLoading = false;
+    }
+  }
+
   Future<void> actionUpdateInfo({id, info}) async {
     try {
       LoadingController.to.isLoading = true;
@@ -100,4 +122,40 @@ class BoardController extends AbsItemController with FbCommonModule {
       LoadingController.to.isLoading = false;
     }
   }
+
+  void actionChangeColor(String color) async {
+    final _newInfo = boardItem!.info.copyWith(boardColor: color);
+    final _newItem = boardItem!.copyWith(info: _newInfo);
+    boardItem = _newItem;
+
+    update();
+  }
+
+  void actionChangeShare(int share) async {
+    final _newInfo = boardItem!.info.copyWith(shareCheck: share);
+    final _newItem = boardItem!.copyWith(shareCheck: share, info: _newInfo);
+    boardItem = _newItem;
+    update();
+  }
+
+  void actionChangeBadge(String badge) async {
+    final _newInfo = boardItem!.info.copyWith(boardBadge: badge);
+    final _newItem = boardItem!.copyWith(info: _newInfo);
+    boardItem = _newItem;
+    update();
+  }
+
+  void actionChangeName(String name) async {
+    final _newInfo = boardItem!.info.copyWith(boardName: name);
+    final _newItem = boardItem!.copyWith(info: _newInfo);
+    boardItem = _newItem;
+  }
+
+  // void actionBoardInfo({
+  //   required String name,
+  // }) async {
+  //   final _newInfo = boardItem!.info.copyWith(boardName: name);
+  //   final _newItem = boardItem!.copyWith(info: _newInfo);
+  //   boardItem = _newItem;
+  // }
 }

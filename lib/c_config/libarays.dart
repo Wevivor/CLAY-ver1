@@ -24,7 +24,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 
 export 'package:fluttertoast/fluttertoast.dart';
 export 'package:get_storage/get_storage.dart';
-export 'package:share/share.dart';
+// export 'package:share/share.dart';
 
 // SNS 로그인
 export 'package:sign_in_with_apple/sign_in_with_apple.dart';

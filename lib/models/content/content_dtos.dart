@@ -8,65 +8,75 @@ part 'content_dtos.freezed.dart';
 part 'content_dtos.g.dart';
 
 @freezed
-class ContentDto with _$ContentDto {
+class ContentsDto with _$ContentsDto {
   @JsonSerializable(explicitToJson: true)
-  factory ContentDto({
-    String? id,
-    required ContentInfoDto info,
-    required ProfileDto profile,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtCreated,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtUpdated,
-    String? kind,
-  }) = _ContentDto;
-  ContentDto._();
+  factory ContentsDto({
+    @JsonKey(name: 'contents_id') String? contentsId,
+    required ContentsInfoDto info,
+    @JsonKey(name: 'user_info') required ProfileDto userInfo,
+    @JsonKey(name: 'contents_allview_count') required int contentsAllviewCount,
+    @JsonKey(name: 'contents_myview_count') required int contentsMyviewCount,
+    @JsonKey(name: 'contents_alarm_check') required int contentsAlarmCheck,
+    @JsonKey(name: 'board_info') BoardInfoDto? boardInfo,
+    @JsonKey(name: 'share') ShareDto? shareInfo,
+    @JsonKey(name: 'contents_comment') List<dynamic>? contentsComment,
+    @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime ContentsCreateDate,
+    @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime ContentsUpdateDate,
+  }) = _ContentsDto;
+  ContentsDto._();
 
-  factory ContentDto.fromJson(Map<String, dynamic> json) =>
-      _$ContentDtoFromJson(json);
-  Content toDomain() => Content(
-        id: id,
-        profile: profile.toDomain(),
+  factory ContentsDto.fromJson(Map<String, dynamic> json) =>
+      _$ContentsDtoFromJson(json);
+
+  Contents toDomain() => Contents(
+        contentsId: contentsId,
+        userInfo: userInfo.toDomain(),
         info: info.toDomain(),
-        dtCreated: dtCreated,
-        dtUpdated: dtUpdated,
-        kind: kind,
+        boardInfo: boardInfo?.toDomain(),
+        contentsAllviewCount: contentsAllviewCount,
+        contentsMyviewCount: contentsMyviewCount,
+        contentsAlarmCheck: contentsAlarmCheck,
+        shareInfo: shareInfo,
+        contentsComment: contentsComment,
+        ContentsCreateDate: ContentsCreateDate,
+        ContentsUpdateDate: ContentsUpdateDate,
       );
 }
 
 @freezed
-class ContentInfoDto with _$ContentInfoDto {
+class ContentsInfoDto with _$ContentsInfoDto {
   @JsonSerializable(explicitToJson: true)
-  factory ContentInfoDto({
-    String? id,
-    String? imgUrl,
-    String? uid,
-    String? title,
-    String? content,
-    required int cntView,
-    required int contentKind,
+  factory ContentsInfoDto({
+    @JsonKey(name: 'contents_id') String? contentsId,
+    @JsonKey(name: 'contents_title') String? contentsTitle,
+    @JsonKey(name: 'contents_url') String? contentsUrl,
+    @JsonKey(name: 'contents_images') String? contentsImages,
+    @JsonKey(name: 'contents_description') String? contentsDescription,
+    @JsonKey(name: 'contents_comment') String? contentsComment,
+    @JsonKey(name: 'contents_unique_link') String? contentsUniqueLink,
     List<String?>? thumbnails,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtCreated,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime dtUpdated,
-
+    @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime ContentsCreateDate,
+    @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+        required DateTime ContentsUpdateDate,
     // List<Comment>? comments;
-  }) = _ContentInfoDto;
-  ContentInfoDto._();
-  factory ContentInfoDto.fromJson(Map<String, dynamic> json) =>
-      _$ContentInfoDtoFromJson(json);
+  }) = _ContentsInfoDto;
+  ContentsInfoDto._();
+  factory ContentsInfoDto.fromJson(Map<String, dynamic> json) =>
+      _$ContentsInfoDtoFromJson(json);
 
-  ContentInfo toDomain() => ContentInfo(
-        id: id,
-        imgUrl: imgUrl,
-        uid: uid,
-        title: title,
-        contentKind: contentKind,
-        content: content,
-        cntView: cntView,
+  ContentsInfo toDomain() => ContentsInfo(
+        contentsId: contentsId,
+        contentsTitle: contentsTitle,
+        contentsUrl: contentsUrl,
+        contentsImages: contentsImages,
+        contentsDescription: contentsDescription,
+        contentsComment: contentsComment,
         thumbnails: thumbnails,
-        dtCreated: dtCreated,
-        dtUpdated: dtUpdated,
+        contentsUniqueLink: contentsUniqueLink,
+        ContentsCreateDate: ContentsCreateDate,
+        ContentsUpdateDate: ContentsUpdateDate,
       );
 }

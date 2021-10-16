@@ -4,46 +4,64 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'contents.freezed.dart';
 
 @freezed
-class Content with _$Content {
-  factory Content({
-    String? id,
-    required ContentInfo info,
-    required Profile profile,
-    required DateTime dtCreated,
-    required DateTime dtUpdated,
-    String? kind,
-  }) = _Content;
-  Content._();
+class Contents with _$Contents {
+  factory Contents({
+    String? contentsId,
+    required ContentsInfo info,
+    required Profile userInfo,
+    required int contentsAllviewCount,
+    required int contentsMyviewCount,
+    required int contentsAlarmCheck,
+    BoardInfo? boardInfo,
+    ShareDto? shareInfo,
+    List<dynamic>? contentsComment,
+    required DateTime ContentsCreateDate,
+    required DateTime ContentsUpdateDate,
+  }) = _Contents;
+  Contents._();
+  ContentsDto toDto() => ContentsDto(
+        contentsId: contentsId,
+        info: info.toDto(),
+        userInfo: userInfo.toDto(),
+        contentsAllviewCount: contentsAllviewCount,
+        contentsMyviewCount: contentsMyviewCount,
+        contentsAlarmCheck: contentsAlarmCheck,
+        boardInfo: boardInfo?.toDto(),
+        shareInfo: shareInfo,
+        contentsComment: contentsComment,
+        ContentsCreateDate: ContentsCreateDate,
+        ContentsUpdateDate: ContentsUpdateDate,
+      );
 }
 
 @freezed
-class ContentInfo with _$ContentInfo {
-  factory ContentInfo({
-    String? id,
-    String? imgUrl,
-    String? uid,
-    String? title,
-    String? content,
-    required int contentKind,
-    required int cntView,
+class ContentsInfo with _$ContentsInfo {
+  factory ContentsInfo({
+    String? contentsId,
+    String? contentsTitle,
+    String? contentsUrl,
+    String? contentsImages,
+    String? contentsDescription,
+    String? contentsComment,
+    String? contentsUniqueLink,
     List<String?>? thumbnails,
-    required DateTime dtCreated,
-    required DateTime dtUpdated,
+    required DateTime ContentsCreateDate,
+    required DateTime ContentsUpdateDate,
 
     // List<Comment>? comments;
-  }) = _ContentInfo;
-  ContentInfo._();
+  }) = _ContentsInfo;
+  ContentsInfo._();
 
-  ContentInfoDto toDto() => ContentInfoDto(
-        id: id,
-        imgUrl: imgUrl,
-        uid: uid,
-        title: title,
-        content: content,
-        contentKind: contentKind,
-        cntView: cntView,
+  ContentsInfoDto toDto() => ContentsInfoDto(
+        contentsId: contentsId,
+        contentsTitle: contentsTitle,
+        contentsUrl: contentsUrl,
+        contentsImages: contentsImages,
+        contentsDescription: contentsDescription,
+        contentsComment: contentsComment,
+        contentsUniqueLink: contentsUniqueLink,
         thumbnails: thumbnails,
-        dtCreated: dtCreated,
-        dtUpdated: dtUpdated,
+        ContentsCreateDate: ContentsCreateDate,
+        ContentsUpdateDate: ContentsUpdateDate,
       );
 }

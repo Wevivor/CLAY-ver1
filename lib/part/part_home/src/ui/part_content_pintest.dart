@@ -6,7 +6,7 @@ import 'package:clay/controllers/controllers.dart';
 import 'package:clay/models/models.dart';
 
 import 'package:clay/page/sub_post.dart';
-import 'package:clay/page/widget/card_post_item.dart';
+import 'package:clay/part/part_home/src/ui/card_post_item.dart';
 import 'package:clay/part/part_bs/part_bs.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,6 +17,7 @@ import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 
 import '../../part_home.dart';
+import 'wgt_content_grid_item.dart';
 
 // ignore: must_be_immutable
 class ContentPintestPART extends StatelessWidget with AppbarHelper {
@@ -62,7 +63,7 @@ class ContentPintestPART extends StatelessWidget with AppbarHelper {
           itemBuilder: (context, index) {
             final controller = ContentListController.to;
             final cache = controller.cache;
-            Content item = cache[index];
+            Contents item = cache[index];
 
             if (item == null) return Container();
 
@@ -73,34 +74,32 @@ class ContentPintestPART extends StatelessWidget with AppbarHelper {
             //   return null;
             // });
 
-            return Container();
+            // return Container();
 
             //SUBJECT: 콘텐츠 아이템
             //TODO
-            // // return PostItemCard(
-            // //   title: '베란다 텃밭에서 방울 ...',
-            // //   imgUrl: item.imgUrl,
-            // //   category: '좋아',
-            // //   cntFavor: item.favorite.cnt,
-            // //   isFavor: exist == null ? false : true,
-            // //   // holder: cache[index].img,
-            // //   onTap: () async {
-            // //     final postInfo = cache[index];
-            // //     print('------------>${postInfo.id}');
-            // //     final _controller = Get.put(PostController());
-            // //     await _controller.fetchItem(id: postInfo.id);
-            // //     // final _authorController = Get.put(PostAuthorController(
-            // //     //     uid: postInfo.uid, excludedId: item.id ?? ''));
-            // //     // PostAuthorController.to.cache = [];
-            // //     // await _authorController.fetchItems();
+            return ContentGridItemWidget(
+              title: item.info.contentsTitle,
+              imgUrl: item.info.contentsImages,
+              contentText: item.info.contentsTitle,
+              // holder: cache[index].img,
+              // onTap: () async {
+              //   final postInfo = cache[index];
+              //   print('------------>${postInfo.id}');
+              //   final _controller = Get.put(PostController());
+              //   await _controller.fetchItem(id: postInfo.id);
+              //   // final _authorController = Get.put(PostAuthorController(
+              //   //     uid: postInfo.uid, excludedId: item.id ?? ''));
+              //   // PostAuthorController.to.cache = [];
+              //   // await _authorController.fetchItems();
 
-            // //     Get.to(() => PostSUB(item: postInfo));
-            // //     // Get.to(() => PostSUB(item: index));
-            // //   },
-            // //   onMore: () {
-            // //     _showBS(context, vwBoardMenu(context));
-            // //   },
-            // );
+              //   Get.to(() => PostSUB(item: postInfo));
+              //   // Get.to(() => PostSUB(item: index));
+              // },
+              onMore: () {
+                _showBS(context, vwBoardMenu(context));
+              },
+            );
           },
           // staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
           staggeredTileBuilder: (int index) =>

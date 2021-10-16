@@ -10,13 +10,17 @@ class ContentListController extends AbsListController
   static String MENU_POS = 'contents';
   late dynamic _instance;
   late dynamic _storage;
+  late String _boardId;
   ContentListController({
     int pageSize = 30,
   }) : super(pageSize) {
     _instance = FirebaseFirestore.instance;
     _storage = FirebaseStorage.instance;
+    _boardId = '';
     // fetchItems();
   }
+  String get boardId => _boardId;
+  set boardId(String value) => _boardId = value;
 
   static ContentListController get to => Get.find();
   Future<List<dynamic>> getList(
@@ -24,47 +28,45 @@ class ContentListController extends AbsListController
     int limit, {
     String? searchTerm,
   }) async {
+    var queryList = [
+      {
+        "match": {"board_info.board_id": _boardId}
+      }
+    ];
+    if (searchTerm != null && searchTerm.isNotEmpty) {
+      queryList.add({
+        "match": {"info.board_badge": searchTerm}
+      });
+    }
+
     final bodyJSON = {
-      "query": {"match_all": {}},
+      "query": {
+        "bool": {
+          "must": queryList,
+        },
+      },
       "sort": [
-        {"cntView": "desc"}
+        // {"cntView": "desc"}
       ]
     };
-
     final lists = await listFilter('/clay_contents/_search', bodyJSON);
     return lists.map((jsonList) {
-      return ContentDto.fromJson(jsonList['_source']).toDomain();
+      return ContentsDto.fromJson(jsonList['_source']).toDomain();
     }).toList();
-
-    /*    
-
-    final lists = await listFb(instance: _instance, path: MENU_POS);
-    return lists.map((jsonObject) {
-      return PostInfoDto.fromJson(jsonObject['info']).toDomain();
-    }).toList();
-
-    String url =
-        '${Const.baseUrl}$path?offset=$offset&limit=$limit${_buildSearchTermQuery(searchTerm)}';
-
-    return client.get(Uri.parse(url.trim())).mapResponse(
-        (List<dynamic> jsonArray) => jsonArray
-            .map((jsonObject) => PostListItem.fromJson(jsonObject))
-            .toList());
-     */
   }
 
   //---------------------------------
   //------------------기본 CRUD 프로토콜
   //---------------------------------
 
-  Future<ContentInfo> read(String id) async {
+  Future<ContentsInfo> read(String id) async {
     // try {
     final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
 
     if (_item == null) {
       throw Exception('error');
     }
-    final _post = ContentDto.fromJson(_item).toDomain();
+    final _post = ContentsDto.fromJson(_item).toDomain();
 
     // final info = PostInfo.fromJson((_info.info));
     this.item = _post.info;
@@ -79,7 +81,7 @@ class ContentListController extends AbsListController
     if (_item == null) {
       throw Exception('error');
     }
-    final _post = ContentDto.fromJson(_item).toDomain();
+    final _post = ContentsDto.fromJson(_item).toDomain();
     var existIndex = cache.indexWhere(
       (element) => element.id == id,
     );
@@ -90,6 +92,19 @@ class ContentListController extends AbsListController
 
     // final info = PostInfo.fromJson((_info.info));
     this.item = _post;
+    update();
+  }
+
+  Future<void> actionDelteItem(String id) async {
+    // try {
+    var existIndex = cache.indexWhere(
+      (element) => element.contentsId == id,
+    );
+
+    if (existIndex >= 0) {
+      cache.removeAt(existIndex);
+    }
+
     update();
   }
 }

@@ -23,7 +23,7 @@ class _$BoardTearOff {
       required Profile boardCreator,
       Share? shareInfo,
       List<dynamic>? boardComment,
-      required bool shareCheck,
+      required int shareCheck,
       required DateTime registerDate}) {
     return _Board(
       boardId: boardId,
@@ -47,7 +47,7 @@ mixin _$Board {
   Profile get boardCreator => throw _privateConstructorUsedError;
   Share? get shareInfo => throw _privateConstructorUsedError;
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -64,7 +64,7 @@ abstract class $BoardCopyWith<$Res> {
       Profile boardCreator,
       Share? shareInfo,
       List<dynamic>? boardComment,
-      bool shareCheck,
+      int shareCheck,
       DateTime registerDate});
 
   $BoardInfoCopyWith<$Res> get info;
@@ -114,7 +114,7 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ abstract class _$BoardCopyWith<$Res> implements $BoardCopyWith<$Res> {
       Profile boardCreator,
       Share? shareInfo,
       List<dynamic>? boardComment,
-      bool shareCheck,
+      int shareCheck,
       DateTime registerDate});
 
   @override
@@ -213,7 +213,7 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -246,7 +246,7 @@ class _$_Board extends _Board {
   @override
   final List<dynamic>? boardComment;
   @override
-  final bool shareCheck;
+  final int shareCheck;
   @override
   final DateTime registerDate;
 
@@ -305,7 +305,7 @@ abstract class _Board extends Board {
       required Profile boardCreator,
       Share? shareInfo,
       List<dynamic>? boardComment,
-      required bool shareCheck,
+      required int shareCheck,
       required DateTime registerDate}) = _$_Board;
   _Board._() : super._();
 
@@ -320,7 +320,7 @@ abstract class _Board extends Board {
   @override
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   @override
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   @override
   DateTime get registerDate => throw _privateConstructorUsedError;
   @override
@@ -340,7 +340,7 @@ class _$BoardInfoTearOff {
       required String boardBadge,
       String? boardUnquieLink,
       required int contentsCount,
-      required bool shareCheck,
+      required int shareCheck,
       int? shareCount,
       required DateTime registerDate}) {
     return _BoardInfo(
@@ -370,7 +370,7 @@ mixin _$BoardInfo {
   String get boardBadge => throw _privateConstructorUsedError;
   String? get boardUnquieLink => throw _privateConstructorUsedError;
   int get contentsCount => throw _privateConstructorUsedError;
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   int? get shareCount => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
 
@@ -391,7 +391,7 @@ abstract class $BoardInfoCopyWith<$Res> {
       String boardBadge,
       String? boardUnquieLink,
       int contentsCount,
-      bool shareCheck,
+      int shareCheck,
       int? shareCount,
       DateTime registerDate});
 }
@@ -449,7 +449,7 @@ class _$BoardInfoCopyWithImpl<$Res> implements $BoardInfoCopyWith<$Res> {
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       shareCount: shareCount == freezed
           ? _value.shareCount
           : shareCount // ignore: cast_nullable_to_non_nullable
@@ -476,7 +476,7 @@ abstract class _$BoardInfoCopyWith<$Res> implements $BoardInfoCopyWith<$Res> {
       String boardBadge,
       String? boardUnquieLink,
       int contentsCount,
-      bool shareCheck,
+      int shareCheck,
       int? shareCount,
       DateTime registerDate});
 }
@@ -535,7 +535,7 @@ class __$BoardInfoCopyWithImpl<$Res> extends _$BoardInfoCopyWithImpl<$Res>
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
-              as bool,
+              as int,
       shareCount: shareCount == freezed
           ? _value.shareCount
           : shareCount // ignore: cast_nullable_to_non_nullable
@@ -580,7 +580,7 @@ class _$_BoardInfo extends _BoardInfo {
   @override
   final int contentsCount;
   @override
-  final bool shareCheck;
+  final int shareCheck;
   @override
   final int? shareCount;
   @override
@@ -656,7 +656,7 @@ abstract class _BoardInfo extends BoardInfo {
       required String boardBadge,
       String? boardUnquieLink,
       required int contentsCount,
-      required bool shareCheck,
+      required int shareCheck,
       int? shareCount,
       required DateTime registerDate}) = _$_BoardInfo;
   _BoardInfo._() : super._();
@@ -676,7 +676,7 @@ abstract class _BoardInfo extends BoardInfo {
   @override
   int get contentsCount => throw _privateConstructorUsedError;
   @override
-  bool get shareCheck => throw _privateConstructorUsedError;
+  int get shareCheck => throw _privateConstructorUsedError;
   @override
   int? get shareCount => throw _privateConstructorUsedError;
   @override

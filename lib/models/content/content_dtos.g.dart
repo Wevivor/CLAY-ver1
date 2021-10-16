@@ -6,52 +6,66 @@ part of 'content_dtos.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_ContentDto _$$_ContentDtoFromJson(Map<String, dynamic> json) =>
-    _$_ContentDto(
-      id: json['id'] as String?,
-      info: ContentInfoDto.fromJson(json['info'] as Map<String, dynamic>),
-      profile: ProfileDto.fromJson(json['profile'] as Map<String, dynamic>),
-      dtCreated: Fbconverter.fromJson(json['dtCreated']),
-      dtUpdated: Fbconverter.fromJson(json['dtUpdated']),
-      kind: json['kind'] as String?,
+_$_ContentsDto _$$_ContentsDtoFromJson(Map<String, dynamic> json) =>
+    _$_ContentsDto(
+      contentsId: json['contents_id'] as String?,
+      info: ContentsInfoDto.fromJson(json['info'] as Map<String, dynamic>),
+      userInfo: ProfileDto.fromJson(json['user_info'] as Map<String, dynamic>),
+      contentsAllviewCount: json['contents_allview_count'] as int,
+      contentsMyviewCount: json['contents_myview_count'] as int,
+      contentsAlarmCheck: json['contents_alarm_check'] as int,
+      boardInfo: json['board_info'] == null
+          ? null
+          : BoardInfoDto.fromJson(json['board_info'] as Map<String, dynamic>),
+      shareInfo: json['share'] == null
+          ? null
+          : ShareDto.fromJson(json['share'] as Map<String, dynamic>),
+      contentsComment: json['contents_comment'] as List<dynamic>?,
+      ContentsCreateDate: Fbconverter.fromJson(json['contents_create_date']),
+      ContentsUpdateDate: Fbconverter.fromJson(json['contents_upt_date']),
     );
 
-Map<String, dynamic> _$$_ContentDtoToJson(_$_ContentDto instance) =>
+Map<String, dynamic> _$$_ContentsDtoToJson(_$_ContentsDto instance) =>
     <String, dynamic>{
-      'id': instance.id,
+      'contents_id': instance.contentsId,
       'info': instance.info.toJson(),
-      'profile': instance.profile.toJson(),
-      'dtCreated': Fbconverter.toJson(instance.dtCreated),
-      'dtUpdated': Fbconverter.toJson(instance.dtUpdated),
-      'kind': instance.kind,
+      'user_info': instance.userInfo.toJson(),
+      'contents_allview_count': instance.contentsAllviewCount,
+      'contents_myview_count': instance.contentsMyviewCount,
+      'contents_alarm_check': instance.contentsAlarmCheck,
+      'board_info': instance.boardInfo?.toJson(),
+      'share': instance.shareInfo?.toJson(),
+      'contents_comment': instance.contentsComment,
+      'contents_create_date': Fbconverter.toJson(instance.ContentsCreateDate),
+      'contents_upt_date': Fbconverter.toJson(instance.ContentsUpdateDate),
     };
 
-_$_ContentInfoDto _$$_ContentInfoDtoFromJson(Map<String, dynamic> json) =>
-    _$_ContentInfoDto(
-      id: json['id'] as String?,
-      imgUrl: json['imgUrl'] as String?,
-      uid: json['uid'] as String?,
-      title: json['title'] as String?,
-      content: json['content'] as String?,
-      cntView: json['cntView'] as int,
-      contentKind: json['contentKind'] as int,
+_$_ContentsInfoDto _$$_ContentsInfoDtoFromJson(Map<String, dynamic> json) =>
+    _$_ContentsInfoDto(
+      contentsId: json['contents_id'] as String?,
+      contentsTitle: json['contents_title'] as String?,
+      contentsUrl: json['contents_url'] as String?,
+      contentsImages: json['contents_images'] as String?,
+      contentsDescription: json['contents_description'] as String?,
+      contentsComment: json['contents_comment'] as String?,
+      contentsUniqueLink: json['contents_unique_link'] as String?,
       thumbnails: (json['thumbnails'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
-      dtCreated: Fbconverter.fromJson(json['dtCreated']),
-      dtUpdated: Fbconverter.fromJson(json['dtUpdated']),
+      ContentsCreateDate: Fbconverter.fromJson(json['contents_create_date']),
+      ContentsUpdateDate: Fbconverter.fromJson(json['contents_upt_date']),
     );
 
-Map<String, dynamic> _$$_ContentInfoDtoToJson(_$_ContentInfoDto instance) =>
+Map<String, dynamic> _$$_ContentsInfoDtoToJson(_$_ContentsInfoDto instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'imgUrl': instance.imgUrl,
-      'uid': instance.uid,
-      'title': instance.title,
-      'content': instance.content,
-      'cntView': instance.cntView,
-      'contentKind': instance.contentKind,
+      'contents_id': instance.contentsId,
+      'contents_title': instance.contentsTitle,
+      'contents_url': instance.contentsUrl,
+      'contents_images': instance.contentsImages,
+      'contents_description': instance.contentsDescription,
+      'contents_comment': instance.contentsComment,
+      'contents_unique_link': instance.contentsUniqueLink,
       'thumbnails': instance.thumbnails,
-      'dtCreated': Fbconverter.toJson(instance.dtCreated),
-      'dtUpdated': Fbconverter.toJson(instance.dtUpdated),
+      'contents_create_date': Fbconverter.toJson(instance.ContentsCreateDate),
+      'contents_upt_date': Fbconverter.toJson(instance.ContentsUpdateDate),
     };

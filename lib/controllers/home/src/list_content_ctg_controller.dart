@@ -37,7 +37,7 @@ class ContentCtgListController extends AbsListController
 
     final lists = await listFilter('/clay_contents/_search', bodyJSON);
     return lists.map((jsonList) {
-      return ContentDto.fromJson(jsonList['_source']).toDomain();
+      return ContentsDto.fromJson(jsonList['_source']).toDomain();
     }).toList();
 
     /*    

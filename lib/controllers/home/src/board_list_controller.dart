@@ -27,8 +27,23 @@ class BoardListController extends AbsListController
     int limit, {
     String? searchTerm,
   }) async {
+    var queryList = [
+      {
+        "match": {"board_creator.user_id": AuthController.to.getUser?.uid}
+      }
+    ];
+    if (searchTerm != null && searchTerm.isNotEmpty) {
+      queryList.add({
+        "match": {"info.board_badge": searchTerm}
+      });
+    }
+
     final bodyJSON = {
-      "query": {"match_all": {}},
+      "query": {
+        "bool": {
+          "must": queryList,
+        },
+      },
       "sort": [
         // {"cntView": "desc"}
       ]
@@ -47,14 +62,14 @@ class BoardListController extends AbsListController
   //------------------기본 CRUD 프로토콜
   //---------------------------------
 
-  Future<ContentInfo> read(String id) async {
+  Future<ContentsInfo> read(String id) async {
     // try {
     final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
 
     if (_item == null) {
       throw Exception('error');
     }
-    final _post = ContentDto.fromJson(_item).toDomain();
+    final _post = ContentsDto.fromJson(_item).toDomain();
 
     // final info = PostInfo.fromJson((_info.info));
     this.item = _post.info;
@@ -69,7 +84,7 @@ class BoardListController extends AbsListController
     if (_item == null) {
       throw Exception('error');
     }
-    final _post = ContentDto.fromJson(_item).toDomain();
+    final _post = ContentsDto.fromJson(_item).toDomain();
     var existIndex = cache.indexWhere(
       (element) => element.id == id,
     );
@@ -83,16 +98,18 @@ class BoardListController extends AbsListController
     update();
   }
 
-  Future<void> actionDeleteItem(String id) async {
-    var existIndex = cache.indexWhere(
-      (element) => element.id == id,
-    );
+  Future<void> actionDeleteItem(String? id) async {
+    if (id != null) {
+      var existIndex = cache.indexWhere(
+        (element) => element.boardId == id,
+      );
 
-    if (existIndex >= 0) {
-      cache.removeAt(existIndex);
+      if (existIndex >= 0) {
+        cache.removeAt(existIndex);
+      }
+
+      update();
     }
-
-    update();
   }
 
   Future<void> actionUpdateItem(Board? item) async {

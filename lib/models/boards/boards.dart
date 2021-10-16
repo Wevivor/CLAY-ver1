@@ -1,7 +1,7 @@
-import 'package:clay/c_globals/utils/utils.dart';
+import 'package:clay/models/model_app/users/users.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../models.dart';
+import 'board_dtos.dart';
 
 part 'boards.freezed.dart';
 
@@ -13,7 +13,7 @@ class Board with _$Board {
     required Profile boardCreator,
     Share? shareInfo,
     List<dynamic>? boardComment,
-    required bool shareCheck,
+    required int shareCheck,
     required DateTime registerDate,
   }) = _Board;
   Board._();
@@ -39,7 +39,7 @@ class BoardInfo with _$BoardInfo {
     required String boardBadge,
     String? boardUnquieLink,
     required int contentsCount,
-    required bool shareCheck,
+    required int shareCheck,
     int? shareCount,
     required DateTime registerDate,
     // List<Comment>? comments;

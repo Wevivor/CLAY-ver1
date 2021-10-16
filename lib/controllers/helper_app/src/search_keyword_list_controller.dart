@@ -6,12 +6,13 @@ import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/models/models.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:sprintf/sprintf.dart';
 
 import 'fb_search_history_module.dart';
 
 class SearchKeyWordListController extends GetxController
     with FbCommonModule, FbSearchHistoryModule {
-  static String MENU_POS = 'history/검색기록/사용자';
+  static String MENU_POS = 'history/searchwords/users';
   late dynamic _instance;
 
   SearchKeyWordListController() {
@@ -40,9 +41,12 @@ class SearchKeyWordListController extends GetxController
           name: AuthController.to.getUser?.displayName,
           node: _cache);
 
-      updateFb(
+      setFb(
           instance: _instance,
-          path: MENU_POS,
+          // path: sprintf('%s/%s', [MENU_POS, AuthController.to.getUser?.uid]),
+          path: sprintf('%s', [
+            MENU_POS,
+          ]),
           id: AuthController.to.getUser?.uid ?? '',
           dto: item.toJson());
     }
@@ -60,9 +64,11 @@ class SearchKeyWordListController extends GetxController
           strUid: AuthController.to.getUser?.uid,
           name: AuthController.to.getUser?.displayName,
           node: _cache);
-      updateFb(
+      setFb(
           instance: _instance,
-          path: MENU_POS,
+          path: sprintf('%s', [
+            MENU_POS,
+          ]),
           id: AuthController.to.getUser?.uid ?? '',
           dto: item.toJson());
     } catch (e) {
