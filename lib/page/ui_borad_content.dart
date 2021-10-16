@@ -2,6 +2,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/models/models.dart';
 import 'package:clay/part/part_bs/part_bs.dart';
 import 'package:clay/part/part_home/part_home.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,7 +12,7 @@ import 'package:get/get.dart';
 
 // ignore: must_be_immutable
 class BoardContentUI extends StatefulWidget {
-  final board;
+  final Board board;
   BoardContentUI({required this.board});
 
   @override
@@ -21,16 +22,44 @@ class BoardContentUI extends StatefulWidget {
 class _BoardContentUIState extends State<BoardContentUI>
     with AppbarHelper, SingleTickerProviderStateMixin {
   int listType = 0;
+  late ScrollController _scrollController;
+  bool silverCollapsed = false;
+  String myTitle = '';
   @override
   void initState() {
     super.initState();
+    _scrollController = ScrollController();
+
+    _scrollController.addListener(() {
+      if (_scrollController.offset > 220 &&
+          !_scrollController.position.outOfRange) {
+        if (!silverCollapsed) {
+          // do what ever you want when silver is collapsing !
+
+          myTitle = widget.board.info.boardName;
+          silverCollapsed = true;
+          setState(() {});
+        }
+      }
+      if (_scrollController.offset <= 220 &&
+          !_scrollController.position.outOfRange) {
+        if (silverCollapsed) {
+          // do what ever you want when silver is expanding !
+
+          // myTitle = "silver expanded !";
+          myTitle = '';
+          silverCollapsed = false;
+          setState(() {});
+        }
+      }
+    });
 
     initFetch();
   }
 
   Future<void> initFetch() async {
     final _controller = Get.put(ContentListController());
-    _controller.boardId = widget.board;
+    _controller.boardId = widget.board.info.boardId ?? '';
     _controller.cache = [];
     await ContentListController.to.fetchItems();
     debugPrint('--------- BoardContentUI initFetch-----------');
@@ -70,6 +99,7 @@ class _BoardContentUIState extends State<BoardContentUI>
     return Scaffold(
         backgroundColor: Colors.white,
         body: CustomScrollView(
+          controller: _scrollController,
           slivers: [
             PreferredSize(
               preferredSize: Size.fromHeight(profileHeight),
@@ -78,6 +108,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                 //   '홈베이킹 레시피',
                 //   style: baseStyle.copyWith(color: Colors.black),
                 // ),
+
                 pinned: true,
                 floating: true,
                 snap: true,
@@ -92,6 +123,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                     color: Colors.white,
                   ),
                 ),
+                title: Text(myTitle),
                 expandedHeight: profileHeight,
                 flexibleSpace: FlexibleSpaceBar(
                   collapseMode: CollapseMode.pin,
@@ -108,7 +140,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                       top: kToolbarHeight,
                     ),
                     alignment: Alignment.center,
-                    child: ContentHeaderPART(),
+                    child: ContentHeaderPART(widget.board),
                   ),
                 ),
                 actions: [
@@ -117,7 +149,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                     child: InkWell(
                       onTap: () {
                         final _controller = Get.put(BoardController());
-
+                        BoardController.to.boardItem = widget.board;
                         _showBS(context, BottomSheetShare());
                       },
                       child: Container(

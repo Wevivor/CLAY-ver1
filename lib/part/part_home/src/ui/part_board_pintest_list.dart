@@ -87,11 +87,15 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
               onMore: () {
                 final _controller = Get.put(BoardListMySelectController());
                 _controller.cache = [];
-                _controller.selected =-1;
+                _controller.selected = -1;
                 _controller.fetchItems();
                 _showBS(
                     context,
                     BottomSheetBoardChange(
+                      onDone: () {
+                        ContentListController.to
+                            .actionDelteItem(item.contentsId ?? '');
+                      },
                       current: item,
                     ));
               },

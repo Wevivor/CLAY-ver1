@@ -12,7 +12,8 @@ import 'package:clay/controllers/common/commons.dart';
 class ContentsController extends AbsItemController with FbCommonModule {
   static String MENU_POS = 'contents';
   late FirebaseFirestore _instance;
-  Board? boardItem;
+  // Board? boardItem;
+  Contents? contentsItem;
   final TextEditingController linkController = TextEditingController();
   final TextEditingController commentController = TextEditingController();
   final TextEditingController memoController = TextEditingController();
@@ -105,20 +106,20 @@ class ContentsController extends AbsItemController with FbCommonModule {
     }
   }
 
-  Future<void> actionUpdate() async {
-    try {
-      await updateFb(
-          instance: _instance,
-          path: MENU_POS,
-          id: boardItem?.boardId ?? '',
-          dto: boardItem?.toDto());
-    } catch (e) {
-      throw Exception('error ${e.toString()}');
-    } finally {
-      update();
-      LoadingController.to.isLoading = false;
-    }
-  }
+  // Future<void> actionUpdate() async {
+  //   try {
+  //     await updateFb(
+  //         instance: _instance,
+  //         path: MENU_POS,
+  //         id: boardItem?.boardId ?? '',
+  //         dto: boardItem?.toDto());
+  //   } catch (e) {
+  //     throw Exception('error ${e.toString()}');
+  //   } finally {
+  //     update();
+  //     LoadingController.to.isLoading = false;
+  //   }
+  // }
 
   Future<void> actionUpdateInfo({id, info}) async {
     try {
@@ -138,13 +139,13 @@ class ContentsController extends AbsItemController with FbCommonModule {
 
   Future<void> actionPin({fix}) async {
     try {
-      if (boardItem?.info != null) {
-        final _info = boardItem?.info;
-        boardItem = boardItem?.copyWith(info: _info!.copyWith(isFixed: fix));
-        update();
+      if (contentsItem?.info != null) {
+        final _info = contentsItem?.info;
+        contentsItem =
+            contentsItem?.copyWith(info: _info!.copyWith(contentsFixed: fix));
         await actionUpdateInfo(
-            id: boardItem?.boardId,
-            info: boardItem?.info.copyWith(isFixed: fix).toDto());
+            id: contentsItem?.contentsId,
+            info: contentsItem?.info.copyWith(contentsFixed: fix).toDto());
       }
     } catch (e) {
       throw Exception('error ${e.toString()}');
@@ -153,25 +154,25 @@ class ContentsController extends AbsItemController with FbCommonModule {
     }
   }
 
-  void actionChangeColor(String color) async {
-    final _newInfo = boardItem!.info.copyWith(boardColor: color);
-    final _newItem = boardItem!.copyWith(info: _newInfo);
-    boardItem = _newItem;
+  // void actionChangeColor(String color) async {
+  //   final _newInfo = boardItem!.info.copyWith(boardColor: color);
+  //   final _newItem = boardItem!.copyWith(info: _newInfo);
+  //   boardItem = _newItem;
 
-    update();
-  }
+  //   update();
+  // }
 
-  void actionChangeShare(int share) async {
-    final _newInfo = boardItem!.info.copyWith(shareCheck: share);
-    final _newItem = boardItem!.copyWith(shareCheck: share, info: _newInfo);
-    boardItem = _newItem;
-    update();
-  }
+  // void actionChangeShare(int share) async {
+  //   final _newInfo = boardItem!.info.copyWith(shareCheck: share);
+  //   final _newItem = boardItem!.copyWith(shareCheck: share, info: _newInfo);
+  //   boardItem = _newItem;
+  //   update();
+  // }
 
-  void actionChangeBadge(String badge) async {
-    final _newInfo = boardItem!.info.copyWith(boardBadge: badge);
-    final _newItem = boardItem!.copyWith(info: _newInfo);
-    boardItem = _newItem;
-    update();
-  }
+  // void actionChangeBadge(String badge) async {
+  //   final _newInfo = boardItem!.info.copyWith(boardBadge: badge);
+  //   final _newItem = boardItem!.copyWith(info: _newInfo);
+  //   boardItem = _newItem;
+  //   update();
+  // }
 }

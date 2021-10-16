@@ -37,7 +37,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
   }
 
   Widget memo(BuildContext context) {
-    Get.put(ContentCtgListController());
+    // Get.put(ContentCtgListController());
     final node = FocusScope.of(context);
 
     return Column(

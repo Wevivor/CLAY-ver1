@@ -1,21 +1,26 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/models/models.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:sprintf/sprintf.dart';
 
 import 'wgt_profile_ovlay_list.dart';
 
 // ignore: must_be_immutable
 class ContentHeaderPART extends StatelessWidget with AppbarHelper {
+  final Board board;
   final listController = Get.put(
     BoardListController(),
   );
-  ContentHeaderPART();
+  ContentHeaderPART(
+    this.board,
+  );
   Future<void> initFetch() async {
     listController.cache = [];
     await listController.fetchItems();
@@ -29,14 +34,15 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
-          vwTitle('홈베이킹 레시피'),
+          vwTitle(board.info.boardName),
           heightSpace(2.0),
           //TODO: 날짜, 및 개수 sprinf
           Container(
             // padding: EdgeInsets.only(left: 16),
             alignment: Alignment.centerLeft,
             child: Text(
-              sprintf('%s, %d items', ['2021년 8월 7일, ', 13]),
+              sprintf('%s, %d items',
+                  [Jiffy(board.info.registerDate).format('yyyy년 MM월 dd일'), 13]),
               style: baseStyle.copyWith(
                   fontSize: 13,
                   color: Colors.white,

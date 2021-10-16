@@ -56,6 +56,7 @@ class ContentsInfoDto with _$ContentsInfoDto {
     @JsonKey(name: 'contents_description') String? contentsDescription,
     @JsonKey(name: 'contents_comment') String? contentsComment,
     @JsonKey(name: 'contents_unique_link') String? contentsUniqueLink,
+    @JsonKey(name: 'contents_fixed') bool? contentsFixed,
     List<String?>? thumbnails,
     @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime ContentsCreateDate,
@@ -75,6 +76,7 @@ class ContentsInfoDto with _$ContentsInfoDto {
         contentsDescription: contentsDescription,
         contentsComment: contentsComment,
         thumbnails: thumbnails,
+        contentsFixed: contentsFixed,
         contentsUniqueLink: contentsUniqueLink,
         ContentsCreateDate: ContentsCreateDate,
         ContentsUpdateDate: ContentsUpdateDate,

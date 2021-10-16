@@ -17,11 +17,13 @@ import 'wgt_choice_color.dart';
 class BottomSheetBoardChange extends StatelessWidget
     with AppbarHelper, BSValidator {
   final onMenu;
+  final onDone;
   final current;
   final _formKey = GlobalKey<FormState>();
   BottomSheetBoardChange({
     this.onMenu,
     this.current,
+    required this.onDone,
   });
 
   @override
@@ -80,14 +82,9 @@ class BottomSheetBoardChange extends StatelessWidget
                     final _item = current.copyWith(boardInfo: _boardInfo);
 
                     await _controller.actionContentsUpdate(_item.toDto());
-                    ContentListController.to
-                        .actionDelteItem(current.contentsId);
-                    Get.back();
-                    // ContentListController.to.boardId =
-                    //     current.boardInfo.boardId;
+                    if (onDone != null) onDone();
 
-                    // await ContentListController.to.fetchItems();
-                    // ContentListController.to.update();
+                    Get.back();
                   },
                   child: Text(
                     '완료',

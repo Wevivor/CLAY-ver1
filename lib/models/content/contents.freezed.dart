@@ -456,6 +456,7 @@ class _$ContentsInfoTearOff {
       String? contentsDescription,
       String? contentsComment,
       String? contentsUniqueLink,
+      bool? contentsFixed,
       List<String?>? thumbnails,
       required DateTime ContentsCreateDate,
       required DateTime ContentsUpdateDate}) {
@@ -467,6 +468,7 @@ class _$ContentsInfoTearOff {
       contentsDescription: contentsDescription,
       contentsComment: contentsComment,
       contentsUniqueLink: contentsUniqueLink,
+      contentsFixed: contentsFixed,
       thumbnails: thumbnails,
       ContentsCreateDate: ContentsCreateDate,
       ContentsUpdateDate: ContentsUpdateDate,
@@ -486,6 +488,7 @@ mixin _$ContentsInfo {
   String? get contentsDescription => throw _privateConstructorUsedError;
   String? get contentsComment => throw _privateConstructorUsedError;
   String? get contentsUniqueLink => throw _privateConstructorUsedError;
+  bool? get contentsFixed => throw _privateConstructorUsedError;
   List<String?>? get thumbnails => throw _privateConstructorUsedError;
   DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
   DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
@@ -508,6 +511,7 @@ abstract class $ContentsInfoCopyWith<$Res> {
       String? contentsDescription,
       String? contentsComment,
       String? contentsUniqueLink,
+      bool? contentsFixed,
       List<String?>? thumbnails,
       DateTime ContentsCreateDate,
       DateTime ContentsUpdateDate});
@@ -530,6 +534,7 @@ class _$ContentsInfoCopyWithImpl<$Res> implements $ContentsInfoCopyWith<$Res> {
     Object? contentsDescription = freezed,
     Object? contentsComment = freezed,
     Object? contentsUniqueLink = freezed,
+    Object? contentsFixed = freezed,
     Object? thumbnails = freezed,
     Object? ContentsCreateDate = freezed,
     Object? ContentsUpdateDate = freezed,
@@ -563,6 +568,10 @@ class _$ContentsInfoCopyWithImpl<$Res> implements $ContentsInfoCopyWith<$Res> {
           ? _value.contentsUniqueLink
           : contentsUniqueLink // ignore: cast_nullable_to_non_nullable
               as String?,
+      contentsFixed: contentsFixed == freezed
+          ? _value.contentsFixed
+          : contentsFixed // ignore: cast_nullable_to_non_nullable
+              as bool?,
       thumbnails: thumbnails == freezed
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
@@ -594,6 +603,7 @@ abstract class _$ContentsInfoCopyWith<$Res>
       String? contentsDescription,
       String? contentsComment,
       String? contentsUniqueLink,
+      bool? contentsFixed,
       List<String?>? thumbnails,
       DateTime ContentsCreateDate,
       DateTime ContentsUpdateDate});
@@ -618,6 +628,7 @@ class __$ContentsInfoCopyWithImpl<$Res> extends _$ContentsInfoCopyWithImpl<$Res>
     Object? contentsDescription = freezed,
     Object? contentsComment = freezed,
     Object? contentsUniqueLink = freezed,
+    Object? contentsFixed = freezed,
     Object? thumbnails = freezed,
     Object? ContentsCreateDate = freezed,
     Object? ContentsUpdateDate = freezed,
@@ -651,6 +662,10 @@ class __$ContentsInfoCopyWithImpl<$Res> extends _$ContentsInfoCopyWithImpl<$Res>
           ? _value.contentsUniqueLink
           : contentsUniqueLink // ignore: cast_nullable_to_non_nullable
               as String?,
+      contentsFixed: contentsFixed == freezed
+          ? _value.contentsFixed
+          : contentsFixed // ignore: cast_nullable_to_non_nullable
+              as bool?,
       thumbnails: thumbnails == freezed
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
@@ -678,6 +693,7 @@ class _$_ContentsInfo extends _ContentsInfo {
       this.contentsDescription,
       this.contentsComment,
       this.contentsUniqueLink,
+      this.contentsFixed,
       this.thumbnails,
       required this.ContentsCreateDate,
       required this.ContentsUpdateDate})
@@ -698,6 +714,8 @@ class _$_ContentsInfo extends _ContentsInfo {
   @override
   final String? contentsUniqueLink;
   @override
+  final bool? contentsFixed;
+  @override
   final List<String?>? thumbnails;
   @override
   final DateTime ContentsCreateDate;
@@ -706,7 +724,7 @@ class _$_ContentsInfo extends _ContentsInfo {
 
   @override
   String toString() {
-    return 'ContentsInfo(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
+    return 'ContentsInfo(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
   }
 
   @override
@@ -734,6 +752,9 @@ class _$_ContentsInfo extends _ContentsInfo {
             (identical(other.contentsUniqueLink, contentsUniqueLink) ||
                 const DeepCollectionEquality()
                     .equals(other.contentsUniqueLink, contentsUniqueLink)) &&
+            (identical(other.contentsFixed, contentsFixed) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsFixed, contentsFixed)) &&
             (identical(other.thumbnails, thumbnails) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnails, thumbnails)) &&
@@ -755,6 +776,7 @@ class _$_ContentsInfo extends _ContentsInfo {
       const DeepCollectionEquality().hash(contentsDescription) ^
       const DeepCollectionEquality().hash(contentsComment) ^
       const DeepCollectionEquality().hash(contentsUniqueLink) ^
+      const DeepCollectionEquality().hash(contentsFixed) ^
       const DeepCollectionEquality().hash(thumbnails) ^
       const DeepCollectionEquality().hash(ContentsCreateDate) ^
       const DeepCollectionEquality().hash(ContentsUpdateDate);
@@ -774,6 +796,7 @@ abstract class _ContentsInfo extends ContentsInfo {
       String? contentsDescription,
       String? contentsComment,
       String? contentsUniqueLink,
+      bool? contentsFixed,
       List<String?>? thumbnails,
       required DateTime ContentsCreateDate,
       required DateTime ContentsUpdateDate}) = _$_ContentsInfo;
@@ -793,6 +816,8 @@ abstract class _ContentsInfo extends ContentsInfo {
   String? get contentsComment => throw _privateConstructorUsedError;
   @override
   String? get contentsUniqueLink => throw _privateConstructorUsedError;
+  @override
+  bool? get contentsFixed => throw _privateConstructorUsedError;
   @override
   List<String?>? get thumbnails => throw _privateConstructorUsedError;
   @override

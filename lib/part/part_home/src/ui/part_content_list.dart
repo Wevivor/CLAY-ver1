@@ -55,6 +55,10 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                       _showBS(
                           context,
                           BottomSheetBoardChange(
+                            onDone: () {
+                              ContentListController.to
+                                  .actionDelteItem(item.contentsId ?? '');
+                            },
                             current: item,
                           ));
                     },

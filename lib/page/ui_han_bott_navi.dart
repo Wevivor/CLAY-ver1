@@ -215,6 +215,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     // print('---------${_getcontroller?.index}');
     final _index = BottomNaviController.to.getIndex;
     return Container(
+      color: Colors.white,
       // padding: EdgeInsets.only(left: 34, right: 34),
 
       child: Container(

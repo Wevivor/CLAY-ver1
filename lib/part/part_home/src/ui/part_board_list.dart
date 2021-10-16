@@ -51,7 +51,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                       children: [
                         BoardItemWidget(
                           onTap: () {
-                            Get.to(() => BoardContentUI(board: item.boardId));
+                            Get.to(() => BoardContentUI(board: item));
                           },
                           boardColor:
                               Color(int.parse(item.info.boardColor, radix: 16)),

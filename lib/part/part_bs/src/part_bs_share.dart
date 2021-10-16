@@ -14,11 +14,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
     this.onMenu,
   });
 
-  // await BoardController.to.actionPin(fix: !_fixed!);
-
-  // await BoardListController.to
-  //     .actionUpdateItem(BoardController.to.boardItem);
-  // Get.back();
   @override
   Widget build(BuildContext context) {
     return GetBuilder<BoardController>(builder: (controller) {

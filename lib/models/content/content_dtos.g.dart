@@ -49,6 +49,7 @@ _$_ContentsInfoDto _$$_ContentsInfoDtoFromJson(Map<String, dynamic> json) =>
       contentsDescription: json['contents_description'] as String?,
       contentsComment: json['contents_comment'] as String?,
       contentsUniqueLink: json['contents_unique_link'] as String?,
+      contentsFixed: json['contents_fixed'] as bool?,
       thumbnails: (json['thumbnails'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
@@ -65,6 +66,7 @@ Map<String, dynamic> _$$_ContentsInfoDtoToJson(_$_ContentsInfoDto instance) =>
       'contents_description': instance.contentsDescription,
       'contents_comment': instance.contentsComment,
       'contents_unique_link': instance.contentsUniqueLink,
+      'contents_fixed': instance.contentsFixed,
       'thumbnails': instance.thumbnails,
       'contents_create_date': Fbconverter.toJson(instance.ContentsCreateDate),
       'contents_upt_date': Fbconverter.toJson(instance.ContentsUpdateDate),

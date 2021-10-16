@@ -44,6 +44,7 @@ class ContentsInfo with _$ContentsInfo {
     String? contentsDescription,
     String? contentsComment,
     String? contentsUniqueLink,
+    bool? contentsFixed,
     List<String?>? thumbnails,
     required DateTime ContentsCreateDate,
     required DateTime ContentsUpdateDate,
@@ -61,6 +62,7 @@ class ContentsInfo with _$ContentsInfo {
         contentsComment: contentsComment,
         contentsUniqueLink: contentsUniqueLink,
         thumbnails: thumbnails,
+        contentsFixed: contentsFixed,
         ContentsCreateDate: ContentsCreateDate,
         ContentsUpdateDate: ContentsUpdateDate,
       );
