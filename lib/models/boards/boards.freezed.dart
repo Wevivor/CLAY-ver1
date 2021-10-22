@@ -22,6 +22,7 @@ class _$BoardTearOff {
       required BoardInfo info,
       required Profile boardCreator,
       Share? shareInfo,
+      int? contentsCount,
       List<dynamic>? boardComment,
       required int shareCheck,
       required DateTime registerDate}) {
@@ -30,6 +31,7 @@ class _$BoardTearOff {
       info: info,
       boardCreator: boardCreator,
       shareInfo: shareInfo,
+      contentsCount: contentsCount,
       boardComment: boardComment,
       shareCheck: shareCheck,
       registerDate: registerDate,
@@ -46,6 +48,7 @@ mixin _$Board {
   BoardInfo get info => throw _privateConstructorUsedError;
   Profile get boardCreator => throw _privateConstructorUsedError;
   Share? get shareInfo => throw _privateConstructorUsedError;
+  int? get contentsCount => throw _privateConstructorUsedError;
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   int get shareCheck => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
@@ -63,6 +66,7 @@ abstract class $BoardCopyWith<$Res> {
       BoardInfo info,
       Profile boardCreator,
       Share? shareInfo,
+      int? contentsCount,
       List<dynamic>? boardComment,
       int shareCheck,
       DateTime registerDate});
@@ -86,6 +90,7 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
     Object? info = freezed,
     Object? boardCreator = freezed,
     Object? shareInfo = freezed,
+    Object? contentsCount = freezed,
     Object? boardComment = freezed,
     Object? shareCheck = freezed,
     Object? registerDate = freezed,
@@ -107,6 +112,10 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
           ? _value.shareInfo
           : shareInfo // ignore: cast_nullable_to_non_nullable
               as Share?,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       boardComment: boardComment == freezed
           ? _value.boardComment
           : boardComment // ignore: cast_nullable_to_non_nullable
@@ -158,6 +167,7 @@ abstract class _$BoardCopyWith<$Res> implements $BoardCopyWith<$Res> {
       BoardInfo info,
       Profile boardCreator,
       Share? shareInfo,
+      int? contentsCount,
       List<dynamic>? boardComment,
       int shareCheck,
       DateTime registerDate});
@@ -185,6 +195,7 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
     Object? info = freezed,
     Object? boardCreator = freezed,
     Object? shareInfo = freezed,
+    Object? contentsCount = freezed,
     Object? boardComment = freezed,
     Object? shareCheck = freezed,
     Object? registerDate = freezed,
@@ -206,6 +217,10 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
           ? _value.shareInfo
           : shareInfo // ignore: cast_nullable_to_non_nullable
               as Share?,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       boardComment: boardComment == freezed
           ? _value.boardComment
           : boardComment // ignore: cast_nullable_to_non_nullable
@@ -230,6 +245,7 @@ class _$_Board extends _Board {
       required this.info,
       required this.boardCreator,
       this.shareInfo,
+      this.contentsCount,
       this.boardComment,
       required this.shareCheck,
       required this.registerDate})
@@ -244,6 +260,8 @@ class _$_Board extends _Board {
   @override
   final Share? shareInfo;
   @override
+  final int? contentsCount;
+  @override
   final List<dynamic>? boardComment;
   @override
   final int shareCheck;
@@ -252,7 +270,7 @@ class _$_Board extends _Board {
 
   @override
   String toString() {
-    return 'Board(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, boardComment: $boardComment, shareCheck: $shareCheck, registerDate: $registerDate)';
+    return 'Board(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, contentsCount: $contentsCount, boardComment: $boardComment, shareCheck: $shareCheck, registerDate: $registerDate)';
   }
 
   @override
@@ -270,6 +288,9 @@ class _$_Board extends _Board {
             (identical(other.shareInfo, shareInfo) ||
                 const DeepCollectionEquality()
                     .equals(other.shareInfo, shareInfo)) &&
+            (identical(other.contentsCount, contentsCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsCount, contentsCount)) &&
             (identical(other.boardComment, boardComment) ||
                 const DeepCollectionEquality()
                     .equals(other.boardComment, boardComment)) &&
@@ -288,6 +309,7 @@ class _$_Board extends _Board {
       const DeepCollectionEquality().hash(info) ^
       const DeepCollectionEquality().hash(boardCreator) ^
       const DeepCollectionEquality().hash(shareInfo) ^
+      const DeepCollectionEquality().hash(contentsCount) ^
       const DeepCollectionEquality().hash(boardComment) ^
       const DeepCollectionEquality().hash(shareCheck) ^
       const DeepCollectionEquality().hash(registerDate);
@@ -304,6 +326,7 @@ abstract class _Board extends Board {
       required BoardInfo info,
       required Profile boardCreator,
       Share? shareInfo,
+      int? contentsCount,
       List<dynamic>? boardComment,
       required int shareCheck,
       required DateTime registerDate}) = _$_Board;
@@ -317,6 +340,8 @@ abstract class _Board extends Board {
   Profile get boardCreator => throw _privateConstructorUsedError;
   @override
   Share? get shareInfo => throw _privateConstructorUsedError;
+  @override
+  int? get contentsCount => throw _privateConstructorUsedError;
   @override
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   @override
@@ -339,7 +364,6 @@ class _$BoardInfoTearOff {
       required String boardColor,
       required String boardBadge,
       String? boardUnquieLink,
-      required int contentsCount,
       required int shareCheck,
       int? shareCount,
       required DateTime registerDate}) {
@@ -350,7 +374,6 @@ class _$BoardInfoTearOff {
       boardColor: boardColor,
       boardBadge: boardBadge,
       boardUnquieLink: boardUnquieLink,
-      contentsCount: contentsCount,
       shareCheck: shareCheck,
       shareCount: shareCount,
       registerDate: registerDate,
@@ -369,7 +392,6 @@ mixin _$BoardInfo {
   String get boardColor => throw _privateConstructorUsedError;
   String get boardBadge => throw _privateConstructorUsedError;
   String? get boardUnquieLink => throw _privateConstructorUsedError;
-  int get contentsCount => throw _privateConstructorUsedError;
   int get shareCheck => throw _privateConstructorUsedError;
   int? get shareCount => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
@@ -390,7 +412,6 @@ abstract class $BoardInfoCopyWith<$Res> {
       String boardColor,
       String boardBadge,
       String? boardUnquieLink,
-      int contentsCount,
       int shareCheck,
       int? shareCount,
       DateTime registerDate});
@@ -412,7 +433,6 @@ class _$BoardInfoCopyWithImpl<$Res> implements $BoardInfoCopyWith<$Res> {
     Object? boardColor = freezed,
     Object? boardBadge = freezed,
     Object? boardUnquieLink = freezed,
-    Object? contentsCount = freezed,
     Object? shareCheck = freezed,
     Object? shareCount = freezed,
     Object? registerDate = freezed,
@@ -442,10 +462,6 @@ class _$BoardInfoCopyWithImpl<$Res> implements $BoardInfoCopyWith<$Res> {
           ? _value.boardUnquieLink
           : boardUnquieLink // ignore: cast_nullable_to_non_nullable
               as String?,
-      contentsCount: contentsCount == freezed
-          ? _value.contentsCount
-          : contentsCount // ignore: cast_nullable_to_non_nullable
-              as int,
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
@@ -475,7 +491,6 @@ abstract class _$BoardInfoCopyWith<$Res> implements $BoardInfoCopyWith<$Res> {
       String boardColor,
       String boardBadge,
       String? boardUnquieLink,
-      int contentsCount,
       int shareCheck,
       int? shareCount,
       DateTime registerDate});
@@ -498,7 +513,6 @@ class __$BoardInfoCopyWithImpl<$Res> extends _$BoardInfoCopyWithImpl<$Res>
     Object? boardColor = freezed,
     Object? boardBadge = freezed,
     Object? boardUnquieLink = freezed,
-    Object? contentsCount = freezed,
     Object? shareCheck = freezed,
     Object? shareCount = freezed,
     Object? registerDate = freezed,
@@ -528,10 +542,6 @@ class __$BoardInfoCopyWithImpl<$Res> extends _$BoardInfoCopyWithImpl<$Res>
           ? _value.boardUnquieLink
           : boardUnquieLink // ignore: cast_nullable_to_non_nullable
               as String?,
-      contentsCount: contentsCount == freezed
-          ? _value.contentsCount
-          : contentsCount // ignore: cast_nullable_to_non_nullable
-              as int,
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
@@ -558,7 +568,6 @@ class _$_BoardInfo extends _BoardInfo {
       required this.boardColor,
       required this.boardBadge,
       this.boardUnquieLink,
-      required this.contentsCount,
       required this.shareCheck,
       this.shareCount,
       required this.registerDate})
@@ -578,8 +587,6 @@ class _$_BoardInfo extends _BoardInfo {
   @override
   final String? boardUnquieLink;
   @override
-  final int contentsCount;
-  @override
   final int shareCheck;
   @override
   final int? shareCount;
@@ -588,7 +595,7 @@ class _$_BoardInfo extends _BoardInfo {
 
   @override
   String toString() {
-    return 'BoardInfo(boardId: $boardId, isFixed: $isFixed, boardName: $boardName, boardColor: $boardColor, boardBadge: $boardBadge, boardUnquieLink: $boardUnquieLink, contentsCount: $contentsCount, shareCheck: $shareCheck, shareCount: $shareCount, registerDate: $registerDate)';
+    return 'BoardInfo(boardId: $boardId, isFixed: $isFixed, boardName: $boardName, boardColor: $boardColor, boardBadge: $boardBadge, boardUnquieLink: $boardUnquieLink, shareCheck: $shareCheck, shareCount: $shareCount, registerDate: $registerDate)';
   }
 
   @override
@@ -613,9 +620,6 @@ class _$_BoardInfo extends _BoardInfo {
             (identical(other.boardUnquieLink, boardUnquieLink) ||
                 const DeepCollectionEquality()
                     .equals(other.boardUnquieLink, boardUnquieLink)) &&
-            (identical(other.contentsCount, contentsCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.contentsCount, contentsCount)) &&
             (identical(other.shareCheck, shareCheck) ||
                 const DeepCollectionEquality()
                     .equals(other.shareCheck, shareCheck)) &&
@@ -636,7 +640,6 @@ class _$_BoardInfo extends _BoardInfo {
       const DeepCollectionEquality().hash(boardColor) ^
       const DeepCollectionEquality().hash(boardBadge) ^
       const DeepCollectionEquality().hash(boardUnquieLink) ^
-      const DeepCollectionEquality().hash(contentsCount) ^
       const DeepCollectionEquality().hash(shareCheck) ^
       const DeepCollectionEquality().hash(shareCount) ^
       const DeepCollectionEquality().hash(registerDate);
@@ -655,7 +658,6 @@ abstract class _BoardInfo extends BoardInfo {
       required String boardColor,
       required String boardBadge,
       String? boardUnquieLink,
-      required int contentsCount,
       required int shareCheck,
       int? shareCount,
       required DateTime registerDate}) = _$_BoardInfo;
@@ -673,8 +675,6 @@ abstract class _BoardInfo extends BoardInfo {
   String get boardBadge => throw _privateConstructorUsedError;
   @override
   String? get boardUnquieLink => throw _privateConstructorUsedError;
-  @override
-  int get contentsCount => throw _privateConstructorUsedError;
   @override
   int get shareCheck => throw _privateConstructorUsedError;
   @override

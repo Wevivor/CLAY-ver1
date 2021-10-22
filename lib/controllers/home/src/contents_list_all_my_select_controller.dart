@@ -30,6 +30,8 @@ class ContentsListAllMySelectController extends AbsListController
     String? searchTerm,
   }) async {
     final bodyJSON = {
+      'from': 0,
+      'size': pageSize,
       "query": {
         "bool": {
           "must": [

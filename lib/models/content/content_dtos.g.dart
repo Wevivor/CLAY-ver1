@@ -20,7 +20,7 @@ _$_ContentsDto _$$_ContentsDtoFromJson(Map<String, dynamic> json) =>
       shareInfo: json['share'] == null
           ? null
           : ShareDto.fromJson(json['share'] as Map<String, dynamic>),
-      contentsComment: json['contents_comment'] as List<dynamic>?,
+      contentsComment: json['contents_comment'] as String?,
       ContentsCreateDate: Fbconverter.fromJson(json['contents_create_date']),
       ContentsUpdateDate: Fbconverter.fromJson(json['contents_upt_date']),
     );
@@ -50,9 +50,8 @@ _$_ContentsInfoDto _$$_ContentsInfoDtoFromJson(Map<String, dynamic> json) =>
       contentsComment: json['contents_comment'] as String?,
       contentsUniqueLink: json['contents_unique_link'] as String?,
       contentsFixed: json['contents_fixed'] as bool?,
-      thumbnails: (json['thumbnails'] as List<dynamic>?)
-          ?.map((e) => e as String?)
-          .toList(),
+      contentsType: json['contents_type'] as String?,
+      thumbnails: json['thumbnails'] as String?,
       ContentsCreateDate: Fbconverter.fromJson(json['contents_create_date']),
       ContentsUpdateDate: Fbconverter.fromJson(json['contents_upt_date']),
     );
@@ -67,6 +66,7 @@ Map<String, dynamic> _$$_ContentsInfoDtoToJson(_$_ContentsInfoDto instance) =>
       'contents_comment': instance.contentsComment,
       'contents_unique_link': instance.contentsUniqueLink,
       'contents_fixed': instance.contentsFixed,
+      'contents_type': instance.contentsType,
       'thumbnails': instance.thumbnails,
       'contents_create_date': Fbconverter.toJson(instance.ContentsCreateDate),
       'contents_upt_date': Fbconverter.toJson(instance.ContentsUpdateDate),

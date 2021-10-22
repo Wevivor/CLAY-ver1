@@ -56,7 +56,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                           boardColor:
                               Color(int.parse(item.info.boardColor, radix: 16)),
                           title: item.info.boardName,
-                          cnt: item.info.contentsCount,
+                          cnt: item.contentsCount ?? 0,
                           cntShare: 0,
                           isFix: item.info.isFixed,
                           category: item.info.boardBadge,
@@ -174,7 +174,6 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                 },
               ),
             );
-
             //SUBJECT: 보드 삭제
             //TODO: 다이어로르 처리, boardList 를 refresh
             if (_responce) {

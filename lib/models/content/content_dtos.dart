@@ -19,7 +19,7 @@ class ContentsDto with _$ContentsDto {
     @JsonKey(name: 'contents_alarm_check') required int contentsAlarmCheck,
     @JsonKey(name: 'board_info') BoardInfoDto? boardInfo,
     @JsonKey(name: 'share') ShareDto? shareInfo,
-    @JsonKey(name: 'contents_comment') List<dynamic>? contentsComment,
+    @JsonKey(name: 'contents_comment') String? contentsComment,
     @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime ContentsCreateDate,
     @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -57,7 +57,8 @@ class ContentsInfoDto with _$ContentsInfoDto {
     @JsonKey(name: 'contents_comment') String? contentsComment,
     @JsonKey(name: 'contents_unique_link') String? contentsUniqueLink,
     @JsonKey(name: 'contents_fixed') bool? contentsFixed,
-    List<String?>? thumbnails,
+    @JsonKey(name: 'contents_type') String? contentsType,
+    String? thumbnails,
     @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime ContentsCreateDate,
     @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -77,6 +78,7 @@ class ContentsInfoDto with _$ContentsInfoDto {
         contentsComment: contentsComment,
         thumbnails: thumbnails,
         contentsFixed: contentsFixed,
+        contentsType: contentsType,
         contentsUniqueLink: contentsUniqueLink,
         ContentsCreateDate: ContentsCreateDate,
         ContentsUpdateDate: ContentsUpdateDate,

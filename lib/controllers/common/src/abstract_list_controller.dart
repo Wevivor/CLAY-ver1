@@ -29,6 +29,8 @@ abstract class AbsListController<T> extends GetxController {
     try {
       final newItems = await getList(nextId, _pageSize, searchTerm: term);
       final isLastPage = newItems.length < _pageSize;
+
+      print('isLastPage:${isLastPage}, ${newItems.length}');
       if (isLastPage) {
         this.cache = [
           ...this.cache,
@@ -41,7 +43,10 @@ abstract class AbsListController<T> extends GetxController {
           ...newItems,
         ];
       }
-      if (isLastPage) hasMore = false;
+      if (isLastPage)
+        hasMore = false;
+      else
+        hasMore = true;
     } on GenericHttpException catch (e) {
       print(e);
     } catch (e) {

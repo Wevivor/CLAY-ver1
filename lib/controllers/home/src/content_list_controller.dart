@@ -40,6 +40,8 @@ class ContentListController extends AbsListController
     }
 
     final bodyJSON = {
+      'from': offset,
+      'size': pageSize,
       "query": {
         "bool": {
           "must": queryList,
@@ -103,6 +105,19 @@ class ContentListController extends AbsListController
 
     if (existIndex >= 0) {
       cache.removeAt(existIndex);
+    }
+
+    update();
+  }
+
+  void actionUpdateItem(Contents contents) {
+    // try {
+    var existIndex = cache.indexWhere(
+      (element) => element.contentsId == contents.contentsId,
+    );
+
+    if (existIndex >= 0) {
+      cache[existIndex] = contents;
     }
 
     update();

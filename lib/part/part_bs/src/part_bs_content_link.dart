@@ -6,15 +6,19 @@ import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:clay/models/models.dart';
+import 'package:clay/part/part_bs/src/helper_init_dto.dart';
 import 'package:get/get.dart';
 
 import 'part_board_select.dart';
+import 'part_bs_new_board.dart';
 import 'wgt_bs_board_item.dart';
 
 class BottomSheetContentLink extends StatelessWidget
-    with AppbarHelper, BSValidator {
+    with AppbarHelper, BSValidator, InitDtoHelper {
   final onMenu;
+  final parentContext;
   BottomSheetContentLink({
+    this.parentContext,
     this.onMenu,
   });
   final _webLinkKey = new GlobalKey();
@@ -42,6 +46,7 @@ class BottomSheetContentLink extends StatelessWidget
               // color: Colors.red,
               child: InkWell(
                 onTap: () async {
+                  FocusScope.of(context).unfocus();
                   final _webLink = ContentsController.to.linkController.text;
 
                   if (web_url(_webLink) != null || _webLink.isEmpty) {
@@ -62,37 +67,11 @@ class BottomSheetContentLink extends StatelessWidget
 
                   //SUBJECT: 컨텐츠
                   //TODO: 링크로 추가하기
-                  final _boardInfo = BoardListMySelectController.to.boardInfo;
+                  // final _boardInfo = BoardListMySelectController.to.boardInfo;
 
                   final _controller = Get.put(ContentsController());
-                  final _profile = HanUserInfoController.to.toProfile();
-                  final _info = ContentsInfoDto(
-                    //  contentsId: contentsId,
-                    contentsTitle: '',
-                    contentsUrl: _webLink,
-                    contentsImages: '',
-                    contentsDescription: '',
-                    contentsComment: _comment,
-                    thumbnails: null,
-                    contentsUniqueLink: '',
-                    ContentsCreateDate: DateTime.now(),
-                    ContentsUpdateDate: DateTime.now(),
-                  );
-
-                  //SUBJECT comment 타입 변경 필요
-                  //TODO: comment 타입 변경
-                  final _item = ContentsDto(
-                    boardInfo: _boardInfo?.toDto(),
-                    userInfo: _profile.toDto(),
-                    info: _info,
-                    contentsAllviewCount: 0,
-                    contentsMyviewCount: 0,
-                    contentsAlarmCheck: 0,
-                    shareInfo: null,
-                    contentsComment: null,
-                    ContentsCreateDate: DateTime.now(),
-                    ContentsUpdateDate: DateTime.now(),
-                  );
+                  final _item = createInitDto(
+                      link: _webLink, comment: _comment, type: 'link');
 
                   await _controller.actionIns(_item);
 
@@ -204,21 +183,65 @@ class BottomSheetContentLink extends StatelessWidget
         heightSpace(16.0),
         vwTitle('저장할 보드 선택하기'),
         heightSpace(10.0),
-        BoardSelectPART(onTap: () {}),
+        GetBuilder<BoardListMySelectController>(builder: (controller) {
+          return BoardSelectPART(onTap: () {
+            Get.lazyPut(() => BoardController());
+            final _controller = BoardController.to;
+            final initBoard = createInitBoard();
+            _controller.boardItem = initBoard.toDomain();
+            _controller.boardNameController.text = '';
+            Get.back();
+
+            _showBS(parentContext, BottomSheetNewBoard());
+          });
+        }),
         heightSpace(16.0),
       ],
     );
   }
 
-  Widget vwTitle(final title) {
-    return Container(
-      padding: EdgeInsets.only(left: 18),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-      ),
-    );
+  void _showBS(context, child) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext buildContext) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
+        }).then((value) {
+      _showBSSecond(
+          parentContext,
+          BottomSheetContentLink(
+            onMenu: this.onMenu,
+            parentContext: parentContext,
+          ));
+    });
+  }
+
+  void _showBSSecond(context, child) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext buildContext) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
+        });
   }
 }

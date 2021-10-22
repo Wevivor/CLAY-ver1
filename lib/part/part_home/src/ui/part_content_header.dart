@@ -41,8 +41,10 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
             // padding: EdgeInsets.only(left: 16),
             alignment: Alignment.centerLeft,
             child: Text(
-              sprintf('%s, %d items',
-                  [Jiffy(board.info.registerDate).format('yyyy년 MM월 dd일'), 13]),
+              sprintf('%s, %d items', [
+                Jiffy(board.info.registerDate).format('yyyy년 MM월 dd일'),
+                board.contentsCount
+              ]),
               style: baseStyle.copyWith(
                   fontSize: 13,
                   color: Colors.white,

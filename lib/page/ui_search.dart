@@ -118,7 +118,8 @@ class SearchUI extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: Color(0xFFf2f2f2),
+      // backgroundColor: Color(0xFFf2f2f2),
+      backgroundColor: Colors.white,
 
       ///--------------------------
       ///  컴색 필터 임

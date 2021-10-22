@@ -15,6 +15,7 @@ import 'controllers/controllers.dart';
 import 'page/sub_post.dart';
 import 'page/ui_content.dart';
 import 'page/ui_han_bott_navi.dart';
+import 'page/ui_init.dart';
 import 'page/ui_login_google.dart';
 import 'page/ui_profile.dart';
 import 'page/ui_push.dart';
@@ -47,6 +48,7 @@ Future<void> initFirebaseEmulator() async {
 Future<void> initGetxController() async {
   await GetStorage.init();
   Get.put<ThemeController>(ThemeController(), permanent: true);
+  Get.put(ShareController(), permanent: true);
   Get.put(LoadingController(), permanent: true);
   Get.put(AuthController(), permanent: true);
   Get.put(LoginController(), permanent: true);
@@ -130,12 +132,17 @@ class MyApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               // darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.system,
-              initialRoute: '/login',
+              initialRoute: '/start',
               getPages: [
                 ...AppRoutes.routes,
                 //---------------------------------------
                 /// Introduction (인트로....)
                 //---------------------------------------
+                GetPage(
+                  name: '/start',
+                  page: () => InitUI(),
+                  transition: Transition.noTransition,
+                ),
                 GetPage(
                   name: '/login',
                   page: () => LoginGoogleUI(),
@@ -189,11 +196,11 @@ class AppRoutes {
       page: () => SearchUI(),
     ),
 
-    GetPage(
-      name: '/post',
-      transition: Transition.noTransition,
-      page: () => PostSUB(),
-    ),
+    // GetPage(
+    //   name: '/post',
+    //   transition: Transition.noTransition,
+    //   page: () => PostSUB(),
+    // ),
 
     GetPage(
       name: '/content',
@@ -229,116 +236,4 @@ class AppRoutes {
     //     transition: Transition.noTransition,
     //     page: () => YaggwanUI()),
   ];
-}
-
-class ReceiveShare extends StatefulWidget {
-  @override
-  _ReceiveShareState createState() => _ReceiveShareState();
-}
-
-class _ReceiveShareState extends State<ReceiveShare> {
-  late StreamSubscription _intentDataStreamSubscription;
-  List<SharedMediaFile>? _sharedFiles;
-  String? _sharedText;
-
-  int _counter = 0;
-
-  @override
-  void initState() {
-    super.initState();
-
-    // For sharing images coming from outside the app while the app is in the memory
-    _intentDataStreamSubscription = ReceiveSharingIntent.getMediaStream()
-        .listen((List<SharedMediaFile> value) {
-      setState(() {
-        _sharedFiles = value;
-        print("Shared:" + (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
-      });
-    }, onError: (err) {
-      print("getIntentDataStream error: $err");
-    });
-
-    // For sharing images coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
-      setState(() {
-        _sharedFiles = value;
-        print("Shared:" + (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
-      });
-    });
-
-    // For sharing or opening urls/text coming from outside the app while the app is in the memory
-    _intentDataStreamSubscription =
-        ReceiveSharingIntent.getTextStream().listen((String value) {
-      setState(() {
-        _sharedText = value;
-        print("Shared: $_sharedText");
-      });
-    }, onError: (err) {
-      print("getLinkStream error: $err");
-    });
-
-    // For sharing or opening urls/text coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialText().then((String? value) {
-      setState(() {
-        _sharedText = value;
-        print("Shared: $_sharedText");
-      });
-    });
-  }
-
-  @override
-  void dispose() {
-    _intentDataStreamSubscription.cancel();
-    super.dispose();
-  }
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    const textStyleBold = const TextStyle(fontWeight: FontWeight.bold);
-    return MaterialApp(
-      home: Scaffold(
-        backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),
-        body: Container(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Text("Shared files:", style: textStyleBold),
-              Text(_sharedFiles
-                      ?.map((f) =>
-                          "{Path: ${f.path}, Type: ${f.type.toString().replaceFirst("SharedMediaType.", "")}}\n")
-                      .join(",\n") ??
-                  ""),
-              SizedBox(height: 100),
-              Text("Shared urls/text:", style: textStyleBold),
-              Text(_sharedText ?? ""),
-              Text(
-                '$_counter',
-                style: Theme.of(context).textTheme.headline4,
-              ),
-            ],
-          ),
-        ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: _incrementCounter,
-          tooltip: 'Increment',
-          child: const Icon(Icons.add),
-        ), // This trailing comma mak
-      ),
-    );
-  }
 }

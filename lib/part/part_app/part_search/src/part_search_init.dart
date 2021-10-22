@@ -43,7 +43,7 @@ class SearchInitPART extends StatelessWidget {
                 title: item.info.contentsTitle,
                 date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
                 contentText: item.info.contentsDescription,
-                imgUrl: item.info.contentsImages,
+                imgUrl: item.info.thumnails,
               ),
               Divider(
                 color: Color(0xFFEEEFF2),

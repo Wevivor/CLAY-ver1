@@ -23,87 +23,75 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
     ///--------------------------
     /// 핀테스트 리스트
     ///-------------------------
+    return GetBuilder<ContentAllListController>(builder: (controller) {
+      // final controller = ContentAllListController.to;
+      final cache = controller.cache;
+      final loading = controller.loading;
+      print('${controller.hasMore}');
 
-    return GetBuilder<ContentAllListController>(
-      builder: (controller) {
-        final cache = controller.cache;
-        final loading = controller.loading;
-
-        if (loading && cache.length == 0) {
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-
-        if (!loading && cache.length == 0) {
-          return Container(
-            child: Center(
-              child: Text('아이템이 없습니다'),
-            ),
-          );
-        }
-        return new StaggeredGridView.countBuilder(
-          // physics: NeverScrollableScrollPhysics(),
-          primary: false,
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          crossAxisCount: 2,
-          mainAxisSpacing: 14.0,
-          crossAxisSpacing: 12.0,
-          itemCount: ContentAllListController.to.hasMore
-              ? ContentAllListController.to.cache.length + 1
-              : ContentAllListController.to.cache.length,
-          // itemCount: BestListController.to.cache.length,
-          itemBuilder: (context, index) {
-            final controller = ContentAllListController.to;
-            final cache = controller.cache;
-            Contents item = cache[index];
-
-            if (item == null) return Container();
-
-            // final favorLists = item.favorite.lists;
-            // final exist = favorLists.firstWhere(
-            //     (element) => element == AuthController.to.getUser?.uid,
-            //     orElse: () {
-            //   return null;
-            // });
-
-            // return Container();
-
-            //SUBJECT: 콘텐츠 아이템
-            //TODO
-            return ContentGridItemWidget(
-              title: item.info.contentsTitle,
-              imgUrl: item.info.contentsImages,
-              contentText: item.info.contentsTitle,
-              // holder: cache[index].img,
-              // onTap: () async {
-              //   final postInfo = cache[index];
-              //   print('------------>${postInfo.id}');
-              //   final _controller = Get.put(PostController());
-              //   await _controller.fetchItem(id: postInfo.id);
-              //   // final _authorController = Get.put(PostAuthorController(
-              //   //     uid: postInfo.uid, excludedId: item.id ?? ''));
-              //   // PostAuthorController.to.cache = [];
-              //   // await _authorController.fetchItems();
-
-              //   Get.to(() => PostSUB(item: postInfo));
-              //   // Get.to(() => PostSUB(item: index));
-              // },
-              onMore: () {
-                _showBS(context, vwBoardMenu(context, item));
-              },
-            );
-          },
-          // staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-          staggeredTileBuilder: (int index) =>
-              // new StaggeredTile.fit(2),
-              new StaggeredTile.count(1, index.isEven ? 1 : 1.4),
+      if (loading && cache.length == 0) {
+        return Container(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
-      },
-    );
+      }
+
+      if (!loading && cache.length == 0) {
+        return Container(
+          child: Center(
+            child: Text('아이템이 없습니다'),
+          ),
+        );
+      }
+      return new StaggeredGridView.countBuilder(
+        // physics: NeverScrollableScrollPhysics(),
+        primary: false,
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        crossAxisCount: 2,
+        mainAxisSpacing: 14.0,
+        crossAxisSpacing: 12.0,
+        itemCount: controller.hasMore
+            ? controller.cache.length + 1
+            : controller.cache.length,
+        // itemCount: ContentAllListController.to.cache.length,
+        itemBuilder: (context, index) {
+          final controller = ContentAllListController.to;
+          final cache = controller.cache;
+          if (index >= controller.cache.length) {
+            Future.microtask(() {
+              controller.fetchItems(nextId: index);
+            });
+            // Future.delayed(Duration(milliseconds: 100),
+            //     () => controller.fetchItems(nextId: index));
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+
+          Contents item = cache[index];
+
+          //SUBJECT: 콘텐츠 아이템
+          //TODO
+          return ContentGridItemWidget(
+            title: item.info.contentsTitle,
+            // imgUrl: item.info.contentsImages,
+            imgUrl: item.info.thumbnails,
+            contentText: item.info.contentsTitle,
+            onTap: () {},
+
+            onMore: () {
+              _showBS(context, vwBoardMenu(context, item));
+            },
+          );
+        },
+        staggeredTileBuilder: (int index) =>
+            new StaggeredTile.count(1, index.isEven ? 1 : 1.4),
+      );
+    });
   }
 
   Widget vwBoardMenu(BuildContext context, Contents item) {
@@ -143,10 +131,12 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             left: 19.0,
             bottom: 26.17,
           ),
+
+          //SUBJECT: 링크
+          //TODO: 수정해야 함.
           onTap: () async {
             Get.back();
-            final _boardUrl =
-                sprintf('%s/%s', [Const.clayBaseUrl, item.contentsId]);
+            final _boardUrl = sprintf('%s', [item.info.contentsUrl]);
             await share.Share.share(_boardUrl);
           },
           leading: Image.asset(Const.assets + 'icon/icon_share.png'),
@@ -186,6 +176,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             _showBS(
                 context,
                 BottomSheetBoardChange(
+                  parentContext: context,
                   onDone: () {
                     ContentAllListController.to
                         .actionDelteItem(item.contentsId ?? '');

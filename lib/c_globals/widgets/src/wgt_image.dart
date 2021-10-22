@@ -30,7 +30,7 @@ class ImageWidget extends StatelessWidget {
                 holder ?? image_holder,
                 width: width,
                 height: height,
-                fit: BoxFit.cover,
+                fit: BoxFit.fill,
               )
             : Image.network(
                 imgUrl ?? '',

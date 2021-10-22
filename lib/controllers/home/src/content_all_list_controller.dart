@@ -11,13 +11,10 @@ class ContentAllListController extends AbsListController
     with FbCommonModule, ElCommonModule {
   static String MENU_POS = 'contents';
   late dynamic _instance;
-  late dynamic _storage;
   ContentAllListController({
-    int pageSize = 30,
+    int pageSize = 2,
   }) : super(pageSize) {
     _instance = FirebaseFirestore.instance;
-    _storage = FirebaseStorage.instance;
-    // fetchItems();
   }
 
   static ContentAllListController get to => Get.find();
@@ -38,6 +35,8 @@ class ContentAllListController extends AbsListController
     }
 
     final bodyJSON = {
+      "from": offset,
+      "size": limit,
       "query": {
         "bool": {
           "must": queryList,

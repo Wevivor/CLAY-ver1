@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:clay/controllers/common/commons.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/page/ui_share_service.dart';
 import 'package:clay/part/part_app/part_app.dart';
 import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -136,8 +137,10 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                                 '---------------actionVisitInc ${_exist.toString()}--------------------');
 
                             // await HanUserInfoController.to.actionVisitInc();
-
-                            Get.toNamed('/main_menu');
+                            if (ShareController.to.isShare.value)
+                              Get.to(() => ShareServiceUI());
+                            else
+                              Get.toNamed('/main_menu');
                           } on FirebaseAuthException catch (e) {
                             print(
                                 '============ FirebaseAuthException ${e.toString()}=================');

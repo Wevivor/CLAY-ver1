@@ -1,22 +1,54 @@
+import 'dart:io';
+
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
+import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
+import 'package:clay/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PostSUB extends StatelessWidget with AppbarHelper {
+class PostSUB extends StatefulWidget {
   // final PostInfo? item;
-  final item;
-  PostSUB({this.item});
+  final Contents item;
+  final parentController;
+  PostSUB({required this.item, required this.parentController});
+  @override
+  _PostSUBState createState() => _PostSUBState();
+}
+
+class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
+  final _contentsController = Get.put(
+    ContentsController(),
+  );
+  late int _listType = 2;
+  @override
+  void initState() {
+    super.initState();
+    if (widget.item.info.contentsType == 'link')
+      _listType = 0;
+    else if (widget.item.info.contentsType == 'photo') _listType = 1;
+
+    _contentsController.contentsItem = widget.item;
+    _contentsController.commentController.text =
+        widget.item.info.contentsComment ?? '';
+    _contentsController.titleController.text =
+        widget.item.info.contentsTitle ?? '';
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
 
     double topPadding = MediaQuery.of(context).padding.top + 0.0;
     //TODO 컨텐트 타입.
-    final listType = item;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -27,16 +59,79 @@ class PostSUB extends StatelessWidget with AppbarHelper {
           },
           icon: Icon(Icons.chevron_left),
         ),
+        actions: [
+          Container(
+            alignment: Alignment.center,
+            // color: Colors.red,
+            child: InkWell(
+              onTap: () async {
+                FocusScope.of(context).unfocus();
+                final _title = ContentsController.to.titleController.text;
+
+                if (postTitle(_title) != null || _title.isEmpty) {
+                  AppHelper.showMessage(messages['post_title'] ?? '');
+                  return;
+                }
+                var _info;
+
+                switch (_listType) {
+                  case 0:
+                  case 1:
+                    final _comment =
+                        ContentsController.to.commentController.text;
+
+                    if (comment(_comment) != null || _comment.isEmpty) {
+                      AppHelper.showMessage(messages['comment'] ?? '');
+                      return;
+                    }
+                    _info = widget.item.info.copyWith(
+                      contentsTitle: _title,
+                      contentsComment: _comment,
+                    );
+
+                    break;
+
+                  case 2:
+                    _info = widget.item.info.copyWith(
+                      contentsTitle: _title,
+                    );
+
+                    break;
+                }
+
+                //SUBJECT: 컨텐츠
+                //TODO: 컨텐츠 수정하기
+
+                await _contentsController.actionUpdateInfo(
+                  id: widget.item.contentsId,
+                  info: _info.toDto(),
+                );
+                widget.parentController
+                    .actionUpdateItem(widget.item.copyWith(info: _info));
+
+                Get.back();
+              },
+              child: Text(
+                '완료',
+                style: baseStyle.copyWith(
+                    fontSize: 13,
+                    color: Color(0xff017BFE),
+                    fontWeight: FontWeight.w400),
+              ),
+            ),
+          ),
+          widthSpace(18.87),
+        ],
       ),
-      body: IndexedStack(index: listType, children: [
-        appLink(context),
-        photo(context),
-        memo(context),
-      ]),
+      body: _listType == 0
+          ? appLink(context)
+          : _listType == 1
+              ? photo(context)
+              : vwMemo(context),
     );
   }
 
-  Widget memo(BuildContext context) {
+  Widget vwMemo(BuildContext context) {
     // Get.put(ContentCtgListController());
     final node = FocusScope.of(context);
 
@@ -62,7 +157,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '스타트업 코딩 페스티벌 |',
+                hintText: '스타트업 코딩 페스티벌',
                 hintStyle: baseStyle.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
@@ -70,21 +165,21 @@ class PostSUB extends StatelessWidget with AppbarHelper {
                       0xFFCACACA,
                     )),
                 isDense: true,
+                errorText: null,
+                errorStyle: TextStyle(
+                  color: Colors.transparent,
+                  fontSize: 0,
+                  height: 0,
+                ),
               ),
+
               keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
+              textInputAction: TextInputAction.done,
               onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
+              controller: _contentsController.titleController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
+                return postTitle(value);
               },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
             ),
           ),
         ),
@@ -93,7 +188,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
           padding: EdgeInsets.only(left: 25, right: 25),
           height: 189,
           child: Text(
-            '리테일 기업의 경쟁력을 강화하기 위해서는 온·오프라인을 융합하고 ‘고객경험’을 중시해야 한다. 《리테일 4.0》에서는 이를 실천하기 위한 10가지 법칙을 제시한다. 그리고 실제 이 법칙을 적용하고 있는 아마존, 디즈니랜드, HSBC, 시세이도, 파타고니아 등의 글로벌 기업 |',
+            widget.item.info.contentsDescription ?? '',
             style: baseStyle.copyWith(
               color: Color(0xFF707070),
             ),
@@ -108,6 +203,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
     final node = FocusScope.of(context);
 
     return Column(
+      // mainAxisAlignment: MainAxisAlignment.start,
       children: [
         vwTitle('Title'),
         heightSpace(2.0),
@@ -129,7 +225,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '베이킹 완성작 |',
+                hintText: '베이킹 완성작',
                 hintStyle: baseStyle.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
@@ -137,24 +233,24 @@ class PostSUB extends StatelessWidget with AppbarHelper {
                       0xFFCACACA,
                     )),
                 isDense: true,
+                errorText: null,
+                errorStyle: TextStyle(
+                  color: Colors.transparent,
+                  fontSize: 0,
+                  height: 0,
+                ),
               ),
               keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
+              textInputAction: TextInputAction.done,
               onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
+              controller: _contentsController.titleController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
+                return postTitle(value);
               },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
             ),
           ),
         ),
+        heightSpace(10.0),
         vwTitle('Comment'),
         heightSpace(10.0),
         Padding(
@@ -183,35 +279,38 @@ class PostSUB extends StatelessWidget with AppbarHelper {
                       0xFFCACACA,
                     )),
                 isDense: true,
+                errorText: null,
+                errorStyle: TextStyle(
+                  color: Colors.transparent,
+                  fontSize: 0,
+                  height: 0,
+                ),
               ),
               keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
+              textInputAction: TextInputAction.done,
               onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
+              controller: _contentsController.commentController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
+                return comment(value);
               },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
             ),
           ),
         ),
         heightSpace(13.0),
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ImageWidget(
-                height: 320,
-                width: 320,
-                holder: Const.assets + 'images/smpl_list2.png',
+        Expanded(
+          child: Container(
+            alignment: Alignment.topCenter,
+            child: Container(
+              height: 330,
+              width: 330,
+              decoration: DecoHelper.roundDeco.copyWith(
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(widget.item.info.contentsImages ?? '')),
+                // ),
               ),
-            ],
+            ),
           ),
         ),
       ],
@@ -219,7 +318,6 @@ class PostSUB extends StatelessWidget with AppbarHelper {
   }
 
   Widget appLink(BuildContext context) {
-    // Get.put(PostController());
     final node = FocusScope.of(context);
 
     return Column(
@@ -244,7 +342,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '|웹 링크 주소를 입력해 주세요.',
+                hintText: '스타트업 코딩 페스티벌 ',
                 hintStyle: baseStyle.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
@@ -252,24 +350,24 @@ class PostSUB extends StatelessWidget with AppbarHelper {
                       0xFFCACACA,
                     )),
                 isDense: true,
+                errorText: null,
+                errorStyle: TextStyle(
+                  color: Colors.transparent,
+                  fontSize: 0,
+                  height: 0,
+                ),
               ),
               keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
+              textInputAction: TextInputAction.done,
               onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
+              controller: ContentsController.to.titleController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
+                return postTitle(value);
               },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
             ),
           ),
         ),
+        heightSpace(10.0),
         vwTitle('Comment'),
         heightSpace(2.0),
         Padding(
@@ -290,7 +388,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '|웹 링크 주소를 입력해 주세요.',
+                hintText: '코딩 페스티벌 참여 신청',
                 hintStyle: baseStyle.copyWith(
                     fontSize: 14,
                     fontWeight: FontWeight.normal,
@@ -298,21 +396,20 @@ class PostSUB extends StatelessWidget with AppbarHelper {
                       0xFFCACACA,
                     )),
                 isDense: true,
+                errorText: null,
+                errorStyle: TextStyle(
+                  color: Colors.transparent,
+                  fontSize: 0,
+                  height: 0,
+                ),
               ),
               keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.newline,
+              textInputAction: TextInputAction.done,
               onEditingComplete: () => node.unfocus(),
-              // controller: CertificateEditController.to.buyController,
+              controller: ContentsController.to.commentController,
               validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return '체결 금액을 입력해 주세요';
-                }
-                return null;
+                return comment(value);
               },
-              // inputFormatters: <TextInputFormatter>[
-              //   NumericTextFormatter(),
-              //   LengthLimitingTextInputFormatter(13),
-              // ],
             ),
           ),
         ),
@@ -327,7 +424,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
                 holder: Const.assets + 'icon/icon_share.png',
               ),
               Text(
-                'www.instagram.com',
+                widget.item.info.contentsUrl ?? '',
                 style: baseStyle.copyWith(
                   color: Color(0xFF707070),
                   fontSize: 14,
@@ -342,7 +439,7 @@ class PostSUB extends StatelessWidget with AppbarHelper {
         ),
         Expanded(
           child: Container(
-            child: buildWebview(context),
+            child: buildWebview(context, widget.item.info.contentsUrl),
           ),
         )
       ],
@@ -361,9 +458,9 @@ class PostSUB extends StatelessWidget with AppbarHelper {
         });
   }
 
-  Widget buildWebview(BuildContext context) {
+  Widget buildWebview(BuildContext context, initUrl) {
     return WebView(
-      initialUrl: 'https://www.instagram.com',
+      initialUrl: initUrl,
       javascriptMode: JavascriptMode.unrestricted,
       onWebViewCreated: (WebViewController webViewController) {
         _controller.complete(webViewController);

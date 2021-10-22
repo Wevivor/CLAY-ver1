@@ -42,7 +42,7 @@ dependencies:
   path_provider: ^2.0.5
   provider: ^5.0.0
   permission_handler: ^6.1.1
-  
+  uuid: ^3.0.5
   get: ^4.3.8
   get_storage: ^2.0.1
 

@@ -39,6 +39,8 @@ class BsBadgeItemWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: isSelected ? Color(0xFFE5E5E5) : Colors.white,
           borderRadius: BorderRadius.circular(14),
+          border:
+              isSelected ? Border.all(width: 2, color: Colors.black54) : null,
           boxShadow: isSelected
               ? null
               : [

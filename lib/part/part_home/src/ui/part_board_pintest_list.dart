@@ -64,9 +64,17 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
           itemBuilder: (context, index) {
             final controller = ContentListController.to;
             final cache = controller.cache;
-            Contents item = cache[index];
+            if (index >= ContentListController.to.cache.length) {
+              return Container(
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
 
-            if (item == null) return Container();
+            // if (item == null) return Container();
+
+            Contents item = cache[index];
 
             return ContentGridItemWidget(
               onTap: () async {
@@ -79,10 +87,11 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
                 // PostAuthorController.to.cache = [];
                 // await _authorController.fetchItems();
 
-                Get.to(() => PostSUB(item: index));
+                Get.to(() => PostSUB(item: item, parentController: controller));
               },
               title: item.info.contentsTitle,
-              imgUrl: item.info.contentsImages,
+              // imgUrl: item.info.contentsImages,
+              imgUrl: item.info.thumbnails,
               // holder: Const.assets + 'images/smpl_list1.png',
               onMore: () {
                 final _controller = Get.put(BoardListMySelectController());
@@ -92,6 +101,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
                 _showBS(
                     context,
                     BottomSheetBoardChange(
+                      parentContext: context,
                       onDone: () {
                         ContentListController.to
                             .actionDelteItem(item.contentsId ?? '');

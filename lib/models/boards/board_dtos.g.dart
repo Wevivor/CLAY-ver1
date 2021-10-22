@@ -15,6 +15,7 @@ _$_BoardDto _$$_BoardDtoFromJson(Map<String, dynamic> json) => _$_BoardDto(
           ? null
           : ShareDto.fromJson(json['share'] as Map<String, dynamic>),
       shareCheck: json['share_check'] as int,
+      contentsCount: json['contents_count'] as int?,
       boardComment: json['board_comment'] as List<dynamic>?,
       registerDate: Fbconverter.fromJson(json['register_date']),
     );
@@ -26,6 +27,7 @@ Map<String, dynamic> _$$_BoardDtoToJson(_$_BoardDto instance) =>
       'board_creator': instance.boardCreator.toJson(),
       'share': instance.shareInfo?.toJson(),
       'share_check': instance.shareCheck,
+      'contents_count': instance.contentsCount,
       'board_comment': instance.boardComment,
       'register_date': Fbconverter.toJson(instance.registerDate),
     };
@@ -38,7 +40,6 @@ _$_BoardInfoDto _$$_BoardInfoDtoFromJson(Map<String, dynamic> json) =>
       boardColor: json['board_color'] as String,
       boardBadge: json['board_badge'] as String,
       boardUnquieLink: json['board_unique_link'] as String?,
-      contentsCount: json['contents_count'] as int,
       shareCheck: json['share_check'] as int,
       shareCount: json['share_count'] as int?,
       registerDate: Fbconverter.fromJson(json['register_date']),
@@ -52,7 +53,6 @@ Map<String, dynamic> _$$_BoardInfoDtoToJson(_$_BoardInfoDto instance) =>
       'board_color': instance.boardColor,
       'board_badge': instance.boardBadge,
       'board_unique_link': instance.boardUnquieLink,
-      'contents_count': instance.contentsCount,
       'share_check': instance.shareCheck,
       'share_count': instance.shareCount,
       'register_date': Fbconverter.toJson(instance.registerDate),

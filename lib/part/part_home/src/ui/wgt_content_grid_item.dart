@@ -24,7 +24,8 @@ class ContentGridItemWidget extends StatelessWidget {
     this.onMore,
     this.onTap,
   });
-  static String stand_stock_image = '';
+  static String stand_stock_image =
+      'https://firebasestorage.googleapis.com/v0/b/clay-36ada.appspot.com/o/posts%2Fa00L2RmyOzYX2K5LTOJkdWyihXH3%2F9fb1361d-c090-48db-abdf-870233359fed%2F375.jpg?alt=media&token=9afcefbd-8c94-4020-b6b8-46704f01555e';
   final titleStyle = TextStyle(
     fontSize: 16,
     color: Color(0xFF3A3A3A),

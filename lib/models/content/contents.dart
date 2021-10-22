@@ -14,7 +14,7 @@ class Contents with _$Contents {
     required int contentsAlarmCheck,
     BoardInfo? boardInfo,
     ShareDto? shareInfo,
-    List<dynamic>? contentsComment,
+    String? contentsComment,
     required DateTime ContentsCreateDate,
     required DateTime ContentsUpdateDate,
   }) = _Contents;
@@ -45,7 +45,8 @@ class ContentsInfo with _$ContentsInfo {
     String? contentsComment,
     String? contentsUniqueLink,
     bool? contentsFixed,
-    List<String?>? thumbnails,
+    String? contentsType,
+    String? thumbnails,
     required DateTime ContentsCreateDate,
     required DateTime ContentsUpdateDate,
 
@@ -63,6 +64,7 @@ class ContentsInfo with _$ContentsInfo {
         contentsUniqueLink: contentsUniqueLink,
         thumbnails: thumbnails,
         contentsFixed: contentsFixed,
+        contentsType: contentsType,
         ContentsCreateDate: ContentsCreateDate,
         ContentsUpdateDate: ContentsUpdateDate,
       );

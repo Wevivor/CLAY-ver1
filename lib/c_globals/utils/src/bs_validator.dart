@@ -9,9 +9,22 @@ class BSValidator {
     'comment': '코멘트를 입력해 주세요.',
     'board_select': '저장할 보드를 선택해 주세요.',
     'title': '콘텐츠의 제목을 입력해 주세요.',
+    'post_title': '타이틀을 입력해 주세요.',
     'photo_title': '사진/비디오의 제목을 입력해 주세요.',
     'memo': '메모를 입력해 주세요.',
   };
+  String? postTitle(String? value) {
+    if (value == null || value.isEmpty) {
+      return messages['post_title'];
+    }
+    Pattern pattern = r'.{1,40}'; //not Empty 20자 이내
+    RegExp regex = new RegExp(pattern.toString());
+    if (!regex.hasMatch(value))
+      return messages['post_title'];
+    else
+      return null;
+  }
+
   String? photoTitle(String? value) {
     if (value == null || value.isEmpty) {
       return messages['photo_title'];
@@ -53,7 +66,7 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['comment'];
     }
-    Pattern pattern = r'^\S{1,100}$'; //not Empty 20자 이내
+    Pattern pattern = r'^.{1,100}$'; //not Empty 20자 이내
     RegExp regex = new RegExp(pattern.toString());
 
     if (!regex.hasMatch(value))

@@ -30,6 +30,8 @@ class BoardListMySelectController extends AbsListController
     String? searchTerm,
   }) async {
     final bodyJSON = {
+      "from": offset,
+      "size": limit,
       "query": {
         "bool": {
           "must": [

@@ -38,7 +38,7 @@ class _$ContentsDtoTearOff {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'contents_comment')
-          List<dynamic>? contentsComment,
+          String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -84,7 +84,7 @@ mixin _$ContentsDto {
   @JsonKey(name: 'share')
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   @JsonKey(name: 'contents_comment')
-  List<dynamic>? get contentsComment => throw _privateConstructorUsedError;
+  String? get contentsComment => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
@@ -124,7 +124,7 @@ abstract class $ContentsDtoCopyWith<$Res> {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'contents_comment')
-          List<dynamic>? contentsComment,
+          String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -194,7 +194,7 @@ class _$ContentsDtoCopyWithImpl<$Res> implements $ContentsDtoCopyWith<$Res> {
       contentsComment: contentsComment == freezed
           ? _value.contentsComment
           : contentsComment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as String?,
       ContentsCreateDate: ContentsCreateDate == freezed
           ? _value.ContentsCreateDate
           : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
@@ -267,7 +267,7 @@ abstract class _$ContentsDtoCopyWith<$Res>
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'contents_comment')
-          List<dynamic>? contentsComment,
+          String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -343,7 +343,7 @@ class __$ContentsDtoCopyWithImpl<$Res> extends _$ContentsDtoCopyWithImpl<$Res>
       contentsComment: contentsComment == freezed
           ? _value.contentsComment
           : contentsComment // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as String?,
       ContentsCreateDate: ContentsCreateDate == freezed
           ? _value.ContentsCreateDate
           : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
@@ -412,7 +412,7 @@ class _$_ContentsDto extends _ContentsDto {
   final ShareDto? shareInfo;
   @override
   @JsonKey(name: 'contents_comment')
-  final List<dynamic>? contentsComment;
+  final String? contentsComment;
   @override
   @JsonKey(
       name: 'contents_create_date',
@@ -513,7 +513,7 @@ abstract class _ContentsDto extends ContentsDto {
       @JsonKey(name: 'share')
           ShareDto? shareInfo,
       @JsonKey(name: 'contents_comment')
-          List<dynamic>? contentsComment,
+          String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -548,7 +548,7 @@ abstract class _ContentsDto extends ContentsDto {
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'contents_comment')
-  List<dynamic>? get contentsComment => throw _privateConstructorUsedError;
+  String? get contentsComment => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'contents_create_date',
@@ -592,7 +592,9 @@ class _$ContentsInfoDtoTearOff {
           String? contentsUniqueLink,
       @JsonKey(name: 'contents_fixed')
           bool? contentsFixed,
-      List<String?>? thumbnails,
+      @JsonKey(name: 'contents_type')
+          String? contentsType,
+      String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -606,6 +608,7 @@ class _$ContentsInfoDtoTearOff {
       contentsComment: contentsComment,
       contentsUniqueLink: contentsUniqueLink,
       contentsFixed: contentsFixed,
+      contentsType: contentsType,
       thumbnails: thumbnails,
       ContentsCreateDate: ContentsCreateDate,
       ContentsUpdateDate: ContentsUpdateDate,
@@ -638,7 +641,9 @@ mixin _$ContentsInfoDto {
   String? get contentsUniqueLink => throw _privateConstructorUsedError;
   @JsonKey(name: 'contents_fixed')
   bool? get contentsFixed => throw _privateConstructorUsedError;
-  List<String?>? get thumbnails => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_type')
+  String? get contentsType => throw _privateConstructorUsedError;
+  String? get thumbnails => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
@@ -678,7 +683,9 @@ abstract class $ContentsInfoDtoCopyWith<$Res> {
           String? contentsUniqueLink,
       @JsonKey(name: 'contents_fixed')
           bool? contentsFixed,
-      List<String?>? thumbnails,
+      @JsonKey(name: 'contents_type')
+          String? contentsType,
+      String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -704,6 +711,7 @@ class _$ContentsInfoDtoCopyWithImpl<$Res>
     Object? contentsComment = freezed,
     Object? contentsUniqueLink = freezed,
     Object? contentsFixed = freezed,
+    Object? contentsType = freezed,
     Object? thumbnails = freezed,
     Object? ContentsCreateDate = freezed,
     Object? ContentsUpdateDate = freezed,
@@ -741,10 +749,14 @@ class _$ContentsInfoDtoCopyWithImpl<$Res>
           ? _value.contentsFixed
           : contentsFixed // ignore: cast_nullable_to_non_nullable
               as bool?,
+      contentsType: contentsType == freezed
+          ? _value.contentsType
+          : contentsType // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnails: thumbnails == freezed
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
-              as List<String?>?,
+              as String?,
       ContentsCreateDate: ContentsCreateDate == freezed
           ? _value.ContentsCreateDate
           : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
@@ -781,7 +793,9 @@ abstract class _$ContentsInfoDtoCopyWith<$Res>
           String? contentsUniqueLink,
       @JsonKey(name: 'contents_fixed')
           bool? contentsFixed,
-      List<String?>? thumbnails,
+      @JsonKey(name: 'contents_type')
+          String? contentsType,
+      String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -809,6 +823,7 @@ class __$ContentsInfoDtoCopyWithImpl<$Res>
     Object? contentsComment = freezed,
     Object? contentsUniqueLink = freezed,
     Object? contentsFixed = freezed,
+    Object? contentsType = freezed,
     Object? thumbnails = freezed,
     Object? ContentsCreateDate = freezed,
     Object? ContentsUpdateDate = freezed,
@@ -846,10 +861,14 @@ class __$ContentsInfoDtoCopyWithImpl<$Res>
           ? _value.contentsFixed
           : contentsFixed // ignore: cast_nullable_to_non_nullable
               as bool?,
+      contentsType: contentsType == freezed
+          ? _value.contentsType
+          : contentsType // ignore: cast_nullable_to_non_nullable
+              as String?,
       thumbnails: thumbnails == freezed
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
-              as List<String?>?,
+              as String?,
       ContentsCreateDate: ContentsCreateDate == freezed
           ? _value.ContentsCreateDate
           : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
@@ -883,6 +902,8 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
           this.contentsUniqueLink,
       @JsonKey(name: 'contents_fixed')
           this.contentsFixed,
+      @JsonKey(name: 'contents_type')
+          this.contentsType,
       this.thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.ContentsCreateDate,
@@ -918,7 +939,10 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
   @JsonKey(name: 'contents_fixed')
   final bool? contentsFixed;
   @override
-  final List<String?>? thumbnails;
+  @JsonKey(name: 'contents_type')
+  final String? contentsType;
+  @override
+  final String? thumbnails;
   @override
   @JsonKey(
       name: 'contents_create_date',
@@ -934,7 +958,7 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
 
   @override
   String toString() {
-    return 'ContentsInfoDto(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
+    return 'ContentsInfoDto(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, contentsType: $contentsType, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
   }
 
   @override
@@ -965,6 +989,9 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
             (identical(other.contentsFixed, contentsFixed) ||
                 const DeepCollectionEquality()
                     .equals(other.contentsFixed, contentsFixed)) &&
+            (identical(other.contentsType, contentsType) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsType, contentsType)) &&
             (identical(other.thumbnails, thumbnails) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnails, thumbnails)) &&
@@ -987,6 +1014,7 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
       const DeepCollectionEquality().hash(contentsComment) ^
       const DeepCollectionEquality().hash(contentsUniqueLink) ^
       const DeepCollectionEquality().hash(contentsFixed) ^
+      const DeepCollectionEquality().hash(contentsType) ^
       const DeepCollectionEquality().hash(thumbnails) ^
       const DeepCollectionEquality().hash(ContentsCreateDate) ^
       const DeepCollectionEquality().hash(ContentsUpdateDate);
@@ -1020,7 +1048,9 @@ abstract class _ContentsInfoDto extends ContentsInfoDto {
           String? contentsUniqueLink,
       @JsonKey(name: 'contents_fixed')
           bool? contentsFixed,
-      List<String?>? thumbnails,
+      @JsonKey(name: 'contents_type')
+          String? contentsType,
+      String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime ContentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -1055,7 +1085,10 @@ abstract class _ContentsInfoDto extends ContentsInfoDto {
   @JsonKey(name: 'contents_fixed')
   bool? get contentsFixed => throw _privateConstructorUsedError;
   @override
-  List<String?>? get thumbnails => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_type')
+  String? get contentsType => throw _privateConstructorUsedError;
+  @override
+  String? get thumbnails => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'contents_create_date',

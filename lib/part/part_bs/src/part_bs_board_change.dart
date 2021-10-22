@@ -6,25 +6,30 @@ import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/controllers/controllers.dart';
 import 'package:clay/models/models.dart';
+import 'package:clay/part/part_bs/src/helper_init_dto.dart';
 import 'package:get/get.dart';
 
 import 'part_board_class_select.dart';
 import 'part_board_select.dart';
+import 'part_bs_new_board.dart';
 import 'wgt_bs_badge_item.dart';
 import 'wgt_bs_board_item.dart';
 import 'wgt_choice_color.dart';
 
 class BottomSheetBoardChange extends StatelessWidget
-    with AppbarHelper, BSValidator {
+    with AppbarHelper, BSValidator, InitDtoHelper {
   final onMenu;
   final onDone;
   final current;
-  final _formKey = GlobalKey<FormState>();
+  final parentContext;
+
   BottomSheetBoardChange({
     this.onMenu,
     this.current,
+    this.parentContext,
     required this.onDone,
   });
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -115,21 +120,69 @@ class BottomSheetBoardChange extends StatelessWidget
 
           vwTitle('변경할 보드'),
           heightSpace(10),
-          BoardSelectPART(onTap: () {}),
+          GetBuilder<BoardListMySelectController>(builder: (controller) {
+            return BoardSelectPART(onTap: () {
+              Get.lazyPut(() => BoardController());
+              final _controller = BoardController.to;
+              final initBoard = createInitBoard();
+              _controller.boardItem = initBoard.toDomain();
+              _controller.boardNameController.text = '';
+              Get.back();
+
+              _showBS(parentContext, BottomSheetNewBoard());
+            });
+          }),
+          heightSpace(16),
         ],
       ),
     );
   }
 
-  Widget vwTitle(final title) {
-    return Container(
-      padding: EdgeInsets.only(left: 18),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-      ),
-    );
+  void _showBS(context, child) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext buildContext) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
+        }).then((value) {
+      Get.put(BoardListMySelectController());
+      _showBSSecond(
+          parentContext,
+          BottomSheetBoardChange(
+            current: this.current,
+            onDone: this.onDone,
+            onMenu: this.onMenu,
+            parentContext: parentContext,
+          ));
+    });
+  }
+
+  void _showBSSecond(context, child) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext buildContext) {
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
+        });
   }
 }

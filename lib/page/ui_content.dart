@@ -30,18 +30,13 @@ class _ContentUIState extends State<ContentUI>
   }
 
   Future<void> initFetch() async {
-    contentAllListController.cache = [];
-    await contentAllListController.fetchItems();
     contentsListAllMySelectController.cache = [];
     await contentsListAllMySelectController.fetchItems();
     contentsListAllMySelectController.selected = 0;
   }
 
   final contentsListAllMySelectController = Get.put(
-    ContentsListAllMySelectController(),
-  );
-  final contentAllListController = Get.put(
-    ContentAllListController(),
+    ContentsListAllMySelectController(pageSize: 10000),
   );
 
   @override
@@ -83,7 +78,7 @@ class _ContentUIState extends State<ContentUI>
         ),
       ),
       backgroundColor: Colors.white,
-      body: GetBuilder<ContentAllListController>(builder: (context) {
+      body: GetBuilder<ContentAllListController>(builder: (controller) {
         return Column(
           children: [
             Container(
@@ -102,8 +97,8 @@ class _ContentUIState extends State<ContentUI>
                           onTap: (value) async {
                             controller.selected = value;
                             controller.update();
-                            contentAllListController.cache = [];
-                            await contentAllListController.fetchItems();
+                            ContentAllListController.to.cache.clear();
+                            await ContentAllListController.to.fetchItems();
                           },
                         ),
                         widthSpace(8.0),
@@ -125,9 +120,9 @@ class _ContentUIState extends State<ContentUI>
                                   onTap: (value) async {
                                     controller.selected = value;
                                     controller.update();
-                                    contentAllListController.cache = [];
-                                    await contentAllListController.fetchItems(
-                                        term: item.info.boardId);
+                                    ContentAllListController.to.cache.clear();
+                                    await ContentAllListController.to
+                                        .fetchItems(term: item.info.boardId);
                                   },
                                 ),
                               );

@@ -13,7 +13,8 @@ import 'package:get/get.dart';
 // ignore: must_be_immutable
 class BoardContentUI extends StatefulWidget {
   final Board board;
-  BoardContentUI({required this.board});
+  final parentContext;
+  BoardContentUI({required this.board, this.parentContext});
 
   @override
   _BoardContentUIState createState() => _BoardContentUIState();
@@ -58,7 +59,7 @@ class _BoardContentUIState extends State<BoardContentUI>
   }
 
   Future<void> initFetch() async {
-    final _controller = Get.put(ContentListController());
+    final _controller = Get.put(ContentListController(pageSize: 2));
     _controller.boardId = widget.board.info.boardId ?? '';
     _controller.cache = [];
     await ContentListController.to.fetchItems();

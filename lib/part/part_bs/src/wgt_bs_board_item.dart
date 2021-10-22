@@ -43,6 +43,9 @@ class BSBoardItemWidget extends StatelessWidget {
       case 'LIKE':
         holder = 'icon/hart.png';
         break;
+      case '선택안함':
+        holder = 'icon/no_entry.png';
+        break;
     }
     return InkWell(
       onTap: () {
@@ -57,6 +60,12 @@ class BSBoardItemWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 color: selected == index ? Color(0xFFE5E5E5) : Colors.white,
                 borderRadius: BorderRadius.circular(14),
+                border: selected == index
+                    ? Border.all(
+                        width: 2.0,
+                        color: Colors.black,
+                      )
+                    : null,
                 boxShadow: selected != index
                     ? [
                         BoxShadow(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/models/models.dart';
@@ -8,10 +9,15 @@ import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:http/http.dart' as http;
 import 'package:clay/controllers/common/commons.dart';
+import 'package:path_provider/path_provider.dart';
 
-class ContentsController extends AbsItemController with FbCommonModule {
+import 'fb_post_helper_module.dart';
+
+class ContentsController extends AbsItemController
+    with FbCommonModule, FbPostHelperModule {
   static String MENU_POS = 'contents';
   late FirebaseFirestore _instance;
+  bool isCommentShow = false;
   // Board? boardItem;
   Contents? contentsItem;
   final TextEditingController linkController = TextEditingController();
@@ -153,26 +159,4 @@ class ContentsController extends AbsItemController with FbCommonModule {
       LoadingController.to.isLoading = false;
     }
   }
-
-  // void actionChangeColor(String color) async {
-  //   final _newInfo = boardItem!.info.copyWith(boardColor: color);
-  //   final _newItem = boardItem!.copyWith(info: _newInfo);
-  //   boardItem = _newItem;
-
-  //   update();
-  // }
-
-  // void actionChangeShare(int share) async {
-  //   final _newInfo = boardItem!.info.copyWith(shareCheck: share);
-  //   final _newItem = boardItem!.copyWith(shareCheck: share, info: _newInfo);
-  //   boardItem = _newItem;
-  //   update();
-  // }
-
-  // void actionChangeBadge(String badge) async {
-  //   final _newInfo = boardItem!.info.copyWith(boardBadge: badge);
-  //   final _newItem = boardItem!.copyWith(info: _newInfo);
-  //   boardItem = _newItem;
-  //   update();
-  // }
 }

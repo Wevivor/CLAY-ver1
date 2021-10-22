@@ -55,9 +55,13 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                       _showBS(
                           context,
                           BottomSheetBoardChange(
+                            parentContext: context,
                             onDone: () {
                               ContentListController.to
                                   .actionDelteItem(item.contentsId ?? '');
+                            },
+                            onMenu: () {
+                              _showBS(context, vwBoardMenu(context, item));
                             },
                             current: item,
                           ));
@@ -68,7 +72,7 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                     date: Jiffy(item.info.ContentsCreateDate)
                         .format('yyyy-MM-dd'),
                     contentText: item.info.contentsDescription,
-                    imgUrl: item.info.contentsImages,
+                    imgUrl: item.info.thumbnails,
                     holder: Const.assets + 'images/smpl_list1.png',
                   ),
                   Divider(
@@ -81,12 +85,24 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
     });
   }
 
+  Widget vwBoardMenu(BuildContext context, Contents item) {
+    return BottomSheetBoardChange(
+      parentContext: context,
+      onDone: () {
+        ContentListController.to.actionDelteItem(item.contentsId ?? '');
+      },
+      onMenu: () {
+        _showBS(context, vwBoardMenu(context, item));
+      },
+      current: item,
+    );
+  }
+
   void _showBS(context, child) {
     showModalBottomSheet(
         context: context,
         enableDrag: false,
         builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
           return child;
         });
   }

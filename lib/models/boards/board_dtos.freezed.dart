@@ -31,6 +31,8 @@ class _$BoardDtoTearOff {
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
           required int shareCheck,
+      @JsonKey(name: 'contents_count')
+          required int? contentsCount,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -41,6 +43,7 @@ class _$BoardDtoTearOff {
       boardCreator: boardCreator,
       shareInfo: shareInfo,
       shareCheck: shareCheck,
+      contentsCount: contentsCount,
       boardComment: boardComment,
       registerDate: registerDate,
     );
@@ -65,6 +68,8 @@ mixin _$BoardDto {
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   @JsonKey(name: 'share_check')
   int get shareCheck => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_count')
+  int? get contentsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'board_comment')
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   @JsonKey(
@@ -93,6 +98,8 @@ abstract class $BoardDtoCopyWith<$Res> {
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
           int shareCheck,
+      @JsonKey(name: 'contents_count')
+          int? contentsCount,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -118,6 +125,7 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
     Object? boardCreator = freezed,
     Object? shareInfo = freezed,
     Object? shareCheck = freezed,
+    Object? contentsCount = freezed,
     Object? boardComment = freezed,
     Object? registerDate = freezed,
   }) {
@@ -142,6 +150,10 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
               as int,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       boardComment: boardComment == freezed
           ? _value.boardComment
           : boardComment // ignore: cast_nullable_to_non_nullable
@@ -194,6 +206,8 @@ abstract class _$BoardDtoCopyWith<$Res> implements $BoardDtoCopyWith<$Res> {
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
           int shareCheck,
+      @JsonKey(name: 'contents_count')
+          int? contentsCount,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -223,6 +237,7 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
     Object? boardCreator = freezed,
     Object? shareInfo = freezed,
     Object? shareCheck = freezed,
+    Object? contentsCount = freezed,
     Object? boardComment = freezed,
     Object? registerDate = freezed,
   }) {
@@ -247,6 +262,10 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
               as int,
+      contentsCount: contentsCount == freezed
+          ? _value.contentsCount
+          : contentsCount // ignore: cast_nullable_to_non_nullable
+              as int?,
       boardComment: boardComment == freezed
           ? _value.boardComment
           : boardComment // ignore: cast_nullable_to_non_nullable
@@ -273,6 +292,8 @@ class _$_BoardDto extends _BoardDto {
           this.shareInfo,
       @JsonKey(name: 'share_check')
           required this.shareCheck,
+      @JsonKey(name: 'contents_count')
+          required this.contentsCount,
       @JsonKey(name: 'board_comment')
           this.boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -297,6 +318,9 @@ class _$_BoardDto extends _BoardDto {
   @JsonKey(name: 'share_check')
   final int shareCheck;
   @override
+  @JsonKey(name: 'contents_count')
+  final int? contentsCount;
+  @override
   @JsonKey(name: 'board_comment')
   final List<dynamic>? boardComment;
   @override
@@ -308,7 +332,7 @@ class _$_BoardDto extends _BoardDto {
 
   @override
   String toString() {
-    return 'BoardDto(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, shareCheck: $shareCheck, boardComment: $boardComment, registerDate: $registerDate)';
+    return 'BoardDto(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, shareCheck: $shareCheck, contentsCount: $contentsCount, boardComment: $boardComment, registerDate: $registerDate)';
   }
 
   @override
@@ -329,6 +353,9 @@ class _$_BoardDto extends _BoardDto {
             (identical(other.shareCheck, shareCheck) ||
                 const DeepCollectionEquality()
                     .equals(other.shareCheck, shareCheck)) &&
+            (identical(other.contentsCount, contentsCount) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsCount, contentsCount)) &&
             (identical(other.boardComment, boardComment) ||
                 const DeepCollectionEquality()
                     .equals(other.boardComment, boardComment)) &&
@@ -345,6 +372,7 @@ class _$_BoardDto extends _BoardDto {
       const DeepCollectionEquality().hash(boardCreator) ^
       const DeepCollectionEquality().hash(shareInfo) ^
       const DeepCollectionEquality().hash(shareCheck) ^
+      const DeepCollectionEquality().hash(contentsCount) ^
       const DeepCollectionEquality().hash(boardComment) ^
       const DeepCollectionEquality().hash(registerDate);
 
@@ -370,6 +398,8 @@ abstract class _BoardDto extends BoardDto {
           ShareDto? shareInfo,
       @JsonKey(name: 'share_check')
           required int shareCheck,
+      @JsonKey(name: 'contents_count')
+          required int? contentsCount,
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -392,6 +422,9 @@ abstract class _BoardDto extends BoardDto {
   @override
   @JsonKey(name: 'share_check')
   int get shareCheck => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'contents_count')
+  int? get contentsCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'board_comment')
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
@@ -428,8 +461,6 @@ class _$BoardInfoDtoTearOff {
           required String boardBadge,
       @JsonKey(name: 'board_unique_link')
           String? boardUnquieLink,
-      @JsonKey(name: 'contents_count')
-          required int contentsCount,
       @JsonKey(name: 'share_check')
           required int shareCheck,
       @JsonKey(name: 'share_count')
@@ -443,7 +474,6 @@ class _$BoardInfoDtoTearOff {
       boardColor: boardColor,
       boardBadge: boardBadge,
       boardUnquieLink: boardUnquieLink,
-      contentsCount: contentsCount,
       shareCheck: shareCheck,
       shareCount: shareCount,
       registerDate: registerDate,
@@ -472,8 +502,6 @@ mixin _$BoardInfoDto {
   String get boardBadge => throw _privateConstructorUsedError;
   @JsonKey(name: 'board_unique_link')
   String? get boardUnquieLink => throw _privateConstructorUsedError;
-  @JsonKey(name: 'contents_count')
-  int get contentsCount => throw _privateConstructorUsedError;
   @JsonKey(name: 'share_check')
   int get shareCheck => throw _privateConstructorUsedError;
   @JsonKey(name: 'share_count')
@@ -508,8 +536,6 @@ abstract class $BoardInfoDtoCopyWith<$Res> {
           String boardBadge,
       @JsonKey(name: 'board_unique_link')
           String? boardUnquieLink,
-      @JsonKey(name: 'contents_count')
-          int contentsCount,
       @JsonKey(name: 'share_check')
           int shareCheck,
       @JsonKey(name: 'share_count')
@@ -534,7 +560,6 @@ class _$BoardInfoDtoCopyWithImpl<$Res> implements $BoardInfoDtoCopyWith<$Res> {
     Object? boardColor = freezed,
     Object? boardBadge = freezed,
     Object? boardUnquieLink = freezed,
-    Object? contentsCount = freezed,
     Object? shareCheck = freezed,
     Object? shareCount = freezed,
     Object? registerDate = freezed,
@@ -564,10 +589,6 @@ class _$BoardInfoDtoCopyWithImpl<$Res> implements $BoardInfoDtoCopyWith<$Res> {
           ? _value.boardUnquieLink
           : boardUnquieLink // ignore: cast_nullable_to_non_nullable
               as String?,
-      contentsCount: contentsCount == freezed
-          ? _value.contentsCount
-          : contentsCount // ignore: cast_nullable_to_non_nullable
-              as int,
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
@@ -604,8 +625,6 @@ abstract class _$BoardInfoDtoCopyWith<$Res>
           String boardBadge,
       @JsonKey(name: 'board_unique_link')
           String? boardUnquieLink,
-      @JsonKey(name: 'contents_count')
-          int contentsCount,
       @JsonKey(name: 'share_check')
           int shareCheck,
       @JsonKey(name: 'share_count')
@@ -632,7 +651,6 @@ class __$BoardInfoDtoCopyWithImpl<$Res> extends _$BoardInfoDtoCopyWithImpl<$Res>
     Object? boardColor = freezed,
     Object? boardBadge = freezed,
     Object? boardUnquieLink = freezed,
-    Object? contentsCount = freezed,
     Object? shareCheck = freezed,
     Object? shareCount = freezed,
     Object? registerDate = freezed,
@@ -662,10 +680,6 @@ class __$BoardInfoDtoCopyWithImpl<$Res> extends _$BoardInfoDtoCopyWithImpl<$Res>
           ? _value.boardUnquieLink
           : boardUnquieLink // ignore: cast_nullable_to_non_nullable
               as String?,
-      contentsCount: contentsCount == freezed
-          ? _value.contentsCount
-          : contentsCount // ignore: cast_nullable_to_non_nullable
-              as int,
       shareCheck: shareCheck == freezed
           ? _value.shareCheck
           : shareCheck // ignore: cast_nullable_to_non_nullable
@@ -699,8 +713,6 @@ class _$_BoardInfoDto extends _BoardInfoDto {
           required this.boardBadge,
       @JsonKey(name: 'board_unique_link')
           this.boardUnquieLink,
-      @JsonKey(name: 'contents_count')
-          required this.contentsCount,
       @JsonKey(name: 'share_check')
           required this.shareCheck,
       @JsonKey(name: 'share_count')
@@ -731,9 +743,6 @@ class _$_BoardInfoDto extends _BoardInfoDto {
   @JsonKey(name: 'board_unique_link')
   final String? boardUnquieLink;
   @override
-  @JsonKey(name: 'contents_count')
-  final int contentsCount;
-  @override
   @JsonKey(name: 'share_check')
   final int shareCheck;
   @override
@@ -748,7 +757,7 @@ class _$_BoardInfoDto extends _BoardInfoDto {
 
   @override
   String toString() {
-    return 'BoardInfoDto(boardId: $boardId, isFixed: $isFixed, boardName: $boardName, boardColor: $boardColor, boardBadge: $boardBadge, boardUnquieLink: $boardUnquieLink, contentsCount: $contentsCount, shareCheck: $shareCheck, shareCount: $shareCount, registerDate: $registerDate)';
+    return 'BoardInfoDto(boardId: $boardId, isFixed: $isFixed, boardName: $boardName, boardColor: $boardColor, boardBadge: $boardBadge, boardUnquieLink: $boardUnquieLink, shareCheck: $shareCheck, shareCount: $shareCount, registerDate: $registerDate)';
   }
 
   @override
@@ -773,9 +782,6 @@ class _$_BoardInfoDto extends _BoardInfoDto {
             (identical(other.boardUnquieLink, boardUnquieLink) ||
                 const DeepCollectionEquality()
                     .equals(other.boardUnquieLink, boardUnquieLink)) &&
-            (identical(other.contentsCount, contentsCount) ||
-                const DeepCollectionEquality()
-                    .equals(other.contentsCount, contentsCount)) &&
             (identical(other.shareCheck, shareCheck) ||
                 const DeepCollectionEquality()
                     .equals(other.shareCheck, shareCheck)) &&
@@ -796,7 +802,6 @@ class _$_BoardInfoDto extends _BoardInfoDto {
       const DeepCollectionEquality().hash(boardColor) ^
       const DeepCollectionEquality().hash(boardBadge) ^
       const DeepCollectionEquality().hash(boardUnquieLink) ^
-      const DeepCollectionEquality().hash(contentsCount) ^
       const DeepCollectionEquality().hash(shareCheck) ^
       const DeepCollectionEquality().hash(shareCount) ^
       const DeepCollectionEquality().hash(registerDate);
@@ -826,8 +831,6 @@ abstract class _BoardInfoDto extends BoardInfoDto {
           required String boardBadge,
       @JsonKey(name: 'board_unique_link')
           String? boardUnquieLink,
-      @JsonKey(name: 'contents_count')
-          required int contentsCount,
       @JsonKey(name: 'share_check')
           required int shareCheck,
       @JsonKey(name: 'share_count')
@@ -857,9 +860,6 @@ abstract class _BoardInfoDto extends BoardInfoDto {
   @override
   @JsonKey(name: 'board_unique_link')
   String? get boardUnquieLink => throw _privateConstructorUsedError;
-  @override
-  @JsonKey(name: 'contents_count')
-  int get contentsCount => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'share_check')
   int get shareCheck => throw _privateConstructorUsedError;

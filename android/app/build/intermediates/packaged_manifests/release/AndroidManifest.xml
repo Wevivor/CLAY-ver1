@@ -23,16 +23,17 @@
         <package android:name="com.android.chrome" />
         <package android:name="com.chrome.beta" />
         <package android:name="com.chrome.dev" />
-    </queries> <!-- android:launchMode="singleInstance" -->
+    </queries> <!-- android:launchMode="singleTask" -->
     <application
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:icon="@mipmap/ic_launcher"
-        android:label="clay" >
+        android:label="clay"
+        android:usesCleartextTraffic="true" >
         <activity
             android:name="com.wevivor.clay.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:hardwareAccelerated="true"
-            android:launchMode="singleTask"
+            android:launchMode="singleInstance"
             android:theme="@style/LaunchTheme"
             android:windowSoftInputMode="adjustResize" >
 

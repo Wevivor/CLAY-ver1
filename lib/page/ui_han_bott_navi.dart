@@ -21,183 +21,9 @@ class HanBottomNavigationBar extends StatefulWidget {
 
 class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     with AppbarHelper {
-  late StreamSubscription _intentDataStreamSubscription;
-  List<SharedMediaFile>? _sharedFiles;
-  String? _sharedText;
-  bool _isSharedOpen = false;
-  final _controller = Get.put(BoardListController());
-
   @override
   void initState() {
     super.initState();
-
-    // For sharing images coming from outside the app while the app is in the memory
-    _intentDataStreamSubscription = ReceiveSharingIntent.getMediaStream()
-        .listen((List<SharedMediaFile> value) {
-      setState(() {
-        _sharedFiles = value;
-        print("===================>Shared: 1) " +
-            (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
-      });
-    }, onError: (err) {
-      print("getIntentDataStream error: $err");
-    });
-
-    // For sharing images coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
-      setState(() {
-        _sharedFiles = value;
-        print("===================>Shared: 2) " +
-            (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
-      });
-    });
-
-    // For sharing or opening urls/text coming from outside the app while the app is in the memory
-    _intentDataStreamSubscription =
-        ReceiveSharingIntent.getTextStream().listen((String value) {
-      setState(() {
-        _sharedText = value;
-        print("===================> Shared:3 URLS) $_sharedText");
-        if (value == null) {
-          _isSharedOpen = false;
-        } else {
-          _isSharedOpen = true;
-
-          WidgetsBinding.instance!.addPostFrameCallback(
-              (_) => _showBSFromShare(context, vwBoardMenuFromShare(context)));
-        }
-      });
-    }, onError: (err) {
-      print("getLinkStream error: $err");
-    });
-
-    // For sharing or opening urls/text coming from outside the app while the app is closed
-    ReceiveSharingIntent.getInitialText().then((String? value) {
-      print("===================> Shared:0) $value");
-      setState(() {
-        _sharedText = value;
-        if (value == null) {
-          _isSharedOpen = false;
-        } else {
-          _isSharedOpen = true;
-
-          WidgetsBinding.instance!.addPostFrameCallback(
-              (_) => _showBSFromShare(context, vwBoardMenuFromShare(context)));
-        }
-      });
-    });
-  }
-
-  Widget vwBoardMenuFromShare(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          heightSpace(2.0),
-          Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
-          AppBar(
-            elevation: 0.0,
-            leading: null,
-            automaticallyImplyLeading: false,
-            title: Text(
-              '바로 분류하기',
-              style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.black,
-              ),
-            ),
-            centerTitle: true,
-            actions: [
-              Container(
-                alignment: Alignment.center,
-                // color: Colors.red,
-                child: InkWell(
-                  onTap: () {
-                    Get.back();
-                  },
-                  child: Text(
-                    '완료',
-                    style: baseStyle.copyWith(
-                        fontSize: 13,
-                        color: Color(0xff017BFE),
-                        fontWeight: FontWeight.w400),
-                  ),
-                ),
-              ),
-              widthSpace(18.87),
-            ],
-          ),
-          GetBuilder<BoardListController>(builder: (controller) {
-            print('================================');
-            return Container(
-              height: 64,
-              padding: EdgeInsets.only(left: 19),
-              child: HanListView(
-                isSliver: false,
-                direction: Axis.horizontal,
-                controller: controller,
-                itemBuilder: (context, idx) {
-                  final cache = BoardListController.to.cache;
-
-                  return Container(
-                    height: 54,
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        ImageWidget(
-                          holder: Const.assets + 'icon/hart.png',
-                          height: 28,
-                          width: 28,
-                          onTap: () {
-                            Get.toNamed('/collect_detail?index=$idx');
-                          },
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'test',
-                            textAlign: TextAlign.center,
-                            style: baseStyle.copyWith(
-                                fontSize: 12,
-                                color: Color(0xFF3A3A3A),
-                                fontWeight: FontWeight.normal),
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                },
-              ),
-            );
-          }),
-          heightSpace(16.0),
-          Container(
-            width: 158 + 20,
-            height: 32,
-            alignment: Alignment.center,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              top: 8,
-              bottom: 8,
-              left: 35.0,
-              right: 34.0,
-            ),
-            child: Text('코멘트 입력하기'),
-          ),
-          heightSpace(16.0),
-        ],
-      ),
-    );
   }
 
   @override
@@ -207,7 +33,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
   @override
   void dispose() {
-    _intentDataStreamSubscription.cancel();
     super.dispose();
   }
 
@@ -278,14 +103,15 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                           holder: _index == 2
                               ? 'assets/icon/mycontents_on.png'
                               : 'assets/icon/mycontents_off.png',
-                          onTap: () {
+                          onTap: () async {
+                            print('---------------ALL Contens-------------');
+                            final contentAllListController = Get.put(
+                              ContentAllListController(pageSize: 2),
+                            );
+                            contentAllListController.cache = [];
+                            await contentAllListController.fetchItems();
                             BottomNaviController.to.index = 2;
                             BottomNaviController.to.update();
-
-                            // Get.put(MyFollowerController(client: http.Client()));
-                            // Get.put(MyFollowingController(client: http.Client()));
-
-                            // Get.toNamed('/list');
                           },
                         ),
                       ],
@@ -357,7 +183,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
               boardName: '',
               boardColor: 'FFfc5e20',
               boardBadge: '',
-              contentsCount: 0,
               shareCheck: 0,
               isFixed: false,
               shareCount: 0,
@@ -367,6 +192,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
               boardCreator: _profile.toDto(),
               info: _info,
               shareCheck: 0,
+              contentsCount: 0,
               registerDate: DateTime.now(),
             );
 
@@ -394,38 +220,17 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             Get.back();
 
             final _controller = Get.put(ContentsController());
-            // final _profile = HanUserInfoController.to.toProfile();
-            // final _info = ContentsInfoDto(
-            //   contentsTitle: '',
-            //   contentsUrl: '',
-            //   contentsImages: '',
-            //   contentsDescription: '',
-            //   contentsComment: '',
-            //   thumbnails: null,
-            //   contentsUniqueLink: '',
-            //   ContentsCreateDate: DateTime.now(),
-            //   ContentsUpdateDate: DateTime.now(),
-            // );
-            // final _item = ContentsDto(
-            //   boardInfo: null,
-            //   userInfo: _profile.toDto(),
-            //   info: _info,
-            //   contentsAllviewCount: 0,
-            //   contentsMyviewCount: 0,
-            //   contentsAlarmCheck: 0,
-            //   shareInfo: null,
-            //   contentsComment: null,
-            //   ContentsCreateDate: DateTime.now(),
-            //   ContentsUpdateDate: DateTime.now(),
-            // );
             _controller.initTextController();
 
             BoardListMySelectController.to.selected = -1;
-            _showBS(context, BottomSheetContentLink(
-              onMenu: () {
-                _showBS(context, vwBoardMenu(context));
-              },
-            ));
+            _showBS(
+                context,
+                BottomSheetContentLink(
+                  parentContext: context,
+                  onMenu: () {
+                    _showBS(context, vwBoardMenu(context));
+                  },
+                ));
           },
           leading: Image.asset(Const.assets + 'icon/web_link.png'),
           title: Text('웹 링크'),
@@ -443,11 +248,14 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             final _controller = Get.put(ContentsController());
             _controller.initTextController();
             BoardListMySelectController.to.selected = -1;
-            _showBS(context, BottomSheetContentPhoto(
-              onMenu: () {
-                _showBS(context, vwBoardMenu(context));
-              },
-            ));
+            _showBS(
+                context,
+                BottomSheetContentPhoto(
+                  parentContext: context,
+                  onMenu: () {
+                    _showBS(context, vwBoardMenu(context));
+                  },
+                ));
           },
           leading: Image.asset(Const.assets + 'icon/photo.png'),
           title: Text('사진/비디오'),
@@ -466,11 +274,14 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             BoardListMySelectController.to.selected = -1;
 
             Get.back();
-            _showBS(context, BottomSheetContentMemo(
-              onMenu: () {
-                _showBS(context, vwBoardMenu(context));
-              },
-            ));
+            _showBS(
+                context,
+                BottomSheetContentMemo(
+                  parentContext: context,
+                  onMenu: () {
+                    _showBS(context, vwBoardMenu(context));
+                  },
+                ));
           },
           leading: Image.asset(Const.assets + 'icon/memo.png'),
           title: Text('메모'),
@@ -499,38 +310,35 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         });
   }
 
-  void _showBSFromShare(context, child) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
-              ),
-            ),
-          );
-        }).then((value) async {
-      Get.reset();
-      await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
-    });
+  DateTime currentBackPressTime = DateTime.now();
+
+  Future<bool> onWillPop() {
+    DateTime now = DateTime.now();
+    if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
+
+      Fluttertoast.showToast(
+        msg: '한번 더 백키를 누르시면 종료합니다.',
+        backgroundColor: Colors.black45,
+        textColor: Colors.white,
+      );
+      return Future.value(false);
+    }
+    Get.reset();
+    SystemNavigator.pop(); //종
+    return Future.value(true);
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_isSharedOpen == true) {
-      return Container();
-    } else {
-      return Scaffold(
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Scaffold(
         body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
         bottomNavigationBar: GetBuilder<BottomNaviController>(
             builder: (_) => vwBottomMenu(context)),
-      );
-    }
+      ),
+    );
   }
 
   Widget vwTitle(final title) {

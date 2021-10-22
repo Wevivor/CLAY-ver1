@@ -39,6 +39,8 @@ class BoardListController extends AbsListController
     }
 
     final bodyJSON = {
+      "from": offset,
+      "size": limit,
       "query": {
         "bool": {
           "must": queryList,

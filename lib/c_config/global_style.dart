@@ -16,7 +16,7 @@ class GlobalStyle {
   static final configStatusTheme = SystemUiOverlayStyle(
       statusBarBrightness: Brightness.dark,
       statusBarIconBrightness: Brightness.light,
-      statusBarColor: Colors.white,
+      statusBarColor: Colors.transparent,
       systemNavigationBarIconBrightness: Brightness.dark,
       systemNavigationBarColor: Color(0xFFEEEEEE));
 

@@ -16,6 +16,7 @@ class BoardDto with _$BoardDto {
     @JsonKey(name: 'board_creator') required ProfileDto boardCreator,
     @JsonKey(name: 'share') ShareDto? shareInfo,
     @JsonKey(name: 'share_check') required int shareCheck,
+    @JsonKey(name: 'contents_count') required int? contentsCount,
     @JsonKey(name: 'board_comment') List<dynamic>? boardComment,
     @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime registerDate,
@@ -30,6 +31,7 @@ class BoardDto with _$BoardDto {
         boardCreator: boardCreator.toDomain(),
         shareInfo: shareInfo?.toDomain(),
         shareCheck: shareCheck,
+        contentsCount: contentsCount,
         boardComment: boardComment,
         registerDate: registerDate,
       );
@@ -45,7 +47,6 @@ class BoardInfoDto with _$BoardInfoDto {
     @JsonKey(name: 'board_color') required String boardColor,
     @JsonKey(name: 'board_badge') required String boardBadge,
     @JsonKey(name: 'board_unique_link') String? boardUnquieLink,
-    @JsonKey(name: 'contents_count') required int contentsCount,
     @JsonKey(name: 'share_check') required int shareCheck,
     @JsonKey(name: 'share_count') int? shareCount,
     @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -63,7 +64,6 @@ class BoardInfoDto with _$BoardInfoDto {
         boardColor: boardColor,
         boardBadge: boardBadge,
         boardUnquieLink: boardUnquieLink,
-        contentsCount: contentsCount,
         shareCheck: shareCheck,
         shareCount: shareCount,
         registerDate: registerDate,
