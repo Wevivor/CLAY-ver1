@@ -1,27 +1,26 @@
 import 'dart:async';
 
 import 'package:clay/c_config/libarays.dart';
-import 'package:clay/page/sub_language.dart';
+import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
-import 'controllers/common/commons.dart';
-import 'controllers/controllers.dart';
-import 'page/sub_post.dart';
-import 'page/ui_content.dart';
-import 'page/ui_han_bott_navi.dart';
-import 'page/ui_init.dart';
-import 'page/ui_login_google.dart';
-import 'page/ui_profile.dart';
-import 'page/ui_push.dart';
-import 'page/ui_search.dart';
-import 'page/ui_setting.dart';
-import 'part/part_write/part_write.dart';
+import 'c_page/bott_navi_controller.dart';
+import 'c_page/ui_han_bott_navi.dart';
+import 'c_page/ui_init.dart';
+import 'h_account/controllers/han_userinfo_controller.dart';
+import 'h_account/controllers/login_controller.dart';
+import 'h_account/page/sub_language.dart';
+import 'h_account/page/ui_profile.dart';
+import 'h_account/page/ui_setting.dart';
+import 'h_content/page/ui_content.dart';
+import 'h_login/ui_login_google.dart';
+import 'h_search/page/ui_search.dart';
+import 'h_share/share_controller.dart';
 
 Future<void> initFirebaseEmulator() async {
   const bool USE_EMULATOR = true;
@@ -185,11 +184,11 @@ class AppRoutes {
     //home ----------------------------------
     //---------------------------------------
 
-    GetPage(
-      name: '/push',
-      transition: Transition.noTransition,
-      page: () => PushUI(),
-    ),
+    // GetPage(
+    //   name: '/push',
+    //   transition: Transition.noTransition,
+    //   page: () => PushUI(),
+    // ),
     GetPage(
       name: '/search',
       transition: Transition.noTransition,

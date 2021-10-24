@@ -1,6 +1,5 @@
 import 'package:clay/c_config/config.dart';
-import 'package:clay/controllers/common/commons.dart';
-import 'package:clay/controllers/controllers.dart';
+import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
