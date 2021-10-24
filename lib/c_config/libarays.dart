@@ -27,7 +27,7 @@ export 'package:get_storage/get_storage.dart';
 // export 'package:share/share.dart';
 
 // SNS 로그인
-export 'package:sign_in_with_apple/sign_in_with_apple.dart';
+// export 'package:sign_in_with_apple/sign_in_with_apple.dart';
 export 'package:crypto/crypto.dart';
 
 /// 플로팅 서치 바

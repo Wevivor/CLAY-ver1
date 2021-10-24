@@ -111,7 +111,6 @@ class AppbarHelper {
         // leading: Text('아페드'),
         elevation: 0.0,
         backgroundColor: Colors.white,
-        brightness: Brightness.light,
         floating: true,
         pinned: true,
         snap: true,

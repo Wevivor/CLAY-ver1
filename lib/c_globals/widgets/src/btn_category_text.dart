@@ -1,7 +1,6 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
 class CategoryTextButton extends StatelessWidget {
   final int index;

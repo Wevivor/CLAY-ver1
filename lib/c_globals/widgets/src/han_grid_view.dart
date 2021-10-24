@@ -1,9 +1,6 @@
 import 'package:clay/c_config/config.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
-
-import 'package:get/get.dart';
 
 class HanGridView extends StatelessWidget {
   bool shrinkWrap;

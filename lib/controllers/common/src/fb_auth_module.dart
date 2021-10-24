@@ -2,12 +2,10 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:clay/c_config/config.dart';
-import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_kakao_login/flutter_kakao_login.dart';
-import 'package:flutter_naver_login/flutter_naver_login.dart';
-import 'package:get/get.dart';
+// import 'package:flutter_kakao_login/flutter_kakao_login.dart';
+// import 'package:flutter_naver_login/flutter_naver_login.dart';
 
 // mixin FbUserInfoStore on FbCommonModule {
 mixin FbAuthModule {
@@ -186,6 +184,7 @@ mixin FbAuthModule {
     return digest.toString();
   }
 
+/*
   Future<UserCredential> signInWithApple() async {
     // To prevent replay attacks with the credential returned from Apple, we
     // include a nonce in the credential request. When signing in in with
@@ -213,7 +212,8 @@ mixin FbAuthModule {
     // not match the nonce in `appleCredential.identityToken`, sign in will fail.
     return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   }
-
+*/
+/*
   ///---------------------- sigin in 카카오 ----------------------------
   ///
   Future<int> signInWithKAKAO() async {
@@ -243,7 +243,8 @@ mixin FbAuthModule {
     }
     return 0;
   }
-
+*/
+/*
   //Example code of how to sign in with Naver.
   Future<int> signInWithNaver() async {
     NaverAccessToken? token;
@@ -276,7 +277,7 @@ mixin FbAuthModule {
       throw Exception(e);
     }
   }
-
+*/
   /// 새로운 커스텀 토큰을 받아오는 것. 사용자 정보를 보내지 않음.
   Future<dynamic> kakaoCustomToken(email) async {
     try {
