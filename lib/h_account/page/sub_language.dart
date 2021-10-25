@@ -49,6 +49,8 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
               thickness: 1,
               height: 1,
             ),
+            //SUBJECT: 다국어.
+            //TODO: SH 언어 설정.
             LanguageTileWidget(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 selected: Get.locale?.languageCode == 'ko',
@@ -63,6 +65,8 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
               thickness: 1,
               height: 1,
             ),
+            //SUBJECT: 다국어.
+            //TODO: SH 언어 설정.
             LanguageTileWidget(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 selected: Get.locale?.languageCode == 'en',
