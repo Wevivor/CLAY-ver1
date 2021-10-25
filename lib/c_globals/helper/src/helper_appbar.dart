@@ -3,34 +3,10 @@ import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppbarHelper {
-  // Widget vwLogo(BuildContext context) {
-  //   return Center(
-  //     child: InkWell(
-  //       child: Get.isDarkMode
-  //           ? Image.asset('assets/logo_white.png', width: 117, height: 28)
-  //           // Const.isDarkTheme
-  //           : Image.asset(
-  //               'assets/logo_black.png',
-  //               width: 117,
-  //               height: 28,
-  //             ),
-  //       onTap: () {
-  //         // Get.isDarkMode
-  //         //     ? Get.changeTheme(
-  //         //         AppTheme.lightTheme,
-  //         //       )
-  //         //     : Get.changeTheme(AppTheme.darkTheme);
-  //       },
-  //     ),
-  //   );
-  // }
-
-//APPbar의 오른쪽 아이콘 리스트.
-
+  //APPbar의 오른쪽 아이콘 리스트.
   Widget vwIcon(BuildContext context,
       {IconData? iconData, Color color = Colors.black, Function? onTap}) {
     return IconButton(
@@ -43,7 +19,6 @@ class AppbarHelper {
   }
 
   //SUBJECT : Appbar 설정
-  //TODO: 테마 변화
   Widget vwAppBar({
     title,
     List<Widget>? actions,
@@ -101,28 +76,6 @@ class AppbarHelper {
     );
   }
 
-  Widget vwGlobalSliverAppbar(BuildContext context,
-      {final title, final bottom}) {
-    return SliverAppBar(
-        // toolbarHeight: 56,
-        // automaticallyImplyLeading: true,
-        leading: null,
-        // leading: Text('아페드'),
-        elevation: 0.0,
-        backgroundColor: Colors.white,
-        floating: true,
-        pinned: true,
-        snap: true,
-        centerTitle: false,
-        title: Text(title == null ? '아페드' : title,
-            style: baseStyle.copyWith(
-                fontSize: 16,
-                color: Color(0xFF000000),
-                fontWeight: FontWeight.bold)),
-        actions: actionBlankList(),
-        bottom: bottom);
-  }
-
   DateTime currentBackPressTime = DateTime.now();
 
   Future<bool> onWillPop() {
@@ -154,45 +107,6 @@ class AppbarHelper {
       return Colors.white;
     else
       return Colors.black;
-  }
-
-  Widget vwSubBar(BuildContext context,
-      {String? title,
-      bool? isCenter = true,
-      String actionTilte = '',
-      final bottom,
-      Function? actionTap}) {
-    return Container(
-      color: Colors.transparent,
-      // height: kToolbarHeight + bottom.,
-      child: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: IconButton(
-          icon: Icon(
-            Icons.arrow_back,
-            // color: themeData.appBarTheme.iconTheme?.color,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        title: Text(
-          title ?? '',
-          // style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
-        ),
-        centerTitle: isCenter,
-        actions: <Widget>[
-          TextButton(
-            child: Text(actionTilte),
-            onPressed: () {
-              if (actionTap != null) actionTap();
-            },
-          ),
-        ],
-        bottom: bottom,
-      ),
-    );
   }
 
   Widget vwAppbarPosition(BuildContext context,

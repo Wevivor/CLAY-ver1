@@ -37,34 +37,6 @@ class ProfileUserInfoController extends GetxController
   ///----------------------
   ///액션 부분
   ///----------------------
-  // Future<bool> actionFollowing(Profile profile) async {
-  //   final exist = userInfo?.following.lists
-  //       .firstWhere((element) => element == profile.uid, orElse: () {
-  //     return null;
-  //   });
-  //   bool _isFollow = false;
-  //   if (exist != null) {
-  //     userInfo?.following.lists
-  //         .removeWhere((element) => element == profile.uid);
-  //   } else {
-  //     userInfo?.following.lists.add(profile.uid);
-  //     _isFollow = true;
-  //   }
-
-  //   final newFollowing = ListCntDto(
-  //       cnt: userInfo?.following.lists.length ?? 0,
-  //       lists: userInfo?.following.lists ?? []);
-  //   await updateListCntFbByTarget(
-  //       instance: _instance,
-  //       path: MENU_POS,
-  //       id: userInfo?.uid ?? '',
-  //       target: 'following',
-  //       dto: newFollowing.toJson());
-
-  //   userInfo = userInfo?.copyWith(following: newFollowing.toDomain());
-  //   // update();
-  //   return _isFollow;
-  // }
 
   Future<void> actionInsert(HanUserInfoDto user) async {
     userInfo = user.toDomain();

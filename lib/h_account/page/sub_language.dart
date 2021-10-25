@@ -7,6 +7,9 @@ import 'package:clay/h_account/part/part_profile/part_profile.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'dart:ui' as ui;
+
+import 'package:intl/intl.dart';
 
 class LanguageSUB extends StatelessWidget with AppbarHelper {
   final titleStyle = baseStyle.copyWith(
@@ -18,7 +21,7 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
   Widget build(BuildContext context) {
     MySize().init(context);
     Get.put(PushAlarmController('userinfos'));
-    Get.put(LanguageController());
+
     final appbarHeight = 0 + kToolbarHeight;
     return Scaffold(
       appBar: PreferredSize(
@@ -39,46 +42,41 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
             ),
           )),
       body: Container(
-        child: GetBuilder<LanguageController>(
-          builder: (_) => ListView(
-            physics: NeverScrollableScrollPhysics(),
-            children: <Widget>[
-              Divider(
-                thickness: 1,
-                height: 1,
-              ),
-              Padding(
+        child: ListView(
+          physics: NeverScrollableScrollPhysics(),
+          children: <Widget>[
+            Divider(
+              thickness: 1,
+              height: 1,
+            ),
+            LanguageTileWidget(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                child: LanguageTileWidget(
-                    selected: LanguageController.to.currentLanguage == 'ko',
-                    // icon: Icon(Jty.post_globe_selected_new, color: Colors.black),
-                    title: '한국어',
-                    onTap: () {
-                      LanguageController.to.updateLanguage('ko');
-                      // LanguageController.to.status = LANG_STATUS.KO;
-                      // LanguageController.to.selected = 0;
-                    }),
-              ),
-              Divider(
-                thickness: 1,
-                height: 1,
-              ),
-              Padding(
+                selected: Get.locale?.languageCode == 'ko',
+                // icon: Icon(Jty.post_globe_selected_new, color: Colors.black),
+                title: '한국어',
+                onTap: () {
+                  Get.updateLocale(Locale('ko', 'KR'));
+                  final _title = 'title'.tr;
+                  debugPrint('================= Locale: ${_title}');
+                }),
+            Divider(
+              thickness: 1,
+              height: 1,
+            ),
+            LanguageTileWidget(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
-                child: LanguageTileWidget(
-                    selected: LanguageController.to.currentLanguage == 'en',
-                    // icon: Icon(Jty.post_private, color: Colors.black),
-                    title: 'English',
-                    onTap: () {
-                      LanguageController.to.updateLanguage('en');
-                    }),
-              ),
-              Divider(
-                thickness: 1,
-                height: 1,
-              ),
-            ],
-          ),
+                selected: Get.locale?.languageCode == 'en',
+                title: 'English',
+                onTap: () {
+                  Get.updateLocale(Locale('en', 'US'));
+                  final _title = 'title'.tr;
+                  debugPrint('================= Locale: ${_title}');
+                }),
+            Divider(
+              thickness: 1,
+              height: 1,
+            ),
+          ],
         ),
       ),
     );

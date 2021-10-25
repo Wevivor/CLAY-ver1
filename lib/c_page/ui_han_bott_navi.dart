@@ -44,86 +44,80 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     // print('---------${_getcontroller?.index}');
     final _index = BottomNaviController.to.getIndex;
     return Container(
-      color: Colors.white,
-      // padding: EdgeInsets.only(left: 34, right: 34),
-
-      child: Container(
-        height: 66,
-        child: Column(
-          children: [
-            Divider(
-              height: 1,
-              thickness: 1,
-              color: Color(0xffE5E5E5),
-            ),
-            Container(
-                // color: Colors.red,
-                padding: EdgeInsets.only(
-                  top: 12,
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Container(
-                          // color: Colors.blue,
-                          alignment: Alignment.center,
-                          child: HanNaiviBarWidget(
-                            label: '내 보드',
-                            isOn: _index == 0 ? true : false,
-                            holder: _index == 0
-                                ? 'assets/icon/myboard_on.png'
-                                : 'assets/icon/myboard_off.png',
-                            onTap: () {
-                              BottomNaviController.to.index = 0;
-                              BottomNaviController.to.update();
-                            },
-                          ),
-                        ),
-                        HanNaiviBarWidget(
-                          isLabel: false,
-                          align: MainAxisAlignment.start,
-                          height: 48,
-                          width: 48,
-                          isOn: _index == 1 ? true : false,
-                          holder: _index == 1
-                              ? 'assets/icon/add_board_btn.png'
-                              : 'assets/icon/add_board_btn.png',
+      height: 66,
+      child: Column(
+        children: [
+          Divider(
+            height: 1,
+            thickness: 1,
+            color: Color(0xffE5E5E5),
+          ),
+          Container(
+              padding: EdgeInsets.only(
+                top: 12,
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        // color: Colors.blue,
+                        alignment: Alignment.center,
+                        child: HanNaiviBarWidget(
+                          label: '내 보드',
+                          isOn: _index == 0 ? true : false,
+                          holder: _index == 0
+                              ? 'assets/icon/myboard_on.png'
+                              : 'assets/icon/myboard_off.png',
                           onTap: () {
-                            BottomNaviController.to.index = 1;
-                            BottomNaviController.to.update();
-                            Get.put(BoardListMySelectController());
-                            BoardListMySelectController.to.cache = [];
-                            BoardListMySelectController.to.fetchItems();
-                            _showBS(context, vwBoardMenu(context));
-                          },
-                        ),
-                        HanNaiviBarWidget(
-                          label: '내 콘텐츠',
-                          isOn: _index == 2 ? true : false,
-                          holder: _index == 2
-                              ? 'assets/icon/mycontents_on.png'
-                              : 'assets/icon/mycontents_off.png',
-                          onTap: () async {
-                            print('---------------ALL Contens-------------');
-                            final contentAllListController = Get.put(
-                              ContentAllListController(pageSize: 2),
-                            );
-                            contentAllListController.cache = [];
-                            await contentAllListController.fetchItems();
-                            BottomNaviController.to.index = 2;
+                            BottomNaviController.to.index = 0;
                             BottomNaviController.to.update();
                           },
                         ),
-                      ],
-                    ),
-                  ],
-                )),
-          ],
-        ),
+                      ),
+                      HanNaiviBarWidget(
+                        isLabel: false,
+                        align: MainAxisAlignment.start,
+                        height: 48,
+                        width: 48,
+                        isOn: _index == 1 ? true : false,
+                        holder: _index == 1
+                            ? 'assets/icon/add_board_btn.png'
+                            : 'assets/icon/add_board_btn.png',
+                        onTap: () {
+                          BottomNaviController.to.index = 1;
+                          BottomNaviController.to.update();
+                          Get.put(BoardListMySelectController());
+                          BoardListMySelectController.to.cache = [];
+                          BoardListMySelectController.to.fetchItems();
+                          _showBS(context, vwBoardMenu(context));
+                        },
+                      ),
+                      HanNaiviBarWidget(
+                        label: '내 콘텐츠',
+                        isOn: _index == 2 ? true : false,
+                        holder: _index == 2
+                            ? 'assets/icon/mycontents_on.png'
+                            : 'assets/icon/mycontents_off.png',
+                        onTap: () async {
+                          print('---------------ALL Contens-------------');
+                          final contentAllListController = Get.put(
+                            ContentAllListController(pageSize: 2),
+                          );
+                          contentAllListController.cache = [];
+                          await contentAllListController.fetchItems();
+                          BottomNaviController.to.index = 2;
+                          BottomNaviController.to.update();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              )),
+        ],
       ),
     );
   }

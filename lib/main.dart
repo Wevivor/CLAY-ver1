@@ -21,6 +21,7 @@ import 'h_content/page/ui_content.dart';
 import 'h_login/ui_login_google.dart';
 import 'h_search/page/ui_search.dart';
 import 'h_share/share_controller.dart';
+import 'dart:ui' as ui;
 
 Future<void> initFirebaseEmulator() async {
   const bool USE_EMULATOR = true;
@@ -110,26 +111,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(360, 640),
-      builder: () =>
+        designSize: Size(360, 640),
+        builder: () {
           // ThemeController.to.getThemeModeFromStore();
-          GetMaterialApp(
-              locale: Locale('en', 'ko'),
-              localizationsDelegates: [
-                // const AppLocalizationsDelegate(), // <- Your custom delegate
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              // supportedLocales:
-              //     AppLocalizations.languages.keys.toList(), // <- Supported locales
-              //end language translation stuff
-              // navigatorObservers: [
-              //   FirebaseAnalyticsObserver(analytics: FirebaseAnalytics()),
-              // ],
+          return GetMaterialApp(
+              defaultTransition: Transition.native,
+              translations: MultiLanguage(),
+              locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
+              fallbackLocale: Locale('ko', 'KR'),
               debugShowCheckedModeBanner: false,
-              defaultTransition: Transition.fade,
               theme: AppTheme.lightTheme,
-              // darkTheme: AppTheme.darkTheme,
               themeMode: ThemeMode.system,
               initialRoute: '/start',
               getPages: [
@@ -150,8 +141,8 @@ class MyApp extends StatelessWidget {
                     Get.lazyPut<LoginController>(() => LoginController());
                   }),
                 ),
-              ]),
-    );
+              ]);
+        });
   }
 }
 

@@ -17,10 +17,13 @@ dependencies:
     path: "../receive_sharing_intent"
   flutter_localizations:
     sdk: flutter
+  intl: ^0.17.0 # 궂제화와 locale
   
-   # 앱 필수 
- 
+  # The following section is specific to Flutter.
+  # flutter:
+  #   generate: true # Add this line
 
+  # 앱 필수 
   # 파이어베이스 ------------------
   firebase_core: ^1.8.0
   firebase_auth: ^3.1.4
@@ -34,10 +37,9 @@ dependencies:
   # sign_in_with_apple: ^3.0.0
   # crypto: ^3.0.1
   # flutter_kakao_login: ^3.4.0
-  # flutter_naver_login: ^1.2.3
-  # flutter_kakao_login: ^1.2.0
-
+  
   #시스템 관련 --------------
+
   package_info: ^2.0.0
   path_provider: ^2.0.5
   provider: ^5.0.0

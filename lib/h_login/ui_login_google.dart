@@ -142,31 +142,6 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                         },
                       ),
                     ),
-                    heightSpace(16.0),
-                    StackWithButton(
-                      child: SnsWideWidget(
-                        title: '',
-                        assetName: 'assets/sns_login/wide_naver.png',
-                        onTap: () {},
-                      ),
-                    ),
-
-                    //  InkWell(
-                    //     splashColor: Colors.yellow,
-                    //     onTap: () {
-
-                    //     },
-                    //     child: _isLoadingKAKAO
-                    //         ? stackWithButton(SnsWideButton(
-                    //             title: _signup ? '카카오로 간편가입' : '카카오로 로그인',
-                    //             assetFilename:
-                    //                 'assets/sns_login/kakao_wide.png'))
-                    //         : SnsWideButton(
-                    //             title: _signup ? '카카오로 간편가입' : '카카오로 로그인',
-                    //             assetFilename:
-                    //                 'assets/sns_login/kakao_wide.png'),
-                    //     // : buttonCustomKAKAO(),
-                    //   ),
                     heightSpace(20.0),
                   ],
                 ),

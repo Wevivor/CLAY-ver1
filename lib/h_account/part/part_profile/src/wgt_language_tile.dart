@@ -8,12 +8,14 @@ class LanguageTileWidget extends StatefulWidget {
   final title;
   final selected;
   final icon;
+  final padding;
   Function? onTap;
   LanguageTileWidget({
     this.icon,
     this.onTap,
     this.selected,
     this.title,
+    this.padding,
   });
   @override
   _LanguageTileWidgetState createState() => _LanguageTileWidgetState();
@@ -58,6 +60,7 @@ class _LanguageTileWidgetState extends State<LanguageTileWidget> {
         if (widget.onTap != null) widget.onTap!();
       },
       child: Container(
+        padding: widget.padding,
         decoration: _isDown ? BoxDecoration(color: Color(0xFFF6F6F6)) : null,
         child: ListTile(
           contentPadding: EdgeInsets.zero,

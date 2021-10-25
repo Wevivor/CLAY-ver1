@@ -7,7 +7,7 @@ import 'package:uuid/uuid.dart';
 import 'package:image/image.dart' as image;
 
 class FbPostHelperModule {
-  //SUBJECT 파이어베이스 글쓰기 에 추가되는 기능을 모음
+  //SUBJECT 파이어베이스 글쓰기, 부가되는 정보
 
   ///--------------
   ///파일 업로드
@@ -24,6 +24,10 @@ class FbPostHelperModule {
       print(err);
     }
   }
+
+  ///--------------
+  /// 이미지 파일 업로드
+  ///--------------
 
   Future<Map<String, dynamic>> uploadImage(
       FirebaseStorage _storage, File file) async {
@@ -60,37 +64,37 @@ class FbPostHelperModule {
     return imgURL;
   }
 
-  ///--------------
-  ///북마크 기능
-  ///--------------
+  // ///--------------
+  // ///북마크 기능
+  // ///--------------
 
-  Future<void> updateBookmarkFb(
-      {required FirebaseFirestore instance,
-      required String path,
-      required String id,
-      dynamic dto}) async {
-    try {
-      await instance.collection('$path').doc(id).update({'info.bookmark': dto});
-    } catch (e) {
-      print('===>' + e.toString());
-      throw e;
-    }
-  }
+  // Future<void> updateBookmarkFb(
+  //     {required FirebaseFirestore instance,
+  //     required String path,
+  //     required String id,
+  //     dynamic dto}) async {
+  //   try {
+  //     await instance.collection('$path').doc(id).update({'info.bookmark': dto});
+  //   } catch (e) {
+  //     print('===>' + e.toString());
+  //     throw e;
+  //   }
+  // }
 
-  ///--------------
-  ///즐겨찾기 기능
-  ///--------------
+  // ///--------------
+  // ///즐겨찾기 기능
+  // ///--------------
 
-  Future<void> updateFavorFb(
-      {required FirebaseFirestore instance,
-      required String path,
-      required String id,
-      dynamic dto}) async {
-    try {
-      await instance.collection('$path').doc(id).update({'info.favorite': dto});
-    } catch (e) {
-      print('===>' + e.toString());
-      throw e;
-    }
-  }
+  // Future<void> updateFavorFb(
+  //     {required FirebaseFirestore instance,
+  //     required String path,
+  //     required String id,
+  //     dynamic dto}) async {
+  //   try {
+  //     await instance.collection('$path').doc(id).update({'info.favorite': dto});
+  //   } catch (e) {
+  //     print('===>' + e.toString());
+  //     throw e;
+  //   }
+  // }
 }

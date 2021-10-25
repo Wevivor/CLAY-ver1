@@ -10,4 +10,3 @@ export 'src/loading_controller.dart';
 export 'src/theme_controller.dart';
 export 'src/fb_common_module.dart';
 export 'src/fb_strage_module.dart';
-export 'src/language_controller.dart';

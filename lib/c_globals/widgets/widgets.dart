@@ -1,4 +1,4 @@
-export 'src/app_version_widget.dart';
+export 'src/wgt_app_version.dart';
 export 'src/han_grid_view.dart';
 export 'src/han_listview.dart';
 export 'src/wgt_image_circle.dart';
