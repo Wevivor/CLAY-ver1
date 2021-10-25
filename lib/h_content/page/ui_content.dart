@@ -33,10 +33,15 @@ class _ContentUIState extends State<ContentUI>
     contentsListAllMySelectController.cache = [];
     await contentsListAllMySelectController.fetchItems();
     contentsListAllMySelectController.selected = 0;
+    contentAllListController.cache = [];
+    await contentAllListController.fetchItems();
   }
 
   final contentsListAllMySelectController = Get.put(
     ContentsListAllMySelectController(pageSize: 10000),
+  );
+  final contentAllListController = Get.put(
+    ContentAllListController(pageSize: 30),
   );
 
   @override

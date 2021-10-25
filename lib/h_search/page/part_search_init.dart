@@ -1,5 +1,6 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_search/part_search/part_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -17,12 +18,10 @@ class SearchInitPART extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return
-
-        ///--------------------------
-        /// 검색된 리스트
-        ///-------------------------
-        Container(
+    ///--------------------------
+    /// 검색된 리스트
+    ///-------------------------
+    return Container(
       padding: const EdgeInsets.only(left: 10.0, right: 20.0),
       child: HanListView(
         controller: FindController.to,
@@ -32,7 +31,7 @@ class SearchInitPART extends StatelessWidget {
           final cache = FindController.to.cache;
           final size = FindController.to.cache.length;
           print('====== Seachr : $size');
-          final item = cache[idx];
+          final Contents item = cache[idx];
           //SUBJECT:보드 만들기
           //TODO : 보드 위젯 이후에 작업
 
@@ -43,7 +42,7 @@ class SearchInitPART extends StatelessWidget {
                 title: item.info.contentsTitle,
                 date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
                 contentText: item.info.contentsDescription,
-                imgUrl: item.info.thumnails,
+                imgUrl: item.info.thumbnails,
               ),
               Divider(
                 color: Color(0xFFEEEFF2),
