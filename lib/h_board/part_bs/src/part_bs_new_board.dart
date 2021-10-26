@@ -30,8 +30,8 @@ class BottomSheetNewBoard extends StatelessWidget
               child: Image.asset(Const.assets + 'images/rect_40.png')),
           vwBSAppBar(
             onBack: () {
+              Get.back();
               if (onMenu != null) onMenu();
-              Future.microtask(() => Get.back());
             },
             title: '보드 만들기',
             actions: [

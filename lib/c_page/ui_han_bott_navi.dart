@@ -2,6 +2,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
+import 'package:clay/h_account/models/users/users.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
@@ -55,65 +56,62 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           Container(
               padding: EdgeInsets.only(
                 top: 12,
+                left: 72,
+                right: 68,
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        // color: Colors.blue,
-                        alignment: Alignment.center,
-                        child: HanNaiviBarWidget(
-                          label: '내 보드',
-                          isOn: _index == 0 ? true : false,
-                          holder: _index == 0
-                              ? 'assets/icon/myboard_on.png'
-                              : 'assets/icon/myboard_off.png',
-                          onTap: () {
-                            BottomNaviController.to.index = 0;
-                            BottomNaviController.to.update();
-                          },
-                        ),
-                      ),
-                      HanNaiviBarWidget(
-                        isLabel: false,
-                        align: MainAxisAlignment.start,
-                        height: 48,
-                        width: 48,
-                        isOn: _index == 1 ? true : false,
-                        holder: _index == 1
-                            ? 'assets/icon/add_board_btn.png'
-                            : 'assets/icon/add_board_btn.png',
-                        onTap: () {
-                          BottomNaviController.to.index = 1;
-                          BottomNaviController.to.update();
-                          Get.put(BoardListMySelectController());
-                          BoardListMySelectController.to.cache = [];
-                          BoardListMySelectController.to.fetchItems();
-                          _showBS(context, vwBoardMenu(context));
-                        },
-                      ),
-                      HanNaiviBarWidget(
-                        label: '내 콘텐츠',
-                        isOn: _index == 2 ? true : false,
-                        holder: _index == 2
-                            ? 'assets/icon/mycontents_on.png'
-                            : 'assets/icon/mycontents_off.png',
-                        onTap: () async {
-                          print('---------------ALL Contens-------------');
-                          final contentAllListController = Get.put(
-                            ContentAllListController(pageSize: 2),
-                          );
-                          contentAllListController.cache = [];
-                          await contentAllListController.fetchItems();
-                          BottomNaviController.to.index = 2;
-                          BottomNaviController.to.update();
-                        },
-                      ),
-                    ],
+                  Container(
+                    // color: Colors.blue,
+                    alignment: Alignment.center,
+                    child: HanNaiviBarWidget(
+                      label: '내 보드',
+                      isOn: _index == 0 ? true : false,
+                      holder: _index == 0
+                          ? 'assets/icon/myboard_on.png'
+                          : 'assets/icon/myboard_off.png',
+                      onTap: () {
+                        BottomNaviController.to.index = 0;
+                        BottomNaviController.to.update();
+                      },
+                    ),
+                  ),
+                  // HanNaiviBarWidget(
+                  //   isLabel: false,
+                  //   align: MainAxisAlignment.start,
+                  //   height: 48,
+                  //   width: 48,
+                  //   isOn: _index == 1 ? true : false,
+                  //   holder: _index == 1
+                  //       ? 'assets/icon/add_board_btn.png'
+                  //       : 'assets/icon/add_board_btn.png',
+                  //   onTap: () {
+                  //     BottomNaviController.to.index = 1;
+                  //     BottomNaviController.to.update();
+                  //     Get.put(BoardListMySelectController());
+                  //     BoardListMySelectController.to.cache = [];
+                  //     BoardListMySelectController.to.fetchItems();
+                  //     _showBS(context, vwBoardMenu(context));
+                  //   },
+                  // ),
+                  HanNaiviBarWidget(
+                    label: '내 콘텐츠',
+                    isOn: _index == 2 ? true : false,
+                    holder: _index == 2
+                        ? 'assets/icon/mycontents_on.png'
+                        : 'assets/icon/mycontents_off.png',
+                    onTap: () async {
+                      print('---------------ALL Contens-------------');
+                      final contentAllListController = Get.put(
+                        ContentAllListController(pageSize: 2),
+                      );
+                      contentAllListController.cache = [];
+                      await contentAllListController.fetchItems();
+                      BottomNaviController.to.index = 2;
+                      BottomNaviController.to.update();
+                    },
                   ),
                 ],
               )),
@@ -130,7 +128,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         return BoardUI();
 
       case 1:
-        // Future.microtask(() => _showBS(context, vwBoardMenu(context)));
         return Container();
 
       case 2:
@@ -177,23 +174,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
             final _controller = Get.put(BoardController());
             final _profile = HanUserInfoController.to.toProfile();
-            final _info = BoardInfoDto(
-              boardName: '',
-              boardColor: 'FFfc5e20',
-              boardBadge: '',
-              shareCheck: 0,
-              isFixed: false,
-              shareCount: 0,
-              registerDate: DateTime.now(),
-            );
-            final _item = BoardDto(
-              boardCreator: _profile.toDto(),
-              info: _info,
-              shareCheck: 0,
-              contentsCount: 0,
-              registerDate: DateTime.now(),
-            );
-
+            final _item = _createBoard(_profile);
             _controller.boardItem = _item.toDomain();
             _controller.boardNameController.text = '';
 
@@ -289,19 +270,50 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     );
   }
 
+  BoardDto _createBoard(Profile profile) {
+    final _info = BoardInfoDto(
+      boardName: '',
+      boardColor: 'FFfc5e20',
+      boardBadge: '',
+      shareCheck: 0,
+      isFixed: false,
+      shareCount: 0,
+      registerDate: DateTime.now(),
+    );
+    final _item = BoardDto(
+      boardCreator: profile.toDto(),
+      info: _info,
+      shareCheck: 0,
+      contentsCount: 0,
+      registerDate: DateTime.now(),
+    );
+    return _item;
+  }
+
   void _showBS(context, child) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
         isScrollControlled: true,
+        // barrierColor: Colors.red,
         backgroundColor: Colors.white,
         context: context,
         builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
+          delaySetSysyemUIOverlays();
+
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays();
+
+              return Future.value(true);
+            },
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
+                ),
               ),
             ),
           );
@@ -333,8 +345,39 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
       onWillPop: onWillPop,
       child: Scaffold(
         body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
-        bottomNavigationBar: GetBuilder<BottomNaviController>(
-            builder: (_) => vwBottomMenu(context)),
+        bottomNavigationBar: Stack(
+          alignment: Alignment.center,
+          children: [
+            GetBuilder<BottomNaviController>(
+                builder: (_) => vwBottomMenu(context)),
+            FloatingActionButton(
+              child: Icon(
+                Icons.add,
+                size: 36,
+              ),
+
+              mini: false,
+              backgroundColor: Colors.black,
+              // foregroundColor: Colors.white,
+              splashColor: Colors.black,
+              onPressed: () {
+                Get.put(BoardListMySelectController());
+                BoardListMySelectController.to.cache = [];
+                BoardListMySelectController.to.fetchItems();
+                _showBS(context, vwBoardMenu(context));
+              },
+            ),
+          ],
+        ),
+
+        // floatingActionButton: FloatingActionButton(
+        //   child: Container(),
+        //   backgroundColor: Colors.greenAccent,
+        //   foregroundColor: Colors.white,
+        //   splashColor: Colors.black,
+        //   onPressed: () {},
+        // ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.,
       ),
     );
   }

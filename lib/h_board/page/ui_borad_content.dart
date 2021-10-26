@@ -236,14 +236,10 @@ class _BoardContentUIState extends State<BoardContentUI>
         backgroundColor: Colors.white,
         context: context,
         builder: (BuildContext buildContext) {
+          delaySetSysyemUIOverlays();
           return WillPopScope(
             onWillPop: () {
-              Future.delayed(
-                  Duration(milliseconds: 200),
-                  () => SystemChrome.setSystemUIOverlayStyle(
-                      SystemUiOverlayStyle.light.copyWith(
-                          systemNavigationBarColor: Color(0xFFEEEEEE),
-                          systemNavigationBarIconBrightness: Brightness.dark)));
+              delaySetSysyemUIOverlays();
 
               return Future.value(true);
             },

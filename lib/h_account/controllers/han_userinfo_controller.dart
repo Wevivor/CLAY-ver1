@@ -87,6 +87,7 @@ class HanUserInfoController extends GetxController
         throw HanUserInfoException(code: 'userinfo-not-found');
       }
       final info = HanUserInfoDto.fromJson(_item).toDomain();
+      userInfo = info;
       return info;
     }
   }

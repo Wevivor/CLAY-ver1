@@ -30,18 +30,18 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         .listen((List<SharedMediaFile> value) {
       setState(() {
         _sharedFiles = value;
-        print("===================>Shared: 1) " +
+        debugPrint("===================>Shared: 1) " +
             (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
       });
     }, onError: (err) {
-      print("getIntentDataStream error: $err");
+      debugPrint("getIntentDataStream error: $err");
     });
 
     // For sharing images coming from outside the app while the app is closed
     ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
       setState(() {
         _sharedFiles = value;
-        print("===================>Shared: 2) " +
+        debugPrint("===================>Shared: 2) " +
             (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
       });
     });
@@ -67,14 +67,9 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
       if (AuthController.to.getUser != null) {
-        //SUBJECT: LOGIN
-        //TODO: 임시로 주석중...
-        // await HanUserInfoController.to
-        //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
-        print('====> To main_menu');
+        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
         Get.offNamed('/main_menu');
       } else {
-        print('====> To LOGIN');
         Future.microtask(() => Get.offNamed('/login'));
       }
     } else {
@@ -82,9 +77,7 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
       ShareController.to.isShare.value = true;
 
       if (AuthController.to.getUser != null) {
-        final _exist = await HanUserInfoController.to
-            .actionRead(AuthController.to.getUser);
-        print(' START STATE');
+        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
 
         Get.to(() => ShareServiceUI());
       } else

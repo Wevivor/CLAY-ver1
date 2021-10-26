@@ -40,17 +40,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                 //SUBJECT: 바텀시트 색상...
 
                 if (onMenu != null) onMenu();
-                Future.delayed(
-                    Duration(milliseconds: 300),
-                    () =>
-                        // SystemChrome.setSystemUIOverlayStyle(
-                        //     SystemUiOverlayStyle.dark));
-                        SystemChrome.setSystemUIOverlayStyle(
-                            SystemUiOverlayStyle.light.copyWith(
-                                systemNavigationBarColor: Color(0xFFEEEEEE),
-                                // systemNavigationBarColor: Colors.transparent,
-                                systemNavigationBarIconBrightness:
-                                    Brightness.dark)));
               },
               title: '공유방식 선택',
               actions: [
@@ -71,18 +60,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
                       // await share.Share.share('https://www.naver.com');
                       await share.Share.share(_boardUrl);
-                      Future.delayed(
-                          Duration(milliseconds: 300),
-                          () =>
-                              // SystemChrome.setSystemUIOverlayStyle(
-                              //     SystemUiOverlayStyle.dark));
-                              SystemChrome.setSystemUIOverlayStyle(
-                                  SystemUiOverlayStyle.light.copyWith(
-                                      systemNavigationBarColor:
-                                          Color(0xFFEEEEEE),
-                                      // systemNavigationBarColor: Colors.transparent,
-                                      systemNavigationBarIconBrightness:
-                                          Brightness.dark)));
                     },
                     child: Text(
                       '공유하기',
