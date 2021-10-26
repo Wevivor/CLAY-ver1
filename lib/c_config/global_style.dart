@@ -14,11 +14,14 @@ class GlobalStyle {
   static const Color bg = Color(0xffF5F5F5);
 
   static final configStatusTheme = SystemUiOverlayStyle(
-      statusBarBrightness: Brightness.dark,
-      statusBarIconBrightness: Brightness.light,
-      statusBarColor: Colors.transparent,
-      systemNavigationBarIconBrightness: Brightness.dark,
-      systemNavigationBarColor: Color(0xFFEEEEEE));
+    statusBarBrightness: Brightness.light,
+    statusBarIconBrightness: Brightness.dark,
+    // statusBarColor: Color(0xFFEEEEEE),
+    statusBarColor: Colors.white,
+    systemNavigationBarIconBrightness: Brightness.dark,
+    systemNavigationBarColor: Color(0xFFEEEEEE),
+    // systemNavigationBarColor: Colors.transparent,
+  );
 
   /// ----------------------------------------------
   ///  스타일

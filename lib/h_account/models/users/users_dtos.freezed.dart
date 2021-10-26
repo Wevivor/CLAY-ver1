@@ -31,6 +31,8 @@ class _$HanUserInfoDtoTearOff {
       @JsonKey(name: 'user_phone')
           String? userPhone,
       String? intro,
+      @JsonKey(name: 'sns_loging')
+          String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           required int cntVisit,
       String? token,
@@ -43,6 +45,7 @@ class _$HanUserInfoDtoTearOff {
       level: level,
       userPhone: userPhone,
       intro: intro,
+      snsLogin: snsLogin,
       cntVisit: cntVisit,
       token: token,
       registerDate: registerDate,
@@ -68,6 +71,8 @@ mixin _$HanUserInfoDto {
   @JsonKey(name: 'user_phone')
   String? get userPhone => throw _privateConstructorUsedError;
   String? get intro => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sns_loging')
+  String? get snsLogin => throw _privateConstructorUsedError;
   @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
@@ -98,6 +103,8 @@ abstract class $HanUserInfoDtoCopyWith<$Res> {
       @JsonKey(name: 'user_phone')
           String? userPhone,
       String? intro,
+      @JsonKey(name: 'sns_loging')
+          String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           int cntVisit,
       String? token,
@@ -124,6 +131,7 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
     Object? level = freezed,
     Object? userPhone = freezed,
     Object? intro = freezed,
+    Object? snsLogin = freezed,
     Object? cntVisit = freezed,
     Object? token = freezed,
     Object? registerDate = freezed,
@@ -152,6 +160,10 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
       intro: intro == freezed
           ? _value.intro
           : intro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      snsLogin: snsLogin == freezed
+          ? _value.snsLogin
+          : snsLogin // ignore: cast_nullable_to_non_nullable
               as String?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
@@ -193,6 +205,8 @@ abstract class _$HanUserInfoDtoCopyWith<$Res>
       @JsonKey(name: 'user_phone')
           String? userPhone,
       String? intro,
+      @JsonKey(name: 'sns_loging')
+          String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           int cntVisit,
       String? token,
@@ -222,6 +236,7 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
     Object? level = freezed,
     Object? userPhone = freezed,
     Object? intro = freezed,
+    Object? snsLogin = freezed,
     Object? cntVisit = freezed,
     Object? token = freezed,
     Object? registerDate = freezed,
@@ -250,6 +265,10 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
       intro: intro == freezed
           ? _value.intro
           : intro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      snsLogin: snsLogin == freezed
+          ? _value.snsLogin
+          : snsLogin // ignore: cast_nullable_to_non_nullable
               as String?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
@@ -281,6 +300,8 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
       @JsonKey(name: 'user_phone')
           this.userPhone,
       this.intro,
+      @JsonKey(name: 'sns_loging')
+          this.snsLogin,
       @JsonKey(name: 'cnt_visit')
           required this.cntVisit,
       this.token,
@@ -307,6 +328,9 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
   @override
   final String? intro;
   @override
+  @JsonKey(name: 'sns_loging')
+  final String? snsLogin;
+  @override
   @JsonKey(name: 'cnt_visit')
   final int cntVisit;
   @override
@@ -320,7 +344,7 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
 
   @override
   String toString() {
-    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
+    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
   }
 
   @override
@@ -342,6 +366,9 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
                     .equals(other.userPhone, userPhone)) &&
             (identical(other.intro, intro) ||
                 const DeepCollectionEquality().equals(other.intro, intro)) &&
+            (identical(other.snsLogin, snsLogin) ||
+                const DeepCollectionEquality()
+                    .equals(other.snsLogin, snsLogin)) &&
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
@@ -361,6 +388,7 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
       const DeepCollectionEquality().hash(level) ^
       const DeepCollectionEquality().hash(userPhone) ^
       const DeepCollectionEquality().hash(intro) ^
+      const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(registerDate);
@@ -387,6 +415,8 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
       @JsonKey(name: 'user_phone')
           String? userPhone,
       String? intro,
+      @JsonKey(name: 'sns_loging')
+          String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           required int cntVisit,
       String? token,
@@ -412,6 +442,9 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
   String? get userPhone => throw _privateConstructorUsedError;
   @override
   String? get intro => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'sns_loging')
+  String? get snsLogin => throw _privateConstructorUsedError;
   @override
   @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;

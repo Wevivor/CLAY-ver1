@@ -14,7 +14,7 @@ class Const {
 
   ///DEV FLUTTER
   static const String AFADA_PSWD = 'afada1234@!';
-  static const String kakaoKey = '5466fe258c403448896b7c8a80d3f4ff';
+  static const String kakaoKey = '13d9a3e2f95bd8461786d035f8396144';
 
   //============= URL 세팅 =============================
   static String clayBaseUrl = 'https://m.naver.com';

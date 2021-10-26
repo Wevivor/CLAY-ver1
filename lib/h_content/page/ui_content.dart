@@ -75,7 +75,6 @@ class _ContentUIState extends State<ContentUI>
                 width: 32.0,
                 onTap: () {
                   Get.toNamed('/profile');
-                  AppHelper.showMessage('설정..');
                 },
                 holder: 'assets/icon/account.png'),
             widthSpace(10.0),

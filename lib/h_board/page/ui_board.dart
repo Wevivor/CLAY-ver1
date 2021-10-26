@@ -60,11 +60,29 @@ class _BoardUIState extends State<BoardUI>
               ImageButton(
                   height: 32.0,
                   width: 32.0,
-                  onTap: () {
+                  onTap: () async {
                     final _controller = Get.put(FindController());
                     _controller.cache = [];
                     _controller.fetchItems();
                     Get.toNamed('/search');
+
+                    //SUBJECT: 검색.후보
+                    //TODO
+
+                    // final _controller = Get.put(SearchKeyWordListController());
+                    // final result = await showSearch<String>(
+                    //   context: context,
+                    //   delegate: SearchHan(FindController.to.searchWord.isEmpty
+                    //       ? '검색'
+                    //       : FindController.to.searchWord),
+                    // );
+                    // //SUBJECT: 검색
+                    // //TODO : 검색어 조건 설정
+                    // FindController.to.searchWord = result ?? '';
+                    // FindController.to.cache = [];
+
+                    // await FindController.to.fetchItems(term: result);
+                    // FindController.to.update();
                   },
                   holder: 'assets/icon/search.png'),
               widthSpace(10.0),
@@ -73,7 +91,6 @@ class _BoardUIState extends State<BoardUI>
                   width: 32.0,
                   onTap: () {
                     Get.toNamed('/profile');
-                    AppHelper.showMessage('설정..');
                   },
                   holder: 'assets/icon/account.png'),
               widthSpace(10.0),

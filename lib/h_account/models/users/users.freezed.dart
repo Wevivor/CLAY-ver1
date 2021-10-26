@@ -24,6 +24,7 @@ class _$HanUserInfoTearOff {
       int? level,
       String? userPhone,
       String? intro,
+      String? snsLogin,
       required int cntVisit,
       String? token,
       required DateTime registerDate}) {
@@ -34,6 +35,7 @@ class _$HanUserInfoTearOff {
       level: level,
       userPhone: userPhone,
       intro: intro,
+      snsLogin: snsLogin,
       cntVisit: cntVisit,
       token: token,
       registerDate: registerDate,
@@ -52,6 +54,7 @@ mixin _$HanUserInfo {
   int? get level => throw _privateConstructorUsedError;
   String? get userPhone => throw _privateConstructorUsedError;
   String? get intro => throw _privateConstructorUsedError;
+  String? get snsLogin => throw _privateConstructorUsedError;
   int get cntVisit => throw _privateConstructorUsedError;
   String? get token => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
@@ -73,6 +76,7 @@ abstract class $HanUserInfoCopyWith<$Res> {
       int? level,
       String? userPhone,
       String? intro,
+      String? snsLogin,
       int cntVisit,
       String? token,
       DateTime registerDate});
@@ -96,6 +100,7 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
     Object? level = freezed,
     Object? userPhone = freezed,
     Object? intro = freezed,
+    Object? snsLogin = freezed,
     Object? cntVisit = freezed,
     Object? token = freezed,
     Object? registerDate = freezed,
@@ -124,6 +129,10 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
       intro: intro == freezed
           ? _value.intro
           : intro // ignore: cast_nullable_to_non_nullable
+              as String?,
+      snsLogin: snsLogin == freezed
+          ? _value.snsLogin
+          : snsLogin // ignore: cast_nullable_to_non_nullable
               as String?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
@@ -162,6 +171,7 @@ abstract class _$HanUserInfoCopyWith<$Res>
       int? level,
       String? userPhone,
       String? intro,
+      String? snsLogin,
       int cntVisit,
       String? token,
       DateTime registerDate});
@@ -188,6 +198,7 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
     Object? level = freezed,
     Object? userPhone = freezed,
     Object? intro = freezed,
+    Object? snsLogin = freezed,
     Object? cntVisit = freezed,
     Object? token = freezed,
     Object? registerDate = freezed,
@@ -217,6 +228,10 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
           ? _value.intro
           : intro // ignore: cast_nullable_to_non_nullable
               as String?,
+      snsLogin: snsLogin == freezed
+          ? _value.snsLogin
+          : snsLogin // ignore: cast_nullable_to_non_nullable
+              as String?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
@@ -243,6 +258,7 @@ class _$_HanUserInfo implements _HanUserInfo {
       this.level,
       this.userPhone,
       this.intro,
+      this.snsLogin,
       required this.cntVisit,
       this.token,
       required this.registerDate});
@@ -260,6 +276,8 @@ class _$_HanUserInfo implements _HanUserInfo {
   @override
   final String? intro;
   @override
+  final String? snsLogin;
+  @override
   final int cntVisit;
   @override
   final String? token;
@@ -268,7 +286,7 @@ class _$_HanUserInfo implements _HanUserInfo {
 
   @override
   String toString() {
-    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
+    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
   }
 
   @override
@@ -290,6 +308,9 @@ class _$_HanUserInfo implements _HanUserInfo {
                     .equals(other.userPhone, userPhone)) &&
             (identical(other.intro, intro) ||
                 const DeepCollectionEquality().equals(other.intro, intro)) &&
+            (identical(other.snsLogin, snsLogin) ||
+                const DeepCollectionEquality()
+                    .equals(other.snsLogin, snsLogin)) &&
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
@@ -309,6 +330,7 @@ class _$_HanUserInfo implements _HanUserInfo {
       const DeepCollectionEquality().hash(level) ^
       const DeepCollectionEquality().hash(userPhone) ^
       const DeepCollectionEquality().hash(intro) ^
+      const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(registerDate);
@@ -327,6 +349,7 @@ abstract class _HanUserInfo implements HanUserInfo {
       int? level,
       String? userPhone,
       String? intro,
+      String? snsLogin,
       required int cntVisit,
       String? token,
       required DateTime registerDate}) = _$_HanUserInfo;
@@ -343,6 +366,8 @@ abstract class _HanUserInfo implements HanUserInfo {
   String? get userPhone => throw _privateConstructorUsedError;
   @override
   String? get intro => throw _privateConstructorUsedError;
+  @override
+  String? get snsLogin => throw _privateConstructorUsedError;
   @override
   int get cntVisit => throw _privateConstructorUsedError;
   @override

@@ -1,4 +1,5 @@
 import 'package:clay/c_config/config.dart';
+import 'package:clay/c_globals/controllers/src/auth_controller.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
@@ -65,9 +66,11 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
     if (value == null) {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
-      if (FirebaseAuth.instance.currentUser != null) {
-        await HanUserInfoController.to
-            .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
+      if (AuthController.to.getUser != null) {
+        //SUBJECT: LOGIN
+        //TODO: 임시로 주석중...
+        // await HanUserInfoController.to
+        //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
         print('====> To main_menu');
         Get.offNamed('/main_menu');
       } else {
@@ -78,9 +81,9 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
       // _isSharedOpen = true;
       ShareController.to.isShare.value = true;
 
-      if (FirebaseAuth.instance.currentUser != null) {
+      if (AuthController.to.getUser != null) {
         final _exist = await HanUserInfoController.to
-            .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
+            .actionRead(AuthController.to.getUser);
         print(' START STATE');
 
         Get.to(() => ShareServiceUI());

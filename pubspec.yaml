@@ -34,9 +34,9 @@ dependencies:
   
 
   # #SNS 로그인 --------------------
-  # sign_in_with_apple: ^3.0.0
+  sign_in_with_apple: ^3.0.0
   # crypto: ^3.0.1
-  # flutter_kakao_login: ^3.4.0
+  flutter_kakao_login: ^3.4.0
   
   #시스템 관련 --------------
 

@@ -2,41 +2,17 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:clay/c_config/config.dart';
+import 'package:clay/c_globals/controllers/controllers.dart';
+import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 // import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 // import 'package:flutter_naver_login/flutter_naver_login.dart';
 
 // mixin FbUserInfoStore on FbCommonModule {
 mixin FbAuthModule {
-  Future<dynamic?> signInWithGoogle({bool isThrow = false}) async {
-    try {
-      // final _sigin = Const.getGoogleSign();
-      final _sigin = GoogleSignIn();
-      final googleUser = await _sigin.signIn();
-      if (googleUser == null) {
-        throw FirebaseAuthException(
-            code: 'user-cancelled',
-            message: ExceptionMessages.messages('user-cancelled'));
-      }
-
-      GoogleSignInAuthentication googleAuth = await googleUser.authentication;
-
-      final googleAuthCredential = GoogleAuthProvider.credential(
-        accessToken: googleAuth.accessToken,
-        idToken: googleAuth.idToken,
-      );
-      // final _auth = Const.getFbAuth();
-      final _auth = FirebaseAuth.instance;
-      await _auth.signInWithCredential(googleAuthCredential);
-      if (isThrow) throw Exception('Testing');
-      return googleAuthCredential;
-    } catch (e) {
-      throw e;
-    }
-  }
-
-  Future<dynamic?> credntialWithGoogle({bool isThrow = false}) async {
+  Future<dynamic?> credntialWithGoogle() async {
     // final _sigin = Const.getGoogleSign();
     final _sigin = GoogleSignIn();
     final googleUser = await _sigin.signIn();
@@ -49,122 +25,16 @@ mixin FbAuthModule {
     return googleUser;
   }
 
-  // Future<dynamic?> signinWithEmail(String email, String pswd) async {
-  //   try {
-  //     // UserCredential userCredential = await Const.getFbAuth()
-  //     UserCredential userCredential = await FirebaseAuth.instance
-  //         .signInWithEmailAndPassword(email: email, password: pswd);
+  Future<void> signInWithGoogleCredential(final googleUser) async {
+    GoogleSignInAuthentication googleAuth = await googleUser.authentication;
 
-  //     print('=====> userCredential: ${userCredential.toString()}');
-  //     return userCredential;
-  //   } on FirebaseAuthException catch (e) {
-  //     // if (e.code == 'user-not-found') {
-  //     //   print('No user found for that email.');
-  //     // } else if (e.code == 'wrong-password') {
-  //     //   print('Wrong password provided for that user.');
-  //     // }
-  //     throw e;
-  //   }
-  // }
-
-  // void stateChanged() async {
-  //   FirebaseAuth.instance.userChanges().listen((User? user) async {
-  //     if (user == null) {
-  //       print('===============> User is currently signed out!');
-  //       // Get.offAllNamed('/login');
-
-  //     } else {
-  //       if (!user.emailVerified) {
-  //         final actionCodeSettings = ActionCodeSettings(
-  //             url: 'https://afada.page.link/email2=${user.email}',
-  //             dynamicLinkDomain: "afada.page.link",
-  //             androidPackageName: "com.afadadmin.afada",
-  //             androidInstallApp: true,
-  //             androidMinimumVersion: "12",
-  //             iOSBundleId: "com.afadadmin.afada",
-  //             handleCodeInApp: true);
-
-  //         await user.sendEmailVerification(actionCodeSettings);
-  //       } else {
-  //         Get.toNamed('/home');
-  //       }
-  //     }
-  //   });
-  // }
-
-  // Future<void> sendVerifyEmail(User? user) async {
-  //   if (user == null) throw FirebaseAuthException(code: 'user-notfound');
-  //   if (!user.emailVerified) {
-  //     // final actionCodeSettings = ActionCodeSettings(
-  //     //     url: 'https://afada.page.link/email2=${user.email}',
-  //     //     dynamicLinkDomain: "afada.page.link",
-  //     //     androidPackageName: "com.afadadmin.afada",
-  //     //     androidInstallApp: true,
-  //     //     androidMinimumVersion: "12",
-  //     //     iOSBundleId: "com.afadadmin.afada",
-  //     //     handleCodeInApp: true);
-
-  //     await user.sendEmailVerification();
-  //     // await user.sendEmailVerification(actionCodeSettings);
-  //   } else {
-  //     Get.toNamed('/home');
-  //   }
-  // }
-
-  ///이메일 검증 이벤트 등록.
-  //     FirebaseAuth
-  //     .instance
-  //     .userChanges()
-  //     .listen((User? user) async {
-  //   print(
-  //       '=========> email Verify ${user?.uid},${RegisterController.to.isEmailVerifyButtonShow.value},${RegisterController.to.isEmailVerify.value},');
-  //   if (RegisterController
-  //       .to.isEmailVerifyButtonShow.value) {
-  //     if (user != null && user.emailVerified) {
-  //       print('=========> email Verify Success ');
-
-  //       RegisterController.to.isEmailVerify.value =
-  //           true;
-  //       RegisterController
-  //           .to.isEmailVerifyButtonShow.value = false;
-  //       FirebaseAuth.instance
-  //           .userChanges()
-  //           .listen((User? user) {});
-  //     }
-  //   }
-  // });
-
-  // LoginController.to.profile =
-  //     RegisterController.to.profile;
-
-  // LoginController.to.index.value = 0; //로그인으로 이동함.
-
-  // Future<void> sendPasswordResetEmail({
-  //   required String email,
-  //   ActionCodeSettings? actionCodeSettings,
-  // }) async {
-  //   try {
-  //     await FirebaseAuth.instance.sendPasswordResetEmail(
-  //         email: email, actionCodeSettings: actionCodeSettings);
-  //   } on FirebaseAuthException catch (e) {
-  //     if (e.code == 'user-not-found') {
-  //       print('No user found for that email.');
-  //     }
-  //     throw e;
-  //     // } catch (e) {
-  //     //   print('==========' + e.toString());
-  //   }
-  // }
-
-  // Future<UserCredential> createWithEmail(String email, String pswd) async {
-  //   try {
-  //     UserCredential userCredential = await FirebaseAuth.instance
-  //         .createUserWithEmailAndPassword(email: email, password: pswd);
-  //     return userCredential;
-  //   } on FirebaseAuthException catch (e) {
-  //     throw e;
-  //   }
-  // }
+    final googleAuthCredential = GoogleAuthProvider.credential(
+      accessToken: googleAuth.accessToken,
+      idToken: googleAuth.idToken,
+    );
+    final _auth = FirebaseAuth.instance;
+    await _auth.signInWithCredential(googleAuthCredential);
+  }
 
   //--------------------------
   //애플 로그인 부분
@@ -213,104 +83,71 @@ mixin FbAuthModule {
     return await FirebaseAuth.instance.signInWithCredential(oauthCredential);
   }
 */
-/*
   ///---------------------- sigin in 카카오 ----------------------------
   ///
-  Future<int> signInWithKAKAO() async {
+
+  Future<Map<String, dynamic?>?> credntialWithKakao() async {
+    // final _sigin = Const.getGoogleSign();
     dynamic _result;
-    FlutterKakaoLogin kakaoSignIn = FlutterKakaoLogin();
-
-    try {
-      _result = await FlutterKakaoLogin().logIn();
-    } on PlatformException catch (e) {
-      throw Exception('사용자가 취소하였습니다');
-    }
-
+    final FlutterKakaoLogin kakaoSignIn = new FlutterKakaoLogin();
+    _result = await kakaoSignIn.logIn();
     if (_result.status == KakaoLoginStatus.loggedIn) {
       final KakaoToken? token = await (kakaoSignIn.currentToken);
-      try {
-        final jsonResponse = await kakaoCustomToken(_result.account.userEmail);
-
-        final _fbResult = await FirebaseAuth.instance
-            .signInWithCustomToken(jsonResponse['firebase_token']);
-        GetStorage().write("logined", 'K');
-        AppHelper.showMessage("카카오 아이디로 로그인 되었습니다.");
-        return 0;
-      } catch (e) {
-        // goKakaoSignupPage(token);
-        throw Exception('사용자가 취소하였습니다');
-      }
-    }
-    return 0;
-  }
-*/
-/*
-  //Example code of how to sign in with Naver.
-  Future<int> signInWithNaver() async {
-    NaverAccessToken? token;
-    try {
-      NaverLoginResult _naverLoginResult = await FlutterNaverLogin.logIn();
-
-      if (_naverLoginResult.status == NaverLoginStatus.loggedIn) {
-        token = await FlutterNaverLogin.currentAccessToken;
-        print('=> 네이어 로그인 토큰: ' + token.accessToken.toString());
-      }
-    } catch (e) {
-      AppHelper.showMessage(e.toString());
-      throw Exception(e);
-    }
-
-    dynamic jsonResponse;
-    try {
-      if (token == null) throw Exception('사용자가 취소 하었습니다.');
-
-      final _jsonResponse = await naverCustomToken(token);
-
-      final _fbResult = await FirebaseAuth.instance
-          .signInWithCustomToken(_jsonResponse['firebase_token']);
-
-      GetStorage().write("logined", 'K');
-      AppHelper.showMessage("카카오 아이디로 로그인 되었습니다.");
-      return 0;
-    } catch (e) {
-      AppHelper.showMessage(e.toString().replaceAll("Exception:", ''));
-      throw Exception(e);
+      final result = await kakaoSignIn.getUserMe();
+      final resultMap = {'token': token, 'account': result.account};
+      return resultMap;
     }
   }
-*/
+
+  Future<void> signInWithCustomToken(final kakaoToken) async {
+    final jsonResponse = await kakaoCustomToken(kakaoToken.accessToken);
+
+    await FirebaseAuth.instance
+        .signInWithCustomToken(jsonResponse['firebase_token']);
+  }
+
+  Future<int> signInWithKAKAO() async {
+    dynamic _result;
+    final FlutterKakaoLogin kakaoSignIn = new FlutterKakaoLogin();
+
+    try {
+      _result = await kakaoSignIn.logIn();
+      if (_result.status == KakaoLoginStatus.loggedIn) {
+        final KakaoToken? token = await (kakaoSignIn.currentToken);
+
+        final result = await kakaoSignIn.getUserMe();
+        final KakaoAccountResult? account = result.account;
+        if (account != null) {
+          final jsonResponse = await kakaoCustomToken(token?.accessToken);
+
+          final _fbResult = await FirebaseAuth.instance
+              .signInWithCustomToken(jsonResponse['firebase_token']);
+          GetStorage().write("logined", 'K');
+          return 0;
+        }
+      }
+    } on PlatformException catch (e) {
+      throw Exception('사용자가 취소하였습니다');
+    } catch (e) {
+      debugPrint('--------${e.toString()}');
+      throw e;
+    }
+    return -1;
+  }
+
   /// 새로운 커스텀 토큰을 받아오는 것. 사용자 정보를 보내지 않음.
-  Future<dynamic> kakaoCustomToken(email) async {
+  Future<dynamic> kakaoCustomToken(token) async {
     try {
-      final _response = await Dio().get(
-        Const.apiUrl + '/user/kakao/' + email,
+      Dio dio = new Dio();
+
+      final _response = await dio.post(
+        Const.apiUrl + '/kakao/verifyToken',
+        data: {'token': token},
       );
+
       if (_response.statusCode == 200) {
         final datas = _response.data;
 
-        // final _news = datas['news'];
-        // final _banners = datas['banners'];
-        // // final _giftrees = datas['giftrees'];
-        return datas;
-      }
-    } catch (e) {
-      print(e);
-      throw Exception(e);
-    }
-
-    return [];
-  }
-
-  /// 새로운 커스텀 토큰을 받아오는 것. 사용자 정보를 보내지 않음.
-  Future<dynamic> naverCustomToken(token) async {
-    try {
-      final _response = await Dio().post(Const.apiUrl + '/naverjwt/verifyToken',
-          data: {'token': token.accessToken});
-      if (_response.statusCode == 200) {
-        final datas = _response.data;
-
-        // final _news = datas['news'];
-        // final _banners = datas['banners'];
-        // // final _giftrees = datas['giftrees'];
         return datas;
       }
     } catch (e) {

@@ -29,10 +29,22 @@ class _BoardContentUIState extends State<BoardContentUI>
   late ScrollController _scrollController;
   bool silverCollapsed = false;
   String myTitle = '';
+  late LinearGradient gradient;
   @override
   void initState() {
     super.initState();
     _scrollController = ScrollController();
+    gradient = LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      tileMode: TileMode.clamp,
+      stops: [0.8, 1.0],
+      // stops: [1.0, 1.0, 1.0, 1.0, 0.0],
+      colors: [
+        Color(int.parse(widget.board.info.boardColor, radix: 16)),
+        Color(0xFFFFFFFF),
+      ],
+    );
 
     _scrollController.addListener(() {
       if (_scrollController.offset > 220 &&
@@ -73,21 +85,6 @@ class _BoardContentUIState extends State<BoardContentUI>
   void dispose() {
     super.dispose();
   }
-
-  final LinearGradient gradient = LinearGradient(
-    begin: Alignment.topCenter,
-    end: Alignment.bottomCenter,
-    tileMode: TileMode.clamp,
-    // stops: [1.0, 1.0, 1.0, 1.0, 0.0],
-    colors: [
-      Color(0xFFFFB3B3),
-      Color(0xFFFFB3B3),
-      Color(0xFFFFB3B3),
-      Color(0xFFFFB3B3),
-      Color(0xFFFFB3B3),
-      Color(0xFFFFFFFF),
-    ],
-  );
 
   @override
   Widget build(BuildContext context) {

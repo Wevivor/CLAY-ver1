@@ -7,6 +7,7 @@ import 'package:clay/h_account/controllers/push_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 
 import 'package:get/get.dart';
 
@@ -204,6 +205,24 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                         shrinkWrap: true,
                         children: [
                           ListTile(
+                            onTap: () async {
+                              final _loginKind =
+                                  HanUserInfoController.to.userInfo?.snsLogin;
+
+                              if ('K' == _loginKind) {
+                                FlutterKakaoLogin kakaoSignIn =
+                                    new FlutterKakaoLogin();
+
+                                kakaoSignIn.logOut();
+                              } else if ('G' == _loginKind) {
+                                GoogleSignIn googleSignIn = new GoogleSignIn();
+                                googleSignIn.isSignedIn().then((value) {
+                                  if (value) googleSignIn.signOut();
+                                });
+                              }
+                              await FirebaseAuth.instance.signOut();
+                              Get.offAllNamed('start');
+                            },
                             contentPadding: EdgeInsets.zero,
                             dense: true,
                             title: Container(

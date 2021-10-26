@@ -4,6 +4,7 @@ import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -95,6 +96,7 @@ void main() async {
   // Const.isTest = false;
 
   await Firebase.initializeApp();
+  await FlutterKakaoLogin().init("${Const.kakaoKey}");
   // FirebaseFirestore.instance.setPersistenceEnabled(true);
   // FirebaseFirestore.instance.setPersistenceCacheSizeBytes(10000000);
   // await FlutterKakaoLogin().init("${Const.kakaoKey}");
