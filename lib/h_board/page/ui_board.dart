@@ -55,7 +55,8 @@ class _BoardUIState extends State<BoardUI>
           preferredSize: Size.fromHeight(appbarHeight),
           //SUBJECT : 앱바의 액션
           child: vwAppBar(
-            title: 'CLAY',
+            title: 'board.appbar.title'.tr,
+            // 'CLAY',
             actions: [
               ImageButton(
                   height: 32.0,

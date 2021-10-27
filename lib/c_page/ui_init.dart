@@ -66,8 +66,8 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
       if (FirebaseAuth.instance.currentUser != null) {
-        await HanUserInfoController.to
-            .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
+        // await HanUserInfoController.to
+        //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
         print('====> To main_menu');
         Get.offNamed('/main_menu');
       } else {

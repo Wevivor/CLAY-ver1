@@ -23,6 +23,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
   final _contentsController = Get.put(
     ContentsController(),
   );
+
   late int _listType = 2;
   @override
   void initState() {
