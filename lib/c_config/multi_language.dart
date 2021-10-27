@@ -27,6 +27,8 @@ class MultiLanguage extends Translations {
           'share.bs.body.badge.none': 'None',
 
           // 메인보드 : 메인 화면
+          'board.appbar.title.logo': 'CLAY',
+
           'board.body.chip.all': 'All',
 
           // 메인보드 : 바텀 네비게이션바
@@ -147,6 +149,7 @@ class MultiLanguage extends Translations {
           'share.bs.body.badge.none': '선택안함',
 
           // 메인보드 : 메인 화면
+          'board.appbar.title.logo': 'CLAY',
           'board.body.chip.all': '전체',
 
           // 메인보드 : 바텀 네비게이션바

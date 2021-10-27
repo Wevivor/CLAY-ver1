@@ -55,7 +55,7 @@ class _BoardUIState extends State<BoardUI>
           preferredSize: Size.fromHeight(appbarHeight),
           //SUBJECT : 앱바의 액션
           child: vwAppBar(
-            title: 'board.appbar.title'.tr,
+            title: 'board.appbar.title.logo'.tr,
             // 'CLAY',
             actions: [
               ImageButton(
@@ -105,8 +105,9 @@ class _BoardUIState extends State<BoardUI>
             children: [
               Obx(() {
                 final controller = BoardListController.to;
+                //SUBJECT: 보드의 카테고리
+
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     CategoryButton(
                       index: 0,
@@ -117,6 +118,7 @@ class _BoardUIState extends State<BoardUI>
                         await controller.fetchItems(term: '');
                       },
                     ),
+                    widthSpace(7.0),
                     CategoryButton(
                       index: 1,
                       selected: controller.selected,
@@ -126,6 +128,7 @@ class _BoardUIState extends State<BoardUI>
                         await controller.fetchItems(term: '일/공부');
                       },
                     ),
+                    widthSpace(7.0),
                     CategoryButton(
                       index: 2,
                       selected: controller.selected,
@@ -135,6 +138,7 @@ class _BoardUIState extends State<BoardUI>
                         await controller.fetchItems(term: '자기계발');
                       },
                     ),
+                    widthSpace(7.0),
                     CategoryButton(
                       index: 3,
                       title: null,
