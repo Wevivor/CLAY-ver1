@@ -2,7 +2,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/h_account/controllers/push_controller.dart';
+import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_account/part/part_push/part_push.dart';
 import 'package:clay/part_imagepicker/part_imagepicker.dart';
 import 'package:flutter/material.dart';
@@ -76,15 +76,15 @@ class AlarmSUB extends StatelessWidget with AppbarHelper {
           ),
         ),
       ),
-      body: GetBuilder<PushController>(
+      body: GetBuilder<PushListController>(
         builder: (_) => Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: HanListView(
             isSliver: false,
             direction: Axis.vertical,
-            controller: PushController.to,
+            controller: PushListController.to,
             itemBuilder: (context, idx) {
-              final cache = PushController.to.cache;
+              final cache = PushListController.to.cache;
 
               return Column(
                 children: [

@@ -1,7 +1,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/h_account/controllers/push_controller.dart';
+import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_account/models/push/push.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -38,9 +38,9 @@ class PushUI extends StatelessWidget with AppbarHelper {
           SliverToBoxAdapter(
             child: heightSpace(10.0),
           ),
-          GetBuilder<PushController>(
+          GetBuilder<PushListController>(
             builder: (_) => HanListView(
-                controller: PushController.to,
+                controller: PushListController.to,
                 itemBuilder: (context, idx) {
                   // final controller = PushController.to;
                   final cache = _.cache;

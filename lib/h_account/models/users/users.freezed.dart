@@ -250,8 +250,8 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_HanUserInfo implements _HanUserInfo {
-  const _$_HanUserInfo(
+class _$_HanUserInfo extends _HanUserInfo {
+  _$_HanUserInfo(
       {this.userId,
       required this.profile,
       this.isDisabled,
@@ -261,7 +261,8 @@ class _$_HanUserInfo implements _HanUserInfo {
       this.snsLogin,
       required this.cntVisit,
       this.token,
-      required this.registerDate});
+      required this.registerDate})
+      : super._();
 
   @override
   final String? userId;
@@ -341,8 +342,8 @@ class _$_HanUserInfo implements _HanUserInfo {
       __$HanUserInfoCopyWithImpl<_HanUserInfo>(this, _$identity);
 }
 
-abstract class _HanUserInfo implements HanUserInfo {
-  const factory _HanUserInfo(
+abstract class _HanUserInfo extends HanUserInfo {
+  factory _HanUserInfo(
       {String? userId,
       required Profile profile,
       bool? isDisabled,
@@ -353,6 +354,7 @@ abstract class _HanUserInfo implements HanUserInfo {
       required int cntVisit,
       String? token,
       required DateTime registerDate}) = _$_HanUserInfo;
+  _HanUserInfo._() : super._();
 
   @override
   String? get userId => throw _privateConstructorUsedError;

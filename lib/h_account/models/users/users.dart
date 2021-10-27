@@ -5,8 +5,8 @@ import 'users_dtos.dart';
 part 'users.freezed.dart';
 
 @freezed
-abstract class HanUserInfo with _$HanUserInfo {
-  const factory HanUserInfo({
+class HanUserInfo with _$HanUserInfo {
+  factory HanUserInfo({
     String? userId,
     required Profile profile,
     bool? isDisabled,
@@ -18,21 +18,19 @@ abstract class HanUserInfo with _$HanUserInfo {
     String? token,
     required DateTime registerDate,
   }) = _HanUserInfo;
-
-  // HanUserInfoDto toDto() => HanUserInfoDto(
-  //       uid: uid,
-  //       profile: profile.toDto(),
-  //       info: info?.toDto(),
-  //       regiInfo: regiInfo?.toDto(),
-  //       following: following.toDto(),
-  //       isDisabled: isDisabled,
-  //       level: level,
-  //       cntVisit: cntVisit,
-  //       isPush: isPush,
-  //       token: token,
-  //       dtCreated: dtCreated,
-  //       dtUpdated: dtUpdated,
-  //     );
+  HanUserInfo._();
+  HanUserInfoDto toDto() => HanUserInfoDto(
+        userId: userId,
+        profile: profile.toDto(),
+        isDisabled: isDisabled,
+        level: level,
+        userPhone: userPhone,
+        intro: intro,
+        snsLogin: snsLogin,
+        cntVisit: cntVisit,
+        token: token,
+        registerDate: registerDate,
+      );
 }
 
 @freezed

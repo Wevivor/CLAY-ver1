@@ -3,6 +3,7 @@ import 'package:clay/c_globals/controllers/src/auth_controller.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
+import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/h_share.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,11 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
       ShareController.to.isShare.value = false;
       if (AuthController.to.getUser != null) {
         await HanUserInfoController.to.actionRead(AuthController.to.getUser);
-        Get.offNamed('/main_menu');
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        Get.offNamed(route);
       } else {
         Future.microtask(() => Get.offNamed('/login'));
       }
