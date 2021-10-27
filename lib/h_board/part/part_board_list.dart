@@ -67,9 +67,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                             AppHelper.showMessage('모어');
                           },
                         ),
-                        Divider(
-                          color: Color(0xFFEEEFF2),
-                        )
+                        heightSpace(10.0),
                       ],
                     );
                   },
