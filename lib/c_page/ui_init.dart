@@ -1,4 +1,5 @@
 import 'package:clay/c_config/config.dart';
+import 'package:clay/c_globals/controllers/src/auth_controller.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
@@ -29,18 +30,18 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         .listen((List<SharedMediaFile> value) {
       setState(() {
         _sharedFiles = value;
-        print("===================>Shared: 1) " +
+        debugPrint("===================>Shared: 1) " +
             (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
       });
     }, onError: (err) {
-      print("getIntentDataStream error: $err");
+      debugPrint("getIntentDataStream error: $err");
     });
 
     // For sharing images coming from outside the app while the app is closed
     ReceiveSharingIntent.getInitialMedia().then((List<SharedMediaFile> value) {
       setState(() {
         _sharedFiles = value;
-        print("===================>Shared: 2) " +
+        debugPrint("===================>Shared: 2) " +
             (_sharedFiles?.map((f) => f.path).join(",") ?? ""));
       });
     });
@@ -69,23 +70,23 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         // await HanUserInfoController.to
         //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
         print('====> To main_menu');
-        Get.offNamed('/main_menu');
+        if (AuthController.to.getUser != null) {
+          await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+          Get.offNamed('/main_menu');
+        } else {
+          Future.microtask(() => Get.offNamed('/login'));
+        }
       } else {
-        print('====> To LOGIN');
-        Future.microtask(() => Get.offNamed('/login'));
+        // _isSharedOpen = true;
+        ShareController.to.isShare.value = true;
+
+        if (AuthController.to.getUser != null) {
+          await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+
+          Get.to(() => ShareServiceUI());
+        } else
+          Get.toNamed('/login');
       }
-    } else {
-      // _isSharedOpen = true;
-      ShareController.to.isShare.value = true;
-
-      if (FirebaseAuth.instance.currentUser != null) {
-        final _exist = await HanUserInfoController.to
-            .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
-        print(' START STATE');
-
-        Get.to(() => ShareServiceUI());
-      } else
-        Get.toNamed('/login');
     }
   }
 

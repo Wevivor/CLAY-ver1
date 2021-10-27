@@ -6,3 +6,4 @@ export 'src/number_text_formatter.dart';
 export 'src/timestamp_converter.dart';
 export 'src/han_exception_message.dart';
 export 'src/register_errors_message.dart';
+export 'src/han_userinfo_exception.dart';

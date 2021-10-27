@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:clay/c_globals/controllers/controllers.dart';
+import 'package:clay/c_globals/utils/src/han_userinfo_exception.dart';
 import 'package:clay/h_account/models/users/users.dart';
 import 'package:clay/h_account/models/users/users_dtos.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -76,17 +77,19 @@ class HanUserInfoController extends GetxController
     }
   }
 
-  Future<HanUserInfo> actionRead(String uid) async {
+  Future<HanUserInfo?> actionRead(User? user) async {
     // try {
-    final _item = await readFb(id: uid, instance: _instance, path: MENU_POS);
+    if (user != null) {
+      final _item =
+          await readFb(id: user.uid, instance: _instance, path: MENU_POS);
 
-    if (_item == null) {
-      throw Exception('error');
+      if (_item == null) {
+        throw HanUserInfoException(code: 'userinfo-not-found');
+      }
+      final info = HanUserInfoDto.fromJson(_item).toDomain();
+      userInfo = info;
+      return info;
     }
-    final info = HanUserInfoDto.fromJson(_item);
-    this.userInfo = info.toDomain();
-    update();
-    return info.toDomain();
   }
 
   Future<void> actionUpdate(HanUserInfoDto dto) async {
@@ -102,13 +105,16 @@ class HanUserInfoController extends GetxController
     }
   }
 
-  Future<HanUserInfo?> actionExistByEmail(String userEmail) async {
+  Future<HanUserInfo?> actionExistByEmail(String userEmail,
+      {String? snsLogin}) async {
     try {
-      final _result = await existQuery(
-          instance: _instance,
-          path: MENU_POS,
-          target: 'profile.user_email',
-          source: userEmail);
+      final _result = await existQueryByEmail(
+        instance: _instance,
+        path: MENU_POS,
+        email: 'profile.user_email',
+        source: userEmail,
+        snsLogin: snsLogin,
+      );
 
       if (_result != null) {
         userInfo = HanUserInfoDto.fromJson(_result).toDomain();

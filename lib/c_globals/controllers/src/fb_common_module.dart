@@ -191,4 +191,33 @@ class FbCommonModule {
       throw e;
     }
   }
+
+  Future<dynamic> existQueryByEmail({
+    required FirebaseFirestore instance,
+    required String path,
+    required String email,
+    required String source,
+    String? snsLogin,
+  }) async {
+    try {
+      CollectionReference _collRef = instance.collection(path);
+      QuerySnapshot result = await _collRef
+          .where(email, isEqualTo: source)
+          .where('sns_loging', isNotEqualTo: snsLogin)
+          .get();
+
+      var item;
+      final tmp = result.docs.isNotEmpty;
+      if (tmp) {
+        result.docs.forEach((element) {
+          item = element.data();
+        });
+        return item;
+      }
+
+      return null;
+    } catch (e) {
+      throw e;
+    }
+  }
 }

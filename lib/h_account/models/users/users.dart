@@ -13,6 +13,7 @@ abstract class HanUserInfo with _$HanUserInfo {
     int? level,
     String? userPhone,
     String? intro,
+    String? snsLogin,
     required int cntVisit,
     String? token,
     required DateTime registerDate,
