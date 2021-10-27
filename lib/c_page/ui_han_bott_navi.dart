@@ -299,15 +299,15 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         backgroundColor: Colors.white,
         context: context,
         builder: (BuildContext buildContext) {
-          delaySetSysyemUIOverlays();
-
           return WillPopScope(
             onWillPop: () {
               //SUBJECT: BS 시스템네비바 검게 방지하는
-              delaySetSysyemUIOverlays();
+              delaySetSysyemUIOverlays(250);
 
               return Future.value(true);
             },
+            // child: AnnotatedRegion<SystemUiOverlayStyle>(
+            //   value: GlobalStyle.configStatusTheme,
             child: Padding(
               padding: MediaQuery.of(context).viewInsets,
               child: Container(
@@ -316,6 +316,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                 ),
               ),
             ),
+            // ),
           );
         });
   }

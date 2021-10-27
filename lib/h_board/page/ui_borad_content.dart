@@ -236,18 +236,21 @@ class _BoardContentUIState extends State<BoardContentUI>
         backgroundColor: Colors.white,
         context: context,
         builder: (BuildContext buildContext) {
-          delaySetSysyemUIOverlays();
+          // delaySetSysyemUIOverlays(100);
           return WillPopScope(
             onWillPop: () {
-              delaySetSysyemUIOverlays();
+              delaySetSysyemUIOverlays(250);
 
               return Future.value(true);
             },
-            child: Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: Container(
-                child: Wrap(
-                  children: [child],
+            child: AnnotatedRegion<SystemUiOverlayStyle>(
+              value: GlobalStyle.configStatusTheme,
+              child: Padding(
+                padding: MediaQuery.of(context).viewInsets,
+                child: Container(
+                  child: Wrap(
+                    children: [child],
+                  ),
                 ),
               ),
             ),

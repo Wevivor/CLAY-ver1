@@ -10,19 +10,11 @@ import 'package:get/get.dart';
 
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
+import 'c_page/app_routes.dart';
 import 'c_page/bott_navi_controller.dart';
-import 'c_page/ui_han_bott_navi.dart';
-import 'c_page/ui_init.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
-import 'h_account/page/sub_language.dart';
-import 'h_account/page/ui_profile.dart';
-import 'h_account/page/ui_setting.dart';
-import 'h_content/page/ui_content.dart';
-import 'h_login/ui_login_google.dart';
-import 'h_search/page/ui_search.dart';
 import 'h_share/share_controller.dart';
-import 'dart:ui' as ui;
 
 Future<void> initFirebaseEmulator() async {
   const bool USE_EMULATOR = true;
@@ -127,105 +119,7 @@ class MyApp extends StatelessWidget {
               initialRoute: '/start',
               getPages: [
                 ...AppRoutes.routes,
-                //---------------------------------------
-                /// Introduction (인트로....)
-                //---------------------------------------
-                GetPage(
-                  name: '/start',
-                  page: () => InitUI(),
-                  transition: Transition.noTransition,
-                ),
-                GetPage(
-                  name: '/login',
-                  page: () => LoginGoogleUI(),
-                  transition: Transition.noTransition,
-                  binding: BindingsBuilder(() {
-                    Get.lazyPut<LoginController>(() => LoginController());
-                  }),
-                ),
               ]);
         });
   }
-}
-
-class AppRoutes {
-  AppRoutes._(); //this is to prevent anyone from instantiating this object
-  static final routes = [
-    //---------------------------------------
-    //Upload ----------------------------------
-    //---------------------------------------
-
-    // GetPage(
-    //   name: '/board',
-    //   transition: Transition.noTransition,
-    //   page: () => BoradMyUI(),
-    // ),
-    // GetPage(
-    //   name: '/brd_content',
-    //   transition: Transition.noTransition,
-    //   page: () => BoardContentUI(
-    //     board: '1',
-    //   ),
-    // ),
-    GetPage(
-      name: '/main_menu',
-      transition: Transition.noTransition,
-      page: () => HanBottomNavigationBar(),
-    ),
-
-    //---------------------------------------
-    //home ----------------------------------
-    //---------------------------------------
-
-    // GetPage(
-    //   name: '/push',
-    //   transition: Transition.noTransition,
-    //   page: () => PushUI(),
-    // ),
-    GetPage(
-      name: '/search',
-      transition: Transition.noTransition,
-      page: () => SearchUI(),
-    ),
-
-    // GetPage(
-    //   name: '/post',
-    //   transition: Transition.noTransition,
-    //   page: () => PostSUB(),
-    // ),
-
-    GetPage(
-      name: '/content',
-      transition: Transition.noTransition,
-      page: () => ContentUI(),
-    ),
-    //---------------------------------------
-    //setting
-    //---------------------------------------
-    GetPage(
-        name: '/profile',
-        transition: Transition.noTransition,
-        page: () => ProfileUI()),
-    GetPage(
-        name: '/language',
-        transition: Transition.noTransition,
-        page: () => LanguageSUB()),
-
-    // GetPage(
-    //     name: '/profile_edit',
-    //     transition: Transition.noTransition,
-    //     page: () => ProfileEditSUB()),
-    GetPage(
-        name: '/setting',
-        transition: Transition.noTransition,
-        page: () => SettingUI()),
-    // GetPage(
-    //     name: '/notice',
-    //     transition: Transition.noTransition,
-    //     page: () => NoticeUI()),
-    // GetPage(
-    //     name: '/yaggwan/:index',
-    //     transition: Transition.noTransition,
-    //     page: () => YaggwanUI()),
-  ];
 }

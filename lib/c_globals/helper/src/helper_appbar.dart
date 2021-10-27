@@ -149,11 +149,12 @@ class AppbarHelper {
         ));
   }
 
-  void           () {
+  void delaySetSysyemUIOverlays(int time) {
     Future.delayed(
-        Duration(milliseconds: 250),
+        Duration(milliseconds: time),
         () => SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light
             .copyWith(
+                statusBarColor: Colors.transparent,
                 systemNavigationBarColor: Color(0xFFEEEEEE),
                 systemNavigationBarIconBrightness: Brightness.dark)));
   }
