@@ -16,6 +16,22 @@ class BottomSheetNewBoard extends StatelessWidget
     this.onMenu,
   });
   final _formKey = GlobalKey<FormState>();
+
+  final sheetTitle = baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    height: 1.17, // line height : 16.41px
+    color: Colors.black,
+  );
+
+  final msgStyle = baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    height: 1.17, // line height : 16.41px
+    letterSpacing: -0.7, // letter spacing : -5%
+    color: Color(0xFF707070),
+  );
+
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -25,15 +41,16 @@ class BottomSheetNewBoard extends StatelessWidget
         children: <Widget>[
           heightSpace(2.0),
           Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
+            alignment: Alignment.bottomCenter,
+            height: 15,
+            child: Image.asset(Const.assets + 'images/rect_40.png'),
+          ),
           vwBSAppBar(
             onBack: () {
               Get.back();
               if (onMenu != null) onMenu();
             },
-            title: '보드 만들기',
+            title: 'com.bs.title.newBoard'.tr, // 보드 만들기
             actions: [
               Container(
                 alignment: Alignment.center,
@@ -49,14 +66,21 @@ class BottomSheetNewBoard extends StatelessWidget
                     final _controller = BoardController.to;
                     _controller
                         .actionChangeName(_controller.boardNameController.text);
-                    final exist = ['자기계발', '일/공부', 'LIKE', '선택안함'].firstWhere(
+                    final exist = [
+                      'com.chip.badge.growth'.tr,
+                      'com.chip.badge.work'.tr,
+                      'com.chip.badge.like'.tr,
+                      'com.chip.badge.none'.tr
+                    ].firstWhere(
                         (element) =>
                             element == _controller.boardItem?.info.boardBadge,
                         orElse: () {
                       return '';
                     });
+
+                    // SUBJECT : [SH] showMessage 같은 것은 영문으로 번역하지 않아도 될까요?
                     if (exist == '') {
-                      AppHelper.showMessage('배치를 선택해 주세요');
+                      AppHelper.showMessage('배지를 선택해 주세요');
                       return;
                     }
 
@@ -68,21 +92,23 @@ class BottomSheetNewBoard extends StatelessWidget
                     });
                   },
                   child: Text(
-                    '완료',
+                    'com.btn.create'.tr,
                     style: baseStyle.copyWith(
-                        fontSize: 13,
-                        color: Color(0xff017BFE),
-                        fontWeight: FontWeight.w400),
+                      fontSize: 14,
+                      color: Color(0xff017BFE),
+                      fontWeight: FontWeight.w400,
+                      height: 1.17, // line height : 16.41px
+                    ),
                   ),
                 ),
               ),
-              widthSpace(18.87),
+              widthSpace(20),
             ],
           ),
           heightSpace(20.0),
           Padding(
-            padding: EdgeInsets.only(left: 19.0, right: 19.0),
-            child: vwTitle('보드 이름'),
+            padding: EdgeInsets.only(left: 18.0, right: 19.0),
+            child: vwTitle('com.bs.subtitle.boardName'.tr),
           ),
           heightSpace(10.0),
           Padding(
@@ -94,10 +120,7 @@ class BottomSheetNewBoard extends StatelessWidget
                 decoration: DecoHelper.roundDeco.copyWith(
                   color: Color(0xFFF6F6F6),
                 ),
-                padding: const EdgeInsets.only(
-                  left: 12.0,
-                  right: 16.0,
-                ),
+                padding: const EdgeInsets.only(left: 12.0, right: 16.0),
                 child: TextFormField(
                   maxLines: 1,
                   onTap: () {},
@@ -105,13 +128,8 @@ class BottomSheetNewBoard extends StatelessWidget
                   // style: accountEditTextStyle,
                   decoration: kInputDecoration.copyWith(
                     fillColor: Color(0xFFF6F6F6),
-                    hintText: '|“DIY”, “레시피”와 같은 제목을 추가하세요.',
-                    hintStyle: baseStyle.copyWith(
-                        fontSize: 14,
-                        fontWeight: FontWeight.normal,
-                        color: Color(
-                          0xFFCACACA,
-                        )),
+                    hintText: 'com.bs.pholder.inputTitle'.tr,
+                    hintStyle: msgStyle,
                     isDense: true,
                     errorText: null,
                     errorStyle: TextStyle(
@@ -133,8 +151,8 @@ class BottomSheetNewBoard extends StatelessWidget
           ),
           heightSpace(16.0),
           Padding(
-            padding: EdgeInsets.only(left: 19.0, right: 19.0),
-            child: vwTitle('보드에 배치 달기'),
+            padding: EdgeInsets.only(left: 18.0, right: 19.0),
+            child: vwTitle('board.bs.sub.subtitle.badge'.tr),
           ),
           heightSpace(10.0),
           Padding(
@@ -153,8 +171,7 @@ class BottomSheetNewBoard extends StatelessWidget
       alignment: Alignment.centerLeft,
       child: Text(
         title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+        style: sheetTitle,
       ),
     );
   }

@@ -28,6 +28,22 @@ class BottomSheetContentPhoto extends StatelessWidget
     this.parentContext,
   });
   final dialogController = Get.lazyPut(() => CarmeraDailogController());
+
+  final sheetTitle = baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    height: 1.17, // line height : 16.41px
+    color: Colors.black,
+  );
+
+  final msgStyle = baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    height: 1.17, // line height : 16.41px
+    letterSpacing: -0.7, // letter spacing : -5%
+    color: Color(0xFF707070),
+  );
+
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -35,7 +51,7 @@ class BottomSheetContentPhoto extends StatelessWidget
     return GetBuilder<LoadingController>(builder: (controller) {
       return Stack(
         alignment: AlignmentDirectional.center,
-        children: [
+        children: <Widget>[
           Container(
             decoration: new BoxDecoration(
                 color: Colors.white,
@@ -48,14 +64,14 @@ class BottomSheetContentPhoto extends StatelessWidget
                 heightSpace(2.0),
                 Container(
                     alignment: Alignment.bottomCenter,
-                    height: 11,
+                    height: 15,
                     child: Image.asset(Const.assets + 'images/rect_40.png')),
                 vwBSAppBar(
                   onBack: () {
                     Get.back();
                     if (onMenu != null) onMenu();
                   },
-                  title: '사진/비디오',
+                  title: 'board.bs.sub.title.photo'.tr, // 사진/비디오
                   actions: [
                     Container(
                       alignment: Alignment.center,
@@ -131,19 +147,20 @@ class BottomSheetContentPhoto extends StatelessWidget
                           Get.back();
                         },
                         child: Text(
-                          '완료',
+                          'com.btn.save'.tr,
                           style: baseStyle.copyWith(
-                              fontSize: 13,
-                              color: Color(0xff017BFE),
-                              fontWeight: FontWeight.w400),
+                            fontSize: 14,
+                            color: Color(0xff017BFE),
+                            fontWeight: FontWeight.w400,
+                            height: 1.17,
+                          ), // line height : 16.41px
                         ),
                       ),
                     ),
-                    widthSpace(18.87),
+                    widthSpace(20.0),
                   ],
                 ),
                 heightSpace(20.0),
-
                 Container(
                   padding: EdgeInsets.only(
                     left: 25.0,
@@ -188,10 +205,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                     decoration: DecoHelper.roundDeco.copyWith(
                       color: Color(0xFFF6F6F6),
                     ),
-                    padding: const EdgeInsets.only(
-                      left: 12.0,
-                      right: 16.0,
-                    ),
+                    padding: const EdgeInsets.only(left: 12.0, right: 16.0),
                     child: TextFormField(
                       maxLines: 1,
                       onTap: () {},
@@ -199,13 +213,8 @@ class BottomSheetContentPhoto extends StatelessWidget
                       // style: accountEditTextStyle,
                       decoration: kInputDecoration.copyWith(
                         fillColor: Color(0xFFF6F6F6),
-                        hintText: '|사진/비디오의 제목을 입력해 주세요.',
-                        hintStyle: baseStyle.copyWith(
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal,
-                            color: Color(
-                              0xFFCACACA,
-                            )),
+                        hintText: 'board.bs.sub.pholder.photo'.tr,
+                        hintStyle: msgStyle,
                         isDense: true,
                         errorText: null,
                         errorStyle: TextStyle(
@@ -225,8 +234,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                   ),
                 ),
                 heightSpace(16.0),
-                // vwTitle('웹 링크'),
-                vwTitle('코멘트'),
+                vwTitle('com.bs.subtitle.cmt'.tr),
                 heightSpace(10.0),
                 Padding(
                   padding: EdgeInsets.only(left: 19.0, right: 19.0),
@@ -235,10 +243,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                     decoration: DecoHelper.roundDeco.copyWith(
                       color: Color(0xFFF6F6F6),
                     ),
-                    padding: const EdgeInsets.only(
-                      left: 12.0,
-                      right: 16.0,
-                    ),
+                    padding: const EdgeInsets.only(left: 12.0, right: 16.0),
                     child: TextFormField(
                       maxLines: 1,
                       onTap: () {},

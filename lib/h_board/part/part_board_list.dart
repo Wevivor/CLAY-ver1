@@ -20,7 +20,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 2.0, right: 2.0),
+      padding: const EdgeInsets.only(left: 9.0, right: 2.0),
       child: Column(
         children: [
           ///--------------------------
@@ -32,7 +32,6 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
               final loading = controller.loading;
 
               return Container(
-                // padding: const EdgeInsets.only(left: 2.0, right: 2.0),
                 child: HanListView(
                   controller: controller,
                   isSliver: false,
@@ -64,7 +63,8 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                             BoardController.to.boardItem = item;
                             // Future.microtask()
                             _showBS(context, vwBoardMenu(context));
-                            AppHelper.showMessage('모어');
+                            AppHelper.showMessage(
+                                '모어'); // TODO : [SH] 현재 번역하지 않음.
                           },
                         ),
                         heightSpace(10.0),

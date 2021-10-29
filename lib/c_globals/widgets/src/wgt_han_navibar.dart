@@ -42,7 +42,7 @@ class HanNaiviBarWidget extends StatelessWidget {
                 height: height,
                 fit: BoxFit.cover,
               )),
-          isLabel ? heightSpace(5.86) : heightSpace(0.0),
+          isLabel ? heightSpace(4.0) : heightSpace(0.0),
           isLabel
               ? Text(
                   label ?? '',

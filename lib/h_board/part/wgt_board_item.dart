@@ -31,13 +31,16 @@ class BoardItemWidget extends StatelessWidget {
   final titleStyle = TextStyle(
     fontSize: 18,
     color: Color(0xFFffffff),
-    fontWeight: FontWeight.bold,
+    fontWeight: FontWeight.w700,
+    height: 1.17, // Line height : 21.09px
   );
 
   final boardInfoStyle = TextStyle(
+    fontFamily: 'Avenir',
     fontSize: 11,
     color: Color(0xFFffffff),
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w800,
+    height: 1.37, // line height : 15.03px
   );
   @override
   Widget build(BuildContext context) {
@@ -46,12 +49,7 @@ class BoardItemWidget extends StatelessWidget {
         if (onTap != null) onTap();
       },
       child: Container(
-        padding: EdgeInsets.only(
-          left: 16,
-          right: 12,
-          top: 10,
-          bottom: 15,
-        ),
+        padding: EdgeInsets.only(left: 16, right: 12, top: 21, bottom: 15),
         decoration: BoxDecoration(
           color: boardColor,
           borderRadius: BorderRadius.circular(18),
@@ -59,88 +57,112 @@ class BoardItemWidget extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Container(
-              // color: Colors.red,
-              padding: EdgeInsets.zero,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  heightSpace(12.0),
-                  Row(
-                    children: [
-                      Text(
-                        title,
-                        style: titleStyle,
-                      ),
-                      widthSpace(4.0),
-                      if (isFix)
-                        ImageWidget(
-                          height: 18.87,
-                          width: 18.87,
-                          holder: Const.assets + 'icon/icon_pin_fix.png',
-                        )
-                    ],
-                  ),
-                  heightSpace(3.0),
-                  cntShare > 0
-                      ? Text(
-                          sprintf('%s items, %d Members',
-                              [Const.numFormat.format(cnt), cntShare]),
-                          style: boardInfoStyle,
-                        )
-                      : Text(
-                          sprintf('%s items', [Const.numFormat.format(cnt)]),
-                          style: boardInfoStyle,
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                padding: EdgeInsets.zero,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          title,
+                          style: titleStyle,
                         ),
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                //SUBEJCT: 오유
-                //TODO : 이미지 조정하여 재설정해야 함
-                IconButton(
-                  onPressed: () {
-                    if (onMore != null) onMore();
-                  },
-                  icon: Icon(Icons.more_vert, color: Colors.white),
+                        widthSpace(3.0),
+                        if (isFix)
+                          ImageWidget(
+                            height: 18.87,
+                            width: 18.87,
+                            holder: Const.assets + 'icon/icon_pin_fix.png',
+                          )
+                      ],
+                    ),
+                    heightSpace(3.0),
+                    cntShare > 0
+                        ? Text(
+                            sprintf('%s items, %d Members',
+                                [Const.numFormat.format(cnt), cntShare]),
+                            style: boardInfoStyle,
+                          )
+                        : Text(
+                            sprintf('%s items', [Const.numFormat.format(cnt)]),
+                            style: boardInfoStyle,
+                          ),
+                  ],
                 ),
-                if (category == '선택안함')
-                  Container(
-                    child: ImageWidget(
-                      height: 22,
-                      width: 22,
-                      holder: Const.assets + 'icon/no_choice.png',
+              ),
+              flex: 4,
+            ),
+            Expanded(
+              child: Container(
+                alignment: Alignment.topRight,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    //SUBEJCT: 오유
+                    //TODO : 이미지 조정하여 재설정해야 함
+                    Container(
+                      height: 28,
+                      child: IconButton(
+                        padding: EdgeInsets.only(right: 6.0),
+                        alignment: Alignment.topRight,
+                        onPressed: () {
+                          if (onMore != null) onMore();
+                        },
+                        // icon: Icon(Icons.more_vert, color: Colors.white),
+                        icon:
+                            Image.asset(Const.assets + 'icon/dot_vertical.png'),
+                      ),
                     ),
-                  ),
-                if (category == '일/공부')
-                  Container(
-                    // color: Colors.red,
-                    child: ImageWidget(
-                      height: 22,
-                      width: 22,
-                      holder: Const.assets + 'icon/pencil_small.png',
-                    ),
-                  ),
-                if (category == '자기계발')
-                  Container(
-                    child: ImageWidget(
-                      height: 22,
-                      width: 22,
-                      holder: Const.assets + 'icon/medal_small.png',
-                    ),
-                  ),
-                if (category == 'LIKE')
-                  Container(
-                    child: ImageWidget(
-                      height: 22,
-                      width: 22,
-                      holder: Const.assets + 'icon/hart_small.png',
-                    ),
-                  ),
-                // heightSpace(4.0),
-              ],
+                    if (category == '선택안함')
+                      Container(
+                        width: 22,
+                        height: 22,
+                      ),
+                    if (category == '일/공부')
+                      Container(
+                        width: 22,
+                        height: 22,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromRGBO(255, 255, 255, 0.25),
+                        ),
+                        child:
+                            Image.asset(Const.assets + 'icon/pencil_small.png'),
+                      ),
+
+                    if (category == '자기계발')
+                      Container(
+                        width: 22,
+                        height: 22,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromRGBO(255, 255, 255, 0.25),
+                        ),
+                        child:
+                            Image.asset(Const.assets + 'icon/medal_small.png'),
+                      ),
+                    if (category == 'LIKE')
+                      Container(
+                        width: 22,
+                        height: 22,
+                        clipBehavior: Clip.antiAlias,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color.fromRGBO(255, 255, 255, 0.25),
+                        ),
+                        child:
+                            Image.asset(Const.assets + 'icon/hart_small.png'),
+                      ),
+                  ],
+                ),
+              ),
+              flex: 1,
             ),
           ],
         ),

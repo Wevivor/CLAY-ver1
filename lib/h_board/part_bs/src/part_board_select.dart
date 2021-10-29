@@ -20,7 +20,7 @@ class BoardSelectPART extends StatelessWidget with AppbarHelper {
     return GetBuilder<BoardListMySelectController>(
       builder: (controller) {
         return Container(
-          height: 62 + 16,
+          alignment: Alignment.bottomCenter,
           padding: EdgeInsets.only(left: 19),
           child: Row(
             children: [
@@ -29,10 +29,10 @@ class BoardSelectPART extends StatelessWidget with AppbarHelper {
                   if (onTap != null) onTap();
                 },
                 index: 0,
-                title: '새로운 보드',
-                category: '새보드',
+                title: 'com.bs.item.newBoard'.tr,
+                category: '새보드', // TODO : [SH] 현재 번역하지 않음.
               ),
-              widthSpace(17.0),
+              widthSpace(10.0),
               Expanded(
                 child: HanListView(
                   isSliver: false,
@@ -44,8 +44,8 @@ class BoardSelectPART extends StatelessWidget with AppbarHelper {
 
                     return Row(
                       children: [
+                        widthSpace(8.0),
                         Container(
-                          // height: 62 + 20 + 10,
                           child: BSBoardItemWidget(
                             onTap: () {
                               BoardListMySelectController.to.boardInfo =
@@ -59,7 +59,7 @@ class BoardSelectPART extends StatelessWidget with AppbarHelper {
                             category: _item.info.boardBadge,
                           ),
                         ),
-                        widthSpace(17.0),
+                        widthSpace(10.0),
                       ],
                     );
                   },

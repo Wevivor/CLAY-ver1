@@ -53,7 +53,7 @@ class _BNBarWidgetState extends State<BNBarWidget> with AppbarHelper {
                         // color: Colors.blue,
                         alignment: Alignment.center,
                         child: HanNaiviBarWidget(
-                          label: '내 보드',
+                          label: 'com.navi.menu.myboard'.tr,
                           isOn: _index == 0 ? true : false,
                           holder: 'assets/icon/myboard_off.png',
                           onTap: () {
@@ -77,7 +77,7 @@ class _BNBarWidgetState extends State<BNBarWidget> with AppbarHelper {
                         },
                       ),
                       HanNaiviBarWidget(
-                        label: '내 콘텐츠',
+                        label: 'com.navi.mycontents'.tr,
                         isOn: _index == 2 ? true : false,
                         holder: 'assets/icon/mycontents_off.png',
                         onTap: () {

@@ -148,10 +148,10 @@ class MultiLanguage extends Translations {
           'com.navi.mycontents': '콘텐츠',
           'com.bs.title.newBoard': '보드 만들기',
           'com.bs.subtitle.boardName': '보드 이름',
-          'com.bs.pholder.inputTitle': '“DIY”, “레시피”와 같은 제목을 추가하세요.',
+          'com.bs.pholder.inputTitle': '|“DIY”, “레시피”와 같은 제목을 추가하세요.',
           'com.bs.item.newBoard': '새로운 보드',
           'com.bs.subtitle.cmt': '코멘트',
-          'com.bs.pholder.cmt': '콘텐츠에 남기고 싶은 말을 써주세요.',
+          'com.bs.pholder.cmt': '|콘텐츠에 남기고 싶은 말을 써주세요.',
           'com.bs.subtitle.boardChoice': '저장할 보드 선택하기',
           'com.btn.delete': '삭제',
           'com.dlg.msg.delete': '보드를 삭제하시겠어요?',
@@ -176,7 +176,7 @@ class MultiLanguage extends Translations {
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 메인바텀시트 메뉴
           'board.bs.appbar.title.addItem': '추가하기',
-          'board.bs.body.menu.newBoard': '새보드',
+          'board.bs.body.menu.newBoard': '새 보드',
           'board.bs.body.menu.webLink': '웹 링크',
           'board.bs.body.menu.photo': '사진/비디오',
           'board.bs.body.menu.memo': '메모',
@@ -186,12 +186,12 @@ class MultiLanguage extends Translations {
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 링크로 추가하기
           'board.bs.sub.title.addLink': '링크로 추가하기',
-          'board.bs.sub.subtitle.webLink': '웹링크',
-          'board.bs.sub.pholder.webLink': '웹링크 주소를 입력해주세요.',
+          'board.bs.sub.subtitle.webLink': '웹 링크',
+          'board.bs.sub.pholder.webLink': '|웹 링크 주소를 입력해주세요.',
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 사진/비디오
           'board.bs.sub.title.photo': '사진/비디오',
-          'board.bs.sub.pholder.photo': '사진/비디오의 제목을 입력해주세요.',
+          'board.bs.sub.pholder.photo': '|사진/비디오의 제목을 입력해주세요.',
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 메모
           'board.bs.sub.title.memo': '메모',

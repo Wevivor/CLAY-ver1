@@ -24,11 +24,18 @@ class AppbarHelper {
     List<Widget>? actions,
   }) {
     Widget wdgTitle = title is String
-        ? Text(
-            title,
-            style: TextStyle(
-              fontWeight: FontWeight.normal,
-              color: Colors.black,
+        ? Container(
+            //color: Colors.blue,
+            child: Text(
+              title,
+              style: TextStyle(
+                fontFamily: 'Righteous',
+                fontWeight: FontWeight.normal,
+                fontSize: 26,
+                letterSpacing: -1.3, //-5%
+                color: Colors.black,
+                height: 0.88,
+              ),
             ),
           )
         : title;
@@ -38,6 +45,7 @@ class AppbarHelper {
       automaticallyImplyLeading: false,
       leading: null,
       title: wdgTitle,
+      titleSpacing: 20,
     );
   }
 
@@ -56,6 +64,7 @@ class AppbarHelper {
           )
         : title;
     return AppBar(
+      toolbarHeight: 45,
       elevation: 0.0,
       leading: IconButton(
         onPressed: () {
@@ -66,10 +75,12 @@ class AppbarHelper {
       centerTitle: true,
       title: Text(
         title,
-        style: baseStyle.copyWith(
-            fontSize: 18,
-            color: Color(0xFF2F2F2F),
-            fontWeight: FontWeight.bold),
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          height: 1.17, // line height : 21.09px
+          color: Colors.black,
+        ),
       ),
       actions: actions,
       automaticallyImplyLeading: false,
@@ -84,7 +95,7 @@ class AppbarHelper {
       currentBackPressTime = now;
 
       Fluttertoast.showToast(
-        msg: '한번 더 백키를 누르시면 종료합니다.',
+        msg: '한번 더 백키를 누르시면 종료합니다.', // TODO : [SH] 영문 번역
         backgroundColor: Colors.black45,
         textColor: Colors.white,
       );

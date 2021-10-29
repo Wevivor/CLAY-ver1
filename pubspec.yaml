@@ -122,3 +122,16 @@ flutter:
     
     # SNS 로그인
     - assets/sns_login/
+
+  fonts:
+    - family: Righteous
+      fonts:
+        - asset: fonts/Righteous-Regular.ttf
+          style: normal
+    - family: Avenir
+      fonts:
+        - asset: fonts/Avenir Roman.otf
+          style: normal
+          
+          
+          

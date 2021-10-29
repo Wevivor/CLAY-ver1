@@ -53,28 +53,39 @@ class BSBoardItemWidget extends StatelessWidget {
       },
       child: Container(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
               width: 54,
               height: 54,
               decoration: BoxDecoration(
-                color: selected == index ? Color(0xFFE5E5E5) : Colors.white,
+                color: selected == index
+                    ? Color.fromRGBO(230, 242, 255, 1)
+                    : Colors.white,
                 borderRadius: BorderRadius.circular(14),
                 border: selected == index
                     ? Border.all(
                         width: 2.0,
-                        color: Colors.black,
+                        color: Color.fromRGBO(1, 123, 254, 0.5),
                       )
                     : null,
                 boxShadow: selected != index
                     ? [
                         BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, 0.1),
+                          color: Color.fromRGBO(0, 0, 0, 0.05),
                           blurRadius: 10.0,
-                          offset: Offset(0, 2),
+                          offset: Offset(0, 0),
+                          spreadRadius: 2,
                         ),
                       ]
-                    : null,
+                    : [
+                        BoxShadow(
+                          color: Color.fromRGBO(0, 0, 0, 0.06),
+                          blurRadius: 10.0,
+                          offset: Offset(0, 0),
+                          spreadRadius: 4,
+                        ),
+                      ],
               ),
               child: Image.asset(Const.assets + holder),
             ),

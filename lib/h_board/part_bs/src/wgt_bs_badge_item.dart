@@ -15,10 +15,12 @@ class BsBadgeItemWidget extends StatelessWidget {
   final isSelected;
 
   final classTitle = TextStyle(
-    fontSize: 11,
-    color: Color(0xFF707070),
-    fontWeight: FontWeight.normal,
-  );
+      fontSize: 11,
+      color: Color(0xFF707070),
+      fontWeight: FontWeight.normal,
+      letterSpacing: -0.55, // -5%
+      height: 1.17 // line height : 12.89px
+      );
 
   BsBadgeItemWidget({
     this.iconUrl = '',
@@ -45,9 +47,9 @@ class BsBadgeItemWidget extends StatelessWidget {
               ? null
               : [
                   BoxShadow(
-                    color: Color.fromRGBO(0, 0, 0, 0.1),
+                    color: Color.fromRGBO(0, 0, 0, 0.05),
                     blurRadius: 10.0,
-                    offset: Offset(0, 2),
+                    offset: Offset(0, 0),
                   ),
                 ],
         ),

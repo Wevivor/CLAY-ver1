@@ -55,12 +55,12 @@ class _BoardUIState extends State<BoardUI>
           preferredSize: Size.fromHeight(appbarHeight),
           //SUBJECT : 앱바의 액션
           child: vwAppBar(
-            title: 'board.appbar.title.logo'.tr,
-            // 'CLAY',
+            title: 'board.appbar.title.logo'.tr, // 'CLAY'
+
             actions: [
               ImageButton(
-                  height: 32.0,
-                  width: 32.0,
+                  height: 24.0,
+                  width: 24.0,
                   onTap: () async {
                     final _controller = Get.put(FindController());
                     _controller.cache = [];
@@ -88,19 +88,19 @@ class _BoardUIState extends State<BoardUI>
                   holder: 'assets/icon/search.png'),
               widthSpace(10.0),
               ImageButton(
-                  height: 32.0,
-                  width: 32.0,
+                  height: 24.0,
+                  width: 24.0,
                   onTap: () {
                     Get.toNamed('/profile');
                   },
                   holder: 'assets/icon/account.png'),
-              widthSpace(10.0),
+              widthSpace(20.0),
             ],
           ),
         ),
         backgroundColor: Colors.white,
         body: Container(
-          padding: EdgeInsets.only(left: 18, right: 18),
+          padding: EdgeInsets.only(left: 11, right: 18),
           child: Column(
             children: [
               Obx(() {
@@ -109,49 +109,66 @@ class _BoardUIState extends State<BoardUI>
 
                 return Row(
                   children: [
-                    CategoryButton(
-                      index: 0,
-                      selected: controller.selected,
-                      onTap: (value) async {
-                        controller.selected = value;
-                        controller.cache = [];
-                        await controller.fetchItems(term: '');
-                      },
+                    widthSpace(7.0),
+                    Expanded(
+                      child: CategoryButton(
+                        index: 0,
+                        selected: controller.selected,
+                        onTap: (value) async {
+                          controller.selected = value;
+                          controller.cache = [];
+                          await controller.fetchItems(term: '');
+                        },
+                      ),
+                      flex: 10,
                     ),
                     widthSpace(7.0),
-                    CategoryButton(
-                      index: 1,
-                      selected: controller.selected,
-                      onTap: (value) async {
-                        controller.selected = value;
-                        controller.cache = [];
-                        await controller.fetchItems(term: '일/공부');
-                      },
+                    Expanded(
+                      child: CategoryButton(
+                        index: 1,
+                        selected: controller.selected,
+                        onTap: (value) async {
+                          controller.selected = value;
+                          controller.cache = [];
+                          await controller.fetchItems(
+                              term: 'com.chip.badge.work'.tr);
+                        },
+                      ),
+                      flex: 15,
                     ),
                     widthSpace(7.0),
-                    CategoryButton(
-                      index: 2,
-                      selected: controller.selected,
-                      onTap: (value) async {
-                        controller.selected = value;
-                        controller.cache = [];
-                        await controller.fetchItems(term: '자기계발');
-                      },
+                    Expanded(
+                      child: CategoryButton(
+                        index: 2,
+                        selected: controller.selected,
+                        onTap: (value) async {
+                          controller.selected = value;
+                          controller.cache = [];
+                          await controller.fetchItems(
+                              term: 'com.chip.badge.growth'.tr);
+                        },
+                      ),
+                      flex: 15,
                     ),
                     widthSpace(7.0),
-                    CategoryButton(
-                      index: 3,
-                      title: null,
-                      selected: controller.selected,
-                      onTap: (value) async {
-                        controller.selected = value;
-                        controller.cache = [];
-                        await controller.fetchItems(term: 'LIKE');
-                      },
+                    Expanded(
+                      child: CategoryButton(
+                        index: 3,
+                        title: null,
+                        selected: controller.selected,
+                        onTap: (value) async {
+                          controller.selected = value;
+                          controller.cache = [];
+                          await controller.fetchItems(
+                              term: 'com.chip.badge.like'.tr);
+                        },
+                      ),
+                      flex: 10,
                     ),
                   ],
                 );
               }),
+              widthSpace(2.0),
               heightSpace(20.0),
               Expanded(child: BoardListPART()),
             ],

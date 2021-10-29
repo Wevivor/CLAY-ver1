@@ -1,6 +1,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CategoryButton extends StatelessWidget {
   final int index;
@@ -16,16 +17,17 @@ class CategoryButton extends StatelessWidget {
     this.title,
     this.style,
   });
-
-  List<dynamic> btns = [
-    {'on': null, 'title': '전체'},
-    {'on': 'assets/icon/pencil.png', 'title': '일/공부'},
-    {'on': 'assets/icon/medal.png', 'title': '자기계발'},
-    {'on': 'assets/icon/hart.png', 'title': null}
-  ];
+  List<dynamic> btns = [];
 
   @override
   Widget build(BuildContext context) {
+    btns = [
+      {'on': null, 'title': 'board.body.chip.all'.tr},
+      {'on': 'assets/icon/pencil.png', 'title': 'com.chip.badge.work'.tr},
+      {'on': 'assets/icon/medal.png', 'title': 'com.chip.badge.growth'.tr},
+      {'on': 'assets/icon/hart.png', 'title': null}
+    ];
+
     return InkWell(
       onTap: () {
         if (onTap != null) {
@@ -35,13 +37,18 @@ class CategoryButton extends StatelessWidget {
       child: Container(
         decoration: DecoHelper.roundDeco.copyWith(
           color: index == selected ? Colors.black : Colors.white,
-          border: Border.all(width: 1, color: Color(0xFFC4C4C4)),
+          border: Border.all(
+            width: 1,
+            color: index == selected ? Color(0xFF707070) : Color(0xFFDEDEDE),
+          ),
           borderRadius: BorderRadius.all(
-            Radius.circular(24),
+            Radius.circular(20),
           ),
         ),
-        padding: EdgeInsets.only(left: 16, top: 7, right: 15, bottom: 10),
+        padding: EdgeInsets.only(top: 8, bottom: 10),
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             btns[index]['title'] == null
                 ? Container()
@@ -51,6 +58,7 @@ class CategoryButton extends StatelessWidget {
                       style: btnTextStyle.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
+                        height: 1.17, // Line height 16.41px
                         color: index == selected ? Colors.white : Colors.black,
                       ),
                     ),
