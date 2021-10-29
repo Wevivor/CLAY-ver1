@@ -88,7 +88,7 @@ class SearchUI extends StatelessWidget {
                               //SUBJECT: 검색
                               //TODO : 검색어 조건 설정
                               FindController.to.searchWord = result ?? '';
-                              FindController.to.cache = [];
+                              FindController.to.cache.clear();
 
                               await FindController.to.fetchItems(term: result);
                               FindController.to.update();

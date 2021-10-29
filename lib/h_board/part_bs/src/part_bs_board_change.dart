@@ -126,7 +126,6 @@ class BottomSheetBoardChange extends StatelessWidget
               _controller.boardItem = initBoard.toDomain();
               _controller.boardNameController.text = '';
               Get.back();
-
               _showBS(parentContext, BottomSheetNewBoard());
             });
           }),

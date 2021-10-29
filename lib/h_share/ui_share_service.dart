@@ -28,7 +28,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     Get.put(BoardController());
 
     Get.put(BoardListMySelectController());
-    BoardListMySelectController.to.cache = [];
+    BoardListMySelectController.to.cache.clear();
     BoardListMySelectController.to.fetchItems();
     print('ShareServiceUI  ======== ');
     WidgetsBinding.instance!.addPostFrameCallback(

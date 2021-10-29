@@ -12,6 +12,7 @@ import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
@@ -19,6 +20,7 @@ import 'c_page/app_routes.dart';
 import 'c_page/bott_navi_controller.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
+import 'h_account/page/ui_push_list.dart';
 import 'h_push/ui_push_messages.dart';
 import 'h_share/share_controller.dart';
 import 'package:http/http.dart' as http;
@@ -97,6 +99,7 @@ void main() async {
   await initGetxController();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   await getConnectState();
 }
 
@@ -205,6 +208,13 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  // @override
+  // void didChangeDependencies() async {
+  //   super.didChangeDependencies();
+  //   debugPrint('${Localizations.localeOf(context).languageCode}');
+  //   await Jiffy.locale(Localizations.localeOf(context).languageCode);
+  // }
+
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -212,9 +222,18 @@ class _MyAppState extends State<MyApp> {
         builder: () {
           // ThemeController.to.getThemeModeFromStore();
           return GetMaterialApp(
-              defaultTransition: Transition.native,
+              // defaultTransition: Transition.native,
               translations: MultiLanguage(),
-              locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
+              localizationsDelegates: [
+                GlobalMaterialLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+              ],
+              supportedLocales: [
+                Locale('ko', 'ko_KR'),
+                Locale('en', 'US'),
+              ],
+              // locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
               fallbackLocale: Locale('ko', 'KR'),
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
@@ -222,6 +241,10 @@ class _MyAppState extends State<MyApp> {
               initialRoute: '/start',
               getPages: [
                 ...AppRoutes.routes,
+                GetPage(
+                    name: '/push_list',
+                    transition: Transition.noTransition,
+                    page: () => PushListUI()),
                 GetPage(
                   name: '/message',
                   transition: Transition.noTransition,

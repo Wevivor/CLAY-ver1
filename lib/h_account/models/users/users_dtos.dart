@@ -18,7 +18,6 @@ class HanUserInfoDto with _$HanUserInfoDto {
     String? intro,
     @JsonKey(name: 'sns_loging') String? snsLogin,
     @JsonKey(name: 'cnt_visit') required int cntVisit,
-    String? token,
     @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime registerDate,
   }) = _HanUserInfoDto;
@@ -34,7 +33,6 @@ class HanUserInfoDto with _$HanUserInfoDto {
         isDisabled: isDisabled,
         level: level,
         snsLogin: snsLogin,
-        token: token,
         registerDate: registerDate,
       );
 }
@@ -49,6 +47,7 @@ class ProfileDto with _$ProfileDto {
     @JsonKey(name: 'user_name') String? userName,
     @JsonKey(name: 'profile_img') String? profileImg,
     int? level,
+    String? token,
     // bool? isPush,
     // String? token,
     @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
@@ -63,6 +62,7 @@ class ProfileDto with _$ProfileDto {
         userName: userName,
         profileImg: profileImg,
         level: level,
+        token: token,
         registerDate: registerDate,
       );
 }

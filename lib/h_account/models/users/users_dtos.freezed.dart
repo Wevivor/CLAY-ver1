@@ -35,7 +35,6 @@ class _$HanUserInfoDtoTearOff {
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           required int cntVisit,
-      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) {
     return _HanUserInfoDto(
@@ -47,7 +46,6 @@ class _$HanUserInfoDtoTearOff {
       intro: intro,
       snsLogin: snsLogin,
       cntVisit: cntVisit,
-      token: token,
       registerDate: registerDate,
     );
   }
@@ -75,7 +73,6 @@ mixin _$HanUserInfoDto {
   String? get snsLogin => throw _privateConstructorUsedError;
   @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
@@ -107,7 +104,6 @@ abstract class $HanUserInfoDtoCopyWith<$Res> {
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           int cntVisit,
-      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 
@@ -133,7 +129,6 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
-    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -169,10 +164,6 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
               as int,
-      token: token == freezed
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -209,7 +200,6 @@ abstract class _$HanUserInfoDtoCopyWith<$Res>
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           int cntVisit,
-      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 
@@ -238,7 +228,6 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
-    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_HanUserInfoDto(
@@ -274,10 +263,6 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
               as int,
-      token: token == freezed
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -304,7 +289,6 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
           this.snsLogin,
       @JsonKey(name: 'cnt_visit')
           required this.cntVisit,
-      this.token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.registerDate})
       : super._();
@@ -334,8 +318,6 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
   @JsonKey(name: 'cnt_visit')
   final int cntVisit;
   @override
-  final String? token;
-  @override
   @JsonKey(
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
@@ -344,7 +326,7 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
 
   @override
   String toString() {
-    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
+    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, registerDate: $registerDate)';
   }
 
   @override
@@ -372,8 +354,6 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
-            (identical(other.token, token) ||
-                const DeepCollectionEquality().equals(other.token, token)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
                     .equals(other.registerDate, registerDate)));
@@ -390,7 +370,6 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
       const DeepCollectionEquality().hash(intro) ^
       const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(cntVisit) ^
-      const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
@@ -419,7 +398,6 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           required int cntVisit,
-      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) = _$_HanUserInfoDto;
   _HanUserInfoDto._() : super._();
@@ -448,8 +426,6 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
   @override
   @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
-  @override
-  String? get token => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'register_date',
@@ -480,6 +456,7 @@ class _$ProfileDtoTearOff {
       @JsonKey(name: 'profile_img')
           String? profileImg,
       int? level,
+      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) {
     return _ProfileDto(
@@ -488,6 +465,7 @@ class _$ProfileDtoTearOff {
       userName: userName,
       profileImg: profileImg,
       level: level,
+      token: token,
       registerDate: registerDate,
     );
   }
@@ -510,7 +488,8 @@ mixin _$ProfileDto {
   String? get userName => throw _privateConstructorUsedError;
   @JsonKey(name: 'profile_img')
   String? get profileImg => throw _privateConstructorUsedError;
-  int? get level => throw _privateConstructorUsedError; // bool? isPush,
+  int? get level => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError; // bool? isPush,
 // String? token,
   @JsonKey(
       name: 'register_date',
@@ -539,6 +518,7 @@ abstract class $ProfileDtoCopyWith<$Res> {
       @JsonKey(name: 'profile_img')
           String? profileImg,
       int? level,
+      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 }
@@ -558,6 +538,7 @@ class _$ProfileDtoCopyWithImpl<$Res> implements $ProfileDtoCopyWith<$Res> {
     Object? userName = freezed,
     Object? profileImg = freezed,
     Object? level = freezed,
+    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -581,6 +562,10 @@ class _$ProfileDtoCopyWithImpl<$Res> implements $ProfileDtoCopyWith<$Res> {
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -605,6 +590,7 @@ abstract class _$ProfileDtoCopyWith<$Res> implements $ProfileDtoCopyWith<$Res> {
       @JsonKey(name: 'profile_img')
           String? profileImg,
       int? level,
+      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 }
@@ -626,6 +612,7 @@ class __$ProfileDtoCopyWithImpl<$Res> extends _$ProfileDtoCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? profileImg = freezed,
     Object? level = freezed,
+    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_ProfileDto(
@@ -649,6 +636,10 @@ class __$ProfileDtoCopyWithImpl<$Res> extends _$ProfileDtoCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -671,6 +662,7 @@ class _$_ProfileDto extends _ProfileDto {
       @JsonKey(name: 'profile_img')
           this.profileImg,
       this.level,
+      this.token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.registerDate})
       : super._();
@@ -692,6 +684,8 @@ class _$_ProfileDto extends _ProfileDto {
   final String? profileImg;
   @override
   final int? level;
+  @override
+  final String? token;
   @override // bool? isPush,
 // String? token,
   @JsonKey(
@@ -702,7 +696,7 @@ class _$_ProfileDto extends _ProfileDto {
 
   @override
   String toString() {
-    return 'ProfileDto(userId: $userId, userEmail: $userEmail, userName: $userName, profileImg: $profileImg, level: $level, registerDate: $registerDate)';
+    return 'ProfileDto(userId: $userId, userEmail: $userEmail, userName: $userName, profileImg: $profileImg, level: $level, token: $token, registerDate: $registerDate)';
   }
 
   @override
@@ -722,6 +716,8 @@ class _$_ProfileDto extends _ProfileDto {
                     .equals(other.profileImg, profileImg)) &&
             (identical(other.level, level) ||
                 const DeepCollectionEquality().equals(other.level, level)) &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
                     .equals(other.registerDate, registerDate)));
@@ -735,6 +731,7 @@ class _$_ProfileDto extends _ProfileDto {
       const DeepCollectionEquality().hash(userName) ^
       const DeepCollectionEquality().hash(profileImg) ^
       const DeepCollectionEquality().hash(level) ^
+      const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
@@ -759,6 +756,7 @@ abstract class _ProfileDto extends ProfileDto {
       @JsonKey(name: 'profile_img')
           String? profileImg,
       int? level,
+      String? token,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) = _$_ProfileDto;
   _ProfileDto._() : super._();
@@ -780,6 +778,8 @@ abstract class _ProfileDto extends ProfileDto {
   String? get profileImg => throw _privateConstructorUsedError;
   @override
   int? get level => throw _privateConstructorUsedError;
+  @override
+  String? get token => throw _privateConstructorUsedError;
   @override // bool? isPush,
 // String? token,
   @JsonKey(

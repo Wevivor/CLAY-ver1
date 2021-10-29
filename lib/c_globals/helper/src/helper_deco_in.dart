@@ -95,30 +95,30 @@ class DecoInputHelper {
     );
   }
 
-  static InputDecoration underlineDecoration(
-      {String? hint,
-      String? label,
-      TextStyle? hintStyle,
-      bool dense = false,
-      Color? fillColor}) {
-    return InputDecoration(
-      hintText: hint,
-      labelText: '',
-      hintStyle: baseStyle.copyWith(
-          fontSize: 14, color: Color(0xFF9A9A9A), fontWeight: FontWeight.normal
-          // backgroundColor: GlobalStyle.bg,
-          ),
-      border: InputBorder.none,
-      focusedBorder: InputBorder.none,
-      enabledBorder: InputBorder.none,
-      errorBorder: InputBorder.none,
-      disabledBorder: InputBorder.none,
-      filled: false,
-      isDense: dense,
-      contentPadding: EdgeInsets.all(14.0),
-      counterText: '',
-    );
-  }
+  // static InputDecoration underlineDecoration(
+  //     {String? hint,
+  //     String? label,
+  //     TextStyle? hintStyle,
+  //     bool dense = false,
+  //     Color? fillColor}) {
+  //   return InputDecoration(
+  //     hintText: hint,
+  //     labelText: '',
+  //     hintStyle: baseStyle.copyWith(
+  //         fontSize: 14, color: Color(0xFF9A9A9A), fontWeight: FontWeight.normal
+  //         // backgroundColor: GlobalStyle.bg,
+  //         ),
+  //     border: InputBorder.none,
+  //     focusedBorder: InputBorder.none,
+  //     enabledBorder: InputBorder.none,
+  //     errorBorder: InputBorder.none,
+  //     disabledBorder: InputBorder.none,
+  //     filled: false,
+  //     isDense: dense,
+  //     contentPadding: EdgeInsets.all(14.0),
+  //     counterText: '',
+  //   );
+  // }
 }
 
 const kInputDecoration = InputDecoration(

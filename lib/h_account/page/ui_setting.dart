@@ -3,7 +3,9 @@ import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
-import 'package:clay/h_account/controllers/push_alaram_controller.dart';
+import 'package:clay/h_account/controllers/alarm_controller.dart';
+import 'package:clay/h_account/controllers/remind_list_controller.dart';
+import 'package:clay/h_content/controllers/contents_controller.dart';
 
 import 'package:flutter/material.dart';
 
@@ -28,7 +30,6 @@ class SettingUI extends StatelessWidget with AppbarHelper {
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
-    Get.put(PushAlarmController('userinfos'));
     final appbarHeight = 0 + kToolbarHeight;
     return GetBuilder<ThemeController>(builder: (_) {
       return Scaffold(
@@ -187,8 +188,12 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                       left: 20, right: 20.0, top: 17, bottom: 17),
                   child: HanListTile(
                     padding: EdgeInsets.zero,
-                    onTap: () {
-                      Get.toNamed('/push');
+                    onTap: () async {
+                      final _controller = Get.put(RemindListController());
+                      final _ctl = Get.put(ContentsController());
+                      _controller.cache.clear();
+                      _controller.fetchItems();
+                      Get.toNamed('/remind');
                     },
                     leading: Text(
                       '리마인드 알림 관리',

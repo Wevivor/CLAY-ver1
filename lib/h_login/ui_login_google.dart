@@ -87,6 +87,7 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       userEmail: profile?.email ?? '',
       userName: profile?.displayName,
       profileImg: profile?.photoURL,
+      token: PushController.to.token,
       level: 3,
       registerDate: DateTime.now(),
     );
@@ -100,7 +101,6 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       snsLogin: snsLogin,
       cntVisit: 0,
       level: 3,
-      token: PushController.to.token,
       registerDate: DateTime.now(),
     );
     return _userInfo;
@@ -126,8 +126,11 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
         final _userInfo = await HanUserInfoController.to
             .actionRead(AuthController.to.getUser);
         if (PushController.to.token != null && _userInfo != null) {
-          HanUserInfoController.to.actionUpdate(
-              _userInfo.copyWith(token: PushController.to.token).toDto());
+          HanUserInfoController.to.actionUpdate(_userInfo
+              .copyWith(
+                  profile: _userInfo.profile
+                      .copyWith(token: PushController.to.token))
+              .toDto());
         }
       } on HanUserInfoException catch (e) {
         final userDto = _createUserInfo(AuthController.to.getUser, 'G');
@@ -174,8 +177,13 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
         final _userInfo = await HanUserInfoController.to
             .actionRead(AuthController.to.getUser);
         if (PushController.to.token != null && _userInfo != null) {
-          HanUserInfoController.to.actionUpdate(
-              _userInfo.copyWith(token: PushController.to.token).toDto());
+          HanUserInfoController.to.actionUpdate(_userInfo
+              .copyWith(
+                  profile: _userInfo.profile
+                      .copyWith(token: PushController.to.token))
+              .toDto());
+          // HanUserInfoController.to.actionUpdate(
+          //     _userInfo.copyWith(token: PushController.to.token).toDto());
         }
       } on HanUserInfoException catch (e) {
         final userDto = _createUserInfo(AuthController.to.getUser, 'K');

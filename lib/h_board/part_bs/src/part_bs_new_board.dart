@@ -86,7 +86,10 @@ class BottomSheetNewBoard extends StatelessWidget
           ),
           heightSpace(10.0),
           Padding(
-            padding: EdgeInsets.only(left: 19.0, right: 19.0),
+            padding: EdgeInsets.only(
+              left: 19.0,
+              right: 19.0,
+            ),
             child: Form(
               key: _formKey,
               child: Container(
@@ -138,7 +141,11 @@ class BottomSheetNewBoard extends StatelessWidget
           ),
           heightSpace(10.0),
           Padding(
-            padding: EdgeInsets.only(left: 19.0, right: 19.0),
+            padding: EdgeInsets.only(
+              left: 19.0,
+              right: 19.0,
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
             child: BoardClassSelectPART(onTap: () {}),
           ),
           heightSpace(16.0),

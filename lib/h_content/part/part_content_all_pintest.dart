@@ -1,11 +1,13 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
+import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -121,7 +123,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             Get.back();
 
             Future.microtask(() async {
-              ContentAllListController.to.cache = [];
+              ContentAllListController.to.cache.clear();
               await ContentAllListController.to.fetchItems();
             });
           },
@@ -153,13 +155,14 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             //SUBJECT : BS: 리마인드 알림 설정
             //TODO: 작업범위 여부 고민
             Get.back();
-            AppHelper.showMessage('리마인드 알람 관리');
-            // _showBS(context, BottomSheetBoardInfo(onMenu: () {
-            //   _showBS(context, vwBoardMenu(context));
-            // }));
+            Get.lazyPut(() => ContentsController());
+            Get.lazyPut(() => RemindListController());
+            _showBS(context, BottomSheetCalendar(onMenu: () {
+              _showBS(context, vwBoardMenu(context, item));
+            }));
           },
           leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
-          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.red)),
+          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
         ),
         HanListTile(
           padding: EdgeInsets.only(
@@ -172,7 +175,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             Get.back();
             // Get.put(ContentListController());
             final _controller = Get.put(BoardListMySelectController());
-            _controller.cache = [];
+            _controller.cache.clear();
             _controller.selected = -1;
             _controller.fetchItems();
             _showBS(
@@ -234,11 +237,29 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
         isScrollControlled: true,
+        // barrierColor: Colors.red,
         backgroundColor: Colors.white,
         context: context,
-        enableDrag: false,
         builder: (BuildContext buildContext) {
-          return child;
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays(250);
+
+              return Future.value(true);
+            },
+            // child: AnnotatedRegion<SystemUiOverlayStyle>(
+            //   value: GlobalStyle.configStatusTheme,
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
+                ),
+              ),
+            ),
+            // ),
+          );
         });
   }
 

@@ -50,7 +50,7 @@ class SearchAppDelegate<T> extends SearchDelegate<String> {
       child: IconButton(
           icon: Icon(Icons.chevron_left),
           onPressed: () async {
-            FindController.to.cache = [];
+            FindController.to.cache.clear();
             await FindController.to.fetchItems();
             close(context, '');
           }));

@@ -15,7 +15,6 @@ class HanUserInfo with _$HanUserInfo {
     String? intro,
     String? snsLogin,
     required int cntVisit,
-    String? token,
     required DateTime registerDate,
   }) = _HanUserInfo;
   HanUserInfo._();
@@ -28,7 +27,6 @@ class HanUserInfo with _$HanUserInfo {
         intro: intro,
         snsLogin: snsLogin,
         cntVisit: cntVisit,
-        token: token,
         registerDate: registerDate,
       );
 }
@@ -42,6 +40,7 @@ class Profile with _$Profile {
     String? userName,
     String? profileImg,
     int? level,
+    String? token,
     required DateTime registerDate,
   }) = _Profile;
   Profile._();
@@ -53,5 +52,6 @@ class Profile with _$Profile {
         profileImg: profileImg,
         registerDate: registerDate,
         level: level,
+        token: token,
       );
 }

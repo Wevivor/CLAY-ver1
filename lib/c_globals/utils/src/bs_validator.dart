@@ -4,6 +4,7 @@
 
 class BSValidator {
   Map<String, String> messages = {
+    'remind': '알림문구를 입력해 주세요.',
     'board_name': '보드이름을 입력해 주세요.',
     'web_url': '웹 링크 주소를 입력해 주세요.',
     'comment': '코멘트를 입력해 주세요.',
@@ -21,6 +22,18 @@ class BSValidator {
     RegExp regex = new RegExp(pattern.toString());
     if (!regex.hasMatch(value))
       return messages['post_title'];
+    else
+      return null;
+  }
+
+  String? remindTitle(String? value) {
+    if (value == null || value.isEmpty) {
+      return messages['remind'];
+    }
+    Pattern pattern = r'.{1,40}'; //not Empty 20자 이내
+    RegExp regex = new RegExp(pattern.toString());
+    if (!regex.hasMatch(value))
+      return messages['remind'];
     else
       return null;
   }

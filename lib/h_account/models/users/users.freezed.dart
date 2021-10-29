@@ -26,7 +26,6 @@ class _$HanUserInfoTearOff {
       String? intro,
       String? snsLogin,
       required int cntVisit,
-      String? token,
       required DateTime registerDate}) {
     return _HanUserInfo(
       userId: userId,
@@ -37,7 +36,6 @@ class _$HanUserInfoTearOff {
       intro: intro,
       snsLogin: snsLogin,
       cntVisit: cntVisit,
-      token: token,
       registerDate: registerDate,
     );
   }
@@ -56,7 +54,6 @@ mixin _$HanUserInfo {
   String? get intro => throw _privateConstructorUsedError;
   String? get snsLogin => throw _privateConstructorUsedError;
   int get cntVisit => throw _privateConstructorUsedError;
-  String? get token => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -78,7 +75,6 @@ abstract class $HanUserInfoCopyWith<$Res> {
       String? intro,
       String? snsLogin,
       int cntVisit,
-      String? token,
       DateTime registerDate});
 
   $ProfileCopyWith<$Res> get profile;
@@ -102,7 +98,6 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
-    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -138,10 +133,6 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
               as int,
-      token: token == freezed
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -173,7 +164,6 @@ abstract class _$HanUserInfoCopyWith<$Res>
       String? intro,
       String? snsLogin,
       int cntVisit,
-      String? token,
       DateTime registerDate});
 
   @override
@@ -200,7 +190,6 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
-    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_HanUserInfo(
@@ -236,10 +225,6 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
               as int,
-      token: token == freezed
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -260,7 +245,6 @@ class _$_HanUserInfo extends _HanUserInfo {
       this.intro,
       this.snsLogin,
       required this.cntVisit,
-      this.token,
       required this.registerDate})
       : super._();
 
@@ -281,13 +265,11 @@ class _$_HanUserInfo extends _HanUserInfo {
   @override
   final int cntVisit;
   @override
-  final String? token;
-  @override
   final DateTime registerDate;
 
   @override
   String toString() {
-    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, token: $token, registerDate: $registerDate)';
+    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, registerDate: $registerDate)';
   }
 
   @override
@@ -315,8 +297,6 @@ class _$_HanUserInfo extends _HanUserInfo {
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
-            (identical(other.token, token) ||
-                const DeepCollectionEquality().equals(other.token, token)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
                     .equals(other.registerDate, registerDate)));
@@ -333,7 +313,6 @@ class _$_HanUserInfo extends _HanUserInfo {
       const DeepCollectionEquality().hash(intro) ^
       const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(cntVisit) ^
-      const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
@@ -352,7 +331,6 @@ abstract class _HanUserInfo extends HanUserInfo {
       String? intro,
       String? snsLogin,
       required int cntVisit,
-      String? token,
       required DateTime registerDate}) = _$_HanUserInfo;
   _HanUserInfo._() : super._();
 
@@ -373,8 +351,6 @@ abstract class _HanUserInfo extends HanUserInfo {
   @override
   int get cntVisit => throw _privateConstructorUsedError;
   @override
-  String? get token => throw _privateConstructorUsedError;
-  @override
   DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -392,6 +368,7 @@ class _$ProfileTearOff {
       String? userName,
       String? profileImg,
       int? level,
+      String? token,
       required DateTime registerDate}) {
     return _Profile(
       userId: userId,
@@ -399,6 +376,7 @@ class _$ProfileTearOff {
       userName: userName,
       profileImg: profileImg,
       level: level,
+      token: token,
       registerDate: registerDate,
     );
   }
@@ -414,6 +392,7 @@ mixin _$Profile {
   String? get userName => throw _privateConstructorUsedError;
   String? get profileImg => throw _privateConstructorUsedError;
   int? get level => throw _privateConstructorUsedError;
+  String? get token => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -430,6 +409,7 @@ abstract class $ProfileCopyWith<$Res> {
       String? userName,
       String? profileImg,
       int? level,
+      String? token,
       DateTime registerDate});
 }
 
@@ -448,6 +428,7 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
     Object? userName = freezed,
     Object? profileImg = freezed,
     Object? level = freezed,
+    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -471,6 +452,10 @@ class _$ProfileCopyWithImpl<$Res> implements $ProfileCopyWith<$Res> {
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -490,6 +475,7 @@ abstract class _$ProfileCopyWith<$Res> implements $ProfileCopyWith<$Res> {
       String? userName,
       String? profileImg,
       int? level,
+      String? token,
       DateTime registerDate});
 }
 
@@ -509,6 +495,7 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
     Object? userName = freezed,
     Object? profileImg = freezed,
     Object? level = freezed,
+    Object? token = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_Profile(
@@ -532,6 +519,10 @@ class __$ProfileCopyWithImpl<$Res> extends _$ProfileCopyWithImpl<$Res>
           ? _value.level
           : level // ignore: cast_nullable_to_non_nullable
               as int?,
+      token: token == freezed
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -549,6 +540,7 @@ class _$_Profile extends _Profile {
       this.userName,
       this.profileImg,
       this.level,
+      this.token,
       required this.registerDate})
       : super._();
 
@@ -563,11 +555,13 @@ class _$_Profile extends _Profile {
   @override
   final int? level;
   @override
+  final String? token;
+  @override
   final DateTime registerDate;
 
   @override
   String toString() {
-    return 'Profile(userId: $userId, userEmail: $userEmail, userName: $userName, profileImg: $profileImg, level: $level, registerDate: $registerDate)';
+    return 'Profile(userId: $userId, userEmail: $userEmail, userName: $userName, profileImg: $profileImg, level: $level, token: $token, registerDate: $registerDate)';
   }
 
   @override
@@ -587,6 +581,8 @@ class _$_Profile extends _Profile {
                     .equals(other.profileImg, profileImg)) &&
             (identical(other.level, level) ||
                 const DeepCollectionEquality().equals(other.level, level)) &&
+            (identical(other.token, token) ||
+                const DeepCollectionEquality().equals(other.token, token)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
                     .equals(other.registerDate, registerDate)));
@@ -600,6 +596,7 @@ class _$_Profile extends _Profile {
       const DeepCollectionEquality().hash(userName) ^
       const DeepCollectionEquality().hash(profileImg) ^
       const DeepCollectionEquality().hash(level) ^
+      const DeepCollectionEquality().hash(token) ^
       const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
@@ -615,6 +612,7 @@ abstract class _Profile extends Profile {
       String? userName,
       String? profileImg,
       int? level,
+      String? token,
       required DateTime registerDate}) = _$_Profile;
   _Profile._() : super._();
 
@@ -628,6 +626,8 @@ abstract class _Profile extends Profile {
   String? get profileImg => throw _privateConstructorUsedError;
   @override
   int? get level => throw _privateConstructorUsedError;
+  @override
+  String? get token => throw _privateConstructorUsedError;
   @override
   DateTime get registerDate => throw _privateConstructorUsedError;
   @override

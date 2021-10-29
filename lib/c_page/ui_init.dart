@@ -8,6 +8,7 @@ import 'package:clay/h_share/h_share.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 class InitUI extends StatefulWidget {
@@ -64,6 +65,7 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
   }
 
   void startState(String? value) async {
+    await Jiffy.locale(Get.deviceLocale?.languageCode);
     if (value == null) {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
