@@ -92,8 +92,8 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                     height: 17,
                     width: 17,
                     label: 'com.navi.mycontents'.tr,
-                    isOn: _index == 2 ? true : false,
-                    holder: _index == 2
+                    isOn: _index == 1 ? true : false,
+                    holder: _index == 1
                         ? 'assets/icon/mycontents_on.png'
                         : 'assets/icon/mycontents_off.png',
                     onTap: () async {
@@ -162,15 +162,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             ),
           ],
         ),
-
-        // floatingActionButton: FloatingActionButton(
-        //   child: Container(),
-        //   backgroundColor: Colors.greenAccent,
-        //   foregroundColor: Colors.white,
-        //   splashColor: Colors.black,
-        //   onPressed: () {},
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.,
       ),
     );
   }

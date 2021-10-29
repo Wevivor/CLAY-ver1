@@ -31,107 +31,106 @@ class BottomSheetBoardChange extends StatelessWidget
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: new BoxDecoration(
-          color: Colors.white,
-          borderRadius: new BorderRadius.only(
-              topLeft: Radius.circular(16), topRight: Radius.circular(16))),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: <Widget>[
-          heightSpace(2.0),
-          Container(
-              alignment: Alignment.bottomCenter,
-              height: 11,
-              child: Image.asset(Const.assets + 'images/rect_40.png')),
-          // heightSpace(18),
-          AppBar(
-            leading: IconButton(
-              onPressed: () {
-                Get.back();
-              },
-              icon: Icon(Icons.chevron_left),
-            ),
-            centerTitle: true,
-            title: Text(
-              '보드변경',
-              style: baseStyle.copyWith(
-                  fontSize: 18,
-                  color: Color(0xFF2F2F2F),
-                  fontWeight: FontWeight.bold),
-            ),
-            elevation: 0.0,
-            actions: [
-              Container(
-                alignment: Alignment.center,
-                // color: Colors.red,
-                child: InkWell(
-                  onTap: () async {
-                    if (BoardListMySelectController.to.selected < 0) {
-                      AppHelper.showMessage(messages['board_select'] ?? '');
-                      return;
-                    }
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        heightSpace(2.0),
+        Container(
+            alignment: Alignment.bottomCenter,
+            height: 11,
+            child: Image.asset(Const.assets + 'images/rect_40.png')),
+        // heightSpace(18),
+        AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+              if (onMenu != null) onMenu();
+            },
+            icon: Icon(Icons.chevron_left),
+          ),
+          centerTitle: true,
+          title: Text(
+            '보드변경',
+            style: baseStyle.copyWith(
+                fontSize: 18,
+                color: Color(0xFF2F2F2F),
+                fontWeight: FontWeight.bold),
+          ),
+          elevation: 0.0,
+          actions: [
+            Container(
+              alignment: Alignment.center,
+              // color: Colors.red,
+              child: InkWell(
+                onTap: () async {
+                  if (BoardListMySelectController.to.selected < 0) {
+                    AppHelper.showMessage(messages['board_select'] ?? '');
+                    return;
+                  }
 
-                    //SUBJECT: 컨텐츠
-                    //TODO: 링크로 추가하기
-                    final _boardInfo = BoardListMySelectController.to.boardInfo;
+                  //SUBJECT: 컨텐츠
+                  //TODO: 링크로 추가하기
+                  final _boardInfo = BoardListMySelectController.to.boardInfo;
 
-                    final _controller = Get.put(ContentsController());
-                    final _profile = HanUserInfoController.to.toProfile();
+                  final _controller = Get.put(ContentsController());
+                  final _profile = HanUserInfoController.to.toProfile();
 
-                    //SUBJECT comment 타입 변경 필요
-                    //TODO: comment 타입 변경
+                  //SUBJECT comment 타입 변경 필요
+                  //TODO: comment 타입 변경
 
-                    final _item = current.copyWith(boardInfo: _boardInfo);
+                  final _item = current.copyWith(boardInfo: _boardInfo);
 
-                    await _controller.actionContentsUpdate(_item.toDto());
-                    if (onDone != null) onDone();
+                  await _controller.actionContentsUpdate(_item.toDto());
+                  if (onDone != null) onDone();
 
-                    Get.back();
-                  },
-                  child: Text(
-                    '완료',
-                    style: baseStyle.copyWith(
-                        fontSize: 13,
-                        color: Color(0xff017BFE),
-                        fontWeight: FontWeight.w400),
-                  ),
+                  Get.back();
+                },
+                child: Text(
+                  '완료',
+                  style: baseStyle.copyWith(
+                      fontSize: 13,
+                      color: Color(0xff017BFE),
+                      fontWeight: FontWeight.w400),
                 ),
               ),
-              widthSpace(18.87),
-            ],
-          ),
-          vwTitle('기존보드'),
-          heightSpace(10),
-          Container(
-            alignment: Alignment.centerLeft,
-            padding: EdgeInsets.only(left: 19),
-            child: BSBoardItemWidget(
-              selected: -2,
-              index: -1,
-              title: current.boardInfo.boardName,
-              category: current.boardInfo.boardBadge,
             ),
+            widthSpace(18.87),
+          ],
+        ),
+        vwTitle('기존보드'),
+        heightSpace(10),
+        Container(
+          alignment: Alignment.centerLeft,
+          padding: EdgeInsets.only(left: 19),
+          child: BSBoardItemWidget(
+            selected: -2,
+            index: -1,
+            title: current.boardInfo.boardName,
+            category: current.boardInfo.boardBadge,
           ),
+        ),
 
-          heightSpace(16),
+        heightSpace(16),
 
-          vwTitle('변경할 보드'),
-          heightSpace(10),
-          GetBuilder<BoardListMySelectController>(builder: (controller) {
-            return BoardSelectPART(onTap: () {
+        vwTitle('변경할 보드'),
+        heightSpace(10),
+        GetBuilder<BoardListMySelectController>(builder: (controller) {
+          return Container(
+            height: 54 + 8 + 11 + 10,
+            child: BoardSelectPART(onTap: () {
               Get.lazyPut(() => BoardController());
+              Get.back();
               final _controller = BoardController.to;
               final initBoard = createInitBoard();
               _controller.boardItem = initBoard.toDomain();
               _controller.boardNameController.text = '';
-              Get.back();
-              _showBS(parentContext, BottomSheetNewBoard());
-            });
-          }),
-          heightSpace(16),
-        ],
-      ),
+
+              _showBS(context, BottomSheetNewBoard());
+            }),
+          );
+        }),
+        heightSpace(16),
+      ],
     );
   }
 
@@ -144,7 +143,7 @@ class BottomSheetBoardChange extends StatelessWidget
         context: context,
         builder: (BuildContext buildContext) {
           return Padding(
-            padding: MediaQuery.of(context).viewInsets,
+            padding: MediaQuery.of(buildContext).viewInsets,
             child: Container(
               child: Wrap(
                 children: [child],

@@ -115,23 +115,30 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
 
   void _showBS(context, child) {
     showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
         context: context,
-        enableDrag: false,
         builder: (BuildContext buildContext) {
-          final node = FocusScope.of(context);
-          return child;
-        });
-  }
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays(250);
 
-  Widget vwTitle(final title) {
-    return Container(
-      padding: EdgeInsets.only(left: 16),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-      ),
-    );
+              return Future.value(true);
+            },
+
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
+                ),
+              ),
+            ),
+            // ),
+          );
+        });
   }
 }

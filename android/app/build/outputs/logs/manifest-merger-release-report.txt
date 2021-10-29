@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
-INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
-INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
-INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
+ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
+INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
+INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
+INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
 MERGED from [:image_picker] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:2:1-19:12
 MERGED from [:flutter_plugin_android_lifecycle] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/flutter_plugin_android_lifecycle/intermediates/library_manifest/release/AndroidManifest.xml:2:1-7:12
 MERGED from [:cloud_firestore] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:2:1-15:12
@@ -104,20 +104,20 @@ MERGED from [com.jakewharton.threetenabp:threetenabp:1.2.3] /Users/hansallim/.gr
 MERGED from [com.google.firebase:protolite-well-known-types:18.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/d25c534203695d38cb3d330e2a24802a/jetified-protolite-well-known-types-18.0.0/AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.annotation:annotation-experimental:1.1.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/249c8d1e8d704fd72c66aa8958ebe5b7/jetified-annotation-experimental-1.1.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:1.1.3] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/d80265d3f07894df62c59ef4ddaa43d6/constraintlayout-1.1.3/AndroidManifest.xml:2:1-11:12
-INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
-INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
-INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
+INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
+INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
+INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
 	package
 		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:2:5-31
 		INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
 		INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
 		INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-98:12
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:1-104:12
 		INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -128,7 +128,7 @@ MERGED from [:photo_manager] /Users/hansallim/Working/develop-apps/app-projects/
 	android:name
 		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:3:23-78
 application
-ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:6:4-95:19
+ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:6:4-100:19
 MERGED from [:image_picker] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
 MERGED from [:image_picker] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/image_picker/intermediates/library_manifest/release/AndroidManifest.xml:7:5-17:19
 MERGED from [:cloud_firestore] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/cloud_firestore/intermediates/library_manifest/release/AndroidManifest.xml:7:5-13:19
@@ -289,8 +289,14 @@ ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJE
 		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:94:13-30
 	android:name
 		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:93:13-44
+meta-data#com.google.firebase.messaging.default_notification_channel_id
+ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:96:9-98:38
+	android:value
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:98:13-35
+	android:name
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:97:13-89
 uses-permission#android.permission.WAKE_LOCK
-ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:96:5-67
+ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:101:5-67
 MERGED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:8:5-68
 MERGED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:8:5-68
 MERGED from [com.google.firebase:firebase-messaging:22.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/9ed82bbaf48377ddc2c6e419feb124c0/jetified-firebase-messaging-22.0.0/AndroidManifest.xml:23:5-68
@@ -298,9 +304,9 @@ MERGED from [com.google.firebase:firebase-messaging:22.0.0] /Users/hansallim/.gr
 MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/0029a3c5c772a52e563640b4494302a9/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml:9:5-68
 MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/0029a3c5c772a52e563640b4494302a9/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml:9:5-68
 	android:name
-		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:96:22-65
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:101:22-65
 uses-permission#android.permission.INTERNET
-ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:97:7-68
+ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:102:5-66
 MERGED from [:google_sign_in] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/google_sign_in/intermediates/library_manifest/release/AndroidManifest.xml:7:5-67
 MERGED from [:google_sign_in] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/google_sign_in/intermediates/library_manifest/release/AndroidManifest.xml:7:5-67
 MERGED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:7:5-67
@@ -318,7 +324,37 @@ MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/761f5877bc2d816a2b46f253293aefd2/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:26:5-67
 MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/761f5877bc2d816a2b46f253293aefd2/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:26:5-67
 	android:name
-		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:97:24-66
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:102:22-64
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:103:5-78
+MERGED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:9:5-79
+MERGED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:9:5-79
+MERGED from [:connectivity_plus] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/connectivity_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-79
+MERGED from [:connectivity_plus] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/connectivity_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-79
+MERGED from [com.google.firebase:firebase-auth:21.0.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/20c92a9eacc34f0af3135437a9ce4824/jetified-firebase-auth-21.0.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-auth:21.0.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/20c92a9eacc34f0af3135437a9ce4824/jetified-firebase-auth-21.0.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-messaging:22.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/9ed82bbaf48377ddc2c6e419feb124c0/jetified-firebase-messaging-22.0.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.firebase:firebase-messaging:22.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/9ed82bbaf48377ddc2c6e419feb124c0/jetified-firebase-messaging-22.0.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/7840f9a22c36e182b1db5fd29dcd0467/jetified-exoplayer-core-2.14.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/7840f9a22c36e182b1db5fd29dcd0467/jetified-exoplayer-core-2.14.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.firebase:firebase-firestore:23.0.3] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/2562ea70dfdfec13b3abf39f278c87f6/jetified-firebase-firestore-23.0.3/AndroidManifest.xml:13:5-79
+MERGED from [com.google.firebase:firebase-firestore:23.0.3] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/2562ea70dfdfec13b3abf39f278c87f6/jetified-firebase-firestore-23.0.3/AndroidManifest.xml:13:5-79
+MERGED from [com.google.firebase:firebase-storage:20.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a04ffd1262eaa4dc3e604ad51b756273/jetified-firebase-storage-20.0.0/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-storage:20.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a04ffd1262eaa4dc3e604ad51b756273/jetified-firebase-storage-20.0.0/AndroidManifest.xml:26:5-79
+MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/26ef4bb110b83fd88e96e0e6f6c09f01/jetified-firebase-installations-17.0.0/AndroidManifest.xml:10:5-79
+MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/26ef4bb110b83fd88e96e0e6f6c09f01/jetified-firebase-installations-17.0.0/AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/0029a3c5c772a52e563640b4494302a9/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/0029a3c5c772a52e563640b4494302a9/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml:7:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/cda3c795f22e75d46efd7094caf47fa2/jetified-exoplayer-common-2.14.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/cda3c795f22e75d46efd7094caf47fa2/jetified-exoplayer-common-2.14.1/AndroidManifest.xml:24:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/761f5877bc2d816a2b46f253293aefd2/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/761f5877bc2d816a2b46f253293aefd2/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:25:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/f21e566870412fcb9c366fa8e56e532c/jetified-transport-runtime-3.0.0/AndroidManifest.xml:22:5-79
+MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/f21e566870412fcb9c366fa8e56e532c/jetified-transport-runtime-3.0.0/AndroidManifest.xml:22:5-79
+MERGED from [io.grpc:grpc-android:1.28.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a71afb091154f2a642dd54d0bc94b041/jetified-grpc-android-1.28.0/AndroidManifest.xml:11:5-79
+MERGED from [io.grpc:grpc-android:1.28.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a71afb091154f2a642dd54d0bc94b041/jetified-grpc-android-1.28.0/AndroidManifest.xml:11:5-79
+	android:name
+		ADDED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml:103:22-76
 uses-sdk
 INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/android/app/src/main/AndroidManifest.xml
@@ -653,34 +689,6 @@ ADDED from [:firebase_storage] /Users/hansallim/Working/develop-apps/app-project
 		ADDED from [:firebase_storage] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_storage/intermediates/library_manifest/release/AndroidManifest.xml:11:17-82
 	android:name
 		ADDED from [:firebase_storage] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_storage/intermediates/library_manifest/release/AndroidManifest.xml:10:17-126
-uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:9:5-79
-MERGED from [:connectivity_plus] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/connectivity_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-79
-MERGED from [:connectivity_plus] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/connectivity_plus/intermediates/library_manifest/release/AndroidManifest.xml:7:5-79
-MERGED from [com.google.firebase:firebase-auth:21.0.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/20c92a9eacc34f0af3135437a9ce4824/jetified-firebase-auth-21.0.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.firebase:firebase-auth:21.0.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/20c92a9eacc34f0af3135437a9ce4824/jetified-firebase-auth-21.0.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.firebase:firebase-messaging:22.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/9ed82bbaf48377ddc2c6e419feb124c0/jetified-firebase-messaging-22.0.0/AndroidManifest.xml:22:5-79
-MERGED from [com.google.firebase:firebase-messaging:22.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/9ed82bbaf48377ddc2c6e419feb124c0/jetified-firebase-messaging-22.0.0/AndroidManifest.xml:22:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/7840f9a22c36e182b1db5fd29dcd0467/jetified-exoplayer-core-2.14.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-core:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/7840f9a22c36e182b1db5fd29dcd0467/jetified-exoplayer-core-2.14.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.firebase:firebase-firestore:23.0.3] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/2562ea70dfdfec13b3abf39f278c87f6/jetified-firebase-firestore-23.0.3/AndroidManifest.xml:13:5-79
-MERGED from [com.google.firebase:firebase-firestore:23.0.3] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/2562ea70dfdfec13b3abf39f278c87f6/jetified-firebase-firestore-23.0.3/AndroidManifest.xml:13:5-79
-MERGED from [com.google.firebase:firebase-storage:20.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a04ffd1262eaa4dc3e604ad51b756273/jetified-firebase-storage-20.0.0/AndroidManifest.xml:26:5-79
-MERGED from [com.google.firebase:firebase-storage:20.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a04ffd1262eaa4dc3e604ad51b756273/jetified-firebase-storage-20.0.0/AndroidManifest.xml:26:5-79
-MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/26ef4bb110b83fd88e96e0e6f6c09f01/jetified-firebase-installations-17.0.0/AndroidManifest.xml:10:5-79
-MERGED from [com.google.firebase:firebase-installations:17.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/26ef4bb110b83fd88e96e0e6f6c09f01/jetified-firebase-installations-17.0.0/AndroidManifest.xml:10:5-79
-MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/0029a3c5c772a52e563640b4494302a9/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml:7:5-79
-MERGED from [com.google.android.gms:play-services-cloud-messaging:16.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/0029a3c5c772a52e563640b4494302a9/jetified-play-services-cloud-messaging-16.0.0/AndroidManifest.xml:7:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/cda3c795f22e75d46efd7094caf47fa2/jetified-exoplayer-common-2.14.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.exoplayer:exoplayer-common:2.14.1] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/cda3c795f22e75d46efd7094caf47fa2/jetified-exoplayer-common-2.14.1/AndroidManifest.xml:24:5-79
-MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/761f5877bc2d816a2b46f253293aefd2/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:25:5-79
-MERGED from [com.google.android.datatransport:transport-backend-cct:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/761f5877bc2d816a2b46f253293aefd2/jetified-transport-backend-cct-3.0.0/AndroidManifest.xml:25:5-79
-MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/f21e566870412fcb9c366fa8e56e532c/jetified-transport-runtime-3.0.0/AndroidManifest.xml:22:5-79
-MERGED from [com.google.android.datatransport:transport-runtime:3.0.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/f21e566870412fcb9c366fa8e56e532c/jetified-transport-runtime-3.0.0/AndroidManifest.xml:22:5-79
-MERGED from [io.grpc:grpc-android:1.28.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a71afb091154f2a642dd54d0bc94b041/jetified-grpc-android-1.28.0/AndroidManifest.xml:11:5-79
-MERGED from [io.grpc:grpc-android:1.28.0] /Users/hansallim/.gradle/caches/transforms-2/files-2.1/a71afb091154f2a642dd54d0bc94b041/jetified-grpc-android-1.28.0/AndroidManifest.xml:11:5-79
-	android:name
-		ADDED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:9:22-76
 service#io.flutter.plugins.firebase.messaging.FlutterFirebaseMessagingBackgroundService
 ADDED from [:firebase_messaging] /Users/hansallim/Working/develop-apps/app-projects/위바이버/PROJECT/clay/build/firebase_messaging/intermediates/library_manifest/release/AndroidManifest.xml:12:9-15:72
 	android:exported

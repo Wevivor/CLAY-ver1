@@ -243,16 +243,16 @@ class _BoardContentUIState extends State<BoardContentUI>
 
               return Future.value(true);
             },
-            child: AnnotatedRegion<SystemUiOverlayStyle>(
-              value: GlobalStyle.configStatusTheme,
-              child: Padding(
-                padding: MediaQuery.of(context).viewInsets,
-                child: Container(
-                  child: Wrap(
-                    children: [child],
-                  ),
+            // child: AnnotatedRegion<SystemUiOverlayStyle>(
+            //   value: GlobalStyle.configStatusTheme,
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
                 ),
               ),
+              // ),
             ),
           );
         });
