@@ -15,7 +15,7 @@ import 'package:clay/h_content/part_bs/src/part_bs_content_link.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_content_memo.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_content_photo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
+
 import 'package:get/get.dart';
 
 import 'bott_navi_controller.dart';
@@ -28,8 +28,11 @@ class HanBottomNavigationBar extends StatefulWidget {
 class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     with AppbarHelper {
   final sheetTitle = baseStyle.copyWith(
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
     fontSize: 14,
-    fontWeight: FontWeight.w400,
+    fontWeight:
+        Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
+
     height: 1.17, // line height : 16.41px
     color: Colors.black,
   );
@@ -237,7 +240,8 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
-              'board.bs.body.menu.webLink'.tr,
+              // 'board.bs.body.menu.webLink'.tr,
+              'board.bs.body.menu.newBoard'.tr,
               style: sheetTitle,
             ),
           ),

@@ -170,7 +170,8 @@ class BottomSheetContentPhoto extends StatelessWidget
                       PickedImageWidget(
                         MySize.getScaledSizeHeight(120),
                         MySize.getScaledSizeHeight(120),
-                        imgHolder: Const.assets + 'images/smpl_img1.png',
+                        //imgHolder: Const.assets + 'icon/holder_photo.png',
+                        imgHolder: Const.assets + 'images/avatar-1.jpg',
                       ),
                       Positioned(
                         top: MySize.size0,
@@ -276,7 +277,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                   ),
                 ),
                 heightSpace(16.0),
-                vwTitle('저장할 보드 선택하기'),
+                vwTitle('com.bs.subtitle.boardChoice'.tr),
                 heightSpace(10.0),
                 // TODO : 섀도우 때문에 패딩 문제가 있음.
                 GetBuilder<BoardListMySelectController>(builder: (controller) {

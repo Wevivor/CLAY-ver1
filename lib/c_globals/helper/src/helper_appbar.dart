@@ -22,20 +22,23 @@ class AppbarHelper {
   Widget vwAppBar({
     title,
     List<Widget>? actions,
+    titleStyle,
   }) {
     Widget wdgTitle = title is String
         ? Container(
             //color: Colors.blue,
             child: Text(
               title,
-              style: TextStyle(
-                fontFamily: 'Righteous',
-                fontWeight: FontWeight.normal,
-                fontSize: 26,
-                letterSpacing: -1.3, //-5%
-                color: Colors.black,
-                height: 0.88,
-              ),
+              style: titleStyle == null
+                  ? TextStyle(
+                      fontFamily: 'Righteous',
+                      fontWeight: FontWeight.normal,
+                      fontSize: 26,
+                      letterSpacing: -1.3, //-5%
+                      color: Colors.black,
+                      height: 0.88,
+                    )
+                  : titleStyle,
             ),
           )
         : title;

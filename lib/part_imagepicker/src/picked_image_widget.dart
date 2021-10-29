@@ -30,9 +30,12 @@ class PickedImageWidget extends StatelessWidget {
 
       //파일에서 가져옴
       return Container(
-        // decoration: DecoHelper.roundDeco.copyWith(
+        decoration: DecoHelper.roundDeco.copyWith(
+          color: Color.fromRGBO(199, 199, 199, 0.7),
+        ),
 
         // ),
+
         width: width,
         height: height,
         child: Image(
@@ -40,6 +43,18 @@ class PickedImageWidget extends StatelessWidget {
           fit: BoxFit.cover,
         ),
       );
+      // return Container(
+      //   decoration: DecoHelper.roundDeco.copyWith(
+      //     color: Color.fromRGBO(199, 199, 199, 0.7),
+      //   ),
+      //   width: width,
+      //   height: height,
+      //   child: ClipRRect(
+      //     borderRadius: BorderRadius.circular(10.0),
+      //     image: imageProvider,
+      //     fit: BoxFit.fill,
+      //   ),
+      // );
     });
   }
 }

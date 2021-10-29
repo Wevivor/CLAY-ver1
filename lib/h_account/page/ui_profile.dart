@@ -29,6 +29,7 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
         //SUBJECT : 앱바의 액션
         child: vwAppBar(
           title: 'Account',
+          titleStyle: appBarStyle.copyWith(fontFamily: 'Avenir'),
           actions: [
             ImageButton(
                 height: 17.0,
