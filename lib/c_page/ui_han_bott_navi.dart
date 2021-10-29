@@ -407,20 +407,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                   _showBS(context, vwBoardMenu(context));
                 },
               ),
-<<<<<<< HEAD
-=======
-
-              mini: false,
-              backgroundColor: Colors.black,
-              // foregroundColor: Colors.white,
-              splashColor: Colors.black,
-              onPressed: () {
-                Get.put(BoardListMySelectController());
-                BoardListMySelectController.to.cache.clear();
-                BoardListMySelectController.to.fetchItems();
-                _showBS(context, vwBoardMenu(context));
-              },
->>>>>>> 98dc8dc70cc69ed9cc9dd6cf3dbb5592f376e825
             ),
           ],
         ),

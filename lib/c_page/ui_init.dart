@@ -69,7 +69,6 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
     if (value == null) {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
-<<<<<<< HEAD
       if (FirebaseAuth.instance.currentUser != null) {
         // await HanUserInfoController.to
         //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
@@ -80,25 +79,26 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         } else {
           Future.microtask(() => Get.offNamed('/login'));
         }
-=======
-      if (AuthController.to.getUser != null) {
-        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
-        var route = '/main_menu';
-        if (PushController.to.messageArguments != null) {
-          route = '/message';
-        }
-        Get.offNamed(route);
->>>>>>> 98dc8dc70cc69ed9cc9dd6cf3dbb5592f376e825
-      } else {
-        // _isSharedOpen = true;
-        ShareController.to.isShare.value = true;
 
         if (AuthController.to.getUser != null) {
           await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+          var route = '/main_menu';
+          if (PushController.to.messageArguments != null) {
+            route = '/message';
+          }
+          Get.offNamed(route);
+        } else {
+          // _isSharedOpen = true;
+          ShareController.to.isShare.value = true;
 
-          Get.to(() => ShareServiceUI());
-        } else
-          Get.toNamed('/login');
+          if (AuthController.to.getUser != null) {
+            await HanUserInfoController.to
+                .actionRead(AuthController.to.getUser);
+
+            Get.to(() => ShareServiceUI());
+          } else
+            Get.toNamed('/login');
+        }
       }
     }
   }
