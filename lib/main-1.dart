@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:clay/h_push/ui_push_messages.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'h_push/message.dart';
 import 'h_push/message_list.dart';
 import 'h_push/permissions.dart';
 import 'h_push/token_monitor.dart';
@@ -78,7 +78,7 @@ class MessagingExampleApp extends StatelessWidget {
       theme: ThemeData.dark(),
       routes: {
         '/': (context) => Application(),
-        '/message': (context) => MessageView(),
+        '/message': (context) => PushMessagesUI(),
       },
     );
   }

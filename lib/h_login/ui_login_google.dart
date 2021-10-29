@@ -1,6 +1,7 @@
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/models/users/users_dtos.dart';
+import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/h_share.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -86,6 +87,7 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       userEmail: profile?.email ?? '',
       userName: profile?.displayName,
       profileImg: profile?.photoURL,
+      token: PushController.to.token,
       level: 3,
       registerDate: DateTime.now(),
     );
@@ -121,7 +123,15 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       await AuthController.to.signInWithGoogleCredential(googleUser);
 
       try {
-        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+        final _userInfo = await HanUserInfoController.to
+            .actionRead(AuthController.to.getUser);
+        if (PushController.to.token != null && _userInfo != null) {
+          HanUserInfoController.to.actionUpdate(_userInfo
+              .copyWith(
+                  profile: _userInfo.profile
+                      .copyWith(token: PushController.to.token))
+              .toDto());
+        }
       } on HanUserInfoException catch (e) {
         final userDto = _createUserInfo(AuthController.to.getUser, 'G');
         HanUserInfoController.to.actionCreate(userDto);
@@ -129,8 +139,13 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
 
       if (ShareController.to.isShare.value)
         Get.to(() => ShareServiceUI());
-      else
-        Get.toNamed('/main_menu');
+      else {
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        Get.offNamed(route);
+      }
     } on FirebaseAuthException catch (e) {
       if (['user-cancelled', 'user-not-found'].contains(e.code)) {
         AppHelper.showMessage(HanExceptionMessage.keys[e.code] ?? '');
@@ -159,7 +174,17 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
 
       await AuthController.to.signInWithCustomToken(_kakoLoginResult['token']);
       try {
-        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+        final _userInfo = await HanUserInfoController.to
+            .actionRead(AuthController.to.getUser);
+        if (PushController.to.token != null && _userInfo != null) {
+          HanUserInfoController.to.actionUpdate(_userInfo
+              .copyWith(
+                  profile: _userInfo.profile
+                      .copyWith(token: PushController.to.token))
+              .toDto());
+          // HanUserInfoController.to.actionUpdate(
+          //     _userInfo.copyWith(token: PushController.to.token).toDto());
+        }
       } on HanUserInfoException catch (e) {
         final userDto = _createUserInfo(AuthController.to.getUser, 'K');
         HanUserInfoController.to.actionCreate(userDto);
@@ -167,8 +192,13 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       // await GetStorage().write("logined", 'K');
       if (ShareController.to.isShare.value)
         Get.to(() => ShareServiceUI());
-      else
-        Get.toNamed('/main_menu');
+      else {
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        Get.offNamed(route);
+      }
 
       AppHelper.showMessage("카카오 아이디로 로그인 되었습니다.");
     } on Exception catch (ex) {

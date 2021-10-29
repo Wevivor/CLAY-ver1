@@ -76,7 +76,7 @@ class _BoardContentUIState extends State<BoardContentUI>
   Future<void> initFetch() async {
     final _controller = Get.put(ContentListController(pageSize: 2));
     _controller.boardId = widget.board.info.boardId ?? '';
-    _controller.cache = [];
+    _controller.cache.clear();
     await ContentListController.to.fetchItems();
     debugPrint('--------- BoardContentUI initFetch-----------');
   }

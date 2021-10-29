@@ -29,7 +29,7 @@ class _BoardUIState extends State<BoardUI>
     BoardListController(),
   );
   Future<void> initFetch() async {
-    listController.cache = [];
+    listController.cache.clear();
     await listController.fetchItems();
   }
 
@@ -63,7 +63,7 @@ class _BoardUIState extends State<BoardUI>
                   width: 24.0,
                   onTap: () async {
                     final _controller = Get.put(FindController());
-                    _controller.cache = [];
+                    _controller.cache.clear();
                     _controller.fetchItems();
                     Get.toNamed('/search');
 
@@ -80,7 +80,7 @@ class _BoardUIState extends State<BoardUI>
                     // //SUBJECT: 검색
                     // //TODO : 검색어 조건 설정
                     // FindController.to.searchWord = result ?? '';
-                    // FindController.to.cache = [];
+                    // FindController.to.cache.clear();
 
                     // await FindController.to.fetchItems(term: result);
                     // FindController.to.update();

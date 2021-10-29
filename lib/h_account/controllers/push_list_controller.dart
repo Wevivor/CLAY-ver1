@@ -3,17 +3,17 @@ import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/h_account/models/push/push_dto.dart';
 import 'package:get/instance_manager.dart';
 
-class PushController extends AbsListController
+class PushListController extends AbsListController
     with FbCommonModule, ElCommonModule {
   static String MENU_POS = 'history/push/push_send';
   late dynamic _instance;
-  PushController({
+  PushListController({
     int pageSize = 30,
   }) : super(pageSize) {
     _instance = FirebaseFirestore.instance;
   }
 
-  static PushController get to => Get.find();
+  static PushListController get to => Get.find();
   Future<List<dynamic>> getList(
     int offset,
     int limit, {

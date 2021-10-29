@@ -102,7 +102,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                   //     BottomNaviController.to.index = 1;
                   //     BottomNaviController.to.update();
                   //     Get.put(BoardListMySelectController());
-                  //     BoardListMySelectController.to.cache = [];
+                  //     BoardListMySelectController.to.cache.clear();
                   //     BoardListMySelectController.to.fetchItems();
                   //     _showBS(context, vwBoardMenu(context));
                   //   },
@@ -120,7 +120,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                       final contentAllListController = Get.put(
                         ContentAllListController(pageSize: 2),
                       );
-                      contentAllListController.cache = [];
+                      contentAllListController.cache.clear();
                       await contentAllListController.fetchItems();
                       BottomNaviController.to.index = 2;
                       BottomNaviController.to.update();
@@ -407,6 +407,20 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                   _showBS(context, vwBoardMenu(context));
                 },
               ),
+<<<<<<< HEAD
+=======
+
+              mini: false,
+              backgroundColor: Colors.black,
+              // foregroundColor: Colors.white,
+              splashColor: Colors.black,
+              onPressed: () {
+                Get.put(BoardListMySelectController());
+                BoardListMySelectController.to.cache.clear();
+                BoardListMySelectController.to.fetchItems();
+                _showBS(context, vwBoardMenu(context));
+              },
+>>>>>>> 98dc8dc70cc69ed9cc9dd6cf3dbb5592f376e825
             ),
           ],
         ),

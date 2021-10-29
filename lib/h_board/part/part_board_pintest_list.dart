@@ -77,7 +77,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
                 // await _controller.fetchItem(id: postInfo.id);
                 // final _authorController = Get.put(PostAuthorController(
                 //     uid: postInfo.uid, excludedId: item.id ?? ''));
-                // PostAuthorController.to.cache = [];
+                // PostAuthorController.to.cache.clear();
                 // await _authorController.fetchItems();
 
                 Get.to(() => PostSUB(item: item, parentController: controller));
@@ -88,7 +88,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
               // holder: Const.assets + 'images/smpl_list1.png',
               onMore: () {
                 final _controller = Get.put(BoardListMySelectController());
-                _controller.cache = [];
+                _controller.cache.clear();
                 _controller.selected = -1;
                 _controller.fetchItems();
                 _showBS(

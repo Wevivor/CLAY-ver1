@@ -21,7 +21,7 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
     this.board,
   );
   Future<void> initFetch() async {
-    listController.cache = [];
+    listController.cache.clear();
     await listController.fetchItems();
   }
 

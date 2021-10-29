@@ -2,8 +2,8 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
-import 'package:clay/h_account/controllers/push_alaram_controller.dart';
-import 'package:clay/h_account/controllers/push_controller.dart';
+import 'package:clay/h_account/controllers/alarm_controller.dart';
+import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
 
 import 'package:flutter/material.dart';
@@ -22,7 +22,6 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
-    Get.put(PushAlarmController('userinfos'));
     final appbarHeight = 0 + kToolbarHeight;
     return Scaffold(
       appBar: PreferredSize(
@@ -35,9 +34,9 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                 height: 17.0,
                 width: 15.0,
                 onTap: () {
-                  final _controller = Get.put(PushController());
+                  final _controller = Get.put(PushListController());
                   _controller.fetchItems();
-                  Get.toNamed('/push');
+                  Get.toNamed('/push_list');
                 },
                 holder: 'assets/icon/ph_bell-ringing.png'),
             widthSpace(8.5),

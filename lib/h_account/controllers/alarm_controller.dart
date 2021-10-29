@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-class PushAlarmController extends GetxController {
+class AlarmController extends GetxController {
   String path = '';
-  PushAlarmController(this.path);
+  AlarmController(this.path);
 
   bool _isAlert = true;
-  static PushAlarmController get to => Get.find();
+  static AlarmController get to => Get.find();
 
   bool get isAlert => _isAlert;
 

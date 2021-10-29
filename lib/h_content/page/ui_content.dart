@@ -30,10 +30,10 @@ class _ContentUIState extends State<ContentUI>
   }
 
   Future<void> initFetch() async {
-    contentsListAllMySelectController.cache = [];
+    contentsListAllMySelectController.cache.clear();
     await contentsListAllMySelectController.fetchItems();
     contentsListAllMySelectController.selected = 0;
-    contentAllListController.cache = [];
+    contentAllListController.cache.clear();
     await contentAllListController.fetchItems();
   }
 

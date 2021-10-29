@@ -1,5 +1,7 @@
+import 'package:clay/c_config/libarays.dart';
+import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 /// Message route arguments.
 class MessageArguments {
@@ -14,7 +16,7 @@ class MessageArguments {
 }
 
 /// Displays information about a [RemoteMessage].
-class MessageView extends StatelessWidget {
+class PushMessagesUI extends StatelessWidget {
   /// A single data row.
   Widget row(String title, String? value) {
     return Padding(
@@ -31,10 +33,13 @@ class MessageView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final MessageArguments args =
-        ModalRoute.of(context)!.settings.arguments! as MessageArguments;
-    RemoteMessage message = args.message;
-    RemoteNotification? notification = message.notification;
+    final args = PushController.to.messageArguments;
+    late RemoteMessage message;
+    RemoteNotification? notification;
+    if (args != null) {
+      message = args.message;
+      notification = message.notification;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +51,7 @@ class MessageView extends StatelessWidget {
         child: Column(
           children: [
             row('Triggered application open',
-                args.openedApplication.toString()),
+                args?.openedApplication.toString()),
             row('Message ID', message.messageId),
             row('Sender ID', message.senderId),
             row('Category', message.category),

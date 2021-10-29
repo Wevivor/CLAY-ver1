@@ -1,8 +1,8 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
-import 'package:clay/h_account/controllers/push_alaram_controller.dart';
-import 'package:clay/h_account/part/part_profile/part_profile.dart';
+import 'package:clay/h_account/controllers/alarm_controller.dart';
+import 'package:clay/h_account/part_profile/part_profile.dart';
 
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,6 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
-    Get.put(PushAlarmController('userinfos'));
 
     final appbarHeight = 0 + kToolbarHeight;
     return Scaffold(

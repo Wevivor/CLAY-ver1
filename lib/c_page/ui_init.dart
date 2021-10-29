@@ -3,10 +3,12 @@ import 'package:clay/c_globals/controllers/src/auth_controller.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
+import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/h_share.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 class InitUI extends StatefulWidget {
@@ -63,9 +65,11 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
   }
 
   void startState(String? value) async {
+    await Jiffy.locale(Get.deviceLocale?.languageCode);
     if (value == null) {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
+<<<<<<< HEAD
       if (FirebaseAuth.instance.currentUser != null) {
         // await HanUserInfoController.to
         //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
@@ -76,6 +80,15 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         } else {
           Future.microtask(() => Get.offNamed('/login'));
         }
+=======
+      if (AuthController.to.getUser != null) {
+        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        Get.offNamed(route);
+>>>>>>> 98dc8dc70cc69ed9cc9dd6cf3dbb5592f376e825
       } else {
         // _isSharedOpen = true;
         ShareController.to.isShare.value = true;

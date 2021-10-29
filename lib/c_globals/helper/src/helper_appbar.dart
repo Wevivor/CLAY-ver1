@@ -120,6 +120,12 @@ class AppbarHelper {
       return Colors.black;
   }
 
+  Color getGrayBg() {
+    return ThemeController.to.isLightOn
+        ? Color(0xFFF6F6F6)
+        : Colors.grey[400] ?? Colors.grey;
+  }
+
   Widget vwAppbarPosition(BuildContext context,
       {Color color = Colors.black, Function? onTap}) {
     return Positioned(

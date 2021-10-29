@@ -49,7 +49,7 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                     onMore: () {
                       final _controller =
                           Get.put(BoardListMySelectController());
-                      _controller.cache = [];
+                      _controller.cache.clear();
                       _controller.selected = -1;
                       _controller.fetchItems();
                       _showBS(
