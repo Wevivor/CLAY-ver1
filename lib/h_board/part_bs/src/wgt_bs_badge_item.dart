@@ -14,7 +14,7 @@ class BsBadgeItemWidget extends StatelessWidget {
   final onTap;
   final isSelected;
 
-  final classTitle = TextStyle(
+  final classTitle = baseStyle.copyWith(
       fontSize: 11,
       color: Color(0xFF707070),
       fontWeight: FontWeight.normal,
@@ -39,17 +39,29 @@ class BsBadgeItemWidget extends StatelessWidget {
         width: 64,
         height: 64,
         decoration: BoxDecoration(
-          color: isSelected ? Color(0xFFE5E5E5) : Colors.white,
+          color: isSelected ? Color.fromRGBO(230, 242, 255, 1) : Colors.white,
           borderRadius: BorderRadius.circular(14),
-          border:
-              isSelected ? Border.all(width: 2, color: Colors.black54) : null,
+          border: isSelected
+              ? Border.all(
+                  width: 2.0,
+                  color: Color.fromRGBO(1, 123, 254, 0.5),
+                )
+              : null,
           boxShadow: isSelected
-              ? null
+              ? [
+                  BoxShadow(
+                    color: Color.fromRGBO(0, 0, 0, 0.06),
+                    blurRadius: 10.0,
+                    offset: Offset(0, 0),
+                    spreadRadius: 4,
+                  ),
+                ]
               : [
                   BoxShadow(
                     color: Color.fromRGBO(0, 0, 0, 0.05),
                     blurRadius: 10.0,
                     offset: Offset(0, 0),
+                    spreadRadius: 2,
                   ),
                 ],
         ),

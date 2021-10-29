@@ -222,7 +222,7 @@ class _MyAppState extends State<MyApp> {
         builder: () {
           // ThemeController.to.getThemeModeFromStore();
           return GetMaterialApp(
-              // defaultTransition: Transition.native,
+              defaultTransition: Transition.native,
               translations: MultiLanguage(),
               localizationsDelegates: [
                 GlobalMaterialLocalizations.delegate,

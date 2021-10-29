@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -29,6 +30,9 @@ class PickedImageWidget extends StatelessWidget {
 
       //파일에서 가져옴
       return Container(
+        // decoration: DecoHelper.roundDeco.copyWith(
+
+        // ),
         width: width,
         height: height,
         child: Image(

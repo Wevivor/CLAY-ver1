@@ -34,7 +34,7 @@ class BottomSheetContentLink extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070),
+    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
   );
 
   @override
@@ -46,7 +46,7 @@ class BottomSheetContentLink extends StatelessWidget
         heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 15,
+            height: 10,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         vwBSAppBar(
           onBack: () {
@@ -57,7 +57,6 @@ class BottomSheetContentLink extends StatelessWidget
           actions: [
             Container(
               alignment: Alignment.center,
-              // color: Colors.red,
               child: InkWell(
                 onTap: () async {
                   FocusScope.of(context).unfocus();
@@ -97,8 +96,8 @@ class BottomSheetContentLink extends StatelessWidget
                     fontSize: 14,
                     color: Color(0xff017BFE),
                     fontWeight: FontWeight.w400,
-                    height: 1.17,
-                  ), // line height : 16.41px
+                    height: 1.17, // line height : 16.41px
+                  ),
                 ),
               ),
             ),
@@ -181,57 +180,24 @@ class BottomSheetContentLink extends StatelessWidget
           ),
         ),
         heightSpace(16.0),
-        Stack(
-          children: [
-            Container(
-              height: 16 + 10 + 54 + 8 + 11 + 16,
-              //color: Colors.yellow,
-            ),
-            Container(
-              height: 16,
-              child: vwTitle('com.bs.subtitle.boardChoice'.tr),
-            ),
-            Positioned(
-              top: 10,
-              height: 54 + 8 + 11 + 16,
-              width: MediaQuery.of(context).size.width,
-              child: Container(
-                child: GetBuilder<BoardListMySelectController>(
-                    builder: (controller) {
-                  return BoardSelectPART(onTap: () {
-                    Get.lazyPut(() => BoardController());
-                    final _controller = BoardController.to;
-                    final initBoard = createInitBoard();
-                    _controller.boardItem = initBoard.toDomain();
-                    _controller.boardNameController.text = '';
-                    Get.back();
+        vwTitle('com.bs.subtitle.boardChoice'.tr),
+        heightSpace(10.0),
+        // TODO : 섀도우 때문에 패딩 문제가 있음.
+        GetBuilder<BoardListMySelectController>(builder: (controller) {
+          return Container(
+            height: 54 + 8 + 11 + 10,
+            child: BoardSelectPART(onTap: () {
+              Get.lazyPut(() => BoardController());
+              final _controller = BoardController.to;
+              final initBoard = createInitBoard();
+              _controller.boardItem = initBoard.toDomain();
+              _controller.boardNameController.text = '';
+              Get.back();
 
-                    _showBS(parentContext, BottomSheetNewBoard());
-                  });
-                }),
-              ),
-            ),
-          ],
-          // clipBehavior: Clip.hardEdge,
-          // children: <Widget>[
-          //   vwTitle('com.bs.subtitle.boardChoice'.tr),
-          //   Positioned(
-          //     child: GetBuilder<BoardListMySelectController>(
-          //         builder: (controller) {
-          //       return BoardSelectPART(onTap: () {
-          //         Get.lazyPut(() => BoardController());
-          //         final _controller = BoardController.to;
-          //         final initBoard = createInitBoard();
-          //         _controller.boardItem = initBoard.toDomain();
-          //         _controller.boardNameController.text = '';
-          //         Get.back();
-
-          //         _showBS(parentContext, BottomSheetNewBoard());
-          //       });
-          //     }),
-          //   ),
-          // ],
-        ),
+              _showBS(parentContext, BottomSheetNewBoard());
+            }),
+          );
+        }),
         heightSpace(16.0),
       ],
     );

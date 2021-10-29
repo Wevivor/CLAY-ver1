@@ -29,7 +29,7 @@ class BottomSheetNewBoard extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070),
+    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
   );
 
   @override
@@ -42,7 +42,7 @@ class BottomSheetNewBoard extends StatelessWidget
           heightSpace(2.0),
           Container(
             alignment: Alignment.bottomCenter,
-            height: 15,
+            height: 10,
             child: Image.asset(Const.assets + 'images/rect_40.png'),
           ),
           vwBSAppBar(
@@ -162,7 +162,7 @@ class BottomSheetNewBoard extends StatelessWidget
             padding: EdgeInsets.only(
               left: 19.0,
               right: 19.0,
-              bottom: MediaQuery.of(context).viewInsets.bottom,
+              // bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
             child: BoardClassSelectPART(onTap: () {}),
           ),
