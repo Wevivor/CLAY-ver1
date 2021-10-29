@@ -21,6 +21,21 @@ class BottomSheetContentMemo extends StatelessWidget
     this.onMenu,
   });
 
+  final sheetTitle = baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    height: 1.17, // line height : 16.41px
+    color: Colors.black,
+  );
+
+  final msgStyle = baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    height: 1.17, // line height : 16.41px
+    letterSpacing: -0.7, // letter spacing : -5%
+    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+  );
+
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -35,14 +50,14 @@ class BottomSheetContentMemo extends StatelessWidget
           heightSpace(2.0),
           Container(
               alignment: Alignment.bottomCenter,
-              height: 11,
+              height: 10,
               child: Image.asset(Const.assets + 'images/rect_40.png')),
           vwBSAppBar(
             onBack: () {
               Get.back();
               if (onMenu != null) onMenu();
             },
-            title: '메모',
+            title: 'board.bs.sub.title.memo'.tr, // 메모
             actions: [
               Container(
                 alignment: Alignment.center,
@@ -108,15 +123,17 @@ class BottomSheetContentMemo extends StatelessWidget
                     await _controller.actionIns(_item);
                   },
                   child: Text(
-                    '완료',
+                    'com.btn.save'.tr,
                     style: baseStyle.copyWith(
-                        fontSize: 13,
-                        color: Color(0xff017BFE),
-                        fontWeight: FontWeight.w400),
+                      fontSize: 14,
+                      color: Color(0xff017BFE),
+                      fontWeight: FontWeight.w400,
+                      height: 1.17, //line height : 16.41px
+                    ),
                   ),
                 ),
               ),
-              widthSpace(18.87),
+              widthSpace(20.0),
             ],
           ),
           heightSpace(20.0),
@@ -130,13 +147,8 @@ class BottomSheetContentMemo extends StatelessWidget
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '| 원하는 메모를 입력해 주세요.',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
+                hintText: 'board.bs.sub.pholder.memo'.tr,
+                hintStyle: msgStyle,
                 isDense: true,
                 errorText: null,
                 errorStyle: TextStyle(
@@ -155,7 +167,7 @@ class BottomSheetContentMemo extends StatelessWidget
             ),
           ),
           heightSpace(16.0),
-          vwTitle('제목'),
+          vwTitle('board.bs.sub.subtitle.title'.tr),
           heightSpace(10.0),
           Padding(
             padding: EdgeInsets.only(left: 19.0, right: 19.0),
@@ -173,13 +185,8 @@ class BottomSheetContentMemo extends StatelessWidget
                 onTap: () {},
                 decoration: kInputDecoration.copyWith(
                   fillColor: Color(0xFFF6F6F6),
-                  hintText: '| 콘텐츠의 제목을 입력해 주세요.',
-                  hintStyle: baseStyle.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: Color(
-                        0xFFCACACA,
-                      )),
+                  hintText: 'board.bs.sub.pholder.contents'.tr,
+                  hintStyle: msgStyle,
                   isDense: true,
                   errorText: null,
                   errorStyle: TextStyle(
@@ -201,17 +208,21 @@ class BottomSheetContentMemo extends StatelessWidget
           heightSpace(16.0),
           vwTitle('저장할 보드 선택하기'),
           heightSpace(10.0),
+          // TODO : 섀도우 때문에 패딩 문제가 있음.
           GetBuilder<BoardListMySelectController>(builder: (controller) {
-            return BoardSelectPART(onTap: () {
-              Get.lazyPut(() => BoardController());
-              final _controller = BoardController.to;
-              final initBoard = createInitBoard();
-              _controller.boardItem = initBoard.toDomain();
-              _controller.boardNameController.text = '';
-              Get.back();
+            return Container(
+              height: 54 + 8 + 11 + 10,
+              child: BoardSelectPART(onTap: () {
+                Get.lazyPut(() => BoardController());
+                final _controller = BoardController.to;
+                final initBoard = createInitBoard();
+                _controller.boardItem = initBoard.toDomain();
+                _controller.boardNameController.text = '';
+                Get.back();
 
-              _showBS(parentContext, BottomSheetNewBoard());
-            });
+                _showBS(parentContext, BottomSheetNewBoard());
+              }),
+            );
           }),
           heightSpace(16.0),
         ],

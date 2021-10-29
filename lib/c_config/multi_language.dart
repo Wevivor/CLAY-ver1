@@ -195,9 +195,9 @@ class MultiLanguage extends Translations {
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 메모
           'board.bs.sub.title.memo': '메모',
-          'board.bs.sub.pholder.memo': '원하는 메모를 입력해주세요.',
+          'board.bs.sub.pholder.memo': '|원하는 메모를 입력해주세요.',
           'board.bs.sub.subtitle.title': '제목',
-          'board.bs.sub.pholder.contents': '콘텐츠의 제목을 입력해주세요.',
+          'board.bs.sub.pholder.contents': '|콘텐츠의 제목을 입력해주세요.',
 
           // --- 보드 내부 콘텐츠 화면 : 리스트
           'board.sub.appbar.subtitle.date': '2021년8월7일',

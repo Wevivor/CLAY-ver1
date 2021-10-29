@@ -41,7 +41,7 @@ class BottomSheetContentPhoto extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070),
+    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
   );
 
   @override
@@ -64,7 +64,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                 heightSpace(2.0),
                 Container(
                     alignment: Alignment.bottomCenter,
-                    height: 15,
+                    height: 10,
                     child: Image.asset(Const.assets + 'images/rect_40.png')),
                 vwBSAppBar(
                   onBack: () {
@@ -75,7 +75,6 @@ class BottomSheetContentPhoto extends StatelessWidget
                   actions: [
                     Container(
                       alignment: Alignment.center,
-                      // color: Colors.red,
                       child: InkWell(
                         onTap: () async {
                           FocusScope.of(context).unfocus();
@@ -251,7 +250,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                       // style: accountEditTextStyle,
                       decoration: kInputDecoration.copyWith(
                         fillColor: Color(0xFFF6F6F6),
-                        hintText: '|콘텐츠에 남기고 싶은 말을 써주세요.',
+                        hintText: 'com.bs.pholder.cmt'.tr,
                         hintStyle: baseStyle.copyWith(
                             fontSize: 14,
                             fontWeight: FontWeight.normal,
@@ -279,17 +278,21 @@ class BottomSheetContentPhoto extends StatelessWidget
                 heightSpace(16.0),
                 vwTitle('저장할 보드 선택하기'),
                 heightSpace(10.0),
+                // TODO : 섀도우 때문에 패딩 문제가 있음.
                 GetBuilder<BoardListMySelectController>(builder: (controller) {
-                  return BoardSelectPART(onTap: () {
-                    Get.lazyPut(() => BoardController());
-                    final _controller = BoardController.to;
-                    final initBoard = _createInitBoard();
-                    _controller.boardItem = initBoard.toDomain();
-                    _controller.boardNameController.text = '';
-                    Get.back();
+                  return Container(
+                    height: 54 + 8 + 11 + 10,
+                    child: BoardSelectPART(onTap: () {
+                      Get.lazyPut(() => BoardController());
+                      final _controller = BoardController.to;
+                      final initBoard = _createInitBoard();
+                      _controller.boardItem = initBoard.toDomain();
+                      _controller.boardNameController.text = '';
+                      Get.back();
 
-                    _showBS(parentContext, BottomSheetNewBoard());
-                  });
+                      _showBS(parentContext, BottomSheetNewBoard());
+                    }),
+                  );
                 }),
                 heightSpace(16.0),
               ],
