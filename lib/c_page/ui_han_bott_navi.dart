@@ -15,7 +15,10 @@ import 'package:clay/h_content/part_bs/src/part_bs_content_link.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_content_memo.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_content_photo.dart';
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
 
+=======
+>>>>>>> f36476bf1728571e1485ab2cdf72019da8aa373f
 import 'package:get/get.dart';
 
 import 'bott_navi_controller.dart';
@@ -92,24 +95,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                       },
                     ),
                   ),
-                  // HanNaiviBarWidget(
-                  //   isLabel: false,
-                  //   align: MainAxisAlignment.start,
-                  //   height: 48,
-                  //   width: 48,
-                  //   isOn: _index == 1 ? true : false,
-                  //   holder: _index == 1
-                  //       ? 'assets/icon/add_board_btn.png'
-                  //       : 'assets/icon/add_board_btn.png',
-                  //   onTap: () {
-                  //     BottomNaviController.to.index = 1;
-                  //     BottomNaviController.to.update();
-                  //     Get.put(BoardListMySelectController());
-                  //     BoardListMySelectController.to.cache.clear();
-                  //     BoardListMySelectController.to.fetchItems();
-                  //     _showBS(context, vwBoardMenu(context));
-                  //   },
-                  // ),
                   HanNaiviBarWidget(
                     height: 17,
                     width: 17,
@@ -119,13 +104,12 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                         ? 'assets/icon/mycontents_on.png'
                         : 'assets/icon/mycontents_off.png',
                     onTap: () async {
-                      print('---------------ALL Contens-------------');
                       final contentAllListController = Get.put(
                         ContentAllListController(pageSize: 2),
                       );
                       contentAllListController.cache.clear();
                       await contentAllListController.fetchItems();
-                      BottomNaviController.to.index = 2;
+                      BottomNaviController.to.index = 1;
                       BottomNaviController.to.update();
                     },
                   ),
@@ -144,13 +128,58 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         return BoardUI();
 
       case 1:
-        return Container();
-
-      case 2:
         return ContentUI();
       default:
         return Container();
     }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: onWillPop,
+      child: Scaffold(
+        body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
+        bottomNavigationBar: Stack(
+          alignment: Alignment.center,
+          children: [
+            GetBuilder<BottomNaviController>(
+                builder: (_) => vwBottomMenu(context)),
+            Container(
+              width: 36,
+              height: 36,
+              child: FloatingActionButton(
+                child: Icon(
+                  Icons.add_rounded,
+                  size: 24,
+                ),
+                // child: Image.asset('assets/icon/add_board_btn.png'),
+                mini: false,
+                elevation: 0,
+                backgroundColor: Colors.black,
+                // foregroundColor: Colors.white,
+                splashColor: Colors.black,
+                onPressed: () {
+                  Get.put(BoardListMySelectController());
+                  BoardListMySelectController.to.cache = [];
+                  BoardListMySelectController.to.fetchItems();
+                  _showBS(context, vwBoardMenu(context));
+                },
+              ),
+            ),
+          ],
+        ),
+
+        // floatingActionButton: FloatingActionButton(
+        //   child: Container(),
+        //   backgroundColor: Colors.greenAccent,
+        //   foregroundColor: Colors.white,
+        //   splashColor: Colors.black,
+        //   onPressed: () {},
+        // ),
+        // floatingActionButtonLocation: FloatingActionButtonLocation.,
+      ),
+    );
   }
 
   //SUBJECT : 글추가 보텀다이어로그
@@ -189,23 +218,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         ),
         HanListTile(
           padding: EdgeInsets.only(left: 19.0, bottom: 22.5, top: 21),
-          onTap: () {
-            //SUBJECT : BS:
-            //TODO: 새보드 만들기.
-            Get.back();
-
-            final _controller = Get.put(BoardController());
-            final _profile = HanUserInfoController.to.toProfile();
-            final _item = _createBoard(_profile);
-            _controller.boardItem = _item.toDomain();
-            _controller.boardNameController.text = '';
-
-            _showBS(context, BottomSheetNewBoard(
-              onMenu: () {
-                _showBS(context, vwBoardMenu(context));
-              },
-            ));
-          },
+          onTap: () => _actionBSNewBoard(context),
           leading: Image.asset(Const.assets + 'icon/new_board.png'),
           title: Container(
             padding: EdgeInsets.only(left: 9.0),
@@ -217,25 +230,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         ),
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
-          onTap: () {
-            //SUBJECT : BS
-            //TODO: 웹 링크.
-
-            Get.back();
-
-            final _controller = Get.put(ContentsController());
-            _controller.initTextController();
-
-            BoardListMySelectController.to.selected = -1;
-            _showBS(
-                context,
-                BottomSheetContentLink(
-                  parentContext: context,
-                  onMenu: () {
-                    _showBS(context, vwBoardMenu(context));
-                  },
-                ));
-          },
+          onTap: () => _actionBSWeblink(context),
           leading: Image.asset(Const.assets + 'icon/web_link.png'),
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
@@ -248,23 +243,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         ),
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
-          onTap: () {
-            //SUBJECT : BS:
-            //TODO: 사진
-
-            Get.back();
-            final _controller = Get.put(ContentsController());
-            _controller.initTextController();
-            BoardListMySelectController.to.selected = -1;
-            _showBS(
-                context,
-                BottomSheetContentPhoto(
-                  parentContext: context,
-                  onMenu: () {
-                    _showBS(context, vwBoardMenu(context));
-                  },
-                ));
-          },
+          onTap: () => _actionBSPhoto(context),
           leading: Image.asset(Const.assets + 'icon/photo.png'),
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
@@ -276,24 +255,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         ),
         HanListTile(
           padding: EdgeInsets.only(left: 17.0, bottom: 22.5),
-          onTap: () async {
-            //SUBJECT : BS
-            //TODO: 메모
-            final _controller = Get.put(ContentsController());
-            _controller.initTextController();
-
-            BoardListMySelectController.to.selected = -1;
-
-            Get.back();
-            _showBS(
-                context,
-                BottomSheetContentMemo(
-                  parentContext: context,
-                  onMenu: () {
-                    _showBS(context, vwBoardMenu(context));
-                  },
-                ));
-          },
+          onTap: () => _actionBSMemo(context),
           leading: Image.asset(Const.assets + 'icon/memo.png'),
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
@@ -307,6 +269,79 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
       ],
       // ),
     );
+  }
+
+  //SUBJECT : BS:
+  //TODO: 새보드 만들기.
+  void _actionBSNewBoard(BuildContext context) {
+    Get.back();
+
+    final _controller = Get.put(BoardController());
+    final _profile = HanUserInfoController.to.toProfile();
+    final _item = _createBoard(_profile);
+    _controller.boardItem = _item.toDomain();
+    _controller.boardNameController.text = '';
+
+    _showBS(context, BottomSheetNewBoard(
+      onMenu: () {
+        _showBS(context, vwBoardMenu(context));
+      },
+    ));
+  }
+  //SUBJECT : BS
+  //TODO: 웹 링크.
+
+  void _actionBSWeblink(BuildContext context) {
+    Get.back();
+
+    final _controller = Get.put(ContentsController());
+    _controller.initTextController();
+
+    BoardListMySelectController.to.selected = -1;
+    _showBS(
+        context,
+        BottomSheetContentLink(
+          parentContext: context,
+          onMenu: () {
+            _showBS(context, vwBoardMenu(context));
+          },
+        ));
+  }
+
+//SUBJECT : BS:
+  //TODO: 사진
+  void _actionBSPhoto(BuildContext context) {
+    Get.back();
+    final _controller = Get.put(ContentsController());
+    _controller.initTextController();
+    BoardListMySelectController.to.selected = -1;
+    _showBS(
+        context,
+        BottomSheetContentPhoto(
+          parentContext: context,
+          onMenu: () {
+            _showBS(context, vwBoardMenu(context));
+          },
+        ));
+  }
+
+  //SUBJECT : BS
+  //TODO: 메모
+  void _actionBSMemo(BuildContext context) {
+    final _controller = Get.put(ContentsController());
+    _controller.initTextController();
+
+    BoardListMySelectController.to.selected = -1;
+
+    Get.back();
+    _showBS(
+        context,
+        BottomSheetContentMemo(
+          parentContext: context,
+          onMenu: () {
+            _showBS(context, vwBoardMenu(context));
+          },
+        ));
   }
 
   BoardDto _createBoard(Profile profile) {
@@ -379,63 +414,15 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     return Future.value(true);
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop,
-      child: Scaffold(
-        body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
-        bottomNavigationBar: Stack(
-          alignment: Alignment.center,
-          children: [
-            GetBuilder<BottomNaviController>(
-                builder: (_) => vwBottomMenu(context)),
-            Container(
-              width: 36,
-              height: 36,
-              child: FloatingActionButton(
-                child: Icon(
-                  Icons.add_rounded,
-                  size: 24,
-                ),
-                // child: Image.asset('assets/icon/add_board_btn.png'),
-                mini: false,
-                elevation: 0,
-                backgroundColor: Colors.black,
-                // foregroundColor: Colors.white,
-                splashColor: Colors.black,
-                onPressed: () {
-                  Get.put(BoardListMySelectController());
-                  BoardListMySelectController.to.cache = [];
-                  BoardListMySelectController.to.fetchItems();
-                  _showBS(context, vwBoardMenu(context));
-                },
-              ),
-            ),
-          ],
-        ),
-
-        // floatingActionButton: FloatingActionButton(
-        //   child: Container(),
-        //   backgroundColor: Colors.greenAccent,
-        //   foregroundColor: Colors.white,
-        //   splashColor: Colors.black,
-        //   onPressed: () {},
-        // ),
-        // floatingActionButtonLocation: FloatingActionButtonLocation.,
-      ),
-    );
-  }
-
-  Widget vwTitle(final title) {
-    return Container(
-      padding: EdgeInsets.only(left: 16),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-      ),
-    );
-  }
+  // Widget vwTitle(final title) {
+  //   return Container(
+  //     padding: EdgeInsets.only(left: 16),
+  //     alignment: Alignment.centerLeft,
+  //     child: Text(
+  //       title,
+  //       style: baseStyle.copyWith(
+  //           fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+  //     ),
+  //   );
+  // }
 }

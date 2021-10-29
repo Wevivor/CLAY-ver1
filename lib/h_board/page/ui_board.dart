@@ -9,7 +9,6 @@ import 'package:clay/h_search/part_search/part_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:http/http.dart' as http;
 
 // ignore: must_be_immutable
 class BoardUI extends StatefulWidget {
