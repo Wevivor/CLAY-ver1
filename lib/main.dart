@@ -233,7 +233,7 @@ class _MyAppState extends State<MyApp> {
                 Locale('ko', 'ko_KR'),
                 Locale('en', 'US'),
               ],
-              // locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
+              locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
               fallbackLocale: Locale('ko', 'KR'),
               debugShowCheckedModeBanner: false,
               theme: AppTheme.lightTheme,
