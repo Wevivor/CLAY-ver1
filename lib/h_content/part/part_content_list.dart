@@ -100,10 +100,20 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
 
   void _showBS(context, child) {
     showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        backgroundColor: Colors.white,
         context: context,
-        enableDrag: false,
         builder: (BuildContext buildContext) {
-          return child;
+          return Padding(
+            padding: MediaQuery.of(context).viewInsets,
+            child: Container(
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
         });
   }
 }

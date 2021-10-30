@@ -54,7 +54,7 @@ class ContentListItemWidget extends StatelessWidget {
                 child: Container(
                   alignment: Alignment.centerLeft,
                   child: Text(
-                    title,
+                    title ?? '',
                     style: titleStyle,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,

@@ -69,36 +69,33 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
     if (value == null) {
       // _isSharedOpen = false;
       ShareController.to.isShare.value = false;
-      if (FirebaseAuth.instance.currentUser != null) {
-        // await HanUserInfoController.to
-        //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
-        print('====> To main_menu');
+      // await HanUserInfoController.to
+      //     .actionRead(FirebaseAuth.instance.currentUser?.uid ?? '');
+      print('====> To main_menu');
+      if (AuthController.to.getUser != null) {
+        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+        Get.offNamed('/main_menu');
+      } else {
+        Future.microtask(() => Get.offNamed('/login'));
+      }
+      //SUBJECT: 푸시 처
+      if (AuthController.to.getUser != null) {
+        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        Get.offNamed(route);
+      } else {
+        // _isSharedOpen = true;
+        ShareController.to.isShare.value = true;
+
         if (AuthController.to.getUser != null) {
           await HanUserInfoController.to.actionRead(AuthController.to.getUser);
-          Get.offNamed('/main_menu');
-        } else {
-          Future.microtask(() => Get.offNamed('/login'));
-        }
 
-        if (AuthController.to.getUser != null) {
-          await HanUserInfoController.to.actionRead(AuthController.to.getUser);
-          var route = '/main_menu';
-          if (PushController.to.messageArguments != null) {
-            route = '/message';
-          }
-          Get.offNamed(route);
-        } else {
-          // _isSharedOpen = true;
-          ShareController.to.isShare.value = true;
-
-          if (AuthController.to.getUser != null) {
-            await HanUserInfoController.to
-                .actionRead(AuthController.to.getUser);
-
-            Get.to(() => ShareServiceUI());
-          } else
-            Get.toNamed('/login');
-        }
+          Get.to(() => ShareServiceUI());
+        } else
+          Get.toNamed('/login');
       }
     }
   }

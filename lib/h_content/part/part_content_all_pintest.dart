@@ -82,12 +82,13 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
           //TODO
           return ContentGridItemWidget(
             title: item.info.contentsTitle,
-            // imgUrl: item.info.contentsImages,
-            imgUrl: item.info.thumbnails,
+            imgUrl: item.info.contentsImages,
+            // imgUrl: item.info.thumbnails,
             contentText: item.info.contentsTitle,
             onTap: () {},
 
             onMore: () {
+              debugPrint('======> Show BS');
               _showBS(context, vwBoardMenu(context, item));
             },
           );
@@ -113,20 +114,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             left: 19.0,
             bottom: 26.17,
           ),
-          onTap: () async {
-            //SUBJECT : BS: 상단 고정
-            //TODO: 데이터베이스고정.
-            final _contentsCtl = Get.put(ContentsController());
-            _contentsCtl.contentsItem = item;
-            final _fixed = item.info.contentsFixed;
-            await _contentsCtl.actionPin(fix: !_fixed!);
-            Get.back();
-
-            Future.microtask(() async {
-              ContentAllListController.to.cache.clear();
-              await ContentAllListController.to.fetchItems();
-            });
-          },
+          onTap: () => _actionBSFixed(context, item),
           leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
           title: item.info.contentsFixed == true ? Text('상단해제') : Text('상단고정'),
         ),
@@ -135,14 +123,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             left: 19.0,
             bottom: 26.17,
           ),
-
-          //SUBJECT: 링크
-          //TODO: 수정해야 함.
-          onTap: () async {
-            Get.back();
-            final _boardUrl = sprintf('%s', [item.info.contentsUrl]);
-            await share.Share.share(_boardUrl);
-          },
+          onTap: () => _actionBSShare(context, item),
           leading: Image.asset(Const.assets + 'icon/icon_share.png'),
           title: Text('공유'),
         ),
@@ -151,16 +132,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             left: 19.0,
             bottom: 26.17,
           ),
-          onTap: () {
-            //SUBJECT : BS: 리마인드 알림 설정
-            //TODO: 작업범위 여부 고민
-            Get.back();
-            Get.lazyPut(() => ContentsController());
-            Get.lazyPut(() => RemindListController());
-            _showBS(context, BottomSheetCalendar(onMenu: () {
-              _showBS(context, vwBoardMenu(context, item));
-            }));
-          },
+          onTap: () => _actionBSRemindAlarm(context, item),
           leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
           title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
         ),
@@ -169,29 +141,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             left: 19.0,
             bottom: 26.17,
           ),
-          onTap: () {
-            //SUBJECT : BS: 보드 변경
-
-            Get.back();
-            // Get.put(ContentListController());
-            final _controller = Get.put(BoardListMySelectController());
-            _controller.cache.clear();
-            _controller.selected = -1;
-            _controller.fetchItems();
-            _showBS(
-                context,
-                BottomSheetBoardChange(
-                  parentContext: context,
-                  onDone: () {
-                    ContentAllListController.to
-                        .actionDelteItem(item.contentsId ?? '');
-                  },
-                  onMenu: () {
-                    _showBS(context, vwBoardMenu(context, item));
-                  },
-                  current: item,
-                ));
-          },
+          onTap: () => _actionBSBoardChange(context, item),
           leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
           title: Text('보드변경'),
         ),
@@ -200,36 +150,92 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             left: 19.0,
             bottom: 26.17,
           ),
-          onTap: () async {
-            //SUBJECT : BS: 컨테츠 삭제
-            Get.back();
-            var _responce = false;
-            await DialogHelper.MessageDialog(
-              context,
-              (context) => DeleteDialog(
-                title: '보드를 삭제하시겠습니까?',
-                deleteTitle: '삭제',
-                okTitle: '취소',
-                okTap: () {
-                  _responce = false;
-                },
-                deleteTap: () {
-                  _responce = true;
-                },
-              ),
-            );
-            if (_responce) {
-              await ContentAllListController.to
-                  .actionDelete(item.info.contentsId);
-              ContentAllListController.to
-                  .actionDelteItem(item.info.contentsId ?? '');
-            }
-          },
+          onTap: () => _actionBSDelete(context, item),
           leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
           title: Text('삭제'),
         ),
       ],
     );
+  }
+//SUBJECT : BS: 상단 고정
+  //TODO: 데이터베이스고정.
+
+  Future<void> _actionBSFixed(BuildContext context, item) async {
+    final _contentsCtl = Get.put(ContentsController());
+    _contentsCtl.contentsItem = item;
+    final _fixed = item.info.contentsFixed;
+    await _contentsCtl.actionPin(fix: !_fixed!);
+    Get.back();
+
+    Future.microtask(() async {
+      ContentAllListController.to.cache.clear();
+      await ContentAllListController.to.fetchItems();
+    });
+  }
+
+  //SUBJECT: 링크
+  //TODO: 수정해야 함.
+  Future<void> _actionBSShare(BuildContext context, item) async {
+    Get.back();
+    final _boardUrl = sprintf('%s', [item.info.contentsUrl]);
+    await share.Share.share(_boardUrl);
+  }
+
+  //SUBJECT : BS: 리마인드 알림 설정
+  //TODO: 작업범위 여부 고민
+  void _actionBSRemindAlarm(BuildContext context, item) {
+    Get.back();
+    Get.lazyPut(() => ContentsController());
+    Get.lazyPut(() => RemindListController());
+    _showBS(context, BottomSheetCalendar(onMenu: () {
+      _showBS(context, vwBoardMenu(context, item));
+    }));
+  }
+
+  //SUBJECT : BS: 보드 변경
+  Future<void> _actionBSBoardChange(BuildContext context, item) async {
+    Get.back();
+    // Get.put(ContentListController());
+    final _controller = Get.put(BoardListMySelectController());
+    _controller.cache.clear();
+    _controller.selected = -1;
+    _controller.fetchItems();
+    _showBS(
+        context,
+        BottomSheetBoardChange(
+          parentContext: context,
+          onDone: () {
+            ContentAllListController.to.actionDelteItem(item.contentsId ?? '');
+          },
+          onMenu: () {
+            _showBS(context, vwBoardMenu(context, item));
+          },
+          current: item,
+        ));
+  }
+
+  //SUBJECT : BS: 컨테츠 삭제
+  Future<void> _actionBSDelete(BuildContext context, item) async {
+    Get.back();
+    var _responce = false;
+    await DialogHelper.MessageDialog(
+      context,
+      (context) => DeleteDialog(
+        title: '보드를 삭제하시겠습니까?',
+        deleteTitle: '삭제',
+        okTitle: '취소',
+        okTap: () {
+          _responce = false;
+        },
+        deleteTap: () {
+          _responce = true;
+        },
+      ),
+    );
+    if (_responce) {
+      await ContentAllListController.to.actionDelete(item.info.contentsId);
+      ContentAllListController.to.actionDelteItem(item.info.contentsId ?? '');
+    }
   }
 
   void _showBS(context, child) {
@@ -248,30 +254,13 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
 
               return Future.value(true);
             },
-            // child: AnnotatedRegion<SystemUiOverlayStyle>(
-            //   value: GlobalStyle.configStatusTheme,
             child: Padding(
               padding: MediaQuery.of(context).viewInsets,
-              child: Container(
-                child: Wrap(
-                  children: [child],
-                ),
+              child: Wrap(
+                children: [child],
               ),
             ),
-            // ),
           );
         });
-  }
-
-  Widget vwTitle(final title) {
-    return Container(
-      padding: EdgeInsets.only(left: 16),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-      ),
-    );
   }
 }
