@@ -20,7 +20,7 @@ class HanListTile extends StatelessWidget {
       },
       child: Container(
         alignment: Alignment.center,
-        padding: padding ?? EdgeInsets.all(10.0),
+        padding: padding == null ? EdgeInsets.all(10.0) : padding,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
