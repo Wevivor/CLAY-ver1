@@ -6,7 +6,8 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/controllers/alarm_controller.dart';
 import 'package:clay/h_account/controllers/push_list_controller.dart';
-import 'package:clay/h_account/part_profile/sh_wgt/wgt_item_tutorial.dart';
+import 'package:clay/h_account/controllers/remind_list_controller.dart';
+import 'package:clay/h_account/part_profile/src/wgt_item_tutorial.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
 
 import 'package:flutter/material.dart';
@@ -15,17 +16,6 @@ import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:get/get.dart';
 
 class ProfileUI extends StatelessWidget with AppbarHelper {
-  // TODO : [SH] 여기에 스타일 지정을 하니 되었다가 안되었다가 함.
-  // vaTitle()을 만들어 넣음.
-  // final tileTitleStyle = baseStyle.copyWith(
-  //   fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-  //   fontSize: Get.locale?.languageCode == 'ko' ? 12 : 13,
-  //   color: Color(0xFF353535),
-  //   fontWeight:
-  //       Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
-  //   height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 14.06px, 17.76px
-  // );
-
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
@@ -63,8 +53,7 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
               builder: (_) => ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  heightSpace(
-                      17.0), // 83 - preferredSize - HanListTile padding(10)
+                  heightSpace(27.0), // 83 - preferredSize
 
                   //SUBJECT: 프로필 정보
                   //TODO: 프로필 정보
@@ -180,22 +169,37 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          // TODO : [SH] 현재 번역하지 않음.
+                          // TODO : [SH]
                           TutorialItemWidget(
+                              onTap: () {
+                                AppHelper.showMessage('튜토리얼');
+                              },
                               imgUrl: 'img/smpl_tutorial.png',
-                              tutorialText: '내 콘텐츠를 쉽게 공유1'),
+                              tutorialText: 'account.body.tutorials.title'.tr),
                           TutorialItemWidget(
+                              onTap: () {
+                                AppHelper.showMessage('튜토리얼');
+                              },
                               imgUrl: 'img/smpl_tutorial.png',
-                              tutorialText: '내 콘텐츠를 쉽게 공유2'),
+                              tutorialText: 'account.body.tutorials.title'.tr),
                           TutorialItemWidget(
+                              onTap: () {
+                                AppHelper.showMessage('튜토리얼');
+                              },
                               imgUrl: 'img/smpl_tutorial.png',
-                              tutorialText: '내 콘텐츠를 쉽게 공유3'),
+                              tutorialText: 'account.body.tutorials.title'.tr),
                           TutorialItemWidget(
+                              onTap: () {
+                                AppHelper.showMessage('튜토리얼');
+                              },
                               imgUrl: 'img/smpl_tutorial.png',
-                              tutorialText: '내 콘텐츠를 쉽게 공유4'),
+                              tutorialText: 'account.body.tutorials.title'.tr),
                           TutorialItemWidget(
+                              onTap: () {
+                                AppHelper.showMessage('튜토리얼');
+                              },
                               imgUrl: 'img/smpl_tutorial.png',
-                              tutorialText: '내 콘텐츠를 쉽게 공유5'),
+                              tutorialText: 'account.body.tutorials.title'.tr),
                         ],
                       ),
                     ),
@@ -249,6 +253,12 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
 
                           //리마인드 알림 설정
                           ListTile(
+                            onTap: () {
+                              final _ctl = Get.put(RemindListController());
+                              _ctl.fetchItems();
+
+                              Get.toNamed('/remind');
+                            },
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,
                             title: vaTitle('account.body.subtitle.reminder'.tr),
@@ -319,11 +329,13 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                               ),
                             ),
                           ),
+
+                          // TODO : [SH] 패딩이 잡히지 않음
                           ListTile(
-                            contentPadding: EdgeInsets.zero,
+                            //contentPadding: EdgeInsets.zero,
                             dense: true,
                             title: Container(
-                              alignment: Alignment.center,
+                              alignment: Alignment.topCenter,
                               child: AppVersionWidget(),
                             ),
                           ),
