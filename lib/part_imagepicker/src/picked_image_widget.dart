@@ -33,28 +33,18 @@ class PickedImageWidget extends StatelessWidget {
         decoration: DecoHelper.roundDeco.copyWith(
           color: Color.fromRGBO(199, 199, 199, 0.7),
         ),
-
-        // ),
-
         width: width,
         height: height,
-        child: Image(
-          image: imageProvider,
-          fit: BoxFit.cover,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(10.0),
+          child: Image(
+            image: imageProvider,
+            width: width,
+            height: height,
+            fit: BoxFit.cover,
+          ),
         ),
       );
-      // return Container(
-      //   decoration: DecoHelper.roundDeco.copyWith(
-      //     color: Color.fromRGBO(199, 199, 199, 0.7),
-      //   ),
-      //   width: width,
-      //   height: height,
-      //   child: ClipRRect(
-      //     borderRadius: BorderRadius.circular(10.0),
-      //     image: imageProvider,
-      //     fit: BoxFit.fill,
-      //   ),
-      // );
     });
   }
 }
