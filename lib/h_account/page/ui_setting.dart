@@ -6,6 +6,7 @@ import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/controllers/alarm_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 
@@ -13,9 +14,13 @@ import 'package:get/get.dart';
 
 class SettingUI extends StatelessWidget with AppbarHelper {
   final tileTitleStyle = baseStyle.copyWith(
-      fontSize: 13,
-      color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
-      fontWeight: FontWeight.normal);
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+    fontSize: 18,
+    color: Color(0xFFffffff),
+    fontWeight:
+        Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w900,
+    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 21.09px, 24.59px
+  );
   final titleStyle = baseStyle.copyWith(
       fontSize: 12,
       color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
@@ -24,13 +29,74 @@ class SettingUI extends StatelessWidget with AppbarHelper {
   Color getGrayBg() {
     return ThemeController.to.isLightOn
         ? Color(0xFFF6F6F6)
-        : Colors.grey[400] ?? Colors.grey;
+        //: Colors.grey[400] ?? Colors.grey;
+        : Colors.black;
+  }
+
+  //설정 메뉴 타이틀 스타일
+  Widget vsTitle(final title) {
+    return Container(
+      child: Text(
+        title,
+        style: baseStyle.copyWith(
+          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+          fontSize: 12,
+          color: ThemeController.to.isLightOn ? Colors.black : Colors.white,
+          fontWeight: Get.locale?.languageCode == 'ko'
+              ? FontWeight.w700
+              : FontWeight.w800,
+          height: Get.locale?.languageCode == 'ko'
+              ? 1.17
+              : 1.37, // 14.06px, 16.39px
+        ),
+      ),
+    );
+  }
+
+  //설정 메뉴 Sub 타이틀 스타일
+  Widget vsSubTitle(final title) {
+    return Container(
+      child: Text(
+        title,
+        style: baseStyle.copyWith(
+          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+          fontSize: 13,
+          color: ThemeController.to.isLightOn ? Colors.black : Colors.white,
+          fontWeight: Get.locale?.languageCode == 'ko'
+              ? FontWeight.w400
+              : FontWeight.w500,
+          height: Get.locale?.languageCode == 'ko'
+              ? 1.17
+              : 1.37, // 15.23px, 17.76px
+        ),
+      ),
+    );
+  }
+
+  //설정 메뉴 활동알림 스타일
+  Widget vsSubText(final title) {
+    return Container(
+      child: Text(
+        title,
+        style: baseStyle.copyWith(
+          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+          fontSize: 11,
+          color: Color(0xFF707070),
+          fontWeight: Get.locale?.languageCode == 'ko'
+              ? FontWeight.w400
+              : FontWeight.w500,
+          height: Get.locale?.languageCode == 'ko'
+              ? 1.17
+              : 1.37, // 12.89px, 15.03px
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
-    final appbarHeight = 0 + kToolbarHeight;
+    final appbarHeight = -3 + kToolbarHeight;
     return GetBuilder<ThemeController>(builder: (_) {
       return Scaffold(
         appBar: PreferredSize(
@@ -39,6 +105,7 @@ class SettingUI extends StatelessWidget with AppbarHelper {
             child: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0.0,
+              //shadowColor: Color.fromRGBO(0, 0, 0, 0),
               leading: IconButton(
                   icon: Icon(Icons.chevron_left),
                   onPressed: () async {
@@ -46,10 +113,31 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   }),
               centerTitle: true,
               title: Text(
-                '설정',
+                'account.appbar.title.setting'.tr,
                 style: ThemeController.to.isLightOn
-                    ? appBarStyle
-                    : appBarStyleDark,
+                    ? appBarStyle.copyWith(
+                        fontFamily: Get.locale?.languageCode == 'ko'
+                            ? 'Roboto'
+                            : 'Avenir',
+                        fontSize: 18,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w900,
+                        height: Get.locale?.languageCode == 'ko'
+                            ? 1.17
+                            : 1.37) // 21.09px, 24.59px
+                    : appBarStyleDark.copyWith(
+                        fontFamily: Get.locale?.languageCode == 'ko'
+                            ? 'Roboto'
+                            : 'Avenir',
+                        fontSize: 18,
+                        color: Color(0xFFFAFAFA),
+                        fontWeight: FontWeight.w900,
+                        height: Get.locale?.languageCode == 'ko'
+                            ? 1.17
+                            : 1.37), // 21.09px, 24.59px
+                // style: ThemeController.to.isLightOn
+                //     ? appBarStyle
+                //     : appBarStyleDark,
               ),
               backgroundColor:
                   ThemeController.to.isLightOn ? Colors.white : Colors.black,
@@ -60,10 +148,6 @@ class SettingUI extends StatelessWidget with AppbarHelper {
             builder: (_) => ListView(
               physics: NeverScrollableScrollPhysics(),
               children: <Widget>[
-                Divider(
-                  thickness: 1,
-                  height: 1,
-                ),
                 Container(
                   color: getGrayBg(),
                   padding: EdgeInsets.only(
@@ -71,17 +155,11 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   child: Container(
                     child: HanListTile(
                       padding: EdgeInsets.zero,
-                      leading: Text(
-                        '일반',
-                        style: tileTitleStyle,
-                      ),
+                      leading:
+                          vsTitle('account.sub.setting.title.general'.tr), // 일반
                       // trailing: Icon(MdiIcons.chevronRight),
                     ),
                   ),
-                ),
-                Divider(
-                  thickness: 1,
-                  height: 1,
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -96,10 +174,9 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                         else
                           ThemeController.to.setThemeMode('light');
                       },
-                      leading: Text(
-                        '어두운 테마',
-                        style: tileTitleStyle,
-                      ),
+                      leading: vsSubTitle(
+                          'account.sub.setting.subtitle.dark'.tr), // 어두운 테마
+
                       trailing: Container(
                         height: 16,
                         child: Switch(
@@ -115,8 +192,11 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   ),
                 ),
                 Divider(
-                  thickness: 1,
-                  height: 1,
+                  thickness: 0.5,
+                  height: 0,
+                  color: ThemeController.to.isLightOn
+                      ? Color(0xFFDEDEDE)
+                      : Colors.black,
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -126,10 +206,8 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                     onTap: () {
                       Get.toNamed('/language');
                     },
-                    leading: Text(
-                      '연어 설정',
-                      style: tileTitleStyle,
-                    ),
+                    leading: vsSubTitle(
+                        'account.sub.setting.subtitle.lang'.tr), // 언어 설정
                     trailing: Icon(
                       Icons.chevron_right,
                       color: Color(0xff707070),
@@ -137,8 +215,11 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   ),
                 ),
                 Divider(
-                  thickness: 1,
-                  height: 1,
+                  thickness: 0.5,
+                  height: 0,
+                  color: ThemeController.to.isLightOn
+                      ? Color(0xFFDEDEDE)
+                      : Colors.black,
                 ),
                 Container(
                   color: getGrayBg(),
@@ -146,16 +227,10 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                       left: 20, right: 20.0, top: 17, bottom: 17),
                   child: HanListTile(
                     padding: EdgeInsets.zero,
-                    leading: Text(
-                      '알림',
-                      style: tileTitleStyle,
-                    ),
+                    leading:
+                        vsTitle('account.sub.setting.title.notice'.tr), // 알림
                     // trailing: Icon(MdiIcons.chevronRight),
                   ),
-                ),
-                Divider(
-                  thickness: 1,
-                  height: 1,
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -165,23 +240,22 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                     leading: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          '활동 알림',
-                          style: tileTitleStyle,
-                        ),
-                        Text(
-                          '게시물 리마인드, 추가, 추천 등 ',
-                          style: tileTitleStyle.copyWith(
-                              fontSize: 11, color: Color(0xFF707070)),
-                        ),
+                        vsSubTitle('account.sub.setting.subtitle.activity'
+                            .tr), // 활동 알림
+                        heightSpace(4.0),
+                        vsSubText('account.sub.setting.subtitle.summary'
+                            .tr), // 게시물 리마인드, 추가, 추천 등
                       ],
                     ),
                     trailing: Switch(value: true, onChanged: (value) {}),
                   ),
                 ),
                 Divider(
-                  thickness: 1,
-                  height: 1,
+                  thickness: 0.5,
+                  height: 0,
+                  color: ThemeController.to.isLightOn
+                      ? Color(0xFFDEDEDE)
+                      : Colors.black,
                 ),
                 Container(
                   padding: EdgeInsets.only(
@@ -195,10 +269,8 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                       _controller.fetchItems();
                       Get.toNamed('/remind');
                     },
-                    leading: Text(
-                      '리마인드 알림 관리',
-                      style: tileTitleStyle,
-                    ),
+                    leading: vsSubTitle('account.sub.setting.subtitle.reminder'
+                        .tr), // 리마인드 문구 설정
                     trailing: Icon(
                       Icons.chevron_right,
                       color: Color(0xff707070),
@@ -206,8 +278,11 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   ),
                 ),
                 Divider(
-                  thickness: 1,
-                  height: 1,
+                  thickness: 0.5,
+                  height: 0,
+                  color: ThemeController.to.isLightOn
+                      ? Color(0xFFDEDEDE)
+                      : Colors.black,
                 ),
               ],
             ),

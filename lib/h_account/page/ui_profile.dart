@@ -53,7 +53,7 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
               builder: (_) => ListView(
                 physics: NeverScrollableScrollPhysics(),
                 children: <Widget>[
-                  heightSpace(27.0), // 83 - preferredSize
+                  heightSpace(27.0), // 83 - preferredSize(56)
 
                   //SUBJECT: 프로필 정보
                   //TODO: 프로필 정보

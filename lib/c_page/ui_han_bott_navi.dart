@@ -222,8 +222,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
-              // 'board.bs.body.menu.webLink'.tr,
-              'board.bs.body.menu.newBoard'.tr,
+              'board.bs.body.menu.webLink'.tr,
               style: sheetTitle,
             ),
           ),

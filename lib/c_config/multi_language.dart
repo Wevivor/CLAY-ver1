@@ -120,13 +120,14 @@ class MultiLanguage extends Translations {
 
           // --- Account : 설정 페이지
           'account.sub.setting.title.general': 'General',
-          'account.sub.setting.subtitle.dark': 'Dark theme',
+          'account.sub.setting.subtitle.dark': 'Dark Theme',
           'account.sub.setting.subtitle.lang': 'Language',
           'account.sub.setting.title.notice': 'Notifications',
           'account.sub.setting.subtitle.activity': 'More Activity about you',
           'account.sub.setting.subtitle.summary':
               'Reminders, Posts added to your board, Suggestions',
           'account.sub.setting.subtitle.reminder': 'Manage Reminder',
+          'account.appbar.title.setting': 'Setting',
 
           // --- Account : 리마인드 알림 관리
           'account.appbar.title.reminder': 'Manage reminder',
@@ -255,7 +256,8 @@ class MultiLanguage extends Translations {
           'account.sub.setting.title.notice': '알림',
           'account.sub.setting.subtitle.activity': '활동 알림',
           'account.sub.setting.subtitle.summary': '게시물 리마인드, 추가, 추천 등',
-          'account.sub.setting.subtitle.reminder': '리마인드 알림 관리',
+          'account.sub.setting.subtitle.reminder': '리마인드 문구 설정',
+          'account.appbar.title.setting': '설정',
 
           // --- Account : 리마인드 알림 관리
           'account.appbar.title.reminder': '리마인드 알림 관리',
