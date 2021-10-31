@@ -1,3 +1,5 @@
+// Account > 설정
+
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
@@ -13,18 +15,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SettingUI extends StatelessWidget with AppbarHelper {
-  final tileTitleStyle = baseStyle.copyWith(
-    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-    fontSize: 18,
-    color: Color(0xFFffffff),
-    fontWeight:
-        Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w900,
-    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 21.09px, 24.59px
-  );
-  final titleStyle = baseStyle.copyWith(
-      fontSize: 12,
-      color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
-      fontWeight: FontWeight.w700);
+  // final tileTitleStyle = baseStyle.copyWith(
+  //   fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+  //   fontSize: 18,
+  //   color: Color(0xFFffffff),
+  //   fontWeight:
+  //       Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w900,
+  //   height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 21.09px, 24.59px
+  // );
+  // final titleStyle = baseStyle.copyWith(
+  //     fontSize: 12,
+  //     color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
+  //     fontWeight: FontWeight.w700);
 
   Color getGrayBg() {
     return ThemeController.to.isLightOn
@@ -105,7 +107,6 @@ class SettingUI extends StatelessWidget with AppbarHelper {
             child: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0.0,
-              //shadowColor: Color.fromRGBO(0, 0, 0, 0),
               leading: IconButton(
                   icon: Icon(Icons.chevron_left),
                   onPressed: () async {
@@ -181,6 +182,10 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                         height: 16,
                         child: Switch(
                             value: ThemeController.to.isLightOn == true,
+                            activeColor: Color(0xFFDEDEDE),
+                            activeTrackColor: Color(0xFF707070),
+                            inactiveThumbColor: Color(0xFFDEDEDE),
+                            inactiveTrackColor: Color(0xFF707070),
                             onChanged: (value) {
                               if (value)
                                 ThemeController.to.setThemeMode('light');
@@ -247,7 +252,15 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                             .tr), // 게시물 리마인드, 추가, 추천 등
                       ],
                     ),
-                    trailing: Switch(value: true, onChanged: (value) {}),
+                    // trailing: Switch(value: true, onChanged: (value) {}),
+                    trailing: Switch(
+                        value: ThemeController.to.isLightOn ==
+                            false, // TODO : [SH] 현재 다크모드 value로 되어 있음. 수정 필요.
+                        activeColor: Color(0xFF7DAFFF),
+                        activeTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
+                        inactiveThumbColor: Color(0xFF7DAFFF),
+                        inactiveTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
+                        onChanged: (value) {}),
                   ),
                 ),
                 Divider(

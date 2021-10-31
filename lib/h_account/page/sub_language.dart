@@ -28,7 +28,8 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
           //SUBJECT : 앱바의 액션
           child: AppBar(
             automaticallyImplyLeading: false,
-            elevation: 0.0,
+            elevation: 4.0,
+            shadowColor: Color.fromRGBO(0, 0, 0, 0.2),
             leading: IconButton(
                 icon: Icon(Icons.chevron_left),
                 onPressed: () async {
@@ -36,18 +37,22 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
                 }),
             centerTitle: true,
             title: Text(
-              '언어 설정',
-              style: appBarStyle,
+              'account.sub.setting.subtitle.lang'.tr, // 언어 설정
+              style: appBarStyle.copyWith(
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w900,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37), // 21.09px, 24.59px
             ),
           )),
       body: Container(
         child: ListView(
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
-            Divider(
-              thickness: 1,
-              height: 1,
-            ),
             //SUBJECT: 다국어.
             //TODO: SH 언어 설정.
             LanguageTileWidget(
@@ -61,8 +66,9 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
                   debugPrint('================= Locale: ${_title}');
                 }),
             Divider(
-              thickness: 1,
-              height: 1,
+              thickness: 0.5,
+              height: 0,
+              color: Color(0xFFDEDEDE),
             ),
             //SUBJECT: 다국어.
             //TODO: SH 언어 설정.
@@ -76,8 +82,9 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
                   debugPrint('================= Locale: ${_title}');
                 }),
             Divider(
-              thickness: 1,
-              height: 1,
+              thickness: 0.5,
+              height: 0,
+              color: Color(0xFFDEDEDE),
             ),
           ],
         ),
