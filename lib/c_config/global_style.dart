@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'libarays.dart';
 
 const Color SOFT_GREY = Color(0xFFaaaaaa);
@@ -35,7 +36,8 @@ class GlobalStyle {
   );
 }
 
-const TextStyle baseStyle = TextStyle(
+final TextStyle baseStyle = TextStyle(
+  fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
   fontSize: 13,
   color: SOFT_GREY,
 );

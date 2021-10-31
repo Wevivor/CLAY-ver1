@@ -18,10 +18,12 @@ class BottomSheetNewBoard extends StatelessWidget
   final _formKey = GlobalKey<FormState>();
 
   final sheetTitle = baseStyle.copyWith(
-    fontSize: 14,
-    fontWeight: FontWeight.w700,
-    height: 1.17, // line height : 16.41px
-    color: Colors.black,
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+    fontSize: 18,
+    color: Color(0xFF353535),
+    fontWeight:
+        Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w900,
+    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 21.09px, 24.59px
   );
 
   final msgStyle = baseStyle.copyWith(
@@ -54,7 +56,6 @@ class BottomSheetNewBoard extends StatelessWidget
             actions: [
               Container(
                 alignment: Alignment.center,
-                // color: Colors.red,
                 child: InkWell(
                   onTap: () async {
                     FocusScope.of(context).unfocus();
@@ -94,10 +95,19 @@ class BottomSheetNewBoard extends StatelessWidget
                   child: Text(
                     'com.btn.create'.tr,
                     style: baseStyle.copyWith(
+                      fontFamily: Get.locale?.languageCode == 'ko'
+                          ? 'Roboto'
+                          : 'Avenir',
+
                       fontSize: 14,
                       color: Color(0xff017BFE),
-                      fontWeight: FontWeight.w400,
-                      height: 1.17, // line height : 16.41px
+                      fontWeight: Get.locale?.languageCode == 'ko'
+                          ? FontWeight.w400
+                          : FontWeight.w500,
+
+                      height: Get.locale?.languageCode == 'ko'
+                          ? 1.17
+                          : 1.37, // 16.41px , 19.12px
                     ),
                   ),
                 ),
