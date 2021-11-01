@@ -52,7 +52,11 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
             TextPosition(offset: _ctl.txtController.text.length));
     }
     if (widget.contents != null) {
-      _hitText = widget.contents?.info.contentsTitle ?? '';
+      // _hitText = ?.title ?? '';
+      final _ctl = RemindController.to;
+      _ctl.init();
+      _ctl.txtController.text =
+          HanUserInfoController.to.userInfo?.remindTxt ?? '';
     }
   }
 
@@ -136,9 +140,9 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
 
                                     decoration: kRegisterDecoration.copyWith(
                                       fillColor: Colors.white,
-                                      hintText: _hitText == null
+                                      hintText: _hitText.isEmpty
                                           ? '꼭 확인해! 수민!'
-                                          : null,
+                                          : _hitText,
                                       hintStyle: baseStyle.copyWith(
                                           fontSize: 14,
                                           fontWeight: FontWeight.normal,
