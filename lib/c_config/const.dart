@@ -11,9 +11,8 @@ class Const {
   static const String kakaoKey = '13d9a3e2f95bd8461786d035f8396144';
 
   //============= URL 세팅 =============================
-  static String clayBaseUrl = 'https://m.naver.com';
+  static String clayBaseUrl = 'http://clayapp.co/shared';
 
-  static String urlCommunity = 'https://m.naver.com';
   static String apiUrl =
       'https://asia-northeast3-clay-36ada.cloudfunctions.net/api';
 

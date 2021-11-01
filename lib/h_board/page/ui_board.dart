@@ -66,6 +66,25 @@ class _BoardUIState extends State<BoardUI>
                     _controller.fetchItems();
                     Get.toNamed('/search');
 
+                    // final _controller =
+                    //             Get.put(SearchKeyWordListController());
+                    FindController.to.searchWord = '';
+
+                    // Get.put(SearchKeyWordListController());
+                    final result = await showSearch<String>(
+                      context: context,
+                      delegate: SearchHan(FindController.to.searchWord.isEmpty
+                          ? '검색'
+                          : FindController.to.searchWord),
+                    );
+                    //SUBJECT: 검색
+                    //TODO : 검색어 조건 설정
+                    // FindController.to.searchWord = result ?? '';
+                    // FindController.to.cache.clear();
+
+                    // await FindController.to.fetchItems(term: result);
+                    // FindController.to.update();
+
                     //SUBJECT: 검색.후보
                     //TODO
 

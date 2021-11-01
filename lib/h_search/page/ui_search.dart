@@ -75,6 +75,7 @@ class SearchUI extends StatelessWidget {
                                 ],
                               ),
                             ),
+                            //SUBJECT: 검색.
                             onTap: () async {
                               final _controller =
                                   Get.put(SearchKeyWordListController());

@@ -118,6 +118,8 @@ app.*.symbols
 !**/ios/**/default.perspectivev3
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 !/dev/ci/**/Gemfile.lock
+
+#안드로이드
 android/app/build/intermediates/flutter/debug/.last_build_id
 android/app/build/intermediates/flutter/debug/flutter_assets/AssetManifest.json
 android/app/build/intermediates/incremental/mergeDebugAssets/merger.xml

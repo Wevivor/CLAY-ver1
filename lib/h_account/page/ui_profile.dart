@@ -15,6 +15,8 @@ import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 
 import 'package:get/get.dart';
 
+import 'sub_webview.dart';
+
 class ProfileUI extends StatelessWidget with AppbarHelper {
   @override
   Widget build(BuildContext context) {
@@ -134,32 +136,6 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                   ),
                   heightSpace(12.0),
 
-                  // ----------------------------------------------
-                  // Container(
-                  //   height: 148,
-                  //   padding: EdgeInsets.only(left: 20),
-                  //   child: HanListView(
-                  //     isSliver: false,
-                  //     direction: Axis.horizontal,
-                  //     controller: BoardListController.to,
-                  //     itemBuilder: (context, idx) {
-                  //       final cache = BoardListController.to.cache;
-
-                  //       return Row(
-                  //         children: [
-                  //           Container(
-                  //               // height: 62 + 20 + 10,
-                  //               // child: BSBoardItemWidget(
-                  //               //   title: '새로운 보드',
-                  //               //   category: '새보드',
-                  //               // ),
-                  //               ),
-                  //           widthSpace(24.0),
-                  //         ],
-                  //       );
-                  //     },
-                  //   ),
-                  // ),
                   // -------------------------------------
                   // 튜토리얼 부분 Sample Code ------------
                   Container(
@@ -222,14 +198,16 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                         children: [
                           //공지사항
                           ListTile(
+                            onTap: () {
+                              //SUBJECT: 번역, 스타일
+                              //WORKER: SH
+                              Get.to(() => WebviewSUB(
+                                  url: 'http://clayapp.co/notice/',
+                                  title: '공지사항'));
+                            },
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,
                             title: vaTitle('account.body.subtitle.notice'.tr),
-                            // Text(
-                            //   'account.body.subtitle.notice'.tr,
-                            //   style: tileTitleStyle,
-                            // ),
-                            // trailing: Icon(MdiIcons.chevronRight),
                           ),
                           Divider(
                             thickness: 0.5,
@@ -273,6 +251,14 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
 
                           //문의하기 / 도움말
                           ListTile(
+                            onTap: () {
+                              //SUBJECT: 번역, 스타일
+                              //WORKER: SH
+                              //TODO: 자료가 없어서 미루어 둠.
+                              Get.to(() => WebviewSUB(
+                                  url: 'http://clayapp.co/notice/',
+                                  title: '공지사항'));
+                            },
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,
                             title: vaTitle('account.body.subtitle.help'.tr),

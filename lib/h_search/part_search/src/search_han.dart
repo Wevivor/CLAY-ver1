@@ -15,8 +15,8 @@ class SearchHan<T> extends SearchDelegate<String> {
       : super(
           searchFieldLabel: label,
         ) {
-    SearchKeyWordListController.to
-        .actionRead(AuthController.to.getUser?.uid ?? '');
+    // SearchKeyWordListController.to
+    //     .actionRead(AuthController.to.getUser?.uid ?? '');
   }
   Color primaryColor = Color(0xff673BB7);
   @override
@@ -34,6 +34,7 @@ class SearchHan<T> extends SearchDelegate<String> {
             EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
       ),
       appBarTheme: theme.appBarTheme.copyWith(titleSpacing: 0.0),
+      //SUBJECT: 텍스트 스타일.
       textTheme: theme.textTheme.copyWith(
         headline6: TextStyle(
             decoration: TextDecoration.none,
@@ -45,15 +46,21 @@ class SearchHan<T> extends SearchDelegate<String> {
   }
 
   @override
-  Widget buildLeading(BuildContext context) => AnimatedSwitcher(
-      duration: const Duration(milliseconds: 500),
-      child: IconButton(
-          icon: Icon(Icons.chevron_left),
-          onPressed: () async {
-            FindController.to.cache.clear();
-            await FindController.to.fetchItems();
-            close(context, '');
-          }));
+  Widget buildLeading(BuildContext context) {
+    return Container();
+  }
+  // AnimatedSwitcher(
+  //       duration: const Duration(milliseconds: 500),
+  //       child: null,
+  //       // child: IconButton(
+  //       //   icon: Icon(Icons.chevron_left),
+  //       //   onPressed: () async {
+  //       //     FindController.to.cache.clear();
+  //       //     await FindController.to.fetchItems();
+  //       //     close(context, '');
+  //       //   },
+  //       // ),
+  //     );
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -139,54 +146,55 @@ class SearchHan<T> extends SearchDelegate<String> {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    final data = SearchKeyWordListController.to.backup;
+    // final data = SearchKeyWordListController.to.backup;
     if (query.isNotEmpty) {
-      final items = data.where((e) {
-        bool first = e.word?.contains(query) ?? false;
-        bool second = e.word?.startsWith(query) ?? false;
+      // final items = data.where((e) {
+      //   bool first = e.word?.contains(query) ?? false;
+      //   bool second = e.word?.startsWith(query) ?? false;
 
-        return (first && second);
-      }).toList();
+      //   return (first && second);
+      // }).toList();
 
-      SearchKeyWordListController.to.cache = [...items];
-      SearchKeyWordListController.to.update();
+      // SearchKeyWordListController.to.cache = [...items];
+      // SearchKeyWordListController.to.update();
     } else {
-      SearchKeyWordListController.to.cache = [
-        ...SearchKeyWordListController.to.backup
-      ];
-      SearchKeyWordListController.to.update();
+      // SearchKeyWordListController.to.cache = [
+      //   ...SearchKeyWordListController.to.backup
+      // ];
+      // SearchKeyWordListController.to.update();
 
       // listToShow = data;
     }
-    return GetBuilder<SearchKeyWordListController>(builder: (_) {
-      return ListView.builder(
-        itemCount: _.cache.length,
-        itemBuilder: (context, i) {
-          ///TODO 아이콘 입력.
+    return Container();
+    // return GetBuilder<SearchKeyWordListController>(builder: (_) {
+    //   return ListView.builder(
+    //     itemCount: _.cache.length,
+    //     itemBuilder: (context, i) {
+    //       ///TODO 아이콘 입력.
 
-          return ListTile(
-              leading: Icon(Icons.history),
-              title: Text(_.cache[i].word ?? ''),
-              subtitle: Text(Const.df.format(_.cache[i].dtCreated)),
-              trailing: SizedBox(
-                width: 36,
-                child: IconButton(
-                  icon: Icon(MdiIcons.closeBox),
-                  onPressed: () async {
-                    await SearchKeyWordListController.to
-                        .removeNode(_.cache[i].word ?? '');
-                    // buildSuggestions(context);
-                    AppHelper.showMessage('검색어가 삭제 되었습니다');
-                  },
-                ),
-              ),
-              onTap: () {
-                query = _.cache[i].word ?? '';
+    //       return ListTile(
+    //           leading: Icon(Icons.history),
+    //           title: Text(_.cache[i].word ?? ''),
+    //           subtitle: Text(Const.df.format(_.cache[i].dtCreated)),
+    //           trailing: SizedBox(
+    //             width: 36,
+    //             child: IconButton(
+    //               icon: Icon(MdiIcons.closeBox),
+    //               onPressed: () async {
+    //                 await SearchKeyWordListController.to
+    //                     .removeNode(_.cache[i].word ?? '');
+    //                 // buildSuggestions(context);
+    //                 AppHelper.showMessage('검색어가 삭제 되었습니다');
+    //               },
+    //             ),
+    //           ),
+    //           onTap: () {
+    //             query = _.cache[i].word ?? '';
 
-                close(context, query);
-              });
-        },
-      );
-    });
+    //             close(context, query);
+    //           });
+    //     },
+    //   );
+    // });
   }
 }
