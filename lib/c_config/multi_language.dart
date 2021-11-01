@@ -101,11 +101,12 @@ class MultiLanguage extends Translations {
 
           // --- Account : 메인 화면
           'account.appbar.title.account': 'Account',
-          'account.body.body.subtit': 'Get started',
+          'account.body.subtitle.tutorial': 'Get started',
           'account.body.tutorials.title': 'How to share my contents',
           'account.body.subtitle.notice': 'Announcements',
           'account.body.subtitle.setting': 'Settings',
           'account.body.subtitle.help': 'Report an issue / Help',
+          'account.body.subtitle.reminder': 'Manage reminder',
           'account.body.btn.logout': 'Logout',
 
           // --- Account :  받은 알림 페이지
@@ -119,13 +120,14 @@ class MultiLanguage extends Translations {
 
           // --- Account : 설정 페이지
           'account.sub.setting.title.general': 'General',
-          'account.sub.setting.subtitle.dark': 'Dark theme',
+          'account.sub.setting.subtitle.dark': 'Dark Theme',
           'account.sub.setting.subtitle.lang': 'Language',
           'account.sub.setting.title.notice': 'Notifications',
           'account.sub.setting.subtitle.activity': 'More Activity about you',
           'account.sub.setting.subtitle.summary':
               'Reminders, Posts added to your board, Suggestions',
           'account.sub.setting.subtitle.reminder': 'Manage Reminder',
+          'account.appbar.title.setting': 'Setting',
 
           // --- Account : 리마인드 알림 관리
           'account.appbar.title.reminder': 'Manage reminder',
@@ -231,11 +233,12 @@ class MultiLanguage extends Translations {
 
           // --- Account : 메인 화면
           'account.appbar.title.account': 'Account',
-          'account.body.body.subtit': '튜토리얼',
+          'account.body.subtitle.tutorial': '튜토리얼',
           'account.body.tutorials.title': '내 콘텐츠를 쉽게 공유하기',
           'account.body.subtitle.notice': '공지사항',
           'account.body.subtitle.setting': '설정',
           'account.body.subtitle.help': '문의하기/도움말',
+          'account.body.subtitle.reminder': '리마인드 알림 설정',
           'account.body.btn.logout': '로그아웃',
 
           // --- Account :  받은 알림 페이지
@@ -253,7 +256,8 @@ class MultiLanguage extends Translations {
           'account.sub.setting.title.notice': '알림',
           'account.sub.setting.subtitle.activity': '활동 알림',
           'account.sub.setting.subtitle.summary': '게시물 리마인드, 추가, 추천 등',
-          'account.sub.setting.subtitle.reminder': '리마인드 알림 관리',
+          'account.sub.setting.subtitle.reminder': '리마인드 문구 설정',
+          'account.appbar.title.setting': '설정',
 
           // --- Account : 리마인드 알림 관리
           'account.appbar.title.reminder': '리마인드 알림 관리',

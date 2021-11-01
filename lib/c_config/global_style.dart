@@ -47,14 +47,14 @@ final TextStyle baseStyle = TextStyle(
 /// --------------------
 const TextStyle appBarStyle = TextStyle(
   fontFamily: 'Roboto',
-  fontSize: 20,
-  fontWeight: FontWeight.bold,
+  fontSize: 24,
+  fontWeight: FontWeight.w900,
   color: Colors.black,
 );
 const TextStyle appBarStyleDark = TextStyle(
   fontFamily: 'Roboto',
-  fontSize: 20,
-  fontWeight: FontWeight.bold,
+  fontSize: 24,
+  fontWeight: FontWeight.w900,
   color: Colors.white,
 );
 
