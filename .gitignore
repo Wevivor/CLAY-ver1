@@ -64,11 +64,13 @@ unlinked_spec.ds
 .gradle/
 **/android/captures/
 **/android/gradlew
+**/android/build/
 **/android/gradlew.bat
 **/android/local.properties
 **/android/**/GeneratedPluginRegistrant.java
 **/android/key.properties
 *.jks
+*.flat
 
 # iOS/XCode related
 **/ios/**/*.mode1v3
