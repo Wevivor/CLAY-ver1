@@ -54,7 +54,7 @@ class RemindTextSettingSUB extends StatelessWidget
         : Colors.grey[400] ?? Colors.grey;
   }
 
-  final _txt = RemindController.to.txtController.text;
+  var _txt = RemindController.to.txtController.text;
 
   @override
   Widget build(BuildContext context) {
@@ -141,11 +141,17 @@ class RemindTextSettingSUB extends StatelessWidget
                     return remindTitle(value);
                   },
                   onChanged: (value) {
+                    RemindController.to.txtController.text = value;
+                    RemindController.to.txtController
+                      ..selection = TextSelection.fromPosition(TextPosition(
+                          offset:
+                              RemindController.to.txtController.text.length));
                     if (value.isEmpty) {
                       RemindController.to.isTxtEditble.value = true;
                     } else {
                       RemindController.to.isTxtEditble.value = false;
                     }
+                    RemindController.to.update();
                   },
                 ),
               ),
@@ -153,18 +159,23 @@ class RemindTextSettingSUB extends StatelessWidget
             heightSpace(10.0),
 
             //SUBJECT: 리마인드 문구 설정.. 사용자정보로 설정
-            Container(
-              padding: EdgeInsets.only(left: 27.0, right: 27.0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                sprintf('미리보기: [콘텐츠 이름] %s', [
-                  if (_txt.isEmpty) '꼭 확인해!',
-                  if (!_txt.isEmpty) _txt,
-                ]),
-                style: baseStyle.copyWith(
-                  color: Color(0XFF707070),
-                ),
-              ),
+            GetBuilder<RemindController>(
+              builder: (_) {
+                _txt = RemindController.to.txtController.text;
+                return Container(
+                  padding: EdgeInsets.only(left: 27.0, right: 27.0),
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    sprintf('미리보기: [콘텐츠 이름] %s', [
+                      if (_txt.isEmpty) '꼭 확인해!',
+                      if (!_txt.isEmpty) _txt,
+                    ]),
+                    style: baseStyle.copyWith(
+                      color: Color(0XFF707070),
+                    ),
+                  ),
+                );
+              },
             ),
             heightSpace(12.0),
             Obx(
@@ -187,6 +198,8 @@ class RemindTextSettingSUB extends StatelessWidget
     //리마인 문구 업데이터.
     if (!_isEditble) {
       final _txt = RemindController.to.txtController.text;
+      HanUserInfoController.to.userInfo =
+          HanUserInfoController.to.userInfo!.copyWith(remindTxt: _txt);
       await HanUserInfoController.to.actionRemindTxt(_txt);
       AppHelper.showMessage('리마인드 문구가 저장 되었습니다');
       // RemindController.to.txtController.clear();
