@@ -20,31 +20,40 @@ class SearchItemWidget extends StatelessWidget {
     this.holder = 'images/no_image.png',
   });
   final titleStyle = TextStyle(
+    fontFamily: 'Roboto',
     fontSize: 16,
     color: Color(0xFF3A3A3A),
-    fontWeight: FontWeight.bold,
-    letterSpacing: 0.05,
+    fontWeight: FontWeight.w700,
+    height: 0.88, // 14.1px
+    letterSpacing: -0.8, //-5%
   );
   final contentStyle = TextStyle(
-    fontSize: 13,
-    color: Color(0xFF676767),
-    fontWeight: FontWeight.normal,
-    height: 1.2,
-    letterSpacing: 0.05,
-  );
+      fontFamily: 'Roboto',
+      fontSize: 13,
+      color: Color(0xFF676767),
+      fontWeight: FontWeight.w400,
+      height: 1.5, //19.5px
+      letterSpacing: -0.65 //-5%,
+      );
   final dateStyle = TextStyle(
+    fontFamily: 'Avenir',
     fontSize: 11,
-    color: Color(0xb2676767), // 약 70% 투명도
-    fontWeight: FontWeight.normal,
-    height: 1.5,
-    letterSpacing: 0.5,
+    color: Color.fromRGBO(103, 103, 103, 0.7), // 약 70% 투명도
+    fontWeight: FontWeight.w400,
+    height: 1.5, // 16.5px
+    letterSpacing: 0.55, // -5%
   );
   @override
   Widget build(BuildContext context) {
     return HanListTile(
-      padding: EdgeInsets.only(top: 17, bottom: 19),
-      title: searchItemTitle(),
-      trailing: Padding(
+      padding: EdgeInsets.only(top: 17.0, bottom: 14.0),
+      title: Container(
+        height: 92,
+        child: searchItemTitle(),
+      ),
+      trailing: Container(
+        alignment: Alignment.topLeft,
+        height: 92,
         padding: const EdgeInsets.only(left: 12.0),
         child: searchItemTrail(),
       ),
@@ -55,7 +64,7 @@ class SearchItemWidget extends StatelessWidget {
   Widget searchItemTitle() {
     return Expanded(
       child: Container(
-        // padding: EdgeInsets.only(right: 10),
+        alignment: Alignment.topLeft,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +74,7 @@ class SearchItemWidget extends StatelessWidget {
               style: titleStyle,
               overflow: TextOverflow.ellipsis,
             ),
-            heightSpace(10),
+            heightSpace(13),
             Text(
               contentText,
               style: contentStyle,
@@ -87,6 +96,7 @@ class SearchItemWidget extends StatelessWidget {
 // HanListTile의 trailing 부분
   Widget searchItemTrail() {
     return Container(
+      alignment: Alignment.topLeft,
       child: ImageWidget(
         width: 84,
         height: 84,

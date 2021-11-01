@@ -12,11 +12,6 @@ import 'dart:ui' as ui;
 import 'package:intl/intl.dart';
 
 class LanguageSUB extends StatelessWidget with AppbarHelper {
-  final titleStyle = baseStyle.copyWith(
-      fontSize: 12, color: Color(0xFF353535), fontWeight: FontWeight.w700);
-
-  final tileTitleStyle = baseStyle.copyWith(
-      fontSize: 13, color: Color(0xFF353535), fontWeight: FontWeight.normal);
   @override
   Widget build(BuildContext context) {
     MySize().init(context);

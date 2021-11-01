@@ -56,10 +56,20 @@ class CategoryButton extends StatelessWidget {
                     child: Text(
                       btns[index]['title'],
                       style: btnTextStyle.copyWith(
+                        fontFamily: Get.locale?.languageCode == 'ko'
+                            ? 'Roboto'
+                            : 'Avenir',
                         fontSize: 14,
-                        fontWeight: FontWeight.w400,
-                        height: 1.17, // Line height 16.41px
-                        color: index == selected ? Colors.white : Colors.black,
+                        fontWeight: Get.locale?.languageCode == 'ko'
+                            ? FontWeight.w400
+                            : FontWeight.w500,
+                        height: Get.locale?.languageCode == 'ko'
+                            ? 1.17
+                            : 1.37, // 16.41px, 19.12px
+
+                        color: index == selected
+                            ? Color(0xFFFAFAFA)
+                            : Colors.black,
                       ),
                     ),
                   ),

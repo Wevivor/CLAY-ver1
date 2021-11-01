@@ -26,24 +26,18 @@ class ContentGridItemWidget extends StatelessWidget {
   });
   static String stand_stock_image =
       'https://firebasestorage.googleapis.com/v0/b/clay-36ada.appspot.com/o/posts%2Fa00L2RmyOzYX2K5LTOJkdWyihXH3%2F9fb1361d-c090-48db-abdf-870233359fed%2F375.jpg?alt=media&token=9afcefbd-8c94-4020-b6b8-46704f01555e';
-  final titleStyle = TextStyle(
-    fontSize: 16,
-    color: Color(0xFF3A3A3A),
-    fontWeight: FontWeight.bold,
-    height: 1.0,
-    letterSpacing: 0.05,
-  );
+
   final contentStyle = TextStyle(
     fontSize: 13,
-    color: Color(0xFF676767),
+    color: Color(0xFF353535),
     fontWeight: FontWeight.normal,
-    height: 1.2,
-    letterSpacing: 0.05,
+    height: 0.88, // 11.45px,
+    letterSpacing: -0.65, // -5%
   );
   final dateStyle = TextStyle(
     fontSize: 11,
     color: Color(0xb2676767), // 약 70% 투명도
-    fontWeight: FontWeight.normal,
+    fontWeight: FontWeight.w400,
     height: 1.5,
     letterSpacing: 0.5,
   );
@@ -64,9 +58,11 @@ class ContentGridItemWidget extends StatelessWidget {
                 decoration: DecoHelper.roundDeco.copyWith(
                   shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
-                  border: Border.all(width: 1, color: Color(0xFFC1C1C1)),
+                  border: imgUrl == null
+                      ? Border.all(width: 1, color: Color(0xFFDEDEDE))
+                      : null,
                   image: DecorationImage(
-                    fit: BoxFit.fill,
+                    fit: BoxFit.cover,
                     image: Image.network(
                       imgUrl ?? '$stand_stock_image',
                     ).image,
@@ -74,9 +70,11 @@ class ContentGridItemWidget extends StatelessWidget {
                 ),
               ),
             ),
+            heightSpace(11.0),
             Row(
               children: [
-                widthSpace(4.0),
+                //widthSpace(4.0),
+                // TODO : [SH] 보드 배지 아이콘이 들어가야 함.
                 Text(
                   title ?? '',
                   style: contentStyle,
@@ -91,6 +89,7 @@ class ContentGridItemWidget extends StatelessWidget {
                     if (onMore != null) onMore!();
                   },
                   child: Container(
+                    padding: EdgeInsets.only(right: 3),
                     width: 22,
                     alignment: Alignment.bottomRight,
                     child: Image.asset(
@@ -106,42 +105,42 @@ class ContentGridItemWidget extends StatelessWidget {
     );
   }
 
-// HanListTile의 title 부분
-  Widget boardContent() {
-    return Expanded(
-      child: Container(
-        padding: EdgeInsets.only(right: 10),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              contentText,
-              style: contentStyle,
-              overflow: TextOverflow.ellipsis,
-              maxLines: 2,
-            ),
-            heightSpace(5),
-            Text(
-              date,
-              style: dateStyle,
-            ),
-          ],
-        ),
-      ),
-      flex: 100,
-    );
-  }
+// // HanListTile의 title 부분
+//   Widget boardContent() {
+//     return Expanded(
+//       child: Container(
+//         padding: EdgeInsets.only(right: 10),
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.start,
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: [
+//             Text(
+//               contentText,
+//               style: contentStyle,
+//               overflow: TextOverflow.ellipsis,
+//               maxLines: 2,
+//             ),
+//             heightSpace(5),
+//             Text(
+//               date,
+//               style: dateStyle,
+//             ),
+//           ],
+//         ),
+//       ),
+//       flex: 100,
+//     );
+//   }
 
-// HanListTile의 trailing 부분
-  Widget boardItemTrail() {
-    return Container(
-      child: ImageWidget(
-        width: 74,
-        height: 74,
-        imgUrl: imgUrl,
-        holder: holder,
-      ),
-    );
-  }
+// // HanListTile의 trailing 부분
+//   Widget boardItemTrail() {
+//     return Container(
+//       child: ImageWidget(
+//         width: 74,
+//         height: 74,
+//         imgUrl: imgUrl,
+//         holder: holder,
+//       ),
+//     );
+//   }
 }
