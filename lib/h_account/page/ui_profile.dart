@@ -255,9 +255,10 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                           ListTile(
                             onTap: () {
                               final _ctl = Get.put(RemindListController());
+                              _ctl.cache.clear();
                               _ctl.fetchItems();
 
-                              Get.toNamed('/remind');
+                              Get.toNamed('/remind_list');
                             },
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,

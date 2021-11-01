@@ -28,6 +28,7 @@ class _$RemindDtoTearOff {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
+      required ContentsInfoDto contentsInfo,
       required ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime rAlarmTime}) {
@@ -35,6 +36,7 @@ class _$RemindDtoTearOff {
       remindId: remindId,
       title: title,
       description: description,
+      contentsInfo: contentsInfo,
       from: from,
       rAlarmTime: rAlarmTime,
     );
@@ -56,6 +58,7 @@ mixin _$RemindDto {
   String? get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'r_alarm_description')
   String? get description => throw _privateConstructorUsedError;
+  ContentsInfoDto get contentsInfo => throw _privateConstructorUsedError;
   ProfileDto? get from => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'r_alarm_time',
@@ -80,10 +83,12 @@ abstract class $RemindDtoCopyWith<$Res> {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
+      ContentsInfoDto contentsInfo,
       ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime rAlarmTime});
 
+  $ContentsInfoDtoCopyWith<$Res> get contentsInfo;
   $ProfileDtoCopyWith<$Res>? get from;
 }
 
@@ -100,6 +105,7 @@ class _$RemindDtoCopyWithImpl<$Res> implements $RemindDtoCopyWith<$Res> {
     Object? remindId = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? contentsInfo = freezed,
     Object? from = freezed,
     Object? rAlarmTime = freezed,
   }) {
@@ -116,6 +122,10 @@ class _$RemindDtoCopyWithImpl<$Res> implements $RemindDtoCopyWith<$Res> {
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      contentsInfo: contentsInfo == freezed
+          ? _value.contentsInfo
+          : contentsInfo // ignore: cast_nullable_to_non_nullable
+              as ContentsInfoDto,
       from: from == freezed
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -125,6 +135,13 @@ class _$RemindDtoCopyWithImpl<$Res> implements $RemindDtoCopyWith<$Res> {
           : rAlarmTime // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
+  }
+
+  @override
+  $ContentsInfoDtoCopyWith<$Res> get contentsInfo {
+    return $ContentsInfoDtoCopyWith<$Res>(_value.contentsInfo, (value) {
+      return _then(_value.copyWith(contentsInfo: value));
+    });
   }
 
   @override
@@ -152,10 +169,13 @@ abstract class _$RemindDtoCopyWith<$Res> implements $RemindDtoCopyWith<$Res> {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
+      ContentsInfoDto contentsInfo,
       ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime rAlarmTime});
 
+  @override
+  $ContentsInfoDtoCopyWith<$Res> get contentsInfo;
   @override
   $ProfileDtoCopyWith<$Res>? get from;
 }
@@ -174,6 +194,7 @@ class __$RemindDtoCopyWithImpl<$Res> extends _$RemindDtoCopyWithImpl<$Res>
     Object? remindId = freezed,
     Object? title = freezed,
     Object? description = freezed,
+    Object? contentsInfo = freezed,
     Object? from = freezed,
     Object? rAlarmTime = freezed,
   }) {
@@ -190,6 +211,10 @@ class __$RemindDtoCopyWithImpl<$Res> extends _$RemindDtoCopyWithImpl<$Res>
           ? _value.description
           : description // ignore: cast_nullable_to_non_nullable
               as String?,
+      contentsInfo: contentsInfo == freezed
+          ? _value.contentsInfo
+          : contentsInfo // ignore: cast_nullable_to_non_nullable
+              as ContentsInfoDto,
       from: from == freezed
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
@@ -213,6 +238,7 @@ class _$_RemindDto extends _RemindDto {
           this.title,
       @JsonKey(name: 'r_alarm_description')
           this.description,
+      required this.contentsInfo,
       required this.from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.rAlarmTime})
@@ -231,6 +257,8 @@ class _$_RemindDto extends _RemindDto {
   @JsonKey(name: 'r_alarm_description')
   final String? description;
   @override
+  final ContentsInfoDto contentsInfo;
+  @override
   final ProfileDto? from;
   @override
   @JsonKey(
@@ -241,7 +269,7 @@ class _$_RemindDto extends _RemindDto {
 
   @override
   String toString() {
-    return 'RemindDto(remindId: $remindId, title: $title, description: $description, from: $from, rAlarmTime: $rAlarmTime)';
+    return 'RemindDto(remindId: $remindId, title: $title, description: $description, contentsInfo: $contentsInfo, from: $from, rAlarmTime: $rAlarmTime)';
   }
 
   @override
@@ -256,6 +284,9 @@ class _$_RemindDto extends _RemindDto {
             (identical(other.description, description) ||
                 const DeepCollectionEquality()
                     .equals(other.description, description)) &&
+            (identical(other.contentsInfo, contentsInfo) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsInfo, contentsInfo)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
             (identical(other.rAlarmTime, rAlarmTime) ||
@@ -269,6 +300,7 @@ class _$_RemindDto extends _RemindDto {
       const DeepCollectionEquality().hash(remindId) ^
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(description) ^
+      const DeepCollectionEquality().hash(contentsInfo) ^
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(rAlarmTime);
 
@@ -291,6 +323,7 @@ abstract class _RemindDto extends RemindDto {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
+      required ContentsInfoDto contentsInfo,
       required ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime rAlarmTime}) = _$_RemindDto;
@@ -308,6 +341,8 @@ abstract class _RemindDto extends RemindDto {
   @override
   @JsonKey(name: 'r_alarm_description')
   String? get description => throw _privateConstructorUsedError;
+  @override
+  ContentsInfoDto get contentsInfo => throw _privateConstructorUsedError;
   @override
   ProfileDto? get from => throw _privateConstructorUsedError;
   @override

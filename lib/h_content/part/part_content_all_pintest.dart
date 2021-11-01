@@ -1,6 +1,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
@@ -82,8 +83,8 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
           //TODO
           return ContentGridItemWidget(
             title: item.info.contentsTitle,
-            imgUrl: item.info.contentsImages,
-            // imgUrl: item.info.thumbnails,
+            // imgUrl: item.info.contentsImages,
+            imgUrl: item.info.thumbnails,
             contentText: item.info.contentsTitle,
             onTap: () {},
 
@@ -187,9 +188,15 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
     Get.back();
     Get.lazyPut(() => ContentsController());
     Get.lazyPut(() => RemindListController());
-    _showBS(context, BottomSheetCalendar(onMenu: () {
-      _showBS(context, vwBoardMenu(context, item));
-    }));
+    Get.lazyPut(() => RemindController());
+    RemindController.to.init();
+    _showBS(
+        context,
+        BottomSheetCalendar(
+            contents: item,
+            onMenu: () {
+              _showBS(context, vwBoardMenu(context, item));
+            }));
   }
 
   //SUBJECT : BS: 보드 변경

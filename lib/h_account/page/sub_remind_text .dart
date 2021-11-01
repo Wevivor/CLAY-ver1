@@ -96,6 +96,7 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
       body: Container(
         child: Column(
           children: [
+            heightSpace(22.0),
             Form(
               key: _formKey,
               child: Container(
@@ -133,7 +134,8 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   onEditingComplete: () => node.unfocus(),
-                  controller: RemindListController.to.alarmTextController,
+                  //TODO: 안내문구 저장 ==> 사용자 정보롤 변경
+                  // controller: RemindListController.to.alarmTextController,
                   validator: (value) {
                     return remindTitle(value);
                   },
@@ -141,12 +143,15 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
               ),
             ),
             heightSpace(10.0),
+
+            //SUBJECT: 리마인드 문구 설정.. 사용자정보로 설정
             Container(
               padding: EdgeInsets.only(left: 27.0, right: 27.0),
               alignment: Alignment.centerLeft,
               child: Text(
                 sprintf('미리보기: [콘텐츠 이름] %s', [
-                  RemindListController.to.alarmTextController.text,
+                  ''
+                  // RemindListController.to.alarmTextController.text,
                 ]),
                 style: baseStyle.copyWith(
                   color: Color(0XFF707070),
@@ -192,42 +197,5 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
       // RemindListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
     return;
-  }
-
-  Future<void> _actionSelect(BuildContext context) async {
-    Get.lazyPut(() => ContentsController());
-
-    _showBS(context, BottomSheetCalendar());
-  }
-
-  void _showBS(context, child) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-        isScrollControlled: true,
-        // barrierColor: Colors.red,
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (BuildContext buildContext) {
-          return WillPopScope(
-            onWillPop: () {
-              //SUBJECT: BS 시스템네비바 검게 방지하는
-              delaySetSysyemUIOverlays(250);
-
-              return Future.value(true);
-            },
-            // child: AnnotatedRegion<SystemUiOverlayStyle>(
-            //   value: GlobalStyle.configStatusTheme,
-            child: Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: Container(
-                child: Wrap(
-                  children: [child],
-                ),
-              ),
-            ),
-            // ),
-          );
-        });
   }
 }

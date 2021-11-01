@@ -22,12 +22,14 @@ class _$RemindTearOff {
       String? title,
       String? description,
       Profile? from,
+      required ContentsInfo contentsInfo,
       required DateTime rAlarmTime}) {
     return _Remind(
       remindId: remindId,
       title: title,
       description: description,
       from: from,
+      contentsInfo: contentsInfo,
       rAlarmTime: rAlarmTime,
     );
   }
@@ -42,6 +44,7 @@ mixin _$Remind {
   String? get title => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   Profile? get from => throw _privateConstructorUsedError;
+  ContentsInfo get contentsInfo => throw _privateConstructorUsedError;
   DateTime get rAlarmTime => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -57,9 +60,11 @@ abstract class $RemindCopyWith<$Res> {
       String? title,
       String? description,
       Profile? from,
+      ContentsInfo contentsInfo,
       DateTime rAlarmTime});
 
   $ProfileCopyWith<$Res>? get from;
+  $ContentsInfoCopyWith<$Res> get contentsInfo;
 }
 
 /// @nodoc
@@ -76,6 +81,7 @@ class _$RemindCopyWithImpl<$Res> implements $RemindCopyWith<$Res> {
     Object? title = freezed,
     Object? description = freezed,
     Object? from = freezed,
+    Object? contentsInfo = freezed,
     Object? rAlarmTime = freezed,
   }) {
     return _then(_value.copyWith(
@@ -95,6 +101,10 @@ class _$RemindCopyWithImpl<$Res> implements $RemindCopyWith<$Res> {
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
               as Profile?,
+      contentsInfo: contentsInfo == freezed
+          ? _value.contentsInfo
+          : contentsInfo // ignore: cast_nullable_to_non_nullable
+              as ContentsInfo,
       rAlarmTime: rAlarmTime == freezed
           ? _value.rAlarmTime
           : rAlarmTime // ignore: cast_nullable_to_non_nullable
@@ -112,6 +122,13 @@ class _$RemindCopyWithImpl<$Res> implements $RemindCopyWith<$Res> {
       return _then(_value.copyWith(from: value));
     });
   }
+
+  @override
+  $ContentsInfoCopyWith<$Res> get contentsInfo {
+    return $ContentsInfoCopyWith<$Res>(_value.contentsInfo, (value) {
+      return _then(_value.copyWith(contentsInfo: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -124,10 +141,13 @@ abstract class _$RemindCopyWith<$Res> implements $RemindCopyWith<$Res> {
       String? title,
       String? description,
       Profile? from,
+      ContentsInfo contentsInfo,
       DateTime rAlarmTime});
 
   @override
   $ProfileCopyWith<$Res>? get from;
+  @override
+  $ContentsInfoCopyWith<$Res> get contentsInfo;
 }
 
 /// @nodoc
@@ -145,6 +165,7 @@ class __$RemindCopyWithImpl<$Res> extends _$RemindCopyWithImpl<$Res>
     Object? title = freezed,
     Object? description = freezed,
     Object? from = freezed,
+    Object? contentsInfo = freezed,
     Object? rAlarmTime = freezed,
   }) {
     return _then(_Remind(
@@ -164,6 +185,10 @@ class __$RemindCopyWithImpl<$Res> extends _$RemindCopyWithImpl<$Res>
           ? _value.from
           : from // ignore: cast_nullable_to_non_nullable
               as Profile?,
+      contentsInfo: contentsInfo == freezed
+          ? _value.contentsInfo
+          : contentsInfo // ignore: cast_nullable_to_non_nullable
+              as ContentsInfo,
       rAlarmTime: rAlarmTime == freezed
           ? _value.rAlarmTime
           : rAlarmTime // ignore: cast_nullable_to_non_nullable
@@ -180,6 +205,7 @@ class _$_Remind extends _Remind {
       this.title,
       this.description,
       this.from,
+      required this.contentsInfo,
       required this.rAlarmTime})
       : super._();
 
@@ -192,11 +218,13 @@ class _$_Remind extends _Remind {
   @override
   final Profile? from;
   @override
+  final ContentsInfo contentsInfo;
+  @override
   final DateTime rAlarmTime;
 
   @override
   String toString() {
-    return 'Remind(remindId: $remindId, title: $title, description: $description, from: $from, rAlarmTime: $rAlarmTime)';
+    return 'Remind(remindId: $remindId, title: $title, description: $description, from: $from, contentsInfo: $contentsInfo, rAlarmTime: $rAlarmTime)';
   }
 
   @override
@@ -213,6 +241,9 @@ class _$_Remind extends _Remind {
                     .equals(other.description, description)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
+            (identical(other.contentsInfo, contentsInfo) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsInfo, contentsInfo)) &&
             (identical(other.rAlarmTime, rAlarmTime) ||
                 const DeepCollectionEquality()
                     .equals(other.rAlarmTime, rAlarmTime)));
@@ -225,6 +256,7 @@ class _$_Remind extends _Remind {
       const DeepCollectionEquality().hash(title) ^
       const DeepCollectionEquality().hash(description) ^
       const DeepCollectionEquality().hash(from) ^
+      const DeepCollectionEquality().hash(contentsInfo) ^
       const DeepCollectionEquality().hash(rAlarmTime);
 
   @JsonKey(ignore: true)
@@ -239,6 +271,7 @@ abstract class _Remind extends Remind {
       String? title,
       String? description,
       Profile? from,
+      required ContentsInfo contentsInfo,
       required DateTime rAlarmTime}) = _$_Remind;
   _Remind._() : super._();
 
@@ -250,6 +283,8 @@ abstract class _Remind extends Remind {
   String? get description => throw _privateConstructorUsedError;
   @override
   Profile? get from => throw _privateConstructorUsedError;
+  @override
+  ContentsInfo get contentsInfo => throw _privateConstructorUsedError;
   @override
   DateTime get rAlarmTime => throw _privateConstructorUsedError;
   @override

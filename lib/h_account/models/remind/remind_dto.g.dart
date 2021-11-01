@@ -10,6 +10,8 @@ _$_RemindDto _$$_RemindDtoFromJson(Map<String, dynamic> json) => _$_RemindDto(
       remindId: json['remind_id'] as String?,
       title: json['r_alarm_title'] as String?,
       description: json['r_alarm_description'] as String?,
+      contentsInfo: ContentsInfoDto.fromJson(
+          json['contentsInfo'] as Map<String, dynamic>),
       from: json['from'] == null
           ? null
           : ProfileDto.fromJson(json['from'] as Map<String, dynamic>),
@@ -21,6 +23,7 @@ Map<String, dynamic> _$$_RemindDtoToJson(_$_RemindDto instance) =>
       'remind_id': instance.remindId,
       'r_alarm_title': instance.title,
       'r_alarm_description': instance.description,
+      'contentsInfo': instance.contentsInfo.toJson(),
       'from': instance.from?.toJson(),
       'r_alarm_time': Fbconverter.toJson(instance.rAlarmTime),
     };

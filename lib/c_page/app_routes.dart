@@ -1,6 +1,7 @@
 import 'package:clay/h_account/controllers/login_controller.dart';
-import 'package:clay/h_account/page/sub_remind.dart';
 import 'package:clay/h_account/page/sub_language.dart';
+import 'package:clay/h_account/page/sub_remind_list.dart';
+import 'package:clay/h_account/page/sub_remind_text%20.dart';
 import 'package:clay/h_account/page/ui_profile.dart';
 import 'package:clay/h_account/page/ui_setting.dart';
 import 'package:clay/h_content/page/ui_content.dart';
@@ -64,8 +65,12 @@ class AppRoutes {
         transition: Transition.noTransition,
         page: () => SettingUI()),
     GetPage(
-        name: '/remind',
+        name: '/remind_list',
         transition: Transition.noTransition,
-        page: () => RemindSUB()),
+        page: () => RemindListSUB()),
+    GetPage(
+        name: '/remind_text',
+        transition: Transition.noTransition,
+        page: () => RemindTextSUB()),
   ];
 }

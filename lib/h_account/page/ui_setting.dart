@@ -263,11 +263,7 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   child: HanListTile(
                     padding: EdgeInsets.zero,
                     onTap: () async {
-                      final _controller = Get.put(RemindListController());
-                      final _ctl = Get.put(ContentsController());
-                      _controller.cache.clear();
-                      _controller.fetchItems();
-                      Get.toNamed('/remind');
+                      Get.toNamed('/remind_text');
                     },
                     leading: vsSubTitle('account.sub.setting.subtitle.reminder'
                         .tr), // 리마인드 문구 설정

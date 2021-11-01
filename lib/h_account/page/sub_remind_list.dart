@@ -3,7 +3,9 @@ import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
+import 'package:clay/h_account/models/remind/remind.dart';
 import 'package:clay/h_account/part_profile/src/btn_wide.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
@@ -96,101 +98,6 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
       body: Container(
         child: Column(
           children: [
-            // Container(
-            //   color: getGrayBg(),
-            //   padding:
-            //       EdgeInsets.only(left: 20, right: 20.0, top: 17, bottom: 17),
-            //   child: Container(
-            //     child: HanListTile(
-            //       padding: EdgeInsets.zero,
-            //       leading: Text(
-            //         '알림 문구 커스텀',
-            //         style: tileTitleStyle,
-            //       ),
-            //       // trailing: Icon(MdiIcons.chevronRight),
-            //     ),
-            //   ),
-            // ),
-            // Container(
-            //   height: 134,
-            //   color: getBg(),
-            //   padding: EdgeInsets.only(
-            //     left: 20,
-            //     right: 20.0,
-            //   ),
-            //   child: Column(
-            //     children: [
-            //       Padding(
-            //         padding: EdgeInsets.only(left: 19.0, right: 19.0),
-            //         child: Form(
-            //           key: _formKey,
-            //           child: Container(
-            //             height: 38,
-            //             child: TextFormField(
-            //               maxLines: 1,
-            //               onTap: () {},
-
-            //               // style: accountEditTextStyle,
-            //               decoration: kRegisterDecoration.copyWith(
-            //                 fillColor: Colors.white,
-            //                 hintText: '꼭 확인해! 수민!',
-            //                 hintStyle: baseStyle.copyWith(
-            //                     fontSize: 14,
-            //                     fontWeight: FontWeight.normal,
-            //                     color: Colors.black),
-            //                 isDense: true,
-            //                 errorText: null,
-            //                 errorStyle: TextStyle(
-            //                   color: Colors.transparent,
-            //                   fontSize: 0,
-            //                   height: 0,
-            //                 ),
-            //                 border: UnderlineInputBorder(
-            //                   borderSide: BorderSide(color: Colors.black),
-            //                 ),
-            //                 focusedBorder: UnderlineInputBorder(
-            //                   borderSide: BorderSide(color: Colors.black),
-            //                 ),
-            //                 enabledBorder: UnderlineInputBorder(
-            //                   borderSide: BorderSide(color: Colors.black),
-            //                 ),
-            //               ),
-            //               keyboardType: TextInputType.text,
-            //               textInputAction: TextInputAction.done,
-            //               onEditingComplete: () => node.unfocus(),
-            //               controller:
-            //                   RemindListController.to.alarmTextController,
-            //               validator: (value) {
-            //                 return remindTitle(value);
-            //               },
-            //             ),
-            //           ),
-            //         ),
-            //       ),
-            //       heightSpace(10.0),
-            //       Container(
-            //         padding: EdgeInsets.only(left: 19.0, right: 19.0),
-            //         alignment: Alignment.centerLeft,
-            //         child: Text(
-            //           sprintf('미리보기: [콘텐츠 이름] %s', [
-            //             RemindListController.to.alarmTextController.text,
-            //           ]),
-            //           style: baseStyle.copyWith(
-            //             color: Color(0XFF707070),
-            //           ),
-            //         ),
-            //       ),
-            //       heightSpace(12.0),
-            //       WideButton(
-            //         isSubmit: false,
-            //         title: '확인',
-            //         onTap: _actionSubmit,
-            //         width: MySize.safeWidth - 50.0,
-            //       ),
-            //       heightSpace(22.0),
-            //     ],
-            //   ),
-            // ),
             Container(
               color: getGrayBg(),
               padding:
@@ -218,7 +125,7 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                     itemBuilder: (context, idx) {
                       final cache = controller.cache;
                       final size = controller.cache.length;
-                      Board item = cache[idx];
+                      Remind item = cache[idx];
 
                       //SUBJECT:보드 만들기
                       //TODO : 보드 위젯 이후에 작업
@@ -228,11 +135,25 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                         HanListTile(
                           padding: EdgeInsets.only(
                               top: 16, left: 16, bottom: 16, right: 16),
+                          leading: Container(
+                            padding: EdgeInsets.only(
+                                left: 3, top: 12, right: 3, bottom: 12),
+                            color: Color(0xfff6f6f6),
+                            width: 52,
+                            child: Text(
+                              Jiffy(item.rAlarmTime).format('MM월dd일 hh:mm a'),
+                              style: baseStyle.copyWith(
+                                fontSize: 11,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xff191919),
+                              ),
+                            ),
+                          ),
                           title: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                item.info.boardName,
+                                item.title ?? '',
                                 style: baseStyle.copyWith(
                                   fontSize: 13,
                                   fontWeight: FontWeight.w500,
@@ -241,10 +162,9 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                               ),
                               heightSpace(5.0),
                               Text(
-                                Jiffy(item.info.registerDate)
-                                    .format('yyyy.dd.dd hh:mm a'),
+                                item.contentsInfo.contentsTitle ?? '',
                                 style: baseStyle.copyWith(
-                                  fontSize: 11,
+                                  fontSize: 13,
                                   fontWeight: FontWeight.w500,
                                   color: Color(0xff191919),
                                 ),
@@ -255,7 +175,10 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               ImageButton(
-                                onTap: () => _actionSelect(context),
+                                // onTap: () async {
+                                //   await _actionSelect(context, item);
+                                // },
+                                onTap: () => _actionSelect(context, item),
                                 width: 30,
                                 height: 30,
                                 holder: Const.assets + 'icon/icon_alarm.png',
@@ -289,10 +212,6 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
     );
   }
 
-  Future<void> _actionSubmit(BuildContext context) async {
-    return;
-  }
-
   Future<void> _actionDelete(BuildContext context, final item) async {
     var _responce = false;
     await DialogHelper.MessageDialog(
@@ -310,16 +229,22 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
       ),
     );
     if (_responce) {
-      await RemindListController.to.actionDelete(item.info.contentsId);
+      await RemindListController.to.actionDelete(item.remindId);
       // RemindListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
     return;
   }
 
-  Future<void> _actionSelect(BuildContext context) async {
+  Future<void> _actionSelect(BuildContext context, final item) async {
     Get.lazyPut(() => ContentsController());
-
-    _showBS(context, BottomSheetCalendar());
+    Get.lazyPut(() => RemindController());
+    RemindController.to.init();
+    _showBS(
+        context,
+        BottomSheetCalendar(
+          contents: null,
+          remind: item,
+        ));
   }
 
   void _showBS(context, child) {

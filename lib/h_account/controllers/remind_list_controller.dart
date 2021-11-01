@@ -11,7 +11,6 @@ class RemindListController extends AbsListController
     with FbCommonModule, ElCommonModule {
   static String MENU_POS = 'etc/remind/alarm';
   late dynamic _instance;
-  final TextEditingController alarmTextController = TextEditingController();
 
   RemindListController({
     int pageSize = 30,
@@ -21,9 +20,7 @@ class RemindListController extends AbsListController
 
   static RemindListController get to => Get.find();
 
-  void init() {
-    alarmTextController.clear();
-  }
+  void init() {}
 
   @override
   void onInit() {
@@ -32,7 +29,6 @@ class RemindListController extends AbsListController
 
   @override
   void onClose() {
-    alarmTextController.dispose();
     super.onClose();
   }
 
@@ -44,14 +40,14 @@ class RemindListController extends AbsListController
   }) async {
     var queryList = [
       {
-        "match": {"board_creator.user_id": AuthController.to.getUser?.uid}
+        "match": {"from.user_id": AuthController.to.getUser?.uid}
       }
     ];
-    if (searchTerm != null && searchTerm.isNotEmpty) {
-      queryList.add({
-        "match": {"info.board_badge": searchTerm}
-      });
-    }
+    // if (searchTerm != null && searchTerm.isNotEmpty) {
+    //   queryList.add({
+    //     "match": {"info.board_badge": searchTerm}
+    //   });
+    // }
 
     final bodyJSON = {
       "from": offset,
@@ -66,9 +62,9 @@ class RemindListController extends AbsListController
       ]
     };
 
-    final lists = await listFilter('/clay_boards/_search', bodyJSON);
+    final lists = await listFilter('/clay_reminds/_search', bodyJSON);
     final tmp = lists.map((jsonList) {
-      final item = BoardDto.fromJson(jsonList['_source']).toDomain();
+      final item = RemindDto.fromJson(jsonList['_source']).toDomain();
       return item;
     }).toList();
     return tmp;
@@ -88,17 +84,23 @@ class RemindListController extends AbsListController
     // await insertFbByUserInfo(instance: _instance, path: MENU_POS, item: user);
   }
 
-  Future<void> actionDelete(String uid) async {
-    // try {
-    //   await deleteFb(
-    //     id: uid,
-    //     instance: _instance,
-    //     path: MENU_POS,
-    //   );
-    // } catch (e) {
-    //   print('===>' + e.toString());
-    //   throw e;
-    // }
+  Future<void> actionDelete(id) async {
+    try {
+      LoadingController.to.isLoading = true;
+      await deleteFb(instance: _instance, path: MENU_POS, id: id);
+      var existIndex = cache.indexWhere(
+        (element) => element.remindId == id,
+      );
+
+      if (existIndex >= 0) {
+        cache.removeAt(existIndex);
+      }
+    } catch (e) {
+      throw Exception('error');
+    } finally {
+      update();
+      LoadingController.to.isLoading = false;
+    }
   }
 
   Future<Remind?> actionRead(User? user) async {
@@ -116,17 +118,15 @@ class RemindListController extends AbsListController
     }
   }
 
-  Future<void> actionUpdate(RemindDto dto) async {
-    print('==============> ' + DateTime.now().toIso8601String());
-    // try {
-    //   await updateFb(
-    //       id: dto.userId ?? '', instance: _instance, path: MENU_POS, dto: dto);
-    //   userInfo = dto.toDomain();
-    //   update();
-    // } catch (e) {
-    //   print('===>' + e.toString());
-    //   throw e;
-    // }
+  Future<void> actionUpdateItem(Remind item) async {
+    var existIndex = cache.indexWhere(
+      (element) => element.remindId == item.remindId,
+    );
+
+    if (existIndex >= 0) {
+      cache[existIndex] = item;
+    }
+    update();
   }
 
   Future<Remind?> actionExistByEmail(String userEmail,
