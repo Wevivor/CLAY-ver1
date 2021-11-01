@@ -3,19 +3,17 @@ import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
+import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_account/part_profile/src/btn_wide.dart';
-import 'package:clay/h_board/models/boards.dart';
-import 'package:clay/h_content/controllers/contents_controller.dart';
-import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_file.dart';
-import 'package:jiffy/jiffy.dart';
 import 'package:sprintf/sprintf.dart';
 
-class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
+class RemindTextSettingSUB extends StatelessWidget
+    with AppbarHelper, BSValidator {
   final _formKey = GlobalKey<FormState>();
   final tileTitleStyle = baseStyle.copyWith(
       fontSize: 13,
@@ -55,6 +53,8 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
         ? Color(0xFFF6F6F6)
         : Colors.grey[400] ?? Colors.grey;
   }
+
+  final _txt = RemindController.to.txtController.text;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +109,8 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
                   // style: accountEditTextStyle,
                   decoration: kRegisterDecoration.copyWith(
                     fillColor: Colors.white,
-                    hintText: '‘꼭 확인해!’와 같은 나만의 문구를 입력해주세요',
+                    hintText:
+                        _txt.isEmpty ? '‘꼭 확인해!’와 같은 나만의 문구를 입력해주세요' : _txt,
                     hintStyle: baseStyle.copyWith(
                         fontSize: 14,
                         fontWeight: FontWeight.normal,
@@ -135,9 +136,16 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
                   textInputAction: TextInputAction.done,
                   onEditingComplete: () => node.unfocus(),
                   //TODO: 안내문구 저장 ==> 사용자 정보롤 변경
-                  // controller: RemindListController.to.alarmTextController,
+                  controller: RemindController.to.txtController,
                   validator: (value) {
                     return remindTitle(value);
+                  },
+                  onChanged: (value) {
+                    if (value.isEmpty) {
+                      RemindController.to.isTxtEditble.value = true;
+                    } else {
+                      RemindController.to.isTxtEditble.value = false;
+                    }
                   },
                 ),
               ),
@@ -150,8 +158,8 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
               alignment: Alignment.centerLeft,
               child: Text(
                 sprintf('미리보기: [콘텐츠 이름] %s', [
-                  ''
-                  // RemindListController.to.alarmTextController.text,
+                  if (_txt.isEmpty) '꼭 확인해!',
+                  if (!_txt.isEmpty) _txt,
                 ]),
                 style: baseStyle.copyWith(
                   color: Color(0XFF707070),
@@ -159,11 +167,13 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
               ),
             ),
             heightSpace(12.0),
-            WideButton(
-              isSubmit: false,
-              title: '확인',
-              onTap: _actionSubmit,
-              width: MySize.safeWidth - 27.0 * 2,
+            Obx(
+              () => WideButton(
+                isSubmit: !RemindController.to.isTxtEditble.value,
+                title: '확인',
+                onTap: () => _actionSubmit(context),
+                width: MySize.safeWidth - 27.0 * 2,
+              ),
             ),
             heightSpace(22.0),
           ],
@@ -173,6 +183,17 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
   }
 
   Future<void> _actionSubmit(BuildContext context) async {
+    final _isEditble = RemindController.to.isTxtEditble.value;
+    //리마인 문구 업데이터.
+    if (!_isEditble) {
+      final _txt = RemindController.to.txtController.text;
+      await HanUserInfoController.to.actionRemindTxt(_txt);
+      AppHelper.showMessage('리마인드 문구가 저장 되었습니다');
+      // RemindController.to.txtController.clear();
+      // RemindController.to.isTxtEditble.value = true;
+      Get.back();
+    }
+
     return;
   }
 
@@ -194,7 +215,6 @@ class RemindTextSUB extends StatelessWidget with AppbarHelper, BSValidator {
     );
     if (_responce) {
       await RemindListController.to.actionDelete(item.info.contentsId);
-      // RemindListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
     return;
   }

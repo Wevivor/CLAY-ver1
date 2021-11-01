@@ -217,6 +217,7 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                         borderRadius: BorderRadius.all(Radius.circular(20)),
                       ),
                       child: ListView(
+                        physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         children: [
                           //공지사항

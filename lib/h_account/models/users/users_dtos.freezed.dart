@@ -35,6 +35,8 @@ class _$HanUserInfoDtoTearOff {
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           required int cntVisit,
+      @JsonKey(name: 'remind_txt')
+          String? remindTxt,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) {
     return _HanUserInfoDto(
@@ -46,6 +48,7 @@ class _$HanUserInfoDtoTearOff {
       intro: intro,
       snsLogin: snsLogin,
       cntVisit: cntVisit,
+      remindTxt: remindTxt,
       registerDate: registerDate,
     );
   }
@@ -73,6 +76,8 @@ mixin _$HanUserInfoDto {
   String? get snsLogin => throw _privateConstructorUsedError;
   @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
+  @JsonKey(name: 'remind_txt')
+  String? get remindTxt => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
@@ -104,6 +109,8 @@ abstract class $HanUserInfoDtoCopyWith<$Res> {
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           int cntVisit,
+      @JsonKey(name: 'remind_txt')
+          String? remindTxt,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 
@@ -129,6 +136,7 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
+    Object? remindTxt = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -164,6 +172,10 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
               as int,
+      remindTxt: remindTxt == freezed
+          ? _value.remindTxt
+          : remindTxt // ignore: cast_nullable_to_non_nullable
+              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -200,6 +212,8 @@ abstract class _$HanUserInfoDtoCopyWith<$Res>
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           int cntVisit,
+      @JsonKey(name: 'remind_txt')
+          String? remindTxt,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 
@@ -228,6 +242,7 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
+    Object? remindTxt = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_HanUserInfoDto(
@@ -263,6 +278,10 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
               as int,
+      remindTxt: remindTxt == freezed
+          ? _value.remindTxt
+          : remindTxt // ignore: cast_nullable_to_non_nullable
+              as String?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -289,6 +308,8 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
           this.snsLogin,
       @JsonKey(name: 'cnt_visit')
           required this.cntVisit,
+      @JsonKey(name: 'remind_txt')
+          this.remindTxt,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.registerDate})
       : super._();
@@ -318,6 +339,9 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
   @JsonKey(name: 'cnt_visit')
   final int cntVisit;
   @override
+  @JsonKey(name: 'remind_txt')
+  final String? remindTxt;
+  @override
   @JsonKey(
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
@@ -326,7 +350,7 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
 
   @override
   String toString() {
-    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, registerDate: $registerDate)';
+    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, remindTxt: $remindTxt, registerDate: $registerDate)';
   }
 
   @override
@@ -354,6 +378,9 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
+            (identical(other.remindTxt, remindTxt) ||
+                const DeepCollectionEquality()
+                    .equals(other.remindTxt, remindTxt)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
                     .equals(other.registerDate, registerDate)));
@@ -370,6 +397,7 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
       const DeepCollectionEquality().hash(intro) ^
       const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(cntVisit) ^
+      const DeepCollectionEquality().hash(remindTxt) ^
       const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
@@ -398,6 +426,8 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
           String? snsLogin,
       @JsonKey(name: 'cnt_visit')
           required int cntVisit,
+      @JsonKey(name: 'remind_txt')
+          String? remindTxt,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) = _$_HanUserInfoDto;
   _HanUserInfoDto._() : super._();
@@ -426,6 +456,9 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
   @override
   @JsonKey(name: 'cnt_visit')
   int get cntVisit => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'remind_txt')
+  String? get remindTxt => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'register_date',

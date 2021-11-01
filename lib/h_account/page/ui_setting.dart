@@ -4,6 +4,7 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/controllers/alarm_controller.dart';
+import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:flutter/foundation.dart';
@@ -263,6 +264,10 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                   child: HanListTile(
                     padding: EdgeInsets.zero,
                     onTap: () async {
+                      final _ctl = Get.put(RemindController());
+                      _ctl.init();
+                      _ctl.txtController.text =
+                          HanUserInfoController.to.userInfo?.remindTxt ?? '';
                       Get.toNamed('/remind_text');
                     },
                     leading: vsSubTitle('account.sub.setting.subtitle.reminder'

@@ -59,6 +59,16 @@ class HanUserInfoController extends GetxController
     }
   }
 
+  Future<void> actionRemindTxt(String remindTxt) async {
+    try {
+      final docRef = await _instance.collection(MENU_POS).doc(userInfo?.userId);
+
+      await docRef.update({'remind_txt': remindTxt});
+    } catch (e) {
+      print('-------${e.toString()}------------');
+    }
+  }
+
   Future<void> actionCreate(HanUserInfoDto user) async {
     userInfo = user.toDomain();
     await insertFbByUserInfo(instance: _instance, path: MENU_POS, item: user);

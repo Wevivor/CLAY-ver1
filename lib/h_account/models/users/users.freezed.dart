@@ -25,6 +25,7 @@ class _$HanUserInfoTearOff {
       String? userPhone,
       String? intro,
       String? snsLogin,
+      String? remindTxt,
       required int cntVisit,
       required DateTime registerDate}) {
     return _HanUserInfo(
@@ -35,6 +36,7 @@ class _$HanUserInfoTearOff {
       userPhone: userPhone,
       intro: intro,
       snsLogin: snsLogin,
+      remindTxt: remindTxt,
       cntVisit: cntVisit,
       registerDate: registerDate,
     );
@@ -53,6 +55,7 @@ mixin _$HanUserInfo {
   String? get userPhone => throw _privateConstructorUsedError;
   String? get intro => throw _privateConstructorUsedError;
   String? get snsLogin => throw _privateConstructorUsedError;
+  String? get remindTxt => throw _privateConstructorUsedError;
   int get cntVisit => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
 
@@ -74,6 +77,7 @@ abstract class $HanUserInfoCopyWith<$Res> {
       String? userPhone,
       String? intro,
       String? snsLogin,
+      String? remindTxt,
       int cntVisit,
       DateTime registerDate});
 
@@ -97,6 +101,7 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
     Object? userPhone = freezed,
     Object? intro = freezed,
     Object? snsLogin = freezed,
+    Object? remindTxt = freezed,
     Object? cntVisit = freezed,
     Object? registerDate = freezed,
   }) {
@@ -128,6 +133,10 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
       snsLogin: snsLogin == freezed
           ? _value.snsLogin
           : snsLogin // ignore: cast_nullable_to_non_nullable
+              as String?,
+      remindTxt: remindTxt == freezed
+          ? _value.remindTxt
+          : remindTxt // ignore: cast_nullable_to_non_nullable
               as String?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
@@ -163,6 +172,7 @@ abstract class _$HanUserInfoCopyWith<$Res>
       String? userPhone,
       String? intro,
       String? snsLogin,
+      String? remindTxt,
       int cntVisit,
       DateTime registerDate});
 
@@ -189,6 +199,7 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
     Object? userPhone = freezed,
     Object? intro = freezed,
     Object? snsLogin = freezed,
+    Object? remindTxt = freezed,
     Object? cntVisit = freezed,
     Object? registerDate = freezed,
   }) {
@@ -221,6 +232,10 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
           ? _value.snsLogin
           : snsLogin // ignore: cast_nullable_to_non_nullable
               as String?,
+      remindTxt: remindTxt == freezed
+          ? _value.remindTxt
+          : remindTxt // ignore: cast_nullable_to_non_nullable
+              as String?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
@@ -244,6 +259,7 @@ class _$_HanUserInfo extends _HanUserInfo {
       this.userPhone,
       this.intro,
       this.snsLogin,
+      this.remindTxt,
       required this.cntVisit,
       required this.registerDate})
       : super._();
@@ -263,13 +279,15 @@ class _$_HanUserInfo extends _HanUserInfo {
   @override
   final String? snsLogin;
   @override
+  final String? remindTxt;
+  @override
   final int cntVisit;
   @override
   final DateTime registerDate;
 
   @override
   String toString() {
-    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, registerDate: $registerDate)';
+    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, remindTxt: $remindTxt, cntVisit: $cntVisit, registerDate: $registerDate)';
   }
 
   @override
@@ -294,6 +312,9 @@ class _$_HanUserInfo extends _HanUserInfo {
             (identical(other.snsLogin, snsLogin) ||
                 const DeepCollectionEquality()
                     .equals(other.snsLogin, snsLogin)) &&
+            (identical(other.remindTxt, remindTxt) ||
+                const DeepCollectionEquality()
+                    .equals(other.remindTxt, remindTxt)) &&
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
@@ -312,6 +333,7 @@ class _$_HanUserInfo extends _HanUserInfo {
       const DeepCollectionEquality().hash(userPhone) ^
       const DeepCollectionEquality().hash(intro) ^
       const DeepCollectionEquality().hash(snsLogin) ^
+      const DeepCollectionEquality().hash(remindTxt) ^
       const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(registerDate);
 
@@ -330,6 +352,7 @@ abstract class _HanUserInfo extends HanUserInfo {
       String? userPhone,
       String? intro,
       String? snsLogin,
+      String? remindTxt,
       required int cntVisit,
       required DateTime registerDate}) = _$_HanUserInfo;
   _HanUserInfo._() : super._();
@@ -348,6 +371,8 @@ abstract class _HanUserInfo extends HanUserInfo {
   String? get intro => throw _privateConstructorUsedError;
   @override
   String? get snsLogin => throw _privateConstructorUsedError;
+  @override
+  String? get remindTxt => throw _privateConstructorUsedError;
   @override
   int get cntVisit => throw _privateConstructorUsedError;
   @override

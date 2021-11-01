@@ -14,6 +14,7 @@ class HanUserInfo with _$HanUserInfo {
     String? userPhone,
     String? intro,
     String? snsLogin,
+    String? remindTxt,
     required int cntVisit,
     required DateTime registerDate,
   }) = _HanUserInfo;
@@ -26,6 +27,7 @@ class HanUserInfo with _$HanUserInfo {
         userPhone: userPhone,
         intro: intro,
         snsLogin: snsLogin,
+        remindTxt: remindTxt,
         cntVisit: cntVisit,
         registerDate: registerDate,
       );
