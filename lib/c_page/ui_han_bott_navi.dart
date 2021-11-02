@@ -206,7 +206,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 19.0, bottom: 22.5, top: 21),
           onTap: () => _actionBSNewBoard(context),
-          leading: Image.asset(Const.assets + 'icon/new_board.png'),
+          leading: Image.asset(Const.assets + 'icon/new_board.png'), //새 보드
           title: Container(
             padding: EdgeInsets.only(left: 9.0),
             child: Text(
@@ -218,7 +218,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
           onTap: () => _actionBSWeblink(context),
-          leading: Image.asset(Const.assets + 'icon/web_link.png'),
+          leading: Image.asset(Const.assets + 'icon/web_link.png'), // 웹링크
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
@@ -230,7 +230,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
           onTap: () => _actionBSPhoto(context),
-          leading: Image.asset(Const.assets + 'icon/photo.png'),
+          leading: Image.asset(Const.assets + 'icon/photo.png'), // 사진/비디오
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
@@ -242,7 +242,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 17.0, bottom: 22.5),
           onTap: () => _actionBSMemo(context),
-          leading: Image.asset(Const.assets + 'icon/memo.png'),
+          leading: Image.asset(Const.assets + 'icon/memo.png'), // 메모
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(

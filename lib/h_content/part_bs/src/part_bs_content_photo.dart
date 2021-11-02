@@ -170,8 +170,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                       PickedImageWidget(
                         MySize.getScaledSizeHeight(120),
                         MySize.getScaledSizeHeight(120),
-                        //imgHolder: Const.assets + 'icon/holder_photo.png',
-                        imgHolder: Const.assets + 'images/avatar-1.jpg',
+                        imgHolder: Const.assets + 'img/holder_img.png',
                       ),
                       Positioned(
                         top: MySize.size0,

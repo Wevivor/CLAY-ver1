@@ -39,11 +39,18 @@ class SearchInitPART extends StatelessWidget {
             children: [
               // TODO : [SH] holder 이미지 요청 84 * 84
               SearchItemWidget(
-                holder: Const.assets + 'images/smpl_list1.png',
-                title: item.info.contentsTitle,
-                date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
-                contentText: item.info.contentsDescription,
-                imgUrl: item.info.thumbnails,
+                // holder: Const.assets + 'images/smpl_list1.png',
+                // title: item.info.contentsTitle,
+                // date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
+                // contentText: item.info.contentsDescription,
+                // imgUrl: item.info.thumbnails,
+
+                // //holder: Const.assets + 'images/smpl_list1.png',
+                title: 'eng) 무야호~미니오븐으로6가지맛 미니바스',
+                date: '2021.03.22',
+                contentText:
+                    '안녕하세요 진영입니다:-) 오늘은 간단하지만 정말 맛있는 바스크치즈케이크를 들고 왔습니다. 정말 맛있는 바스크치즈케이크를 들고 왔습니다.',
+                // imgUrl: item.info.thumbnails,
               ),
               Divider(
                 height: 0,
