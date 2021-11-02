@@ -89,6 +89,7 @@ class MultiLanguage extends Translations {
           'board.bs.sub.subtitle.share': 'Share',
 
           // --- 콘텐츠 화면 및 검색창 : 검색창
+          'search.appbar.pholder.search': 'Search',
 
           // --- 콘텐츠 회면 및 검색창 : 내콘텐츠 점메뉴
           'contents.appbar.title.contents': 'All Contents',
@@ -221,7 +222,7 @@ class MultiLanguage extends Translations {
           'board.bs.sub.subtitle.share': '공유하기',
 
           // --- 콘텐츠 화면 및 검색창 : 검색창
-
+          'search.appbar.pholder.search': '검색',
           // --- 콘텐츠 회면 및 검색창 : 내콘텐츠 점메뉴
           'contents.appbar.title.contents': 'All Contents',
           'contents.bs.body.menu.reminder': '알람 설정',

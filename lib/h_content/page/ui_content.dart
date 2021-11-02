@@ -8,6 +8,7 @@ import 'package:clay/h_content/part/part_content_all_pintest.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
 
 //SUBJECT: 컨텐츠 화면
@@ -60,24 +61,31 @@ class _ContentUIState extends State<ContentUI>
         preferredSize: Size.fromHeight(appbarHeight),
         //SUBJECT : 앱바의 액션
         child: vwAppBar(
-          title: 'All Contents',
+          title: 'contents.appbar.title.contents'.tr, // All Contents
+          titleStyle: TextStyle(
+            fontFamily: 'Avenir',
+            fontSize: 24,
+            color: Color(0xFF000000),
+            fontWeight: FontWeight.w900,
+            height: 1.37, // 32.78px
+          ),
           actions: [
             ImageButton(
-                height: 32.0,
-                width: 32.0,
+                height: 24.46,
+                width: 24.58,
                 onTap: () {
                   Get.toNamed('/search');
                 },
                 holder: 'assets/icon/search.png'),
             widthSpace(10.0),
             ImageButton(
-                height: 32.0,
-                width: 32.0,
+                height: 24.46,
+                width: 24.58,
                 onTap: () {
                   Get.toNamed('/profile');
                 },
                 holder: 'assets/icon/account.png'),
-            widthSpace(10.0),
+            widthSpace(20.0),
           ],
         ),
       ),
@@ -86,7 +94,6 @@ class _ContentUIState extends State<ContentUI>
         return Column(
           children: [
             Container(
-                // color: Colors.red,
                 height: 30 + 4,
                 padding: EdgeInsets.only(left: 20),
                 child: GetBuilder<ContentsListAllMySelectController>(
@@ -95,7 +102,7 @@ class _ContentUIState extends State<ContentUI>
                     child: Row(
                       children: [
                         CategoryTextButton(
-                          title: '전체',
+                          title: 'board.body.chip.all'.tr,
                           index: 0,
                           selected: controller.selected,
                           onTap: (value) async {
@@ -105,7 +112,7 @@ class _ContentUIState extends State<ContentUI>
                             await ContentAllListController.to.fetchItems();
                           },
                         ),
-                        widthSpace(8.0),
+                        widthSpace(7.0),
                         Expanded(
                           child: HanListView(
                             isSliver: false,
@@ -116,7 +123,7 @@ class _ContentUIState extends State<ContentUI>
                               Board item = cache[idx];
 
                               return Padding(
-                                padding: const EdgeInsets.only(right: 8.0),
+                                padding: const EdgeInsets.only(right: 7.0),
                                 child: CategoryTextButton(
                                   title: item.info.boardName,
                                   index: idx + 1,
@@ -137,7 +144,7 @@ class _ContentUIState extends State<ContentUI>
                     ),
                   );
                 })),
-            heightSpace(16.0),
+            heightSpace(10.0),
             Expanded(child: ContentAllPintestPART()),
           ],
         );

@@ -1,6 +1,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class CategoryTextButton extends StatelessWidget {
   final int index;
@@ -38,9 +39,16 @@ class CategoryTextButton extends StatelessWidget {
           child: Text(
             title,
             style: btnTextStyle.copyWith(
+              fontFamily:
+                  Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
               fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: index == selected ? Colors.white : Colors.black,
+              fontWeight: Get.locale?.languageCode == 'ko'
+                  ? FontWeight.w400
+                  : FontWeight.w500,
+              height: Get.locale?.languageCode == 'ko'
+                  ? 1.17
+                  : 1.37, // 16.41px, 19.12px
+              color: index == selected ? Color(0xFFFAFAFA) : Colors.black,
             ),
           ),
         ),

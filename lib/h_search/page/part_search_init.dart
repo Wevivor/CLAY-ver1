@@ -37,6 +37,7 @@ class SearchInitPART extends StatelessWidget {
 
           return Column(
             children: [
+              // TODO : [SH] holder 이미지 요청 84 * 84
               SearchItemWidget(
                 holder: Const.assets + 'images/smpl_list1.png',
                 title: item.info.contentsTitle,
@@ -45,7 +46,9 @@ class SearchInitPART extends StatelessWidget {
                 imgUrl: item.info.thumbnails,
               ),
               Divider(
-                color: Color(0xFFEEEFF2),
+                height: 0,
+                thickness: 0.5,
+                color: Color(0xFFDEDEDE),
               )
             ],
           );

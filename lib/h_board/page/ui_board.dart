@@ -54,12 +54,12 @@ class _BoardUIState extends State<BoardUI>
           preferredSize: Size.fromHeight(appbarHeight),
           //SUBJECT : 앱바의 액션
           child: vwAppBar(
-            title: 'board.appbar.title.logo'.tr, // 'CLAY'
+            title: 'board.appbar.title.logo'.tr, // CLAY
 
             actions: [
               ImageButton(
-                  height: 24.0,
-                  width: 24.0,
+                  height: 24.46,
+                  width: 24.58,
                   onTap: () async {
                     final _controller = Get.put(FindController());
                     _controller.cache.clear();
@@ -106,8 +106,8 @@ class _BoardUIState extends State<BoardUI>
                   holder: 'assets/icon/search.png'),
               widthSpace(10.0),
               ImageButton(
-                  height: 24.0,
-                  width: 24.0,
+                  height: 24.46,
+                  width: 24.58,
                   onTap: () {
                     Get.toNamed('/profile');
                   },
@@ -187,7 +187,7 @@ class _BoardUIState extends State<BoardUI>
                 );
               }),
               widthSpace(2.0),
-              heightSpace(20.0),
+              heightSpace(15.0),
               Expanded(child: BoardListPART()),
             ],
           ),

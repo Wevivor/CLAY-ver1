@@ -36,10 +36,15 @@ class _LanguageTileWidgetState extends State<LanguageTileWidget> {
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
+
+    // TODO : [SH] 한국어를 선택 했을 경우 영문과 한글 공통으로 스타일이 같다.
     final listTytleStyle = baseStyle.copyWith(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
       fontSize: 13,
       color: Color(0xFF353535),
       fontWeight: FontWeight.w500,
+      height:
+          Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 15.23px, 17.76px
     );
     return GestureDetector(
       onTapDown: (detail) {

@@ -1,4 +1,4 @@
-// sub_search
+// sub_search 검색 화면
 import 'package:clay/c_config/config.dart';
 import 'package:clay/h_search/part_search/controllers/find_controller.dart';
 import 'package:clay/h_search/part_search/part_search.dart';
@@ -17,7 +17,7 @@ class SearchUI extends StatelessWidget {
   Widget build(BuildContext context) {
     MySize().init(context);
 
-    final profileHeight = 70.0;
+    final profileHeight = 65.0;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(profileHeight),
@@ -37,23 +37,19 @@ class SearchUI extends StatelessWidget {
 
               GetBuilder<FindController>(
                 builder: (_) => Container(
-                  color: Colors.white,
                   child: Row(
                     children: [
                       Expanded(
                         child: Container(
-                          color: Colors.white,
                           padding: EdgeInsets.only(
-                              left: 18.0, right: 18.7, top: 16.0, bottom: 10.0),
+                              left: 20.0, right: 7.67, top: 19.0, bottom: 14.0),
                           child: InkWell(
                             child: Container(
                               // width: MySize.safeWidth,
-                              height: 36.0,
+                              height: 32.0,
                               padding: const EdgeInsets.only(left: 10.0),
                               decoration: BoxDecoration(
-                                color: Color(0xFFf2f2f2),
-                                border: Border.all(
-                                    width: 0.1, color: Color(0xFFf2f2f2)),
+                                color: Color(0xFFEFEFEF),
                                 borderRadius: BorderRadius.all(Radius.circular(
                                         10.0) //         <--- border radius here
                                     ),
@@ -63,13 +59,25 @@ class SearchUI extends StatelessWidget {
                                   InkWell(
                                     onTap: () {},
                                     child: Icon(Icons.search,
-                                        color: Color(0xffbdbdbd)),
+                                        color: Color(0xff8E8E8E)),
                                   ),
                                   widthSpace(12.51),
                                   Text(
                                     FindController.to.searchWord == ''
-                                        ? '검색'
+                                        ? 'search.appbar.pholder.search'.tr //검색
                                         : FindController.to.searchWord,
+                                    style: baseStyle.copyWith(
+                                      fontFamily:
+                                          Get.locale?.languageCode == 'ko'
+                                              ? 'Roboto'
+                                              : 'Avenir',
+                                      fontSize: 13,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w400,
+                                      height: Get.locale?.languageCode == 'ko'
+                                          ? 1.17
+                                          : 1.37, // 15.23px, 17.76px,
+                                    ),
                                   ),
                                   Expanded(child: widthSpace(10.0)),
                                 ],
@@ -83,7 +91,7 @@ class SearchUI extends StatelessWidget {
                                 context: context,
                                 delegate: SearchHan(
                                     FindController.to.searchWord.isEmpty
-                                        ? '검색'
+                                        ? '검색' // TODO : [SH] 현재 번역하지 않음.
                                         : FindController.to.searchWord),
                               );
                               //SUBJECT: 검색
@@ -97,20 +105,31 @@ class SearchUI extends StatelessWidget {
                           ),
                         ),
                       ),
-                      // widthSpace(12.17),
+                      widthSpace(11.0),
                       InkWell(
                         onTap: () {
                           Get.back();
                         },
                         child: Text(
-                          '취소',
+                          'com.btn.cancel'.tr,
                           style: baseStyle.copyWith(
-                              fontSize: 13,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w400),
+                            fontFamily: Get.locale?.languageCode == 'ko'
+                                ? 'Roboto'
+                                : 'Avenir',
+
+                            fontSize:
+                                Get.locale?.languageCode == 'ko' ? 13 : 12,
+                            color: Colors.black,
+                            fontWeight: Get.locale?.languageCode == 'ko'
+                                ? FontWeight.w400
+                                : FontWeight.w500,
+                            height: Get.locale?.languageCode == 'ko'
+                                ? 1.17
+                                : 1.37, // 15.23px, 16.39px
+                          ),
                         ),
                       ),
-                      widthSpace(18.87),
+                      widthSpace(20),
                     ],
                   ),
                 ),

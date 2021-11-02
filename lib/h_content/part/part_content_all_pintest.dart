@@ -1,3 +1,5 @@
+// 모든 콘텐츠 > 메인 화면
+
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
@@ -45,7 +47,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
       if (!loading && cache.length == 0) {
         return Container(
           child: Center(
-            child: Text('아이템이 없습니다'),
+            child: Text('아이템이 없습니다'), // TODO : [SH] 현재 번역하지 않음.
           ),
         );
       }
@@ -81,17 +83,20 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
 
           //SUBJECT: 콘텐츠 아이템
           //TODO
-          return ContentGridItemWidget(
-            title: item.info.contentsTitle,
-            // imgUrl: item.info.contentsImages,
-            imgUrl: item.info.thumbnails,
-            contentText: item.info.contentsTitle,
-            onTap: () {},
+          return Container(
+            padding: EdgeInsets.only(top: 6.0),
+            child: ContentGridItemWidget(
+              title: item.info.contentsTitle,
+              imgUrl: item.info.contentsImages,
+              // imgUrl: item.info.thumbnails,
+              contentText: item.info.contentsTitle,
+              onTap: () {},
 
-            onMore: () {
-              debugPrint('======> Show BS');
-              _showBS(context, vwBoardMenu(context, item));
-            },
+              onMore: () {
+                debugPrint('======> Show BS');
+                _showBS(context, vwBoardMenu(context, item));
+              },
+            ),
           );
         },
         staggeredTileBuilder: (int index) =>
