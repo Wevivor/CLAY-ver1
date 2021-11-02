@@ -18,7 +18,7 @@ class PushListUI extends StatelessWidget with AppbarHelper {
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: AppBar(
-            automaticallyImplyLeading: false,
+            automaticallyImplyLeading: true,
             elevation: 0.0,
             leading: IconButton(
                 icon: Icon(Icons.chevron_left),

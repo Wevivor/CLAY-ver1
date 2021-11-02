@@ -8,7 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class RemindController extends AbsItemController with FbCommonModule {
-  static String MENU_POS = 'etc/remind/alarm';
+  // static String MENU_POS = 'etc/remind/alarm';
+  static String MENU_POS = 'etc/messages/remind_alarm';
   late FirebaseFirestore _instance;
   Remind? remindItem;
   DateTime? date;

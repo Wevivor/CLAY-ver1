@@ -9,7 +9,8 @@ import 'package:get/get.dart';
 
 class RemindListController extends AbsListController
     with FbCommonModule, ElCommonModule {
-  static String MENU_POS = 'etc/remind/alarm';
+  // static String MENU_POS = 'etc/remind/alarm';
+  static String MENU_POS = 'etc/messages/remind_alarm';
   late dynamic _instance;
 
   RemindListController({
