@@ -30,10 +30,12 @@ class SearchHan<T> extends SearchDelegate<String> {
         // labelStyle:,
         focusColor: Colors.red,
         border: InputBorder.none,
-        contentPadding:
-            EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+        contentPadding: EdgeInsets.zero,
+        // EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
       ),
-      appBarTheme: theme.appBarTheme.copyWith(titleSpacing: 0.0),
+      appBarTheme: theme.appBarTheme.copyWith(
+        titleSpacing: 0.0,
+      ),
       //SUBJECT: 텍스트 스타일.
       textTheme: theme.textTheme.copyWith(
         headline6: TextStyle(
@@ -46,8 +48,11 @@ class SearchHan<T> extends SearchDelegate<String> {
   }
 
   @override
-  Widget buildLeading(BuildContext context) {
-    return Container();
+  Widget? buildLeading(BuildContext context) {
+    return Text(
+      'tesing...',
+      style: TextStyle(color: Colors.black),
+    );
   }
   // AnimatedSwitcher(
   //       duration: const Duration(milliseconds: 500),

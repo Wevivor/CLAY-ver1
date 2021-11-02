@@ -2,9 +2,13 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/c_page/bott_navi_controller.dart';
+import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/part/part_board_list.dart';
 import 'package:clay/h_search/part_search/part_search.dart';
+import 'package:clay/h_search/part_search/src/cupertino_search_delegate.dart';
+import 'package:clay/h_search/part_search/src/platform_search.dart';
+import 'package:clay/h_search/part_search/src/wgt_search_result.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -37,6 +41,14 @@ class _BoardUIState extends State<BoardUI>
     super.dispose();
   }
 
+  Future<void> search(String text) async {
+    FindController.to.cache.clear();
+    if (text.isNotEmpty)
+      await FindController.to.fetchItems(term: text);
+    else
+      FindController.to.update();
+  }
+
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
@@ -63,45 +75,14 @@ class _BoardUIState extends State<BoardUI>
                   onTap: () async {
                     final _controller = Get.put(FindController());
                     _controller.cache.clear();
-                    _controller.fetchItems();
-                    Get.toNamed('/search');
-
-                    // final _controller =
-                    //             Get.put(SearchKeyWordListController());
-                    FindController.to.searchWord = '';
-
-                    // Get.put(SearchKeyWordListController());
-                    final result = await showSearch<String>(
-                      context: context,
-                      delegate: SearchHan(FindController.to.searchWord.isEmpty
-                          ? '검색'
-                          : FindController.to.searchWord),
-                    );
                     //SUBJECT: 검색
-                    //TODO : 검색어 조건 설정
-                    // FindController.to.searchWord = result ?? '';
-                    // FindController.to.cache.clear();
+                    //TODO : 새로 만든 검색
 
-                    // await FindController.to.fetchItems(term: result);
-                    // FindController.to.update();
-
-                    //SUBJECT: 검색.후보
-                    //TODO
-
-                    // final _controller = Get.put(SearchKeyWordListController());
-                    // final result = await showSearch<String>(
-                    //   context: context,
-                    //   delegate: SearchHan(FindController.to.searchWord.isEmpty
-                    //       ? '검색'
-                    //       : FindController.to.searchWord),
-                    // );
-                    // //SUBJECT: 검색
-                    // //TODO : 검색어 조건 설정
-                    // FindController.to.searchWord = result ?? '';
-                    // FindController.to.cache.clear();
-
-                    // await FindController.to.fetchItems(term: result);
-                    // FindController.to.update();
+                    final _item = await showPlatformSearch(
+                      context: context,
+                      delegate: CupertinoSearchDelegate(search),
+                    );
+                    // if (_item != null) debugPrint(_item.toString());
                   },
                   holder: 'assets/icon/search.png'),
               widthSpace(10.0),

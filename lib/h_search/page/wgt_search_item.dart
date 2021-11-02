@@ -12,12 +12,14 @@ class SearchItemWidget extends StatelessWidget {
   final contentText; // 내용
   final imgUrl;
   final holder; // 이미지 URL
+  final onTap;
   SearchItemWidget({
     this.title,
     this.date,
     this.contentText,
     this.imgUrl,
     this.holder = 'images/no_image.png',
+    this.onTap,
   });
   final titleStyle = TextStyle(
     fontFamily: 'Roboto',
@@ -46,10 +48,17 @@ class SearchItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return HanListTile(
+      onTap: () {
+        if (onTap != null) onTap();
+      },
       padding: EdgeInsets.only(top: 17.0, bottom: 14.0),
       title: Container(
         height: 92,
-        child: searchItemTitle(),
+        child: Column(
+          children: [
+            searchItemTitle(),
+          ],
+        ),
       ),
       trailing: Container(
         alignment: Alignment.topLeft,

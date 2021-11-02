@@ -1,5 +1,6 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_search/part_search/part_search.dart';
 import 'package:flutter/cupertino.dart';
@@ -14,7 +15,10 @@ import 'wgt_search_item.dart';
 
 // ignore: must_be_immutable
 class SearchInitPART extends StatelessWidget {
-  SearchInitPART();
+  final parentContext;
+  final delegate;
+
+  SearchInitPART({this.parentContext, this.delegate});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +28,7 @@ class SearchInitPART extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.only(left: 10.0, right: 20.0),
       child: HanListView(
+        noItem: Container(),
         controller: FindController.to,
         isSliver: false,
         direction: Axis.vertical,
@@ -35,38 +40,21 @@ class SearchInitPART extends StatelessWidget {
           //SUBJECT:보드 만들기
           //TODO : 보드 위젯 이후에 작업
 
-          return Column(
-            children: [
-              // TODO : [SH] holder 이미지 요청 84 * 84
-              SearchItemWidget(
-                holder: Const.assets + 'images/smpl_list1.png',
-                title: item.info.contentsTitle,
-                date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
-                contentText: item.info.contentsDescription,
-                imgUrl: item.info.thumbnails,
-              ),
-              Divider(
-                height: 0,
-                thickness: 0.5,
-                color: Color(0xFFDEDEDE),
-              )
-            ],
+          return Material(
+            child: SearchItemWidget(
+              onTap: () {
+                Get.to(() =>
+                    PostSUB(item: item, parentController: FindController.to));
+                // delegate.close(parentContext, item);
+              },
+              holder: Const.assets + 'images/smpl_list1.png',
+              title: item.info.contentsTitle,
+              date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
+              contentText: item.info.contentsDescription,
+              imgUrl: item.info.thumbnails,
+            ),
           );
         },
-      ),
-    );
-  }
-
-  Widget getSearchField() {
-    // String text = getStringValue(LanguageKey.searchForPhotos, context);
-    return Container(
-      decoration: new BoxDecoration(
-        // color: themeData.backgroundColor,
-        borderRadius: BorderRadius.all(Radius.circular(4.0)),
-        border: Border.all(
-          width: 1.2,
-          // color: themeData.colorScheme.surface,
-        ),
       ),
     );
   }

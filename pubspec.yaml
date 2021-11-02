@@ -60,6 +60,8 @@ dependencies:
   material_design_icons_flutter: ^5.0.5955-rc.1
 
   # 화면 관련 --------------
+  # fluent_ui: ^1.8.1
+  fluent_ui: ^3.4.0
   fluttertoast: ^8.0.1-nullsafety.0
   image: ^3.0.2
   image_picker: ^0.8.4+3
