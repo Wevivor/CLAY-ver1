@@ -4,17 +4,28 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/h_account/controllers/remind_controller.dart';
+import 'package:clay/h_account/controllers/remind_list_controller.dart';
+import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
+import 'package:clay/h_board/part_bs/part_bs.dart';
+import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
+import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sprintf/sprintf.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:share/share.dart' as share;
 
 class PostSUB extends StatefulWidget {
   // final PostInfo? item;
   final Contents item;
   final parentController;
-  PostSUB({required this.item, required this.parentController});
+  PostSUB({
+    required this.item,
+    required this.parentController,
+  });
   @override
   _PostSUBState createState() => _PostSUBState();
 }
@@ -24,10 +35,13 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     ContentsController(),
   );
 
+  late bool isEdit;
+
   late int _listType = 2;
   @override
   void initState() {
     super.initState();
+    isEdit = true;
     if (widget.item.info.contentsType == 'link')
       _listType = 0;
     else if (widget.item.info.contentsType == 'photo') _listType = 1;
@@ -61,66 +75,26 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
           icon: Icon(Icons.chevron_left),
         ),
         actions: [
-          Container(
-            alignment: Alignment.center,
-            // color: Colors.red,
-            child: InkWell(
-              onTap: () async {
-                FocusScope.of(context).unfocus();
-                final _title = ContentsController.to.titleController.text;
-
-                if (postTitle(_title) != null || _title.isEmpty) {
-                  AppHelper.showMessage(messages['post_title'] ?? '');
-                  return;
-                }
-                var _info;
-
-                switch (_listType) {
-                  case 0:
-                  case 1:
-                    final _comment =
-                        ContentsController.to.commentController.text;
-
-                    if (comment(_comment) != null || _comment.isEmpty) {
-                      AppHelper.showMessage(messages['comment'] ?? '');
-                      return;
-                    }
-                    _info = widget.item.info.copyWith(
-                      contentsTitle: _title,
-                      contentsComment: _comment,
-                    );
-
-                    break;
-
-                  case 2:
-                    _info = widget.item.info.copyWith(
-                      contentsTitle: _title,
-                    );
-
-                    break;
-                }
-
-                //SUBJECT: 컨텐츠
-                //TODO: 컨텐츠 수정하기
-
-                await _contentsController.actionUpdateInfo(
-                  id: widget.item.contentsId,
-                  info: _info.toDto(),
-                );
-                widget.parentController
-                    .actionUpdateItem(widget.item.copyWith(info: _info));
-
-                Get.back();
-              },
-              child: Text(
-                '완료',
-                style: baseStyle.copyWith(
-                    fontSize: 13,
-                    color: Color(0xff017BFE),
-                    fontWeight: FontWeight.w400),
-              ),
-            ),
-          ),
+          if (isEdit)
+            ImageButton(
+                height: 24.46,
+                width: 24.58,
+                onTap: () => _actionSubmit(context),
+                holder: 'assets/icon/addboard_check.png'),
+          if (!isEdit)
+            ImageButton(
+                height: 24.46,
+                width: 24.58,
+                onTap: () => setState(() => isEdit = true),
+                holder: 'assets/icon/remind_pencil.png'),
+          ImageButton(
+              height: 12.23,
+              width: 24.58,
+              onTap: () => _showBS(
+                    context,
+                    vwBoardMenu(context, widget.item),
+                  ),
+              holder: Const.assets + 'icon/dot_vertical_black.png'),
           widthSpace(18.87),
         ],
       ),
@@ -132,6 +106,52 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     );
   }
 
+  Future<void> _actionSubmit(BuildContext context) async {
+    FocusScope.of(context).unfocus();
+    final _title = ContentsController.to.titleController.text;
+
+    if (postTitle(_title) != null || _title.isEmpty) {
+      AppHelper.showMessage(messages['post_title'] ?? '');
+      return;
+    }
+    var _info;
+
+    switch (_listType) {
+      case 0:
+      case 1:
+        final _comment = ContentsController.to.commentController.text;
+
+        if (comment(_comment) != null || _comment.isEmpty) {
+          AppHelper.showMessage(messages['comment'] ?? '');
+          return;
+        }
+        _info = widget.item.info.copyWith(
+          contentsTitle: _title,
+          contentsComment: _comment,
+        );
+
+        break;
+
+      case 2:
+        _info = widget.item.info.copyWith(
+          contentsTitle: _title,
+        );
+
+        break;
+    }
+
+    //SUBJECT: 컨텐츠
+    //TODO: 컨텐츠 수정하기
+
+    await _contentsController.actionUpdateInfo(
+      id: widget.item.contentsId,
+      info: _info.toDto(),
+    );
+    widget.parentController.actionUpdateItem(widget.item.copyWith(info: _info));
+
+    Get.back();
+  }
+
   Widget vwMemo(BuildContext context) {
     // Get.put(ContentCtgListController());
     final node = FocusScope.of(context);
@@ -139,6 +159,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     return Column(
       children: [
         vwTitle('Title'),
+        widthSpace(18.74),
         heightSpace(2.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
@@ -318,126 +339,148 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     );
   }
 
-  Widget appLink(BuildContext context) {
+  Widget appLinkTitle() {
     final node = FocusScope.of(context);
-
-    return Column(
-      children: [
-        vwTitle('Title'),
-        heightSpace(2.0),
-        Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Container(
-            height: 38,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
-            child: TextFormField(
-              maxLines: 1,
-              onTap: () {},
-
-              // style: accountEditTextStyle,
-              decoration: kInputDecoration.copyWith(
-                fillColor: Color(0xFFF6F6F6),
-                hintText: '스타트업 코딩 페스티벌 ',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
-                isDense: true,
-                errorText: null,
-                errorStyle: TextStyle(
-                  color: Colors.transparent,
-                  fontSize: 0,
-                  height: 0,
-                ),
-              ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.done,
-              onEditingComplete: () => node.unfocus(),
-              controller: ContentsController.to.titleController,
-              validator: (value) {
-                return postTitle(value);
-              },
-            ),
-          ),
-        ),
-        heightSpace(10.0),
-        vwTitle('Comment'),
-        heightSpace(2.0),
-        Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: Container(
-            height: 38,
-            decoration: DecoHelper.roundDeco.copyWith(
-              color: Color(0xFFF6F6F6),
-            ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
-            child: TextFormField(
-              maxLines: 1,
-              onTap: () {},
-
-              // style: accountEditTextStyle,
-              decoration: kInputDecoration.copyWith(
-                fillColor: Color(0xFFF6F6F6),
-                hintText: '코딩 페스티벌 참여 신청',
-                hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
-                isDense: true,
-                errorText: null,
-                errorStyle: TextStyle(
-                  color: Colors.transparent,
-                  fontSize: 0,
-                  height: 0,
-                ),
-              ),
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.done,
-              onEditingComplete: () => node.unfocus(),
-              controller: ContentsController.to.commentController,
-              validator: (value) {
-                return comment(value);
-              },
-            ),
-          ),
-        ),
-        heightSpace(15.0),
-        Container(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
+    return Container(
+      child: Column(
+        children: [
+          Row(
             children: [
-              ImageWidget(
-                height: 13.5,
-                width: 14.06,
-                holder: Const.assets + 'icon/icon_share.png',
-              ),
-              Text(
-                widget.item.info.contentsUrl ?? '',
-                style: baseStyle.copyWith(
-                  color: Color(0xFF707070),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  decoration: TextDecoration.underline,
-                  decorationStyle: TextDecorationStyle.solid,
-                ),
-              ),
-              widthSpace(14.0),
+              vwTitle('Title'),
+              Expanded(child: Container()),
+              ImageButton(
+                  height: 24.46,
+                  width: 24.58,
+                  onTap: () {
+                    setState(() => isEdit = false);
+                  },
+                  holder: 'assets/icon/arror_up.png'),
+              widthSpace(18.74),
             ],
           ),
-        ),
+          heightSpace(2.0),
+          Padding(
+            padding: EdgeInsets.only(left: 19.0, right: 19.0),
+            child: Container(
+              height: 38,
+              decoration: DecoHelper.roundDeco.copyWith(
+                color: Color(0xFFF6F6F6),
+              ),
+              padding: const EdgeInsets.only(
+                left: 12.0,
+                right: 16.0,
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                onTap: () {},
+
+                // style: accountEditTextStyle,
+                decoration: kInputDecoration.copyWith(
+                  fillColor: Color(0xFFF6F6F6),
+                  hintText: '스타트업 코딩 페스티벌 ',
+                  hintStyle: baseStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Color(
+                        0xFFCACACA,
+                      )),
+                  isDense: true,
+                  errorText: null,
+                  errorStyle: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 0,
+                    height: 0,
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () => node.unfocus(),
+                controller: ContentsController.to.titleController,
+                validator: (value) {
+                  return postTitle(value);
+                },
+              ),
+            ),
+          ),
+          heightSpace(10.0),
+          vwTitle('Comment'),
+          heightSpace(2.0),
+          Padding(
+            padding: EdgeInsets.only(left: 19.0, right: 19.0),
+            child: Container(
+              height: 38,
+              decoration: DecoHelper.roundDeco.copyWith(
+                color: Color(0xFFF6F6F6),
+              ),
+              padding: const EdgeInsets.only(
+                left: 12.0,
+                right: 16.0,
+              ),
+              child: TextFormField(
+                maxLines: 1,
+                onTap: () {},
+
+                // style: accountEditTextStyle,
+                decoration: kInputDecoration.copyWith(
+                  fillColor: Color(0xFFF6F6F6),
+                  hintText: '코딩 페스티벌 참여 신청',
+                  hintStyle: baseStyle.copyWith(
+                      fontSize: 14,
+                      fontWeight: FontWeight.normal,
+                      color: Color(
+                        0xFFCACACA,
+                      )),
+                  isDense: true,
+                  errorText: null,
+                  errorStyle: TextStyle(
+                    color: Colors.transparent,
+                    fontSize: 0,
+                    height: 0,
+                  ),
+                ),
+                keyboardType: TextInputType.text,
+                textInputAction: TextInputAction.done,
+                onEditingComplete: () => node.unfocus(),
+                controller: ContentsController.to.commentController,
+                validator: (value) {
+                  return comment(value);
+                },
+              ),
+            ),
+          ),
+          heightSpace(15.0),
+          Container(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                ImageWidget(
+                  height: 13.5,
+                  width: 14.06,
+                  holder: Const.assets + 'icon/icon_share.png',
+                ),
+                Text(
+                  widget.item.info.contentsUrl ?? '',
+                  style: baseStyle.copyWith(
+                    color: Color(0xFF707070),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                    decoration: TextDecoration.underline,
+                    decorationStyle: TextDecorationStyle.solid,
+                  ),
+                ),
+                widthSpace(14.0),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget appLink(BuildContext context) {
+    return Column(
+      children: [
+        if (isEdit) appLinkTitle(),
         Expanded(
           child: Container(
             child: buildWebview(context, widget.item.info.contentsUrl),
@@ -499,5 +542,178 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
       ),
     );
+  }
+
+  Widget vwBoardMenu(BuildContext context, Contents item) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: <Widget>[
+        heightSpace(2.0),
+        Container(
+            alignment: Alignment.bottomCenter,
+            height: 11,
+            child: Image.asset(Const.assets + 'images/rect_40.png')),
+        heightSpace(34),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () => _actionBSFixed(context, item),
+          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
+          title: item.info.contentsFixed == true ? Text('상단해제') : Text('상단고정'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () => _actionBSShare(context, item),
+          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
+          title: Text('공유'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () => _actionBSRemindAlarm(context, item),
+          leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
+          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () => _actionBSBoardChange(context, item),
+          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
+          title: Text('보드변경'),
+        ),
+        HanListTile(
+          padding: EdgeInsets.only(
+            left: 19.0,
+            bottom: 26.17,
+          ),
+          onTap: () => _actionBSDelete(context, item),
+          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
+          title: Text('삭제'),
+        ),
+      ],
+    );
+  }
+//SUBJECT : BS: 상단 고정
+  //TODO: 데이터베이스고정.
+
+  Future<void> _actionBSFixed(BuildContext context, item) async {
+    final _contentsCtl = Get.put(ContentsController());
+    _contentsCtl.contentsItem = item;
+    final _fixed = item.info.contentsFixed;
+    await _contentsCtl.actionPin(fix: !_fixed!);
+    Get.back();
+
+    Future.microtask(() async {
+      ContentAllListController.to.cache.clear();
+      await ContentAllListController.to.fetchItems();
+    });
+  }
+
+  //SUBJECT: 링크
+  //TODO: 수정해야 함.
+  Future<void> _actionBSShare(BuildContext context, item) async {
+    Get.back();
+    final _boardUrl = sprintf('%s/%s', [Const.clayBaseUrl, item.contentsId]);
+    await share.Share.share(_boardUrl);
+  }
+
+  //SUBJECT : BS: 리마인드 알림 설정
+  //TODO: 작업범위 여부 고민
+  void _actionBSRemindAlarm(BuildContext context, item) {
+    Get.back();
+    Get.lazyPut(() => ContentsController());
+    Get.lazyPut(() => RemindListController());
+    Get.lazyPut(() => RemindController());
+    RemindController.to.init();
+    _showBS(
+        context,
+        BottomSheetCalendar(
+            contents: item,
+            onMenu: () {
+              _showBS(context, vwBoardMenu(context, item));
+            }));
+  }
+
+  //SUBJECT : BS: 보드 변경
+  Future<void> _actionBSBoardChange(BuildContext context, item) async {
+    Get.back();
+    // Get.put(ContentListController());
+    final _controller = Get.put(BoardListMySelectController());
+    _controller.cache.clear();
+    _controller.selected = -1;
+    _controller.fetchItems();
+    _showBS(
+        context,
+        BottomSheetBoardChange(
+          parentContext: context,
+          onDone: () {
+            Get.lazyPut(() => ContentAllListController());
+            ContentAllListController.to.actionDelteItem(item.contentsId ?? '');
+          },
+          onMenu: () {
+            _showBS(context, vwBoardMenu(context, item));
+          },
+          current: item,
+        ));
+  }
+
+  //SUBJECT : BS: 컨테츠 삭제
+  Future<void> _actionBSDelete(BuildContext context, item) async {
+    Get.back();
+    Get.lazyPut(() => ContentAllListController());
+    var _responce = false;
+    await DialogHelper.MessageDialog(
+      context,
+      (context) => DeleteDialog(
+        title: '보드를 삭제하시겠습니까?',
+        deleteTitle: '삭제',
+        okTitle: '취소',
+        okTap: () {
+          _responce = false;
+        },
+        deleteTap: () {
+          _responce = true;
+        },
+      ),
+    );
+    if (_responce) {
+      await ContentAllListController.to.actionDelete(item.info.contentsId);
+      ContentAllListController.to.actionDelteItem(item.info.contentsId ?? '');
+    }
+  }
+
+  void _showBS(context, child) {
+    showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        // barrierColor: Colors.red,
+        backgroundColor: Colors.white,
+        context: context,
+        builder: (BuildContext buildContext) {
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays(250);
+
+              return Future.value(true);
+            },
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Wrap(
+                children: [child],
+              ),
+            ),
+          );
+        });
   }
 }
