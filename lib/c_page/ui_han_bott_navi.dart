@@ -184,21 +184,23 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           child: Image.asset(Const.assets + 'images/rect_40.png'),
         ),
         AppBar(
-          toolbarHeight: 35,
+          toolbarHeight: 45,
           elevation: 0.0,
           leading: null,
           automaticallyImplyLeading: false,
-          title: Container(
-            height: 35,
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              'board.bs.appbar.title.addItem'.tr,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                height: 1.17, // line height : 21.09px
-                color: Colors.black,
-              ),
+          title: Text(
+            'board.bs.appbar.title.addItem'.tr,
+            style: TextStyle(
+              fontFamily:
+                  Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+              fontSize: 18,
+              color: Color(0xFF000000),
+              fontWeight: Get.locale?.languageCode == 'ko'
+                  ? FontWeight.w700
+                  : FontWeight.w900,
+              height: Get.locale?.languageCode == 'ko'
+                  ? 1.17
+                  : 1.37, // 21.09px, 24.59px
             ),
           ),
           centerTitle: true,

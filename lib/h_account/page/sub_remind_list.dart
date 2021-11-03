@@ -1,3 +1,4 @@
+// Account > 리마인드 알림 설정
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
@@ -20,9 +21,15 @@ import 'package:sprintf/sprintf.dart';
 class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
   final _formKey = GlobalKey<FormState>();
   final tileTitleStyle = baseStyle.copyWith(
-      fontSize: 13,
-      color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
-      fontWeight: FontWeight.normal);
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+    fontSize: 12,
+    color: Get.locale?.languageCode == 'ko'
+        ? Color(0xFF000000)
+        : Color(0xFF353535),
+    fontWeight:
+        Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w800,
+    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 14.06px, 16.39px
+  );
   final titleStyle = baseStyle.copyWith(
       fontSize: 12,
       color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
@@ -61,18 +68,28 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
-    final profileHeight = 60.0;
+    MySize().init(context);
+    final appbarHeight = 0 + kToolbarHeight;
     return Scaffold(
       backgroundColor: getGrayBg(),
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(profileHeight),
+        preferredSize: Size.fromHeight(appbarHeight),
         child: AppBar(
-          elevation: 0.0,
-          title: Text('리마인드 알림 관리',
-              style: baseStyle.copyWith(
-                  fontSize: 16,
-                  color: Color(0xff373737),
-                  fontWeight: FontWeight.normal)),
+          automaticallyImplyLeading: false,
+          elevation: 4.0,
+          shadowColor: Color.fromRGBO(0, 0, 0, 0.2),
+          title: Text(
+            'account.appbar.title.reminder'.tr,
+            style: appBarStyle.copyWith(
+                fontFamily:
+                    Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                fontSize: 18,
+                color: Colors.black,
+                fontWeight: FontWeight.w900,
+                height: Get.locale?.languageCode == 'ko'
+                    ? 1.17
+                    : 1.37), // 21.09px, 24.59px
+          ),
           centerTitle: true,
           leading: InkWell(
             onTap: () {
@@ -99,14 +116,15 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
         child: Column(
           children: [
             Container(
-              color: getGrayBg(),
+              //color: getGrayBg(),
+              color: Color.fromRGBO(246, 246, 246, 0.7),
               padding:
-                  EdgeInsets.only(left: 20, right: 20.0, top: 17, bottom: 17),
+                  EdgeInsets.only(left: 19, right: 20.0, top: 18, bottom: 17),
               child: Container(
                 child: HanListTile(
                   padding: EdgeInsets.zero,
                   leading: Text(
-                    '설정된 알림 리스트 ',
+                    'account.setting.reminder.title.list'.tr,
                     style: tileTitleStyle,
                   ),
                   // trailing: Icon(MdiIcons.chevronRight),
@@ -117,7 +135,6 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
               return Expanded(
                 child: Container(
                   color: getBg(),
-                  // padding: const EdgeInsets.only(left: 2.0, right: 2.0),
                   child: HanListView(
                     controller: controller,
                     isSliver: false,
@@ -134,65 +151,100 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                       return Column(children: [
                         HanListTile(
                           padding: EdgeInsets.only(
-                              top: 16, left: 16, bottom: 16, right: 16),
+                              top: 8, left: 16, bottom: 0, right: 16),
                           leading: Container(
                             padding: EdgeInsets.only(
-                                left: 3, top: 12, right: 3, bottom: 12),
-                            color: Color(0xfff6f6f6),
+                                left: 3, top: 12, right: 2, bottom: 12),
+                            decoration: BoxDecoration(
+                              color: Color(0xFFF6F6F6),
+                              shape: BoxShape.rectangle,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                            ),
                             width: 52,
+                            height: 50,
+                            // TODO : [SH] 시간 형식을 다시 정리해야 함. 한글 : 10월07일\n5:35 PM, 영문 : Oct. 7th\n5:35 PM
                             child: Text(
                               Jiffy(item.rAlarmTime).format('MM월dd일 hh:mm a'),
+                              textAlign: TextAlign.center,
                               style: baseStyle.copyWith(
                                 fontSize: 11,
-                                fontWeight: FontWeight.w500,
-                                color: Color(0xff191919),
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                                height: 1.17, // 12.89px
                               ),
                             ),
                           ),
-                          title: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item.title ?? '',
-                                style: baseStyle.copyWith(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff191919),
-                                ),
+                          title: Expanded(
+                            child: Container(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    item.title ?? '',
+                                    style: baseStyle.copyWith(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xFF000000),
+                                      height: 1.17, // 15.23px
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                  heightSpace(5.0),
+                                  Text(
+                                    item.contentsInfo.contentsTitle ?? '',
+                                    style: baseStyle.copyWith(
+                                      fontSize: 10,
+                                      fontWeight: FontWeight.w400,
+                                      color: Color(0xFF707070),
+                                      height: 1.17, // 11.72px
+                                    ),
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 1,
+                                  ),
+                                ],
                               ),
-                              heightSpace(5.0),
-                              Text(
-                                item.contentsInfo.contentsTitle ?? '',
-                                style: baseStyle.copyWith(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w500,
-                                  color: Color(0xff191919),
-                                ),
-                              ),
-                            ],
+                            ),
+                            flex: 15,
                           ),
                           trailing: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              ImageButton(
+                              InkWell(
                                 // onTap: () async {
                                 //   await _actionSelect(context, item);
                                 // },
+
                                 onTap: () => _actionSelect(context, item),
-                                width: 30,
-                                height: 30,
-                                holder: Const.assets + 'icon/icon_alarm.png',
+
+                                child: reminderButton(
+                                  iconUrl: 'icon/icon_alarm.png',
+                                ),
                               ),
                               widthSpace(8.0),
-                              ImageButton(
+
+                              InkWell(
                                 // onTap: () async {
                                 //   await _actionDelete(context, item);
                                 // },
+
                                 onTap: () => _actionDelete(context, item),
-                                width: 30,
-                                height: 30,
-                                holder: Const.assets + 'icon/icon_close.png',
+
+                                child: reminderButton(
+                                  iconUrl: 'icon/icon_close.png',
+                                ),
                               ),
+
+                              // ImageButton(
+                              //   // onTap: () async {
+                              //   //   await _actionDelete(context, item);
+                              //   // },
+                              //   onTap: () => _actionDelete(context, item),
+                              //   width: 30,
+                              //   height: 30,
+                              //   holder: Const.assets + 'icon/icon_close.png',
+                              // ),
                             ],
                           ),
                         ),
@@ -276,5 +328,34 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
             // ),
           );
         });
+  }
+}
+
+class reminderButton extends StatelessWidget {
+  final double height;
+  final double width;
+  final iconUrl;
+
+  reminderButton({
+    this.height = 20,
+    this.width = 20,
+    this.iconUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+        height: 30,
+        width: 30,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Color(0xFFF6F6F6),
+        ),
+        child: Image.asset(
+          Const.assets + iconUrl,
+          width: width,
+          height: height,
+          fit: BoxFit.none,
+        ));
   }
 }

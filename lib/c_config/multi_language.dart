@@ -103,7 +103,9 @@ class MultiLanguage extends Translations {
           // --- Account : 메인 화면
           'account.appbar.title.account': 'Account',
           'account.body.subtitle.tutorial': 'Get started',
-          'account.body.tutorials.title': 'How to share my contents',
+          'account.body.tutorials.title1': 'CLAY Introduction',
+          'account.body.tutorials.title2': 'How to collect more easily',
+          'account.body.tutorials.title3': 'How to share with my friends',
           'account.body.subtitle.notice': 'Announcements',
           'account.body.subtitle.setting': 'Settings',
           'account.body.subtitle.help': 'Report an issue / Help',
@@ -130,14 +132,17 @@ class MultiLanguage extends Translations {
           'account.sub.setting.subtitle.reminder': 'Manage Reminder',
           'account.appbar.title.setting': 'Setting',
 
-          // --- Account : 리마인드 알림 관리
+          // --- Account : 리마인드 알림 관리, 리마인드 문구 설정
           'account.appbar.title.reminder': 'Manage reminder',
           'account.setting.reminder.title.reminder': 'Customize notice',
           'account.setting.reminder.custom.text': 'Be sure to check! Su-min!',
-          'account.setting.reminder.custom.subtext': 'Preview',
+          'account.setting.reminder.custom.subtext':
+              'Be sure to check! Su-min!',
+          'account.setting.reminder.custom.subtext1': 'Preview',
+          'account.setting.reminder.custom.subtext2': '[Title of content]',
           'account.setting.reminder.title.list': 'List',
           'account.setting.reminder.dlg.question': 'Delete Alarm?',
-          'account.setting.reminder.btn.save': 'save',
+          'account.setting.reminder.btn.save': 'Save',
         },
         'ko': {
           // --- Common : 전체 앱 페이지에서 여러 번 사용 되는 문구 및 단어.
@@ -235,7 +240,9 @@ class MultiLanguage extends Translations {
           // --- Account : 메인 화면
           'account.appbar.title.account': 'Account',
           'account.body.subtitle.tutorial': '튜토리얼',
-          'account.body.tutorials.title': '내 콘텐츠를 쉽게 공유하기',
+          'account.body.tutorials.title1': 'CLAY Introduction',
+          'account.body.tutorials.title2': '내 콘텐츠를 쉽게 공유하기',
+          'account.body.tutorials.title3': '그룹 기능 활용하기',
           'account.body.subtitle.notice': '공지사항',
           'account.body.subtitle.setting': '설정',
           'account.body.subtitle.help': '문의하기/도움말',
@@ -260,11 +267,14 @@ class MultiLanguage extends Translations {
           'account.sub.setting.subtitle.reminder': '리마인드 문구 설정',
           'account.appbar.title.setting': '설정',
 
-          // --- Account : 리마인드 알림 관리
-          'account.appbar.title.reminder': '리마인드 알림 관리',
+          // --- Account : 리마인드 알림 관리, 리마인드 문구 설정
+          'account.appbar.title.reminder': '리마인드 알림 설정',
           'account.setting.reminder.title.reminder': '알림 문구 커스텀',
-          'account.setting.reminder.custom.text': '꼭 확인해! 수민!',
-          'account.setting.reminder.custom.subtext': '미리보기',
+          'account.setting.reminder.custom.text':
+              "'꼭 확인해!'와 같은 나만의 문구를 입력해 주세요.",
+          'account.setting.reminder.custom.subtext': '꼭 확인해!',
+          'account.setting.reminder.custom.subtext1': '미리보기',
+          'account.setting.reminder.custom.subtext2': '[콘텐츠 이름]',
           'account.setting.reminder.title.list': '설정된 알림 리스트',
           'account.setting.reminder.dlg.question': '알람을 삭제하시겠어요?',
           'account.setting.reminder.btn.save': '확인',
