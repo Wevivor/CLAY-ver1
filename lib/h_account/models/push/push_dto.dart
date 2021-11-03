@@ -14,11 +14,11 @@ class PushDto with _$PushDto {
   factory PushDto({
     String? id,
     required String kind,
-    String? postId,
+    @JsonKey(name: 'contents_id') String? contentsId,
     required ProfileDto? from,
     required ProfileDto? to,
     PushMessageDto? message,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+    @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime dtCreated,
     // List<Comment>? comments;
   }) = _PushDto;
@@ -29,7 +29,7 @@ class PushDto with _$PushDto {
   Push toDomain() => Push(
         id: id,
         kind: kind,
-        postId: postId,
+        contentsId: contentsId,
         message: message?.toDomain(),
         dtCreated: dtCreated,
         from: from?.toDomain(),
@@ -43,9 +43,9 @@ class PushMessageDto with _$PushMessageDto {
   factory PushMessageDto({
     int? cnt,
     String? content,
-    String? imageUrl,
+    @JsonKey(name: 'image_url') String? imageUrl,
     String? title,
-    @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+    @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime dtCreated,
   }) = _PushMessageDto;
   PushMessageDto._();

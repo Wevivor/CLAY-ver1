@@ -11,7 +11,7 @@ class Push with _$Push {
   factory Push({
     String? id,
     required String kind,
-    String? postId,
+    String? contentsId,
     Profile? from,
     Profile? to,
     PushMessage? message,
@@ -22,7 +22,7 @@ class Push with _$Push {
   PushDto toDto() => PushDto(
         id: id,
         kind: kind,
-        postId: postId,
+        contentsId: contentsId,
         message: message?.toDto(),
         from: from?.toDto(),
         to: to?.toDto(),

@@ -36,9 +36,10 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
             ImageButton(
                 height: 17.0,
                 width: 15.0,
-                onTap: () {
+                onTap: () async {
                   final _controller = Get.put(PushListController());
-                  _controller.fetchItems();
+                  _controller.cache.clear();
+                  await _controller.fetchItems();
                   Get.toNamed('/push_list');
                 },
                 holder: 'assets/icon/ph_bell-ringing.png'),

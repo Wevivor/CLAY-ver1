@@ -24,16 +24,17 @@ class _$PushDtoTearOff {
   _PushDto call(
       {String? id,
       required String kind,
-      String? postId,
+      @JsonKey(name: 'contents_id')
+          String? contentsId,
       required ProfileDto? from,
       required ProfileDto? to,
       PushMessageDto? message,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime dtCreated}) {
     return _PushDto(
       id: id,
       kind: kind,
-      postId: postId,
+      contentsId: contentsId,
       from: from,
       to: to,
       message: message,
@@ -53,11 +54,15 @@ const $PushDto = _$PushDtoTearOff();
 mixin _$PushDto {
   String? get id => throw _privateConstructorUsedError;
   String get kind => throw _privateConstructorUsedError;
-  String? get postId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_id')
+  String? get contentsId => throw _privateConstructorUsedError;
   ProfileDto? get from => throw _privateConstructorUsedError;
   ProfileDto? get to => throw _privateConstructorUsedError;
   PushMessageDto? get message => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
   DateTime get dtCreated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -72,11 +77,12 @@ abstract class $PushDtoCopyWith<$Res> {
   $Res call(
       {String? id,
       String kind,
-      String? postId,
+      @JsonKey(name: 'contents_id')
+          String? contentsId,
       ProfileDto? from,
       ProfileDto? to,
       PushMessageDto? message,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime dtCreated});
 
   $ProfileDtoCopyWith<$Res>? get from;
@@ -96,7 +102,7 @@ class _$PushDtoCopyWithImpl<$Res> implements $PushDtoCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? kind = freezed,
-    Object? postId = freezed,
+    Object? contentsId = freezed,
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
@@ -111,9 +117,9 @@ class _$PushDtoCopyWithImpl<$Res> implements $PushDtoCopyWith<$Res> {
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: postId == freezed
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
       from: from == freezed
           ? _value.from
@@ -176,11 +182,12 @@ abstract class _$PushDtoCopyWith<$Res> implements $PushDtoCopyWith<$Res> {
   $Res call(
       {String? id,
       String kind,
-      String? postId,
+      @JsonKey(name: 'contents_id')
+          String? contentsId,
       ProfileDto? from,
       ProfileDto? to,
       PushMessageDto? message,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime dtCreated});
 
   @override
@@ -204,7 +211,7 @@ class __$PushDtoCopyWithImpl<$Res> extends _$PushDtoCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? kind = freezed,
-    Object? postId = freezed,
+    Object? contentsId = freezed,
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
@@ -219,9 +226,9 @@ class __$PushDtoCopyWithImpl<$Res> extends _$PushDtoCopyWithImpl<$Res>
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: postId == freezed
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
       from: from == freezed
           ? _value.from
@@ -250,11 +257,12 @@ class _$_PushDto extends _PushDto {
   _$_PushDto(
       {this.id,
       required this.kind,
-      this.postId,
+      @JsonKey(name: 'contents_id')
+          this.contentsId,
       required this.from,
       required this.to,
       this.message,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.dtCreated})
       : super._();
 
@@ -266,7 +274,8 @@ class _$_PushDto extends _PushDto {
   @override
   final String kind;
   @override
-  final String? postId;
+  @JsonKey(name: 'contents_id')
+  final String? contentsId;
   @override
   final ProfileDto? from;
   @override
@@ -274,12 +283,15 @@ class _$_PushDto extends _PushDto {
   @override
   final PushMessageDto? message;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
   final DateTime dtCreated;
 
   @override
   String toString() {
-    return 'PushDto(id: $id, kind: $kind, postId: $postId, from: $from, to: $to, message: $message, dtCreated: $dtCreated)';
+    return 'PushDto(id: $id, kind: $kind, contentsId: $contentsId, from: $from, to: $to, message: $message, dtCreated: $dtCreated)';
   }
 
   @override
@@ -290,8 +302,9 @@ class _$_PushDto extends _PushDto {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.kind, kind) ||
                 const DeepCollectionEquality().equals(other.kind, kind)) &&
-            (identical(other.postId, postId) ||
-                const DeepCollectionEquality().equals(other.postId, postId)) &&
+            (identical(other.contentsId, contentsId) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsId, contentsId)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
             (identical(other.to, to) ||
@@ -309,7 +322,7 @@ class _$_PushDto extends _PushDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(kind) ^
-      const DeepCollectionEquality().hash(postId) ^
+      const DeepCollectionEquality().hash(contentsId) ^
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(to) ^
       const DeepCollectionEquality().hash(message) ^
@@ -330,11 +343,12 @@ abstract class _PushDto extends PushDto {
   factory _PushDto(
       {String? id,
       required String kind,
-      String? postId,
+      @JsonKey(name: 'contents_id')
+          String? contentsId,
       required ProfileDto? from,
       required ProfileDto? to,
       PushMessageDto? message,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime dtCreated}) = _$_PushDto;
   _PushDto._() : super._();
 
@@ -345,7 +359,8 @@ abstract class _PushDto extends PushDto {
   @override
   String get kind => throw _privateConstructorUsedError;
   @override
-  String? get postId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_id')
+  String? get contentsId => throw _privateConstructorUsedError;
   @override
   ProfileDto? get from => throw _privateConstructorUsedError;
   @override
@@ -353,7 +368,10 @@ abstract class _PushDto extends PushDto {
   @override
   PushMessageDto? get message => throw _privateConstructorUsedError;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
   DateTime get dtCreated => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
@@ -372,9 +390,10 @@ class _$PushMessageDtoTearOff {
   _PushMessageDto call(
       {int? cnt,
       String? content,
-      String? imageUrl,
+      @JsonKey(name: 'image_url')
+          String? imageUrl,
       String? title,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime dtCreated}) {
     return _PushMessageDto(
       cnt: cnt,
@@ -397,9 +416,13 @@ const $PushMessageDto = _$PushMessageDtoTearOff();
 mixin _$PushMessageDto {
   int? get cnt => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
+  @JsonKey(name: 'image_url')
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
   DateTime get dtCreated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -416,9 +439,10 @@ abstract class $PushMessageDtoCopyWith<$Res> {
   $Res call(
       {int? cnt,
       String? content,
-      String? imageUrl,
+      @JsonKey(name: 'image_url')
+          String? imageUrl,
       String? title,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime dtCreated});
 }
 
@@ -474,9 +498,10 @@ abstract class _$PushMessageDtoCopyWith<$Res>
   $Res call(
       {int? cnt,
       String? content,
-      String? imageUrl,
+      @JsonKey(name: 'image_url')
+          String? imageUrl,
       String? title,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime dtCreated});
 }
 
@@ -531,9 +556,10 @@ class _$_PushMessageDto extends _PushMessageDto {
   _$_PushMessageDto(
       {this.cnt,
       this.content,
-      this.imageUrl,
+      @JsonKey(name: 'image_url')
+          this.imageUrl,
       this.title,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.dtCreated})
       : super._();
 
@@ -545,11 +571,15 @@ class _$_PushMessageDto extends _PushMessageDto {
   @override
   final String? content;
   @override
+  @JsonKey(name: 'image_url')
   final String? imageUrl;
   @override
   final String? title;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
   final DateTime dtCreated;
 
   @override
@@ -600,9 +630,10 @@ abstract class _PushMessageDto extends PushMessageDto {
   factory _PushMessageDto(
       {int? cnt,
       String? content,
-      String? imageUrl,
+      @JsonKey(name: 'image_url')
+          String? imageUrl,
       String? title,
-      @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+      @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime dtCreated}) = _$_PushMessageDto;
   _PushMessageDto._() : super._();
 
@@ -614,11 +645,15 @@ abstract class _PushMessageDto extends PushMessageDto {
   @override
   String? get content => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'image_url')
   String? get imageUrl => throw _privateConstructorUsedError;
   @override
   String? get title => throw _privateConstructorUsedError;
   @override
-  @JsonKey(fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
+  @JsonKey(
+      name: 'register_date',
+      fromJson: Fbconverter.fromJson,
+      toJson: Fbconverter.toJson)
   DateTime get dtCreated => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

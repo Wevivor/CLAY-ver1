@@ -20,7 +20,7 @@ class _$PushTearOff {
   _Push call(
       {String? id,
       required String kind,
-      String? postId,
+      String? contentsId,
       Profile? from,
       Profile? to,
       PushMessage? message,
@@ -28,7 +28,7 @@ class _$PushTearOff {
     return _Push(
       id: id,
       kind: kind,
-      postId: postId,
+      contentsId: contentsId,
       from: from,
       to: to,
       message: message,
@@ -44,7 +44,7 @@ const $Push = _$PushTearOff();
 mixin _$Push {
   String? get id => throw _privateConstructorUsedError;
   String get kind => throw _privateConstructorUsedError;
-  String? get postId => throw _privateConstructorUsedError;
+  String? get contentsId => throw _privateConstructorUsedError;
   Profile? get from => throw _privateConstructorUsedError;
   Profile? get to => throw _privateConstructorUsedError;
   PushMessage? get message => throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ abstract class $PushCopyWith<$Res> {
   $Res call(
       {String? id,
       String kind,
-      String? postId,
+      String? contentsId,
       Profile? from,
       Profile? to,
       PushMessage? message,
@@ -84,7 +84,7 @@ class _$PushCopyWithImpl<$Res> implements $PushCopyWith<$Res> {
   $Res call({
     Object? id = freezed,
     Object? kind = freezed,
-    Object? postId = freezed,
+    Object? contentsId = freezed,
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
@@ -99,9 +99,9 @@ class _$PushCopyWithImpl<$Res> implements $PushCopyWith<$Res> {
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: postId == freezed
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
       from: from == freezed
           ? _value.from
@@ -164,7 +164,7 @@ abstract class _$PushCopyWith<$Res> implements $PushCopyWith<$Res> {
   $Res call(
       {String? id,
       String kind,
-      String? postId,
+      String? contentsId,
       Profile? from,
       Profile? to,
       PushMessage? message,
@@ -191,7 +191,7 @@ class __$PushCopyWithImpl<$Res> extends _$PushCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? kind = freezed,
-    Object? postId = freezed,
+    Object? contentsId = freezed,
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
@@ -206,9 +206,9 @@ class __$PushCopyWithImpl<$Res> extends _$PushCopyWithImpl<$Res>
           ? _value.kind
           : kind // ignore: cast_nullable_to_non_nullable
               as String,
-      postId: postId == freezed
-          ? _value.postId
-          : postId // ignore: cast_nullable_to_non_nullable
+      contentsId: contentsId == freezed
+          ? _value.contentsId
+          : contentsId // ignore: cast_nullable_to_non_nullable
               as String?,
       from: from == freezed
           ? _value.from
@@ -236,7 +236,7 @@ class _$_Push extends _Push {
   _$_Push(
       {this.id,
       required this.kind,
-      this.postId,
+      this.contentsId,
       this.from,
       this.to,
       this.message,
@@ -248,7 +248,7 @@ class _$_Push extends _Push {
   @override
   final String kind;
   @override
-  final String? postId;
+  final String? contentsId;
   @override
   final Profile? from;
   @override
@@ -260,7 +260,7 @@ class _$_Push extends _Push {
 
   @override
   String toString() {
-    return 'Push(id: $id, kind: $kind, postId: $postId, from: $from, to: $to, message: $message, dtCreated: $dtCreated)';
+    return 'Push(id: $id, kind: $kind, contentsId: $contentsId, from: $from, to: $to, message: $message, dtCreated: $dtCreated)';
   }
 
   @override
@@ -271,8 +271,9 @@ class _$_Push extends _Push {
                 const DeepCollectionEquality().equals(other.id, id)) &&
             (identical(other.kind, kind) ||
                 const DeepCollectionEquality().equals(other.kind, kind)) &&
-            (identical(other.postId, postId) ||
-                const DeepCollectionEquality().equals(other.postId, postId)) &&
+            (identical(other.contentsId, contentsId) ||
+                const DeepCollectionEquality()
+                    .equals(other.contentsId, contentsId)) &&
             (identical(other.from, from) ||
                 const DeepCollectionEquality().equals(other.from, from)) &&
             (identical(other.to, to) ||
@@ -290,7 +291,7 @@ class _$_Push extends _Push {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
       const DeepCollectionEquality().hash(kind) ^
-      const DeepCollectionEquality().hash(postId) ^
+      const DeepCollectionEquality().hash(contentsId) ^
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(to) ^
       const DeepCollectionEquality().hash(message) ^
@@ -306,7 +307,7 @@ abstract class _Push extends Push {
   factory _Push(
       {String? id,
       required String kind,
-      String? postId,
+      String? contentsId,
       Profile? from,
       Profile? to,
       PushMessage? message,
@@ -318,7 +319,7 @@ abstract class _Push extends Push {
   @override
   String get kind => throw _privateConstructorUsedError;
   @override
-  String? get postId => throw _privateConstructorUsedError;
+  String? get contentsId => throw _privateConstructorUsedError;
   @override
   Profile? get from => throw _privateConstructorUsedError;
   @override
