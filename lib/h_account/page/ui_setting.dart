@@ -1,8 +1,10 @@
 // Account > 설정
 
 import 'package:clay/c_config/config.dart';
-import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
+import 'package:flutter/material.dart';
+
+import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/controllers/alarm_controller.dart';
@@ -10,8 +12,6 @@ import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
@@ -137,9 +137,6 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                         height: Get.locale?.languageCode == 'ko'
                             ? 1.17
                             : 1.37), // 21.09px, 24.59px
-                // style: ThemeController.to.isLightOn
-                //     ? appBarStyle
-                //     : appBarStyleDark,
               ),
               backgroundColor:
                   ThemeController.to.isLightOn ? Colors.white : Colors.black,
@@ -243,6 +240,9 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                       left: 20, right: 20.0, top: 17, bottom: 17),
                   child: HanListTile(
                     padding: EdgeInsets.zero,
+                    onTap: () {
+                      AppHelper.showMessage('활동알림');
+                    },
                     leading: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

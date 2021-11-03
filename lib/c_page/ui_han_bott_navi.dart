@@ -184,21 +184,23 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           child: Image.asset(Const.assets + 'images/rect_40.png'),
         ),
         AppBar(
-          toolbarHeight: 35,
+          toolbarHeight: 45,
           elevation: 0.0,
           leading: null,
           automaticallyImplyLeading: false,
-          title: Container(
-            height: 35,
-            alignment: Alignment.bottomCenter,
-            child: Text(
-              'board.bs.appbar.title.addItem'.tr,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                height: 1.17, // line height : 21.09px
-                color: Colors.black,
-              ),
+          title: Text(
+            'board.bs.appbar.title.addItem'.tr,
+            style: TextStyle(
+              fontFamily:
+                  Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+              fontSize: 18,
+              color: Color(0xFF000000),
+              fontWeight: Get.locale?.languageCode == 'ko'
+                  ? FontWeight.w700
+                  : FontWeight.w900,
+              height: Get.locale?.languageCode == 'ko'
+                  ? 1.17
+                  : 1.37, // 21.09px, 24.59px
             ),
           ),
           centerTitle: true,
@@ -206,7 +208,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 19.0, bottom: 22.5, top: 21),
           onTap: () => _actionBSNewBoard(context),
-          leading: Image.asset(Const.assets + 'icon/new_board.png'),
+          leading: Image.asset(Const.assets + 'icon/new_board.png'), //새 보드
           title: Container(
             padding: EdgeInsets.only(left: 9.0),
             child: Text(
@@ -218,7 +220,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
           onTap: () => _actionBSWeblink(context),
-          leading: Image.asset(Const.assets + 'icon/web_link.png'),
+          leading: Image.asset(Const.assets + 'icon/web_link.png'), // 웹링크
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
@@ -230,7 +232,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
           onTap: () => _actionBSPhoto(context),
-          leading: Image.asset(Const.assets + 'icon/photo.png'),
+          leading: Image.asset(Const.assets + 'icon/photo.png'), // 사진/비디오
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
@@ -242,7 +244,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 17.0, bottom: 22.5),
           onTap: () => _actionBSMemo(context),
-          leading: Image.asset(Const.assets + 'icon/memo.png'),
+          leading: Image.asset(Const.assets + 'icon/memo.png'), // 메모
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(

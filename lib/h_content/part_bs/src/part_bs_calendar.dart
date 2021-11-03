@@ -86,14 +86,14 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                 heightSpace(2.0),
                 Container(
                     alignment: Alignment.bottomCenter,
-                    height: 11,
+                    height: 15,
                     child: Image.asset(Const.assets + 'images/rect_40.png')),
                 vwBSAppBar(
                   onBack: () {
                     Get.back();
                     if (widget.onMenu != null) widget.onMenu();
                   },
-                  title: '',
+                  title: 'account.appbar.title.reminder'.tr,
                   actions: [
                     Container(
                       alignment: Alignment.center,
@@ -101,18 +101,27 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                       child: InkWell(
                         onTap: () => _actionSubmit(context),
                         child: Text(
-                          '완료',
+                          'com.btn.save'.tr,
                           style: baseStyle.copyWith(
-                              fontSize: 13,
-                              color: Color(0xff017BFE),
-                              fontWeight: FontWeight.w400),
+                            fontFamily: Get.locale?.languageCode == 'ko'
+                                ? 'Roboto'
+                                : 'Avenir',
+                            fontSize: 14,
+                            color: Color(0xFF017BFE),
+                            fontWeight: Get.locale?.languageCode == 'ko'
+                                ? FontWeight.w400
+                                : FontWeight.w500,
+                            height: Get.locale?.languageCode == 'ko'
+                                ? 1.17
+                                : 1.37, // 16.41px, 19.12px
+                          ),
                         ),
                       ),
                     ),
-                    widthSpace(18.87),
+                    widthSpace(20),
                   ],
                 ),
-                heightSpace(15.0),
+                heightSpace(23.0),
 
                 Container(
                   // height: 134,
@@ -124,7 +133,7 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(left: 19.0, right: 19.0),
+                        padding: EdgeInsets.only(left: 5.0, right: 5.0),
                         child: Form(
                           key: _formKey,
                           child: Obx(
@@ -141,12 +150,23 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                                     decoration: kRegisterDecoration.copyWith(
                                       fillColor: Colors.white,
                                       hintText: _hitText.isEmpty
-                                          ? '꼭 확인해! 수민!'
+                                          ? 'account.setting.reminder.custom.subtext'
+                                              .tr
                                           : _hitText,
                                       hintStyle: baseStyle.copyWith(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.normal,
-                                          color: Colors.black),
+                                          fontFamily:
+                                              Get.locale?.languageCode == 'ko'
+                                                  ? 'Roboto'
+                                                  : 'Avenir',
+                                          fontSize: 13,
+                                          color: Color(0xFFcccccc),
+                                          fontWeight: FontWeight.w400,
+                                          height:
+                                              Get.locale?.languageCode == 'ko'
+                                                  ? 1.17
+                                                  : 1.37, // 15.23px, 17.76px
+                                          letterSpacing: -0.65 // -5%
+                                          ),
                                       isDense: true,
                                       errorText: null,
                                       errorStyle: TextStyle(
@@ -155,16 +175,15 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                                         height: 0,
                                       ),
                                       border: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black),
-                                      ),
+                                          borderSide: BorderSide(
+                                              color: Colors.black, width: 0.7)),
                                       focusedBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black),
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 0.7),
                                       ),
                                       enabledBorder: UnderlineInputBorder(
-                                        borderSide:
-                                            BorderSide(color: Colors.black),
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 0.7),
                                       ),
                                     ),
                                     keyboardType: TextInputType.text,
@@ -172,10 +191,10 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                                     onEditingComplete: () => node.unfocus(),
                                     controller:
                                         RemindController.to.txtController,
-                                    enabled:
-                                        RemindController.to.isTxtEditble.value
-                                            ? false
-                                            : true,
+                                    // enabled:
+                                    //     RemindController.to.isTxtEditble.value
+                                    //         ? false
+                                    //         : true,
                                   ),
                                   if (RemindController.to.isTxtEditble.value)
                                     Container(
@@ -183,10 +202,10 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                                       height: 18,
                                       // padding: EdgeInsets.only(top: 15),
                                       child: ImageButton(
-                                        width: 12,
-                                        height: 12,
+                                        width: 18,
+                                        height: 18,
                                         holder: Const.assets +
-                                            'icon/pencil_small.png',
+                                            'icon/remind_pencil.png',
                                         onTap: () {
                                           final _ctl = RemindController.to;
                                           _ctl.isTxtEditble.value =
@@ -208,8 +227,10 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
 
                 Divider(
                   thickness: 1,
-                  color: Color(0xffe6e4ea),
-                  // color: Colors.red,
+                  color: Color(0xffE6E4EA),
+                  indent: 7,
+                  endIndent: 7,
+                  height: 0,
                 ),
                 heightSpace(11.85),
 
@@ -229,7 +250,7 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                       // onTimerDurationChanged: (Duration value) {},
                       // mode: CupertinoTimerPickerMode.hm,
                     )),
-                heightSpace(22.0),
+                heightSpace(20.0),
 
                 // // vwTitle('웹 링크'),
                 // vwTitle('코멘트'),

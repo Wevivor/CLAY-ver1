@@ -3,6 +3,7 @@ import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class AppbarHelper {
@@ -79,10 +80,15 @@ class AppbarHelper {
       title: Text(
         title,
         style: TextStyle(
+          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
           fontSize: 18,
-          fontWeight: FontWeight.w700,
-          height: 1.17, // line height : 21.09px
-          color: Colors.black,
+          color: Color(0xFF000000),
+          fontWeight: Get.locale?.languageCode == 'ko'
+              ? FontWeight.w700
+              : FontWeight.w900,
+          height: Get.locale?.languageCode == 'ko'
+              ? 1.17
+              : 1.37, // 21.09px, 24.59px
         ),
       ),
       actions: actions,

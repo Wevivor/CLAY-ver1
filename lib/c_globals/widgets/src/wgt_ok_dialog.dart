@@ -28,44 +28,92 @@ class DeleteDialog extends StatelessWidget {
         child: ListView(
           shrinkWrap: true,
           children: <Widget>[
-            heightSpace(20.0),
+            heightSpace(32.0),
             Container(
                 width: double.infinity,
                 alignment: Alignment.center,
                 child: Text(
                   title,
-                  style:
-                      baseStyle.copyWith(fontSize: 20, color: Colors.black45),
+                  style: baseStyle.copyWith(
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                    fontSize: 14,
+                    color: Color(0xFF353535),
+                    fontWeight: Get.locale?.languageCode == 'ko'
+                        ? FontWeight.w700
+                        : FontWeight.w900,
+                    height: Get.locale?.languageCode == 'ko'
+                        ? 1.17
+                        : 1.37, // 16.41px, 19.12px
+                  ),
                 )),
-            heightSpace(20.0),
+            heightSpace(24.0),
+            Divider(
+              thickness: 0.3,
+              height: 0.0,
+              color: Color(0xFFDEDEDE),
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      if (deleteTap != null) deleteTap!();
-                      Get.back();
-                    },
-                    child: Text(
-                      deleteTitle,
-                      style: baseStyle.copyWith(
-                          fontSize: 12, color: Colors.black45),
+                  child: SizedBox(
+                    height: 47,
+                    child: TextButton(
+                      onPressed: () {
+                        if (deleteTap != null) deleteTap!();
+                        Get.back();
+                      },
+                      child: Text(
+                        deleteTitle,
+                        style: baseStyle.copyWith(
+                          fontFamily: Get.locale?.languageCode == 'ko'
+                              ? 'Roboto'
+                              : 'Avenir',
+                          fontSize: 13,
+                          color: Color(0xFF353535),
+                          fontWeight: Get.locale?.languageCode == 'ko'
+                              ? FontWeight.w400
+                              : FontWeight.w500,
+                          height: Get.locale?.languageCode == 'ko'
+                              ? 1.17
+                              : 1.37, // 15.23px, 17.76px
+                        ),
+                      ),
                     ),
                   ),
                 ),
+                Divider(
+                  thickness: 0.3,
+                  height: 0.0,
+                  color: Color(0xFFDEDEDE),
+                ),
                 Container(
                   alignment: Alignment.center,
-                  child: TextButton(
-                    onPressed: () {
-                      if (okTap != null) okTap!();
-                      Get.back();
-                    },
-                    child: Text(
-                      okTitle,
-                      style: baseStyle.copyWith(
-                          fontSize: 12, color: Colors.black45),
+                  child: SizedBox(
+                    height: 47,
+                    child: TextButton(
+                      onPressed: () {
+                        if (okTap != null) okTap!();
+                        Get.back();
+                      },
+                      child: Text(
+                        okTitle,
+                        style: baseStyle.copyWith(
+                          fontFamily: Get.locale?.languageCode == 'ko'
+                              ? 'Roboto'
+                              : 'Avenir',
+                          fontSize: 13,
+                          color: Color(0xFF353535),
+                          fontWeight: Get.locale?.languageCode == 'ko'
+                              ? FontWeight.w400
+                              : FontWeight.w500,
+                          height: Get.locale?.languageCode == 'ko'
+                              ? 1.17
+                              : 1.37, // 15.23px, 17.76px
+                        ),
+                      ),
                     ),
                   ),
                 ),

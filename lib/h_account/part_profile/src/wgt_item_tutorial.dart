@@ -69,12 +69,17 @@ class TutorialItemWidget extends StatelessWidget {
                         ),
                         color: Colors.white),
 
-                    // TODO : [SH] 이미지를 박스에 맞추어 넣는 방법이 필요
                     // 현재 image size :  w*h=68*87 이하
                     // fit : 이미지 규칙이 정해지면 수정이 필요
-                    child: Image.asset(
-                      Const.assets + imgUrl,
-                      fit: BoxFit.none,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                      child: Image.asset(
+                        Const.assets + imgUrl,
+                        fit: BoxFit.cover,
+                      ),
                     ),
                   ),
                   Divider(

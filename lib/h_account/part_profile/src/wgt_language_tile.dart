@@ -38,7 +38,14 @@ class _LanguageTileWidgetState extends State<LanguageTileWidget> {
     MySize().init(context);
 
     // TODO : [SH] 한국어를 선택 했을 경우 영문과 한글 공통으로 스타일이 같다.
-    final listTytleStyle = baseStyle.copyWith(
+    final listTytleStyle_ko = baseStyle.copyWith(
+      fontFamily: 'Roboto',
+      fontSize: 13,
+      color: Color(0xFF353535),
+      fontWeight: FontWeight.w500,
+      height: 1.17, // 15.23px
+    );
+    final listTytleStyle_eng = baseStyle.copyWith(
       fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
       fontSize: 13,
       color: Color(0xFF353535),
@@ -71,11 +78,13 @@ class _LanguageTileWidgetState extends State<LanguageTileWidget> {
           contentPadding: EdgeInsets.zero,
           title: Text(
             widget.title,
-            style: listTytleStyle,
+            style:
+                widget.title == '한국어' ? listTytleStyle_ko : listTytleStyle_eng,
           ),
           trailing: widget.selected
               ? Icon(Icons.check, color: Color(0xff017BFE))
-              : SizedBox.shrink(),
+              // : SizedBox.shrink(),
+              : null,
         ),
       ),
     );

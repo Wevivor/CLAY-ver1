@@ -1,4 +1,4 @@
-// 검색 리스트
+// 검색 리스트 아이템
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
@@ -53,12 +53,16 @@ class SearchItemWidget extends StatelessWidget {
       },
       padding: EdgeInsets.only(top: 17.0, bottom: 14.0),
       title: Container(
+<<<<<<< HEAD
         height: 92,
         child: Column(
           children: [
             searchItemTitle(),
           ],
         ),
+=======
+        child: searchItemTitle(),
+>>>>>>> origin/sh_account1102
       ),
       trailing: Container(
         alignment: Alignment.topLeft,
@@ -82,6 +86,7 @@ class SearchItemWidget extends StatelessWidget {
               title,
               style: titleStyle,
               overflow: TextOverflow.ellipsis,
+              maxLines: 1,
             ),
             heightSpace(13),
             Text(
@@ -98,7 +103,7 @@ class SearchItemWidget extends StatelessWidget {
           ],
         ),
       ),
-      flex: 100,
+      flex: 50,
     );
   }
 
@@ -110,7 +115,7 @@ class SearchItemWidget extends StatelessWidget {
         width: 84,
         height: 84,
         imgUrl: imgUrl,
-        holder: holder,
+        holder: Const.assets + holder,
       ),
     );
   }

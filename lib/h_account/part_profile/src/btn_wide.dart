@@ -1,6 +1,7 @@
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:flutter/material.dart';
 import 'package:clay/c_config/config.dart';
+import 'package:get/get.dart';
 
 class WideButton extends StatelessWidget {
   final width;
@@ -31,9 +32,18 @@ class WideButton extends StatelessWidget {
         child: Text(
           title,
           style: baseStyle.copyWith(
-            color: isSubmit ? Colors.white : Color(0xFF707070),
+            // color: isSubmit ? Colors.white : Color(0xFF707070),
+            // fontSize: 13,
+            // fontWeight: FontWeight.normal,
+            fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
             fontSize: 13,
-            fontWeight: FontWeight.normal,
+            color: isSubmit ? Colors.white : Color(0xFF707070),
+            fontWeight: Get.locale?.languageCode == 'ko'
+                ? FontWeight.w400
+                : FontWeight.w500,
+            height: Get.locale?.languageCode == 'ko'
+                ? 1.17
+                : 1.37, // 15.23px, 17.76px
           ),
         ),
       ),
