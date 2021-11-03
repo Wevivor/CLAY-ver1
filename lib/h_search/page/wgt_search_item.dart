@@ -53,16 +53,12 @@ class SearchItemWidget extends StatelessWidget {
       },
       padding: EdgeInsets.only(top: 17.0, bottom: 14.0),
       title: Container(
-<<<<<<< HEAD
         height: 92,
         child: Column(
           children: [
             searchItemTitle(),
           ],
         ),
-=======
-        child: searchItemTitle(),
->>>>>>> origin/sh_account1102
       ),
       trailing: Container(
         alignment: Alignment.topLeft,

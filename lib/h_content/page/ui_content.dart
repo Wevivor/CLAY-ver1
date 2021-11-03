@@ -5,6 +5,9 @@ import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
 import 'package:clay/h_content/part/part_content_all_pintest.dart';
+import 'package:clay/h_search/part_search/part_search.dart';
+import 'package:clay/h_search/part_search/src/cupertino_search_delegate.dart';
+import 'package:clay/h_search/part_search/src/platform_search.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +53,14 @@ class _ContentUIState extends State<ContentUI>
     super.dispose();
   }
 
+  Future<void> search(String text) async {
+    FindController.to.cache.clear();
+    if (text.isNotEmpty)
+      await FindController.to.fetchItems(term: text);
+    else
+      FindController.to.update();
+  }
+
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
@@ -73,8 +84,16 @@ class _ContentUIState extends State<ContentUI>
             ImageButton(
                 height: 24.46,
                 width: 24.58,
-                onTap: () {
-                  Get.toNamed('/search');
+                onTap: () async {
+                  //SUBJECT: 검색
+                  //TODO : 새로 만든 검색
+
+                  final _controller = Get.put(FindController());
+                  _controller.cache.clear();
+                  final _item = await showPlatformSearch(
+                    context: context,
+                    delegate: CupertinoSearchDelegate(search),
+                  );
                 },
                 holder: 'assets/icon/search.png'),
             widthSpace(10.0),
