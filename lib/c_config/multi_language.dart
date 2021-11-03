@@ -74,8 +74,8 @@ class MultiLanguage extends Translations {
 
           // --- 보드 내부 콘텐츠 화면 : share 클릭시 보드 공유 방식 선택
           'board.sub.bs.title.share': 'Share anyone to',
-          'board.sub.bs.menu.read': 'view',
-          'board.sub.bs.menu.edit': 'edit',
+          'board.sub.bs.menu.read': 'View',
+          'board.sub.bs.menu.edit': 'Edit',
           'board.sub.bs.menu.done': 'Share',
 
           // --- 보드 내부 콘텐츠 화면 : 각 형식별 콘텐츠 뷰

@@ -173,11 +173,11 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   //TODO: 글쓰기 메뉴 만들기
   // TODO : [SH] TEXT가 영어일 경우 폰트 변경하기
 
+  // Bottom Sheet : 추가하기
   Widget vwBoardMenu(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
           alignment: Alignment.bottomCenter,
           height: 15,

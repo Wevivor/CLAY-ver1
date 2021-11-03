@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+// BS2 : 공유 방식 선택
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
@@ -28,11 +29,11 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            heightSpace(2.0),
             Container(
-                alignment: Alignment.bottomCenter,
-                height: 11,
-                child: Image.asset(Const.assets + 'images/rect_40.png')),
+              alignment: Alignment.bottomCenter,
+              height: 15,
+              child: Image.asset(Const.assets + 'images/rect_40.png'),
+            ),
             vwBSAppBar(
               onBack: () {
                 Get.back();
@@ -41,15 +42,15 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
                 if (onMenu != null) onMenu();
               },
-              title: '공유방식 선택',
+              title: 'board.sub.bs.title.share'.tr, //공유 방식 선택
               actions: [
                 Container(
                   alignment: Alignment.center,
-                  // color: Colors.red,
                   child: InkWell(
                     onTap: () async {
                       if (_shareCheck! <= 0) {
-                        AppHelper.showMessage('공유방식을 선택해 주세요');
+                        AppHelper.showMessage(
+                            '공유방식을 선택해 주세요'); // TODO : [SH] 현재 번역하지 않음.
                         return;
                       }
                       Get.back();
@@ -58,23 +59,33 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
                       BoardController.to.actionUpdate();
 
-                      // await share.Share.share('https://www.naver.com');
+                      // await share.Share.sha re('https://www.naver.com');
                       await share.Share.share(_boardUrl);
                     },
                     child: Text(
-                      '공유하기',
+                      'board.sub.bs.menu.done'.tr,
                       style: baseStyle.copyWith(
-                          fontSize: 13,
-                          color: Color(0xff017BFE),
-                          fontWeight: FontWeight.w400),
+                        fontFamily: Get.locale?.languageCode == 'ko'
+                            ? 'Roboto'
+                            : 'Avenir',
+                        fontSize: 14,
+                        color: Color(0xFF017BFE),
+                        fontWeight: Get.locale?.languageCode == 'ko'
+                            ? FontWeight.w400
+                            : FontWeight.w500,
+                        height: Get.locale?.languageCode == 'ko'
+                            ? 1.17
+                            : 1.37, // 16.41px, 19.12px
+                      ),
                     ),
                   ),
                 ),
-                widthSpace(18.87),
+                widthSpace(20),
               ],
             ),
+            heightSpace(10.0),
             HanListTile(
-              padding: EdgeInsets.only(left: 47.0),
+              padding: EdgeInsets.only(left: 32.0),
               onTap: () async {
                 //SUBJECT : 공유 설정
                 //TODO: 데이터베이스고정.
@@ -88,13 +99,35 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                     .actionUpdateItem(controller.boardItem);
               },
               leading: _shareCheck == 1
-                  ? Image.asset(Const.assets + 'icon/radio_on.png')
-                  : Image.asset(Const.assets + 'icon/radio_off.png'),
-              title: Text('읽기 허용'),
+                  ? Image.asset(
+                      Const.assets + 'icon/radio_on.png',
+                      width: 24,
+                      height: 24,
+                    )
+                  : Image.asset(
+                      Const.assets + 'icon/radio_off.png',
+                      width: 24,
+                      height: 24,
+                    ),
+              title: Text(
+                'board.sub.bs.menu.read'.tr,
+                style: baseStyle.copyWith(
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 14,
+                  color: Color(0xFF000000),
+                  fontWeight: Get.locale?.languageCode == 'ko'
+                      ? FontWeight.w400
+                      : FontWeight.w500,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37, // 16.41px, 19.12px
+                ),
+              ),
             ),
-            heightSpace(34.0),
+            heightSpace(20.0),
             HanListTile(
-              padding: EdgeInsets.only(left: 47.0),
+              padding: EdgeInsets.only(left: 32.0),
               onTap: () async {
                 //SUBJECT : 공유 방법
                 //TODO: 공유....

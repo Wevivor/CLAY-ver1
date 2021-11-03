@@ -79,19 +79,27 @@ class SettingUI extends StatelessWidget with AppbarHelper {
   //설정 메뉴 활동알림 스타일
   Widget vsSubText(final title) {
     return Container(
+      //constraints: ,
+      width: 360,
+      color: Colors.red,
       child: Text(
         title,
         style: baseStyle.copyWith(
-          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-          fontSize: 11,
-          color: Color(0xFF707070),
-          fontWeight: Get.locale?.languageCode == 'ko'
-              ? FontWeight.w400
-              : FontWeight.w500,
-          height: Get.locale?.languageCode == 'ko'
-              ? 1.17
-              : 1.37, // 12.89px, 15.03px
-        ),
+            fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+            fontSize: 11,
+            color: Color(0xFF707070),
+            fontWeight: Get.locale?.languageCode == 'ko'
+                ? FontWeight.w400
+                : FontWeight.w500,
+            height: Get.locale?.languageCode == 'ko'
+                ? 1.17
+                : 1.37, // 12.89px, 15.03px
+            letterSpacing: Get.locale?.languageCode == 'ko'
+                ? 0
+                : -0.55 // -0.5px  because overflow
+            ),
+        overflow: TextOverflow.clip,
+        maxLines: 2,
       ),
     );
   }

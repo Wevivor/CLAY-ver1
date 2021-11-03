@@ -43,17 +43,16 @@ class BottomSheetContentLink extends StatelessWidget
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 10,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         vwBSAppBar(
           onBack: () {
             Get.back();
             if (onMenu != null) onMenu();
           },
-          title: 'board.bs.sub.title.addLink'.tr, // 링크로 추가하기
+          title: 'board.bs.sub.title.addLink'.tr, // 웹링크로 추가하기
           actions: [
             Container(
               alignment: Alignment.center,
@@ -93,10 +92,16 @@ class BottomSheetContentLink extends StatelessWidget
                 child: Text(
                   'com.btn.save'.tr,
                   style: baseStyle.copyWith(
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
                     fontSize: 14,
-                    color: Color(0xff017BFE),
-                    fontWeight: FontWeight.w400,
-                    height: 1.17, // line height : 16.41px
+                    color: Color(0xFF017BFE),
+                    fontWeight: Get.locale?.languageCode == 'ko'
+                        ? FontWeight.w400
+                        : FontWeight.w500,
+                    height: Get.locale?.languageCode == 'ko'
+                        ? 1.17
+                        : 1.37, // 16.41px, 19.12px
                   ),
                 ),
               ),
