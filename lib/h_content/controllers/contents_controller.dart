@@ -1,6 +1,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_globals/controllers/src/fb_post_helper_module.dart';
+import 'package:clay/h_account/models/users/users.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/models/content_dtos.dart';
@@ -72,6 +73,7 @@ class ContentsController extends AbsItemController
       final newItem = item.copyWith(
           contentsId: docRef.id,
           info: item.info.copyWith(contentsId: docRef.id));
+
       await docRef.set(newItem.toJson(), SetOptions(merge: true));
     } catch (e) {
       throw Exception('error');
@@ -154,5 +156,40 @@ class ContentsController extends AbsItemController
     } finally {
       LoadingController.to.isLoading = false;
     }
+  }
+
+  ContentsDto createContentsDto(Profile profile, BoardInfo? boardInfo,
+      {required String comment}) {
+    final _profile = profile;
+    final _info = ContentsInfoDto(
+      //  contentsId: contentsId,
+      contentsTitle: '',
+      contentsUrl: '',
+      contentsImages: '',
+      contentsDescription: '',
+      contentsComment: comment,
+      contentsType: 'comment',
+      thumbnails: null,
+      contentsUniqueLink: '',
+      ContentsCreateDate: DateTime.now(),
+      ContentsUpdateDate: DateTime.now(),
+    );
+
+    //SUBJECT comment 타입 변경 필요
+    //TODO: comment 타입 변경
+    final _item = ContentsDto(
+      boardInfo: boardInfo?.toDto(),
+      userInfo: _profile.toDto(),
+      info: _info,
+      contentsAllviewCount: 0,
+      contentsMyviewCount: 0,
+      contentsAlarmCheck: 0,
+      shareInfo: null,
+      contentsComment: null,
+      ContentsCreateDate: DateTime.now(),
+      ContentsUpdateDate: DateTime.now(),
+    );
+
+    return _item;
   }
 }

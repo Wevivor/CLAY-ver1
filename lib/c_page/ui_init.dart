@@ -58,19 +58,17 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
     });
   }
 
-  void startState(String? value) {
-    // value = 'https://www.naver.com';
-
+  Future<void> startState(String? value) async {
     if (value != null) {
       ShareController.to.isShare = true;
       ShareController.to.update();
       debugPrint("========> Shared:1) $value");
-      Future.microtask(() async {
-        await Jiffy.locale(Get.deviceLocale?.languageCode);
+      // Future.microtask(() async {
+      await Jiffy.locale(Get.deviceLocale?.languageCode);
 
-        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
-        Get.offNamed('/share_service');
-      });
+      await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+      Get.offNamed('/share_service');
+      // });
       // Future.delayed(Duration(milliseconds: 300), () async {});
       // Get.offNamed('/share_service');
     } else {
@@ -78,21 +76,21 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         debugPrint("========> Shared:0) $value");
         ShareController.to.isShare = false;
 
-        Future.microtask(() async {
-          await Jiffy.locale(Get.deviceLocale?.languageCode);
+        // Future.microtask(() async {
+        await Jiffy.locale(Get.deviceLocale?.languageCode);
 
-          await HanUserInfoController.to.actionRead(AuthController.to.getUser);
-          var route = '/main_menu';
-          debugPrint(
-              "===================> Push ${PushController.to.messageArguments}");
+        await HanUserInfoController.to.actionRead(AuthController.to.getUser);
+        var route = '/main_menu';
+        debugPrint(
+            "===================> Push ${PushController.to.messageArguments}");
 
-          if (PushController.to.messageArguments != null) {
-            route = '/message';
-          }
-          debugPrint('=======> ROUTE: $route $_isSharedOpen');
-          // Get.off(() => LoginGoogleUI());
-          Get.offNamed(route);
-        });
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        debugPrint('=======> ROUTE: $route $_isSharedOpen');
+        // Get.off(() => LoginGoogleUI());
+        Get.offNamed(route);
+        // });
       } catch (e) {
         debugPrint('=========> ${e.toString()}');
       }

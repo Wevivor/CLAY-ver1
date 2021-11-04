@@ -4,12 +4,10 @@ import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
-import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/part_bs/src/dialog_share_done.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
-import 'package:clay/h_content/models/content_dtos.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -30,8 +28,8 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     Get.put(BoardListMySelectController());
     initFetch();
     debugPrint('ShareServiceUI  ======== ');
-    WidgetsBinding.instance!.addPostFrameCallback(
-        (_) => _showBSFromShare(context, vwBoardMenuFromShare(context)));
+    WidgetsBinding.instance!
+        .addPostFrameCallback((_) => _showBS(context, vwBoardMenu(context)));
   }
 
   Future<void> initFetch() async {
@@ -59,22 +57,32 @@ class _ShareServiceUIState extends State<ShareServiceUI>
 
   bool isExit = true;
 
-  void _showBSFromShare(context, child) {
-    // Get.put(ContentsController());
+  void _showBS(context, child) {
     showModalBottomSheet(
-        isScrollControlled: true,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+        isScrollControlled: true,
+        // barrierColor: Colors.red,
         backgroundColor: Colors.white,
         context: context,
         builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays(250);
+
+              return Future.value(true);
+            },
+
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
+                ),
               ),
             ),
+            // ),
           );
         }).then((value) {
       if (isExit) {
@@ -85,7 +93,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
   }
 
 //새보드와 같이 계속하는 경우에 사용함
-  void _showBSFromShareContinue(context, child) {
+  void _showBSContinue(context, child) {
     // Get.put(ContentsController());
     showModalBottomSheet(
         isScrollControlled: true,
@@ -94,18 +102,26 @@ class _ShareServiceUIState extends State<ShareServiceUI>
         backgroundColor: Colors.white,
         context: context,
         builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays(250);
+
+              return Future.value(true);
+            },
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
+                ),
               ),
             ),
           );
         }).then((value) {});
   }
 
-  Widget vwBoardMenuFromShare(BuildContext context) {
+  Widget vwBoardMenu(BuildContext context) {
     final node = FocusScope.of(context);
 
     return GetBuilder<ContentsController>(builder: (controller) {
@@ -161,34 +177,10 @@ class _ShareServiceUIState extends State<ShareServiceUI>
 
                       final _controller = ContentsController.to;
                       final _profile = HanUserInfoController.to.toProfile();
-                      final _info = ContentsInfoDto(
-                        //  contentsId: contentsId,
-                        contentsTitle: '',
-                        contentsUrl: '',
-                        contentsImages: '',
-                        contentsDescription: '',
-                        contentsComment: _comment,
-                        contentsType: 'comment',
-                        thumbnails: null,
-                        contentsUniqueLink: '',
-                        ContentsCreateDate: DateTime.now(),
-                        ContentsUpdateDate: DateTime.now(),
-                      );
+                      final _item = await _controller.createContentsDto(
+                          _profile, _boardInfo,
+                          comment: _comment);
 
-                      //SUBJECT comment 타입 변경 필요
-                      //TODO: comment 타입 변경
-                      final _item = ContentsDto(
-                        boardInfo: _boardInfo?.toDto(),
-                        userInfo: _profile.toDto(),
-                        info: _info,
-                        contentsAllviewCount: 0,
-                        contentsMyviewCount: 0,
-                        contentsAlarmCheck: 0,
-                        shareInfo: null,
-                        contentsComment: null,
-                        ContentsCreateDate: DateTime.now(),
-                        ContentsUpdateDate: DateTime.now(),
-                      );
                       await _controller.actionIns(_item);
                       Get.back();
                       await DialogHelper.MessageDialog(
@@ -215,32 +207,19 @@ class _ShareServiceUIState extends State<ShareServiceUI>
             GetBuilder<BoardListMySelectController>(builder: (controller) {
               return Container(
                 height: 54 + 8 + 11 + 10,
-                child: BoardSelectPART(onTap: () {
+                child: BoardSelectPART(onTap: () async {
                   final _controller = BoardController.to;
                   final _profile = HanUserInfoController.to.toProfile();
-                  final _info = BoardInfoDto(
-                    boardName: '',
-                    boardColor: 'FFfc5e20',
-                    boardBadge: '',
-                    shareCheck: 0,
-                    isFixed: false,
-                    shareCount: 0,
-                    registerDate: DateTime.now(),
-                  );
-                  final _item = BoardDto(
-                    boardCreator: _profile.toDto(),
-                    info: _info,
-                    shareCheck: 0,
-                    contentsCount: 0,
-                    registerDate: DateTime.now(),
-                  );
 
-                  _controller.boardItem = _item.toDomain();
+                  final _boardDto = await _controller.createBoardInit(_profile,
+                      name: '', type: '');
+
+                  _controller.boardItem = _boardDto?.toDomain();
                   _controller.boardNameController.text = '';
 
-                  _showBSFromShareContinue(context, BottomSheetNewBoard(
+                  _showBSContinue(context, BottomSheetNewBoard(
                     onMenu: () {
-                      _showBSFromShare(context, vwBoardMenuFromShare(context));
+                      _showBS(context, vwBoardMenu(context));
                     },
                   ));
                 }),

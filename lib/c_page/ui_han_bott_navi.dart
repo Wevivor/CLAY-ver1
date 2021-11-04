@@ -132,39 +132,36 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop,
-      child: Scaffold(
-        body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
-        bottomNavigationBar: Stack(
-          alignment: Alignment.center,
-          children: [
-            GetBuilder<BottomNaviController>(
-                builder: (_) => vwBottomMenu(context)),
-            Container(
-              width: 36,
-              height: 36,
-              child: FloatingActionButton(
-                child: Icon(
-                  Icons.add_rounded,
-                  size: 24,
-                ),
-                // child: Image.asset('assets/icon/add_board_btn.png'),
-                mini: false,
-                elevation: 0,
-                backgroundColor: Colors.black,
-                // foregroundColor: Colors.white,
-                splashColor: Colors.black,
-                onPressed: () {
-                  Get.put(BoardListMySelectController());
-                  BoardListMySelectController.to.cache = [];
-                  BoardListMySelectController.to.fetchItems();
-                  _showBS(context, vwBoardMenu(context));
-                },
+    return Scaffold(
+      body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
+      bottomNavigationBar: Stack(
+        alignment: Alignment.center,
+        children: [
+          GetBuilder<BottomNaviController>(
+              builder: (_) => vwBottomMenu(context)),
+          Container(
+            width: 36,
+            height: 36,
+            child: FloatingActionButton(
+              child: Icon(
+                Icons.add_rounded,
+                size: 24,
               ),
+              // child: Image.asset('assets/icon/add_board_btn.png'),
+              mini: false,
+              elevation: 0,
+              backgroundColor: Colors.black,
+              // foregroundColor: Colors.white,
+              splashColor: Colors.black,
+              onPressed: () {
+                Get.put(BoardListMySelectController());
+                BoardListMySelectController.to.cache = [];
+                BoardListMySelectController.to.fetchItems();
+                _showBS(context, vwBoardMenu(context));
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -368,8 +365,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
               return Future.value(true);
             },
-            // child: AnnotatedRegion<SystemUiOverlayStyle>(
-            //   value: GlobalStyle.configStatusTheme,
+
             child: Padding(
               padding: MediaQuery.of(context).viewInsets,
               child: Container(
@@ -378,7 +374,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                 ),
               ),
             ),
-            // ),
           );
         });
   }
@@ -387,16 +382,16 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    // if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
-    //   currentBackPressTime = now;
+    if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+      currentBackPressTime = now;
 
-    //   Fluttertoast.showToast(
-    //     msg: '한번 더 백키를 누르시면 종료합니다.',
-    //     backgroundColor: Colors.black45,
-    //     textColor: Colors.white,
-    //   );
-    //   return Future.value(false);
-    // }
+      Fluttertoast.showToast(
+        msg: '한번 더 백키를 누르시면 종료합니다.',
+        backgroundColor: Colors.black45,
+        textColor: Colors.white,
+      );
+      return Future.value(false);
+    }
     Get.reset();
     SystemNavigator.pop(); //종
     return Future.value(true);
