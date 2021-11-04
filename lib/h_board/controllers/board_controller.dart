@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
+import 'package:clay/h_account/models/users/users.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,6 +61,66 @@ class BoardController extends AbsItemController with FbCommonModule {
       update();
       LoadingController.to.isLoading = false;
     }
+  }
+
+  Future<void> actionDefalutCreate(Profile? profile) async {
+    try {
+      final _board01 = createBoardInit(profile, name: '자기계발', type: '자기계발');
+      final _board02 = createBoardInit(profile, name: '일/공부', type: '일/공부');
+      final _board03 = createBoardInit(profile, name: 'LIKE', type: 'LIKE');
+    } catch (e) {
+      throw Exception('error');
+    } finally {
+      update();
+      LoadingController.to.isLoading = false;
+    }
+  }
+
+  Future<BoardDto?> createBoardInit(Profile? profile,
+      {required String name, required type}) async {
+    List colors = [
+      'FFfc5e20',
+      'FFffc700',
+      'FF159b4d',
+      'FF1b9dfc',
+      'FF9a71bb',
+      'FF9a71bb',
+      'FFff78d9',
+      'FFcaf2ff',
+      'FF9dffd0',
+      'FFc1a27c',
+      'FFfff1a7',
+      'FFfff1a7'
+    ];
+    var rng = new Random().nextInt(colors.length);
+
+    final _profile = profile;
+    if (_profile != null) {
+      final _info = BoardInfoDto(
+        boardName: name,
+        boardColor: colors[rng - 1],
+        boardBadge: type,
+        shareCheck: 0,
+        isFixed: false,
+        shareCount: 0,
+        registerDate: DateTime.now(),
+      );
+      final _item = BoardDto(
+        boardCreator: _profile.toDto(),
+        info: _info,
+        shareCheck: 0,
+        contentsCount: 0,
+        registerDate: DateTime.now(),
+      );
+
+      final docRef = _instance.collection('$MENU_POS').doc();
+      //TODO 여러가지의 경우 info 인지 아닌지?
+      final newItem = _item.copyWith(
+          boardId: docRef.id, info: _item.info.copyWith(boardId: docRef.id));
+      await docRef.set(newItem.toJson(), SetOptions(merge: true));
+      return _item;
+    }
+    return null;
   }
 
   Future<void> actionDelete(id) async {

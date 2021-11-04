@@ -387,16 +387,16 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
   Future<bool> onWillPop() {
     DateTime now = DateTime.now();
-    if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
-      currentBackPressTime = now;
+    // if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
+    //   currentBackPressTime = now;
 
-      Fluttertoast.showToast(
-        msg: '한번 더 백키를 누르시면 종료합니다.',
-        backgroundColor: Colors.black45,
-        textColor: Colors.white,
-      );
-      return Future.value(false);
-    }
+    //   Fluttertoast.showToast(
+    //     msg: '한번 더 백키를 누르시면 종료합니다.',
+    //     backgroundColor: Colors.black45,
+    //     textColor: Colors.white,
+    //   );
+    //   return Future.value(false);
+    // }
     Get.reset();
     SystemNavigator.pop(); //종
     return Future.value(true);

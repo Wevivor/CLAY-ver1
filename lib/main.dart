@@ -17,11 +17,13 @@ import 'package:jiffy/jiffy.dart';
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
 import 'c_page/app_routes.dart';
+import 'c_page/auth_middle.dart';
 import 'c_page/bott_navi_controller.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
 import 'h_account/page/ui_push_list.dart';
 import 'h_push/ui_push_messages.dart';
+import 'h_share/h_share.dart';
 import 'h_share/share_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -245,6 +247,11 @@ class _MyAppState extends State<MyApp> {
                     name: '/push_list',
                     transition: Transition.noTransition,
                     page: () => PushListUI()),
+                GetPage(
+                    name: '/share_service',
+                    transition: Transition.noTransition,
+                    middlewares: [AuthMiddleWare()],
+                    page: () => ShareServiceUI()),
                 GetPage(
                   name: '/message',
                   transition: Transition.noTransition,

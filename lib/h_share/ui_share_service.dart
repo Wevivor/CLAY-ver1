@@ -28,19 +28,27 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     Get.put(BoardController());
 
     Get.put(BoardListMySelectController());
-    BoardListMySelectController.to.cache.clear();
-    BoardListMySelectController.to.fetchItems();
-    print('ShareServiceUI  ======== ');
+    initFetch();
+    debugPrint('ShareServiceUI  ======== ');
     WidgetsBinding.instance!.addPostFrameCallback(
         (_) => _showBSFromShare(context, vwBoardMenuFromShare(context)));
+  }
+
+  Future<void> initFetch() async {
+    BoardListMySelectController.to.cache.clear();
+    await BoardListMySelectController.to.fetchItems();
   }
 
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
 
-    return Container(
-      color: Colors.transparent,
+    return Scaffold(
+      backgroundColor: Colors.transparent,
+      body: Container(
+        height: MySize.safeBlockVertical,
+        color: Colors.transparent,
+      ),
     );
   }
 
@@ -205,35 +213,38 @@ class _ShareServiceUIState extends State<ShareServiceUI>
             ),
             heightSpace(40.0),
             GetBuilder<BoardListMySelectController>(builder: (controller) {
-              return BoardSelectPART(onTap: () {
-                final _controller = BoardController.to;
-                final _profile = HanUserInfoController.to.toProfile();
-                final _info = BoardInfoDto(
-                  boardName: '',
-                  boardColor: 'FFfc5e20',
-                  boardBadge: '',
-                  shareCheck: 0,
-                  isFixed: false,
-                  shareCount: 0,
-                  registerDate: DateTime.now(),
-                );
-                final _item = BoardDto(
-                  boardCreator: _profile.toDto(),
-                  info: _info,
-                  shareCheck: 0,
-                  contentsCount: 0,
-                  registerDate: DateTime.now(),
-                );
+              return Container(
+                height: 54 + 8 + 11 + 10,
+                child: BoardSelectPART(onTap: () {
+                  final _controller = BoardController.to;
+                  final _profile = HanUserInfoController.to.toProfile();
+                  final _info = BoardInfoDto(
+                    boardName: '',
+                    boardColor: 'FFfc5e20',
+                    boardBadge: '',
+                    shareCheck: 0,
+                    isFixed: false,
+                    shareCount: 0,
+                    registerDate: DateTime.now(),
+                  );
+                  final _item = BoardDto(
+                    boardCreator: _profile.toDto(),
+                    info: _info,
+                    shareCheck: 0,
+                    contentsCount: 0,
+                    registerDate: DateTime.now(),
+                  );
 
-                _controller.boardItem = _item.toDomain();
-                _controller.boardNameController.text = '';
+                  _controller.boardItem = _item.toDomain();
+                  _controller.boardNameController.text = '';
 
-                _showBSFromShareContinue(context, BottomSheetNewBoard(
-                  onMenu: () {
-                    _showBSFromShare(context, vwBoardMenuFromShare(context));
-                  },
-                ));
-              });
+                  _showBSFromShareContinue(context, BottomSheetNewBoard(
+                    onMenu: () {
+                      _showBSFromShare(context, vwBoardMenuFromShare(context));
+                    },
+                  ));
+                }),
+              );
             }),
             heightSpace(29.0),
             if (!ContentsController.to.isCommentShow)

@@ -9,7 +9,7 @@ class AuthMiddleWare extends GetMiddleware {
       var login = RouteSettings(name: '/login');
 
       final _user = FirebaseAuth.instance.currentUser;
-      print('===========${_user?.email}');
+      debugPrint('===========${_user?.email}');
       return _user == null ? login : null;
     } catch (e) {}
   }

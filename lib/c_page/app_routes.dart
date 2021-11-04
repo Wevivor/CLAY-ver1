@@ -9,6 +9,7 @@ import 'package:clay/h_login/ui_login_google.dart';
 import 'package:clay/h_search/page/ui_search.dart';
 import 'package:get/get.dart';
 
+import 'auth_middle.dart';
 import 'ui_han_bott_navi.dart';
 import 'ui_init.dart';
 
@@ -34,6 +35,7 @@ class AppRoutes {
     GetPage(
       name: '/main_menu',
       transition: Transition.noTransition,
+      middlewares: [AuthMiddleWare()],
       page: () => HanBottomNavigationBar(),
     ),
 
