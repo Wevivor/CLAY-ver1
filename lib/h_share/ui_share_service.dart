@@ -28,6 +28,8 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     Get.put(BoardListMySelectController());
     initFetch();
     debugPrint('ShareServiceUI  ======== ');
+    // delaySetSysyemUIOverlays(500);
+
     WidgetsBinding.instance!
         .addPostFrameCallback((_) => _showBS(context, vwBoardMenu(context)));
   }
@@ -41,11 +43,14 @@ class _ShareServiceUIState extends State<ShareServiceUI>
   Widget build(BuildContext context) {
     MySize().init(context);
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Container(
-        height: MySize.safeBlockVertical,
-        color: Colors.transparent,
+    return AnnotatedRegion(
+      value: GlobalStyle.configStatusTheme,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: Container(
+          height: 50.0,
+          color: Colors.transparent,
+        ),
       ),
     );
   }
@@ -84,10 +89,11 @@ class _ShareServiceUIState extends State<ShareServiceUI>
             ),
             // ),
           );
-        }).then((value) {
+        }).then((value) async {
       if (isExit) {
         Get.reset();
-        SystemChannels.platform.invokeMethod('SystemNavigator.pop');
+
+        await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
       }
     });
   }
@@ -105,7 +111,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
           return WillPopScope(
             onWillPop: () {
               //SUBJECT: BS 시스템네비바 검게 방지하는
-              delaySetSysyemUIOverlays(250);
+              delaySetSysyemUIOverlays(300);
 
               return Future.value(true);
             },

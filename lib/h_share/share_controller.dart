@@ -4,10 +4,14 @@ import 'package:get/get.dart';
 
 class ShareController extends GetxController {
   bool isShare = false;
-
+  String sharedText = '';
   ShareController() {}
 
   static ShareController get to => Get.find();
+  void init() {
+    isShare = false;
+    sharedText = '';
+  }
 
   @override
   void onInit() {

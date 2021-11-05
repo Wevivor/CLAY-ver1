@@ -152,6 +152,7 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       //   if (PushController.to.messageArguments != null) {
       //     route = '/message';
       //   }
+
       //   Get.offNamed(route);
       // }
     } on FirebaseAuthException catch (e) {
