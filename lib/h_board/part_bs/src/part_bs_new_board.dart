@@ -19,11 +19,11 @@ class BottomSheetNewBoard extends StatelessWidget
 
   final sheetTitle = baseStyle.copyWith(
     fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-    fontSize: 18,
+    fontSize: 14,
     color: Color(0xFF353535),
     fontWeight:
-        Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w900,
-    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 21.09px, 24.59px
+        Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w800,
+    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 16.41px, 19.12px
   );
 
   final msgStyle = baseStyle.copyWith(
@@ -41,10 +41,9 @@ class BottomSheetNewBoard extends StatelessWidget
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: <Widget>[
-          heightSpace(2.0),
           Container(
             alignment: Alignment.bottomCenter,
-            height: 10,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png'),
           ),
           vwBSAppBar(
@@ -98,13 +97,11 @@ class BottomSheetNewBoard extends StatelessWidget
                       fontFamily: Get.locale?.languageCode == 'ko'
                           ? 'Roboto'
                           : 'Avenir',
-
                       fontSize: 14,
                       color: Color(0xff017BFE),
                       fontWeight: Get.locale?.languageCode == 'ko'
                           ? FontWeight.w400
                           : FontWeight.w500,
-
                       height: Get.locale?.languageCode == 'ko'
                           ? 1.17
                           : 1.37, // 16.41px , 19.12px
@@ -115,7 +112,7 @@ class BottomSheetNewBoard extends StatelessWidget
               widthSpace(20),
             ],
           ),
-          heightSpace(20.0),
+          heightSpace(10.0),
           Padding(
             padding: EdgeInsets.only(left: 18.0, right: 19.0),
             child: vwTitle('com.bs.subtitle.boardName'.tr),
@@ -165,7 +162,7 @@ class BottomSheetNewBoard extends StatelessWidget
           heightSpace(16.0),
           Padding(
             padding: EdgeInsets.only(left: 18.0, right: 19.0),
-            child: vwTitle('board.bs.sub.subtitle.badge'.tr),
+            child: vwTitle('board.bs.sub.subtitle.badge'.tr), // 보드에 배지 달기
           ),
           heightSpace(10.0),
           Padding(

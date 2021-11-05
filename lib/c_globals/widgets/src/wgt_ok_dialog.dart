@@ -79,6 +79,7 @@ class DeleteDialog extends StatelessWidget {
                           height: Get.locale?.languageCode == 'ko'
                               ? 1.17
                               : 1.37, // 15.23px, 17.76px
+                          letterSpacing: -0.65, // -5%
                         ),
                       ),
                     ),
@@ -105,13 +106,14 @@ class DeleteDialog extends StatelessWidget {
                               ? 'Roboto'
                               : 'Avenir',
                           fontSize: 13,
-                          color: Color(0xFF353535),
+                          color: Color(0xFF017BFE),
                           fontWeight: Get.locale?.languageCode == 'ko'
                               ? FontWeight.w400
                               : FontWeight.w500,
                           height: Get.locale?.languageCode == 'ko'
                               ? 1.17
                               : 1.37, // 15.23px, 17.76px
+                          letterSpacing: -0.65, // -5%
                         ),
                       ),
                     ),

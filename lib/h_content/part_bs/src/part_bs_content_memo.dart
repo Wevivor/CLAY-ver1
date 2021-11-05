@@ -206,9 +206,7 @@ class BottomSheetContentMemo extends StatelessWidget
             ),
           ),
           heightSpace(16.0),
-          vwTitle('저장할 보드 선택하기'),
-          heightSpace(10.0),
-          // TODO : 섀도우 때문에 패딩 문제가 있음.
+          vwTitle('com.bs.subtitle.boardChoice'.tr),
           GetBuilder<BoardListMySelectController>(builder: (controller) {
             return Container(
               height: 54 + 8 + 11 + 10,

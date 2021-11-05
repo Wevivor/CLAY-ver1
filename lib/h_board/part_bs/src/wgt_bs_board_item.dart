@@ -5,6 +5,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 // Bottom Sheet 내용
 class BSBoardItemWidget extends StatelessWidget {
@@ -22,10 +23,15 @@ class BSBoardItemWidget extends StatelessWidget {
     this.index,
   });
   final classTitle = TextStyle(
-    fontSize: 12,
-    color: Color(0xFF3a3a3a),
-    fontWeight: FontWeight.normal,
-  );
+      fontFamily: 'Roboto',
+      fontSize: 12,
+      color: Get.locale?.languageCode == 'ko'
+          ? Color(0xFF000000)
+          : Color(0xFF353535),
+      fontWeight: FontWeight.w400,
+      height: 0.88 // 10.57px
+
+      );
 
   @override
   Widget build(BuildContext context) {

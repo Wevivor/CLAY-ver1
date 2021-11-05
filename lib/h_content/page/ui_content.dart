@@ -93,6 +93,7 @@ class _ContentUIState extends State<ContentUI>
       body: GetBuilder<ContentAllListController>(builder: (controller) {
         return Column(
           children: [
+            // Chip button 리스트
             Container(
                 height: 30 + 4,
                 padding: EdgeInsets.only(left: 20),

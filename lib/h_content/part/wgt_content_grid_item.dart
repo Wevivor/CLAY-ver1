@@ -34,13 +34,6 @@ class ContentGridItemWidget extends StatelessWidget {
     height: 0.88, // 11.45px,
     letterSpacing: -0.65, // -5%
   );
-  final dateStyle = TextStyle(
-    fontSize: 11,
-    color: Color(0xb2676767), // 약 70% 투명도
-    fontWeight: FontWeight.w400,
-    height: 1.5,
-    letterSpacing: 0.5,
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -75,11 +68,22 @@ class ContentGridItemWidget extends StatelessWidget {
               children: [
                 //widthSpace(4.0),
                 // TODO : [SH] 보드 배지 아이콘이 들어가야 함.
-                Text(
-                  title ?? '',
-                  style: contentStyle,
-                  overflow: TextOverflow.ellipsis,
-                  maxLines: 1,
+                // Sample
+                Image.asset(Const.assets + 'icon/hart_small.png'),
+                // ========
+                widthSpace(3.0),
+                ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: (MySize.safeWidth / 2) - 61,
+                  ),
+                  child: Container(
+                    child: Text(
+                      title ?? '',
+                      style: contentStyle,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                  ),
                 ),
                 Expanded(
                   child: Container(),
@@ -89,8 +93,8 @@ class ContentGridItemWidget extends StatelessWidget {
                     if (onMore != null) onMore!();
                   },
                   child: Container(
-                    padding: EdgeInsets.only(right: 3),
-                    width: 22,
+                    padding: EdgeInsets.only(right: 4.0),
+                    width: 12,
                     alignment: Alignment.bottomRight,
                     child: Image.asset(
                       Const.assets + 'icon/dot_vertical_black.png',
@@ -104,43 +108,4 @@ class ContentGridItemWidget extends StatelessWidget {
       ),
     );
   }
-
-// // HanListTile의 title 부분
-//   Widget boardContent() {
-//     return Expanded(
-//       child: Container(
-//         padding: EdgeInsets.only(right: 10),
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.start,
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text(
-//               contentText,
-//               style: contentStyle,
-//               overflow: TextOverflow.ellipsis,
-//               maxLines: 2,
-//             ),
-//             heightSpace(5),
-//             Text(
-//               date,
-//               style: dateStyle,
-//             ),
-//           ],
-//         ),
-//       ),
-//       flex: 100,
-//     );
-//   }
-
-// // HanListTile의 trailing 부분
-//   Widget boardItemTrail() {
-//     return Container(
-//       child: ImageWidget(
-//         width: 74,
-//         height: 74,
-//         imgUrl: imgUrl,
-//         holder: holder,
-//       ),
-//     );
-//   }
 }
