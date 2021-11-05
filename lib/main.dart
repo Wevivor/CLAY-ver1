@@ -3,7 +3,11 @@ import 'dart:convert';
 
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
+import 'package:clay/c_page/test01.dart';
+import 'package:clay/c_page/ui_han_bott_navi.dart';
+import 'package:clay/h_login/ui_login_google.dart';
 import 'package:clay/h_push/controllers/push_controller.dart';
+import 'package:clay/h_share/share_service.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -17,11 +21,14 @@ import 'package:jiffy/jiffy.dart';
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
 import 'c_page/app_routes.dart';
+import 'c_page/auth_middle.dart';
 import 'c_page/bott_navi_controller.dart';
+import 'c_page/test.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
 import 'h_account/page/ui_push_list.dart';
 import 'h_push/ui_push_messages.dart';
+import 'h_share/h_share.dart';
 import 'h_share/share_controller.dart';
 import 'package:http/http.dart' as http;
 
@@ -61,8 +68,6 @@ Future<void> initGetxController() async {
   ///AuthController Test, Real 설정.
 
   final _userinfo = Get.put(HanUserInfoController(), permanent: true);
-  // if (AuthController.to.getUser?.uid != null)
-  //   _userinfo.getUserInfoStore(AuthController.to.getUser?.uid ?? '');
 }
 
 ///---------------------------
@@ -71,14 +76,7 @@ Future<void> initGetxController() async {
 
 getConnectState() async {
   var connectivityResult = await (Connectivity().checkConnectivity());
-  if (connectivityResult == ConnectivityResult.none) {
-    // runApp(DialogApp());
-    // AppHelper.showMessage('네트워크를 확인해 주세요');
-  } else {
-    runApp(MyApp());
-  }
-  // StreamSubscription<ConnectivityResult> _connectivitySubscription =
-  //     Connectivity().onConnectivityChanged.listen(_updateConnectionStatus);
+  runApp(MyApp());
 }
 
 Future<void> _updateConnectionStatus(ConnectivityResult result) async {
@@ -121,7 +119,6 @@ Future<void> initPushChannel() async {
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   if (!kIsWeb) {
-    // groupId = NotificationChannelGroup();
     channel = const AndroidNotificationChannel(
         'wevior', // id
         '알림 채널', // title
@@ -161,6 +158,10 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
+    ShareController.to.isShare = false;
+    ShareController.to.sharedText = '';
+
+    // ---------------FCM -------------------------
     FirebaseMessaging.instance.getToken().then((token) {
       final _token = GetStorage().read('push_token');
       if (_token == null || token != _token) {
@@ -194,7 +195,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
     Get.put(PushController());
-    //종료 이후에 신초받을경우
+    //Closed 상태에 신초받을경우
     FirebaseMessaging.instance
         .getInitialMessage()
         .then((RemoteMessage? message) {
@@ -206,6 +207,38 @@ class _MyAppState extends State<MyApp> {
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       PushController.to.messageArguments = MessageArguments(message, true);
     });
+    // ---------------FCM End-------------------------
+
+    //-----------공유 서비스 서버 ----------------
+    ShareController.to.init();
+    // Create the share service
+    // Register a callback so that we handle shared data if it arrives while the
+    // app is running
+    // Check to see if there is any shared data already, meaning that the app
+    // was launched via sharing.
+
+    ShareService()
+      ..onDataReceived = _handleSharedData
+      ..getSharedData().then(_handleSharedData);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  /// Handles any shared data we may receive.
+  void _handleSharedData(String sharedData) {
+    debugPrint('[CLAY Share] :[RECIEVE] [${sharedData}]');
+    if (sharedData.isNotEmpty) {
+      ShareController.to.sharedText = sharedData;
+      ShareController.to.isShare = true;
+      ShareController.to.update();
+    } else {
+      ShareController.to.sharedText = '';
+      ShareController.to.isShare = false;
+      ShareController.to.update();
+    }
   }
 
   // @override
@@ -218,116 +251,44 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(360, 640),
-        builder: () {
-          // ThemeController.to.getThemeModeFromStore();
-          return GetMaterialApp(
-              defaultTransition: Transition.native,
-              translations: MultiLanguage(),
-              localizationsDelegates: [
-                GlobalMaterialLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-              ],
-              supportedLocales: [
-                Locale('ko', 'ko_KR'),
-                Locale('en', 'US'),
-              ],
-              locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
-              fallbackLocale: Locale('ko', 'KR'),
-              debugShowCheckedModeBanner: false,
-              theme: AppTheme.lightTheme,
-              themeMode: ThemeMode.system,
-              initialRoute: '/start',
-              getPages: [
-                ...AppRoutes.routes,
-                GetPage(
-                    name: '/push_list',
-                    transition: Transition.noTransition,
-                    page: () => PushListUI()),
-                GetPage(
-                  name: '/message',
-                  transition: Transition.noTransition,
-                  page: () => PushMessagesUI(),
-                ),
-              ]);
-        });
+      designSize: Size(360, 640),
+      builder: () => GetMaterialApp(
+        defaultTransition: Transition.native,
+        translations: MultiLanguage(),
+        localizationsDelegates: [
+          GlobalMaterialLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('ko', 'ko_KR'),
+          Locale('en', 'US'),
+        ],
+        locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
+        fallbackLocale: Locale('ko', 'KR'),
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
+        themeMode: ThemeMode.system,
+
+        initialRoute: '/start',
+        getPages: [
+          ...AppRoutes.routes,
+          GetPage(
+              name: '/push_list',
+              transition: Transition.noTransition,
+              page: () => PushListUI()),
+          GetPage(
+              name: '/share_service',
+              transition: Transition.noTransition,
+              middlewares: [AuthMiddleWare()],
+              page: () => ShareServiceUI()),
+          GetPage(
+            name: '/message',
+            transition: Transition.noTransition,
+            page: () => PushMessagesUI(),
+          ),
+        ],
+      ),
+    );
   }
-
-  Future<void> sendPushMessage() async {
-    if (_token == null) {
-      print('Unable to send FCM message, no token exists.');
-      return;
-    }
-
-    try {
-      await http.post(
-        Uri.parse('https://api.rnfirebase.io/messaging/send'),
-        headers: <String, String>{
-          'Content-Type': 'application/json; charset=UTF-8',
-        },
-        body: constructFCMPayload(_token),
-      );
-      print('FCM request for device sent!');
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> onActionSelected(String value) async {
-    switch (value) {
-      case 'subscribe':
-        {
-          print(
-              'FlutterFire Messaging Example: Subscribing to topic "fcm_test".');
-          await FirebaseMessaging.instance.subscribeToTopic('fcm_test');
-          print(
-              'FlutterFire Messaging Example: Subscribing to topic "fcm_test" successful.');
-        }
-        break;
-      case 'unsubscribe':
-        {
-          print(
-              'FlutterFire Messaging Example: Unsubscribing from topic "fcm_test".');
-          await FirebaseMessaging.instance.unsubscribeFromTopic('fcm_test');
-          print(
-              'FlutterFire Messaging Example: Unsubscribing from topic "fcm_test" successful.');
-        }
-        break;
-      case 'get_apns_token':
-        {
-          if (defaultTargetPlatform == TargetPlatform.iOS ||
-              defaultTargetPlatform == TargetPlatform.macOS) {
-            print('FlutterFire Messaging Example: Getting APNs token...');
-            String? token = await FirebaseMessaging.instance.getAPNSToken();
-            print('FlutterFire Messaging Example: Got APNs token: $token');
-          } else {
-            print(
-                'FlutterFire Messaging Example: Getting an APNs token is only supported on iOS and macOS platforms.');
-          }
-        }
-        break;
-      default:
-        break;
-    }
-  }
-}
-
-// Crude counter to make messages unique
-int _messageCount = 0;
-
-/// The API endpoint here accepts a raw FCM payload for demonstration purposes.
-String constructFCMPayload(String? token) {
-  _messageCount++;
-  return jsonEncode({
-    'token': token,
-    'data': {
-      'via': 'FlutterFire Cloud Messaging!!!',
-      'count': _messageCount.toString(),
-    },
-    'notification': {
-      'title': 'Hello FlutterFire!',
-      'body': 'This notification (#$_messageCount) was created via FCM!',
-    },
-  });
 }

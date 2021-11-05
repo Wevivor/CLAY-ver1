@@ -3,11 +3,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
 class ShareController extends GetxController {
-  RxBool isShare = false.obs;
-
+  bool isShare = false;
+  String sharedText = '';
   ShareController() {}
 
   static ShareController get to => Get.find();
+  void init() {
+    isShare = false;
+    sharedText = '';
+  }
 
   @override
   void onInit() {

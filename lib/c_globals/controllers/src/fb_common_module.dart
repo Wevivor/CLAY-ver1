@@ -83,7 +83,7 @@ class FbCommonModule {
       var docSnapshot = await instance.collection(path).doc(id).get();
 
       debugPrint(
-          '--------------readFb:---------------> ${docSnapshot.toString()}');
+          '--------------readFb:---------------> ${docSnapshot.data().toString()}');
 
       if (docSnapshot.exists) {
         final item = docSnapshot.data();

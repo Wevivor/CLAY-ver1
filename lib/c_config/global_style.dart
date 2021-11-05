@@ -18,7 +18,7 @@ class GlobalStyle {
     statusBarBrightness: Brightness.light,
     statusBarIconBrightness: Brightness.dark,
     // statusBarColor: Color(0xFFEEEEEE),
-    statusBarColor: Colors.white,
+    statusBarColor: Colors.transparent,
     systemNavigationBarIconBrightness: Brightness.dark,
     systemNavigationBarColor: Color(0xFFEEEEEE),
     // systemNavigationBarColor: Colors.transparent,

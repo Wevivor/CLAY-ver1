@@ -1,6 +1,7 @@
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/models/users/users_dtos.dart';
+import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/h_share.dart';
 import 'package:clay/h_share/share_controller.dart';
@@ -134,18 +135,26 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
         }
       } on HanUserInfoException catch (e) {
         final userDto = _createUserInfo(AuthController.to.getUser, 'G');
-        HanUserInfoController.to.actionCreate(userDto);
+        HanUserInfoController.to.actionCreate(userDto).then((value) async {
+          //SUJECT: 보드 디폴트 3게를 만듬.
+          final _controller = Get.put(BoardController());
+
+          await _controller
+              .actionDefalutCreate(HanUserInfoController.to.toProfile());
+        });
       }
 
-      if (ShareController.to.isShare.value)
-        Get.to(() => ShareServiceUI());
-      else {
-        var route = '/main_menu';
-        if (PushController.to.messageArguments != null) {
-          route = '/message';
-        }
-        Get.offNamed(route);
-      }
+      // if (ShareController.to.isShare)
+      //   Get.to(() => ShareServiceUI());
+      // else {
+      //   //SUBJECT: 푸시 작업
+      //   var route = '/main_menu';
+      //   if (PushController.to.messageArguments != null) {
+      //     route = '/message';
+      //   }
+
+      //   Get.offNamed(route);
+      // }
     } on FirebaseAuthException catch (e) {
       if (['user-cancelled', 'user-not-found'].contains(e.code)) {
         AppHelper.showMessage(HanExceptionMessage.keys[e.code] ?? '');
@@ -190,15 +199,15 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
         HanUserInfoController.to.actionCreate(userDto);
       }
       // await GetStorage().write("logined", 'K');
-      if (ShareController.to.isShare.value)
-        Get.to(() => ShareServiceUI());
-      else {
-        var route = '/main_menu';
-        if (PushController.to.messageArguments != null) {
-          route = '/message';
-        }
-        Get.offNamed(route);
-      }
+      // if (ShareController.to.isShare)
+      //   Get.to(() => ShareServiceUI());
+      // else {
+      //   var route = '/main_menu';
+      //   if (PushController.to.messageArguments != null) {
+      //     route = '/message';
+      //   }
+      //   Get.offNamed(route);
+      // }
 
       AppHelper.showMessage("카카오 아이디로 로그인 되었습니다.");
     } on Exception catch (ex) {
