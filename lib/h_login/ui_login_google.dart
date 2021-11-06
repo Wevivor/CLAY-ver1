@@ -144,17 +144,17 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
         });
       }
 
-      // if (ShareController.to.isShare)
-      //   Get.to(() => ShareServiceUI());
-      // else {
-      //   //SUBJECT: 푸시 작업
-      //   var route = '/main_menu';
-      //   if (PushController.to.messageArguments != null) {
-      //     route = '/message';
-      //   }
+      if (ShareController.to.isShare)
+        Get.to(() => ShareServiceUI());
+      else {
+        //SUBJECT: 푸시 작업
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
 
-      //   Get.offNamed(route);
-      // }
+        Get.offNamed(route);
+      }
     } on FirebaseAuthException catch (e) {
       if (['user-cancelled', 'user-not-found'].contains(e.code)) {
         AppHelper.showMessage(HanExceptionMessage.keys[e.code] ?? '');
@@ -198,16 +198,16 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
         final userDto = _createUserInfo(AuthController.to.getUser, 'K');
         HanUserInfoController.to.actionCreate(userDto);
       }
-      // await GetStorage().write("logined", 'K');
-      // if (ShareController.to.isShare)
-      //   Get.to(() => ShareServiceUI());
-      // else {
-      //   var route = '/main_menu';
-      //   if (PushController.to.messageArguments != null) {
-      //     route = '/message';
-      //   }
-      //   Get.offNamed(route);
-      // }
+      await GetStorage().write("logined", 'K');
+      if (ShareController.to.isShare)
+        Get.to(() => ShareServiceUI());
+      else {
+        var route = '/main_menu';
+        if (PushController.to.messageArguments != null) {
+          route = '/message';
+        }
+        Get.offNamed(route);
+      }
 
       AppHelper.showMessage("카카오 아이디로 로그인 되었습니다.");
     } on Exception catch (ex) {
