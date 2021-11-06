@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
-import 'package:clay/c_page/test01.dart';
 import 'package:clay/c_page/ui_han_bott_navi.dart';
 import 'package:clay/h_login/ui_login_google.dart';
 import 'package:clay/h_push/controllers/push_controller.dart';
@@ -22,7 +21,6 @@ import 'c_globals/helper/helpers.dart';
 import 'c_page/app_routes.dart';
 import 'c_page/auth_middle.dart';
 import 'c_page/bott_navi_controller.dart';
-import 'c_page/test.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
 import 'h_account/page/ui_push_list.dart';
