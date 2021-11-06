@@ -136,35 +136,35 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
       onWillPop: onWillPop,
       child: Scaffold(
         body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
-        // bottomNavigationBar: Stack(
-        //   alignment: Alignment.center,
-        //   children: [
-        //     GetBuilder<BottomNaviController>(
-        //         builder: (_) => vwBottomMenu(context)),
-        //     Container(
-        //       width: 36,
-        //       height: 36,
-        //       child: FloatingActionButton(
-        //         child: Icon(
-        //           Icons.add_rounded,
-        //           size: 24,
-        //         ),
-        //         // child: Image.asset('assets/icon/add_board_btn.png'),
-        //         mini: false,
-        //         elevation: 0,
-        //         backgroundColor: Colors.black,
-        //         // foregroundColor: Colors.white,
-        //         splashColor: Colors.black,
-        //         onPressed: () {
-        //           Get.put(BoardListMySelectController());
-        //           BoardListMySelectController.to.cache = [];
-        //           BoardListMySelectController.to.fetchItems();
-        //           _showBS(context, vwBoardMenu(context));
-        //         },
-        //       ),
-        //     ),
-        //   ],
-        // ),
+        bottomNavigationBar: Stack(
+          alignment: Alignment.center,
+          children: [
+            GetBuilder<BottomNaviController>(
+                builder: (_) => vwBottomMenu(context)),
+            Container(
+              width: 36,
+              height: 36,
+              child: FloatingActionButton(
+                child: Icon(
+                  Icons.add_rounded,
+                  size: 24,
+                ),
+                // child: Image.asset('assets/icon/add_board_btn.png'),
+                mini: false,
+                elevation: 0,
+                backgroundColor: Colors.black,
+                // foregroundColor: Colors.white,
+                splashColor: Colors.black,
+                onPressed: () {
+                  Get.put(BoardListMySelectController());
+                  BoardListMySelectController.to.cache = [];
+                  BoardListMySelectController.to.fetchItems();
+                  _showBS(context, vwBoardMenu(context));
+                },
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
