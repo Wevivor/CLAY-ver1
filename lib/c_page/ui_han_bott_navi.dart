@@ -145,6 +145,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
               width: 36,
               height: 36,
               child: FloatingActionButton(
+                // 플러스 버튼 (추가하기 버튼)
                 child: Icon(
                   Icons.add_rounded,
                   size: 24,

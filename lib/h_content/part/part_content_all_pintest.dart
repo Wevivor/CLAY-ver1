@@ -1,176 +1,186 @@
-// 내보드의 상세리스트 페이지 : 그리드 타입.
-
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
-import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
-import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
-import 'package:clay/h_content/widget/wgt_content_grid_item.dart';
 
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:share/share.dart' as share;
 
+import 'package:share/share.dart' as share;
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
 
+import 'wgt_content_grid_item.dart';
+
 // ignore: must_be_immutable
-class BoardPintestListPART extends StatelessWidget with AppbarHelper {
-  BoardPintestListPART();
+class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
+  ContentAllPintestPART();
   @override
   Widget build(BuildContext context) {
     ///--------------------------
     /// 핀테스트 리스트
     ///-------------------------
+    return GetBuilder<ContentAllListController>(builder: (controller) {
+      // final controller = ContentAllListController.to;
+      final cache = controller.cache;
+      final loading = controller.loading;
+      print('${controller.hasMore}');
 
-    return GetBuilder<ContentListController>(
-      builder: (controller) {
-        final cache = controller.cache;
-        final loading = controller.loading;
-
-        if (loading && cache.length == 0) {
-          return Container(
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
-
-        if (!loading && cache.length == 0) {
-          return Container(
-            child: Center(
-              child: Text('아이템이 없습니다'),
-            ),
-          );
-        }
-        return StaggeredGridView.countBuilder(
-          // physics: NeverScrollableScrollPhysics(),
-          primary: false,
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          crossAxisCount: 2,
-          mainAxisSpacing: 14.0,
-          crossAxisSpacing: 12.0,
-          itemCount: ContentListController.to.hasMore
-              ? ContentListController.to.cache.length + 1
-              : ContentListController.to.cache.length,
-          // itemCount: BestListController.to.cache.length,
-          itemBuilder: (context, index) {
-            final controller = ContentListController.to;
-            final cache = controller.cache;
-            if (index >= ContentListController.to.cache.length) {
-              return Container(
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-
-            // if (item == null) return Container();
-
-            Contents item = cache[index];
-
-            return ContentGridItemWidget(
-              onTap: () async {
-                // final postInfo = cache[index];
-                // print('------------>${postInfo.id}');
-                // final _controller = Get.put(PostController());
-                // await _controller.fetchItem(id: postInfo.id);
-                // final _authorController = Get.put(PostAuthorController(
-                //     uid: postInfo.uid, excludedId: item.id ?? ''));
-                // PostAuthorController.to.cache.clear();
-                // await _authorController.fetchItems();
-
-                Get.to(() => PostSUB(item: item, parentController: controller));
-              },
-              title: item.info.contentsTitle,
-              // imgUrl: item.info.contentsImages,
-              imgUrl: item.info.thumbnails,
-              // holder: Const.assets + 'images/smpl_list1.png',
-              onMore: () {
-                final _controller = Get.put(BoardListMySelectController());
-                _controller.cache.clear();
-                _controller.selected = -1;
-                _controller.fetchItems();
-                _showBS(
-                  context,
-                  vwBoardMenu(context, item),
-                );
-              },
-            );
-          },
-          // staggeredTileBuilder: (int index) => new StaggeredTile.fit(2),
-          staggeredTileBuilder: (int index) =>
-              // new StaggeredTile.fit(2),
-              new StaggeredTile.count(1, index.isEven ? 1 : 1.4),
+      if (loading && cache.length == 0) {
+        return Container(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
         );
-      },
-    );
+      }
+
+      if (!loading && cache.length == 0) {
+        return Container(
+          child: Center(
+            child: Text('아이템이 없습니다'), // TODO : [SH] 현재 번역하지 않음.
+          ),
+        );
+      }
+      return new StaggeredGridView.countBuilder(
+        // physics: NeverScrollableScrollPhysics(),
+        primary: false,
+        shrinkWrap: true,
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        crossAxisCount: 2,
+        mainAxisSpacing: 14.0,
+        crossAxisSpacing: 12.0,
+        itemCount: controller.hasMore
+            ? controller.cache.length + 1
+            : controller.cache.length,
+        // itemCount: ContentAllListController.to.cache.length,
+        itemBuilder: (context, index) {
+          final controller = ContentAllListController.to;
+          final cache = controller.cache;
+          if (index >= controller.cache.length) {
+            Future.microtask(() {
+              controller.fetchItems(nextId: index);
+            });
+            // Future.delayed(Duration(milliseconds: 100),
+            //     () => controller.fetchItems(nextId: index));
+            return Container(
+              child: Center(
+                child: CircularProgressIndicator(),
+              ),
+            );
+          }
+
+          Contents item = cache[index];
+
+          //SUBJECT: 콘텐츠 아이템
+          //TODO
+          return Container(
+            padding: EdgeInsets.only(top: 6.0),
+            child: ContentGridItemWidget(
+              title: item.info.contentsTitle,
+              imgUrl: item.info.contentsImages,
+              // imgUrl: item.info.thumbnails,
+              contentText: item.info.contentsTitle,
+              onTap: () {},
+
+              onMore: () {
+                debugPrint('======> Show BS');
+                _showBS(context, vwBoardMenu(context, item));
+              },
+            ),
+          );
+        },
+        staggeredTileBuilder: (int index) =>
+            new StaggeredTile.count(1, index.isEven ? 1 : 1.4),
+      );
+    });
   }
 
+  // All Content 리스트에서 점메뉴
   Widget vwBoardMenu(BuildContext context, Contents item) {
+    final menuStyle = TextStyle(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+      fontSize: 14,
+      color: Color(0xFF000000),
+      fontWeight:
+          Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
+      height:
+          Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 16.41px, 19.12px
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
-        heightSpace(34),
+        heightSpace(20.0),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSFixed(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-          title: item.info.contentsFixed == true ? Text('상단해제') : Text('상단고정'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_pin_fix.png')),
+          title: item.info.contentsFixed == true // 상단고정
+              ? Text('com.bs.body.menu.pinOff'.tr, style: menuStyle)
+              : Text('com.bs.body.menu.pinOn'.tr, style: menuStyle),
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSShare(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-          title: Text('공유'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_share.png')),
+          title: Text('com.bs.body.menu.share'.tr, style: menuStyle), // 공유
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSRemindAlarm(context, item),
-          leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
-          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/ph_bell-ringing.png')),
+          title: Text('contents.bs.body.menu.reminder'.tr,
+              style: menuStyle), // 알람 설정
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSBoardChange(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-          title: Text('보드변경'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_boardchange.png')),
+          title: Text('contents.bs.body.menu.moveBoard'.tr,
+              style: menuStyle), // 보드 변경
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 23.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSDelete(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-          title: Text('삭제'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_trashcan.png')),
+          title: Text('com.bs.body.menu.delBoard'.tr, style: menuStyle), // 삭제
         ),
       ],
     );
@@ -195,7 +205,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
   //TODO: 수정해야 함.
   Future<void> _actionBSShare(BuildContext context, item) async {
     Get.back();
-    final _boardUrl = sprintf('%s/%s', [Const.clayBaseUrl, item.contentsId]);
+    final _boardUrl = sprintf('%s', [item.info.contentsUrl]);
     await share.Share.share(_boardUrl);
   }
 
@@ -229,7 +239,6 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
         BottomSheetBoardChange(
           parentContext: context,
           onDone: () {
-            Get.lazyPut(() => ContentAllListController());
             ContentAllListController.to.actionDelteItem(item.contentsId ?? '');
           },
           onMenu: () {
@@ -242,14 +251,13 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
   //SUBJECT : BS: 컨테츠 삭제
   Future<void> _actionBSDelete(BuildContext context, item) async {
     Get.back();
-    Get.lazyPut(() => ContentAllListController());
     var _responce = false;
     await DialogHelper.MessageDialog(
       context,
       (context) => DeleteDialog(
-        title: '보드를 삭제하시겠습니까?',
-        deleteTitle: '삭제',
-        okTitle: '취소',
+        title: 'contents.bs.dlg.question.delete'.tr, // 콘텐츠를 삭제하시겠어요?
+        deleteTitle: 'com.btn.delete'.tr, // 삭제
+        okTitle: 'com.btn.cancel'.tr, // 취소
         okTap: () {
           _responce = false;
         },

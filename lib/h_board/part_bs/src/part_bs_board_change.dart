@@ -34,13 +34,13 @@ class BottomSheetBoardChange extends StatelessWidget
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
-        // heightSpace(18),
         AppBar(
+          toolbarHeight: 45,
+          elevation: 0.0,
           leading: IconButton(
             onPressed: () {
               Get.back();
@@ -50,17 +50,23 @@ class BottomSheetBoardChange extends StatelessWidget
           ),
           centerTitle: true,
           title: Text(
-            '보드변경',
-            style: baseStyle.copyWith(
-                fontSize: 18,
-                color: Color(0xFF2F2F2F),
-                fontWeight: FontWeight.bold),
+            'contents.bs.body.menu.moveBoard'.tr, // 보드 변경
+            style: TextStyle(
+              fontFamily:
+                  Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+              fontSize: 18,
+              color: Color(0xFF000000),
+              fontWeight: Get.locale?.languageCode == 'ko'
+                  ? FontWeight.w700
+                  : FontWeight.w900,
+              height: Get.locale?.languageCode == 'ko'
+                  ? 1.17
+                  : 1.37, // 21.09px, 24.59px
+            ),
           ),
-          elevation: 0.0,
           actions: [
             Container(
               alignment: Alignment.center,
-              // color: Colors.red,
               child: InkWell(
                 onTap: () async {
                   if (BoardListMySelectController.to.selected < 0) {
@@ -86,22 +92,29 @@ class BottomSheetBoardChange extends StatelessWidget
                   Get.back();
                 },
                 child: Text(
-                  '완료',
+                  'com.btn.save'.tr, // dhks
                   style: baseStyle.copyWith(
-                      fontSize: 13,
-                      color: Color(0xff017BFE),
-                      fontWeight: FontWeight.w400),
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                    fontSize: 14,
+                    color: Color(0xFF017BFE),
+                    fontWeight: Get.locale?.languageCode == 'ko'
+                        ? FontWeight.w400
+                        : FontWeight.w500,
+                    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37,
+                  ), // 16.41px, 19.12px
                 ),
               ),
             ),
-            widthSpace(18.87),
+            widthSpace(20),
           ],
         ),
-        vwTitle('기존보드'),
-        heightSpace(10),
+        heightSpace(10.0),
+        vwTitle('contests.bs.sub.subtitle.originalB'.tr),
+        heightSpace(10.0),
         Container(
           alignment: Alignment.centerLeft,
-          padding: EdgeInsets.only(left: 19),
+          padding: EdgeInsets.only(left: 18.0),
           child: BSBoardItemWidget(
             selected: -2,
             index: -1,
@@ -109,11 +122,8 @@ class BottomSheetBoardChange extends StatelessWidget
             category: current.boardInfo.boardBadge,
           ),
         ),
-
-        heightSpace(16),
-
-        vwTitle('변경할 보드'),
-        heightSpace(10),
+        heightSpace(16.0),
+        vwTitle('contents.bs.sub.subtitle.newB'.tr), // 변경할 보드
         GetBuilder<BoardListMySelectController>(builder: (controller) {
           return Container(
             height: 54 + 8 + 11 + 10,
@@ -129,7 +139,7 @@ class BottomSheetBoardChange extends StatelessWidget
             }),
           );
         }),
-        heightSpace(16),
+        heightSpace(16.0),
       ],
     );
   }

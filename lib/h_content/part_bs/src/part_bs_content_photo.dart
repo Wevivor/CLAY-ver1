@@ -282,8 +282,6 @@ class BottomSheetContentPhoto extends StatelessWidget
                 ),
                 heightSpace(16.0),
                 vwTitle('com.bs.subtitle.boardChoice'.tr),
-                heightSpace(10.0),
-                // TODO : 섀도우 때문에 패딩 문제가 있음.
                 GetBuilder<BoardListMySelectController>(builder: (controller) {
                   return Container(
                     height: 54 + 8 + 11 + 10,

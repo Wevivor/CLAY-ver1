@@ -45,10 +45,9 @@ class BottomSheetContentLink extends StatelessWidget
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 10,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         vwBSAppBar(
           onBack: () {
@@ -103,10 +102,16 @@ class BottomSheetContentLink extends StatelessWidget
                 child: Text(
                   'com.btn.save'.tr,
                   style: baseStyle.copyWith(
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
                     fontSize: 14,
                     color: Color(0xff017BFE),
-                    fontWeight: FontWeight.w400,
-                    height: 1.17, // line height : 16.41px
+                    fontWeight: Get.locale?.languageCode == 'ko'
+                        ? FontWeight.w400
+                        : FontWeight.w500,
+                    height: Get.locale?.languageCode == 'ko'
+                        ? 1.17
+                        : 1.37, // 16.41px , 19.12px
                   ),
                 ),
               ),
@@ -114,7 +119,7 @@ class BottomSheetContentLink extends StatelessWidget
             widthSpace(20.0),
           ],
         ),
-        heightSpace(20.0),
+        heightSpace(10.0),
         vwTitle('board.bs.sub.subtitle.webLink'.tr),
         heightSpace(10.0),
         Padding(
@@ -191,8 +196,6 @@ class BottomSheetContentLink extends StatelessWidget
         ),
         heightSpace(16.0),
         vwTitle('com.bs.subtitle.boardChoice'.tr),
-        heightSpace(10.0),
-        // TODO : 섀도우 때문에 패딩 문제가 있음.
         GetBuilder<BoardListMySelectController>(builder: (controller) {
           return Container(
             height: 54 + 8 + 11 + 10,

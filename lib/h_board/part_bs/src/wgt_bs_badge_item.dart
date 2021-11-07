@@ -6,6 +6,7 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
+import 'package:get/get.dart';
 
 // Bottom Sheet 내용
 class BsBadgeItemWidget extends StatelessWidget {
@@ -15,12 +16,13 @@ class BsBadgeItemWidget extends StatelessWidget {
   final isSelected;
 
   final classTitle = baseStyle.copyWith(
-      fontSize: 11,
-      color: Color(0xFF707070),
-      fontWeight: FontWeight.normal,
-      letterSpacing: -0.55, // -5%
-      height: 1.17 // line height : 12.89px
-      );
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+    fontSize: 11,
+    color: Color(0xFF707070),
+    fontWeight: FontWeight.w400,
+    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 12.89px, 15.03px
+    letterSpacing: -0.55, // -5%
+  );
 
   BsBadgeItemWidget({
     this.iconUrl = '',
@@ -70,13 +72,15 @@ class BsBadgeItemWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             ImageWidget(height: 24, width: 24, holder: Const.assets + iconUrl),
-            SizedBox(
-              height: 6,
-            ),
-            Text(
-              classText,
-              overflow: TextOverflow.ellipsis,
-              style: classTitle,
+            heightSpace(6.0),
+            Container(
+              alignment: Alignment.center,
+              width: 44,
+              child: Text(
+                classText,
+                overflow: TextOverflow.ellipsis,
+                style: classTitle,
+              ),
             ),
           ],
         ),
