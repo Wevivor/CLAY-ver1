@@ -87,8 +87,8 @@ class BottomSheetBoardChange extends StatelessWidget
                   final _item = current.copyWith(boardInfo: _boardInfo);
 
                   await _controller.actionContentsUpdate(_item.toDto());
-                  if (onDone != null) onDone();
 
+                  if (onDone != null) onDone();
                   Get.back();
                 },
                 child: Text(

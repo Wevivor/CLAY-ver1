@@ -4,7 +4,7 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
-import 'package:clay/h_content/page/part_content_all_pintest.dart';
+import 'package:clay/h_content/part/part_content_all_pintest.dart';
 import 'package:clay/h_search/part_search/part_search.dart';
 import 'package:clay/h_search/part_search/src/cupertino_search_delegate.dart';
 import 'package:clay/h_search/part_search/src/platform_search.dart';

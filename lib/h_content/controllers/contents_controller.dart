@@ -72,22 +72,8 @@ class ContentsController extends AbsItemController
           info: item.info.copyWith(contentsId: docRef.id));
 
       await docRef.set(newItem.toJson(), SetOptions(merge: true));
-      var _itemJson = newItem.toJson();
-      _itemJson['user_info']['register_date'] =
-          newItem.userInfo.registerDate.toIso8601String();
 
-      _itemJson['board_info']['register_date'] =
-          newItem.boardInfo?.registerDate.toIso8601String();
-
-      _itemJson['contents_create_date'] =
-          newItem.contentsCreateDate.toIso8601String();
-      _itemJson['contents_upt_date'] =
-          newItem.contentsUpdateDate.toIso8601String();
-
-      _itemJson['info']['contents_create_date'] =
-          newItem.info.contentsCreateDate.toIso8601String();
-      _itemJson['info']['contents_upt_date'] =
-          newItem.info.contentsUpdateDate.toIso8601String();
+      final _itemJson = converterToDate(newItem);
 
       await insertEl(
         index: '/clay_contents/',
@@ -133,18 +119,13 @@ class ContentsController extends AbsItemController
           id: item.contentsId ?? '',
           dto: item);
 
-      var _itemJson = item.toJson();
-      _itemJson['contents_create_date'] =
-          item.contentsCreateDate.toIso8601String();
-      _itemJson['contents_upt_date'] =
-          item.contentsUpdateDate.toIso8601String();
+      final _itemJson = converterToDate(item);
 
-      _itemJson['info']['contents_create_date'] =
-          item.info.contentsCreateDate.toIso8601String();
-      _itemJson['info']['contents_upt_date'] =
-          item.info.contentsUpdateDate.toIso8601String();
       await updateEl(
-          index: '/clay_boards/', id: item.contentsId, body: _itemJson);
+          index: '/clay_contents/', id: item.contentsId, body: _itemJson);
+
+      //SUBJET: 에러 수정.
+      //TODO: 보드의 아이템 숫자조정
     }).then((value) {
       update();
       LoadingController.to.isLoading = false;
@@ -155,21 +136,6 @@ class ContentsController extends AbsItemController
       throw Exception('error');
     });
   }
-
-  // Future<void> actionUpdate() async {
-  //   try {
-  //     await updateFb(
-  //         instance: _instance,
-  //         path: MENU_POS,
-  //         id: boardItem?.boardId ?? '',
-  //         dto: boardItem?.toDto());
-  //   } catch (e) {
-  //     throw Exception('error ${e.toString()}');
-  //   } finally {
-  //     update();
-  //     LoadingController.to.isLoading = false;
-  //   }
-  // }
 
   Future<void> actionUpdateInfo({id, info}) async {
     try {
@@ -187,21 +153,51 @@ class ContentsController extends AbsItemController
     }
   }
 
+  dynamic converterToDate(ContentsDto? info) {
+    var _itemJson = info?.toJson();
+    _itemJson?['user_info']['register_date'] =
+        info?.userInfo.registerDate.toIso8601String();
+
+    _itemJson?['board_info']['register_date'] =
+        info?.boardInfo?.registerDate.toIso8601String();
+
+    _itemJson?['contents_create_date'] =
+        info?.contentsCreateDate.toIso8601String();
+    _itemJson?['contents_upt_date'] =
+        info?.contentsUpdateDate.toIso8601String();
+
+    _itemJson?['info']['contents_create_date'] =
+        info?.info.contentsCreateDate.toIso8601String();
+    _itemJson?['info']['contents_upt_date'] =
+        info?.info.contentsUpdateDate.toIso8601String();
+    return _itemJson;
+  }
+
   Future<void> actionPin({fix}) async {
-    try {
-      if (contentsItem?.info != null) {
-        final _info = contentsItem?.info;
-        contentsItem =
-            contentsItem?.copyWith(info: _info!.copyWith(contentsFixed: fix));
-        await actionUpdateInfo(
-            id: contentsItem?.contentsId,
-            info: contentsItem?.info.copyWith(contentsFixed: fix).toDto());
-      }
-    } catch (e) {
-      throw Exception('error ${e.toString()}');
-    } finally {
+    LoadingController.to.isLoading = true;
+    return FirebaseFirestore.instance.runTransaction((transaction) async {
+      final _info = contentsItem?.info;
+      contentsItem =
+          contentsItem?.copyWith(info: _info!.copyWith(contentsFixed: fix));
+      await actionUpdateInfo(
+          id: contentsItem?.contentsId,
+          info: contentsItem?.info.copyWith(contentsFixed: fix).toDto());
+
+      //시간 변경 함.
+      final _itemEL = converterToDate(contentsItem?.toDto());
+      await updateEl(
+          index: '/clay_contents/',
+          id: contentsItem?.contentsId,
+          body: _itemEL);
+    }).then((value) {
+      update();
       LoadingController.to.isLoading = false;
-    }
+    }).catchError((error) {
+      //TODO: Exception에 추가함
+      LoadingController.to.isLoading = false;
+      debugPrint("Failed to update user followers: $error");
+      throw Exception('error');
+    });
   }
 
   ContentsDto createContentsDto(Profile profile, BoardInfo? boardInfo,
@@ -211,6 +207,7 @@ class ContentsController extends AbsItemController
       //  contentsId: contentsId,
       contentsTitle: '',
       contentsUrl: '',
+      contentsFixed: false,
       contentsImages: '',
       contentsDescription: '',
       contentsComment: comment,

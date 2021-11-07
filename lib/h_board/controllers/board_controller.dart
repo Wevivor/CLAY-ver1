@@ -26,7 +26,6 @@ class BoardController extends AbsItemController
     super.onClose();
   }
 
-
   //---------------------------------
   //------------------기본 CRUD 프로토콜
   //---------------------------------
@@ -115,12 +114,11 @@ class BoardController extends AbsItemController
         })
         .then((value) => null)
         //TODO: Exception에 추가함
-        .catchError(
-            (error) {
-              LoadingController.to.isLoading = false;
-              debugPrint("Failed to update user followers: $error");
-              throw Exception('error');
-            });
+        .catchError((error) {
+          LoadingController.to.isLoading = false;
+          debugPrint("Failed to update user followers: $error");
+          throw Exception('error');
+        });
   }
 
   Future<void> actionDelete(id) async {
@@ -129,6 +127,7 @@ class BoardController extends AbsItemController
       await deleteFb(instance: _instance, path: MENU_POS, id: id);
 
       await deleteEl(index: '/clay_boards/', id: id);
+      //TODO 콘텐츠 삭제 부분 추가해야 함.
     }).then((value) {
       update();
       LoadingController.to.isLoading = false;
@@ -185,15 +184,14 @@ class BoardController extends AbsItemController
 
   Future<void> actionPin({fix}) async {
     LoadingController.to.isLoading = true;
-      if (boardItem?.info != null) {
-        final _info = boardItem?.info;
-        boardItem = boardItem?.copyWith(info: _info!.copyWith(isFixed: fix));
+    if (boardItem?.info != null) {
+      final _info = boardItem?.info;
+      boardItem = boardItem?.copyWith(info: _info!.copyWith(isFixed: fix));
 
-        await actionUpdate(id: boardItem?.boardId, info: boardItem);
-        update();
-      }
-      LoadingController.to.isLoading = false;
-
+      await actionUpdate(id: boardItem?.boardId, info: boardItem);
+      update();
+    }
+    LoadingController.to.isLoading = false;
   }
 
   ///----------------------------------
@@ -263,5 +261,4 @@ class BoardController extends AbsItemController
     );
     return _item;
   }
-
 }

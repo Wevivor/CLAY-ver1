@@ -11,8 +11,10 @@ class ElCommonModule {
 
       dio.options.headers['Content-Type'] = 'application/json';
       dio.options.headers["authorization"] = Const.apiKey;
+      dio.options.baseUrl = Const.elasticEndPoint;
+
       final _response = await dio.post(
-        Const.elasticEndPoint + query,
+        query,
         data: body,
       );
       if (_response.statusCode == 200) {
@@ -20,6 +22,35 @@ class ElCommonModule {
         final _resultData = _result['hits'];
         final _datas = _resultData['hits'];
         return _datas;
+      } else {
+        debugPrint('====>GenericHttpException');
+        throw GenericHttpException();
+      }
+    } on SocketException catch (e) {
+      debugPrint('====>NoConnectionException ${e.toString()}');
+
+      throw NoConnectionException();
+    }
+  }
+
+  Future<List<dynamic>> countFilter(final index, final body) async {
+    debugPrint('--------listFilter---------');
+    try {
+      Dio dio = new Dio();
+
+      dio.options.headers['Content-Type'] = 'application/json';
+      dio.options.headers["authorization"] = Const.apiKey;
+      dio.options.baseUrl = Const.elasticEndPoint;
+
+      final _response = await dio.post(
+        '${index}/_search',
+        data: body,
+      );
+      if (_response.statusCode == 200) {
+        final _result = _response.data;
+        final _resultData = _result['aggregations'];
+        final _datas = _resultData['group_by_state'];
+        return _datas['buckets'];
       } else {
         debugPrint('====>GenericHttpException');
         throw GenericHttpException();

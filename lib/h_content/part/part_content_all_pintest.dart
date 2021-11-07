@@ -7,6 +7,7 @@ import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
+import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 
@@ -191,14 +192,12 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
   Future<void> _actionBSFixed(BuildContext context, item) async {
     final _contentsCtl = Get.put(ContentsController());
     _contentsCtl.contentsItem = item;
-    final _fixed = item.info.contentsFixed;
+    final _fixed = item.info.contentsFixed ?? false;
     await _contentsCtl.actionPin(fix: !_fixed!);
-    Get.back();
 
-    Future.microtask(() async {
-      ContentAllListController.to.cache.clear();
-      await ContentAllListController.to.fetchItems();
-    });
+    ContentAllListController.to.cache.clear();
+    await ContentAllListController.to.fetchItems();
+    Get.back();
   }
 
   //SUBJECT: 링크
@@ -238,8 +237,16 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
         context,
         BottomSheetBoardChange(
           parentContext: context,
-          onDone: () {
-            ContentAllListController.to.actionDelteItem(item.contentsId ?? '');
+          onDone: () async {
+            ContentAllListController.to.cache.clear();
+            final _selected = ContentsListAllMySelectController.to.selected;
+            if (_selected > 0) {
+              final _board =
+                  ContentsListAllMySelectController.to.cache[_selected - 1];
+              await ContentAllListController.to
+                  .fetchItems(term: _board.boardId);
+            } else
+              await ContentAllListController.to.fetchItems();
           },
           onMenu: () {
             _showBS(context, vwBoardMenu(context, item));
@@ -267,7 +274,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
       ),
     );
     if (_responce) {
-      await ContentAllListController.to.actionDelete(item.info.contentsId);
+      await ContentsController.to.actionDelete(item.info.contentsId);
       ContentAllListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
   }

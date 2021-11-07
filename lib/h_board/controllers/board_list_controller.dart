@@ -56,11 +56,38 @@ class BoardListController extends AbsListController
         }
       ]
     };
-
     final lists = await listFilter('/clay_boards/_search', bodyJSON);
+
+    //보드 카운드 입력하기
+    var countList = [
+      {
+        "match": {"user_info.user_id": AuthController.to.getUser?.uid}
+      }
+    ];
+    final countJSON = {
+      "size": 0,
+      "query": {
+        "bool": {
+          "must": countList,
+        },
+      },
+      "aggs": {
+        "group_by_state": {
+          "terms": {"field": "board_info.board_id.keyword"}
+        }
+      }
+    };
+    final counts = await countFilter('/clay_contents', countJSON);
     final tmp = lists.map((jsonList) {
       final item = BoardDto.fromJson(jsonList['_source']).toDomain();
-      return item;
+      final keys = counts.where((e) {
+        return e['key'] == item.boardId;
+      });
+
+      if (keys.isEmpty)
+        return item.copyWith(contentsCount: 0);
+      else
+        return item.copyWith(contentsCount: keys.first['doc_count']);
     }).toList();
 
     return tmp;

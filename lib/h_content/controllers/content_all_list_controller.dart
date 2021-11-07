@@ -43,68 +43,74 @@ class ContentAllListController extends AbsListController
         }
       },
       "sort": [
-        {"info.contents_fixed": "desc"}
+        {"info.contents_fixed": "desc"},
+        {
+          "contents_create_date": {
+            "order": "desc",
+            "format": "strict_date_optional_time_nanos"
+          }
+        }
       ]
     };
 
-    print(jsonEncode(bodyJSON));
     final lists = await listFilter('/clay_contents/_search', bodyJSON);
-    return lists.map((jsonList) {
+    final _tmp = lists.map((jsonList) {
       return ContentsDto.fromJson(jsonList['_source']).toDomain();
     }).toList();
+    return _tmp;
   }
 
   //---------------------------------
   //------------------기본 CRUD 프로토콜
   //---------------------------------
 
-  Future<ContentsInfo> read(String id) async {
-    // try {
-    final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
+  // Future<ContentsInfo> read(String id) async {
+  //   // try {
+  //   final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
 
-    if (_item == null) {
-      throw Exception('error');
-    }
-    final _post = ContentsDto.fromJson(_item).toDomain();
+  //   if (_item == null) {
+  //     throw Exception('error');
+  //   }
+  //   final _post = ContentsDto.fromJson(_item).toDomain();
 
-    // final info = PostInfo.fromJson((_info.info));
-    this.item = _post.info;
-    update();
-    return _post.info;
-  }
+  //   // final info = PostInfo.fromJson((_info.info));
+  //   this.item = _post.info;
+  //   update();
+  //   return _post.info;
+  // }
 
-  Future<void> actionfresh(String id) async {
-    // try {
-    final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
+  // Future<void> actionfresh(String id) async {
+  //   // try {
+  //   final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
 
-    if (_item == null) {
-      throw Exception('error');
-    }
-    final _post = ContentsDto.fromJson(_item).toDomain();
-    var existIndex = cache.indexWhere(
-      (element) => element.id == id,
-    );
+  //   if (_item == null) {
+  //     throw Exception('error');
+  //   }
+  //   final _post = ContentsDto.fromJson(_item).toDomain();
+  //   var existIndex = cache.indexWhere(
+  //     (element) => element.id == id,
+  //   );
 
-    if (existIndex >= 0) {
-      cache[existIndex] = _post.info;
-    }
+  //   if (existIndex >= 0) {
+  //     cache[existIndex] = _post.info;
+  //   }
 
-    // final info = PostInfo.fromJson((_info.info));
-    this.item = _post;
-    update();
-  }
+  //   // final info = PostInfo.fromJson((_info.info));
+  //   this.item = _post;
+  //   update();
+  // }
 
-  Future<void> actionDelete(id) async {
-    try {
-      LoadingController.to.isLoading = true;
-      await deleteFb(instance: _instance, path: MENU_POS, id: id);
-    } catch (e) {
-      throw Exception('error');
-    } finally {
-      update();
-      LoadingController.to.isLoading = false;
-    }
-  }
+  // Future<void> actionDelete(id) async {
+  //   try {
+  //     LoadingController.to.isLoading = true;
+  //     await deleteFb(instance: _instance, path: MENU_POS, id: id);
+  //   } catch (e) {
+  //     throw Exception('error');
+  //   } finally {
+  //     update();
+  //     LoadingController.to.isLoading = false;
+  //   }
+  // }
 
   Future<void> actionDelteItem(String id) async {
     // try {
