@@ -7,6 +7,7 @@ import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
+import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:get/get.dart';
 
@@ -86,41 +87,14 @@ class BottomSheetContentMemo extends StatelessWidget
                     //TODO: 링크로 추가하기
                     final _controller = Get.put(ContentsController());
 
-                    // final _boardInfo = BoardListMySelectController.to.boardInfo;
-
-                    // final _profile = HanUserInfoController.to.toProfile();
-                    // final _info = ContentsInfoDto(
-                    //   //  contentsId: contentsId,
-                    //   contentsTitle: _title,
-                    //   contentsUrl: '',
-                    //   contentsImages: '',
-                    //   contentsDescription: _memo,
-                    //   contentsComment: '',
-                    //   contentsType: 'memo',
-                    //   thumbnails: null,
-                    //   contentsUniqueLink: '',
-                    //   ContentsCreateDate: DateTime.now(),
-                    //   ContentsUpdateDate: DateTime.now(),
-                    // );
-
-                    // //SUBJECT comment 타입 변경 필요
-                    // //TODO: comment 타입 변경
-                    // final _item = ContentsDto(
-                    //   boardInfo: _boardInfo?.toDto(),
-                    //   userInfo: _profile.toDto(),
-                    //   info: _info,
-                    //   contentsAllviewCount: 0,
-                    //   contentsMyviewCount: 0,
-                    //   contentsAlarmCheck: 0,
-                    //   shareInfo: null,
-                    //   contentsComment: null,
-                    //   ContentsCreateDate: DateTime.now(),
-                    //   ContentsUpdateDate: DateTime.now(),
-                    // );
                     final _item =
                         createInitDto(title: _title, memo: _memo, type: 'memo');
                     Get.back();
                     await _controller.actionIns(_item);
+
+                    Get.lazyPut(() => ContentAllListController());
+                    ContentAllListController.to.cache.clear();
+                    await ContentAllListController.to.fetchItems();
                   },
                   child: Text(
                     'com.btn.save'.tr,
@@ -206,9 +180,7 @@ class BottomSheetContentMemo extends StatelessWidget
             ),
           ),
           heightSpace(16.0),
-          vwTitle('저장할 보드 선택하기'),
-          heightSpace(10.0),
-          // TODO : 섀도우 때문에 패딩 문제가 있음.
+          vwTitle('com.bs.subtitle.boardChoice'.tr),
           GetBuilder<BoardListMySelectController>(builder: (controller) {
             return Container(
               height: 54 + 8 + 11 + 10,
@@ -274,50 +246,4 @@ class BottomSheetContentMemo extends StatelessWidget
           );
         });
   }
-
-  // ContentsDto _createInitMemo(String title, String memo) {
-  //   final _boardInfo = BoardListMySelectController.to.boardInfo;
-  //   final _profile = HanUserInfoController.to.toProfile();
-  //   final _info = ContentsInfoDto(
-  //     //  contentsId: contentsId,
-  //     contentsTitle: title,
-  //     contentsUrl: '',
-  //     contentsImages: '',
-  //     contentsDescription: memo,
-  //     contentsComment: '',
-  //     contentsType: 'memo',
-  //     thumbnails: null,
-  //     contentsUniqueLink: '',
-  //     ContentsCreateDate: DateTime.now(),
-  //     ContentsUpdateDate: DateTime.now(),
-  //   );
-
-  //   //SUBJECT comment 타입 변경 필요
-  //   //TODO: comment 타입 변경
-  //   final _item = ContentsDto(
-  //     boardInfo: _boardInfo?.toDto(),
-  //     userInfo: _profile.toDto(),
-  //     info: _info,
-  //     contentsAllviewCount: 0,
-  //     contentsMyviewCount: 0,
-  //     contentsAlarmCheck: 0,
-  //     shareInfo: null,
-  //     contentsComment: null,
-  //     ContentsCreateDate: DateTime.now(),
-  //     ContentsUpdateDate: DateTime.now(),
-  //   );
-  //   return _item;
-  // }
-
-  // Widget vwTitle(final title) {
-  //   return Container(
-  //     padding: EdgeInsets.only(left: 19),
-  //     alignment: Alignment.centerLeft,
-  //     child: Text(
-  //       title,
-  //       style: baseStyle.copyWith(
-  //           fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-  //     ),
-  //   );
-  // }
 }

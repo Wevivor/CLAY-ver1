@@ -686,7 +686,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
       ),
     );
     if (_responce) {
-      await ContentAllListController.to.actionDelete(item.info.contentsId);
+      await ContentsController.to.actionDelete(item.info.contentsId);
       ContentAllListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
   }

@@ -40,9 +40,9 @@ class _$ContentsDtoTearOff {
       @JsonKey(name: 'contents_comment')
           String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsCreateDate,
+          required DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsUpdateDate}) {
+          required DateTime contentsUpdateDate}) {
     return _ContentsDto(
       contentsId: contentsId,
       info: info,
@@ -53,8 +53,8 @@ class _$ContentsDtoTearOff {
       boardInfo: boardInfo,
       shareInfo: shareInfo,
       contentsComment: contentsComment,
-      ContentsCreateDate: ContentsCreateDate,
-      ContentsUpdateDate: ContentsUpdateDate,
+      contentsCreateDate: contentsCreateDate,
+      contentsUpdateDate: contentsUpdateDate,
     );
   }
 
@@ -89,12 +89,12 @@ mixin _$ContentsDto {
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'contents_upt_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -126,9 +126,9 @@ abstract class $ContentsDtoCopyWith<$Res> {
       @JsonKey(name: 'contents_comment')
           String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsCreateDate,
+          DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsUpdateDate});
+          DateTime contentsUpdateDate});
 
   $ContentsInfoDtoCopyWith<$Res> get info;
   $ProfileDtoCopyWith<$Res> get userInfo;
@@ -155,8 +155,8 @@ class _$ContentsDtoCopyWithImpl<$Res> implements $ContentsDtoCopyWith<$Res> {
     Object? boardInfo = freezed,
     Object? shareInfo = freezed,
     Object? contentsComment = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_value.copyWith(
       contentsId: contentsId == freezed
@@ -195,13 +195,13 @@ class _$ContentsDtoCopyWithImpl<$Res> implements $ContentsDtoCopyWith<$Res> {
           ? _value.contentsComment
           : contentsComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -269,9 +269,9 @@ abstract class _$ContentsDtoCopyWith<$Res>
       @JsonKey(name: 'contents_comment')
           String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsCreateDate,
+          DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsUpdateDate});
+          DateTime contentsUpdateDate});
 
   @override
   $ContentsInfoDtoCopyWith<$Res> get info;
@@ -304,8 +304,8 @@ class __$ContentsDtoCopyWithImpl<$Res> extends _$ContentsDtoCopyWithImpl<$Res>
     Object? boardInfo = freezed,
     Object? shareInfo = freezed,
     Object? contentsComment = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_ContentsDto(
       contentsId: contentsId == freezed
@@ -344,13 +344,13 @@ class __$ContentsDtoCopyWithImpl<$Res> extends _$ContentsDtoCopyWithImpl<$Res>
           ? _value.contentsComment
           : contentsComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -379,9 +379,9 @@ class _$_ContentsDto extends _ContentsDto {
       @JsonKey(name: 'contents_comment')
           this.contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.ContentsCreateDate,
+          required this.contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.ContentsUpdateDate})
+          required this.contentsUpdateDate})
       : super._();
 
   factory _$_ContentsDto.fromJson(Map<String, dynamic> json) =>
@@ -418,17 +418,17 @@ class _$_ContentsDto extends _ContentsDto {
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  final DateTime ContentsCreateDate;
+  final DateTime contentsCreateDate;
   @override
   @JsonKey(
       name: 'contents_upt_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  final DateTime ContentsUpdateDate;
+  final DateTime contentsUpdateDate;
 
   @override
   String toString() {
-    return 'ContentsDto(contentsId: $contentsId, info: $info, userInfo: $userInfo, contentsAllviewCount: $contentsAllviewCount, contentsMyviewCount: $contentsMyviewCount, contentsAlarmCheck: $contentsAlarmCheck, boardInfo: $boardInfo, shareInfo: $shareInfo, contentsComment: $contentsComment, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
+    return 'ContentsDto(contentsId: $contentsId, info: $info, userInfo: $userInfo, contentsAllviewCount: $contentsAllviewCount, contentsMyviewCount: $contentsMyviewCount, contentsAlarmCheck: $contentsAlarmCheck, boardInfo: $boardInfo, shareInfo: $shareInfo, contentsComment: $contentsComment, contentsCreateDate: $contentsCreateDate, contentsUpdateDate: $contentsUpdateDate)';
   }
 
   @override
@@ -461,12 +461,12 @@ class _$_ContentsDto extends _ContentsDto {
             (identical(other.contentsComment, contentsComment) ||
                 const DeepCollectionEquality()
                     .equals(other.contentsComment, contentsComment)) &&
-            (identical(other.ContentsCreateDate, ContentsCreateDate) ||
+            (identical(other.contentsCreateDate, contentsCreateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsCreateDate, ContentsCreateDate)) &&
-            (identical(other.ContentsUpdateDate, ContentsUpdateDate) ||
+                    .equals(other.contentsCreateDate, contentsCreateDate)) &&
+            (identical(other.contentsUpdateDate, contentsUpdateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsUpdateDate, ContentsUpdateDate)));
+                    .equals(other.contentsUpdateDate, contentsUpdateDate)));
   }
 
   @override
@@ -481,8 +481,8 @@ class _$_ContentsDto extends _ContentsDto {
       const DeepCollectionEquality().hash(boardInfo) ^
       const DeepCollectionEquality().hash(shareInfo) ^
       const DeepCollectionEquality().hash(contentsComment) ^
-      const DeepCollectionEquality().hash(ContentsCreateDate) ^
-      const DeepCollectionEquality().hash(ContentsUpdateDate);
+      const DeepCollectionEquality().hash(contentsCreateDate) ^
+      const DeepCollectionEquality().hash(contentsUpdateDate);
 
   @JsonKey(ignore: true)
   @override
@@ -515,9 +515,9 @@ abstract class _ContentsDto extends ContentsDto {
       @JsonKey(name: 'contents_comment')
           String? contentsComment,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsCreateDate,
+          required DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsUpdateDate}) = _$_ContentsDto;
+          required DateTime contentsUpdateDate}) = _$_ContentsDto;
   _ContentsDto._() : super._();
 
   factory _ContentsDto.fromJson(Map<String, dynamic> json) =
@@ -554,13 +554,13 @@ abstract class _ContentsDto extends ContentsDto {
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'contents_upt_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ContentsDtoCopyWith<_ContentsDto> get copyWith =>
@@ -596,9 +596,9 @@ class _$ContentsInfoDtoTearOff {
           String? contentsType,
       String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsCreateDate,
+          required DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsUpdateDate}) {
+          required DateTime contentsUpdateDate}) {
     return _ContentsInfoDto(
       contentsId: contentsId,
       contentsTitle: contentsTitle,
@@ -610,8 +610,8 @@ class _$ContentsInfoDtoTearOff {
       contentsFixed: contentsFixed,
       contentsType: contentsType,
       thumbnails: thumbnails,
-      ContentsCreateDate: ContentsCreateDate,
-      ContentsUpdateDate: ContentsUpdateDate,
+      contentsCreateDate: contentsCreateDate,
+      contentsUpdateDate: contentsUpdateDate,
     );
   }
 
@@ -648,12 +648,12 @@ mixin _$ContentsInfoDto {
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'contents_upt_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -687,9 +687,9 @@ abstract class $ContentsInfoDtoCopyWith<$Res> {
           String? contentsType,
       String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsCreateDate,
+          DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsUpdateDate});
+          DateTime contentsUpdateDate});
 }
 
 /// @nodoc
@@ -713,8 +713,8 @@ class _$ContentsInfoDtoCopyWithImpl<$Res>
     Object? contentsFixed = freezed,
     Object? contentsType = freezed,
     Object? thumbnails = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_value.copyWith(
       contentsId: contentsId == freezed
@@ -757,13 +757,13 @@ class _$ContentsInfoDtoCopyWithImpl<$Res>
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -797,9 +797,9 @@ abstract class _$ContentsInfoDtoCopyWith<$Res>
           String? contentsType,
       String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsCreateDate,
+          DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime ContentsUpdateDate});
+          DateTime contentsUpdateDate});
 }
 
 /// @nodoc
@@ -825,8 +825,8 @@ class __$ContentsInfoDtoCopyWithImpl<$Res>
     Object? contentsFixed = freezed,
     Object? contentsType = freezed,
     Object? thumbnails = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_ContentsInfoDto(
       contentsId: contentsId == freezed
@@ -869,13 +869,13 @@ class __$ContentsInfoDtoCopyWithImpl<$Res>
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -906,9 +906,9 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
           this.contentsType,
       this.thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.ContentsCreateDate,
+          required this.contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.ContentsUpdateDate})
+          required this.contentsUpdateDate})
       : super._();
 
   factory _$_ContentsInfoDto.fromJson(Map<String, dynamic> json) =>
@@ -948,17 +948,17 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  final DateTime ContentsCreateDate;
+  final DateTime contentsCreateDate;
   @override
   @JsonKey(
       name: 'contents_upt_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  final DateTime ContentsUpdateDate;
+  final DateTime contentsUpdateDate;
 
   @override
   String toString() {
-    return 'ContentsInfoDto(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, contentsType: $contentsType, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
+    return 'ContentsInfoDto(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, contentsType: $contentsType, thumbnails: $thumbnails, contentsCreateDate: $contentsCreateDate, contentsUpdateDate: $contentsUpdateDate)';
   }
 
   @override
@@ -995,12 +995,12 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
             (identical(other.thumbnails, thumbnails) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnails, thumbnails)) &&
-            (identical(other.ContentsCreateDate, ContentsCreateDate) ||
+            (identical(other.contentsCreateDate, contentsCreateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsCreateDate, ContentsCreateDate)) &&
-            (identical(other.ContentsUpdateDate, ContentsUpdateDate) ||
+                    .equals(other.contentsCreateDate, contentsCreateDate)) &&
+            (identical(other.contentsUpdateDate, contentsUpdateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsUpdateDate, ContentsUpdateDate)));
+                    .equals(other.contentsUpdateDate, contentsUpdateDate)));
   }
 
   @override
@@ -1016,8 +1016,8 @@ class _$_ContentsInfoDto extends _ContentsInfoDto {
       const DeepCollectionEquality().hash(contentsFixed) ^
       const DeepCollectionEquality().hash(contentsType) ^
       const DeepCollectionEquality().hash(thumbnails) ^
-      const DeepCollectionEquality().hash(ContentsCreateDate) ^
-      const DeepCollectionEquality().hash(ContentsUpdateDate);
+      const DeepCollectionEquality().hash(contentsCreateDate) ^
+      const DeepCollectionEquality().hash(contentsUpdateDate);
 
   @JsonKey(ignore: true)
   @override
@@ -1052,9 +1052,9 @@ abstract class _ContentsInfoDto extends ContentsInfoDto {
           String? contentsType,
       String? thumbnails,
       @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsCreateDate,
+          required DateTime contentsCreateDate,
       @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime ContentsUpdateDate}) = _$_ContentsInfoDto;
+          required DateTime contentsUpdateDate}) = _$_ContentsInfoDto;
   _ContentsInfoDto._() : super._();
 
   factory _ContentsInfoDto.fromJson(Map<String, dynamic> json) =
@@ -1094,13 +1094,13 @@ abstract class _ContentsInfoDto extends ContentsInfoDto {
       name: 'contents_create_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'contents_upt_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ContentsInfoDtoCopyWith<_ContentsInfoDto> get copyWith =>

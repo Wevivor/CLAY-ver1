@@ -8,10 +8,12 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
+import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/content_dtos.dart';
 import 'package:clay/part_imagepicker/part_imagepicker.dart';
@@ -22,9 +24,12 @@ import 'helper_content_init_dto.dart';
 class BottomSheetContentPhoto extends StatelessWidget
     with AppbarHelper, BSValidator, ContentInitDtoHelper {
   final onMenu;
+  final onDone;
+
   final parentContext;
   BottomSheetContentPhoto({
     this.onMenu,
+    this.onDone,
     this.parentContext,
   });
   final dialogController = Get.lazyPut(() => CarmeraDailogController());
@@ -143,6 +148,14 @@ class BottomSheetContentPhoto extends StatelessWidget
                           await _controller.actionIns(_item);
                           LoadingController.to.isLoading = false;
                           LoadingController.to.update();
+
+                          // Get.lazyPut(() => ContentAllListController());
+                          // ContentAllListController.to.cache.clear();
+                          // await ContentAllListController.to.fetchItems();
+                          // BoardListController.to.cache.clear();
+                          // await BoardListController.to.fetchItems();
+
+                          if (onDone != null) onDone();
                           Get.back();
                         },
                         child: Text(
@@ -277,8 +290,6 @@ class BottomSheetContentPhoto extends StatelessWidget
                 ),
                 heightSpace(16.0),
                 vwTitle('com.bs.subtitle.boardChoice'.tr),
-                heightSpace(10.0),
-                // TODO : 섀도우 때문에 패딩 문제가 있음.
                 GetBuilder<BoardListMySelectController>(builder: (controller) {
                   return Container(
                     height: 54 + 8 + 11 + 10,
@@ -368,8 +379,8 @@ class BottomSheetContentPhoto extends StatelessWidget
       contentsType: 'photo',
       thumbnails: thumbName,
       contentsUniqueLink: '',
-      ContentsCreateDate: DateTime.now(),
-      ContentsUpdateDate: DateTime.now(),
+      contentsCreateDate: DateTime.now(),
+      contentsUpdateDate: DateTime.now(),
     );
 
     //SUBJECT 컨텐츠 타입 변경 필요
@@ -383,8 +394,8 @@ class BottomSheetContentPhoto extends StatelessWidget
       contentsAlarmCheck: 0,
       shareInfo: null,
       contentsComment: null,
-      ContentsCreateDate: DateTime.now(),
-      ContentsUpdateDate: DateTime.now(),
+      contentsCreateDate: DateTime.now(),
+      contentsUpdateDate: DateTime.now(),
     );
     return _item;
   }

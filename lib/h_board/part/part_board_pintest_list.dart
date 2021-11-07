@@ -1,3 +1,5 @@
+// 내보드의 상세리스트 페이지 : 그리드 타입.
+
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
@@ -257,7 +259,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
       ),
     );
     if (_responce) {
-      await ContentAllListController.to.actionDelete(item.info.contentsId);
+      await ContentsController.to.actionDelete(item.info.contentsId);
       ContentAllListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
   }

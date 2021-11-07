@@ -34,11 +34,12 @@ class _ContentUIState extends State<ContentUI>
   }
 
   Future<void> initFetch() async {
+    contentAllListController.cache.clear();
+    await contentAllListController.fetchItems();
+
     contentsListAllMySelectController.cache.clear();
     await contentsListAllMySelectController.fetchItems();
     contentsListAllMySelectController.selected = 0;
-    contentAllListController.cache.clear();
-    await contentAllListController.fetchItems();
   }
 
   final contentsListAllMySelectController = Get.put(
@@ -109,65 +110,71 @@ class _ContentUIState extends State<ContentUI>
         ),
       ),
       backgroundColor: Colors.white,
-      body: GetBuilder<ContentAllListController>(builder: (controller) {
-        return Column(
-          children: [
-            Container(
-                height: 30 + 4,
-                padding: EdgeInsets.only(left: 20),
-                child: GetBuilder<ContentsListAllMySelectController>(
-                    builder: (controller) {
-                  return Container(
-                    child: Row(
-                      children: [
-                        CategoryTextButton(
-                          title: 'board.body.chip.all'.tr,
-                          index: 0,
-                          selected: controller.selected,
-                          onTap: (value) async {
-                            controller.selected = value;
-                            controller.update();
-                            ContentAllListController.to.cache.clear();
-                            await ContentAllListController.to.fetchItems();
-                          },
-                        ),
-                        widthSpace(7.0),
-                        Expanded(
-                          child: HanListView(
-                            isSliver: false,
-                            direction: Axis.horizontal,
-                            controller: controller,
-                            itemBuilder: (context, idx) {
-                              final cache = controller.cache;
-                              Board item = cache[idx];
-
-                              return Padding(
-                                padding: const EdgeInsets.only(right: 7.0),
-                                child: CategoryTextButton(
-                                  title: item.info.boardName,
-                                  index: idx + 1,
-                                  selected: controller.selected,
-                                  onTap: (value) async {
-                                    controller.selected = value;
-                                    controller.update();
-                                    ContentAllListController.to.cache.clear();
-                                    await ContentAllListController.to
-                                        .fetchItems(term: item.info.boardId);
-                                  },
-                                ),
-                              );
+      body: RefreshIndicator(
+        backgroundColor: Colors.white,
+        onRefresh: () => Future.sync(
+          () => ContentAllListController.to.actionRefresh(),
+        ),
+        child: GetBuilder<ContentAllListController>(builder: (controller) {
+          return Column(
+            children: [
+              Container(
+                  height: 30 + 4,
+                  padding: EdgeInsets.only(left: 20),
+                  child: GetBuilder<ContentsListAllMySelectController>(
+                      builder: (controller) {
+                    return Container(
+                      child: Row(
+                        children: [
+                          CategoryTextButton(
+                            title: 'board.body.chip.all'.tr,
+                            index: 0,
+                            selected: controller.selected,
+                            onTap: (value) async {
+                              controller.selected = value;
+                              controller.update();
+                              ContentAllListController.to.cache.clear();
+                              await ContentAllListController.to.fetchItems();
                             },
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                })),
-            heightSpace(10.0),
-            Expanded(child: ContentAllPintestPART()),
-          ],
-        );
-      }),
+                          widthSpace(7.0),
+                          Expanded(
+                            child: HanListView(
+                              isSliver: false,
+                              direction: Axis.horizontal,
+                              controller: controller,
+                              itemBuilder: (context, idx) {
+                                final cache = controller.cache;
+                                Board item = cache[idx];
+
+                                return Padding(
+                                  padding: const EdgeInsets.only(right: 7.0),
+                                  child: CategoryTextButton(
+                                    title: item.info.boardName,
+                                    index: idx + 1,
+                                    selected: controller.selected,
+                                    onTap: (value) async {
+                                      controller.selected = value;
+                                      controller.update();
+                                      ContentAllListController.to.cache.clear();
+                                      await ContentAllListController.to
+                                          .fetchItems(term: item.info.boardId);
+                                    },
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  })),
+              heightSpace(10.0),
+              Expanded(child: ContentAllPintestPART()),
+            ],
+          );
+        }),
+      ),
     );
   }
 }

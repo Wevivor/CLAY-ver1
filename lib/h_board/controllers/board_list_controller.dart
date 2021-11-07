@@ -47,14 +47,47 @@ class BoardListController extends AbsListController
         },
       },
       "sort": [
-        // {"cntView": "desc"}
+        {"info.is_fixed": "desc"},
+        {
+          "register_date": {
+            "order": "desc",
+            "format": "strict_date_optional_time_nanos"
+          }
+        }
       ]
     };
-
     final lists = await listFilter('/clay_boards/_search', bodyJSON);
+
+    //보드 카운드 입력하기
+    var countList = [
+      {
+        "match": {"user_info.user_id": AuthController.to.getUser?.uid}
+      }
+    ];
+    final countJSON = {
+      "size": 0,
+      "query": {
+        "bool": {
+          "must": countList,
+        },
+      },
+      "aggs": {
+        "group_by_state": {
+          "terms": {"field": "board_info.board_id.keyword"}
+        }
+      }
+    };
+    final counts = await countFilter('/clay_contents', countJSON);
     final tmp = lists.map((jsonList) {
       final item = BoardDto.fromJson(jsonList['_source']).toDomain();
-      return item;
+      final keys = counts.where((e) {
+        return e['key'] == item.boardId;
+      });
+
+      if (keys.isEmpty)
+        return item.copyWith(contentsCount: 0);
+      else
+        return item.copyWith(contentsCount: keys.first['doc_count']);
     }).toList();
 
     return tmp;
@@ -79,27 +112,17 @@ class BoardListController extends AbsListController
     return _post.info;
   }
 
-  Future<void> actionfresh(String id) async {
-    // try {
-    final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
-
-    if (_item == null) {
-      throw Exception('error');
-    }
-    final _post = ContentsDto.fromJson(_item).toDomain();
-    var existIndex = cache.indexWhere(
-      (element) => element.id == id,
-    );
-
-    if (existIndex >= 0) {
-      cache[existIndex] = _post.info;
-    }
-
-    // final info = PostInfo.fromJson((_info.info));
-    this.item = _post;
-    update();
-  }
+ 
   */
+
+  Future<void> actionRefresh() async {
+    this.cache.clear();
+
+    loading = false;
+    hasMore = true;
+    update();
+    await fetchItems(nextId: 0);
+  }
 
   Future<void> actionDeleteItem(String? id) async {
     if (id != null) {

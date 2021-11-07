@@ -18,8 +18,8 @@ class Contents with _$Contents {
     BoardInfo? boardInfo,
     ShareDto? shareInfo,
     String? contentsComment,
-    required DateTime ContentsCreateDate,
-    required DateTime ContentsUpdateDate,
+    required DateTime contentsCreateDate,
+    required DateTime contentsUpdateDate,
   }) = _Contents;
   Contents._();
   ContentsDto toDto() => ContentsDto(
@@ -32,8 +32,8 @@ class Contents with _$Contents {
         boardInfo: boardInfo?.toDto(),
         shareInfo: shareInfo,
         contentsComment: contentsComment,
-        ContentsCreateDate: ContentsCreateDate,
-        ContentsUpdateDate: ContentsUpdateDate,
+        contentsCreateDate: contentsCreateDate,
+        contentsUpdateDate: contentsUpdateDate,
       );
 }
 
@@ -50,8 +50,8 @@ class ContentsInfo with _$ContentsInfo {
     bool? contentsFixed,
     String? contentsType,
     String? thumbnails,
-    required DateTime ContentsCreateDate,
-    required DateTime ContentsUpdateDate,
+    required DateTime contentsCreateDate,
+    required DateTime contentsUpdateDate,
 
     // List<Comment>? comments;
   }) = _ContentsInfo;
@@ -68,7 +68,7 @@ class ContentsInfo with _$ContentsInfo {
         thumbnails: thumbnails,
         contentsFixed: contentsFixed,
         contentsType: contentsType,
-        ContentsCreateDate: ContentsCreateDate,
-        ContentsUpdateDate: ContentsUpdateDate,
+        contentsCreateDate: contentsCreateDate,
+        contentsUpdateDate: contentsUpdateDate,
       );
 }

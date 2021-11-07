@@ -1,6 +1,7 @@
 // 보드 리스트
 
 import 'package:clay/c_config/config.dart';
+import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -10,8 +11,8 @@ class ContentListItemWidget extends StatelessWidget {
   final title; // 내용의 제목
   final date; // 내용의 날짜
   final contentText; // 내용
-  final imgUrl;
-  final holder; // 이미지 URL
+  final imgUrl; // 이미지 URL
+  final holder;
   final onMore;
   ContentListItemWidget({
     this.title,
@@ -23,25 +24,25 @@ class ContentListItemWidget extends StatelessWidget {
   });
   final titleStyle = TextStyle(
     fontSize: 16,
-    color: Color(0xFF3A3A3A),
-    fontWeight: FontWeight.bold,
-    height: 1.0,
-    letterSpacing: 0.05,
+    color: Color(0xFF353535),
+    fontWeight: FontWeight.w700, // weight : 750
+    height: 0.88, //14.1px
+    letterSpacing: -0.8, //-0.5px
   );
   final contentStyle = TextStyle(
     fontSize: 13,
-    color: Color(0xFF676767),
-    fontWeight: FontWeight.normal,
-    height: 1.2,
-    letterSpacing: 0.05,
+    color: Color(0xFF707070),
+    fontWeight: FontWeight.w400,
+    height: 1.5, //19.5px
+    letterSpacing: -0.65, // -5%
   );
   final dateStyle = TextStyle(
-    fontSize: 11,
-    color: Color(0xb2676767), // 약 70% 투명도
-    fontWeight: FontWeight.normal,
-    height: 1.5,
-    letterSpacing: 0.5,
-  );
+      fontSize: 11,
+      color: Color.fromRGBO(112, 112, 112, 0.7),
+      fontWeight: FontWeight.w400,
+      height: 1.5, // 16.5px
+      letterSpacing: -0.55 // -5%
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -78,18 +79,22 @@ class ContentListItemWidget extends StatelessWidget {
               ),
             ],
           ),
-          HanListTile(
-            // crossAxisAlignment: CrossAxisAlignment.start,
-            // mainAxisAlignment: MainAxisAlignment.start,
-            padding: EdgeInsets.only(top: 10, bottom: 7),
-            title: boardContent(),
-            trailing: boardItemTrail(),
-          ),
-          // Divider(
-          //   height: 1,
-          //   color: Color(0xFFdedede),
-          //   thickness: 0.5,
+          //SUBJECT : SH
+          //TODO : 위젯 없음.
+
+          // HanListTileNew(
+          //   crossAxisAlignment: CrossAxisAlignment.start,
+          //   mainAxisAlignment: MainAxisAlignment.start,
+          //   padding: EdgeInsets.only(top: 10, bottom: 7),
+          //   title: boardContent(),
+          //   trailing: boardItemTrail(),
           // ),
+          Divider(
+            height: 0,
+            color: Color(0xFFDEDEDE),
+            thickness: 0.5,
+          ),
+          heightSpace(16.0),
         ],
       ),
     );
@@ -110,7 +115,7 @@ class ContentListItemWidget extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               maxLines: 2,
             ),
-            heightSpace(5),
+            heightSpace(4.0),
             Text(
               date,
               style: dateStyle,
@@ -122,14 +127,20 @@ class ContentListItemWidget extends StatelessWidget {
     );
   }
 
-// HanListTile의 trailing 부분
   Widget boardItemTrail() {
     return Container(
-      child: ImageWidget(
-        width: 74,
-        height: 74,
-        imgUrl: imgUrl,
-        holder: holder,
+      decoration: DecoHelper.roundDeco.copyWith(
+        color: Colors.white,
+      ),
+      width: 74,
+      height: 74,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(5.0),
+        child: ImageWidget(
+          imgUrl: imgUrl,
+          width: 74,
+          height: 74,
+        ),
       ),
     );
   }

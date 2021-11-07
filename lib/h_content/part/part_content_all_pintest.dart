@@ -1,5 +1,3 @@
-// 모든 콘텐츠 > 메인 화면
-
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
@@ -9,6 +7,7 @@ import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
+import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 
@@ -105,60 +104,84 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
     });
   }
 
+  // All Content 리스트에서 점메뉴
   Widget vwBoardMenu(BuildContext context, Contents item) {
+    final menuStyle = TextStyle(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+      fontSize: 14,
+      color: Color(0xFF000000),
+      fontWeight:
+          Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
+      height:
+          Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 16.41px, 19.12px
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
-        heightSpace(34),
+        heightSpace(20.0),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSFixed(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-          title: item.info.contentsFixed == true ? Text('상단해제') : Text('상단고정'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_pin_fix.png')),
+          title: item.info.contentsFixed == true // 상단고정
+              ? Text('com.bs.body.menu.pinOff'.tr, style: menuStyle)
+              : Text('com.bs.body.menu.pinOn'.tr, style: menuStyle),
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSShare(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-          title: Text('공유'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_share.png')),
+          title: Text('com.bs.body.menu.share'.tr, style: menuStyle), // 공유
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSRemindAlarm(context, item),
-          leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
-          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/ph_bell-ringing.png')),
+          title: Text('contents.bs.body.menu.reminder'.tr,
+              style: menuStyle), // 알람 설정
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 20.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSBoardChange(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-          title: Text('보드변경'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_boardchange.png')),
+          title: Text('contents.bs.body.menu.moveBoard'.tr,
+              style: menuStyle), // 보드 변경
         ),
         HanListTile(
           padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
+            left: 23.0,
+            bottom: 21.0,
           ),
           onTap: () => _actionBSDelete(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-          title: Text('삭제'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_trashcan.png')),
+          title: Text('com.bs.body.menu.delBoard'.tr, style: menuStyle), // 삭제
         ),
       ],
     );
@@ -169,14 +192,12 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
   Future<void> _actionBSFixed(BuildContext context, item) async {
     final _contentsCtl = Get.put(ContentsController());
     _contentsCtl.contentsItem = item;
-    final _fixed = item.info.contentsFixed;
+    final _fixed = item.info.contentsFixed ?? false;
     await _contentsCtl.actionPin(fix: !_fixed!);
-    Get.back();
 
-    Future.microtask(() async {
-      ContentAllListController.to.cache.clear();
-      await ContentAllListController.to.fetchItems();
-    });
+    ContentAllListController.to.cache.clear();
+    await ContentAllListController.to.fetchItems();
+    Get.back();
   }
 
   //SUBJECT: 링크
@@ -216,8 +237,16 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
         context,
         BottomSheetBoardChange(
           parentContext: context,
-          onDone: () {
-            ContentAllListController.to.actionDelteItem(item.contentsId ?? '');
+          onDone: () async {
+            ContentAllListController.to.cache.clear();
+            final _selected = ContentsListAllMySelectController.to.selected;
+            if (_selected > 0) {
+              final _board =
+                  ContentsListAllMySelectController.to.cache[_selected - 1];
+              await ContentAllListController.to
+                  .fetchItems(term: _board.boardId);
+            } else
+              await ContentAllListController.to.fetchItems();
           },
           onMenu: () {
             _showBS(context, vwBoardMenu(context, item));
@@ -233,9 +262,9 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
     await DialogHelper.MessageDialog(
       context,
       (context) => DeleteDialog(
-        title: '보드를 삭제하시겠습니까?',
-        deleteTitle: '삭제',
-        okTitle: '취소',
+        title: 'contents.bs.dlg.question.delete'.tr, // 콘텐츠를 삭제하시겠어요?
+        deleteTitle: 'com.btn.delete'.tr, // 삭제
+        okTitle: 'com.btn.cancel'.tr, // 취소
         okTap: () {
           _responce = false;
         },
@@ -245,7 +274,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
       ),
     );
     if (_responce) {
-      await ContentAllListController.to.actionDelete(item.info.contentsId);
+      await ContentsController.to.actionDelete(item.info.contentsId);
       ContentAllListController.to.actionDelteItem(item.info.contentsId ?? '');
     }
   }

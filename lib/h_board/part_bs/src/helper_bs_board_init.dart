@@ -3,16 +3,28 @@ import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_content_link.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class BSBoardInitDtoHelper {
   Widget vwTitle(final title) {
     return Container(
-      padding: EdgeInsets.only(left: 18),
+      padding: EdgeInsets.only(left: 20.0),
       alignment: Alignment.centerLeft,
       child: Text(
         title,
         style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+            fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+            fontSize: 14,
+            color: Get.locale?.languageCode == 'ko'
+                ? Color(0xFF000000)
+                : Color(0xFF353535),
+            fontWeight: Get.locale?.languageCode == 'ko'
+                ? FontWeight.w700
+                : FontWeight.w800,
+            height: Get.locale?.languageCode == 'ko'
+                ? 1.17
+                : 1.37 // 16.41px, 19.12px
+            ),
       ),
     );
   }
