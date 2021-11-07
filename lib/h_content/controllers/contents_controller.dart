@@ -97,7 +97,6 @@ class ContentsController extends AbsItemController
     LoadingController.to.isLoading = true;
     return FirebaseFirestore.instance.runTransaction((transaction) async {
       await deleteFb(instance: _instance, path: MENU_POS, id: id);
-
       await deleteEl(index: '/clay_contents/', id: id);
     }).then((value) {
       update();

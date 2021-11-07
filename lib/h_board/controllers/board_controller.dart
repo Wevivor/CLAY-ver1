@@ -126,8 +126,14 @@ class BoardController extends AbsItemController
     return FirebaseFirestore.instance.runTransaction((transaction) async {
       await deleteFb(instance: _instance, path: MENU_POS, id: id);
 
-      await deleteEl(index: '/clay_boards/', id: id);
-      //TODO 콘텐츠 삭제 부분 추가해야 함.
+      await deleteEl(index: '/clay_boards', id: id); //EL 보드 삭제.
+      //보드에 소속된 컨텐츠를 삭제함.
+      final bodyJSON = {
+        "query": {
+          "match": {"board_info.board_id": id}
+        }
+      };
+      await deleteElByQuery(index: '/clay_contents', body: bodyJSON);
     }).then((value) {
       update();
       LoadingController.to.isLoading = false;
@@ -138,21 +144,6 @@ class BoardController extends AbsItemController
       throw Exception('error');
     });
   }
-
-  // Future<void> actionUpdate() async {
-  //   try {
-  //     await updateFb(
-  //         instance: _instance,
-  //         path: MENU_POS,
-  //         id: boardItem?.boardId ?? '',
-  //         dto: boardItem?.toDto());
-  //   } catch (e) {
-  //     throw Exception('error ${e.toString()}');
-  //   } finally {
-  //     update();
-  //     LoadingController.to.isLoading = false;
-  //   }
-  // }
 
   Future<void> actionUpdate({id, Board? info}) async {
     LoadingController.to.isLoading = true;

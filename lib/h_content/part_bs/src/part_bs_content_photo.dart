@@ -8,6 +8,7 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
@@ -23,9 +24,12 @@ import 'helper_content_init_dto.dart';
 class BottomSheetContentPhoto extends StatelessWidget
     with AppbarHelper, BSValidator, ContentInitDtoHelper {
   final onMenu;
+  final onDone;
+
   final parentContext;
   BottomSheetContentPhoto({
     this.onMenu,
+    this.onDone,
     this.parentContext,
   });
   final dialogController = Get.lazyPut(() => CarmeraDailogController());
@@ -145,9 +149,13 @@ class BottomSheetContentPhoto extends StatelessWidget
                           LoadingController.to.isLoading = false;
                           LoadingController.to.update();
 
-                          Get.lazyPut(() => ContentAllListController());
-                          ContentAllListController.to.cache.clear();
-                          await ContentAllListController.to.fetchItems();
+                          // Get.lazyPut(() => ContentAllListController());
+                          // ContentAllListController.to.cache.clear();
+                          // await ContentAllListController.to.fetchItems();
+                          // BoardListController.to.cache.clear();
+                          // await BoardListController.to.fetchItems();
+
+                          if (onDone != null) onDone();
                           Get.back();
                         },
                         child: Text(

@@ -4,15 +4,19 @@ import 'package:clay/c_config/config.dart';
 import 'package:dio/dio.dart';
 
 class ElCommonModule {
+  initDio() {
+    Dio dio = new Dio();
+
+    dio.options.headers['Content-Type'] = 'application/json';
+    dio.options.headers["authorization"] = Const.apiKey;
+    dio.options.baseUrl = Const.elasticEndPoint;
+    return dio;
+  }
+
   Future<List<dynamic>> listFilter(final query, final body) async {
     debugPrint('--------listFilter---------');
     try {
-      Dio dio = new Dio();
-
-      dio.options.headers['Content-Type'] = 'application/json';
-      dio.options.headers["authorization"] = Const.apiKey;
-      dio.options.baseUrl = Const.elasticEndPoint;
-
+      final dio = initDio();
       final _response = await dio.post(
         query,
         data: body,
@@ -36,11 +40,7 @@ class ElCommonModule {
   Future<List<dynamic>> countFilter(final index, final body) async {
     debugPrint('--------listFilter---------');
     try {
-      Dio dio = new Dio();
-
-      dio.options.headers['Content-Type'] = 'application/json';
-      dio.options.headers["authorization"] = Const.apiKey;
-      dio.options.baseUrl = Const.elasticEndPoint;
+      final dio = initDio();
 
       final _response = await dio.post(
         '${index}/_search',
@@ -66,11 +66,7 @@ class ElCommonModule {
       {required final index, required final id, required final body}) async {
     debugPrint('--------Ins EL---------');
     try {
-      Dio dio = new Dio();
-
-      dio.options.headers['Content-Type'] = 'application/json';
-      dio.options.headers["authorization"] = Const.apiKey;
-      dio.options.baseUrl = Const.elasticEndPoint;
+      final dio = initDio();
 
       final _response = await dio.post(
         '${index}/_create/${id}?refresh=true',
@@ -91,14 +87,39 @@ class ElCommonModule {
     }
   }
 
-  Future<dynamic> deleteEl({required final index, final id}) async {
+  Future<dynamic> deleteElByQuery({
+    required final index,
+    final body,
+  }) async {
     debugPrint('--------DELETE EL---------');
     try {
-      Dio dio = new Dio();
+      final dio = initDio();
 
-      dio.options.headers['Content-Type'] = 'application/json';
-      dio.options.headers["authorization"] = Const.apiKey;
-      dio.options.baseUrl = Const.elasticEndPoint;
+      final _response = await dio.post(
+        '${index}/_delete_by_query',
+        data: body,
+      );
+      if (_response.statusCode == 200) {
+        final _result = _response.data;
+        return _result;
+      } else {
+        debugPrint('====>GenericHttpException');
+        throw GenericHttpException();
+      }
+    } on SocketException catch (e) {
+      debugPrint('====>NoConnectionException ${e.toString()}');
+
+      throw NoConnectionException();
+    }
+  }
+
+  Future<dynamic> deleteEl({
+    required final index,
+    final id,
+  }) async {
+    debugPrint('--------DELETE EL---------');
+    try {
+      final dio = initDio();
 
       final _response = await dio.delete(
         '${index}/_doc/${id}?refresh=true',
@@ -120,11 +141,7 @@ class ElCommonModule {
   Future<dynamic> updateEl({required final index, final id, final body}) async {
     debugPrint('--------UPDATE EL---------');
     try {
-      Dio dio = new Dio();
-
-      dio.options.headers['Content-Type'] = 'application/json';
-      dio.options.headers["authorization"] = Const.apiKey;
-      dio.options.baseUrl = Const.elasticEndPoint;
+      final dio = initDio();
 
       final _response = await dio.post(
         '${index}/_update/${id}?refresh=true',

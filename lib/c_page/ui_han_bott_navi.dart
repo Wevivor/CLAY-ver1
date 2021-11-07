@@ -4,6 +4,7 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/models/users/users.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/page/ui_board.dart';
@@ -309,6 +310,13 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         context,
         BottomSheetContentPhoto(
           parentContext: context,
+          onDone: () async {
+            Get.lazyPut(() => ContentAllListController());
+            ContentAllListController.to.cache.clear();
+            await ContentAllListController.to.fetchItems();
+            BoardListController.to.cache.clear();
+            await BoardListController.to.fetchItems();
+          },
           onMenu: () {
             _showBS(context, vwBoardMenu(context));
           },
