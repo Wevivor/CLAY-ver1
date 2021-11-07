@@ -6,8 +6,8 @@ import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_board/part/part_board_pintest_list.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_share.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
-import 'package:clay/h_content/page/part_content_header.dart';
 import 'package:clay/h_content/page/part_content_list.dart';
+import 'package:clay/h_content/part/part_content_header.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 

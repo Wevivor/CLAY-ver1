@@ -70,7 +70,7 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                     //title: 'eng) 무야호~미니오븐으로6가지 맛 미니바스크 치즈케이크 입니다.',
                     title: item.info.contentsTitle,
 
-                    date: Jiffy(item.info.ContentsCreateDate)
+                    date: Jiffy(item.info.contentsCreateDate)
                         .format('yyyy-MM-dd'),
                     contentText: item.info.contentsDescription,
                     //contentText:
