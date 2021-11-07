@@ -68,6 +68,7 @@ class ContentGridItemWidget extends StatelessWidget {
               children: [
                 //widthSpace(4.0),
                 // TODO : [SH] 보드 배지 아이콘이 들어가야 함.
+                // 내보드의 보드 상세리스트 화면에는 보드 배지가 들어가지 않는다.
                 // Sample
                 Image.asset(Const.assets + 'icon/hart_small.png'),
                 // ========

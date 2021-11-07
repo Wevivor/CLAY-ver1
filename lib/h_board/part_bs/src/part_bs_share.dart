@@ -28,10 +28,9 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            heightSpace(2.0),
             Container(
                 alignment: Alignment.bottomCenter,
-                height: 11,
+                height: 15,
                 child: Image.asset(Const.assets + 'images/rect_40.png')),
             vwBSAppBar(
               onBack: () {
@@ -41,7 +40,8 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
                 if (onMenu != null) onMenu();
               },
-              title: '공유방식 선택',
+              title:
+                  'board.sub.bs.title.share'.tr, // 공유 방식 선택 (Share anyone to)
               actions: [
                 Container(
                   alignment: Alignment.center,
@@ -62,19 +62,29 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                       await share.Share.share(_boardUrl);
                     },
                     child: Text(
-                      '공유하기',
+                      'board.sub.bs.menu.done'.tr, // 완료 (share)
                       style: baseStyle.copyWith(
-                          fontSize: 13,
-                          color: Color(0xff017BFE),
-                          fontWeight: FontWeight.w400),
+                        fontFamily: Get.locale?.languageCode == 'ko'
+                            ? 'Roboto'
+                            : 'Avenir',
+                        fontSize: 14,
+                        color: Color(0xff017BFE),
+                        fontWeight: Get.locale?.languageCode == 'ko'
+                            ? FontWeight.w400
+                            : FontWeight.w500,
+                        height: Get.locale?.languageCode == 'ko'
+                            ? 1.17
+                            : 1.37, // 16.41px, 19.12px
+                      ),
                     ),
                   ),
                 ),
-                widthSpace(18.87),
+                widthSpace(20.0),
               ],
             ),
+            heightSpace(10.0),
             HanListTile(
-              padding: EdgeInsets.only(left: 47.0),
+              padding: EdgeInsets.only(left: 32.0),
               onTap: () async {
                 //SUBJECT : 공유 설정
                 //TODO: 데이터베이스고정.
@@ -88,13 +98,30 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                     .actionUpdateItem(controller.boardItem);
               },
               leading: _shareCheck == 1
-                  ? Image.asset(Const.assets + 'icon/radio_on.png')
-                  : Image.asset(Const.assets + 'icon/radio_off.png'),
-              title: Text('읽기 허용'),
+                  ? Image.asset(Const.assets + 'icon/radio_on.png',
+                      width: 24, height: 24)
+                  : Image.asset(Const.assets + 'icon/radio_off.png',
+                      width: 24, height: 24),
+
+              title: Text(
+                'board.sub.bs.menu.read'.tr, // 읽기 허용 (View)
+                style: baseStyle.copyWith(
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 14,
+                  color: Color(0xFF000000),
+                  fontWeight: Get.locale?.languageCode == 'ko'
+                      ? FontWeight.w400
+                      : FontWeight.w500,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37, // 21.09px, 24.59px
+                ),
+              ), // 읽기 허용
             ),
-            heightSpace(34.0),
+            heightSpace(20.0),
             HanListTile(
-              padding: EdgeInsets.only(left: 47.0),
+              padding: EdgeInsets.only(left: 32.0),
               onTap: () async {
                 //SUBJECT : 공유 방법
                 //TODO: 공유....
@@ -111,9 +138,23 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
               leading: _shareCheck == 2
                   ? Image.asset(Const.assets + 'icon/radio_on.png')
                   : Image.asset(Const.assets + 'icon/radio_off.png'),
-              title: Text('편집 허용'),
+              title: Text(
+                'board.sub.bs.menu.edit'.tr,
+                style: baseStyle.copyWith(
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 14,
+                  color: Color(0xFF000000),
+                  fontWeight: Get.locale?.languageCode == 'ko'
+                      ? FontWeight.w400
+                      : FontWeight.w500,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37, // 21.09px, 24.59px
+                ),
+              ), // 편집 허용 (Edit)
             ),
-            heightSpace(37.0),
+            heightSpace(24.0),
           ],
         ),
       );

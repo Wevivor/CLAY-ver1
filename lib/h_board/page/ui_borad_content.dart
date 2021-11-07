@@ -148,6 +148,8 @@ class _BoardContentUIState extends State<BoardContentUI>
                   Container(
                     alignment: Alignment.center,
                     child: InkWell(
+                      highlightColor: Colors.white.withOpacity(0.1),
+                      borderRadius: BorderRadius.circular(20),
                       onTap: () {
                         final _controller = Get.put(BoardController());
                         BoardController.to.boardItem = widget.board;
@@ -157,26 +159,30 @@ class _BoardContentUIState extends State<BoardContentUI>
                         height: 28,
                         width: 63,
                         decoration: DecoHelper.roundDeco.copyWith(
+                          color: Color.fromRGBO(250, 250, 250, 0.12),
                           borderRadius: BorderRadius.all(Radius.circular(20)),
                           border: Border.all(width: 1, color: Colors.white),
                         ),
                         alignment: Alignment.center,
                         child: Text('Share',
                             style: baseStyle.copyWith(
+                              fontFamily: 'Avenir',
                               color: Colors.white,
                               fontSize: 14,
-                              fontWeight: FontWeight.w700,
+                              fontWeight: FontWeight.w900,
+                              height: 1.37, // 19.12px
                             )),
                       ),
                     ),
                   ),
-                  widthSpace(18.0)
+                  widthSpace(15.0)
                 ],
               ),
             ),
             SliverToBoxAdapter(
                 child: Column(
               children: [
+                heightSpace(13.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
@@ -207,7 +213,6 @@ class _BoardContentUIState extends State<BoardContentUI>
                     widthSpace(20.0),
                   ],
                 ),
-                // heightSpace(16.0),
               ],
             )),
             SliverToBoxAdapter(

@@ -1,3 +1,5 @@
+// 내보드의 상세리스트 페이지 : 그리드 타입.
+
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_page/sub_post.dart';

@@ -37,7 +37,7 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
           heightSpace(2.0),
           //TODO: 날짜, 및 개수 sprinf
           Container(
-            // padding: EdgeInsets.only(left: 16),
+            padding: EdgeInsets.only(left: 3.0),
             alignment: Alignment.centerLeft,
             child: Text(
               sprintf('%s, %d items', [
@@ -45,9 +45,16 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
                 board.contentsCount
               ]),
               style: baseStyle.copyWith(
-                  fontSize: 13,
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700),
+                fontFamily:
+                    Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                fontSize: 13,
+                color: Color(0xFFffffff),
+                fontWeight: Get.locale?.languageCode == 'ko'
+                    ? FontWeight.w700
+                    : FontWeight.w800,
+                height: 1.37, // 17.76px
+                letterSpacing: -0.65, // -5%
+              ),
             ),
           ),
           heightSpace(10.0),
@@ -72,8 +79,7 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
               ],
             ),
           ),
-
-          heightSpace(19.0),
+          heightSpace(20.0),
         ],
       ),
     );
@@ -86,7 +92,14 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
       child: Text(
         title,
         style: baseStyle.copyWith(
-            fontSize: 36, color: Colors.white, fontWeight: FontWeight.w900),
+          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+          fontSize: Get.locale?.languageCode == 'ko' ? 36 : 30,
+          color: Color(0xFFffffff),
+          fontWeight: FontWeight.w900,
+          height: Get.locale?.languageCode == 'ko'
+              ? 1.17
+              : 1.37, // 42.19px, 40.98px
+        ),
       ),
     );
   }
