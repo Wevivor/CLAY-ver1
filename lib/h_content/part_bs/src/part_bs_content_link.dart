@@ -7,6 +7,8 @@ import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
+import 'package:clay/h_content/controllers/content_all_list_controller.dart';
+import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:get/get.dart';
 
@@ -60,6 +62,11 @@ class BottomSheetContentLink extends StatelessWidget
               child: InkWell(
                 onTap: () async {
                   FocusScope.of(context).unfocus();
+                  ContentsController.to.linkController.text =
+                      'https://www.naver.com';
+                  ContentsController.to.commentController.text =
+                      'commentController';
+
                   final _webLink = ContentsController.to.linkController.text;
 
                   if (web_url(_webLink) != null || _webLink.isEmpty) {
@@ -87,6 +94,9 @@ class BottomSheetContentLink extends StatelessWidget
                       link: _webLink, comment: _comment, type: 'link');
 
                   await _controller.actionIns(_item);
+                  Get.lazyPut(() => ContentAllListController());
+                  ContentAllListController.to.cache.clear();
+                  await ContentAllListController.to.fetchItems();
 
                   Get.back();
                 },

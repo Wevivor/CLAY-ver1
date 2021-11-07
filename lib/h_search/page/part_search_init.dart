@@ -49,7 +49,7 @@ class SearchInitPART extends StatelessWidget {
               },
               holder: Const.assets + 'images/smpl_list1.png',
               title: item.info.contentsTitle,
-              date: Jiffy(item.info.ContentsCreateDate).format('yyyy-MM-dd'),
+              date: Jiffy(item.info.contentsCreateDate).format('yyyy-MM-dd'),
               contentText: item.info.contentsDescription,
               imgUrl: item.info.thumbnails,
             ),

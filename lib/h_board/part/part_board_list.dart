@@ -104,6 +104,8 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
 
             await BoardListController.to
                 .actionUpdateItem(BoardController.to.boardItem);
+            BoardListController.to.cache.clear();
+            await BoardListController.to.fetchItems();
             Get.back();
           },
           leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
@@ -118,7 +120,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
           ),
           onTap: () {
             //SUBJECT : BS: 공유 권한 변경
-            //TODO: 패딩조정.
+
             Get.back();
             _showBS(context, BottomSheetShare(onMenu: () {
               _showBS(context, vwBoardMenu(context));
@@ -175,7 +177,6 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             //TODO: 다이어로르 처리, boardList 를 refresh
             if (_responce) {
               Board? _info = BoardController.to.boardItem;
-
               await BoardController.to.actionDelete(_info?.boardId);
               BoardListController.to.actionDeleteItem(_info?.boardId);
             }
@@ -196,19 +197,22 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
         context: context,
         enableDrag: false,
         builder: (BuildContext buildContext) {
-          return child;
-        });
-  }
+          return WillPopScope(
+            onWillPop: () {
+              //SUBJECT: BS 시스템네비바 검게 방지하는
+              delaySetSysyemUIOverlays(250);
 
-  Widget vwTitle(final title) {
-    return Container(
-      padding: EdgeInsets.only(left: 16),
-      alignment: Alignment.centerLeft,
-      child: Text(
-        title,
-        style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
-      ),
-    );
+              return Future.value(true);
+            },
+            child: Padding(
+              padding: MediaQuery.of(context).viewInsets,
+              child: Container(
+                child: Wrap(
+                  children: [child],
+                ),
+              ),
+            ),
+          );
+        });
   }
 }

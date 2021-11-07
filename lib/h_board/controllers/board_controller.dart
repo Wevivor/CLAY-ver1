@@ -9,7 +9,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 
-class BoardController extends AbsItemController with FbCommonModule {
+class BoardController extends AbsItemController
+    with FbCommonModule, ElCommonModule {
   static String MENU_POS = 'board';
   late FirebaseFirestore _instance;
   Board? boardItem;
@@ -25,9 +26,11 @@ class BoardController extends AbsItemController with FbCommonModule {
     super.onClose();
   }
 
+
   //---------------------------------
   //------------------기본 CRUD 프로토콜
   //---------------------------------
+
   @override
   Future<Board> actionRead(String id) async {
     // try {
@@ -44,25 +47,28 @@ class BoardController extends AbsItemController with FbCommonModule {
     return _post;
   }
 
-  Future<void> actionIns(BoardDto item) async {
-    try {
-      LoadingController.to.isLoading = true;
-      // final _item =
-      //     await insertFb(instance: _instance, path: MENU_POS, item: item);
+  // Future<void> actionIns(BoardDto item) async {
+  //   try {
+  //     LoadingController.to.isLoading = true;
+  //     // final _item =
+  //     //     await insertFb(instance: _instance, path: MENU_POS, item: item);
+  //
+  //     final docRef = _instance.collection('$MENU_POS').doc();
+  //     //TODO 여러가지의 경우 info 인지 아닌지?
+  //     final newItem = item.copyWith(
+  //         boardId: docRef.id, info: item.info.copyWith(boardId: docRef.id));
+  //     await docRef.set(newItem.toJson(), SetOptions(merge: true));
+  //   } catch (e) {
+  //     throw Exception('error');
+  //   } finally {
+  //     update();
+  //     LoadingController.to.isLoading = false;
+  //   }
+  // }
 
-      final docRef = _instance.collection('$MENU_POS').doc();
-      //TODO 여러가지의 경우 info 인지 아닌지?
-      final newItem = item.copyWith(
-          boardId: docRef.id, info: item.info.copyWith(boardId: docRef.id));
-      await docRef.set(newItem.toJson(), SetOptions(merge: true));
-    } catch (e) {
-      throw Exception('error');
-    } finally {
-      update();
-      LoadingController.to.isLoading = false;
-    }
-  }
-
+  ///--------------------------
+  ///처음가입시에 보드 3개 자동생성
+  ///--------------------------
   Future<void> actionDefalutCreate(Profile? profile) async {
     try {
       final _board01 = createBoardInit(profile, name: '자기계발', type: '자기계발');
@@ -76,113 +82,123 @@ class BoardController extends AbsItemController with FbCommonModule {
     }
   }
 
-  Future<BoardDto?> createBoardInit(Profile? profile,
+  Future<void> createBoardInit(Profile? profile,
       {required String name, required type}) async {
-    List colors = [
-      'FFfc5e20',
-      'FFffc700',
-      'FF159b4d',
-      'FF1b9dfc',
-      'FF9a71bb',
-      'FF9a71bb',
-      'FFff78d9',
-      'FFcaf2ff',
-      'FF9dffd0',
-      'FFc1a27c',
-      'FFfff1a7',
-      'FFfff1a7'
-    ];
-    var rng = new Random().nextInt(colors.length);
+    final docRef = _instance.collection('$MENU_POS').doc();
 
-    final _profile = profile;
-    if (_profile != null) {
-      final _info = BoardInfoDto(
-        boardName: name,
-        boardColor: colors[rng - 1],
-        boardBadge: type,
-        shareCheck: 0,
-        isFixed: false,
-        shareCount: 0,
-        registerDate: DateTime.now(),
-      );
-      final _item = BoardDto(
-        boardCreator: _profile.toDto(),
-        info: _info,
-        shareCheck: 0,
-        contentsCount: 0,
-        registerDate: DateTime.now(),
-      );
+    if (profile == null) throw Exception();
 
-      final docRef = _instance.collection('$MENU_POS').doc();
-      //TODO 여러가지의 경우 info 인지 아닌지?
-      final newItem = _item.copyWith(
-          boardId: docRef.id, info: _item.info.copyWith(boardId: docRef.id));
-      await docRef.set(newItem.toJson(), SetOptions(merge: true));
-      return _item;
-    }
-    return null;
+    final _item = initItem(profile, name: name, type: type);
+    //TODO 여러가지의 경우 info 인지 아닌지?
+    return FirebaseFirestore.instance
+        .runTransaction((transaction) async {
+          final newItem = _item.copyWith(
+              boardId: docRef.id,
+              info: _item.info.copyWith(boardId: docRef.id));
+
+          var _itemJson = newItem.toJson();
+          await docRef.set(_itemJson, SetOptions(merge: true));
+
+          _itemJson['register_date'] = newItem.registerDate.toIso8601String();
+          _itemJson['info']['register_date'] =
+              newItem.registerDate.toIso8601String();
+          _itemJson['board_creator']['register_date'] =
+              newItem.boardCreator.registerDate.toIso8601String();
+
+          await insertEl(
+            index: '/clay_boards/',
+            id: docRef.id,
+            body: _itemJson,
+          );
+
+          return _item;
+        })
+        .then((value) => null)
+        //TODO: Exception에 추가함
+        .catchError(
+            (error) {
+              LoadingController.to.isLoading = false;
+              debugPrint("Failed to update user followers: $error");
+              throw Exception('error');
+            });
   }
 
   Future<void> actionDelete(id) async {
-    try {
-      LoadingController.to.isLoading = true;
+    LoadingController.to.isLoading = true;
+    return FirebaseFirestore.instance.runTransaction((transaction) async {
       await deleteFb(instance: _instance, path: MENU_POS, id: id);
-    } catch (e) {
-      throw Exception('error');
-    } finally {
+
+      await deleteEl(index: '/clay_boards/', id: id);
+    }).then((value) {
       update();
       LoadingController.to.isLoading = false;
-    }
+    }).catchError((error) {
+      //TODO: Exception에 추가함
+      LoadingController.to.isLoading = false;
+      debugPrint("Failed to update user followers: $error");
+      throw Exception('error');
+    });
   }
 
-  Future<void> actionUpdate() async {
-    try {
+  // Future<void> actionUpdate() async {
+  //   try {
+  //     await updateFb(
+  //         instance: _instance,
+  //         path: MENU_POS,
+  //         id: boardItem?.boardId ?? '',
+  //         dto: boardItem?.toDto());
+  //   } catch (e) {
+  //     throw Exception('error ${e.toString()}');
+  //   } finally {
+  //     update();
+  //     LoadingController.to.isLoading = false;
+  //   }
+  // }
+
+  Future<void> actionUpdate({id, Board? info}) async {
+    LoadingController.to.isLoading = true;
+    return FirebaseFirestore.instance.runTransaction((transaction) async {
       await updateFb(
           instance: _instance,
           path: MENU_POS,
           id: boardItem?.boardId ?? '',
-          dto: boardItem?.toDto());
-    } catch (e) {
-      throw Exception('error ${e.toString()}');
-    } finally {
-      update();
-      LoadingController.to.isLoading = false;
-    }
-  }
+          dto: info?.toDto());
 
-  Future<void> actionUpdateInfo({id, info}) async {
-    try {
-      LoadingController.to.isLoading = true;
-      await updateInfoFb(
-          instance: _instance,
-          path: MENU_POS,
-          id: id,
-          info: {'info': info.toJson()});
-    } catch (e) {
-      throw Exception('error ${e.toString()}');
-    } finally {
+      var _itemJson = info?.toDto().toJson();
+      _itemJson?['register_date'] = info?.registerDate.toIso8601String();
+      _itemJson?['info']['register_date'] =
+          info?.registerDate.toIso8601String();
+      _itemJson?['board_creator']['register_date'] =
+          info?.boardCreator.registerDate.toIso8601String();
+
+      await updateEl(index: '/clay_boards/', id: id, body: _itemJson);
+    }).then((value) {
       update();
       LoadingController.to.isLoading = false;
-    }
+    }).catchError((error) {
+      //TODO: Exception에 추가함
+      LoadingController.to.isLoading = false;
+      debugPrint("Failed to update user followers: $error");
+      throw Exception('error');
+    });
   }
 
   Future<void> actionPin({fix}) async {
-    try {
+    LoadingController.to.isLoading = true;
       if (boardItem?.info != null) {
         final _info = boardItem?.info;
         boardItem = boardItem?.copyWith(info: _info!.copyWith(isFixed: fix));
+
+        await actionUpdate(id: boardItem?.boardId, info: boardItem);
         update();
-        await actionUpdateInfo(
-            id: boardItem?.boardId,
-            info: boardItem?.info.copyWith(isFixed: fix).toDto());
       }
-    } catch (e) {
-      throw Exception('error ${e.toString()}');
-    } finally {
       LoadingController.to.isLoading = false;
-    }
+
   }
 
+  ///----------------------------------
+  ///보드 정보 수정 액션 -------------------
+  ///----------------------------------
   void actionChangeColor(String color) async {
     final _newInfo = boardItem!.info.copyWith(boardColor: color);
     final _newItem = boardItem!.copyWith(info: _newInfo);
@@ -211,11 +227,41 @@ class BoardController extends AbsItemController with FbCommonModule {
     boardItem = _newItem;
   }
 
-  // void actionBoardInfo({
-  //   required String name,
-  // }) async {
-  //   final _newInfo = boardItem!.info.copyWith(boardName: name);
-  //   final _newItem = boardItem!.copyWith(info: _newInfo);
-  //   boardItem = _newItem;
-  // }
+  BoardDto initItem(Profile profile, {required String name, required type}) {
+    List colors = [
+      'FFfc5e20',
+      'FFFFA178',
+      'FFFFC700',
+      'FFFFE999',
+      'FF159B4D',
+      'FFB0E6A3',
+      'FF1B75FC',
+      'FFCAF2FF',
+      'FF9A71BB',
+      'FFD6B8EE',
+      'FFFE4A75',
+      'FFFEB5C7'
+    ];
+    var rng = new Random().nextInt(colors.length);
+
+    final _profile = profile;
+    final _info = BoardInfoDto(
+      boardName: name,
+      boardColor: colors[rng],
+      boardBadge: type,
+      shareCheck: 0,
+      isFixed: false,
+      shareCount: 0,
+      registerDate: DateTime.now(),
+    );
+    final _item = BoardDto(
+      boardCreator: _profile.toDto(),
+      info: _info,
+      shareCheck: 0,
+      contentsCount: 0,
+      registerDate: DateTime.now(),
+    );
+    return _item;
+  }
+
 }

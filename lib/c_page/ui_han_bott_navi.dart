@@ -266,7 +266,8 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
     final _controller = Get.put(BoardController());
     final _profile = HanUserInfoController.to.toProfile();
-    final _item = _createBoard(_profile);
+    final _item = _controller.initItem(_profile, name: '', type: '');
+
     _controller.boardItem = _item.toDomain();
     _controller.boardNameController.text = '';
 
@@ -330,26 +331,6 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
             _showBS(context, vwBoardMenu(context));
           },
         ));
-  }
-
-  BoardDto _createBoard(Profile profile) {
-    final _info = BoardInfoDto(
-      boardName: '',
-      boardColor: 'FFfc5e20',
-      boardBadge: '',
-      shareCheck: 0,
-      isFixed: false,
-      shareCount: 0,
-      registerDate: DateTime.now(),
-    );
-    final _item = BoardDto(
-      boardCreator: profile.toDto(),
-      info: _info,
-      shareCheck: 0,
-      contentsCount: 0,
-      registerDate: DateTime.now(),
-    );
-    return _item;
   }
 
   void _showBS(context, child) {

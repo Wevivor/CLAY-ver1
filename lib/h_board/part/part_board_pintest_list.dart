@@ -10,8 +10,8 @@ import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
-import 'package:clay/h_content/part/wgt_content_grid_item.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
+import 'package:clay/h_content/widget/wgt_content_grid_item.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

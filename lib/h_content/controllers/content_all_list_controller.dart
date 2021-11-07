@@ -130,4 +130,13 @@ class ContentAllListController extends AbsListController
       }
     }
   }
+
+  Future<void> actionRefresh() async {
+    this.cache.clear();
+
+    loading = false;
+    hasMore = true;
+    update();
+    await fetchItems(nextId: 0);
+  }
 }

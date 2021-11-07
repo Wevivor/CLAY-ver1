@@ -27,8 +27,8 @@ class _$ContentsTearOff {
       BoardInfo? boardInfo,
       ShareDto? shareInfo,
       String? contentsComment,
-      required DateTime ContentsCreateDate,
-      required DateTime ContentsUpdateDate}) {
+      required DateTime contentsCreateDate,
+      required DateTime contentsUpdateDate}) {
     return _Contents(
       contentsId: contentsId,
       info: info,
@@ -39,8 +39,8 @@ class _$ContentsTearOff {
       boardInfo: boardInfo,
       shareInfo: shareInfo,
       contentsComment: contentsComment,
-      ContentsCreateDate: ContentsCreateDate,
-      ContentsUpdateDate: ContentsUpdateDate,
+      contentsCreateDate: contentsCreateDate,
+      contentsUpdateDate: contentsUpdateDate,
     );
   }
 }
@@ -59,8 +59,8 @@ mixin _$Contents {
   BoardInfo? get boardInfo => throw _privateConstructorUsedError;
   ShareDto? get shareInfo => throw _privateConstructorUsedError;
   String? get contentsComment => throw _privateConstructorUsedError;
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ContentsCopyWith<Contents> get copyWith =>
@@ -81,8 +81,8 @@ abstract class $ContentsCopyWith<$Res> {
       BoardInfo? boardInfo,
       ShareDto? shareInfo,
       String? contentsComment,
-      DateTime ContentsCreateDate,
-      DateTime ContentsUpdateDate});
+      DateTime contentsCreateDate,
+      DateTime contentsUpdateDate});
 
   $ContentsInfoCopyWith<$Res> get info;
   $ProfileCopyWith<$Res> get userInfo;
@@ -109,8 +109,8 @@ class _$ContentsCopyWithImpl<$Res> implements $ContentsCopyWith<$Res> {
     Object? boardInfo = freezed,
     Object? shareInfo = freezed,
     Object? contentsComment = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_value.copyWith(
       contentsId: contentsId == freezed
@@ -149,13 +149,13 @@ class _$ContentsCopyWithImpl<$Res> implements $ContentsCopyWith<$Res> {
           ? _value.contentsComment
           : contentsComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -212,8 +212,8 @@ abstract class _$ContentsCopyWith<$Res> implements $ContentsCopyWith<$Res> {
       BoardInfo? boardInfo,
       ShareDto? shareInfo,
       String? contentsComment,
-      DateTime ContentsCreateDate,
-      DateTime ContentsUpdateDate});
+      DateTime contentsCreateDate,
+      DateTime contentsUpdateDate});
 
   @override
   $ContentsInfoCopyWith<$Res> get info;
@@ -245,8 +245,8 @@ class __$ContentsCopyWithImpl<$Res> extends _$ContentsCopyWithImpl<$Res>
     Object? boardInfo = freezed,
     Object? shareInfo = freezed,
     Object? contentsComment = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_Contents(
       contentsId: contentsId == freezed
@@ -285,13 +285,13 @@ class __$ContentsCopyWithImpl<$Res> extends _$ContentsCopyWithImpl<$Res>
           ? _value.contentsComment
           : contentsComment // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -310,8 +310,8 @@ class _$_Contents extends _Contents {
       this.boardInfo,
       this.shareInfo,
       this.contentsComment,
-      required this.ContentsCreateDate,
-      required this.ContentsUpdateDate})
+      required this.contentsCreateDate,
+      required this.contentsUpdateDate})
       : super._();
 
   @override
@@ -333,13 +333,13 @@ class _$_Contents extends _Contents {
   @override
   final String? contentsComment;
   @override
-  final DateTime ContentsCreateDate;
+  final DateTime contentsCreateDate;
   @override
-  final DateTime ContentsUpdateDate;
+  final DateTime contentsUpdateDate;
 
   @override
   String toString() {
-    return 'Contents(contentsId: $contentsId, info: $info, userInfo: $userInfo, contentsAllviewCount: $contentsAllviewCount, contentsMyviewCount: $contentsMyviewCount, contentsAlarmCheck: $contentsAlarmCheck, boardInfo: $boardInfo, shareInfo: $shareInfo, contentsComment: $contentsComment, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
+    return 'Contents(contentsId: $contentsId, info: $info, userInfo: $userInfo, contentsAllviewCount: $contentsAllviewCount, contentsMyviewCount: $contentsMyviewCount, contentsAlarmCheck: $contentsAlarmCheck, boardInfo: $boardInfo, shareInfo: $shareInfo, contentsComment: $contentsComment, contentsCreateDate: $contentsCreateDate, contentsUpdateDate: $contentsUpdateDate)';
   }
 
   @override
@@ -372,12 +372,12 @@ class _$_Contents extends _Contents {
             (identical(other.contentsComment, contentsComment) ||
                 const DeepCollectionEquality()
                     .equals(other.contentsComment, contentsComment)) &&
-            (identical(other.ContentsCreateDate, ContentsCreateDate) ||
+            (identical(other.contentsCreateDate, contentsCreateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsCreateDate, ContentsCreateDate)) &&
-            (identical(other.ContentsUpdateDate, ContentsUpdateDate) ||
+                    .equals(other.contentsCreateDate, contentsCreateDate)) &&
+            (identical(other.contentsUpdateDate, contentsUpdateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsUpdateDate, ContentsUpdateDate)));
+                    .equals(other.contentsUpdateDate, contentsUpdateDate)));
   }
 
   @override
@@ -392,8 +392,8 @@ class _$_Contents extends _Contents {
       const DeepCollectionEquality().hash(boardInfo) ^
       const DeepCollectionEquality().hash(shareInfo) ^
       const DeepCollectionEquality().hash(contentsComment) ^
-      const DeepCollectionEquality().hash(ContentsCreateDate) ^
-      const DeepCollectionEquality().hash(ContentsUpdateDate);
+      const DeepCollectionEquality().hash(contentsCreateDate) ^
+      const DeepCollectionEquality().hash(contentsUpdateDate);
 
   @JsonKey(ignore: true)
   @override
@@ -412,8 +412,8 @@ abstract class _Contents extends Contents {
       BoardInfo? boardInfo,
       ShareDto? shareInfo,
       String? contentsComment,
-      required DateTime ContentsCreateDate,
-      required DateTime ContentsUpdateDate}) = _$_Contents;
+      required DateTime contentsCreateDate,
+      required DateTime contentsUpdateDate}) = _$_Contents;
   _Contents._() : super._();
 
   @override
@@ -435,9 +435,9 @@ abstract class _Contents extends Contents {
   @override
   String? get contentsComment => throw _privateConstructorUsedError;
   @override
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
   @override
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ContentsCopyWith<_Contents> get copyWith =>
@@ -459,8 +459,8 @@ class _$ContentsInfoTearOff {
       bool? contentsFixed,
       String? contentsType,
       String? thumbnails,
-      required DateTime ContentsCreateDate,
-      required DateTime ContentsUpdateDate}) {
+      required DateTime contentsCreateDate,
+      required DateTime contentsUpdateDate}) {
     return _ContentsInfo(
       contentsId: contentsId,
       contentsTitle: contentsTitle,
@@ -472,8 +472,8 @@ class _$ContentsInfoTearOff {
       contentsFixed: contentsFixed,
       contentsType: contentsType,
       thumbnails: thumbnails,
-      ContentsCreateDate: ContentsCreateDate,
-      ContentsUpdateDate: ContentsUpdateDate,
+      contentsCreateDate: contentsCreateDate,
+      contentsUpdateDate: contentsUpdateDate,
     );
   }
 }
@@ -493,8 +493,8 @@ mixin _$ContentsInfo {
   bool? get contentsFixed => throw _privateConstructorUsedError;
   String? get contentsType => throw _privateConstructorUsedError;
   String? get thumbnails => throw _privateConstructorUsedError;
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $ContentsInfoCopyWith<ContentsInfo> get copyWith =>
@@ -517,8 +517,8 @@ abstract class $ContentsInfoCopyWith<$Res> {
       bool? contentsFixed,
       String? contentsType,
       String? thumbnails,
-      DateTime ContentsCreateDate,
-      DateTime ContentsUpdateDate});
+      DateTime contentsCreateDate,
+      DateTime contentsUpdateDate});
 }
 
 /// @nodoc
@@ -541,8 +541,8 @@ class _$ContentsInfoCopyWithImpl<$Res> implements $ContentsInfoCopyWith<$Res> {
     Object? contentsFixed = freezed,
     Object? contentsType = freezed,
     Object? thumbnails = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_value.copyWith(
       contentsId: contentsId == freezed
@@ -585,13 +585,13 @@ class _$ContentsInfoCopyWithImpl<$Res> implements $ContentsInfoCopyWith<$Res> {
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -615,8 +615,8 @@ abstract class _$ContentsInfoCopyWith<$Res>
       bool? contentsFixed,
       String? contentsType,
       String? thumbnails,
-      DateTime ContentsCreateDate,
-      DateTime ContentsUpdateDate});
+      DateTime contentsCreateDate,
+      DateTime contentsUpdateDate});
 }
 
 /// @nodoc
@@ -641,8 +641,8 @@ class __$ContentsInfoCopyWithImpl<$Res> extends _$ContentsInfoCopyWithImpl<$Res>
     Object? contentsFixed = freezed,
     Object? contentsType = freezed,
     Object? thumbnails = freezed,
-    Object? ContentsCreateDate = freezed,
-    Object? ContentsUpdateDate = freezed,
+    Object? contentsCreateDate = freezed,
+    Object? contentsUpdateDate = freezed,
   }) {
     return _then(_ContentsInfo(
       contentsId: contentsId == freezed
@@ -685,13 +685,13 @@ class __$ContentsInfoCopyWithImpl<$Res> extends _$ContentsInfoCopyWithImpl<$Res>
           ? _value.thumbnails
           : thumbnails // ignore: cast_nullable_to_non_nullable
               as String?,
-      ContentsCreateDate: ContentsCreateDate == freezed
-          ? _value.ContentsCreateDate
-          : ContentsCreateDate // ignore: cast_nullable_to_non_nullable
+      contentsCreateDate: contentsCreateDate == freezed
+          ? _value.contentsCreateDate
+          : contentsCreateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      ContentsUpdateDate: ContentsUpdateDate == freezed
-          ? _value.ContentsUpdateDate
-          : ContentsUpdateDate // ignore: cast_nullable_to_non_nullable
+      contentsUpdateDate: contentsUpdateDate == freezed
+          ? _value.contentsUpdateDate
+          : contentsUpdateDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -711,8 +711,8 @@ class _$_ContentsInfo extends _ContentsInfo {
       this.contentsFixed,
       this.contentsType,
       this.thumbnails,
-      required this.ContentsCreateDate,
-      required this.ContentsUpdateDate})
+      required this.contentsCreateDate,
+      required this.contentsUpdateDate})
       : super._();
 
   @override
@@ -736,13 +736,13 @@ class _$_ContentsInfo extends _ContentsInfo {
   @override
   final String? thumbnails;
   @override
-  final DateTime ContentsCreateDate;
+  final DateTime contentsCreateDate;
   @override
-  final DateTime ContentsUpdateDate;
+  final DateTime contentsUpdateDate;
 
   @override
   String toString() {
-    return 'ContentsInfo(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, contentsType: $contentsType, thumbnails: $thumbnails, ContentsCreateDate: $ContentsCreateDate, ContentsUpdateDate: $ContentsUpdateDate)';
+    return 'ContentsInfo(contentsId: $contentsId, contentsTitle: $contentsTitle, contentsUrl: $contentsUrl, contentsImages: $contentsImages, contentsDescription: $contentsDescription, contentsComment: $contentsComment, contentsUniqueLink: $contentsUniqueLink, contentsFixed: $contentsFixed, contentsType: $contentsType, thumbnails: $thumbnails, contentsCreateDate: $contentsCreateDate, contentsUpdateDate: $contentsUpdateDate)';
   }
 
   @override
@@ -779,12 +779,12 @@ class _$_ContentsInfo extends _ContentsInfo {
             (identical(other.thumbnails, thumbnails) ||
                 const DeepCollectionEquality()
                     .equals(other.thumbnails, thumbnails)) &&
-            (identical(other.ContentsCreateDate, ContentsCreateDate) ||
+            (identical(other.contentsCreateDate, contentsCreateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsCreateDate, ContentsCreateDate)) &&
-            (identical(other.ContentsUpdateDate, ContentsUpdateDate) ||
+                    .equals(other.contentsCreateDate, contentsCreateDate)) &&
+            (identical(other.contentsUpdateDate, contentsUpdateDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.ContentsUpdateDate, ContentsUpdateDate)));
+                    .equals(other.contentsUpdateDate, contentsUpdateDate)));
   }
 
   @override
@@ -800,8 +800,8 @@ class _$_ContentsInfo extends _ContentsInfo {
       const DeepCollectionEquality().hash(contentsFixed) ^
       const DeepCollectionEquality().hash(contentsType) ^
       const DeepCollectionEquality().hash(thumbnails) ^
-      const DeepCollectionEquality().hash(ContentsCreateDate) ^
-      const DeepCollectionEquality().hash(ContentsUpdateDate);
+      const DeepCollectionEquality().hash(contentsCreateDate) ^
+      const DeepCollectionEquality().hash(contentsUpdateDate);
 
   @JsonKey(ignore: true)
   @override
@@ -821,8 +821,8 @@ abstract class _ContentsInfo extends ContentsInfo {
       bool? contentsFixed,
       String? contentsType,
       String? thumbnails,
-      required DateTime ContentsCreateDate,
-      required DateTime ContentsUpdateDate}) = _$_ContentsInfo;
+      required DateTime contentsCreateDate,
+      required DateTime contentsUpdateDate}) = _$_ContentsInfo;
   _ContentsInfo._() : super._();
 
   @override
@@ -846,9 +846,9 @@ abstract class _ContentsInfo extends ContentsInfo {
   @override
   String? get thumbnails => throw _privateConstructorUsedError;
   @override
-  DateTime get ContentsCreateDate => throw _privateConstructorUsedError;
+  DateTime get contentsCreateDate => throw _privateConstructorUsedError;
   @override
-  DateTime get ContentsUpdateDate => throw _privateConstructorUsedError;
+  DateTime get contentsUpdateDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ContentsInfoCopyWith<_ContentsInfo> get copyWith =>

@@ -3,7 +3,9 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
+import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:get/get.dart';
 
@@ -67,12 +69,9 @@ class BottomSheetNewBoard extends StatelessWidget
                     final _controller = BoardController.to;
                     _controller
                         .actionChangeName(_controller.boardNameController.text);
-                    final exist = [
-                      'com.chip.badge.growth'.tr,
-                      'com.chip.badge.work'.tr,
-                      'com.chip.badge.like'.tr,
-                      'com.chip.badge.none'.tr
-                    ].firstWhere(
+                    //SUBJECT: 보드 타입 , 한글화 하면 안됨
+                    //TODO :
+                    final exist = ['자기계발', '선택안함', 'LIKE', '일/공부'].firstWhere(
                         (element) =>
                             element == _controller.boardItem?.info.boardBadge,
                         orElse: () {
@@ -84,13 +83,25 @@ class BottomSheetNewBoard extends StatelessWidget
                       AppHelper.showMessage('배지를 선택해 주세요');
                       return;
                     }
+                    //TODO 작업중...
+                    // await _controller.actionIns(_controller.boardItem!.toDto());
+                    final _profile = HanUserInfoController.to.toProfile();
+                    await _controller.createBoardInit(_profile,
+                        name: _controller.boardNameController.text,
+                        type: _controller.boardItem?.info.boardBadge);
 
-                    await _controller.actionIns(_controller.boardItem!.toDto());
-                    Future.delayed(Duration(milliseconds: 1200), () async {
-                      BoardListMySelectController.to.cache.clear();
-                      await BoardListMySelectController.to.fetchItems();
-                      Get.back();
-                    });
+                    BoardListController.to.cache.clear();
+                    BoardListController.to.fetchItems();
+
+                    BoardListMySelectController.to.cache.clear();
+                    await BoardListMySelectController.to.fetchItems();
+                    Get.back();
+
+                    // Future.delayed(Duration(milliseconds: 1200), () async {
+                    //   BoardListMySelectController.to.cache.clear();
+                    //   await BoardListMySelectController.to.fetchItems();
+                    //   Get.back();
+                    // });
                   },
                   child: Text(
                     'com.btn.create'.tr,

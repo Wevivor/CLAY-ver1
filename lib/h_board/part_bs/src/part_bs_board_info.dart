@@ -20,6 +20,21 @@ class BottomSheetBoardInfo extends StatelessWidget
     this.onMenu,
   });
 
+  final _color = [
+    'FFfc5e20',
+    'FFFFA178',
+    'FFFFC700',
+    'FFFFE999',
+    'FF159B4D',
+    'FFB0E6A3',
+    'FF1B75FC',
+    'FFCAF2FF',
+    'FF9A71BB',
+    'FFD6B8EE',
+    'FFFE4A75',
+    'FFFEB5C7'
+  ];
+
   @override
   Widget build(BuildContext context) {
     final node = FocusScope.of(context);
@@ -64,21 +79,7 @@ class BottomSheetBoardInfo extends StatelessWidget
                     AppHelper.showMessage('배치를 선택해 주세요');
                     return;
                   }
-
-                  final _color = [
-                    'FFfc5e20',
-                    'FFffc700',
-                    'FF159b4d',
-                    'FF1b9dfc',
-                    'FF9a71bb',
-                    'FF9a71bb',
-                    'FFff78d9',
-                    'FFcaf2ff',
-                    'FF9dffd0',
-                    'FFc1a27c',
-                    'FFfff1a7',
-                    'FFfff1a7'
-                  ].firstWhere(
+                  _color.firstWhere(
                       (element) =>
                           element == _controller.boardItem?.info.boardColor,
                       orElse: () {
@@ -89,7 +90,9 @@ class BottomSheetBoardInfo extends StatelessWidget
                     return;
                   }
 
-                  await _controller.actionUpdate();
+                  await _controller.actionUpdate(
+                      id: _controller.boardItem?.boardId,
+                      info: _controller.boardItem);
                   await BoardListController.to
                       .actionUpdateItem(BoardController.to.boardItem);
                   Get.back();
@@ -198,44 +201,44 @@ class BottomSheetBoardInfo extends StatelessWidget
                         children: [
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFfc5e20');
+                              controller.actionChangeColor(_color[0]);
                             },
-                            boardColor: Color(0xFFfc5e20),
+                            boardColor: Color(int.parse(_color[0], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFffc700');
+                              controller.actionChangeColor(_color[1]);
                             },
-                            boardColor: Color(0xFFffc700),
+                            boardColor: Color(int.parse(_color[1], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FF159b4d');
+                              controller.actionChangeColor(_color[2]);
                             },
-                            boardColor: Color(0xFF159b4d),
+                            boardColor: Color(int.parse(_color[2], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FF1b9dfc');
+                              controller.actionChangeColor(_color[3]);
                             },
-                            boardColor: Color(0xFF1b9dfc),
+                            boardColor: Color(int.parse(_color[3], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FF9a71bb');
+                              controller.actionChangeColor(_color[4]);
                             },
-                            boardColor: Color(0xFF9a71bb),
+                            boardColor: Color(int.parse(_color[4], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FF9a71bb');
+                              controller.actionChangeColor(_color[5]);
                             },
-                            boardColor: Color(0xFF9a71bb),
+                            boardColor: Color(int.parse(_color[5], radix: 16)),
                             selectColor: _selectColor,
                           ),
                         ],
@@ -246,44 +249,44 @@ class BottomSheetBoardInfo extends StatelessWidget
                         children: [
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFff78d9');
+                              controller.actionChangeColor(_color[6]);
                             },
-                            boardColor: Color(0xFFff78d9),
+                            boardColor: Color(int.parse(_color[6], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFcaf2ff');
+                              controller.actionChangeColor(_color[7]);
                             },
-                            boardColor: Color(0xFFcaf2ff),
+                            boardColor: Color(int.parse(_color[7], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FF9dffd0');
+                              controller.actionChangeColor(_color[8]);
                             },
-                            boardColor: Color(0xFF9dffd0),
+                            boardColor: Color(int.parse(_color[8], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFc1a27c');
+                              controller.actionChangeColor(_color[9]);
                             },
-                            boardColor: Color(0xFFc1a27c),
+                            boardColor: Color(int.parse(_color[9], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFfff1a7');
+                              controller.actionChangeColor(_color[10]);
                             },
-                            boardColor: Color(0xFFfff1a7),
+                            boardColor: Color(int.parse(_color[10], radix: 16)),
                             selectColor: _selectColor,
                           ),
                           BSChoiceColorWidget(
                             onTap: () async {
-                              controller.actionChangeColor('FFfff1a7');
+                              controller.actionChangeColor(_color[11]);
                             },
-                            boardColor: Color(0xFFfff1a7),
+                            boardColor: Color(int.parse(_color[11], radix: 16)),
                             selectColor: _selectColor,
                           ),
                         ],

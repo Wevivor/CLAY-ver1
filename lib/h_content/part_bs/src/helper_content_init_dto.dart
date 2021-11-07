@@ -41,8 +41,8 @@ class ContentInitDtoHelper {
       contentsType: type,
       thumbnails: thumbnail,
       contentsUniqueLink: '',
-      ContentsCreateDate: DateTime.now(),
-      ContentsUpdateDate: DateTime.now(),
+      contentsCreateDate: DateTime.now(),
+      contentsUpdateDate: DateTime.now(),
     );
 
     //SUBJECT comment 타입 변경 필요
@@ -56,8 +56,8 @@ class ContentInitDtoHelper {
       contentsAlarmCheck: 0,
       shareInfo: null,
       contentsComment: null,
-      ContentsCreateDate: DateTime.now(),
-      ContentsUpdateDate: DateTime.now(),
+      contentsCreateDate: DateTime.now(),
+      contentsUpdateDate: DateTime.now(),
     );
     return _item;
   }

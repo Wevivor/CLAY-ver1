@@ -47,7 +47,13 @@ class BoardListController extends AbsListController
         },
       },
       "sort": [
-        // {"cntView": "desc"}
+        {"info.is_fixed": "desc"},
+        {
+          "register_date": {
+            "order": "desc",
+            "format": "strict_date_optional_time_nanos"
+          }
+        }
       ]
     };
 
@@ -79,27 +85,17 @@ class BoardListController extends AbsListController
     return _post.info;
   }
 
-  Future<void> actionfresh(String id) async {
-    // try {
-    final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
-
-    if (_item == null) {
-      throw Exception('error');
-    }
-    final _post = ContentsDto.fromJson(_item).toDomain();
-    var existIndex = cache.indexWhere(
-      (element) => element.id == id,
-    );
-
-    if (existIndex >= 0) {
-      cache[existIndex] = _post.info;
-    }
-
-    // final info = PostInfo.fromJson((_info.info));
-    this.item = _post;
-    update();
-  }
+ 
   */
+
+  Future<void> actionRefresh() async {
+    this.cache.clear();
+
+    loading = false;
+    hasMore = true;
+    update();
+    await fetchItems(nextId: 0);
+  }
 
   Future<void> actionDeleteItem(String? id) async {
     if (id != null) {

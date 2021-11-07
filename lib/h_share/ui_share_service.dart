@@ -220,7 +220,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
                   final _boardDto = await _controller.createBoardInit(_profile,
                       name: '', type: '');
 
-                  _controller.boardItem = _boardDto?.toDomain();
+                  // _controller.boardItem = _boardDto?.toDomain();
                   _controller.boardNameController.text = '';
 
                   _showBSContinue(context, BottomSheetNewBoard(

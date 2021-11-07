@@ -12,6 +12,7 @@ import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
+import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/content_dtos.dart';
 import 'package:clay/part_imagepicker/part_imagepicker.dart';
@@ -143,6 +144,10 @@ class BottomSheetContentPhoto extends StatelessWidget
                           await _controller.actionIns(_item);
                           LoadingController.to.isLoading = false;
                           LoadingController.to.update();
+
+                          Get.lazyPut(() => ContentAllListController());
+                          ContentAllListController.to.cache.clear();
+                          await ContentAllListController.to.fetchItems();
                           Get.back();
                         },
                         child: Text(
@@ -368,8 +373,8 @@ class BottomSheetContentPhoto extends StatelessWidget
       contentsType: 'photo',
       thumbnails: thumbName,
       contentsUniqueLink: '',
-      ContentsCreateDate: DateTime.now(),
-      ContentsUpdateDate: DateTime.now(),
+      contentsCreateDate: DateTime.now(),
+      contentsUpdateDate: DateTime.now(),
     );
 
     //SUBJECT 컨텐츠 타입 변경 필요
@@ -383,8 +388,8 @@ class BottomSheetContentPhoto extends StatelessWidget
       contentsAlarmCheck: 0,
       shareInfo: null,
       contentsComment: null,
-      ContentsCreateDate: DateTime.now(),
-      ContentsUpdateDate: DateTime.now(),
+      contentsCreateDate: DateTime.now(),
+      contentsUpdateDate: DateTime.now(),
     );
     return _item;
   }

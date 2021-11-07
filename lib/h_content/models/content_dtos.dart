@@ -22,9 +22,9 @@ class ContentsDto with _$ContentsDto {
     @JsonKey(name: 'share') ShareDto? shareInfo,
     @JsonKey(name: 'contents_comment') String? contentsComment,
     @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime ContentsCreateDate,
+        required DateTime contentsCreateDate,
     @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime ContentsUpdateDate,
+        required DateTime contentsUpdateDate,
   }) = _ContentsDto;
   ContentsDto._();
 
@@ -41,8 +41,8 @@ class ContentsDto with _$ContentsDto {
         contentsAlarmCheck: contentsAlarmCheck,
         shareInfo: shareInfo,
         contentsComment: contentsComment,
-        ContentsCreateDate: ContentsCreateDate,
-        ContentsUpdateDate: ContentsUpdateDate,
+        contentsCreateDate: contentsCreateDate,
+        contentsUpdateDate: contentsUpdateDate,
       );
 }
 
@@ -61,9 +61,9 @@ class ContentsInfoDto with _$ContentsInfoDto {
     @JsonKey(name: 'contents_type') String? contentsType,
     String? thumbnails,
     @JsonKey(name: 'contents_create_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime ContentsCreateDate,
+        required DateTime contentsCreateDate,
     @JsonKey(name: 'contents_upt_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-        required DateTime ContentsUpdateDate,
+        required DateTime contentsUpdateDate,
     // List<Comment>? comments;
   }) = _ContentsInfoDto;
   ContentsInfoDto._();
@@ -81,7 +81,7 @@ class ContentsInfoDto with _$ContentsInfoDto {
         contentsFixed: contentsFixed,
         contentsType: contentsType,
         contentsUniqueLink: contentsUniqueLink,
-        ContentsCreateDate: ContentsCreateDate,
-        ContentsUpdateDate: ContentsUpdateDate,
+        contentsCreateDate: contentsCreateDate,
+        contentsUpdateDate: contentsUpdateDate,
       );
 }
