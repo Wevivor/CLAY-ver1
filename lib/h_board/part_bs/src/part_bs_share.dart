@@ -30,16 +30,9 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             Container(
-<<<<<<< HEAD
-              alignment: Alignment.bottomCenter,
-              height: 15,
-              child: Image.asset(Const.assets + 'images/rect_40.png'),
-            ),
-=======
                 alignment: Alignment.bottomCenter,
                 height: 15,
                 child: Image.asset(Const.assets + 'images/rect_40.png')),
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
             vwBSAppBar(
               onBack: () {
                 Get.back();
@@ -48,12 +41,8 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
                 if (onMenu != null) onMenu();
               },
-<<<<<<< HEAD
-              title: 'board.sub.bs.title.share'.tr, //공유 방식 선택
-=======
               title:
                   'board.sub.bs.title.share'.tr, // 공유 방식 선택 (Share anyone to)
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
               actions: [
                 Container(
                   alignment: Alignment.center,
@@ -74,21 +63,13 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                       await share.Share.share(_boardUrl);
                     },
                     child: Text(
-<<<<<<< HEAD
-                      'board.sub.bs.menu.done'.tr,
-=======
                       'board.sub.bs.menu.done'.tr, // 완료 (share)
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
                       style: baseStyle.copyWith(
                         fontFamily: Get.locale?.languageCode == 'ko'
                             ? 'Roboto'
                             : 'Avenir',
                         fontSize: 14,
-<<<<<<< HEAD
-                        color: Color(0xFF017BFE),
-=======
                         color: Color(0xff017BFE),
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
                         fontWeight: Get.locale?.languageCode == 'ko'
                             ? FontWeight.w400
                             : FontWeight.w500,
@@ -99,11 +80,7 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                     ),
                   ),
                 ),
-<<<<<<< HEAD
-                widthSpace(20),
-=======
                 widthSpace(20.0),
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
               ],
             ),
             heightSpace(10.0),
@@ -122,20 +99,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                     .actionUpdateItem(controller.boardItem);
               },
               leading: _shareCheck == 1
-<<<<<<< HEAD
-                  ? Image.asset(
-                      Const.assets + 'icon/radio_on.png',
-                      width: 24,
-                      height: 24,
-                    )
-                  : Image.asset(
-                      Const.assets + 'icon/radio_off.png',
-                      width: 24,
-                      height: 24,
-                    ),
-              title: Text(
-                'board.sub.bs.menu.read'.tr,
-=======
                   ? Image.asset(Const.assets + 'icon/radio_on.png',
                       width: 24, height: 24)
                   : Image.asset(Const.assets + 'icon/radio_off.png',
@@ -143,7 +106,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
 
               title: Text(
                 'board.sub.bs.menu.read'.tr, // 읽기 허용 (View)
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
                 style: baseStyle.copyWith(
                   fontFamily:
                       Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
@@ -154,15 +116,9 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                       : FontWeight.w500,
                   height: Get.locale?.languageCode == 'ko'
                       ? 1.17
-<<<<<<< HEAD
-                      : 1.37, // 16.41px, 19.12px
-                ),
-              ),
-=======
                       : 1.37, // 21.09px, 24.59px
                 ),
               ), // 읽기 허용
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
             ),
             heightSpace(20.0),
             HanListTile(

@@ -105,21 +105,13 @@ class BottomSheetContentLink extends StatelessWidget
                     fontFamily:
                         Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
                     fontSize: 14,
-<<<<<<< HEAD
-                    color: Color(0xFF017BFE),
-=======
                     color: Color(0xff017BFE),
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
                     fontWeight: Get.locale?.languageCode == 'ko'
                         ? FontWeight.w400
                         : FontWeight.w500,
                     height: Get.locale?.languageCode == 'ko'
                         ? 1.17
-<<<<<<< HEAD
-                        : 1.37, // 16.41px, 19.12px
-=======
                         : 1.37, // 16.41px , 19.12px
->>>>>>> e9295cb3777c860835e8265429e176db60828aa6
                   ),
                 ),
               ),
