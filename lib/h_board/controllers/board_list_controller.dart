@@ -13,7 +13,7 @@ class BoardListController extends AbsListController
   RxInt _selected = 0.obs;
   BoardListController({
     int pageSize = 30,
-  }) : super(pageSize) {
+  }) : super(pageSize = 30) {
     _instance = FirebaseFirestore.instance;
     _selected.value = 0;
     // fetchItems();

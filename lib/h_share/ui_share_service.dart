@@ -29,9 +29,8 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     debugPrint('ShareServiceUI  ======== ');
     // delaySetSysyemUIOverlays(500);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
-      Future.delayed(Duration(milliseconds: 200), () {
-        _showBS(context, vwBoardMenu(context));
-      });
+      Future.microtask(() => _showBS(context, vwBoardMenu(context)));
+      // Future.delayed(Duration(milliseconds: 200), () {});
     });
   }
 

@@ -105,7 +105,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                         : 'assets/icon/mycontents_off.png',
                     onTap: () async {
                       final contentAllListController = Get.put(
-                        ContentAllListController(pageSize: 2),
+                        ContentAllListController(),
                       );
                       contentAllListController.cache.clear();
                       await contentAllListController.fetchItems();
@@ -134,37 +134,40 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     return WillPopScope(
       onWillPop: onWillPop,
       child: GetBuilder<BottomNaviController>(
-        builder: (_) => Scaffold(
-          backgroundColor: Colors.white,
-          body: vwBody(context),
-          bottomNavigationBar: Stack(
-            alignment: Alignment.center,
-            children: [
-              vwBottomMenu(context),
-              Container(
-                width: 36,
-                height: 36,
-                child: FloatingActionButton(
-                  // 플러스 버튼 (추가하기 버튼)
-                  child: Icon(
-                    Icons.add_rounded,
-                    size: 24,
+        builder: (_) => AnnotatedRegion(
+          value: GlobalStyle.configStatusTheme,
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            body: vwBody(context),
+            bottomNavigationBar: Stack(
+              alignment: Alignment.center,
+              children: [
+                vwBottomMenu(context),
+                Container(
+                  width: 36,
+                  height: 36,
+                  child: FloatingActionButton(
+                    // 플러스 버튼 (추가하기 버튼)
+                    child: Icon(
+                      Icons.add_rounded,
+                      size: 24,
+                    ),
+                    // child: Image.asset('assets/icon/add_board_btn.png'),
+                    mini: false,
+                    elevation: 0,
+                    backgroundColor: Colors.black,
+                    // foregroundColor: Colors.white,
+                    splashColor: Colors.black,
+                    onPressed: () {
+                      Get.put(BoardListMySelectController());
+                      BoardListMySelectController.to.cache = [];
+                      BoardListMySelectController.to.fetchItems();
+                      _showBS(context, vwBoardMenu(context));
+                    },
                   ),
-                  // child: Image.asset('assets/icon/add_board_btn.png'),
-                  mini: false,
-                  elevation: 0,
-                  backgroundColor: Colors.black,
-                  // foregroundColor: Colors.white,
-                  splashColor: Colors.black,
-                  onPressed: () {
-                    Get.put(BoardListMySelectController());
-                    BoardListMySelectController.to.cache = [];
-                    BoardListMySelectController.to.fetchItems();
-                    _showBS(context, vwBoardMenu(context));
-                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
@@ -292,11 +295,19 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     _showBS(
         context,
         BottomSheetContentLink(
-          parentContext: context,
-          onMenu: () {
-            _showBS(context, vwBoardMenu(context));
-          },
-        ));
+            parentContext: context,
+            onMenu: () {
+              _showBS(context, vwBoardMenu(context));
+            },
+            onDone: () async {
+              Get.lazyPut(() => ContentAllListController());
+              ContentAllListController.to.filter = '';
+
+              ContentAllListController.to.cache.clear();
+              await ContentAllListController.to.fetchItems();
+              BoardListController.to.cache.clear();
+              await BoardListController.to.fetchItems();
+            }));
   }
 
 //SUBJECT : BS:
@@ -312,6 +323,8 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           parentContext: context,
           onDone: () async {
             Get.lazyPut(() => ContentAllListController());
+            ContentAllListController.to.filter = '';
+
             ContentAllListController.to.cache.clear();
             await ContentAllListController.to.fetchItems();
             BoardListController.to.cache.clear();
@@ -338,6 +351,15 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
           parentContext: context,
           onMenu: () {
             _showBS(context, vwBoardMenu(context));
+          },
+          onDone: () async {
+            Get.lazyPut(() => ContentAllListController());
+            ContentAllListController.to.cache.clear();
+            ContentAllListController.to.filter = '';
+
+            await ContentAllListController.to.fetchItems();
+            BoardListController.to.cache.clear();
+            await BoardListController.to.fetchItems();
           },
         ));
   }

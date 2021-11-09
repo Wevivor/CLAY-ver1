@@ -10,11 +10,13 @@ import 'package:get/instance_manager.dart';
 class ContentAllListController extends AbsListController
     with FbCommonModule, ElCommonModule {
   static String MENU_POS = 'contents';
+  late String filter;
   late dynamic _instance;
   ContentAllListController({
     int pageSize = 2,
-  }) : super(pageSize) {
+  }) : super(pageSize = 30) {
     _instance = FirebaseFirestore.instance;
+    filter = '';
   }
 
   static ContentAllListController get to => Get.find();

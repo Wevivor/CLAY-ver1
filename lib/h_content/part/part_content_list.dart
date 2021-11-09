@@ -4,7 +4,6 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
-import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_content/part/wgt_content_list_item.dart';
@@ -17,7 +16,8 @@ import 'package:jiffy/jiffy.dart';
 
 // ignore: must_be_immutable
 class ContentListPART extends StatelessWidget with AppbarHelper {
-  ContentListPART();
+  final onMore;
+  ContentListPART({this.onMore});
 
   @override
   Widget build(BuildContext context) {
@@ -53,19 +53,7 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                       _controller.cache.clear();
                       _controller.selected = -1;
                       _controller.fetchItems();
-                      _showBS(
-                          context,
-                          BottomSheetBoardChange(
-                            parentContext: context,
-                            onDone: () {
-                              ContentListController.to
-                                  .actionDelteItem(item.contentsId ?? '');
-                            },
-                            onMenu: () {
-                              _showBS(context, vwBoardMenu(context, item));
-                            },
-                            current: item,
-                          ));
+                      if (this.onMore != null) onMore(item);
                     },
                     //title: 'eng) 무야호~미니오븐으로6가지 맛 미니바스크 치즈케이크 입니다.',
                     title: item.info.contentsTitle,
@@ -83,38 +71,5 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
             }),
       );
     });
-  }
-
-  // TODO : [SH] 콘텐츠 리스트의 점메뉴와 같은 것으로 바뀌어야 함.
-  Widget vwBoardMenu(BuildContext context, Contents item) {
-    return BottomSheetBoardChange(
-      parentContext: context,
-      onDone: () {
-        ContentListController.to.actionDelteItem(item.contentsId ?? '');
-      },
-      onMenu: () {
-        _showBS(context, vwBoardMenu(context, item));
-      },
-      current: item,
-    );
-  }
-
-  void _showBS(context, child) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-        isScrollControlled: true,
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
-              ),
-            ),
-          );
-        });
   }
 }

@@ -92,7 +92,7 @@ class _BNBarWidgetState extends State<BNBarWidget> with AppbarHelper {
                       : 'assets/icon/mycontents_off.png',
                   onTap: () async {
                     final contentAllListController = Get.put(
-                      ContentAllListController(pageSize: 2),
+                      ContentAllListController(),
                     );
                     contentAllListController.cache.clear();
                     await contentAllListController.fetchItems();
