@@ -35,7 +35,7 @@ class AppRoutes {
     GetPage(
       name: '/main_menu',
       transition: Transition.noTransition,
-      middlewares: [AuthMiddleWare()],
+      // middlewares: [AuthMiddleWare()],
       page: () => HanBottomNavigationBar(),
     ),
 

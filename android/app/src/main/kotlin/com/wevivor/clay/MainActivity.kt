@@ -9,6 +9,7 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugins.GeneratedPluginRegistrant
 import android.content.Intent
 import io.flutter.plugin.common.MethodChannel
+import io.flutter.embedding.android.TransparencyMode
 
 class MainActivity: FlutterActivity() {
     private var sharedData: String = ""
@@ -25,18 +26,20 @@ class MainActivity: FlutterActivity() {
         }
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        intent.putExtra("background_mode", transparent.toString())
-        //자동 안됨 사용 금지 요망....
-        // if (intent.getIntExtra("org.chromium.chrome.extra.TASK_ID", -1) == this.taskId) {
-        //     this.finish()
-        //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        //     startActivity(intent);
-        // }
-        super.onCreate(savedInstanceState)
-    }
+    // override fun onCreate(savedInstanceState: Bundle?) {
+    //     // intent.putExtra("background_mode", transparent.toString())
+    //     //자동 안됨 사용 금지 요망....
+    //     // if (intent.getIntExtra("org.chromium.chrome.extra.TASK_ID", -1) == this.taskId) {
+    //     //     this.finish()
+    //     //     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+    //     //     startActivity(intent);
+    //     // }
+    //     super.onCreate(savedInstanceState)
+    // }
       
-    
+    override fun getTransparencyMode(): TransparencyMode {
+      return TransparencyMode.transparent
+  }
       private fun handleIntent() {
         // intent is a property of this activity
         // Only process the intent if it's a send intent and it's of type 'text'

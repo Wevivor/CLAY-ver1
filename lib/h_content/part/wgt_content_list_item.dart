@@ -2,6 +2,7 @@
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
+import 'package:clay/c_globals/widgets/src/tile_han_list_new.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -79,16 +80,13 @@ class ContentListItemWidget extends StatelessWidget {
               ),
             ],
           ),
-          //SUBJECT : SH
-          //TODO : 위젯 없음.
-
-          // HanListTileNew(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   padding: EdgeInsets.only(top: 10, bottom: 7),
-          //   title: boardContent(),
-          //   trailing: boardItemTrail(),
-          // ),
+          HanListTileNew(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            padding: EdgeInsets.only(top: 10, bottom: 7),
+            title: boardContent(),
+            trailing: boardItemTrail(),
+          ),
           Divider(
             height: 0,
             color: Color(0xFFDEDEDE),

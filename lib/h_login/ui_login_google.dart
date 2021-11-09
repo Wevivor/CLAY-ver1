@@ -145,7 +145,7 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
       }
 
       if (ShareController.to.isShare)
-        Get.to(() => ShareServiceUI());
+        Get.off(() => ShareServiceUI());
       else {
         //SUBJECT: 푸시 작업
         var route = '/main_menu';

@@ -52,6 +52,7 @@ class _BoardUIState extends State<BoardUI>
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
+    debugPrint('[UI BOARD] ${kToolbarHeight}');
 
     final appbarHeight = 0 + kToolbarHeight;
 
@@ -62,6 +63,7 @@ class _BoardUIState extends State<BoardUI>
         return Future.value(true);
       },
       child: Scaffold(
+        // backgroundColor:
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(appbarHeight),
           //SUBJECT : 앱바의 액션
@@ -97,7 +99,7 @@ class _BoardUIState extends State<BoardUI>
             ],
           ),
         ),
-        backgroundColor: Colors.white,
+        // backgroundColor: Colors.white,
         body: RefreshIndicator(
           backgroundColor: Colors.white,
           onRefresh: () => Future.sync(

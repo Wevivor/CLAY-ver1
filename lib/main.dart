@@ -90,19 +90,19 @@ void main() async {
   // Const.isTest = false;
 
   await Firebase.initializeApp();
-  await FlutterKakaoLogin().init("${Const.kakaoKey}");
+  // await FlutterKakaoLogin().init("${Const.kakaoKey}");
   await initPushChannel();
   await initGetxController();
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-
-  await getConnectState();
+  runApp(MyApp());
+  // await getConnectState();
 }
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
+  // await Firebase.initializeApp();
   debugPrint('Handling a background message ${message.messageId}');
 }
 
@@ -150,14 +150,24 @@ class MyApp extends StatefulWidget {
   _MyAppState createState() => _MyAppState();
 }
 
-class _MyAppState extends State<MyApp> {
+class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   String? _token;
 
   @override
   void initState() {
     super.initState();
-    ShareController.to.isShare = false;
-    ShareController.to.sharedText = '';
+    WidgetsBinding.instance!.addObserver(this);
+    //-----------공유 서비스 서버 ----------------
+    ShareController.to.init();
+    // Create the share service
+    // Register a callback so that we handle shared data if it arrives while the
+    // app is running
+    // Check to see if there is any shared data already, meaning that the app
+    // was launched via sharing.
+
+    ShareService()
+      ..onDataReceived = _handleSharedData
+      ..getSharedData().then(_handleSharedData);
 
     // ---------------FCM -------------------------
     FirebaseMessaging.instance.getToken().then((token) {
@@ -206,28 +216,24 @@ class _MyAppState extends State<MyApp> {
       PushController.to.messageArguments = MessageArguments(message, true);
     });
     // ---------------FCM End-------------------------
+  }
 
-    //-----------공유 서비스 서버 ----------------
-    ShareController.to.init();
-    // Create the share service
-    // Register a callback so that we handle shared data if it arrives while the
-    // app is running
-    // Check to see if there is any shared data already, meaning that the app
-    // was launched via sharing.
-
-    ShareService()
-      ..onDataReceived = _handleSharedData
-      ..getSharedData().then(_handleSharedData);
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    debugPrint('[CALY] exit' + state.toString());
+    super.didChangeAppLifecycleState(state);
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance!.removeObserver(this);
+    debugPrint('[CALY] exit');
     super.dispose();
   }
 
   /// Handles any shared data we may receive.
   void _handleSharedData(String sharedData) {
-    debugPrint('[CLAY Share] :[RECIEVE] [${sharedData}]');
+    debugPrint('[onHandelShareData] :[RECIEVE] [${sharedData}]');
     if (sharedData.isNotEmpty) {
       ShareController.to.sharedText = sharedData;
       ShareController.to.isShare = true;
@@ -235,7 +241,7 @@ class _MyAppState extends State<MyApp> {
     } else {
       ShareController.to.sharedText = '';
       ShareController.to.isShare = false;
-      ShareController.to.update();
+      // ShareController.to.update();
     }
   }
 
@@ -278,7 +284,7 @@ class _MyAppState extends State<MyApp> {
           GetPage(
               name: '/share_service',
               transition: Transition.noTransition,
-              middlewares: [AuthMiddleWare()],
+              // middlewares: [AuthMiddleWare()],
               page: () => ShareServiceUI()),
           GetPage(
             name: '/message',
