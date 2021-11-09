@@ -104,7 +104,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                         : 'assets/icon/mycontents_off.png',
                     onTap: () async {
                       final contentAllListController = Get.put(
-                        ContentAllListController(pageSize: 2),
+                        ContentAllListController(),
                       );
                       contentAllListController.cache.clear();
                       await contentAllListController.fetchItems();

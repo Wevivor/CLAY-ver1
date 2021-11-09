@@ -13,7 +13,7 @@ class ContentListController extends AbsListController
   late String _boardId;
   ContentListController({
     int pageSize = 30,
-  }) : super(pageSize) {
+  }) : super(pageSize = 30) {
     _instance = FirebaseFirestore.instance;
     _storage = FirebaseStorage.instance;
     _boardId = '';
@@ -23,6 +23,16 @@ class ContentListController extends AbsListController
   set boardId(String value) => _boardId = value;
 
   static ContentListController get to => Get.find();
+
+  Future<void> actionRefresh() async {
+    this.cache.clear();
+
+    loading = false;
+    hasMore = true;
+    update();
+    await fetchItems(nextId: 0);
+  }
+
   Future<List<dynamic>> getList(
     int offset,
     int limit, {
@@ -48,7 +58,13 @@ class ContentListController extends AbsListController
         },
       },
       "sort": [
-        // {"cntView": "desc"}
+        {"info.contents_fixed": "desc"},
+        {
+          "contents_create_date": {
+            "order": "desc",
+            "format": "strict_date_optional_time_nanos"
+          }
+        }
       ]
     };
     final lists = await listFilter('/clay_contents/_search', bodyJSON);

@@ -38,6 +38,7 @@ class ContentInitDtoHelper {
       contentsImages: imgURL,
       contentsDescription: '',
       contentsComment: comment,
+      contentsFixed: false,
       contentsType: type,
       thumbnails: thumbnail,
       contentsUniqueLink: '',
@@ -83,5 +84,4 @@ class ContentInitDtoHelper {
 
     return _item;
   }
-
 }

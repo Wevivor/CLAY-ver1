@@ -14,7 +14,7 @@ class ContentAllListController extends AbsListController
   late dynamic _instance;
   ContentAllListController({
     int pageSize = 2,
-  }) : super(pageSize) {
+  }) : super(pageSize = 30) {
     _instance = FirebaseFirestore.instance;
     filter = '';
   }
