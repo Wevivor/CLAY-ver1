@@ -54,7 +54,9 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
   Widget vwBottomMenu(BuildContext context) {
     // print('---------${_getcontroller?.index}');
+
     final _index = BottomNaviController.to.getIndex;
+    debugPrint('[UI HAN NAVIBOTTOM vwBottomMenu] ${_index}');
     return Container(
       height: 48,
       decoration: BoxDecoration(
@@ -119,53 +121,50 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
 
   Widget vwBody(BuildContext context) {
     int current = BottomNaviController.to.getIndex;
-
-    switch (current) {
-      case 0:
-        return BoardUI();
-
-      case 1:
-        return ContentUI();
-      default:
-        return Container();
-    }
+    debugPrint('[UI HAN NAVIBOTTOM vwBottomMenu] ${current}');
+    if (current == 0)
+      return BoardUI();
+    else
+      return ContentUI();
   }
 
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: onWillPop,
-      child: Scaffold(
-        body: GetBuilder<BottomNaviController>(builder: (_) => vwBody(context)),
-        bottomNavigationBar: Stack(
-          alignment: Alignment.center,
-          children: [
-            GetBuilder<BottomNaviController>(
-                builder: (_) => vwBottomMenu(context)),
-            Container(
-              width: 36,
-              height: 36,
-              child: FloatingActionButton(
-                // 플러스 버튼 (추가하기 버튼)
-                child: Icon(
-                  Icons.add_rounded,
-                  size: 24,
+      child: GetBuilder<BottomNaviController>(
+        builder: (_) => Scaffold(
+          backgroundColor: Colors.white,
+          body: vwBody(context),
+          bottomNavigationBar: Stack(
+            alignment: Alignment.center,
+            children: [
+              vwBottomMenu(context),
+              Container(
+                width: 36,
+                height: 36,
+                child: FloatingActionButton(
+                  // 플러스 버튼 (추가하기 버튼)
+                  child: Icon(
+                    Icons.add_rounded,
+                    size: 24,
+                  ),
+                  // child: Image.asset('assets/icon/add_board_btn.png'),
+                  mini: false,
+                  elevation: 0,
+                  backgroundColor: Colors.black,
+                  // foregroundColor: Colors.white,
+                  splashColor: Colors.black,
+                  onPressed: () {
+                    Get.put(BoardListMySelectController());
+                    BoardListMySelectController.to.cache = [];
+                    BoardListMySelectController.to.fetchItems();
+                    _showBS(context, vwBoardMenu(context));
+                  },
                 ),
-                // child: Image.asset('assets/icon/add_board_btn.png'),
-                mini: false,
-                elevation: 0,
-                backgroundColor: Colors.black,
-                // foregroundColor: Colors.white,
-                splashColor: Colors.black,
-                onPressed: () {
-                  Get.put(BoardListMySelectController());
-                  BoardListMySelectController.to.cache = [];
-                  BoardListMySelectController.to.fetchItems();
-                  _showBS(context, vwBoardMenu(context));
-                },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

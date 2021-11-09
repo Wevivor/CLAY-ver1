@@ -13,67 +13,58 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
   @override
   void initState() {
     super.initState();
-    _loadData();
-  }
+    // if (mounted) _loadData();
 
-  Future _loadData() async {
-    await Future.delayed(Duration(seconds: 2), () async {
-      debugPrint(
-          '[CLAY Share] : [Share _loadData ${ShareController.to.isShare}]');
-
-      if (ShareController.to.isShare) {
-        debugPrint('[CLAY Share] : [Share _loadData ShareService 이동]');
-        Get.offNamed('/share_service');
-      } else {
-        debugPrint('[CLAY Share] : [Share _loadData 메인메뉴로 이동]');
-        Get.offNamed('/main_menu');
-      }
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      Future.delayed(Duration(milliseconds: 100), () {
+        debugPrint(
+            '[CLAY Share] : [ui_init: build] : ${ShareController.to.sharedText},${ShareController.to.isShare}');
+        if (ShareController.to.isShare) {
+          debugPrint("[ onAddPostFrameCallback] ${ShareController.to.isShare}");
+          AppHelper.goto('/share_service');
+        } else {
+          debugPrint(
+              "[ onAddPostFrameCallback ] ${ShareController.to.isShare}");
+          AppHelper.goto('/main_menu');
+          // Future.delayed(Duration(milliseconds: 300), () {
+          //   AppHelper.goto('/main_menu');
+          // });
+        }
+      });
     });
-    debugPrint(
-        '[CLAY Share] : [ui_init: _loadData] : ${ShareController.to.sharedText},${ShareController.to.isShare}');
   }
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      debugPrint(
-          " [CLAY: ui_init] ${ShareController.to.sharedText} ,${ShareController.to.isShare}");
-      if (ShareController.to.isShare) {
-        Get.offNamed('/share_service');
-      }
-    });
-
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      body: Container(
-        // color: Colors.red,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Text(
-              '대기중...',
-              style: TextStyle(fontSize: 40, color: Colors.red),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: GlobalStyle.configStatusTheme,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        body: GetBuilder<ShareController>(builder: (_) {
+          return Center(
+            child: Text(
+              ShareController.to.isShare
+                  ? ShareController.to.sharedText
+                  : '대기중...',
+              style: TextStyle(fontSize: 40, color: Colors.transparent),
             ),
-            GetBuilder<ShareController>(
-              builder: (_) => Center(
-                child: Text(
-                  ShareController.to.isShare
-                      ? ShareController.to.sharedText
-                      : '대기중...',
-                  style: TextStyle(fontSize: 40, color: Colors.red),
-                ),
-              ),
-            ),
-          ],
-        ),
+          );
+        }),
+        // return Center(
+        //   child: Text(
+        //     ShareController.to.isShare
+        //         ? ShareController.to.sharedText
+        //         : '대기중...',
+        //     style: TextStyle(fontSize: 40, color: Colors.red),
+        //   ),
+        // );
+        // }),
       ),
     );
   }
 
   @override
   void dispose() {
-    // _intentDataStreamSubscription.cancel();
     super.dispose();
   }
 

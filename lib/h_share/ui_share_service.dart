@@ -24,14 +24,15 @@ class _ShareServiceUIState extends State<ShareServiceUI>
 
     Get.put(ContentsController());
     Get.put(BoardController());
-
     Get.put(BoardListMySelectController());
     initFetch();
     debugPrint('ShareServiceUI  ======== ');
     // delaySetSysyemUIOverlays(500);
-
-    WidgetsBinding.instance!
-        .addPostFrameCallback((_) => _showBS(context, vwBoardMenu(context)));
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      Future.delayed(Duration(milliseconds: 200), () {
+        _showBS(context, vwBoardMenu(context));
+      });
+    });
   }
 
   Future<void> initFetch() async {
@@ -49,7 +50,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
         backgroundColor: Colors.transparent,
         body: Container(
           height: 50.0,
-          color: Colors.transparent,
+          // color: Colors.transparent,
         ),
       ),
     );

@@ -1,5 +1,6 @@
 import 'package:android_intent/android_intent.dart';
 import 'package:android_intent/flag.dart';
+import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -59,5 +60,12 @@ class AppHelper {
   static String dateDiff(DateTime? dateItem) {
     final diff = Jiffy(dateItem).fromNow();
     return diff;
+  }
+
+  static void goto(String route) {
+    if (AuthController.to.getUser != null)
+      Get.offNamed(route);
+    else
+      Get.offNamed('/login');
   }
 }
