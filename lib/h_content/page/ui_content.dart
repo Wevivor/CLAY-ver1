@@ -133,6 +133,7 @@ class _ContentUIState extends State<ContentUI>
                             onTap: (value) async {
                               controller.selected = value;
                               controller.update();
+                              ContentAllListController.to.filter = '';
                               ContentAllListController.to.cache.clear();
                               await ContentAllListController.to.fetchItems();
                             },
@@ -157,6 +158,9 @@ class _ContentUIState extends State<ContentUI>
                                       controller.selected = value;
                                       controller.update();
                                       ContentAllListController.to.cache.clear();
+                                      ContentAllListController.to.filter =
+                                          item.info.boardId ?? '';
+
                                       await ContentAllListController.to
                                           .fetchItems(term: item.info.boardId);
                                     },

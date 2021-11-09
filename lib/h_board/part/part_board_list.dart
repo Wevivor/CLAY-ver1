@@ -135,8 +135,8 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             bottom: 26.17,
           ),
           onTap: () {
-            //SUBJECT : BS: 보드 체인지
-            //TODO: 보드 정보
+            //BS: 보드 체인지
+            // 보드 정보
             Get.back();
             BoardInfo? infoDto = BoardController.to.boardItem?.info;
             BoardController.to.boardNameController.text =
@@ -155,8 +155,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             bottom: 26.17,
           ),
           onTap: () async {
-            //SUBJECT : BS: 보드 삭제
-            //TODO: 삭제....
+            // BS: 보드 삭제
             Get.back();
             var _responce = false;
             await DialogHelper.MessageDialog(
@@ -173,8 +172,8 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                 },
               ),
             );
-            //SUBJECT: 보드 삭제
-            //TODO: 다이어로르 처리, boardList 를 refresh
+            // 보드 삭제
+            // 다이어로르 처리, boardList 를 refresh
             if (_responce) {
               Board? _info = BoardController.to.boardItem;
               await BoardController.to.actionDelete(_info?.boardId);
@@ -199,7 +198,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
         builder: (BuildContext buildContext) {
           return WillPopScope(
             onWillPop: () {
-              //SUBJECT: BS 시스템네비바 검게 방지하는
+              // BS 시스템네비바 검게 방지하는
               delaySetSysyemUIOverlays(250);
 
               return Future.value(true);

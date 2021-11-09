@@ -1,6 +1,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
@@ -65,38 +66,65 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
         itemBuilder: (context, index) {
           final controller = ContentAllListController.to;
           final cache = controller.cache;
-          if (index >= controller.cache.length) {
+          final hasMore = controller.hasMore;
+          if (hasMore && index == cache.length) {
+            debugPrint(
+                '[StaggeredGridView]:[microtask] HasMore:${hasMore},${controller.cache.length},$index');
             Future.microtask(() {
-              controller.fetchItems(nextId: index);
+              controller.fetchItems(nextId: index, term: controller.filter);
             });
-            // Future.delayed(Duration(milliseconds: 100),
-            //     () => controller.fetchItems(nextId: index));
-            return Container(
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
+            return Center(
+              child: CircularProgressIndicator(),
             );
           }
-
           Contents item = cache[index];
+          debugPrint(
+              '[StaggeredGridView]: HasMore:${hasMore},${controller.cache.length},$index');
+          if (index < cache.length) {
+            //SUBJECT: 콘텐츠 아이템
+            //TODO
+            return Container(
+              padding: EdgeInsets.only(top: 6.0),
+              child: ContentGridItemWidget(
+                title: item.info.contentsTitle,
+                imgUrl: item.info.contentsType == 'photo'
+                    ? item.info.thumbnails
+                    : item.info.contentsImages,
+                contentText: item.info.contentsTitle,
+                onTap: () {
+                  Get.to(
+                      () => PostSUB(item: item, parentController: controller));
+                },
 
-          //SUBJECT: 콘텐츠 아이템
-          //TODO
-          return Container(
-            padding: EdgeInsets.only(top: 6.0),
-            child: ContentGridItemWidget(
-              title: item.info.contentsTitle,
-              imgUrl: item.info.contentsImages,
-              // imgUrl: item.info.thumbnails,
-              contentText: item.info.contentsTitle,
-              onTap: () {},
+                onMore: () {
+                  debugPrint('======> Show BS');
+                  _showBS(context, vwBoardMenu(context, item));
+                },
+              ),
+            );
+          } else {
+            if (hasMore)
+              return SizedBox.shrink();
+            else
+              return Container(
+                padding: EdgeInsets.only(top: 6.0),
+                child: ContentGridItemWidget(
+                  title: item.info.contentsTitle,
+                  imgUrl: item.info.contentsImages,
+                  // imgUrl: item.info.thumbnails,
+                  contentText: item.info.contentsTitle,
+                  onTap: () {
+                    Get.to(() =>
+                        PostSUB(item: item, parentController: controller));
+                  },
 
-              onMore: () {
-                debugPrint('======> Show BS');
-                _showBS(context, vwBoardMenu(context, item));
-              },
-            ),
-          );
+                  onMore: () {
+                    debugPrint('======> Show BS');
+                    _showBS(context, vwBoardMenu(context, item));
+                  },
+                ),
+              );
+          }
         },
         staggeredTileBuilder: (int index) =>
             new StaggeredTile.count(1, index.isEven ? 1 : 1.4),

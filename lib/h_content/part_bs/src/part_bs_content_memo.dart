@@ -17,9 +17,11 @@ class BottomSheetContentMemo extends StatelessWidget
     with AppbarHelper, BSValidator, ContentInitDtoHelper {
   final onMenu;
   final parentContext;
+  final onDone;
   BottomSheetContentMemo({
     this.parentContext,
     this.onMenu,
+    this.onDone,
   });
 
   final sheetTitle = baseStyle.copyWith(
@@ -64,38 +66,7 @@ class BottomSheetContentMemo extends StatelessWidget
                 alignment: Alignment.center,
                 // color: Colors.red,
                 child: InkWell(
-                  onTap: () async {
-                    final _memo = ContentsController.to.memoController.text;
-
-                    if (memo(_memo) != null || _memo.isEmpty) {
-                      AppHelper.showMessage(messages['memo'] ?? '');
-                      return;
-                    }
-                    final _title = ContentsController.to.titleController.text;
-
-                    if (title(_title) != null || _title.isEmpty) {
-                      AppHelper.showMessage(messages['title'] ?? '');
-                      return;
-                    }
-
-                    if (BoardListMySelectController.to.selected < 0) {
-                      AppHelper.showMessage(messages['board_select'] ?? '');
-                      return;
-                    }
-
-                    //SUBJECT: 컨텐츠
-                    //TODO: 링크로 추가하기
-                    final _controller = Get.put(ContentsController());
-
-                    final _item =
-                        createInitDto(title: _title, memo: _memo, type: 'memo');
-                    Get.back();
-                    await _controller.actionIns(_item);
-
-                    Get.lazyPut(() => ContentAllListController());
-                    ContentAllListController.to.cache.clear();
-                    await ContentAllListController.to.fetchItems();
-                  },
+                  onTap: () => _actionSubmit(context),
                   child: Text(
                     'com.btn.save'.tr,
                     style: baseStyle.copyWith(
@@ -200,6 +171,36 @@ class BottomSheetContentMemo extends StatelessWidget
         ],
       ),
     );
+  }
+
+  Future<void> _actionSubmit(BuildContext context) async {
+    FocusScope.of(context).unfocus();
+    final _memo = ContentsController.to.memoController.text;
+
+    if (memo(_memo) != null || _memo.isEmpty) {
+      AppHelper.showMessage(messages['memo'] ?? '');
+      return;
+    }
+    final _title = ContentsController.to.titleController.text;
+
+    if (title(_title) != null || _title.isEmpty) {
+      AppHelper.showMessage(messages['title'] ?? '');
+      return;
+    }
+
+    if (BoardListMySelectController.to.selected < 0) {
+      AppHelper.showMessage(messages['board_select'] ?? '');
+      return;
+    }
+
+    //SUBJECT: 컨텐츠
+    //TODO: 링크로 추가하기
+    final _controller = Get.put(ContentsController());
+
+    final _item = createInitDto(title: _title, memo: _memo, type: 'memo');
+    await _controller.actionIns(_item);
+    if (onDone != null) onDone();
+    Get.back();
   }
 
   void _showBS(context, child) {

@@ -4,6 +4,7 @@ import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
@@ -11,6 +12,7 @@ import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:get/get.dart';
+import 'package:metadata_fetch/metadata_fetch.dart';
 
 import 'helper_content_init_dto.dart';
 
@@ -18,9 +20,11 @@ class BottomSheetContentLink extends StatelessWidget
     with AppbarHelper, BSValidator, ContentInitDtoHelper {
   final onMenu;
   final parentContext;
+  final onDone;
   BottomSheetContentLink({
     this.parentContext,
     this.onMenu,
+    this.onDone,
   });
   final _webLinkKey = new GlobalKey();
 
@@ -59,59 +63,23 @@ class BottomSheetContentLink extends StatelessWidget
             Container(
               alignment: Alignment.center,
               child: InkWell(
-                onTap: () async {
-                  FocusScope.of(context).unfocus();
-                  ContentsController.to.linkController.text =
-                      'https://www.naver.com';
-                  ContentsController.to.commentController.text =
-                      'commentController';
-
-                  final _webLink = ContentsController.to.linkController.text;
-
-                  if (web_url(_webLink) != null || _webLink.isEmpty) {
-                    AppHelper.showMessage(messages['web_url'] ?? '');
-                    return;
-                  }
-                  final _comment = ContentsController.to.commentController.text;
-
-                  if (comment(_comment) != null || _comment.isEmpty) {
-                    AppHelper.showMessage(messages['comment'] ?? '');
-                    return;
-                  }
-
-                  if (BoardListMySelectController.to.selected < 0) {
-                    AppHelper.showMessage(messages['board_select'] ?? '');
-                    return;
-                  }
-
-                  //SUBJECT: 컨텐츠
-                  //TODO: 링크로 추가하기
-                  // final _boardInfo = BoardListMySelectController.to.boardInfo;
-
-                  final _controller = Get.put(ContentsController());
-                  final _item = createInitDto(
-                      link: _webLink, comment: _comment, type: 'link');
-
-                  await _controller.actionIns(_item);
-                  Get.lazyPut(() => ContentAllListController());
-                  ContentAllListController.to.cache.clear();
-                  await ContentAllListController.to.fetchItems();
-
-                  Get.back();
-                },
-                child: Text(
-                  'com.btn.save'.tr,
-                  style: baseStyle.copyWith(
-                    fontFamily:
-                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-                    fontSize: 14,
-                    color: Color(0xff017BFE),
-                    fontWeight: Get.locale?.languageCode == 'ko'
-                        ? FontWeight.w400
-                        : FontWeight.w500,
-                    height: Get.locale?.languageCode == 'ko'
-                        ? 1.17
-                        : 1.37, // 16.41px , 19.12px
+                onTap: () => _actionSubmit(context),
+                child: Container(
+                  child: Text(
+                    'com.btn.save'.tr,
+                    style: baseStyle.copyWith(
+                      fontFamily: Get.locale?.languageCode == 'ko'
+                          ? 'Roboto'
+                          : 'Avenir',
+                      fontSize: 14,
+                      color: Color(0xff017BFE),
+                      fontWeight: Get.locale?.languageCode == 'ko'
+                          ? FontWeight.w400
+                          : FontWeight.w500,
+                      height: Get.locale?.languageCode == 'ko'
+                          ? 1.17
+                          : 1.37, // 16.41px , 19.12px
+                    ),
                   ),
                 ),
               ),
@@ -216,6 +184,53 @@ class BottomSheetContentLink extends StatelessWidget
     );
   }
 
+  Future<void> _actionSubmit(BuildContext context) async {
+    FocusScope.of(context).unfocus();
+    // ContentsController.to.linkController.text =
+    //     'https://www.naver.com';
+    // ContentsController.to.commentController.text =
+    //     'commentController';
+
+    final _webLink = ContentsController.to.linkController.text;
+
+    if (web_url(_webLink) != null || _webLink.isEmpty) {
+      AppHelper.showMessage(messages['web_url'] ?? '');
+      return;
+    }
+    final _comment = ContentsController.to.commentController.text;
+
+    if (comment(_comment) != null || _comment.isEmpty) {
+      AppHelper.showMessage(messages['comment'] ?? '');
+      return;
+    }
+
+    if (BoardListMySelectController.to.selected < 0) {
+      AppHelper.showMessage(messages['board_select'] ?? '');
+      return;
+    }
+
+    //SUBJECT: 컨텐츠
+    //TODO: 링크로 추가하기
+    // final _boardInfo = BoardListMySelectController.to.boardInfo;
+
+    //링크에서 정보 추출하기
+
+    var data =
+        await MetadataFetch.extract(_webLink); // returns a Metadata object
+    final _controller = Get.put(ContentsController());
+    final _item = createInitDto(
+        title: data?.title,
+        imgURL: data?.image,
+        link: _webLink,
+        comment: _comment,
+        type: 'link');
+
+    await _controller.actionIns(_item);
+    if (onDone != null) onDone();
+
+    Get.back();
+  }
+
   void _showBS(context, child) {
     showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -238,6 +253,15 @@ class BottomSheetContentLink extends StatelessWidget
           BottomSheetContentLink(
             onMenu: this.onMenu,
             parentContext: parentContext,
+            onDone: () async {
+              Get.lazyPut(() => ContentAllListController());
+              ContentAllListController.to.cache.clear();
+              ContentAllListController.to.filter = '';
+
+              await ContentAllListController.to.fetchItems();
+              BoardListController.to.cache.clear();
+              await BoardListController.to.fetchItems();
+            },
           ));
     });
   }
