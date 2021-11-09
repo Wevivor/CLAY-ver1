@@ -26,11 +26,22 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(appbarHeight),
         //SUBJECT : 앱바의 액션
-        child: vwAppBar(
-          title: 'account.appbar.title.account'.tr,
-          titleStyle: appBarStyle.copyWith(
-            fontFamily: 'Avenir',
-            height: 1.37, // line height : 32.78px
+        child: AppBar(
+          automaticallyImplyLeading: true,
+          elevation: 0.0,
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(Icons.chevron_left),
+          ),
+          centerTitle: true,
+          title: Text(
+            'account.appbar.title.account'.tr,
+            style: appBarStyle.copyWith(
+              fontFamily: 'Avenir',
+              height: 1.37, // line height : 32.78px
+            ),
           ),
           actions: [
             ImageButton(
@@ -349,7 +360,7 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
           // Positioned(bottom: 5.0, right: 20.0, child: AppVersionWidget()),
         ],
       ),
-      bottomNavigationBar: BNBarWidget(),
+      // bottomNavigationBar: BNBarWidget(),
     );
   }
 
