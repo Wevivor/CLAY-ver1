@@ -84,48 +84,4 @@ class ContentInitDtoHelper {
     return _item;
   }
 
-  void showBS(context, parentContext, onMenu, child) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-        isScrollControlled: true,
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
-              ),
-            ),
-          );
-        }).then((value) {
-      showBSSecond(
-          parentContext,
-          BottomSheetContentLink(
-            onMenu: onMenu,
-            parentContext: parentContext,
-          ));
-    });
-  }
-
-  void showBSSecond(context, child) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-        isScrollControlled: true,
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (BuildContext buildContext) {
-          return Padding(
-            padding: MediaQuery.of(context).viewInsets,
-            child: Container(
-              child: Wrap(
-                children: [child],
-              ),
-            ),
-          );
-        });
-  }
 }

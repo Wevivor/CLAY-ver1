@@ -8,6 +8,8 @@ import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_board/part/part_board_pintest_list.dart';
+import 'package:clay/h_board/part_bs/src/helper_bs_board_init.dart';
+import 'package:clay/h_board/part_bs/src/helper_bs_function.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_share.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
@@ -34,7 +36,7 @@ class BoardContentUI extends StatefulWidget {
 }
 
 class _BoardContentUIState extends State<BoardContentUI>
-    with AppbarHelper, SingleTickerProviderStateMixin {
+    with AppbarHelper, SingleTickerProviderStateMixin, BSBoardFunctionHelper {
   int listType = 0;
   late ScrollController _scrollController;
   bool silverCollapsed = false;
@@ -161,7 +163,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                       onTap: () {
                         final _controller = Get.put(BoardController());
                         BoardController.to.boardItem = widget.board;
-                        _showBS(context, BottomSheetShare());
+                        showBS(context, BottomSheetShare());
                       },
                       child: Container(
                         height: 28,
@@ -229,7 +231,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                   padding: const EdgeInsets.only(top: 16.0),
                   child: BoardPintestListPART(
                     onMore: (item) {
-                      _showBS(context, vwBoardMenu(context, item));
+                      showBS(context, vwBoardMenu(context, item));
                     },
                   ),
                 ),
@@ -237,7 +239,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                   padding: const EdgeInsets.only(left: 20, right: 20),
                   child: ContentListPART(
                     onMore: (item) {
-                      _showBS(context, vwBoardMenu(context, item));
+                      showBS(context, vwBoardMenu(context, item));
                     },
                   ),
                 ),
@@ -249,35 +251,35 @@ class _BoardContentUIState extends State<BoardContentUI>
     ///Tab 바
   }
 
-  void _showBS(context, child) {
-    showModalBottomSheet(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
-        isScrollControlled: true,
-        backgroundColor: Colors.white,
-        context: context,
-        builder: (BuildContext buildContext) {
-          // delaySetSysyemUIOverlays(100);
-          return WillPopScope(
-            onWillPop: () {
-              delaySetSysyemUIOverlays(250);
+  // void _showBS(context, child) {
+  //   showModalBottomSheet(
+  //       shape: RoundedRectangleBorder(
+  //           borderRadius: BorderRadius.vertical(top: Radius.circular(16.0))),
+  //       isScrollControlled: true,
+  //       backgroundColor: Colors.white,
+  //       context: context,
+  //       builder: (BuildContext buildContext) {
+  //         // delaySetSysyemUIOverlays(100);
+  //         return WillPopScope(
+  //           onWillPop: () {
+  //             delaySetSysyemUIOverlays(250);
 
-              return Future.value(true);
-            },
-            // child: AnnotatedRegion<SystemUiOverlayStyle>(
-            //   value: GlobalStyle.configStatusTheme,
-            child: Padding(
-              padding: MediaQuery.of(context).viewInsets,
-              child: Container(
-                child: Wrap(
-                  children: [child],
-                ),
-              ),
-              // ),
-            ),
-          );
-        });
-  }
+  //             return Future.value(true);
+  //           },
+  //           // child: AnnotatedRegion<SystemUiOverlayStyle>(
+  //           //   value: GlobalStyle.configStatusTheme,
+  //           child: Padding(
+  //             padding: MediaQuery.of(context).viewInsets,
+  //             child: Container(
+  //               child: Wrap(
+  //                 children: [child],
+  //               ),
+  //             ),
+  //             // ),
+  //           ),
+  //         );
+  //       });
+  // }
 
   Widget vwBoardMenu(BuildContext context, Contents item) {
     return Column(
@@ -370,12 +372,12 @@ class _BoardContentUIState extends State<BoardContentUI>
     Get.lazyPut(() => RemindListController());
     Get.lazyPut(() => RemindController());
     RemindController.to.init();
-    _showBS(
+    showBS(
         context,
         BottomSheetCalendar(
             contents: item,
             onMenu: () {
-              _showBS(context, vwBoardMenu(context, item));
+              showBS(context, vwBoardMenu(context, item));
             }));
   }
 
@@ -387,7 +389,7 @@ class _BoardContentUIState extends State<BoardContentUI>
     _controller.cache.clear();
     _controller.selected = -1;
     _controller.fetchItems();
-    _showBS(
+    showBS(
         context,
         BottomSheetBoardChange(
           parentContext: context,
@@ -396,7 +398,7 @@ class _BoardContentUIState extends State<BoardContentUI>
             ContentAllListController.to.actionDelteItem(item.contentsId ?? '');
           },
           onMenu: () {
-            _showBS(context, vwBoardMenu(context, item));
+            showBS(context, vwBoardMenu(context, item));
           },
           current: item,
         ));
