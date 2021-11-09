@@ -62,6 +62,8 @@ class MultiLanguage extends Translations {
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 사진/비디오
           'board.bs.sub.title.photo': 'Add photo or video',
           'board.bs.sub.pholder.photo': '|Give me a name like “DIY”, “Recipe”.',
+          'board.dlg.menu.album': 'Album',
+          'board.dlg.menu.camera': 'Camera',
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 메모
           'board.bs.sub.title.memo': 'Add Note',
@@ -84,6 +86,8 @@ class MultiLanguage extends Translations {
           'board.sub.weblink.pholder.cmt': 'Write something about this item.',
           'board.sub.photo.pholder.title': 'Baking Madeleine |',
           'board.sub.weblink.pholder.title': 'Startup Coding Festival |',
+          'board.sub.memo.pholder.cmt': 'Write something about this item.',
+          'board.sub.memo.pholder.title': 'Startup Coding Festival |',
 
           // --- 보드 내부 콘텐츠 화면 : 보드 옵션 설정 바텀 시트 (점메뉴 클릭)
           'board.bs.body.menu.editBoard': 'Edit name and color',
@@ -203,8 +207,10 @@ class MultiLanguage extends Translations {
           'board.bs.sub.pholder.webLink': '|웹 링크 주소를 입력해주세요.',
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 사진/비디오
-          'board.bs.sub.title.photo': '사진/비디오',
+          'board.bs.sub.title.photo': '사진/카메라',
           'board.bs.sub.pholder.photo': '|사진/비디오의 제목을 입력해주세요.',
+          'board.dlg.menu.album': '앨범에서 선택하기',
+          'board.dlg.menu.camera': '카메라로 사진찍기',
 
           // --- 메인보드 : 추가하기 탭 (플러스 탭), 메모
           'board.bs.sub.title.memo': '메모',
@@ -222,12 +228,12 @@ class MultiLanguage extends Translations {
           'board.sub.bs.menu.done': '완료',
 
           // --- 보드 내부 콘텐츠 화면 : 각 형식별 콘텐츠 뷰
-          'board.sub.sub.pholder.cmt': '코멘트를 입력하세요.',
           'board.sub.photo.pholder.cmt': '코멘트를 입력하세요.',
           'board.sub.weblink.pholder.cmt': '코딩 페스티벌 참여 신청',
-
           'board.sub.photo.pholder.title': '베이킹 완성작',
           'board.sub.weblink.pholder.title': '스타트업 코딩 페스티벌',
+          'board.sub.memo.pholder.cmt': '코멘트를 입력하세요.',
+          'board.sub.memo.pholder.title': '스타트업 코딩 페스티벌',
 
           // --- 보드 내부 콘텐츠 화면 : 보드 옵션 설정 바텀 시트 (점메뉴 클릭)
           'board.bs.body.menu.editBoard': '보드 정보 수정',

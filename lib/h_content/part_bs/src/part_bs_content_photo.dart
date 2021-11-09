@@ -66,17 +66,16 @@ class BottomSheetContentPhoto extends StatelessWidget
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                heightSpace(2.0),
                 Container(
                     alignment: Alignment.bottomCenter,
-                    height: 10,
+                    height: 15,
                     child: Image.asset(Const.assets + 'images/rect_40.png')),
                 vwBSAppBar(
                   onBack: () {
                     Get.back();
                     if (onMenu != null) onMenu();
                   },
-                  title: 'board.bs.sub.title.photo'.tr, // 사진/비디오
+                  title: 'board.bs.sub.title.photo'.tr, // 사진/비디오->사진/카메라
                   actions: [
                     Container(
                       alignment: Alignment.center,
@@ -172,7 +171,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                     widthSpace(20.0),
                   ],
                 ),
-                heightSpace(20.0),
+                heightSpace(10.0),
                 Container(
                   padding: EdgeInsets.only(
                     left: 25.0,
@@ -209,6 +208,9 @@ class BottomSheetContentPhoto extends StatelessWidget
                     ],
                   ),
                 ),
+                heightSpace(16.0),
+                vwTitle('board.bs.sub.subtitle.title'.tr), // 제목
+
                 heightSpace(10.0),
                 Padding(
                   padding: EdgeInsets.only(left: 19.0, right: 19.0),

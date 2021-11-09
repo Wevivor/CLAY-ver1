@@ -235,11 +235,11 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         HanListTile(
           padding: EdgeInsets.only(left: 16.0, bottom: 22.5),
           onTap: () => _actionBSPhoto(context),
-          leading: Image.asset(Const.assets + 'icon/photo.png'), // 사진/비디오
+          leading: Image.asset(Const.assets + 'icon/photo.png'),
           title: Container(
             padding: EdgeInsets.only(left: 6.0),
             child: Text(
-              'board.bs.body.menu.photo'.tr,
+              'board.bs.body.menu.photo'.tr, // 사진/비디오
               style: sheetTitle,
             ),
           ),

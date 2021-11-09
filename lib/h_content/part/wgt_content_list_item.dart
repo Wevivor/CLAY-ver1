@@ -2,6 +2,7 @@
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
+import 'package:clay/c_globals/widgets/src/tile_han_list_new.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -61,7 +62,7 @@ class ContentListItemWidget extends StatelessWidget {
                     maxLines: 1,
                   ),
                 ),
-                flex: 18,
+                flex: 12,
               ),
               Expanded(
                 child: InkWell(
@@ -69,6 +70,7 @@ class ContentListItemWidget extends StatelessWidget {
                     if (onMore != null) onMore();
                   },
                   child: Container(
+                    width: 20,
                     alignment: Alignment.bottomRight,
                     child: Image.asset(
                       Const.assets + 'icon/dot_vertical_black.png',
@@ -82,13 +84,13 @@ class ContentListItemWidget extends StatelessWidget {
           //SUBJECT : SH
           //TODO : 위젯 없음.
 
-          // HanListTileNew(
-          //   crossAxisAlignment: CrossAxisAlignment.start,
-          //   mainAxisAlignment: MainAxisAlignment.start,
-          //   padding: EdgeInsets.only(top: 10, bottom: 7),
-          //   title: boardContent(),
-          //   trailing: boardItemTrail(),
-          // ),
+          HanListTileNew(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
+            padding: EdgeInsets.only(top: 10, bottom: 7),
+            title: boardContent(),
+            trailing: boardItemTrail(),
+          ),
           Divider(
             height: 0,
             color: Color(0xFFDEDEDE),
@@ -138,6 +140,7 @@ class ContentListItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.0),
         child: ImageWidget(
           imgUrl: imgUrl,
+          holder: 'assets/img/holder_img.png',
           width: 74,
           height: 74,
         ),

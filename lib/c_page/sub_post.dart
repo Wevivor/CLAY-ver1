@@ -161,9 +161,8 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
 
     return Column(
       children: [
-        vwTitle('Title'),
-        widthSpace(18.74),
-        heightSpace(2.0),
+        vwTitle('com.bs.subtitle.title'.tr), //제목
+        heightSpace(6.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
           child: Container(
@@ -171,10 +170,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             decoration: DecoHelper.roundDeco.copyWith(
               color: Color(0xFFF6F6F6),
             ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
+            padding: const EdgeInsets.only(left: 12.0, right: 16.0),
             child: TextFormField(
               maxLines: 1,
               onTap: () {},
@@ -182,13 +178,18 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '스타트업 코딩 페스티벌',
+                hintText: 'board.sub.memo.pholder.title'.tr, //스타트업 코딩 페스티벌
                 hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 14,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.w400,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37, // 16.41px, 19.12px
+                  letterSpacing: -0.7, // -5%
+                ),
                 isDense: true,
                 errorText: null,
                 errorStyle: TextStyle(
@@ -208,14 +209,26 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             ),
           ),
         ),
-        heightSpace(62.0),
-        Container(
-          padding: EdgeInsets.only(left: 25, right: 25),
-          height: 189,
-          child: Text(
-            widget.item.info.contentsDescription ?? '',
-            style: baseStyle.copyWith(
-              color: Color(0xFF707070),
+        heightSpace(20.0),
+        Expanded(
+          child: Container(
+            color: Color(0xFFF9F9F9),
+            padding: EdgeInsets.all(25.0),
+            width: MediaQuery.of(context).size.width,
+            //height: 189,
+            child: Text(
+              widget.item.info.contentsDescription ?? '',
+              style: baseStyle.copyWith(
+                color: Color(0xFF707070),
+                fontFamily:
+                    Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                fontSize: 14,
+                fontWeight: FontWeight.w400,
+                height: Get.locale?.languageCode == 'ko'
+                    ? 1.43
+                    : 1.43, // 20px, 20px
+                letterSpacing: -0.7, // -5%
+              ),
             ),
           ),
         ),
@@ -569,6 +582,16 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
 
   // 점메뉴 바텀 시트 (B3)
   Widget vwBoardMenu(BuildContext context, Contents item) {
+    final menuStyle = TextStyle(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+      fontSize: 14,
+      color: Color(0xFF000000),
+      fontWeight:
+          Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
+      height:
+          Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 16.41px, 19.12px
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
@@ -576,51 +599,50 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             alignment: Alignment.bottomCenter,
             height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
-        heightSpace(34),
+        heightSpace(20.0),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSFixed(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-          title: item.info.contentsFixed == true ? Text('상단해제') : Text('상단고정'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_pin_fix.png')),
+          title: item.info.contentsFixed == true // 상단고정
+              ? Text('com.bs.body.menu.pinOff'.tr, style: menuStyle)
+              : Text('com.bs.body.menu.pinOn'.tr, style: menuStyle),
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSShare(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-          title: Text('공유'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_share.png')),
+          title: Text('com.bs.body.menu.share'.tr, style: menuStyle), // 공유
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSRemindAlarm(context, item),
-          leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
-          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/ph_bell-ringing.png')),
+          title: Text('contents.bs.body.menu.reminder'.tr,
+              style: menuStyle), // 알람 설정
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSBoardChange(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-          title: Text('보드변경'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_boardchange.png')),
+          title: Text('contents.bs.body.menu.moveBoard'.tr,
+              style: menuStyle), // 보드 변경
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 23.0, bottom: 21.0),
           onTap: () => _actionBSDelete(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-          title: Text('삭제'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_trashcan.png')),
+          title: Text('com.bs.body.menu.delBoard'.tr, style: menuStyle), // 삭제
         ),
       ],
     );
@@ -697,9 +719,9 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     await DialogHelper.MessageDialog(
       context,
       (context) => DeleteDialog(
-        title: '보드를 삭제하시겠습니까?',
-        deleteTitle: '삭제',
-        okTitle: '취소',
+        title: 'contents.bs.dlg.question.delete'.tr, // 콘텐츠를  삭제하시겠어요?
+        deleteTitle: 'com.btn.delete'.tr, // 삭제
+        okTitle: 'com.btn.cancel'.tr, // 취소
         okTap: () {
           _responce = false;
         },

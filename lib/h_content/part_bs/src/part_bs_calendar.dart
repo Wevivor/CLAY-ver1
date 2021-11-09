@@ -83,7 +83,6 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: <Widget>[
-                heightSpace(2.0),
                 Container(
                     alignment: Alignment.bottomCenter,
                     height: 15,
@@ -101,7 +100,7 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                       child: InkWell(
                         onTap: () => _actionSubmit(context),
                         child: Text(
-                          'com.btn.save'.tr,
+                          'com.btn.save'.tr, // 완료
                           style: baseStyle.copyWith(
                             fontFamily: Get.locale?.languageCode == 'ko'
                                 ? 'Roboto'
