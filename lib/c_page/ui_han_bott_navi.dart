@@ -1,3 +1,4 @@
+// 메인 보드 화면의 플러스버튼 (추가하기) & 추가하기 Bottom Sheet
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';

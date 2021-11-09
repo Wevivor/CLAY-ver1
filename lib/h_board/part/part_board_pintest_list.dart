@@ -48,7 +48,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
         if (!loading && cache.length == 0) {
           return Container(
             child: Center(
-              child: Text('아이템이 없습니다'),
+              child: Text('아이템이 없습니다'), // TODO : [SH] 현재 번역하지 않음.
             ),
           );
         }
@@ -92,6 +92,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
 
                 Get.to(() => PostSUB(item: item, parentController: controller));
               },
+              nobadge: 1, // TODO : [SH] 임시로 넣어 둔 변수 수정이 필요함.(그리드,리스트 구분)
               title: item.info.contentsTitle,
               // imgUrl: item.info.contentsImages,
               imgUrl: item.info.thumbnails,
@@ -117,14 +118,14 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
     );
   }
 
+  // 점메뉴 바텀 시트 (B3)
   Widget vwBoardMenu(BuildContext context, Contents item) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         heightSpace(34),
         HanListTile(

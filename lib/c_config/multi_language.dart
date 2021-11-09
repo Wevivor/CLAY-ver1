@@ -29,6 +29,7 @@ class MultiLanguage extends Translations {
           'com.bs.body.menu.pinOff': 'Unpin a content',
           'com.bs.body.menu.share': 'Share',
           'com.bs.body.menu.delBoard': 'Delete',
+          'com.bs.subtitle.title': 'Title',
 
           // --- 공유과정 화면 : 공유하기 보드 선택 (바로 분류하기)
           'share.bs.appbar.title.class': 'Add to..',
@@ -79,7 +80,10 @@ class MultiLanguage extends Translations {
           'board.sub.bs.menu.done': 'Share',
 
           // --- 보드 내부 콘텐츠 화면 : 각 형식별 콘텐츠 뷰
-          'board.sub.sub.pholder.cmt': 'Write something about this item.',
+          'board.sub.photo.pholder.cmt': 'Write something about this item.',
+          'board.sub.weblink.pholder.cmt': 'Write something about this item.',
+          'board.sub.photo.pholder.title': 'Baking Madeleine |',
+          'board.sub.weblink.pholder.title': 'Startup Coding Festival |',
 
           // --- 보드 내부 콘텐츠 화면 : 보드 옵션 설정 바텀 시트 (점메뉴 클릭)
           'board.bs.body.menu.editBoard': 'Edit name and color',
@@ -168,6 +172,7 @@ class MultiLanguage extends Translations {
           'com.bs.body.menu.pinOff': '상단 고정 해제',
           'com.bs.body.menu.share': '공유',
           'com.bs.body.menu.delBoard': '삭제',
+          'com.bs.subtitle.title': '제목',
 
           // --- 공유과정 화면 : 공유하기 보드 선택 (바로 분류하기)
           'share.bs.appbar.title.class': '바로 분류하기',
@@ -218,6 +223,11 @@ class MultiLanguage extends Translations {
 
           // --- 보드 내부 콘텐츠 화면 : 각 형식별 콘텐츠 뷰
           'board.sub.sub.pholder.cmt': '코멘트를 입력하세요.',
+          'board.sub.photo.pholder.cmt': '코멘트를 입력하세요.',
+          'board.sub.weblink.pholder.cmt': '코딩 페스티벌 참여 신청',
+
+          'board.sub.photo.pholder.title': '베이킹 완성작',
+          'board.sub.weblink.pholder.title': '스타트업 코딩 페스티벌',
 
           // --- 보드 내부 콘텐츠 화면 : 보드 옵션 설정 바텀 시트 (점메뉴 클릭)
           'board.bs.body.menu.editBoard': '보드 정보 수정',

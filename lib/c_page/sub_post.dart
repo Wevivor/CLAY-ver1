@@ -1,3 +1,5 @@
+// 콘텐츠 상세보기 화면
+
 import 'dart:io';
 
 import 'package:clay/c_config/config.dart';
@@ -77,25 +79,26 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
         actions: [
           if (isEdit)
             ImageButton(
-                height: 24.46,
-                width: 24.58,
+                height: 20.0,
+                width: 20.0,
                 onTap: () => _actionSubmit(context),
                 holder: 'assets/icon/addboard_check.png'),
           if (!isEdit)
             ImageButton(
-                height: 24.46,
-                width: 24.58,
+                height: 20.0,
+                width: 20.0,
                 onTap: () => setState(() => isEdit = true),
                 holder: 'assets/icon/remind_pencil.png'),
+          widthSpace(12.0),
           ImageButton(
-              height: 12.23,
-              width: 24.58,
+              height: 10.0,
+              width: 2.0,
               onTap: () => _showBS(
                     context,
                     vwBoardMenu(context, widget.item),
                   ),
               holder: Const.assets + 'icon/dot_vertical_black.png'),
-          widthSpace(18.87),
+          widthSpace(25.0),
         ],
       ),
       body: _listType == 0
@@ -227,8 +230,8 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     return Column(
       // mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        vwTitle('Title'),
-        heightSpace(2.0),
+        vwTitle('com.bs.subtitle.title'.tr), //제목
+        heightSpace(6.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
           child: Container(
@@ -236,10 +239,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             decoration: DecoHelper.roundDeco.copyWith(
               color: Color(0xFFF6F6F6),
             ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
+            padding: const EdgeInsets.only(left: 12.0, right: 16.0),
             child: TextFormField(
               maxLines: 1,
               onTap: () {},
@@ -247,13 +247,18 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '베이킹 완성작',
+                hintText: 'board.sub.photo.pholder.title'.tr, // 베이킹 완성작
                 hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 14,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.w400,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37, // 16.41px, 19.12px
+                  letterSpacing: -0.7, // -5%
+                ),
                 isDense: true,
                 errorText: null,
                 errorStyle: TextStyle(
@@ -272,9 +277,9 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             ),
           ),
         ),
-        heightSpace(10.0),
-        vwTitle('Comment'),
-        heightSpace(10.0),
+        heightSpace(9.0),
+        vwTitle('com.bs.subtitle.cmt'.tr), // 코멘트
+        heightSpace(6.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
           child: Container(
@@ -282,10 +287,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             decoration: DecoHelper.roundDeco.copyWith(
               color: Color(0xFFF6F6F6),
             ),
-            padding: const EdgeInsets.only(
-              left: 12.0,
-              right: 16.0,
-            ),
+            padding: const EdgeInsets.only(left: 12.0, right: 16.0),
             child: TextFormField(
               maxLines: 1,
               onTap: () {},
@@ -293,13 +295,17 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               // style: accountEditTextStyle,
               decoration: kInputDecoration.copyWith(
                 fillColor: Color(0xFFF6F6F6),
-                hintText: '코멘트를 입력하세요.',
+                hintText: 'board.sub.photo.pholder.cmt'.tr, // 코멘트를 입력하세요.
                 hintStyle: baseStyle.copyWith(
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal,
-                    color: Color(
-                      0xFFCACACA,
-                    )),
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 14,
+                  color: Color(0xFF000000),
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37, // 16.41px, 19.12px
+                  letterSpacing: -0.7, // -5%
+                ),
                 isDense: true,
                 errorText: null,
                 errorStyle: TextStyle(
@@ -318,11 +324,12 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             ),
           ),
         ),
-        heightSpace(13.0),
+        heightSpace(20.0),
         Expanded(
           child: Container(
             alignment: Alignment.topCenter,
             child: Container(
+              //margin: EdgeInsets.only(left: 15.0, right: 15.0),
               height: 330,
               width: 330,
               decoration: DecoHelper.roundDeco.copyWith(
@@ -346,11 +353,11 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
         children: [
           Row(
             children: [
-              vwTitle('Title'),
+              vwTitle('com.bs.subtitle.title'.tr), //제목
               Expanded(child: Container()),
               ImageButton(
-                  height: 24.46,
-                  width: 24.58,
+                  height: 24.0,
+                  width: 24.0,
                   onTap: () {
                     setState(() => isEdit = false);
                   },
@@ -358,7 +365,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               widthSpace(18.74),
             ],
           ),
-          heightSpace(2.0),
+          heightSpace(6.0),
           Padding(
             padding: EdgeInsets.only(left: 19.0, right: 19.0),
             child: Container(
@@ -366,10 +373,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               decoration: DecoHelper.roundDeco.copyWith(
                 color: Color(0xFFF6F6F6),
               ),
-              padding: const EdgeInsets.only(
-                left: 12.0,
-                right: 16.0,
-              ),
+              padding: const EdgeInsets.only(left: 12.0, right: 16.0),
               child: TextFormField(
                 maxLines: 1,
                 onTap: () {},
@@ -377,13 +381,19 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
                 // style: accountEditTextStyle,
                 decoration: kInputDecoration.copyWith(
                   fillColor: Color(0xFFF6F6F6),
-                  hintText: '스타트업 코딩 페스티벌 ',
+                  hintText:
+                      'board.sub.weblink.pholder.title'.tr, // 스타트업 코딩 페스티벌
                   hintStyle: baseStyle.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: Color(
-                        0xFFCACACA,
-                      )),
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                    fontSize: 14,
+                    color: Color(0xFF000000),
+                    fontWeight: FontWeight.w400,
+                    height: Get.locale?.languageCode == 'ko'
+                        ? 1.17
+                        : 1.37, // 16.41px, 19.12px
+                    letterSpacing: -0.7, // -5%
+                  ),
                   isDense: true,
                   errorText: null,
                   errorStyle: TextStyle(
@@ -402,9 +412,9 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               ),
             ),
           ),
-          heightSpace(10.0),
-          vwTitle('Comment'),
-          heightSpace(2.0),
+          heightSpace(9.0),
+          vwTitle('com.bs.subtitle.cmt'.tr), // 코멘트
+          heightSpace(6.0),
           Padding(
             padding: EdgeInsets.only(left: 19.0, right: 19.0),
             child: Container(
@@ -423,13 +433,17 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
                 // style: accountEditTextStyle,
                 decoration: kInputDecoration.copyWith(
                   fillColor: Color(0xFFF6F6F6),
-                  hintText: '코딩 페스티벌 참여 신청',
+                  hintText: 'board.sub.weblink.pholder.cmt'.tr, // 코딩 페스티벌 참여 신청
                   hintStyle: baseStyle.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: Color(
-                        0xFFCACACA,
-                      )),
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                    fontSize: 14,
+                    color: Color(0xFF000000),
+                    height: Get.locale?.languageCode == 'ko'
+                        ? 1.17
+                        : 1.37, // 16.41px, 19.12px
+                    letterSpacing: -0.7, // -5%
+                  ),
                   isDense: true,
                   errorText: null,
                   errorStyle: TextStyle(
@@ -468,7 +482,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
                     decorationStyle: TextDecorationStyle.solid,
                   ),
                 ),
-                widthSpace(14.0),
+                widthSpace(19.0),
               ],
             ),
           ),
@@ -534,24 +548,33 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
 
   Widget vwTitle(final title) {
     return Container(
-      padding: EdgeInsets.only(left: 16),
+      padding: EdgeInsets.only(left: 18.0),
       alignment: Alignment.centerLeft,
       child: Text(
         title,
         style: baseStyle.copyWith(
-            fontSize: 14, color: Colors.black, fontWeight: FontWeight.w700),
+          fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+          fontSize: 16,
+          color: Color(0xFF353535),
+          fontWeight: Get.locale?.languageCode == 'ko'
+              ? FontWeight.w700
+              : FontWeight.w800,
+          height: Get.locale?.languageCode == 'ko'
+              ? 1.17
+              : 1.37, // 18.75px, 21.86px
+        ),
       ),
     );
   }
 
+  // 점메뉴 바텀 시트 (B3)
   Widget vwBoardMenu(BuildContext context, Contents item) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         heightSpace(34),
         HanListTile(
