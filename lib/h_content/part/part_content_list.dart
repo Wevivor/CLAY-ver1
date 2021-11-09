@@ -85,6 +85,7 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
     });
   }
 
+  // TODO : [SH] 콘텐츠 리스트의 점메뉴와 같은 것으로 바뀌어야 함.
   Widget vwBoardMenu(BuildContext context, Contents item) {
     return BottomSheetBoardChange(
       parentContext: context,

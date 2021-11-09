@@ -11,10 +11,11 @@ class ContentGridItemWidget extends StatelessWidget {
   final title; // 내용의 제목
   final date; // 내용의 날짜
   final contentText; // 내용
-  final imgUrl;
-  final holder; // 이미지 URL
+  final imgUrl; // 이미지 URL
+  final holder;
   final onMore;
   final onTap;
+  final nobadge; // TODO : [SH] 임시로 넣어 둔 변수 수정이 필요함.(그리드,리스트 구분)
   ContentGridItemWidget({
     this.title,
     this.date,
@@ -23,6 +24,7 @@ class ContentGridItemWidget extends StatelessWidget {
     this.holder = 'images/no_image.png',
     this.onMore,
     this.onTap,
+    this.nobadge,
   });
   static String stand_stock_image =
       'https://firebasestorage.googleapis.com/v0/b/clay-36ada.appspot.com/o/posts%2Fa00L2RmyOzYX2K5LTOJkdWyihXH3%2F9fb1361d-c090-48db-abdf-870233359fed%2F375.jpg?alt=media&token=9afcefbd-8c94-4020-b6b8-46704f01555e';
@@ -66,12 +68,12 @@ class ContentGridItemWidget extends StatelessWidget {
             heightSpace(11.0),
             Row(
               children: [
-                //widthSpace(4.0),
                 // TODO : [SH] 보드 배지 아이콘이 들어가야 함.
                 // 내보드의 보드 상세리스트 화면에는 보드 배지가 들어가지 않는다.
-                // Sample
-                Image.asset(Const.assets + 'icon/hart_small.png'),
-                // ========
+                // Sample Code :   데이터를 넣어서 바꾸어야 한다.
+                if (nobadge == null)
+                  Image.asset(Const.assets + 'icon/hart_small.png'),
+                // ====================================================
                 widthSpace(3.0),
                 ConstrainedBox(
                   constraints: BoxConstraints(
