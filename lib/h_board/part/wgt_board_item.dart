@@ -70,12 +70,12 @@ class BoardItemWidget extends StatelessWidget {
                           title,
                           style: titleStyle,
                         ),
-                        widthSpace(3.0),
+                        widthSpace(5.0),
                         if (isFix)
                           ImageWidget(
-                            height: 18.87,
-                            width: 18.87,
-                            holder: Const.assets + 'icon/icon_pin_fix.png',
+                            height: 16.0,
+                            width: 14.0,
+                            holder: Const.assets + 'icon/pinfix_icon.png',
                           )
                       ],
                     ),

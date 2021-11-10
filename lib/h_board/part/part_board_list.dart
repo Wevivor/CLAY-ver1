@@ -81,20 +81,26 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
   }
 
   Widget vwBoardMenu(BuildContext context) {
+    final menuStyle = TextStyle(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+      fontSize: 14,
+      color: Color(0xFF000000),
+      fontWeight:
+          Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
+      height:
+          Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 16.41px, 19.12px
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
-        heightSpace(34),
+        heightSpace(20.0),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 19.0, bottom: 21.0),
           onTap: () async {
             //SUBJECT : BS: 상단 고정
 
@@ -108,16 +114,15 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
             await BoardListController.to.fetchItems();
             Get.back();
           },
-          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-          title: BoardController.to.boardItem?.info.isFixed == true
-              ? Text('상단해제')
-              : Text('상단고정'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_pin_fix.png')),
+          title: BoardController.to.boardItem?.info.isFixed == true // 상단고정
+              ? Text('com.bs.body.menu.pinOff'.tr, style: menuStyle)
+              : Text('com.bs.body.menu.pinOn'.tr, style: menuStyle),
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () {
             //SUBJECT : BS: 공유 권한 변경
 
@@ -126,14 +131,13 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
               _showBS(context, vwBoardMenu(context));
             }));
           },
-          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-          title: Text('공유'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_share.png')),
+          title: Text('com.bs.body.menu.share'.tr, style: menuStyle), // 공유
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 19.0, bottom: 21.0),
           onTap: () {
             //BS: 보드 체인지
             // 보드 정보
@@ -146,14 +150,14 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
               _showBS(context, vwBoardMenu(context));
             }));
           },
-          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-          title: Text('보드정보 수정'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_boardchange.png')),
+          title: Text('board.bs.body.menu.editBoard'.tr,
+              style: menuStyle), // 보드 정보 수정
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 23.0, bottom: 21.0),
           onTap: () async {
             // BS: 보드 삭제
             Get.back();
@@ -180,8 +184,10 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
               BoardListController.to.actionDeleteItem(_info?.boardId);
             }
           },
-          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-          title: Text('삭제'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_trashcan.png')),
+          title: Text('com.bs.body.menu.delBoard'.tr, style: menuStyle), // 삭제
         ),
       ],
     );

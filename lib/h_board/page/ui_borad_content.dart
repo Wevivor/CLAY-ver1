@@ -250,60 +250,69 @@ class _BoardContentUIState extends State<BoardContentUI>
         ));
   }
 
+  // 점메뉴 바텀 시트 (B3)
   Widget vwBoardMenu(BuildContext context, Contents item) {
+    final menuStyle = TextStyle(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+      fontSize: 14,
+      color: Color(0xFF000000),
+      fontWeight:
+          Get.locale?.languageCode == 'ko' ? FontWeight.w400 : FontWeight.w500,
+      height:
+          Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 16.41px, 19.12px
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
-        heightSpace(34),
+        heightSpace(20.0),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSFixed(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_pin_fix.png'),
-          title: item.info.contentsFixed == true ? Text('상단해제') : Text('상단고정'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_pin_fix.png')),
+          title: item.info.contentsFixed == true // 상단고정
+              ? Text('com.bs.body.menu.pinOff'.tr, style: menuStyle)
+              : Text('com.bs.body.menu.pinOn'.tr, style: menuStyle),
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSShare(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_share.png'),
-          title: Text('공유'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_share.png')),
+          title: Text('com.bs.body.menu.share'.tr, style: menuStyle), // 공유
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSRemindAlarm(context, item),
-          leading: Image.asset(Const.assets + 'icon/ph_bell-ringing.png'),
-          title: Text('알람 설정', style: baseStyle.copyWith(color: Colors.black)),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/ph_bell-ringing.png')),
+          title: Text('contents.bs.body.menu.reminder'.tr,
+              style: menuStyle), // 알람 설정
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSBoardChange(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_boardchange.png'),
-          title: Text('보드변경'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_boardchange.png')),
+          title: Text('contents.bs.body.menu.moveBoard'.tr,
+              style: menuStyle), // 보드 변경
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 19.0,
-            bottom: 26.17,
-          ),
+          padding: EdgeInsets.only(left: 23.0, bottom: 21.0),
           onTap: () => _actionBSDelete(context, item),
-          leading: Image.asset(Const.assets + 'icon/icon_trashcan.png'),
-          title: Text('삭제'),
+          leading: Container(
+              padding: EdgeInsets.only(right: 6.0),
+              child: Image.asset(Const.assets + 'icon/icon_trashcan.png')),
+          title: Text('com.bs.body.menu.delBoard'.tr, style: menuStyle), // 삭제
         ),
       ],
     );

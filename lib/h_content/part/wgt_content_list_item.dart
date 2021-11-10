@@ -62,7 +62,7 @@ class ContentListItemWidget extends StatelessWidget {
                     maxLines: 1,
                   ),
                 ),
-                flex: 18,
+                flex: 12,
               ),
               Expanded(
                 child: InkWell(
@@ -70,6 +70,7 @@ class ContentListItemWidget extends StatelessWidget {
                     if (onMore != null) onMore();
                   },
                   child: Container(
+                    width: 20,
                     alignment: Alignment.bottomRight,
                     child: Image.asset(
                       Const.assets + 'icon/dot_vertical_black.png',
@@ -80,6 +81,9 @@ class ContentListItemWidget extends StatelessWidget {
               ),
             ],
           ),
+          //SUBJECT : SH
+          //TODO : 위젯 없음.
+
           HanListTileNew(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -136,6 +140,7 @@ class ContentListItemWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(5.0),
         child: ImageWidget(
           imgUrl: imgUrl,
+          holder: 'assets/img/holder_img.png',
           width: 74,
           height: 74,
         ),

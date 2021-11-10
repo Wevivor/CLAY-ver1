@@ -153,10 +153,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         heightSpace(20.0),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            bottom: 21.0,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSFixed(context, item),
           leading: Container(
               padding: EdgeInsets.only(right: 6.0),
@@ -166,10 +163,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
               : Text('com.bs.body.menu.pinOn'.tr, style: menuStyle),
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            bottom: 21.0,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSShare(context, item),
           leading: Container(
               padding: EdgeInsets.only(right: 6.0),
@@ -177,10 +171,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
           title: Text('com.bs.body.menu.share'.tr, style: menuStyle), // 공유
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            bottom: 21.0,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSRemindAlarm(context, item),
           leading: Container(
               padding: EdgeInsets.only(right: 6.0),
@@ -189,10 +180,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
               style: menuStyle), // 알람 설정
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 20.0,
-            bottom: 21.0,
-          ),
+          padding: EdgeInsets.only(left: 20.0, bottom: 21.0),
           onTap: () => _actionBSBoardChange(context, item),
           leading: Container(
               padding: EdgeInsets.only(right: 6.0),
@@ -201,10 +189,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
               style: menuStyle), // 보드 변경
         ),
         HanListTile(
-          padding: EdgeInsets.only(
-            left: 23.0,
-            bottom: 21.0,
-          ),
+          padding: EdgeInsets.only(left: 23.0, bottom: 21.0),
           onTap: () => _actionBSDelete(context, item),
           leading: Container(
               padding: EdgeInsets.only(right: 6.0),
