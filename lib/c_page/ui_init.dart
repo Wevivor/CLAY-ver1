@@ -24,20 +24,20 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         await HanUserInfoController.to.actionRead(AuthController.to.getUser);
         debugPrint(
             '[CLAY Share] : [ui_init: build] : ${ShareController.to.sharedText},${ShareController.to.isShare}');
-        if (ShareController.to.isShare) {
-          debugPrint("[ onAddPostFrameCallback] ${ShareController.to.isShare}");
-          AppHelper.goto('/share_service');
-        } else {
-          debugPrint(
-              "[ onAddPostFrameCallback ] ${ShareController.to.isShare}");
-          var route = '/main_menu';
+        // if (ShareController.to.isShare) {
+        debugPrint("[ onAddPostFrameCallback] ${ShareController.to.isShare}");
+        AppHelper.goto('/share_service');
+        // } else {
+        //   debugPrint(
+        //       "[ onAddPostFrameCallback ] ${ShareController.to.isShare}");
+        //   var route = '/main_menu';
 
-          if (PushController.to.messageArguments != null) {
-            route = '/message';
-          }
+        //   if (PushController.to.messageArguments != null) {
+        //     route = '/message';
+        //   }
 
-          AppHelper.goto(route);
-        }
+        //   AppHelper.goto(route);
+        // }
       });
     });
   }

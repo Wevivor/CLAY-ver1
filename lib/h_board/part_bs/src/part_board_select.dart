@@ -29,7 +29,7 @@ class BoardSelectPART extends StatelessWidget with AppbarHelper {
                   if (onTap != null) onTap();
                 },
                 index: 0,
-                title: 'com.bs.item.newBoard'.tr,
+                title: 'com.bs.item.newBoard'.tr, // 새로운 보드
                 category: '새보드', // TODO : [SH] 현재 번역하지 않음.
               ),
               widthSpace(10.0),

@@ -35,7 +35,7 @@ class MultiLanguage extends Translations {
           'share.bs.appbar.title.class': 'Add to..',
           'share.bs.body.btn.cmt': 'Write Comment',
           'share.bs.body.pholder.cmt': 'Write something about this item.',
-          'share.dlg.msg.save': 'Save to CLAY',
+          'share.dlg.msg.save': 'Saved to CLAY',
 
           // --- 공유과정 화면 : 보드 추가 생성
           'share.bs.body.subtitle.addBadge': 'Add a badge',
@@ -181,7 +181,7 @@ class MultiLanguage extends Translations {
           // --- 공유과정 화면 : 공유하기 보드 선택 (바로 분류하기)
           'share.bs.appbar.title.class': '바로 분류하기',
           'share.bs.body.btn.cmt': '코멘트 입력하기',
-          'share.bs.body.pholder.cmt': '콘텐츠에 남기고 싶은 말을 써주세요.',
+          'share.bs.body.pholder.cmt': '|콘텐츠에 남기고 싶은 말을 써주세요.',
           'share.dlg.msg.save': '보드에 추가 완료',
 
           // --- 공유과정 화면 : 보드 추가 생성

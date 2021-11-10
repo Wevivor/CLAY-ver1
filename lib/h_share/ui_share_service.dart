@@ -135,24 +135,26 @@ class _ShareServiceUIState extends State<ShareServiceUI>
         decoration: new BoxDecoration(
             color: Colors.white,
             borderRadius: new BorderRadius.only(
-                topLeft: Radius.circular(16), topRight: Radius.circular(16))),
+                topLeft: Radius.circular(26), topRight: Radius.circular(26))),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            heightSpace(2.0),
             Container(
                 alignment: Alignment.bottomCenter,
-                height: 11,
+                height: 15,
                 child: Image.asset(Const.assets + 'images/rect_40.png')),
             AppBar(
               elevation: 0.0,
               leading: null,
               automaticallyImplyLeading: false,
               title: Text(
-                'Add to..',
+                'share.bs.appbar.title.class'.tr, // 바로 분류하기
                 style: TextStyle(
-                  fontWeight: FontWeight.normal,
-                  color: Colors.black,
+                  fontFamily: 'Roboto',
+                  fontSize: 18,
+                  color: Color(0xFF000000),
+                  fontWeight: FontWeight.w700,
+                  height: 1.17, // 21.09px
                 ),
               ),
               centerTitle: true,
@@ -198,18 +200,21 @@ class _ShareServiceUIState extends State<ShareServiceUI>
                           .invokeMethod('SystemNavigator.pop');
                     },
                     child: Text(
-                      'Save',
+                      'com.btn.save'.tr, // 완료(save)
                       style: baseStyle.copyWith(
-                          fontSize: 13,
-                          color: Color(0xff017BFE),
-                          fontWeight: FontWeight.w400),
+                        fontFamily: 'Roboto',
+                        fontSize: 14,
+                        color: Color(0xFF017BFE),
+                        fontWeight: FontWeight.w400,
+                        height: 1.17, // 16.41px
+                      ),
                     ),
                   ),
                 ),
-                widthSpace(18.87),
+                widthSpace(20.0),
               ],
             ),
-            heightSpace(40.0),
+            heightSpace(19.0),
             GetBuilder<BoardListMySelectController>(builder: (controller) {
               return Container(
                 height: 54 + 8 + 11 + 10,
@@ -245,13 +250,16 @@ class _ShareServiceUIState extends State<ShareServiceUI>
                   decoration: DecoHelper.roundDeco.copyWith(
                     color: Color(0xFFF6F6F6),
                   ),
-                  padding: const EdgeInsets.only(
-                    top: 8,
-                    bottom: 8,
-                    left: 35.0,
-                    right: 34.0,
+                  child: Text(
+                    'share.bs.body.btn.cmt'.tr, // 코멘트 입력하기(Write Comment)
+                    style: TextStyle(
+                      fontFamily: 'Roboto',
+                      fontSize: 14,
+                      color: Color(0xFF000000),
+                      fontWeight: FontWeight.w400,
+                      height: 1.17, // 16.41px
+                    ),
                   ),
-                  child: Text('Write Comment'),
                 ),
               ),
             if (ContentsController.to.isCommentShow)
@@ -273,13 +281,16 @@ class _ShareServiceUIState extends State<ShareServiceUI>
                     // style: accountEditTextStyle,
                     decoration: kInputDecoration.copyWith(
                       fillColor: Color(0xFFF6F6F6),
-                      hintText: '|콘텐츠에 남기고 싶은 말을 써주세요.',
+                      hintText: 'share.bs.body.pholder.cmt'
+                          .tr, // |콘텐츠에 남기고 싶은 말을 써주세요.(Write something about this item.)
                       hintStyle: baseStyle.copyWith(
+                          fontFamily: 'Roboto',
                           fontSize: 14,
-                          fontWeight: FontWeight.normal,
-                          color: Color(
-                            0xFFCACACA,
-                          )),
+                          color: Color(0xFF707070),
+                          fontWeight: FontWeight.w400,
+                          height: 1.17, // 16.41px
+                          letterSpacing: -0.7 //-5%
+                          ),
                       isDense: true,
                       errorText: null,
                       errorStyle: TextStyle(
