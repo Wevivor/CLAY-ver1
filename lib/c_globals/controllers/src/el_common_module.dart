@@ -14,7 +14,7 @@ class ElCommonModule {
   }
 
   Future<List<dynamic>> listFilter(final query, final body) async {
-    debugPrint('--------listFilter---------');
+    debugPrint('--------[${query}]listFilter---------');
     try {
       final dio = initDio();
       final _response = await dio.post(

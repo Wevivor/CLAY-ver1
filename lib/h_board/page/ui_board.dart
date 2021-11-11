@@ -4,11 +4,11 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/c_page/bott_navi_controller.dart';
 import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
+import 'package:clay/h_board/page/ui_borad_content.dart';
 import 'package:clay/h_board/part/part_board_list.dart';
-import 'package:clay/h_search/part_search/part_search.dart';
-import 'package:clay/h_search/part_search/src/cupertino_search_delegate.dart';
-import 'package:clay/h_search/part_search/src/platform_search.dart';
-import 'package:clay/h_search/part_search/src/wgt_search_result.dart';
+import 'package:clay/h_search/controllers/find_controller.dart';
+import 'package:clay/h_search/page/cupertino_search_delegate.dart';
+import 'package:clay/h_search/page/platform_search.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -84,6 +84,7 @@ class _BoardUIState extends State<BoardUI>
                       context: context,
                       delegate: CupertinoSearchDelegate(search),
                     );
+                    // Get.to(() => BoardContentUI(board: _item));
                     // if (_item != null) debugPrint(_item.toString());
                   },
                   holder: 'assets/icon/search.png'),
@@ -122,7 +123,7 @@ class _BoardUIState extends State<BoardUI>
                           selected: controller.selected,
                           onTap: (value) async {
                             controller.selected = value;
-                            controller.cache = [];
+                            controller.cache.clear();
                             await controller.fetchItems(term: '');
                           },
                         ),
@@ -135,7 +136,7 @@ class _BoardUIState extends State<BoardUI>
                           selected: controller.selected,
                           onTap: (value) async {
                             controller.selected = value;
-                            controller.cache = [];
+                            controller.cache.clear();
                             await controller.fetchItems(
                                 term: 'com.chip.badge.work'.tr);
                           },
@@ -149,7 +150,7 @@ class _BoardUIState extends State<BoardUI>
                           selected: controller.selected,
                           onTap: (value) async {
                             controller.selected = value;
-                            controller.cache = [];
+                            controller.cache.clear();
                             await controller.fetchItems(
                                 term: 'com.chip.badge.growth'.tr);
                           },
@@ -164,7 +165,7 @@ class _BoardUIState extends State<BoardUI>
                           selected: controller.selected,
                           onTap: (value) async {
                             controller.selected = value;
-                            controller.cache = [];
+                            controller.cache.clear();
                             await controller.fetchItems(
                                 term: 'com.chip.badge.like'.tr);
                           },

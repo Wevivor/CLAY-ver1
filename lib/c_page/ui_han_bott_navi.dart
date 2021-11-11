@@ -160,7 +160,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                     splashColor: Colors.black,
                     onPressed: () {
                       Get.put(BoardListMySelectController());
-                      BoardListMySelectController.to.cache = [];
+                      BoardListMySelectController.to.cache.clear();
                       BoardListMySelectController.to.fetchItems();
                       _showBS(context, vwBoardMenu(context));
                     },

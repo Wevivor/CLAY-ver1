@@ -14,20 +14,13 @@ import 'package:sprintf/sprintf.dart';
 // ignore: must_be_immutable
 class ContentHeaderPART extends StatelessWidget with AppbarHelper {
   final Board board;
-  final listController = Get.put(
-    BoardListController(),
-  );
   ContentHeaderPART(
     this.board,
   );
-  Future<void> initFetch() async {
-    listController.cache.clear();
-    await listController.fetchItems();
-  }
 
   @override
   Widget build(BuildContext context) {
-    initFetch();
+    // initFetch();
     return Padding(
       padding: const EdgeInsets.only(left: 20.0),
       child: Column(

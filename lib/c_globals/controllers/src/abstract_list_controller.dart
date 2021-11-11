@@ -11,7 +11,7 @@ abstract class AbsListController<T> extends GetxController {
   // ListBaseController() {}
   AbsListController(int pageSize) {
     this._pageSize = pageSize;
-    cache = [];
+    cache.clear();
   }
   int get pageSize => _pageSize;
   Future<List<dynamic>> getList(

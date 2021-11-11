@@ -8,11 +8,9 @@ import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_board/part/part_board_pintest_list.dart';
-import 'package:clay/h_board/part_bs/src/helper_bs_board_init.dart';
 import 'package:clay/h_board/part_bs/src/helper_bs_function.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_share.dart';
-import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
@@ -126,9 +124,7 @@ class _BoardContentUIState extends State<BoardContentUI>
                   backgroundColor:
                       Color(int.parse(widget.board.info.boardColor, radix: 16)),
                   leading: IconButton(
-                    onPressed: () {
-                      Get.back();
-                    },
+                    onPressed: () => Get.back(),
                     icon: Icon(
                       Icons.chevron_left,
                       color: Colors.white,
@@ -376,11 +372,11 @@ class _BoardContentUIState extends State<BoardContentUI>
         context,
         BottomSheetBoardChange(
           parentContext: context,
-          onDone: () {
+          onDone: () async {
             Get.lazyPut(() => ContentListController());
             ContentListController.to.actionDelteItem(item.contentsId ?? '');
             BoardListController.to.cache.clear();
-            BoardListController.to.fetchItems();
+            await BoardListController.to.fetchItems();
           },
           onMenu: () {
             showBS(context, vwBoardMenu(context, item));
