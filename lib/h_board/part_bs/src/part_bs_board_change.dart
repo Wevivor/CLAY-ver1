@@ -5,6 +5,7 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:get/get.dart';
@@ -135,7 +136,16 @@ class BottomSheetBoardChange extends StatelessWidget
               _controller.boardItem = initBoard.toDomain();
               _controller.boardNameController.text = '';
 
-              _showBS(context, BottomSheetNewBoard());
+              _showBS(context, BottomSheetNewBoard(
+                onDone: () async {
+                  Get.lazyPut(() => BoardListController());
+                  BoardListController.to.cache.clear();
+                  await BoardListController.to.fetchItems();
+
+                  BoardListMySelectController.to.cache.clear();
+                  await BoardListMySelectController.to.fetchItems();
+                },
+              ));
             }),
           );
         }),

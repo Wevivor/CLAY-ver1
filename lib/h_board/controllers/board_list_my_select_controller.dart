@@ -42,7 +42,12 @@ class BoardListMySelectController extends AbsListController
         },
       },
       "sort": [
-        // {"cntView": "desc"}
+        {
+          "list_date": {
+            "order": "desc",
+            "format": "strict_date_optional_time_nanos"
+          }
+        }
       ]
     };
 

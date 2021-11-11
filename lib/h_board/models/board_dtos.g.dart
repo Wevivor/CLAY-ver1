@@ -18,6 +18,9 @@ _$_BoardDto _$$_BoardDtoFromJson(Map<String, dynamic> json) => _$_BoardDto(
       contentsCount: json['contents_count'] as int?,
       boardComment: json['board_comment'] as List<dynamic>?,
       registerDate: Fbconverter.fromJson(json['register_date']),
+      listDate: json['list_date'] == null
+          ? null
+          : DateTime.parse(json['list_date'] as String),
     );
 
 Map<String, dynamic> _$$_BoardDtoToJson(_$_BoardDto instance) =>
@@ -30,6 +33,7 @@ Map<String, dynamic> _$$_BoardDtoToJson(_$_BoardDto instance) =>
       'contents_count': instance.contentsCount,
       'board_comment': instance.boardComment,
       'register_date': Fbconverter.toJson(instance.registerDate),
+      'list_date': instance.listDate?.toIso8601String(),
     };
 
 _$_BoardInfoDto _$$_BoardInfoDtoFromJson(Map<String, dynamic> json) =>

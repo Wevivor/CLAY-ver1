@@ -16,6 +16,7 @@ class Board with _$Board {
     List<dynamic>? boardComment,
     required int shareCheck,
     required DateTime registerDate,
+    DateTime? listDate,
   }) = _Board;
   Board._();
 
@@ -28,6 +29,7 @@ class Board with _$Board {
         contentsCount: contentsCount,
         boardComment: boardComment,
         registerDate: registerDate,
+        listDate: listDate,
       );
 }
 

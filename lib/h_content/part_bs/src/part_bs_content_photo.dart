@@ -303,7 +303,16 @@ class BottomSheetContentPhoto extends StatelessWidget
                       _controller.boardNameController.text = '';
                       Get.back();
 
-                      _showBS(parentContext, BottomSheetNewBoard());
+                      _showBS(parentContext, BottomSheetNewBoard(
+                        onDone: () async {
+                          Get.lazyPut(() => BoardListController());
+                          BoardListController.to.cache.clear();
+                          await BoardListController.to.fetchItems();
+
+                          BoardListMySelectController.to.cache.clear();
+                          await BoardListMySelectController.to.fetchItems();
+                        },
+                      ));
                     }),
                   );
                 }),

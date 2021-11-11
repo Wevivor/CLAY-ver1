@@ -36,7 +36,9 @@ class _$BoardDtoTearOff {
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime registerDate}) {
+          required DateTime registerDate,
+      @JsonKey(name: 'list_date')
+          DateTime? listDate}) {
     return _BoardDto(
       boardId: boardId,
       info: info,
@@ -46,6 +48,7 @@ class _$BoardDtoTearOff {
       contentsCount: contentsCount,
       boardComment: boardComment,
       registerDate: registerDate,
+      listDate: listDate,
     );
   }
 
@@ -77,6 +80,8 @@ mixin _$BoardDto {
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
   DateTime get registerDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'list_date')
+  DateTime? get listDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -103,7 +108,9 @@ abstract class $BoardDtoCopyWith<$Res> {
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime registerDate});
+          DateTime registerDate,
+      @JsonKey(name: 'list_date')
+          DateTime? listDate});
 
   $BoardInfoDtoCopyWith<$Res> get info;
   $ProfileDtoCopyWith<$Res> get boardCreator;
@@ -128,6 +135,7 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
     Object? contentsCount = freezed,
     Object? boardComment = freezed,
     Object? registerDate = freezed,
+    Object? listDate = freezed,
   }) {
     return _then(_value.copyWith(
       boardId: boardId == freezed
@@ -162,6 +170,10 @@ class _$BoardDtoCopyWithImpl<$Res> implements $BoardDtoCopyWith<$Res> {
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      listDate: listDate == freezed
+          ? _value.listDate
+          : listDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 
@@ -211,7 +223,9 @@ abstract class _$BoardDtoCopyWith<$Res> implements $BoardDtoCopyWith<$Res> {
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime registerDate});
+          DateTime registerDate,
+      @JsonKey(name: 'list_date')
+          DateTime? listDate});
 
   @override
   $BoardInfoDtoCopyWith<$Res> get info;
@@ -240,6 +254,7 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
     Object? contentsCount = freezed,
     Object? boardComment = freezed,
     Object? registerDate = freezed,
+    Object? listDate = freezed,
   }) {
     return _then(_BoardDto(
       boardId: boardId == freezed
@@ -274,6 +289,10 @@ class __$BoardDtoCopyWithImpl<$Res> extends _$BoardDtoCopyWithImpl<$Res>
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      listDate: listDate == freezed
+          ? _value.listDate
+          : listDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -297,7 +316,9 @@ class _$_BoardDto extends _BoardDto {
       @JsonKey(name: 'board_comment')
           this.boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.registerDate})
+          required this.registerDate,
+      @JsonKey(name: 'list_date')
+          this.listDate})
       : super._();
 
   factory _$_BoardDto.fromJson(Map<String, dynamic> json) =>
@@ -329,10 +350,13 @@ class _$_BoardDto extends _BoardDto {
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
   final DateTime registerDate;
+  @override
+  @JsonKey(name: 'list_date')
+  final DateTime? listDate;
 
   @override
   String toString() {
-    return 'BoardDto(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, shareCheck: $shareCheck, contentsCount: $contentsCount, boardComment: $boardComment, registerDate: $registerDate)';
+    return 'BoardDto(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, shareCheck: $shareCheck, contentsCount: $contentsCount, boardComment: $boardComment, registerDate: $registerDate, listDate: $listDate)';
   }
 
   @override
@@ -361,7 +385,10 @@ class _$_BoardDto extends _BoardDto {
                     .equals(other.boardComment, boardComment)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.registerDate, registerDate)));
+                    .equals(other.registerDate, registerDate)) &&
+            (identical(other.listDate, listDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.listDate, listDate)));
   }
 
   @override
@@ -374,7 +401,8 @@ class _$_BoardDto extends _BoardDto {
       const DeepCollectionEquality().hash(shareCheck) ^
       const DeepCollectionEquality().hash(contentsCount) ^
       const DeepCollectionEquality().hash(boardComment) ^
-      const DeepCollectionEquality().hash(registerDate);
+      const DeepCollectionEquality().hash(registerDate) ^
+      const DeepCollectionEquality().hash(listDate);
 
   @JsonKey(ignore: true)
   @override
@@ -403,7 +431,9 @@ abstract class _BoardDto extends BoardDto {
       @JsonKey(name: 'board_comment')
           List<dynamic>? boardComment,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime registerDate}) = _$_BoardDto;
+          required DateTime registerDate,
+      @JsonKey(name: 'list_date')
+          DateTime? listDate}) = _$_BoardDto;
   _BoardDto._() : super._();
 
   factory _BoardDto.fromJson(Map<String, dynamic> json) = _$_BoardDto.fromJson;
@@ -434,6 +464,9 @@ abstract class _BoardDto extends BoardDto {
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
   DateTime get registerDate => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'list_date')
+  DateTime? get listDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BoardDtoCopyWith<_BoardDto> get copyWith =>

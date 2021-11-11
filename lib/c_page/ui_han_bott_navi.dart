@@ -276,11 +276,21 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     _controller.boardItem = _item.toDomain();
     _controller.boardNameController.text = '';
 
-    _showBS(context, BottomSheetNewBoard(
-      onMenu: () {
-        _showBS(context, vwBoardMenu(context));
-      },
-    ));
+    _showBS(
+        context,
+        BottomSheetNewBoard(
+          onDone: () async {
+            Get.lazyPut(() => BoardListController());
+            BoardListController.to.cache.clear();
+            await BoardListController.to.fetchItems();
+
+            BoardListMySelectController.to.cache.clear();
+            await BoardListMySelectController.to.fetchItems();
+          },
+          onMenu: () {
+            _showBS(context, vwBoardMenu(context));
+          },
+        ));
   }
   //SUBJECT : BS
   //TODO: 웹 링크.

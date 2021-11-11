@@ -4,6 +4,7 @@
 
 class BSValidator {
   Map<String, String> messages = {
+    'category': '배지를 선택해 주세요.',
     'remind': '알림문구를 입력해 주세요.',
     'board_name': '보드이름을 입력해 주세요.',
     'web_url': '웹 링크 주소를 입력해 주세요.',
@@ -26,6 +27,14 @@ class BSValidator {
       return null;
   }
 
+  String? category(String? value) {
+    if (value == null || value.isEmpty) {
+      return messages['category'];
+    }
+
+    return null;
+  }
+
   String? remindTitle(String? value) {
     if (value == null || value.isEmpty) {
       return messages['remind'];
@@ -42,7 +51,7 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['photo_title'];
     }
-    Pattern pattern = r'^\S{1,40}$'; //not Empty 20자 이내
+    Pattern pattern = r'.{1,40}$'; //not Empty 20자 이내
     RegExp regex = new RegExp(pattern.toString());
     if (!regex.hasMatch(value))
       return messages['photo_title'];
@@ -54,7 +63,7 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['title'];
     }
-    Pattern pattern = r'^\S{1,}$'; //not Empty 20자 이내
+    Pattern pattern = r'.{1,}$'; //not Empty 20자 이내
     RegExp regex = new RegExp(pattern.toString());
     if (!regex.hasMatch(value))
       return messages['title'];
@@ -66,7 +75,7 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['board_name'];
     }
-    Pattern pattern = r'^\S{1,20}$'; //not Empty 20자 이내
+    Pattern pattern = r'.{1,20}$'; //not Empty 20자 이내
     RegExp regex = new RegExp(pattern.toString());
 
     if (!regex.hasMatch(value))
@@ -79,7 +88,7 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['comment'];
     }
-    Pattern pattern = r'^.{1,100}$'; //not Empty 20자 이내
+    Pattern pattern = r'.{1,100}$'; //not Empty 20자 이내
     RegExp regex = new RegExp(pattern.toString());
 
     if (!regex.hasMatch(value))
@@ -92,7 +101,7 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['memo'];
     }
-    Pattern pattern = r'^.{5,}$'; //not Empty 20자 이내
+    Pattern pattern = r'.{5,}$'; //not Empty 20자 이내
     RegExp regex = new RegExp(pattern.toString());
 
     if (!regex.hasMatch(value))

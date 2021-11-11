@@ -4,6 +4,7 @@ import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
@@ -163,7 +164,16 @@ class BottomSheetContentMemo extends StatelessWidget
                 _controller.boardNameController.text = '';
                 Get.back();
 
-                _showBS(parentContext, BottomSheetNewBoard());
+                _showBS(parentContext, BottomSheetNewBoard(
+                  onDone: () async {
+                    Get.lazyPut(() => BoardListController());
+                    BoardListController.to.cache.clear();
+                    await BoardListController.to.fetchItems();
+
+                    BoardListMySelectController.to.cache.clear();
+                    await BoardListMySelectController.to.fetchItems();
+                  },
+                ));
               }),
             );
           }),

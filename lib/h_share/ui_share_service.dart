@@ -3,13 +3,16 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/src/dialog_share_done.dart';
 import 'package:clay/h_board/part_bs/src/part_board_select.dart';
 import 'package:clay/h_board/part_bs/src/part_bs_new_board.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
+import 'package:clay/h_share/share_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:metadata_fetch/metadata_fetch.dart';
 
 class ShareServiceUI extends StatefulWidget {
   @override
@@ -163,42 +166,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
                   alignment: Alignment.center,
                   // color: Colors.red,
                   child: InkWell(
-                    onTap: () async {
-                      final _comment =
-                          ContentsController.to.commentController.text;
-
-                      if (comment(_comment) != null || _comment.isEmpty) {
-                        AppHelper.showMessage(messages['comment'] ?? '');
-                        return;
-                      }
-
-                      if (BoardListMySelectController.to.selected < 0) {
-                        AppHelper.showMessage(messages['board_select'] ?? '');
-                        return;
-                      }
-                      isExit = false;
-
-                      //SUBJECT: 컨텐츠
-
-                      final _boardInfo =
-                          BoardListMySelectController.to.boardInfo;
-
-                      final _controller = ContentsController.to;
-                      final _profile = HanUserInfoController.to.toProfile();
-                      final _item = await _controller.createContentsDto(
-                          _profile, _boardInfo,
-                          comment: _comment);
-
-                      await _controller.actionIns(_item);
-                      Get.back();
-                      await DialogHelper.MessageDialog(
-                          context,
-                          (context) => ShareDoneDialog(
-                              boardName: _boardInfo?.boardName ?? ''));
-                      Get.reset();
-                      SystemChannels.platform
-                          .invokeMethod('SystemNavigator.pop');
-                    },
+                    onTap: () => _actionSubmit(context),
                     child: Text(
                       'com.btn.save'.tr, // 완료(save)
                       style: baseStyle.copyWith(
@@ -222,17 +190,26 @@ class _ShareServiceUIState extends State<ShareServiceUI>
                   final _controller = BoardController.to;
                   final _profile = HanUserInfoController.to.toProfile();
 
-                  final _boardDto = await _controller.createBoardInit(_profile,
-                      name: '', type: '');
+                  final _board = _controller.initBoardItem();
 
-                  // _controller.boardItem = _boardDto?.toDomain();
+                  _controller.boardItem = _board;
                   _controller.boardNameController.text = '';
 
-                  _showBSContinue(context, BottomSheetNewBoard(
-                    onMenu: () {
-                      _showBS(context, vwBoardMenu(context));
-                    },
-                  ));
+                  _showBSContinue(
+                      context,
+                      BottomSheetNewBoard(
+                        onMenu: () {
+                          _showBS(context, vwBoardMenu(context));
+                        },
+                        onDone: () async {
+                          Get.lazyPut(() => BoardListController());
+                          BoardListController.to.cache.clear();
+                          await BoardListController.to.fetchItems();
+
+                          BoardListMySelectController.to.cache.clear();
+                          await BoardListMySelectController.to.fetchItems();
+                        },
+                      ));
                 }),
               );
             }),
@@ -315,5 +292,47 @@ class _ShareServiceUIState extends State<ShareServiceUI>
         ),
       );
     });
+  }
+
+  Future<void> _actionSubmit(BuildContext context) async {
+    FocusScope.of(context).unfocus();
+    final _comment = ContentsController.to.commentController.text;
+
+    if (comment(_comment) != null || _comment.isEmpty) {
+      AppHelper.showMessage(messages['comment'] ?? '');
+      return;
+    }
+
+    if (BoardListMySelectController.to.selected < 0) {
+      AppHelper.showMessage(messages['board_select'] ?? '');
+      return;
+    }
+    isExit = false;
+
+    final _link = ShareController.to.sharedText;
+    var data = await MetadataFetch.extract(_link);
+
+    //SUBJECT: 컨텐츠
+    Get.lazyPut(() => BoardListController());
+    final _boardInfo = BoardListMySelectController.to.boardInfo;
+
+    final _controller = ContentsController.to;
+    final _profile = HanUserInfoController.to.toProfile();
+    final _item = await _controller.createContentsDto(
+      _profile,
+      _boardInfo,
+      comment: _comment,
+      type: 'link',
+      imgURL: data?.image,
+      link: data?.url,
+      title: data?.title,
+    );
+
+    await _controller.actionIns(_item);
+    Get.back();
+    await DialogHelper.MessageDialog(context,
+        (context) => ShareDoneDialog(boardName: _boardInfo?.boardName ?? ''));
+    Get.reset();
+    SystemChannels.platform.invokeMethod('SystemNavigator.pop');
   }
 }

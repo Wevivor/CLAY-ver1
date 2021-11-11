@@ -25,7 +25,8 @@ class _$BoardTearOff {
       int? contentsCount,
       List<dynamic>? boardComment,
       required int shareCheck,
-      required DateTime registerDate}) {
+      required DateTime registerDate,
+      DateTime? listDate}) {
     return _Board(
       boardId: boardId,
       info: info,
@@ -35,6 +36,7 @@ class _$BoardTearOff {
       boardComment: boardComment,
       shareCheck: shareCheck,
       registerDate: registerDate,
+      listDate: listDate,
     );
   }
 }
@@ -52,6 +54,7 @@ mixin _$Board {
   List<dynamic>? get boardComment => throw _privateConstructorUsedError;
   int get shareCheck => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
+  DateTime? get listDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $BoardCopyWith<Board> get copyWith => throw _privateConstructorUsedError;
@@ -69,7 +72,8 @@ abstract class $BoardCopyWith<$Res> {
       int? contentsCount,
       List<dynamic>? boardComment,
       int shareCheck,
-      DateTime registerDate});
+      DateTime registerDate,
+      DateTime? listDate});
 
   $BoardInfoCopyWith<$Res> get info;
   $ProfileCopyWith<$Res> get boardCreator;
@@ -94,6 +98,7 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
     Object? boardComment = freezed,
     Object? shareCheck = freezed,
     Object? registerDate = freezed,
+    Object? listDate = freezed,
   }) {
     return _then(_value.copyWith(
       boardId: boardId == freezed
@@ -128,6 +133,10 @@ class _$BoardCopyWithImpl<$Res> implements $BoardCopyWith<$Res> {
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      listDate: listDate == freezed
+          ? _value.listDate
+          : listDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 
@@ -170,7 +179,8 @@ abstract class _$BoardCopyWith<$Res> implements $BoardCopyWith<$Res> {
       int? contentsCount,
       List<dynamic>? boardComment,
       int shareCheck,
-      DateTime registerDate});
+      DateTime registerDate,
+      DateTime? listDate});
 
   @override
   $BoardInfoCopyWith<$Res> get info;
@@ -199,6 +209,7 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
     Object? boardComment = freezed,
     Object? shareCheck = freezed,
     Object? registerDate = freezed,
+    Object? listDate = freezed,
   }) {
     return _then(_Board(
       boardId: boardId == freezed
@@ -233,6 +244,10 @@ class __$BoardCopyWithImpl<$Res> extends _$BoardCopyWithImpl<$Res>
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      listDate: listDate == freezed
+          ? _value.listDate
+          : listDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -248,7 +263,8 @@ class _$_Board extends _Board {
       this.contentsCount,
       this.boardComment,
       required this.shareCheck,
-      required this.registerDate})
+      required this.registerDate,
+      this.listDate})
       : super._();
 
   @override
@@ -267,10 +283,12 @@ class _$_Board extends _Board {
   final int shareCheck;
   @override
   final DateTime registerDate;
+  @override
+  final DateTime? listDate;
 
   @override
   String toString() {
-    return 'Board(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, contentsCount: $contentsCount, boardComment: $boardComment, shareCheck: $shareCheck, registerDate: $registerDate)';
+    return 'Board(boardId: $boardId, info: $info, boardCreator: $boardCreator, shareInfo: $shareInfo, contentsCount: $contentsCount, boardComment: $boardComment, shareCheck: $shareCheck, registerDate: $registerDate, listDate: $listDate)';
   }
 
   @override
@@ -299,7 +317,10 @@ class _$_Board extends _Board {
                     .equals(other.shareCheck, shareCheck)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.registerDate, registerDate)));
+                    .equals(other.registerDate, registerDate)) &&
+            (identical(other.listDate, listDate) ||
+                const DeepCollectionEquality()
+                    .equals(other.listDate, listDate)));
   }
 
   @override
@@ -312,7 +333,8 @@ class _$_Board extends _Board {
       const DeepCollectionEquality().hash(contentsCount) ^
       const DeepCollectionEquality().hash(boardComment) ^
       const DeepCollectionEquality().hash(shareCheck) ^
-      const DeepCollectionEquality().hash(registerDate);
+      const DeepCollectionEquality().hash(registerDate) ^
+      const DeepCollectionEquality().hash(listDate);
 
   @JsonKey(ignore: true)
   @override
@@ -329,7 +351,8 @@ abstract class _Board extends Board {
       int? contentsCount,
       List<dynamic>? boardComment,
       required int shareCheck,
-      required DateTime registerDate}) = _$_Board;
+      required DateTime registerDate,
+      DateTime? listDate}) = _$_Board;
   _Board._() : super._();
 
   @override
@@ -348,6 +371,8 @@ abstract class _Board extends Board {
   int get shareCheck => throw _privateConstructorUsedError;
   @override
   DateTime get registerDate => throw _privateConstructorUsedError;
+  @override
+  DateTime? get listDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$BoardCopyWith<_Board> get copyWith => throw _privateConstructorUsedError;

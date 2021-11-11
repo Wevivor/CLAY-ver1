@@ -20,6 +20,7 @@ class BoardDto with _$BoardDto {
     @JsonKey(name: 'board_comment') List<dynamic>? boardComment,
     @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime registerDate,
+    @JsonKey(name: 'list_date') DateTime? listDate,
   }) = _BoardDto;
   BoardDto._();
 
@@ -34,6 +35,7 @@ class BoardDto with _$BoardDto {
         contentsCount: contentsCount,
         boardComment: boardComment,
         registerDate: registerDate,
+        listDate: listDate,
       );
 }
 

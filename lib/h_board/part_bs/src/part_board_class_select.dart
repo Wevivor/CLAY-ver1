@@ -24,38 +24,31 @@ class BoardClassSelectPART extends StatelessWidget with AppbarHelper {
             children: [
               BsBadgeItemWidget(
                 onTap: () {
-                  controller
-                      .actionChangeBadge('자기계발'); // TODO : [SH] 현재 번역하지 않음.
+                  controller.actionChangeBadge('자기계발');
                 },
                 iconUrl: 'icon/medal.png',
                 classText: 'com.chip.badge.growth'.tr, //
-                isSelected: controller.boardItem?.info.boardBadge ==
-                    '자기계발', // TODO : [SH] 현재 번역하지 않음.
+                isSelected: controller.boardItem?.info.boardBadge == '자기계발',
               ),
               BsBadgeItemWidget(
                 onTap: () {
-                  controller
-                      .actionChangeBadge('일/공부'); // TODO : [SH] 현재 번역하지 않음.
+                  controller.actionChangeBadge('일/공부');
                 },
                 iconUrl: 'icon/pencil.png',
                 classText: 'com.chip.badge.work'.tr,
-                isSelected: controller.boardItem?.info.boardBadge ==
-                    '일/공부', // TODO : [SH] 현재 번역하지 않음.
+                isSelected: controller.boardItem?.info.boardBadge == '일/공부',
               ),
               BsBadgeItemWidget(
                 onTap: () {
-                  controller
-                      .actionChangeBadge('LIKE'); // TODO : [SH] 현재 번역하지 않음.
+                  controller.actionChangeBadge('LIKE');
                 },
                 iconUrl: 'icon/hart.png',
                 classText: 'com.chip.badge.like'.tr,
-                isSelected: controller.boardItem?.info.boardBadge ==
-                    'LIKE', // TODO : [SH] 현재 번역하지 않음.
+                isSelected: controller.boardItem?.info.boardBadge == 'LIKE',
               ),
               BsBadgeItemWidget(
                 onTap: () {
-                  controller
-                      .actionChangeBadge('선택안함'); // TODO : [SH] 현재 번역하지 않음.
+                  controller.actionChangeBadge('선택안함');
                 },
                 iconUrl: 'icon/no_entry.png',
                 classText: 'com.chip.badge.none'.tr,

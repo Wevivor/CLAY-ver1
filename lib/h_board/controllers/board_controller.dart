@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
+import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/models/users/users.dart';
 import 'package:clay/h_board/models/board_dtos.dart';
 import 'package:clay/h_board/models/boards.dart';
@@ -81,7 +82,7 @@ class BoardController extends AbsItemController
     }
   }
 
-  Future<void> createBoardInit(Profile? profile,
+  Future<BoardDto?> createBoardInit(Profile? profile,
       {required String name, required type}) async {
     final docRef = _instance.collection('$MENU_POS').doc();
 
@@ -189,6 +190,7 @@ class BoardController extends AbsItemController
   ///보드 정보 수정 액션 -------------------
   ///----------------------------------
   void actionChangeColor(String color) async {
+    if (boardItem == null) boardItem = initBoardItem();
     final _newInfo = boardItem!.info.copyWith(boardColor: color);
     final _newItem = boardItem!.copyWith(info: _newInfo);
     boardItem = _newItem;
@@ -197,6 +199,7 @@ class BoardController extends AbsItemController
   }
 
   void actionChangeShare(int share) async {
+    if (boardItem == null) boardItem = initBoardItem();
     final _newInfo = boardItem!.info.copyWith(shareCheck: share);
     final _newItem = boardItem!.copyWith(shareCheck: share, info: _newInfo);
     boardItem = _newItem;
@@ -204,6 +207,8 @@ class BoardController extends AbsItemController
   }
 
   void actionChangeBadge(String badge) async {
+    if (boardItem == null) boardItem = initBoardItem();
+
     final _newInfo = boardItem!.info.copyWith(boardBadge: badge);
     final _newItem = boardItem!.copyWith(info: _newInfo);
     boardItem = _newItem;
@@ -211,9 +216,33 @@ class BoardController extends AbsItemController
   }
 
   void actionChangeName(String name) async {
+    if (boardItem == null) boardItem = initBoardItem();
     final _newInfo = boardItem!.info.copyWith(boardName: name);
     final _newItem = boardItem!.copyWith(info: _newInfo);
     boardItem = _newItem;
+  }
+
+  Board initBoardItem() {
+    final _profile = HanUserInfoController.to.toProfile();
+    final _info = BoardInfo(
+      boardName: '',
+      boardColor: 'FFfc5e20',
+      boardBadge: '',
+      shareCheck: 0,
+      isFixed: false,
+      shareCount: 0,
+      registerDate: DateTime.now(),
+    );
+    final _item = Board(
+      boardCreator: _profile,
+      info: _info,
+      shareCheck: 0,
+      contentsCount: 0,
+      registerDate: DateTime.now(),
+      listDate: DateTime.now(),
+    );
+
+    return _item;
   }
 
   BoardDto initItem(Profile profile, {required String name, required type}) {
@@ -249,6 +278,7 @@ class BoardController extends AbsItemController
       shareCheck: 0,
       contentsCount: 0,
       registerDate: DateTime.now(),
+      listDate: DateTime.now(),
     );
     return _item;
   }

@@ -7,6 +7,7 @@ import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/models/content_dtos.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:get/instance_manager.dart';
 import 'package:get/state_manager.dart';
 
@@ -79,6 +80,12 @@ class ContentsController extends AbsItemController
         index: '/clay_contents/',
         id: docRef.id,
         body: _itemJson,
+      );
+      final _board = newItem.boardInfo;
+      await updateEl(
+        index: '/clay_boards/',
+        id: _board?.boardId,
+        body: {'list_date': DateTime.now().toIso8601String()},
       );
 
       return newItem;
@@ -200,18 +207,22 @@ class ContentsController extends AbsItemController
   }
 
   ContentsDto createContentsDto(Profile profile, BoardInfo? boardInfo,
-      {required String comment}) {
+      {required String comment,
+      final title,
+      final link,
+      final type,
+      final imgURL}) {
     final _profile = profile;
     final _info = ContentsInfoDto(
       //  contentsId: contentsId,
-      contentsTitle: '',
-      contentsUrl: '',
+      contentsTitle: title,
+      contentsUrl: link,
       contentsFixed: false,
-      contentsImages: '',
+      contentsImages: imgURL,
       contentsDescription: '',
       contentsComment: comment,
-      contentsType: 'comment',
-      thumbnails: null,
+      contentsType: type,
+      thumbnails: imgURL,
       contentsUniqueLink: '',
       contentsCreateDate: DateTime.now(),
       contentsUpdateDate: DateTime.now(),
