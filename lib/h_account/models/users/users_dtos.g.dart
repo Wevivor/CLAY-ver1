@@ -17,6 +17,8 @@ _$_HanUserInfoDto _$$_HanUserInfoDtoFromJson(Map<String, dynamic> json) =>
       snsLogin: json['sns_loging'] as String?,
       cntVisit: json['cnt_visit'] as int,
       remindTxt: json['remind_txt'] as String?,
+      locale: json['locale'] as String?,
+      isPush: json['is_push'] as bool?,
       registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
@@ -31,6 +33,8 @@ Map<String, dynamic> _$$_HanUserInfoDtoToJson(_$_HanUserInfoDto instance) =>
       'sns_loging': instance.snsLogin,
       'cnt_visit': instance.cntVisit,
       'remind_txt': instance.remindTxt,
+      'locale': instance.locale,
+      'is_push': instance.isPush,
       'register_date': Fbconverter.toJson(instance.registerDate),
     };
 

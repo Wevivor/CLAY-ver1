@@ -240,6 +240,7 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                           //설정
                           ListTile(
                             onTap: () {
+                              Get.lazyPut(() => AlarmController());
                               Get.toNamed('/setting');
                             },
                             contentPadding: EdgeInsets.only(left: 20),

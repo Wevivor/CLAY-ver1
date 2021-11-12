@@ -49,7 +49,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget>
 
     /// Example Calendar Carousel without header and custom prev & next button
     final _calendarCarouselNoHeader = CalendarCarousel<Event>(
-      locale: Get.locale?.languageCode ?? 'ko',
+      locale: Get.locale?.languageCode ?? 'en',
       onDayPressed: (date, events) {
         this.setState(() => _currentDate2 = date);
         events.forEach((event) => print(event.title));

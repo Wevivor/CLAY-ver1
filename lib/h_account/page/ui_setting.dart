@@ -251,8 +251,13 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                       left: 20, right: 20.0, top: 17, bottom: 17),
                   child: HanListTile(
                     padding: EdgeInsets.zero,
-                    onTap: () {
-                      AppHelper.showMessage('활동알림');
+                    onTap: () async {
+                      AlarmController.to.isAlert = !AlarmController.to.isAlert;
+                      AlarmController.to.update();
+                      final _userinfo = HanUserInfoController.to.userInfo;
+                      await HanUserInfoController.to.actionUpdate(_userinfo!
+                          .copyWith(isPush: AlarmController.to.isAlert)
+                          .toDto());
                     },
                     leading: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -265,14 +270,24 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                       ],
                     ),
                     // trailing: Switch(value: true, onChanged: (value) {}),
-                    trailing: Switch(
-                        value: ThemeController.to.isLightOn ==
-                            false, // TODO : [SH] 현재 다크모드 value로 되어 있음. 수정 필요.
-                        activeColor: Color(0xFF7DAFFF),
-                        activeTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
-                        inactiveThumbColor: Color(0xFF7DAFFF),
-                        inactiveTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
-                        onChanged: (value) {}),
+                    trailing: GetBuilder<AlarmController>(builder: (_) {
+                      return Switch(
+                          value: AlarmController.to.isAlert,
+                          activeColor: Color(0xFF7DAFFF),
+                          activeTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
+                          inactiveThumbColor: Color(0xFF7DAFFF),
+                          inactiveTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
+                          onChanged: (value) async {
+                            AlarmController.to.isAlert = value;
+                            AlarmController.to.update();
+                            final _userinfo = HanUserInfoController.to.userInfo;
+                            await HanUserInfoController.to.actionUpdate(
+                                _userinfo!
+                                    .copyWith(
+                                        isPush: AlarmController.to.isAlert)
+                                    .toDto());
+                          });
+                    }),
                   ),
                 ),
                 Divider(

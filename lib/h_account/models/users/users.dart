@@ -15,6 +15,8 @@ class HanUserInfo with _$HanUserInfo {
     String? intro,
     String? snsLogin,
     String? remindTxt,
+    String? locale,
+    bool? isPush,
     required int cntVisit,
     required DateTime registerDate,
   }) = _HanUserInfo;
@@ -28,6 +30,8 @@ class HanUserInfo with _$HanUserInfo {
         intro: intro,
         snsLogin: snsLogin,
         remindTxt: remindTxt,
+        isPush: isPush,
+        locale: locale,
         cntVisit: cntVisit,
         registerDate: registerDate,
       );

@@ -152,10 +152,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   String? _token;
+  var _locale = Locale('en');
 
   @override
   void initState() {
     super.initState();
+    Get.locale = Locale('en');
+    if (Get.deviceLocale?.languageCode == 'ko') {
+      Get.locale = Locale('ko');
+    }
+
     WidgetsBinding.instance!.addObserver(this);
     //-----------공유 서비스 서버 ----------------
     ShareController.to.init();
@@ -268,8 +274,8 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
           Locale('ko', 'ko_KR'),
           Locale('en', 'US'),
         ],
-        locale: Get.deviceLocale, //시스템 로켈이션 으로 설정
-        fallbackLocale: Locale('ko', 'KR'),
+        locale: Get.locale, //시스템 로켈이션 으로 설정
+        fallbackLocale: Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
         themeMode: ThemeMode.system,

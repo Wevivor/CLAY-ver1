@@ -26,6 +26,8 @@ class _$HanUserInfoTearOff {
       String? intro,
       String? snsLogin,
       String? remindTxt,
+      String? locale,
+      bool? isPush,
       required int cntVisit,
       required DateTime registerDate}) {
     return _HanUserInfo(
@@ -37,6 +39,8 @@ class _$HanUserInfoTearOff {
       intro: intro,
       snsLogin: snsLogin,
       remindTxt: remindTxt,
+      locale: locale,
+      isPush: isPush,
       cntVisit: cntVisit,
       registerDate: registerDate,
     );
@@ -56,6 +60,8 @@ mixin _$HanUserInfo {
   String? get intro => throw _privateConstructorUsedError;
   String? get snsLogin => throw _privateConstructorUsedError;
   String? get remindTxt => throw _privateConstructorUsedError;
+  String? get locale => throw _privateConstructorUsedError;
+  bool? get isPush => throw _privateConstructorUsedError;
   int get cntVisit => throw _privateConstructorUsedError;
   DateTime get registerDate => throw _privateConstructorUsedError;
 
@@ -78,6 +84,8 @@ abstract class $HanUserInfoCopyWith<$Res> {
       String? intro,
       String? snsLogin,
       String? remindTxt,
+      String? locale,
+      bool? isPush,
       int cntVisit,
       DateTime registerDate});
 
@@ -102,6 +110,8 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? remindTxt = freezed,
+    Object? locale = freezed,
+    Object? isPush = freezed,
     Object? cntVisit = freezed,
     Object? registerDate = freezed,
   }) {
@@ -138,6 +148,14 @@ class _$HanUserInfoCopyWithImpl<$Res> implements $HanUserInfoCopyWith<$Res> {
           ? _value.remindTxt
           : remindTxt // ignore: cast_nullable_to_non_nullable
               as String?,
+      locale: locale == freezed
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPush: isPush == freezed
+          ? _value.isPush
+          : isPush // ignore: cast_nullable_to_non_nullable
+              as bool?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
@@ -173,6 +191,8 @@ abstract class _$HanUserInfoCopyWith<$Res>
       String? intro,
       String? snsLogin,
       String? remindTxt,
+      String? locale,
+      bool? isPush,
       int cntVisit,
       DateTime registerDate});
 
@@ -200,6 +220,8 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
     Object? intro = freezed,
     Object? snsLogin = freezed,
     Object? remindTxt = freezed,
+    Object? locale = freezed,
+    Object? isPush = freezed,
     Object? cntVisit = freezed,
     Object? registerDate = freezed,
   }) {
@@ -236,6 +258,14 @@ class __$HanUserInfoCopyWithImpl<$Res> extends _$HanUserInfoCopyWithImpl<$Res>
           ? _value.remindTxt
           : remindTxt // ignore: cast_nullable_to_non_nullable
               as String?,
+      locale: locale == freezed
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPush: isPush == freezed
+          ? _value.isPush
+          : isPush // ignore: cast_nullable_to_non_nullable
+              as bool?,
       cntVisit: cntVisit == freezed
           ? _value.cntVisit
           : cntVisit // ignore: cast_nullable_to_non_nullable
@@ -260,6 +290,8 @@ class _$_HanUserInfo extends _HanUserInfo {
       this.intro,
       this.snsLogin,
       this.remindTxt,
+      this.locale,
+      this.isPush,
       required this.cntVisit,
       required this.registerDate})
       : super._();
@@ -281,13 +313,17 @@ class _$_HanUserInfo extends _HanUserInfo {
   @override
   final String? remindTxt;
   @override
+  final String? locale;
+  @override
+  final bool? isPush;
+  @override
   final int cntVisit;
   @override
   final DateTime registerDate;
 
   @override
   String toString() {
-    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, remindTxt: $remindTxt, cntVisit: $cntVisit, registerDate: $registerDate)';
+    return 'HanUserInfo(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, remindTxt: $remindTxt, locale: $locale, isPush: $isPush, cntVisit: $cntVisit, registerDate: $registerDate)';
   }
 
   @override
@@ -315,6 +351,10 @@ class _$_HanUserInfo extends _HanUserInfo {
             (identical(other.remindTxt, remindTxt) ||
                 const DeepCollectionEquality()
                     .equals(other.remindTxt, remindTxt)) &&
+            (identical(other.locale, locale) ||
+                const DeepCollectionEquality().equals(other.locale, locale)) &&
+            (identical(other.isPush, isPush) ||
+                const DeepCollectionEquality().equals(other.isPush, isPush)) &&
             (identical(other.cntVisit, cntVisit) ||
                 const DeepCollectionEquality()
                     .equals(other.cntVisit, cntVisit)) &&
@@ -334,6 +374,8 @@ class _$_HanUserInfo extends _HanUserInfo {
       const DeepCollectionEquality().hash(intro) ^
       const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(remindTxt) ^
+      const DeepCollectionEquality().hash(locale) ^
+      const DeepCollectionEquality().hash(isPush) ^
       const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(registerDate);
 
@@ -353,6 +395,8 @@ abstract class _HanUserInfo extends HanUserInfo {
       String? intro,
       String? snsLogin,
       String? remindTxt,
+      String? locale,
+      bool? isPush,
       required int cntVisit,
       required DateTime registerDate}) = _$_HanUserInfo;
   _HanUserInfo._() : super._();
@@ -373,6 +417,10 @@ abstract class _HanUserInfo extends HanUserInfo {
   String? get snsLogin => throw _privateConstructorUsedError;
   @override
   String? get remindTxt => throw _privateConstructorUsedError;
+  @override
+  String? get locale => throw _privateConstructorUsedError;
+  @override
+  bool? get isPush => throw _privateConstructorUsedError;
   @override
   int get cntVisit => throw _privateConstructorUsedError;
   @override

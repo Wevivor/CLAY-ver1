@@ -19,6 +19,8 @@ class HanUserInfoDto with _$HanUserInfoDto {
     @JsonKey(name: 'sns_loging') String? snsLogin,
     @JsonKey(name: 'cnt_visit') required int cntVisit,
     @JsonKey(name: 'remind_txt') String? remindTxt,
+    @JsonKey(name: 'locale') String? locale,
+    @JsonKey(name: 'is_push') bool? isPush,
     @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime registerDate,
   }) = _HanUserInfoDto;
@@ -34,6 +36,8 @@ class HanUserInfoDto with _$HanUserInfoDto {
         isDisabled: isDisabled,
         level: level,
         snsLogin: snsLogin,
+        locale: locale,
+        isPush: isPush,
         remindTxt: remindTxt,
         registerDate: registerDate,
       );

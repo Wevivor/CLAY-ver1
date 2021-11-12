@@ -37,6 +37,10 @@ class _$HanUserInfoDtoTearOff {
           required int cntVisit,
       @JsonKey(name: 'remind_txt')
           String? remindTxt,
+      @JsonKey(name: 'locale')
+          String? locale,
+      @JsonKey(name: 'is_push')
+          bool? isPush,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) {
     return _HanUserInfoDto(
@@ -49,6 +53,8 @@ class _$HanUserInfoDtoTearOff {
       snsLogin: snsLogin,
       cntVisit: cntVisit,
       remindTxt: remindTxt,
+      locale: locale,
+      isPush: isPush,
       registerDate: registerDate,
     );
   }
@@ -78,6 +84,10 @@ mixin _$HanUserInfoDto {
   int get cntVisit => throw _privateConstructorUsedError;
   @JsonKey(name: 'remind_txt')
   String? get remindTxt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'locale')
+  String? get locale => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_push')
+  bool? get isPush => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
@@ -111,6 +121,10 @@ abstract class $HanUserInfoDtoCopyWith<$Res> {
           int cntVisit,
       @JsonKey(name: 'remind_txt')
           String? remindTxt,
+      @JsonKey(name: 'locale')
+          String? locale,
+      @JsonKey(name: 'is_push')
+          bool? isPush,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 
@@ -137,6 +151,8 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
     Object? remindTxt = freezed,
+    Object? locale = freezed,
+    Object? isPush = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
@@ -176,6 +192,14 @@ class _$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.remindTxt
           : remindTxt // ignore: cast_nullable_to_non_nullable
               as String?,
+      locale: locale == freezed
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPush: isPush == freezed
+          ? _value.isPush
+          : isPush // ignore: cast_nullable_to_non_nullable
+              as bool?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -214,6 +238,10 @@ abstract class _$HanUserInfoDtoCopyWith<$Res>
           int cntVisit,
       @JsonKey(name: 'remind_txt')
           String? remindTxt,
+      @JsonKey(name: 'locale')
+          String? locale,
+      @JsonKey(name: 'is_push')
+          bool? isPush,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime registerDate});
 
@@ -243,6 +271,8 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
     Object? snsLogin = freezed,
     Object? cntVisit = freezed,
     Object? remindTxt = freezed,
+    Object? locale = freezed,
+    Object? isPush = freezed,
     Object? registerDate = freezed,
   }) {
     return _then(_HanUserInfoDto(
@@ -282,6 +312,14 @@ class __$HanUserInfoDtoCopyWithImpl<$Res>
           ? _value.remindTxt
           : remindTxt // ignore: cast_nullable_to_non_nullable
               as String?,
+      locale: locale == freezed
+          ? _value.locale
+          : locale // ignore: cast_nullable_to_non_nullable
+              as String?,
+      isPush: isPush == freezed
+          ? _value.isPush
+          : isPush // ignore: cast_nullable_to_non_nullable
+              as bool?,
       registerDate: registerDate == freezed
           ? _value.registerDate
           : registerDate // ignore: cast_nullable_to_non_nullable
@@ -310,6 +348,10 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
           required this.cntVisit,
       @JsonKey(name: 'remind_txt')
           this.remindTxt,
+      @JsonKey(name: 'locale')
+          this.locale,
+      @JsonKey(name: 'is_push')
+          this.isPush,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.registerDate})
       : super._();
@@ -342,6 +384,12 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
   @JsonKey(name: 'remind_txt')
   final String? remindTxt;
   @override
+  @JsonKey(name: 'locale')
+  final String? locale;
+  @override
+  @JsonKey(name: 'is_push')
+  final bool? isPush;
+  @override
   @JsonKey(
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
@@ -350,7 +398,7 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
 
   @override
   String toString() {
-    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, remindTxt: $remindTxt, registerDate: $registerDate)';
+    return 'HanUserInfoDto(userId: $userId, profile: $profile, isDisabled: $isDisabled, level: $level, userPhone: $userPhone, intro: $intro, snsLogin: $snsLogin, cntVisit: $cntVisit, remindTxt: $remindTxt, locale: $locale, isPush: $isPush, registerDate: $registerDate)';
   }
 
   @override
@@ -381,6 +429,10 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
             (identical(other.remindTxt, remindTxt) ||
                 const DeepCollectionEquality()
                     .equals(other.remindTxt, remindTxt)) &&
+            (identical(other.locale, locale) ||
+                const DeepCollectionEquality().equals(other.locale, locale)) &&
+            (identical(other.isPush, isPush) ||
+                const DeepCollectionEquality().equals(other.isPush, isPush)) &&
             (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
                     .equals(other.registerDate, registerDate)));
@@ -398,6 +450,8 @@ class _$_HanUserInfoDto extends _HanUserInfoDto {
       const DeepCollectionEquality().hash(snsLogin) ^
       const DeepCollectionEquality().hash(cntVisit) ^
       const DeepCollectionEquality().hash(remindTxt) ^
+      const DeepCollectionEquality().hash(locale) ^
+      const DeepCollectionEquality().hash(isPush) ^
       const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
@@ -428,6 +482,10 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
           required int cntVisit,
       @JsonKey(name: 'remind_txt')
           String? remindTxt,
+      @JsonKey(name: 'locale')
+          String? locale,
+      @JsonKey(name: 'is_push')
+          bool? isPush,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime registerDate}) = _$_HanUserInfoDto;
   _HanUserInfoDto._() : super._();
@@ -459,6 +517,12 @@ abstract class _HanUserInfoDto extends HanUserInfoDto {
   @override
   @JsonKey(name: 'remind_txt')
   String? get remindTxt => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'locale')
+  String? get locale => throw _privateConstructorUsedError;
+  @override
+  @JsonKey(name: 'is_push')
+  bool? get isPush => throw _privateConstructorUsedError;
   @override
   @JsonKey(
       name: 'register_date',
