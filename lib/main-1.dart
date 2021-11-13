@@ -294,11 +294,6 @@ class _MyAppState extends State<MyApp> {
             transition: Transition.noTransition,
             // middlewares: [AuthMiddleWare()],
             page: () => ShareServiceUI()),
-        GetPage(
-          name: '/message',
-          transition: Transition.noTransition,
-          page: () => PushMessagesUI(),
-        ),
       ],
     );
   }

@@ -68,6 +68,7 @@ class AppRoutes {
     GetPage(
         name: '/remind_list',
         transition: Transition.noTransition,
+        middlewares: [AuthMiddleWare()],
         page: () => RemindListSUB()),
     GetPage(
         name: '/remind_text',

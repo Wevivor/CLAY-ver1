@@ -81,6 +81,7 @@ dependencies:
   connectivity_plus: ^1.0.6
   freezed_annotation: ^0.14.2
   json_annotation: ^4.0.0
+  
   # http: ^0.13.0
   share: ^2.0.1
   url_launcher: ^6.0.2

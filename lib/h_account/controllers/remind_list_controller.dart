@@ -13,10 +13,14 @@ class RemindListController extends AbsListController
   static String MENU_POS = 'etc/messages/remind_alarm';
   late dynamic _instance;
 
+  var time_diff;
   RemindListController({
     int pageSize = 30,
   }) : super(pageSize) {
     _instance = FirebaseFirestore.instance;
+    var timezoneOffset = DateTime.now().timeZoneOffset;
+    time_diff = new Duration(
+        hours: timezoneOffset.inHours, minutes: timezoneOffset.inMinutes % 60);
   }
 
   static RemindListController get to => Get.find();
@@ -59,13 +63,16 @@ class RemindListController extends AbsListController
         },
       },
       "sort": [
-        // {"cntView": "desc"}
+        {"r_alarm_time": "desc"}
       ]
     };
+    // var now = new DateTime.now();
 
     final lists = await listFilter('/clay_reminds/_search', bodyJSON);
     final tmp = lists.map((jsonList) {
-      final item = RemindDto.fromJson(jsonList['_source']).toDomain();
+      final _tmp = RemindDto.fromJson(jsonList['_source']).toDomain();
+
+      final item = _tmp.copyWith(rAlarmTime: _tmp.rAlarmTime.add(time_diff));
       return item;
     }).toList();
     return tmp;

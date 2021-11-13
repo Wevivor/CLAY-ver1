@@ -3,11 +3,34 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_account/models/push/push.dart';
+import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PushListUI extends StatelessWidget with AppbarHelper {
+class PushListUI extends StatefulWidget {
   // late PushMessage item;
+  @override
+  _PushListUIState createState() => _PushListUIState();
+}
+
+class _PushListUIState extends State<PushListUI>
+    with AppbarHelper, SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+    initFetch();
+  }
+
+  final listController = Get.put(PushListController());
+  Future<void> initFetch() async {
+    listController.cache.clear();
+    await listController.fetchItems();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {

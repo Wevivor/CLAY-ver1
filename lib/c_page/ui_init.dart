@@ -28,14 +28,7 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
           debugPrint("[ onAddPostFrameCallback] ${ShareController.to.isShare}");
           AppHelper.goto('/share_service');
         } else {
-          debugPrint(
-              "[ onAddPostFrameCallback ] ${ShareController.to.isShare}");
           var route = '/main_menu';
-
-          if (PushController.to.messageArguments != null) {
-            route = '/message';
-          }
-
           AppHelper.goto(route);
         }
       });

@@ -16,7 +16,7 @@ class RemindDto with _$RemindDto {
     @JsonKey(name: 'remind_id') String? remindId,
     @JsonKey(name: 'r_alarm_title') String? title,
     @JsonKey(name: 'r_alarm_description') String? description,
-    required ContentsInfoDto contentsInfo,
+    @JsonKey(name: 'contents_info') required ContentsInfoDto contentsInfo,
     required ProfileDto? from,
     @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
         required DateTime rAlarmTime,

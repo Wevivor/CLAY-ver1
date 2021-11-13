@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/c_page/ui_han_bott_navi.dart';
+import 'package:clay/h_account/page/sub_remind_list.dart';
 import 'package:clay/h_login/ui_login_google.dart';
 import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/share_service.dart';
@@ -153,7 +154,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   String? _token;
   var _locale = Locale('en');
-
   @override
   void initState() {
     super.initState();
@@ -201,11 +201,19 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 channelDescription: channel.description,
                 // TODO add a proper drawable resource to android, for now using
                 //      one that already exists in example app.
-                icon: 'launch_background',
+                icon: 'assets/icon/ic_launcher.png',
               ),
             ));
         PushController.to.messageArguments = MessageArguments(message, true);
-        Get.toNamed('/message');
+        final _data = message.data;
+        debugPrint('[message][onMessage]${message.toString()}');
+        if (_data['route'] == 'remind')
+          Get.toNamed('/remind_list');
+
+        // Get.toNamed('');
+        else if (_data['route'] == 'push') {
+          Get.toNamed('/push_list');
+        }
       }
     });
     Get.put(PushController());
@@ -215,11 +223,30 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         .then((RemoteMessage? message) {
       if (message != null) {
         PushController.to.messageArguments = MessageArguments(message, true);
+        debugPrint('[message][getInitialMessage]${message.toString()}');
+        final _data = message.data;
+        if (_data['route'] == 'remind')
+          Get.toNamed('/remind_list');
+
+        // Get.toNamed('');
+        else if (_data['route'] == 'push') {
+          Get.toNamed('/push_list');
+        }
       }
     });
     //백그라운드 인 상태에서 푸시메시지에서 클릭이후 오픈시에.
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
       PushController.to.messageArguments = MessageArguments(message, true);
+      debugPrint('[message][onMessageOpenedApp]${message.toString()}');
+      final _data = message.data;
+      debugPrint('[message][onMessageOpenedApp]${_data.toString()}');
+      if (_data['route'] == 'remind')
+        Get.toNamed('/remind_list');
+
+      // Get.toNamed('');
+      else if (_data['route'] == 'push') {
+        Get.toNamed('/push_list');
+      }
     });
     // ---------------FCM End-------------------------
   }
@@ -281,22 +308,19 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         themeMode: ThemeMode.system,
 
         initialRoute: '/start',
+
         getPages: [
           ...AppRoutes.routes,
           GetPage(
               name: '/push_list',
               transition: Transition.noTransition,
+              middlewares: [AuthMiddleWare()],
               page: () => PushListUI()),
           GetPage(
               name: '/share_service',
               transition: Transition.noTransition,
               // middlewares: [AuthMiddleWare()],
               page: () => ShareServiceUI()),
-          GetPage(
-            name: '/message',
-            transition: Transition.noTransition,
-            page: () => PushMessagesUI(),
-          ),
         ],
       ),
     );
