@@ -167,17 +167,17 @@ class RemindTextSettingSUB extends StatelessWidget
                     return remindTitle(value);
                   },
                   onChanged: (value) {
-                    RemindController.to.txtController.text = value;
-                    RemindController.to.txtController
-                      ..selection = TextSelection.fromPosition(TextPosition(
-                          offset:
-                              RemindController.to.txtController.text.length));
-                    if (value.isEmpty) {
-                      RemindController.to.isTxtEditble.value = true;
-                    } else {
-                      RemindController.to.isTxtEditble.value = false;
-                    }
-                    RemindController.to.update();
+                    // RemindController.to.txtController.text = value;
+                    // RemindController.to.txtController
+                    //   ..selection = TextSelection.fromPosition(TextPosition(
+                    //       offset:
+                    //           RemindController.to.txtController.text.length));
+                    // if (value.isEmpty) {
+                    //   RemindController.to.isTxtEditble.value = true;
+                    // } else {
+                    //   RemindController.to.isTxtEditble.value = false;
+                    // }
+                    // RemindController.to.update();
                   },
                 ),
               ),
