@@ -106,6 +106,7 @@ class BoardItemWidget extends StatelessWidget {
                     //TODO : 이미지 조정하여 재설정해야 함
                     Container(
                       height: 28,
+                      width: 24,
                       child: IconButton(
                         padding: EdgeInsets.only(right: 6.0),
                         alignment: Alignment.topRight,

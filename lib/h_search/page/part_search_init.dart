@@ -28,7 +28,7 @@ class SearchInitPART extends StatelessWidget {
     /// 검색된 리스트
     ///-------------------------
     return Container(
-      padding: const EdgeInsets.only(left: 10.0, right: 20.0),
+      padding: const EdgeInsets.only(left: 20.0, right: 17.0),
       child: HanListView(
         noItem: Container(),
         controller: FindController.to,

@@ -89,16 +89,16 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
                 width: 20.0,
                 onTap: () => setState(() => isEdit = true),
                 holder: 'assets/icon/remind_pencil.png'),
-          widthSpace(12.0),
-          ImageButton(
-              height: 10.0,
-              width: 2.0,
-              onTap: () => _showBS(
-                    context,
-                    vwBoardMenu(context, widget.item),
-                  ),
-              holder: Const.assets + 'icon/dot_vertical_black.png'),
-          widthSpace(25.0),
+          widthSpace(3.0),
+          Container(
+            width: 20,
+            alignment: Alignment.center,
+            child: ImageButton(
+                height: 10.0,
+                width: 2.0,
+                holder: Const.assets + 'icon/dot_vertical_black.png'),
+          ),
+          widthSpace(15.0),
         ],
       ),
       body: _listType == 0

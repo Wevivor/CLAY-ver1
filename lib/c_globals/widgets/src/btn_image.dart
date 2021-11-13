@@ -27,7 +27,7 @@ class ImageButton extends StatelessWidget {
             holder ?? image_holder,
             width: width,
             height: height,
-            fit: BoxFit.contain,
+            // fit: BoxFit.contain,
           )),
     );
   }
