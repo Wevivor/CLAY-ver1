@@ -62,7 +62,7 @@ class SearchItemContentWidget extends StatelessWidget {
 // HanListTile의 trailing 부분
   Widget searchItemCase() {
     return Container(
-      margin: EdgeInsets.only(right: 11.0),
+      margin: EdgeInsets.only(left: 7.0, right: 1.0),
       decoration: BoxDecoration(
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.all(Radius.circular(10)),

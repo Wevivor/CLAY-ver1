@@ -55,16 +55,12 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                       _controller.fetchItems();
                       if (this.onMore != null) onMore(item);
                     },
-                    //title: 'eng) 무야호~미니오븐으로6가지 맛 미니바스크 치즈케이크 입니다.',
                     title: item.info.contentsTitle,
-
                     date: Jiffy(item.info.contentsCreateDate)
                         .format('yyyy-MM-dd'),
                     contentText: item.info.contentsDescription,
-                    //contentText:
-                    //    '안녕하세요 진영입니다:-) 오늘은 간단하지만 정말 맛있는 바스크치즈케이크를 들고 왔습니다. 정말 정말 맛있거든요.',
                     imgUrl: item.info.thumbnails,
-                    holder: Const.assets + 'images/smpl_list1.png',
+                    // holder: Const.assets + 'img/holder_img.png',
                   ),
                 ],
               );

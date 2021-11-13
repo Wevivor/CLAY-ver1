@@ -70,7 +70,7 @@ class ContentListItemWidget extends StatelessWidget {
                     if (onMore != null) onMore();
                   },
                   child: Container(
-                    width: 20,
+                    width: 24,
                     alignment: Alignment.bottomRight,
                     child: Image.asset(
                       Const.assets + 'icon/dot_vertical_black.png',
@@ -96,7 +96,7 @@ class ContentListItemWidget extends StatelessWidget {
             color: Color(0xFFDEDEDE),
             thickness: 0.5,
           ),
-          heightSpace(16.0),
+          heightSpace(18.0),
         ],
       ),
     );

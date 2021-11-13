@@ -27,6 +27,7 @@ class CategoryTextButton extends StatelessWidget {
         }
       },
       child: Container(
+        height: 38,
         decoration: DecoHelper.roundDeco.copyWith(
           color: index == selected ? Colors.black : Colors.white,
           border: Border.all(width: 1, color: Color(0xFFC4C4C4)),
@@ -34,7 +35,9 @@ class CategoryTextButton extends StatelessWidget {
             Radius.circular(24),
           ),
         ),
-        padding: EdgeInsets.only(left: 16, top: 7, right: 15, bottom: 10),
+        padding: Get.locale?.languageCode == 'ko'
+            ? EdgeInsets.only(left: 16, top: 6, right: 15, bottom: 5)
+            : EdgeInsets.only(left: 16, top: 3, right: 15, bottom: 5),
         child: Container(
           child: Text(
             title,

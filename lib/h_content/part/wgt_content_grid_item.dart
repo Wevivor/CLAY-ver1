@@ -77,7 +77,7 @@ class ContentGridItemWidget extends StatelessWidget {
                 widthSpace(3.0),
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxWidth: (MySize.safeWidth / 2) - 61,
+                    maxWidth: (MySize.safeWidth / 2) - 66,
                   ),
                   child: Container(
                     child: Text(
@@ -92,13 +92,17 @@ class ContentGridItemWidget extends StatelessWidget {
                   child: Container(),
                 ),
                 InkWell(
+                  //splashColor: ,
+                  highlightColor: Colors.red,
+                  //hoverColor: Colors.red,
                   onTap: () {
                     if (onMore != null) onMore!();
                   },
                   child: Container(
                     padding: EdgeInsets.only(right: 4.0),
-                    width: 12,
-                    alignment: Alignment.bottomRight,
+                    height: 24,
+                    width: 24,
+                    alignment: Alignment.centerRight,
                     child: Image.asset(
                       Const.assets + 'icon/dot_vertical_black.png',
                     ),
