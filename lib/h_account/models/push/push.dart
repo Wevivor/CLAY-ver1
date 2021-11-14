@@ -15,7 +15,7 @@ class Push with _$Push {
     Profile? from,
     Profile? to,
     PushMessage? message,
-    required DateTime dtCreated,
+    required DateTime registerDate,
   }) = _Push;
   Push._();
 
@@ -26,7 +26,7 @@ class Push with _$Push {
         message: message?.toDto(),
         from: from?.toDto(),
         to: to?.toDto(),
-        dtCreated: dtCreated,
+        registerDate: registerDate,
       );
 }
 
@@ -37,7 +37,8 @@ class PushMessage with _$PushMessage {
     String? content,
     String? imageUrl,
     String? title,
-    required DateTime dtCreated,
+    String? badge,
+    required DateTime registerDate,
   }) = _PushMessage;
   PushMessage._();
   PushMessageDto toDto() => PushMessageDto(
@@ -45,6 +46,7 @@ class PushMessage with _$PushMessage {
         content: content,
         imageUrl: imageUrl,
         title: title,
-        dtCreated: dtCreated,
+        badge: badge,
+        registerDate: registerDate,
       );
 }

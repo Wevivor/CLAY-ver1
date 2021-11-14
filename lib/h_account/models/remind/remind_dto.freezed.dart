@@ -28,7 +28,8 @@ class _$RemindDtoTearOff {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
-      required ContentsInfoDto contentsInfo,
+      @JsonKey(name: 'contents_info')
+          required ContentsInfoDto contentsInfo,
       required ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime rAlarmTime}) {
@@ -58,6 +59,7 @@ mixin _$RemindDto {
   String? get title => throw _privateConstructorUsedError;
   @JsonKey(name: 'r_alarm_description')
   String? get description => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contents_info')
   ContentsInfoDto get contentsInfo => throw _privateConstructorUsedError;
   ProfileDto? get from => throw _privateConstructorUsedError;
   @JsonKey(
@@ -83,7 +85,8 @@ abstract class $RemindDtoCopyWith<$Res> {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
-      ContentsInfoDto contentsInfo,
+      @JsonKey(name: 'contents_info')
+          ContentsInfoDto contentsInfo,
       ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime rAlarmTime});
@@ -169,7 +172,8 @@ abstract class _$RemindDtoCopyWith<$Res> implements $RemindDtoCopyWith<$Res> {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
-      ContentsInfoDto contentsInfo,
+      @JsonKey(name: 'contents_info')
+          ContentsInfoDto contentsInfo,
       ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           DateTime rAlarmTime});
@@ -238,7 +242,8 @@ class _$_RemindDto extends _RemindDto {
           this.title,
       @JsonKey(name: 'r_alarm_description')
           this.description,
-      required this.contentsInfo,
+      @JsonKey(name: 'contents_info')
+          required this.contentsInfo,
       required this.from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required this.rAlarmTime})
@@ -257,6 +262,7 @@ class _$_RemindDto extends _RemindDto {
   @JsonKey(name: 'r_alarm_description')
   final String? description;
   @override
+  @JsonKey(name: 'contents_info')
   final ContentsInfoDto contentsInfo;
   @override
   final ProfileDto? from;
@@ -323,7 +329,8 @@ abstract class _RemindDto extends RemindDto {
           String? title,
       @JsonKey(name: 'r_alarm_description')
           String? description,
-      required ContentsInfoDto contentsInfo,
+      @JsonKey(name: 'contents_info')
+          required ContentsInfoDto contentsInfo,
       required ProfileDto? from,
       @JsonKey(name: 'r_alarm_time', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
           required DateTime rAlarmTime}) = _$_RemindDto;
@@ -342,6 +349,7 @@ abstract class _RemindDto extends RemindDto {
   @JsonKey(name: 'r_alarm_description')
   String? get description => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'contents_info')
   ContentsInfoDto get contentsInfo => throw _privateConstructorUsedError;
   @override
   ProfileDto? get from => throw _privateConstructorUsedError;

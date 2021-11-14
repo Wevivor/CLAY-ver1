@@ -1,8 +1,8 @@
 import 'package:clay/c_globals/controllers/controllers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
+import 'package:clay/h_account/controllers/push_controller.dart';
 import 'package:clay/h_account/models/users/users_dtos.dart';
 import 'package:clay/h_board/controllers/board_controller.dart';
-import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/h_share.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';

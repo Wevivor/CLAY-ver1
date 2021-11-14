@@ -160,6 +160,29 @@ class ElCommonModule {
       throw NoConnectionException();
     }
   }
+
+  Future<dynamic> count({required final index, final params}) async {
+    debugPrint('--------UPDATE EL---------');
+    try {
+      Dio dio = initDio();
+
+      final _response = await dio.get(
+        '${index}/_count?' + params,
+        // queryParameters: params,
+      );
+      if (_response.statusCode == 200 || _response.statusCode == 201) {
+        final _result = _response.data;
+        return _result['count'];
+      } else {
+        debugPrint('====>GenericHttpException');
+        throw GenericHttpException();
+      }
+    } on SocketException catch (e) {
+      debugPrint('====>NoConnectionException ${e.toString()}');
+
+      throw NoConnectionException();
+    }
+  }
 }
 
 class GenericHttpException implements Exception {}

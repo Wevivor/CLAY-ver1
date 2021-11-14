@@ -3,20 +3,14 @@ import 'dart:convert';
 
 import 'package:clay/c_config/libarays.dart';
 import 'package:clay/c_globals/controllers/controllers.dart';
-import 'package:clay/c_page/ui_han_bott_navi.dart';
-import 'package:clay/h_account/page/sub_remind_list.dart';
-import 'package:clay/h_login/ui_login_google.dart';
-import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/share_service.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:jiffy/jiffy.dart';
 
 import 'c_config/config.dart';
 import 'c_globals/helper/helpers.dart';
@@ -25,11 +19,10 @@ import 'c_page/auth_middle.dart';
 import 'c_page/bott_navi_controller.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
+import 'h_account/controllers/push_controller.dart';
 import 'h_account/page/ui_push_list.dart';
-import 'h_push/ui_push_messages.dart';
 import 'h_share/h_share.dart';
 import 'h_share/share_controller.dart';
-import 'package:http/http.dart' as http;
 
 Future<void> initFirebaseEmulator() async {
   const bool USE_EMULATOR = true;

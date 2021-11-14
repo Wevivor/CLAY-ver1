@@ -45,10 +45,19 @@ class PushListController extends AbsListController
 
     final lists = await listFilter('/clay_pushs/_search', bodyJSON);
     return lists.map((jsonList) {
-      final elem = jsonList['_source']['message'];
+      final elem = jsonList['_source'];
 
-      return PushMessageDto.fromJson(elem).toDomain();
+      return PushDto.fromJson(elem).toDomain();
     }).toList();
+  }
+
+  Future<int> getCount({
+    String? searchTerm,
+  }) async {
+    final _count = await count(
+        index: '/clay_pushs',
+        params: 'q=to.user_id:${AuthController.to.getUser?.uid}');
+    return _count;
   }
 
   ///=============================================
@@ -59,22 +68,18 @@ class PushListController extends AbsListController
   //   await insertFb(instance: _instance, path: MENU_POS, item: bookmark);
   // }
 
-  Future<void> actionDelete(
-      {required String postId, required String uid}) async {
-    final _collectionRef = _instance.collection(MENU_POS);
+  Future<void> actionDelete({
+    required String id,
+  }) async {
+    await deleteFb(instance: _instance, path: MENU_POS, id: id);
+    var existIndex = cache.indexWhere(
+      (element) => element.id == id,
+    );
 
-    final querySnap = await _collectionRef
-        .where('postId', isEqualTo: postId)
-        .where('to.uid', isEqualTo: uid)
-        .get();
-    List<dynamic> _tmp = [];
-    querySnap.docs.forEach((doc) {
-      final data = doc.data();
-      _tmp.add(data);
-    });
-    _tmp.forEach((element) async {
-      await deleteFb(instance: _instance, path: MENU_POS, id: element['id']);
-    });
+    if (existIndex >= 0) {
+      cache.removeAt(existIndex);
+    }
+    update();
   }
 
   // Future<Bookmark?> actionRead({required String id}) async {

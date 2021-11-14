@@ -24,7 +24,7 @@ class _$PushTearOff {
       Profile? from,
       Profile? to,
       PushMessage? message,
-      required DateTime dtCreated}) {
+      required DateTime registerDate}) {
     return _Push(
       id: id,
       kind: kind,
@@ -32,7 +32,7 @@ class _$PushTearOff {
       from: from,
       to: to,
       message: message,
-      dtCreated: dtCreated,
+      registerDate: registerDate,
     );
   }
 }
@@ -48,7 +48,7 @@ mixin _$Push {
   Profile? get from => throw _privateConstructorUsedError;
   Profile? get to => throw _privateConstructorUsedError;
   PushMessage? get message => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PushCopyWith<Push> get copyWith => throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ abstract class $PushCopyWith<$Res> {
       Profile? from,
       Profile? to,
       PushMessage? message,
-      DateTime dtCreated});
+      DateTime registerDate});
 
   $ProfileCopyWith<$Res>? get from;
   $ProfileCopyWith<$Res>? get to;
@@ -88,7 +88,7 @@ class _$PushCopyWithImpl<$Res> implements $PushCopyWith<$Res> {
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -115,9 +115,9 @@ class _$PushCopyWithImpl<$Res> implements $PushCopyWith<$Res> {
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as PushMessage?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -168,7 +168,7 @@ abstract class _$PushCopyWith<$Res> implements $PushCopyWith<$Res> {
       Profile? from,
       Profile? to,
       PushMessage? message,
-      DateTime dtCreated});
+      DateTime registerDate});
 
   @override
   $ProfileCopyWith<$Res>? get from;
@@ -195,7 +195,7 @@ class __$PushCopyWithImpl<$Res> extends _$PushCopyWithImpl<$Res>
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_Push(
       id: id == freezed
@@ -222,9 +222,9 @@ class __$PushCopyWithImpl<$Res> extends _$PushCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as PushMessage?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -240,7 +240,7 @@ class _$_Push extends _Push {
       this.from,
       this.to,
       this.message,
-      required this.dtCreated})
+      required this.registerDate})
       : super._();
 
   @override
@@ -256,11 +256,11 @@ class _$_Push extends _Push {
   @override
   final PushMessage? message;
   @override
-  final DateTime dtCreated;
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'Push(id: $id, kind: $kind, contentsId: $contentsId, from: $from, to: $to, message: $message, dtCreated: $dtCreated)';
+    return 'Push(id: $id, kind: $kind, contentsId: $contentsId, from: $from, to: $to, message: $message, registerDate: $registerDate)';
   }
 
   @override
@@ -281,9 +281,9 @@ class _$_Push extends _Push {
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
@@ -295,7 +295,7 @@ class _$_Push extends _Push {
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(to) ^
       const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -311,7 +311,7 @@ abstract class _Push extends Push {
       Profile? from,
       Profile? to,
       PushMessage? message,
-      required DateTime dtCreated}) = _$_Push;
+      required DateTime registerDate}) = _$_Push;
   _Push._() : super._();
 
   @override
@@ -327,7 +327,7 @@ abstract class _Push extends Push {
   @override
   PushMessage? get message => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PushCopyWith<_Push> get copyWith => throw _privateConstructorUsedError;
@@ -342,13 +342,15 @@ class _$PushMessageTearOff {
       String? content,
       String? imageUrl,
       String? title,
-      required DateTime dtCreated}) {
+      String? badge,
+      required DateTime registerDate}) {
     return _PushMessage(
       cnt: cnt,
       content: content,
       imageUrl: imageUrl,
       title: title,
-      dtCreated: dtCreated,
+      badge: badge,
+      registerDate: registerDate,
     );
   }
 }
@@ -362,7 +364,8 @@ mixin _$PushMessage {
   String? get content => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  String? get badge => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PushMessageCopyWith<PushMessage> get copyWith =>
@@ -379,7 +382,8 @@ abstract class $PushMessageCopyWith<$Res> {
       String? content,
       String? imageUrl,
       String? title,
-      DateTime dtCreated});
+      String? badge,
+      DateTime registerDate});
 }
 
 /// @nodoc
@@ -396,7 +400,8 @@ class _$PushMessageCopyWithImpl<$Res> implements $PushMessageCopyWith<$Res> {
     Object? content = freezed,
     Object? imageUrl = freezed,
     Object? title = freezed,
-    Object? dtCreated = freezed,
+    Object? badge = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
       cnt: cnt == freezed
@@ -415,9 +420,13 @@ class _$PushMessageCopyWithImpl<$Res> implements $PushMessageCopyWith<$Res> {
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      badge: badge == freezed
+          ? _value.badge
+          : badge // ignore: cast_nullable_to_non_nullable
+              as String?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -435,7 +444,8 @@ abstract class _$PushMessageCopyWith<$Res>
       String? content,
       String? imageUrl,
       String? title,
-      DateTime dtCreated});
+      String? badge,
+      DateTime registerDate});
 }
 
 /// @nodoc
@@ -454,7 +464,8 @@ class __$PushMessageCopyWithImpl<$Res> extends _$PushMessageCopyWithImpl<$Res>
     Object? content = freezed,
     Object? imageUrl = freezed,
     Object? title = freezed,
-    Object? dtCreated = freezed,
+    Object? badge = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_PushMessage(
       cnt: cnt == freezed
@@ -473,9 +484,13 @@ class __$PushMessageCopyWithImpl<$Res> extends _$PushMessageCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      badge: badge == freezed
+          ? _value.badge
+          : badge // ignore: cast_nullable_to_non_nullable
+              as String?,
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -489,7 +504,8 @@ class _$_PushMessage extends _PushMessage {
       this.content,
       this.imageUrl,
       this.title,
-      required this.dtCreated})
+      this.badge,
+      required this.registerDate})
       : super._();
 
   @override
@@ -501,11 +517,13 @@ class _$_PushMessage extends _PushMessage {
   @override
   final String? title;
   @override
-  final DateTime dtCreated;
+  final String? badge;
+  @override
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'PushMessage(cnt: $cnt, content: $content, imageUrl: $imageUrl, title: $title, dtCreated: $dtCreated)';
+    return 'PushMessage(cnt: $cnt, content: $content, imageUrl: $imageUrl, title: $title, badge: $badge, registerDate: $registerDate)';
   }
 
   @override
@@ -522,9 +540,11 @@ class _$_PushMessage extends _PushMessage {
                     .equals(other.imageUrl, imageUrl)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.badge, badge) ||
+                const DeepCollectionEquality().equals(other.badge, badge)) &&
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
@@ -534,7 +554,8 @@ class _$_PushMessage extends _PushMessage {
       const DeepCollectionEquality().hash(content) ^
       const DeepCollectionEquality().hash(imageUrl) ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(badge) ^
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -548,7 +569,8 @@ abstract class _PushMessage extends PushMessage {
       String? content,
       String? imageUrl,
       String? title,
-      required DateTime dtCreated}) = _$_PushMessage;
+      String? badge,
+      required DateTime registerDate}) = _$_PushMessage;
   _PushMessage._() : super._();
 
   @override
@@ -560,7 +582,9 @@ abstract class _PushMessage extends PushMessage {
   @override
   String? get title => throw _privateConstructorUsedError;
   @override
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  String? get badge => throw _privateConstructorUsedError;
+  @override
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PushMessageCopyWith<_PushMessage> get copyWith =>

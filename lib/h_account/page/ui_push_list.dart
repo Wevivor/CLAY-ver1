@@ -3,7 +3,7 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_account/models/push/push.dart';
-import 'package:clay/h_push/controllers/push_controller.dart';
+import 'package:clay/h_account/page/wgt_item_push.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -15,6 +15,7 @@ class PushListUI extends StatefulWidget {
 
 class _PushListUIState extends State<PushListUI>
     with AppbarHelper, SingleTickerProviderStateMixin {
+  bool _isDelShow = false;
   @override
   void initState() {
     super.initState();
@@ -53,6 +54,15 @@ class _PushListUIState extends State<PushListUI>
               '받은 알림',
               style: appBarStyle,
             ),
+            actions: [
+              ImageButton(
+                onTap: () => setState(() {
+                  _isDelShow = !_isDelShow;
+                }),
+                holder: Const.assets + 'icon/icon_trashcan.png',
+              ),
+              widthSpace(17.0),
+            ],
           )),
       backgroundColor: Colors.white,
       body: CustomScrollView(scrollDirection: Axis.vertical, slivers: <Widget>[
@@ -65,43 +75,52 @@ class _PushListUIState extends State<PushListUI>
               itemBuilder: (context, idx) {
                 // final controller = PushController.to;
                 final cache = _.cache;
-                PushMessage item = cache[idx];
 
-                // if (idx % 2 == 0) {
+                Push _item = cache[idx];
+                final _message = _item.message;
+
                 return Container(
-                  margin: EdgeInsets.only(left: 14, right: 14),
-                  padding: EdgeInsets.only(top: 10, bottom: 10),
-                  child: HanListTile(
-                    padding: EdgeInsets.all(0),
-                    leading: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ImageRoundWidget(
-                          imgUrl: item.imageUrl,
-                        ),
-
-                        //SUBJECT : 푸시메시지, 시간계산.
-                        //TODO : 시간 계산
-                        Text(
-                          // '1시간전',
-                          AppHelper.dateDiff(item.dtCreated),
-                          // style: deadlineStyle.copyWith(
-                          // color: Color(0xFF27ae60))
-                        ),
-                      ],
-                    ),
-                    title: Container(
-                      constraints: BoxConstraints(
-                          maxWidth: MySize.safeWidth - 14 * 2 - 100 - 10),
-                      child: Text(
-                        item.title ?? '',
+                  // color: ,
+                  padding:
+                      EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 15),
+                  alignment: Alignment.centerLeft,
+                  child: Column(
+                    children: [
+                      PushItemWidget(
+                        onTap: () => _actionTap(_item),
+                        kind: _item.kind,
+                        // iconUrl: 'icon/medal.png',
+                        pushtext: _message?.title,
+                        badage: _item.message?.badge,
+                        // classtext: '홈베이킹',
+                        subTitle: _message?.content,
+                        timetext: AppHelper.dateDiff(_message?.registerDate),
+                        isDel: _isDelShow,
+                        onDel: () => PushListController.to
+                            .actionDelete(id: _item.id ?? ''),
                       ),
-                    ),
+                      Divider(
+                        thickness: 0.3,
+                        height: 0,
+                      ),
+                    ],
                   ),
                 );
               }),
         ),
       ]),
     );
+  }
+
+  void _actionTap(Push item) {
+    final kind = item.kind;
+    if ('remind' == kind) Get.toNamed('/remind_list');
+    if ('count_content' == kind)
+      Get.offAllNamed('/main_menu');
+    else if ('best_board' == kind) {
+      Get.offAllNamed('/main_menu');
+    } else if ('week_start' == kind) {
+      Get.offAllNamed('/main_menu');
+    }
   }
 }

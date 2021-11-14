@@ -19,7 +19,7 @@ _$_PushDto _$$_PushDtoFromJson(Map<String, dynamic> json) => _$_PushDto(
       message: json['message'] == null
           ? null
           : PushMessageDto.fromJson(json['message'] as Map<String, dynamic>),
-      dtCreated: Fbconverter.fromJson(json['register_date']),
+      registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
 Map<String, dynamic> _$$_PushDtoToJson(_$_PushDto instance) =>
@@ -30,23 +30,25 @@ Map<String, dynamic> _$$_PushDtoToJson(_$_PushDto instance) =>
       'from': instance.from?.toJson(),
       'to': instance.to?.toJson(),
       'message': instance.message?.toJson(),
-      'register_date': Fbconverter.toJson(instance.dtCreated),
+      'register_date': Fbconverter.toJson(instance.registerDate),
     };
 
 _$_PushMessageDto _$$_PushMessageDtoFromJson(Map<String, dynamic> json) =>
     _$_PushMessageDto(
       cnt: json['cnt'] as int?,
       content: json['content'] as String?,
+      badge: json['board_badge'] as String?,
       imageUrl: json['image_url'] as String?,
       title: json['title'] as String?,
-      dtCreated: Fbconverter.fromJson(json['register_date']),
+      registerDate: Fbconverter.fromJson(json['register_date']),
     );
 
 Map<String, dynamic> _$$_PushMessageDtoToJson(_$_PushMessageDto instance) =>
     <String, dynamic>{
       'cnt': instance.cnt,
       'content': instance.content,
+      'board_badge': instance.badge,
       'image_url': instance.imageUrl,
       'title': instance.title,
-      'register_date': Fbconverter.toJson(instance.dtCreated),
+      'register_date': Fbconverter.toJson(instance.registerDate),
     };

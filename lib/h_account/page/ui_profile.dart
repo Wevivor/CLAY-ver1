@@ -17,7 +17,33 @@ import 'package:get/get.dart';
 
 import 'sub_webview.dart';
 
-class ProfileUI extends StatelessWidget with AppbarHelper {
+class ProfileUI extends StatefulWidget with AppbarHelper {
+  @override
+  _ProfileUIState createState() => _ProfileUIState();
+}
+
+class _ProfileUIState extends State<ProfileUI>
+    with AppbarHelper, SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+    initFetch();
+  }
+
+  int _isPush = 0;
+  final listController = Get.put(PushListController());
+  Future<void> initFetch() async {
+    final _count = await listController.getCount();
+    setState(() {
+      _isPush = _count;
+    });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     MySize().init(context);
@@ -48,12 +74,11 @@ class ProfileUI extends StatelessWidget with AppbarHelper {
                 height: 17.0,
                 width: 15.0,
                 onTap: () async {
-                  final _controller = Get.put(PushListController());
-                  _controller.cache.clear();
-                  await _controller.fetchItems();
                   Get.toNamed('/push_list');
                 },
-                holder: 'assets/icon/ph_bell-ringing.png'),
+                holder: _isPush > 0
+                    ? 'assets/icon/ph_bell-ringing_red.png'
+                    : 'assets/icon/ph_bell-ringing.png'),
             widthSpace(20),
           ],
         ),

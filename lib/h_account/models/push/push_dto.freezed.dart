@@ -30,7 +30,7 @@ class _$PushDtoTearOff {
       required ProfileDto? to,
       PushMessageDto? message,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) {
+          required DateTime registerDate}) {
     return _PushDto(
       id: id,
       kind: kind,
@@ -38,7 +38,7 @@ class _$PushDtoTearOff {
       from: from,
       to: to,
       message: message,
-      dtCreated: dtCreated,
+      registerDate: registerDate,
     );
   }
 
@@ -63,7 +63,7 @@ mixin _$PushDto {
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -83,7 +83,7 @@ abstract class $PushDtoCopyWith<$Res> {
       ProfileDto? to,
       PushMessageDto? message,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+          DateTime registerDate});
 
   $ProfileDtoCopyWith<$Res>? get from;
   $ProfileDtoCopyWith<$Res>? get to;
@@ -106,7 +106,7 @@ class _$PushDtoCopyWithImpl<$Res> implements $PushDtoCopyWith<$Res> {
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -133,9 +133,9 @@ class _$PushDtoCopyWithImpl<$Res> implements $PushDtoCopyWith<$Res> {
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as PushMessageDto?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -188,7 +188,7 @@ abstract class _$PushDtoCopyWith<$Res> implements $PushDtoCopyWith<$Res> {
       ProfileDto? to,
       PushMessageDto? message,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+          DateTime registerDate});
 
   @override
   $ProfileDtoCopyWith<$Res>? get from;
@@ -215,7 +215,7 @@ class __$PushDtoCopyWithImpl<$Res> extends _$PushDtoCopyWithImpl<$Res>
     Object? from = freezed,
     Object? to = freezed,
     Object? message = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_PushDto(
       id: id == freezed
@@ -242,9 +242,9 @@ class __$PushDtoCopyWithImpl<$Res> extends _$PushDtoCopyWithImpl<$Res>
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
               as PushMessageDto?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -263,7 +263,7 @@ class _$_PushDto extends _PushDto {
       required this.to,
       this.message,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.dtCreated})
+          required this.registerDate})
       : super._();
 
   factory _$_PushDto.fromJson(Map<String, dynamic> json) =>
@@ -287,11 +287,11 @@ class _$_PushDto extends _PushDto {
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  final DateTime dtCreated;
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'PushDto(id: $id, kind: $kind, contentsId: $contentsId, from: $from, to: $to, message: $message, dtCreated: $dtCreated)';
+    return 'PushDto(id: $id, kind: $kind, contentsId: $contentsId, from: $from, to: $to, message: $message, registerDate: $registerDate)';
   }
 
   @override
@@ -312,9 +312,9 @@ class _$_PushDto extends _PushDto {
             (identical(other.message, message) ||
                 const DeepCollectionEquality()
                     .equals(other.message, message)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
@@ -326,7 +326,7 @@ class _$_PushDto extends _PushDto {
       const DeepCollectionEquality().hash(from) ^
       const DeepCollectionEquality().hash(to) ^
       const DeepCollectionEquality().hash(message) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -349,7 +349,7 @@ abstract class _PushDto extends PushDto {
       required ProfileDto? to,
       PushMessageDto? message,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) = _$_PushDto;
+          required DateTime registerDate}) = _$_PushDto;
   _PushDto._() : super._();
 
   factory _PushDto.fromJson(Map<String, dynamic> json) = _$_PushDto.fromJson;
@@ -372,7 +372,7 @@ abstract class _PushDto extends PushDto {
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PushDtoCopyWith<_PushDto> get copyWith =>
@@ -390,17 +390,20 @@ class _$PushMessageDtoTearOff {
   _PushMessageDto call(
       {int? cnt,
       String? content,
+      @JsonKey(name: 'board_badge')
+          String? badge,
       @JsonKey(name: 'image_url')
           String? imageUrl,
       String? title,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) {
+          required DateTime registerDate}) {
     return _PushMessageDto(
       cnt: cnt,
       content: content,
+      badge: badge,
       imageUrl: imageUrl,
       title: title,
-      dtCreated: dtCreated,
+      registerDate: registerDate,
     );
   }
 
@@ -416,6 +419,8 @@ const $PushMessageDto = _$PushMessageDtoTearOff();
 mixin _$PushMessageDto {
   int? get cnt => throw _privateConstructorUsedError;
   String? get content => throw _privateConstructorUsedError;
+  @JsonKey(name: 'board_badge')
+  String? get badge => throw _privateConstructorUsedError;
   @JsonKey(name: 'image_url')
   String? get imageUrl => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
@@ -423,7 +428,7 @@ mixin _$PushMessageDto {
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -439,11 +444,13 @@ abstract class $PushMessageDtoCopyWith<$Res> {
   $Res call(
       {int? cnt,
       String? content,
+      @JsonKey(name: 'board_badge')
+          String? badge,
       @JsonKey(name: 'image_url')
           String? imageUrl,
       String? title,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+          DateTime registerDate});
 }
 
 /// @nodoc
@@ -459,9 +466,10 @@ class _$PushMessageDtoCopyWithImpl<$Res>
   $Res call({
     Object? cnt = freezed,
     Object? content = freezed,
+    Object? badge = freezed,
     Object? imageUrl = freezed,
     Object? title = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_value.copyWith(
       cnt: cnt == freezed
@@ -472,6 +480,10 @@ class _$PushMessageDtoCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      badge: badge == freezed
+          ? _value.badge
+          : badge // ignore: cast_nullable_to_non_nullable
+              as String?,
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -480,9 +492,9 @@ class _$PushMessageDtoCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -498,11 +510,13 @@ abstract class _$PushMessageDtoCopyWith<$Res>
   $Res call(
       {int? cnt,
       String? content,
+      @JsonKey(name: 'board_badge')
+          String? badge,
       @JsonKey(name: 'image_url')
           String? imageUrl,
       String? title,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          DateTime dtCreated});
+          DateTime registerDate});
 }
 
 /// @nodoc
@@ -520,9 +534,10 @@ class __$PushMessageDtoCopyWithImpl<$Res>
   $Res call({
     Object? cnt = freezed,
     Object? content = freezed,
+    Object? badge = freezed,
     Object? imageUrl = freezed,
     Object? title = freezed,
-    Object? dtCreated = freezed,
+    Object? registerDate = freezed,
   }) {
     return _then(_PushMessageDto(
       cnt: cnt == freezed
@@ -533,6 +548,10 @@ class __$PushMessageDtoCopyWithImpl<$Res>
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String?,
+      badge: badge == freezed
+          ? _value.badge
+          : badge // ignore: cast_nullable_to_non_nullable
+              as String?,
       imageUrl: imageUrl == freezed
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
@@ -541,9 +560,9 @@ class __$PushMessageDtoCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String?,
-      dtCreated: dtCreated == freezed
-          ? _value.dtCreated
-          : dtCreated // ignore: cast_nullable_to_non_nullable
+      registerDate: registerDate == freezed
+          ? _value.registerDate
+          : registerDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
     ));
   }
@@ -556,11 +575,13 @@ class _$_PushMessageDto extends _PushMessageDto {
   _$_PushMessageDto(
       {this.cnt,
       this.content,
+      @JsonKey(name: 'board_badge')
+          this.badge,
       @JsonKey(name: 'image_url')
           this.imageUrl,
       this.title,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required this.dtCreated})
+          required this.registerDate})
       : super._();
 
   factory _$_PushMessageDto.fromJson(Map<String, dynamic> json) =>
@@ -571,6 +592,9 @@ class _$_PushMessageDto extends _PushMessageDto {
   @override
   final String? content;
   @override
+  @JsonKey(name: 'board_badge')
+  final String? badge;
+  @override
   @JsonKey(name: 'image_url')
   final String? imageUrl;
   @override
@@ -580,11 +604,11 @@ class _$_PushMessageDto extends _PushMessageDto {
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  final DateTime dtCreated;
+  final DateTime registerDate;
 
   @override
   String toString() {
-    return 'PushMessageDto(cnt: $cnt, content: $content, imageUrl: $imageUrl, title: $title, dtCreated: $dtCreated)';
+    return 'PushMessageDto(cnt: $cnt, content: $content, badge: $badge, imageUrl: $imageUrl, title: $title, registerDate: $registerDate)';
   }
 
   @override
@@ -596,14 +620,16 @@ class _$_PushMessageDto extends _PushMessageDto {
             (identical(other.content, content) ||
                 const DeepCollectionEquality()
                     .equals(other.content, content)) &&
+            (identical(other.badge, badge) ||
+                const DeepCollectionEquality().equals(other.badge, badge)) &&
             (identical(other.imageUrl, imageUrl) ||
                 const DeepCollectionEquality()
                     .equals(other.imageUrl, imageUrl)) &&
             (identical(other.title, title) ||
                 const DeepCollectionEquality().equals(other.title, title)) &&
-            (identical(other.dtCreated, dtCreated) ||
+            (identical(other.registerDate, registerDate) ||
                 const DeepCollectionEquality()
-                    .equals(other.dtCreated, dtCreated)));
+                    .equals(other.registerDate, registerDate)));
   }
 
   @override
@@ -611,9 +637,10 @@ class _$_PushMessageDto extends _PushMessageDto {
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(cnt) ^
       const DeepCollectionEquality().hash(content) ^
+      const DeepCollectionEquality().hash(badge) ^
       const DeepCollectionEquality().hash(imageUrl) ^
       const DeepCollectionEquality().hash(title) ^
-      const DeepCollectionEquality().hash(dtCreated);
+      const DeepCollectionEquality().hash(registerDate);
 
   @JsonKey(ignore: true)
   @override
@@ -630,11 +657,13 @@ abstract class _PushMessageDto extends PushMessageDto {
   factory _PushMessageDto(
       {int? cnt,
       String? content,
+      @JsonKey(name: 'board_badge')
+          String? badge,
       @JsonKey(name: 'image_url')
           String? imageUrl,
       String? title,
       @JsonKey(name: 'register_date', fromJson: Fbconverter.fromJson, toJson: Fbconverter.toJson)
-          required DateTime dtCreated}) = _$_PushMessageDto;
+          required DateTime registerDate}) = _$_PushMessageDto;
   _PushMessageDto._() : super._();
 
   factory _PushMessageDto.fromJson(Map<String, dynamic> json) =
@@ -645,6 +674,9 @@ abstract class _PushMessageDto extends PushMessageDto {
   @override
   String? get content => throw _privateConstructorUsedError;
   @override
+  @JsonKey(name: 'board_badge')
+  String? get badge => throw _privateConstructorUsedError;
+  @override
   @JsonKey(name: 'image_url')
   String? get imageUrl => throw _privateConstructorUsedError;
   @override
@@ -654,7 +686,7 @@ abstract class _PushMessageDto extends PushMessageDto {
       name: 'register_date',
       fromJson: Fbconverter.fromJson,
       toJson: Fbconverter.toJson)
-  DateTime get dtCreated => throw _privateConstructorUsedError;
+  DateTime get registerDate => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PushMessageDtoCopyWith<_PushMessageDto> get copyWith =>

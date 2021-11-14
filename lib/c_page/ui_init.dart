@@ -2,7 +2,6 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/src/auth_controller.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
-import 'package:clay/h_push/controllers/push_controller.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
