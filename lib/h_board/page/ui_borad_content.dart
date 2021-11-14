@@ -7,22 +7,23 @@ import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/boards.dart';
-import 'package:clay/h_board/part/part_board_pintest_list.dart';
-import 'package:clay/h_board/part_bs/src/helper_bs_function.dart';
-import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
-import 'package:clay/h_board/part_bs/src/part_bs_share.dart';
+import 'package:clay/h_board/part_bs/helper_bs_function.dart';
+import 'package:clay/h_board/part_bs/part_bs.dart';
+import 'package:clay/h_board/part_bs/part_bs_share.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
-import 'package:clay/h_content/part/part_content_header.dart';
-import 'package:clay/h_content/part/part_content_list.dart';
-import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
+import 'package:clay/h_content/page/part_content_header.dart';
+import 'package:clay/h_content/page/part_content_list.dart';
+import 'package:clay/h_content/part_bs/part_bs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';
 import 'package:share/share.dart' as share;
+
+import 'part_board_pintest_list.dart';
 
 // ignore: must_be_immutable
 class BoardContentUI extends StatefulWidget {

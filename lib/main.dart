@@ -21,8 +21,8 @@ import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
 import 'h_account/controllers/push_controller.dart';
 import 'h_account/page/ui_push_list.dart';
-import 'h_share/h_share.dart';
 import 'h_share/share_controller.dart';
+import 'h_share/ui_share_service.dart';
 
 Future<void> initFirebaseEmulator() async {
   const bool USE_EMULATOR = true;

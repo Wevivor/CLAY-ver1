@@ -7,8 +7,7 @@ import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/controllers/alarm_controller.dart';
 import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
-import 'package:clay/h_account/part_profile/src/wgt_item_tutorial.dart';
-import 'package:clay/h_board/controllers/board_list_controller.dart';
+import 'package:clay/h_account/widget/wgt_item_tutorial.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_kakao_login/flutter_kakao_login.dart';

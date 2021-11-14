@@ -5,7 +5,7 @@ import 'package:clay/h_account/page/sub_remind_text%20_setting.dart';
 import 'package:clay/h_account/page/ui_profile.dart';
 import 'package:clay/h_account/page/ui_setting.dart';
 import 'package:clay/h_content/page/ui_content.dart';
-import 'package:clay/h_login/ui_login_google.dart';
+import 'package:clay/h_login/ui_login.dart';
 import 'package:get/get.dart';
 
 import 'auth_middle.dart';

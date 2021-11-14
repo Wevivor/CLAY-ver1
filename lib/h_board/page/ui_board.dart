@@ -2,10 +2,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/c_page/bott_navi_controller.dart';
-import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
-import 'package:clay/h_board/page/ui_borad_content.dart';
-import 'package:clay/h_board/part/part_board_list.dart';
 import 'package:clay/h_search/controllers/find_controller.dart';
 import 'package:clay/h_search/page/cupertino_search_delegate.dart';
 import 'package:clay/h_search/page/platform_search.dart';
@@ -13,6 +10,8 @@ import 'package:clay/h_search/page/platform_search.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
+import 'part_board_list.dart';
 
 // ignore: must_be_immutable
 class BoardUI extends StatefulWidget {

@@ -7,7 +7,7 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
 import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
-import 'package:clay/h_account/part_profile/src/btn_wide.dart';
+import 'package:clay/h_account/widget/btn_wide.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';

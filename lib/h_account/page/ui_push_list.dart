@@ -3,7 +3,7 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/push_list_controller.dart';
 import 'package:clay/h_account/models/push/push.dart';
-import 'package:clay/h_account/page/wgt_item_push.dart';
+import 'package:clay/h_account/widget/wgt_item_push.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jiffy/jiffy.dart';

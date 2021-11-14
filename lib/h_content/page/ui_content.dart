@@ -6,7 +6,6 @@ import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
-import 'package:clay/h_content/part/part_content_all_pintest.dart';
 import 'package:clay/h_search/controllers/find_controller.dart';
 import 'package:clay/h_search/page/cupertino_search_delegate.dart';
 import 'package:clay/h_search/page/platform_search.dart';
@@ -15,6 +14,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:get/get.dart';
+
+import 'part_content_all_pintest.dart';
 
 //SUBJECT: 컨텐츠 화면
 //TODO : 컨텐트

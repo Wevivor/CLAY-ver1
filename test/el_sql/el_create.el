@@ -77,3 +77,449 @@ GET /clay_contents/_search
       }
   }  
 }
+
+
+GET /clay_pushs/_count?q=to.user_id:bNG2rtFk6weX9mltGpI8zNz2yUX2
+/*
+{
+
+  "query": {
+     "bool": {
+      "must":
+        { "match": {
+          "to.user_id":"bNG2rtFk6weX9mltGpI8zNz2yUX2"}  
+       }
+     
+     }
+    }
+  }
+}
+*/
+
+DELETE /clay_pushs/_doc/oLFVO48Uk4QMJVBe0v6s
+
+GET /clay_pushs/_search
+{
+
+  "query": {
+     "bool": {
+      "must":
+        { "match": {
+          "to.user_id":"bNG2rtFk6weX9mltGpI8zNz2yUX2"}  
+       }
+     }     
+    }
+    ,"sort":{
+     "register_date": "desc"
+  }
+}
+
+GET /clay_reminds/_search
+{
+
+  "query": {
+     "bool": {
+      "must":
+        { "range": {
+          "r_alarm_time": {
+            "lte":"now+10m/m",
+            "gte":"now-40m/m"}  
+       }
+     }
+     }
+    },"sort":{
+     "r_alarm_time": "desc"
+  }
+}
+
+GET /clay_reminds/_search
+{
+  "query": {
+    "match_all": {}
+  },"sort":{
+     "r_alarm_time": "desc"
+  }
+    
+  }
+}
+GET /clay_userinfos/_search
+{
+ "size":0,
+  "query": {
+    "match_all": {
+      }
+    },
+   "aggs": {
+        "grp_by_user": {
+          "terms": {
+            "field": "user_id.keyword"
+          }
+        }
+      }
+}
+
+post  /clay_userinfos/_create/1Fc2VycOa6N1KWw1xgLFuJHcv0r2
+{
+  "level":3
+}
+DELETE /clay_userinfos
+GET /clay_contents/_search
+{
+  "size":0,
+  "query": {
+    "bool": {
+      "must":
+       { "range": {
+      "contents_create_date": {
+           "gte": "now-1w/w" }  
+       }
+     }
+    }
+  },
+  "aggs": {
+     "group_by_user_id": {
+        "terms": { 
+          "field": "user_info.user_id.keyword"
+        },
+        "aggs":{
+          "group_by_board_id":{
+          "terms":{
+          "field": "board_info.board_id.keyword"}
+          }
+        }
+       
+      }
+  }  
+}
+POST /clay_contents/_search
+{
+  "size":0,
+  "query": {
+    "bool": {
+      "must":
+      [
+        {   "match":{"user_info.user_id": "bNG2rtFk6weX9mltGpI8zNz2yUX2"}
+        },
+        { 
+         
+         "range": {
+      "contents_create_date": {
+           "gte": "now-10d/d" }  
+       }
+     }
+     ]
+    }
+  },
+  "aggs": {
+    "content-count-byuser": {
+      "terms": {
+        "field": "user_info.user_id.keyword"
+      }
+    }
+  }
+}
+
+
+GET /clay_contents/_search
+{
+  "query": {
+    "bool": {
+      
+      "must": {"match":{"user_info.user_id": "1Fc2VycOa6N1KWw1xgLFuJHcv0r2"}
+      }
+      
+        
+      }
+    }
+  }
+}
+GET /clay_boards/_search
+{
+  "query": {
+    "range": {
+      "register_date": {
+           "gte": "now-1w/w" }  
+      }
+    }
+  }
+}
+
+GET /clay_pushs/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+
+
+POST /clay_contents/_search
+{
+   "size":0,
+    "query": {
+    "bool": {
+       "must": {"match":{"user_info.user_id": "qbxjmBTYs8aamKpaJqlOpyprLOF3"}
+      }
+        
+      }
+    },
+  
+  "aggs": {
+    "group_by_state":{
+      "terms": {
+        "field": "board_info.board_id.keyword"
+      }
+    }
+  }
+}
+GET /clay_contents/_search
+{
+   
+  "query": {
+  
+    "bool": {
+       "must":[ 
+         {
+         "match":{"user_info.user_id": "bNG2rtFk6weX9mltGpI8zNz2yUX2"}
+         
+        }
+        ]
+        
+      }
+    },
+      "sort": [
+        {"info.contents_fixed": "desc"}
+        
+      ]
+}
+GET /clay_boards/_search
+{
+  "query": {
+    "query_string": {
+       "query":"\"테스트\"",
+        "default_field": "info.board_name"
+      }
+    }
+  }
+
+GET /clay_boards/_search
+{
+  "query": {
+    "bool": {
+       "must": [ {"match":
+        {"board_creator.user_id": "1Fc2VycOa6N1KWw1xgLFuJHcv0r2"}
+        }
+      ]
+        
+    }
+  },
+  "sort": [
+    
+        {"info.is_fixed": "desc"},
+         {
+          "list_date": {
+            "order": "desc"
+          }
+        }
+        
+      ]
+    }
+
+
+GET /clay_contents/_search
+{
+  "query": {
+    "bool": {
+       "must":[ {"match":{"user_info.user_id": "qbxjmBTYs8aamKpaJqlOpyprLOF3"}
+        },
+        {"bool":{
+          "should": [
+              {"match_phrase_prefix":{"info.contents_comment": "테스트"}
+             },
+              {"match_phrase_prefix":{"info.contents_description": "테스트"}
+             },
+              {"match_phrase_prefix":{"info.contents_title": "테스트"}
+             },
+              {"match_phrase_prefix":{"info.contents_memo": "테스트"}
+             }
+          ]
+            
+          }
+        }
+        ]
+      }
+    },
+      "sort": [
+         {"info.contents_fixed": "desc"},
+         {
+          "contents_create_date": {
+            "order": "desc",
+            "format": "strict_date_optional_time_nanos"
+          }
+        }
+       
+        
+      ]
+}
+
+
+
+
+
+delete /clay_reminds
+
+
+delete /clay_pushs
+
+GET /clay_pushs/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"to.user_id": "qbxjmBTYs8aamKpaJqlOpyprLOF3"}
+      }
+      }
+    }
+  }
+}
+
+GET /clay_reminds/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"from.user_id": "qbxjmBTYs8aamKpaJqlOpyprLOF3"}
+      }
+      
+        
+      }
+    }
+  }
+}
+GET /clay_contents/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"from.user_id": "1Fc2VycOa6N1KWw1xgLFuJHcv0r2"}
+      }
+      
+        
+      }
+    }
+  }
+}
+POST /clay_contents/_delete_by_query
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"user_info.user_id": "1Fc2VycOa6N1KWw1xgLFuJHcv0r2"}
+      }
+    }
+  }
+}
+
+POST /clay_boards/_delete_by_query
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"board_creator.user_id": "1Fc2VycOa6N1KWw1xgLFuJHcv0r2"}
+      }
+    }
+  }
+}
+GET /clay_reminds/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"from.user_id": "bNG2rtFk6weX9mltGpI8zNz2yUX2"}
+      }
+      
+        
+      }
+    
+  }
+}
+
+GET /clay_contents/_search
+{"query":{"bool":{"must":[{"match":{"user_info.user_id":"a00L2RmyOzYX2K5LTOJkdWyihXH3"}}]}},"sort":[{"info.contents_fixed":"desc"}]}
+
+
+
+GET /clay_contents/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match":{"user_info.user_id":"qbxjmBTYs8aamKpaJqlOpyprLOF3"}}
+      }
+    },
+    "sort": [
+        {"info.contents_fixed": "desc"}
+      ]
+  }
+}
+GET /clay_contents/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match_all":{}}
+      }
+    }
+  }
+}
+
+
+GET /clay_boards/_search
+{
+  "query": {
+    "bool": {
+      "must": {"match_all": {}}
+      
+        
+      }
+    }
+  }
+}
+
+GET /afada_userinfos/_search
+{
+
+  "query": {
+   "term" : { "level" : 1 }
+
+  }
+}
+POST /afada_userinfos/_search
+{
+  "query": {
+    "wildcard": {"displayName": "이한철"}
+    
+  },
+  "size":3,
+  "from":0
+  
+}
+POST /afada_userinfos/_search
+{
+  
+  "from":3,
+  "size":3,
+
+  "query": {
+    "match_all": {}
+    
+  }
+  
+  
+  
+}
+delete /afada_pushs
+GET /afada_posts/_search
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+      
+GET /afada_bookmarks/_search
+{"query": {"bool": {"must": [{"match": {"owner.uid": "NE5YNZ2tkFbVUHSfTqY62eZIE0p1"}}]}}, "sort": [{"dtCreated": "desc"}]}
+
+

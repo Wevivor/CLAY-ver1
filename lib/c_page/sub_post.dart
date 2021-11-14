@@ -1,7 +1,5 @@
 // 콘텐츠 상세보기 화면
 
-import 'dart:io';
-
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/utils/utils.dart';
@@ -13,7 +11,7 @@ import 'package:clay/h_board/part_bs/part_bs.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
-import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
+import 'package:clay/h_content/part_bs/part_bs.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sprintf/sprintf.dart';

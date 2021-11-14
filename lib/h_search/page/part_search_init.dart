@@ -80,9 +80,10 @@ class SearchInitPART extends StatelessWidget {
                     },
                     type: item.info.contentsType,
                     title: item.info.contentsTitle,
-                    contentText: item.info.contentsDescription!.isNotEmpty
-                        ? item.info.contentsDescription
-                        : item.info.contentsComment,
+                    contentText: (item.info.contentsDescription == null ||
+                            item.info.contentsDescription!.isEmpty)
+                        ? item.info.contentsComment
+                        : item.info.contentsDescription,
                     imgUrl: _imgUrl,
                   ),
                   Divider(
