@@ -61,7 +61,7 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
   }
 
   final _formKey = GlobalKey<FormState>();
-  DateTime _currentDate = DateTime.now();
+  late DateTime _currentDate;
   final tileTitleStyle = baseStyle.copyWith(
       fontSize: 13,
       color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
@@ -222,7 +222,7 @@ class _BottomSheetCalendarState extends State<BottomSheetCalendar>
                   ),
                 ),
                 heightSpace(25.0),
-                DateTimePickerWidget(),
+                DateTimePickerWidget(current: _currentDate),
 
                 Divider(
                   thickness: 1,

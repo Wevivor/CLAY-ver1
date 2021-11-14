@@ -66,13 +66,13 @@ class BSBoardItemWidget extends StatelessWidget {
               height: 54,
               decoration: BoxDecoration(
                 color: selected == index
-                    ? Color.fromRGBO(230, 242, 255, 1)
+                    ? Color.fromRGBO(53, 53, 53, 0.2)
                     : Colors.white,
                 borderRadius: BorderRadius.circular(14),
                 border: selected == index
                     ? Border.all(
                         width: 2.0,
-                        color: Color.fromRGBO(1, 123, 254, 0.5),
+                        color: Color(0xFF666666),
                       )
                     : null,
                 boxShadow: selected != index

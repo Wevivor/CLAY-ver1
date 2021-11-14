@@ -1,5 +1,6 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/src/helper_appbar.dart';
+import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_calendar_carousel/classes/event.dart';
@@ -13,7 +14,8 @@ import 'helper_content_init_dto.dart';
 
 // ignore: must_be_immutable
 class DateTimePickerWidget extends StatefulWidget {
-  DateTimePickerWidget();
+  final current;
+  DateTimePickerWidget({this.current});
   @override
   _DateTimePickerWidgetState createState() => _DateTimePickerWidgetState();
 }
@@ -23,6 +25,12 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget>
   @override
   void initState() {
     super.initState();
+    if (widget.current != null)
+      setState(() => _currentDate2 = widget.current);
+    else
+      setState(() => _currentDate2 = DateTime.now());
+
+    _currentDate = DateTime.now();
   }
 
   @override
@@ -36,7 +44,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget>
   }
 
   // DateTime _currentDate = DateTime.now();
-  DateTime _currentDate = DateTime.now();
+  late DateTime _currentDate;
   DateTime _currentDate2 =
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   String _currentMonth = DateFormat.yMMM().format(DateTime.now());
@@ -52,7 +60,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget>
       locale: Get.locale?.languageCode ?? 'en',
       onDayPressed: (date, events) {
         this.setState(() => _currentDate2 = date);
-        events.forEach((event) => print(event.title));
+        RemindController.to.date = date;
       },
       daysHaveCircularBorder: true,
       showOnlyCurrentMonthDate: false,

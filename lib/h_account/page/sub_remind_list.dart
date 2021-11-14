@@ -7,11 +7,16 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_account/models/remind/remind.dart';
+import 'package:clay/h_account/part_profile/src/btn_wide.dart';
+import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
+import 'package:intl/date_symbol_data_file.dart';
 import 'package:jiffy/jiffy.dart';
+import 'package:sprintf/sprintf.dart';
 
 class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
   final _formKey = GlobalKey<FormState>();
@@ -170,7 +175,11 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                             ),
                             // TODO : [SH] 시간 형식을 다시 정리해야 함. 한글 : 10월07일\n5:35 PM, 영문 : Oct. 7th\n5:35 PM
                             child: Text(
-                              Jiffy(item.rAlarmTime).format('MM월dd일 hh:mm a'),
+                              Get.locale?.languageCode == 'ko'
+                                  ? Jiffy(item.rAlarmTime)
+                                      .format('MM월dd일 HH:MM a')
+                                  : Jiffy(item.rAlarmTime)
+                                      .format('MMM. do HH:MM a'),
                               textAlign: TextAlign.center,
                               style: dateStyle,
                             ),
@@ -272,9 +281,9 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
     await DialogHelper.MessageDialog(
       context,
       (context) => DeleteDialog(
-        title: '알람을 삭제하시겠습니까?',
-        deleteTitle: '삭제',
-        okTitle: '취소',
+        title: 'account.setting.reminder.dlg.question'.tr, // 알람을 삭제하시겠어요?
+        deleteTitle: 'com.btn.delete'.tr, //삭제
+        okTitle: 'com.btn.cancel'.tr, //취소
         okTap: () {
           _responce = false;
         },

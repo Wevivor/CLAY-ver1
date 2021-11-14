@@ -88,7 +88,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
                       alignment: Alignment.center,
                       width: 155,
                       child: Text(
-                        widget.item.info.contentsUrl ?? '',
+                        widget.item.info.contentsTitle ?? '',
                         style: baseStyle.copyWith(
                           fontFamily: 'Roboto',
                           fontSize: 14,
