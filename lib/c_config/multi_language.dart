@@ -260,9 +260,9 @@ class MultiLanguage extends Translations {
           // --- Account : 메인 화면
           'account.appbar.title.account': 'Account',
           'account.body.subtitle.tutorial': '튜토리얼',
-          'account.body.tutorials.title1': 'CLAY Introduction',
-          'account.body.tutorials.title2': '내 콘텐츠를 쉽게 공유하기',
-          'account.body.tutorials.title3': '그룹 기능 활용하기',
+          'account.body.tutorials.title1': 'CLAY\nIntroduction',
+          'account.body.tutorials.title2': '내 콘텐츠를\n쉽게 공유하기',
+          'account.body.tutorials.title3': '그룹 기능\n활용하기',
           'account.body.subtitle.notice': '공지사항',
           'account.body.subtitle.setting': '설정',
           'account.body.subtitle.help': '문의하기/도움말',

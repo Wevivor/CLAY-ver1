@@ -68,9 +68,6 @@ class TutorialItemWidget extends StatelessWidget {
                           topRight: Radius.circular(20),
                         ),
                         color: Colors.white),
-
-                    // 현재 image size :  w*h=68*87 이하
-                    // fit : 이미지 규칙이 정해지면 수정이 필요
                     child: ClipRRect(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(20),
@@ -89,8 +86,8 @@ class TutorialItemWidget extends StatelessWidget {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: 11.0),
-                    width: 70,
-                    height: 30,
+                    //width: 70,
+                    // height: 30,
                     child: Text(
                       tutorialText,
                       textAlign: TextAlign.center,
