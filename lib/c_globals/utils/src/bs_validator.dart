@@ -101,10 +101,8 @@ class BSValidator {
     if (value == null || value.isEmpty) {
       return messages['memo'];
     }
-    Pattern pattern = r'.{5,}$'; //not Empty 20자 이내
-    RegExp regex = new RegExp(pattern.toString());
 
-    if (!regex.hasMatch(value))
+    if (value.length <= 5)
       return messages['memo'];
     else
       return null;

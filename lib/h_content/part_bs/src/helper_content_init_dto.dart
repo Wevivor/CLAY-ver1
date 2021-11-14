@@ -36,7 +36,7 @@ class ContentInitDtoHelper {
       contentsTitle: title,
       contentsUrl: link,
       contentsImages: imgURL,
-      contentsDescription: '',
+      contentsDescription: memo,
       contentsComment: comment,
       contentsFixed: false,
       contentsType: type,
