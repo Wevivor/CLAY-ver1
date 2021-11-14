@@ -66,7 +66,7 @@ class BottomSheetNewBoard extends StatelessWidget
                     child: InkWell(
                       onTap: () => _actionSubmit(context),
                       child: Text(
-                        'com.btn.create'.tr,
+                        'com.btn.create'.tr, // 완료
                         style: baseStyle.copyWith(
                           fontFamily: Get.locale?.languageCode == 'ko'
                               ? 'Roboto'
@@ -89,7 +89,7 @@ class BottomSheetNewBoard extends StatelessWidget
               heightSpace(10.0),
               Padding(
                 padding: EdgeInsets.only(left: 18.0, right: 19.0),
-                child: vwTitle('com.bs.subtitle.boardName'.tr),
+                child: vwTitle('com.bs.subtitle.boardName'.tr), // 보드 이름
               ),
               heightSpace(10.0),
               Padding(

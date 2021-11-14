@@ -97,9 +97,6 @@ class ContentGridItemWidget extends StatelessWidget {
                   child: Container(),
                 ),
                 InkWell(
-                  //splashColor: ,
-                  highlightColor: Colors.red,
-                  //hoverColor: Colors.red,
                   onTap: () {
                     if (onMore != null) onMore!();
                   },

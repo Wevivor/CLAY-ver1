@@ -9,6 +9,7 @@ class MultiLanguage extends Translations {
           // --- Common : 전체 앱 페이지에서 여러 번 사용 되는 문구 및 단어.
           'com.btn.save': 'Save',
           'com.btn.create': 'Create',
+          'com.btn.done': 'Done',
           'com.chip.badge.growth': 'Growth',
           'com.chip.badge.work': 'Work',
           'com.chip.badge.like': 'LIKE',
@@ -92,6 +93,7 @@ class MultiLanguage extends Translations {
           // --- 보드 내부 콘텐츠 화면 : 보드 옵션 설정 바텀 시트 (점메뉴 클릭)
           'board.bs.body.menu.editBoard': 'Edit name and color',
           'board.bs.sub.title.editBoard': 'Edit name and color',
+          'board.bs.sub.title.name': 'Home baking recipes',
           'board.bs.sub.subtitle.badgeChoice': 'Add a badge',
           'board.bs.sub.subtitle.replaceColor': 'Replace Color',
           'board.bs.sub.subtitle.share': 'Share',
@@ -156,6 +158,7 @@ class MultiLanguage extends Translations {
           // --- Common : 전체 앱 페이지에서 여러 번 사용 되는 문구 및 단어.
           'com.btn.save': '완료',
           'com.btn.create': '완료',
+          'com.btn.done': '완료',
           'com.chip.badge.growth': '자기계발',
           'com.chip.badge.work': '일/공부',
           'com.chip.badge.like': 'LIKE',
@@ -238,6 +241,7 @@ class MultiLanguage extends Translations {
           // --- 보드 내부 콘텐츠 화면 : 보드 옵션 설정 바텀 시트 (점메뉴 클릭)
           'board.bs.body.menu.editBoard': '보드 정보 수정',
           'board.bs.sub.title.editBoard': '보드 정보 수정',
+          'board.bs.sub.title.name': '홈베이킹 레시피',
           'board.bs.sub.subtitle.badgeChoice': '배지 선택',
           'board.bs.sub.subtitle.replaceColor': '색상 변경',
           'board.bs.sub.subtitle.share': '공유하기',

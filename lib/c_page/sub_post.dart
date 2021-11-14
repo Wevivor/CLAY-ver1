@@ -146,6 +146,9 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             width: 20,
             alignment: Alignment.center,
             child: ImageButton(
+                onTap: () {
+                  _showBS(context, vwBoardMenu(context, widget.item));
+                },
                 height: 10.0,
                 width: 2.0,
                 holder: Const.assets + 'icon/dot_vertical_black.png'),
@@ -561,7 +564,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     );
   }
 
-  // 점메뉴 바텀 시트 (B3)
+  // 점메뉴 바텀 시트 (SN.B3 콘텐츠 상세보기)
   Widget vwBoardMenu(BuildContext context, Contents item) {
     final menuStyle = TextStyle(
       fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',

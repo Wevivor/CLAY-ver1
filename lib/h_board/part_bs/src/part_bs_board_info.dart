@@ -12,6 +12,14 @@ import 'part_board_class_select.dart';
 import 'wgt_bs_badge_item.dart';
 import 'wgt_choice_color.dart';
 
+final msgStyle = baseStyle.copyWith(
+  fontSize: 14,
+  fontWeight: FontWeight.w400,
+  height: 1.17, // line height : 16.41px
+  letterSpacing: -0.7, // letter spacing : -5%
+  color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+);
+
 class BottomSheetBoardInfo extends StatelessWidget
     with AppbarHelper, BSValidator {
   final onMenu;
@@ -41,17 +49,16 @@ class BottomSheetBoardInfo extends StatelessWidget
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
-        heightSpace(2.0),
         Container(
             alignment: Alignment.bottomCenter,
-            height: 11,
+            height: 15,
             child: Image.asset(Const.assets + 'images/rect_40.png')),
         vwBSAppBar(
           onBack: () {
             Get.back();
             if (onMenu != null) onMenu();
           },
-          title: '보드 접보 수정',
+          title: 'board.bs.body.menu.editBoard'.tr, // 보드 정보 수정
           actions: [
             Container(
               alignment: Alignment.center,
@@ -76,7 +83,7 @@ class BottomSheetBoardInfo extends StatelessWidget
                     return '';
                   });
                   if (exist == '') {
-                    AppHelper.showMessage('배치를 선택해 주세요');
+                    AppHelper.showMessage('배지를 선택해 주세요');
                     return;
                   }
                   _color.firstWhere(
@@ -98,21 +105,29 @@ class BottomSheetBoardInfo extends StatelessWidget
                   Get.back();
                 },
                 child: Text(
-                  '완료',
+                  'com.btn.done'.tr, // 완료
                   style: baseStyle.copyWith(
-                      fontSize: 13,
-                      color: Color(0xff017BFE),
-                      fontWeight: FontWeight.w400),
+                    fontFamily:
+                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                    fontSize: 14,
+                    color: Color(0xff017BFE),
+                    fontWeight: Get.locale?.languageCode == 'ko'
+                        ? FontWeight.w400
+                        : FontWeight.w500,
+                    height: Get.locale?.languageCode == 'ko'
+                        ? 1.17
+                        : 1.37, // 16.41px , 19.12px
+                  ),
                 ),
               ),
             ),
-            widthSpace(18.87),
+            widthSpace(20.0),
           ],
         ),
-        heightSpace(20.0),
+        heightSpace(10.0),
         Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: vwTitle('보드 이름'),
+          padding: EdgeInsets.only(left: 18.0, right: 19.0),
+          child: vwTitle('com.bs.subtitle.boardName'.tr), // 보드 이름
         ),
         heightSpace(10.0),
         Padding(
@@ -136,13 +151,8 @@ class BottomSheetBoardInfo extends StatelessWidget
                 decoration: kInputDecoration.copyWith(
                   fillColor: Color(0xFFF6F6F6),
                   //  contentPadding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                  hintText: '홈베이킹 레시피|',
-                  hintStyle: baseStyle.copyWith(
-                      fontSize: 14,
-                      fontWeight: FontWeight.normal,
-                      color: Color(
-                        0xFFCACACA,
-                      )),
+                  hintText: 'board.bs.sub.title.name'.tr, // 홈베이킹 레시피
+                  hintStyle: msgStyle,
                   isDense: true,
                   errorText: null,
                   errorStyle: TextStyle(
@@ -164,8 +174,8 @@ class BottomSheetBoardInfo extends StatelessWidget
         ),
         heightSpace(16.0),
         Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: vwTitle('배치 선택'),
+          padding: EdgeInsets.only(left: 18.0, right: 19.0),
+          child: vwTitle('board.bs.sub.subtitle.badgeChoice'.tr), // 배지 선택
         ),
         heightSpace(10.0),
         Padding(
@@ -173,10 +183,10 @@ class BottomSheetBoardInfo extends StatelessWidget
           child: BoardClassSelectPART(onTap: () {}),
         ),
 
-        heightSpace(16.0),
+        heightSpace(20.0),
         Padding(
           padding: EdgeInsets.only(left: 19.0, right: 19.0),
-          child: vwTitle('색상 변경'),
+          child: vwTitle('board.bs.sub.subtitle.replaceColor'.tr), // 색상변경
         ),
         heightSpace(10.0),
         //SUBJECT : 색상변경
@@ -184,20 +194,16 @@ class BottomSheetBoardInfo extends StatelessWidget
           color: Colors.white,
           child: Column(
             children: [
-              Divider(height: 1),
               GetBuilder<BoardController>(builder: (controller) {
                 final _selectColor = Color(int.parse(
                     controller.boardItem!.info.boardColor,
                     radix: 16));
                 return Container(
-                  padding:
-                      EdgeInsets.only(left: 0, right: 0, top: 19, bottom: 15),
-                  alignment: Alignment.center,
+                  padding: EdgeInsets.only(left: 16.0, right: 16.0),
                   child: Column(
                     children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           BSChoiceColorWidget(
                             onTap: () async {
@@ -244,8 +250,7 @@ class BottomSheetBoardInfo extends StatelessWidget
                         ],
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        // crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           BSChoiceColorWidget(
                             onTap: () async {
@@ -295,14 +300,20 @@ class BottomSheetBoardInfo extends StatelessWidget
                   ),
                 );
               }),
+              // Divider(height: 1),
             ],
           ),
         ),
 
-        heightSpace(16.0),
+        heightSpace(6.0),
+        Divider(
+          height: 0,
+          thickness: 0.3,
+          color: Color(0xFFDEDEDE),
+        ),
         //SUBJECT: 스위치 버턴.
         Padding(
-          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          padding: EdgeInsets.only(left: 18.0, right: 19.0),
           child: GetBuilder<BoardController>(builder: (controller) {
             var _value = false;
             if (controller.boardItem?.shareCheck == 1 ||
@@ -316,7 +327,7 @@ class BottomSheetBoardInfo extends StatelessWidget
                   controller.actionChangeShare(1);
               },
               padding: EdgeInsets.zero,
-              leading: vwTitle('공유하기'),
+              leading: vwTitle('board.bs.sub.subtitle.share'.tr), // 공유하기
               trailing: Switch(
                   value: _value,
                   onChanged: (value) {
