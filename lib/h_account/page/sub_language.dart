@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'dart:ui' as ui;
 import 'package:intl/intl.dart';
+import 'package:jiffy/jiffy.dart';
 
 class LanguageSUB extends StatelessWidget with AppbarHelper {
   @override
@@ -55,6 +56,8 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
                 title: '한국어',
                 onTap: () async {
                   Get.updateLocale(Locale('ko', 'KR'));
+                  await Jiffy.locale('ko');
+
                   final _title = 'title'.tr;
                   final _userinfo = HanUserInfoController.to.userInfo;
                   await HanUserInfoController.to
@@ -74,6 +77,8 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
                 title: 'English',
                 onTap: () async {
                   Get.updateLocale(Locale('en', 'US'));
+                  await Jiffy.locale('en');
+
                   final _title = 'title'.tr;
                   final _userinfo = HanUserInfoController.to.userInfo;
                   await HanUserInfoController.to
