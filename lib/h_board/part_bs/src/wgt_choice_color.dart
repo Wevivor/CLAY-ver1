@@ -22,23 +22,22 @@ class BSChoiceColorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(left: 0, right: 15, top: 0, bottom: 10),
+      padding: EdgeInsets.only(bottom: 10.0),
       child: InkWell(
         onTap: () {
           if (this.onTap != null) onTap();
         },
         child: boardColor == selectColor
             ? Container(
-                height: 50,
-                width: 50,
+                height: 42,
+                width: 42,
                 decoration: DecoHelper.cicleDeco.copyWith(
                   shape: BoxShape.circle,
-                  border: Border.all(width: 2, color: Colors.black54),
-                  // color: boardColor,
+                  border: Border.all(width: 3, color: Color(0xFF666666)),
                 ),
                 child: Container(
-                  height: 50 - 2,
-                  width: 50 - 2,
+                  height: 42 - 3,
+                  width: 42 - 3,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     color: boardColor,
@@ -46,8 +45,8 @@ class BSChoiceColorWidget extends StatelessWidget {
                 ),
               )
             : Container(
-                height: 50,
-                width: 50,
+                height: 42,
+                width: 42,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: boardColor,

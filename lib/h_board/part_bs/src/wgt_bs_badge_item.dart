@@ -41,12 +41,12 @@ class BsBadgeItemWidget extends StatelessWidget {
         width: 64,
         height: 64,
         decoration: BoxDecoration(
-          color: isSelected ? Color.fromRGBO(230, 242, 255, 1) : Colors.white,
+          color: isSelected ? Color.fromRGBO(53, 53, 53, 0.2) : Colors.white,
           borderRadius: BorderRadius.circular(14),
           border: isSelected
               ? Border.all(
                   width: 2.0,
-                  color: Color.fromRGBO(1, 123, 254, 0.5),
+                  color: Color(0xFF666666),
                 )
               : null,
           boxShadow: isSelected

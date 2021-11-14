@@ -275,8 +275,8 @@ class SettingUI extends StatelessWidget with AppbarHelper {
                           value: AlarmController.to.isAlert,
                           activeColor: Color(0xFF7DAFFF),
                           activeTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
-                          inactiveThumbColor: Color(0xFF7DAFFF),
-                          inactiveTrackColor: Color.fromRGBO(48, 98, 190, 0.78),
+                          inactiveThumbColor: Color(0xFFDEDEDE),
+                          inactiveTrackColor: Color(0xFF707070),
                           onChanged: (value) async {
                             AlarmController.to.isAlert = value;
                             AlarmController.to.update();

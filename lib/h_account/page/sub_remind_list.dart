@@ -30,6 +30,14 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
         Get.locale?.languageCode == 'ko' ? FontWeight.w700 : FontWeight.w800,
     height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 14.06px, 16.39px
   );
+
+  final dateStyle = baseStyle.copyWith(
+    fontSize: 10,
+    fontWeight: FontWeight.w400,
+    color: Colors.black,
+    height: 1.17,
+  ); // 11.72px
+
   final titleStyle = baseStyle.copyWith(
       fontSize: 12,
       color: ThemeController.to.isLightOn ? Color(0xFF353535) : Colors.white,
@@ -124,7 +132,7 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                 child: HanListTile(
                   padding: EdgeInsets.zero,
                   leading: Text(
-                    'account.setting.reminder.title.list'.tr,
+                    'account.setting.reminder.title.list'.tr, // 설정된 알림 리스트
                     style: tileTitleStyle,
                   ),
                   // trailing: Icon(MdiIcons.chevronRight),
@@ -151,28 +159,25 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                       return Column(children: [
                         HanListTile(
                           padding: EdgeInsets.only(
-                              top: 8, left: 16, bottom: 0, right: 16),
+                              top: 8, left: 16, bottom: 8, right: 16),
                           leading: Container(
-                            padding: EdgeInsets.only(
-                                left: 3, top: 12, right: 2, bottom: 12),
+                            width: 52,
+                            height: 50,
+                            alignment: Alignment.center,
+                            // padding:
+                            //     EdgeInsets.only(left: 6, top: 12, bottom: 12),'
+                            margin: EdgeInsets.only(left: 2.0),
                             decoration: BoxDecoration(
                               color: Color(0xFFF6F6F6),
                               shape: BoxShape.rectangle,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
-                            width: 52,
-                            height: 50,
                             // TODO : [SH] 시간 형식을 다시 정리해야 함. 한글 : 10월07일\n5:35 PM, 영문 : Oct. 7th\n5:35 PM
                             child: Text(
                               Jiffy(item.rAlarmTime).format('MM월dd일 hh:mm a'),
                               textAlign: TextAlign.center,
-                              style: baseStyle.copyWith(
-                                fontSize: 11,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                                height: 1.17, // 12.89px
-                              ),
+                              style: dateStyle,
                             ),
                           ),
                           title: Expanded(
@@ -251,6 +256,9 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                         Divider(
                           thickness: 0.5,
                           color: Color(0xFFDEDEDE),
+                          height: 0,
+                          indent: 10.0,
+                          endIndent: 10.0,
                         )
                       ]);
                     },
