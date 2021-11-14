@@ -7,7 +7,7 @@ import 'package:clay/h_account/page/wgt_item_push.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class PushListUI extends StatefulWidget {
+class PushListUI extends StatefulWidget with AppbarHelper {
   // late PushMessage item;
   @override
   _PushListUIState createState() => _PushListUIState();
@@ -15,6 +15,31 @@ class PushListUI extends StatefulWidget {
 
 class _PushListUIState extends State<PushListUI>
     with AppbarHelper, SingleTickerProviderStateMixin {
+  final pushTextStyle = TextStyle(
+      fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+      fontSize: 13,
+      color: Color(0xFF707070), // color 정보 없음.
+      fontWeight: FontWeight.w400,
+      height: 1.31, // 17px
+      letterSpacing: Get.locale?.languageCode == 'ko' ? -0.65 : 0 // -5%, null
+      );
+  final classTextStyle = TextStyle(
+    fontFamily: 'Roboto',
+    fontSize: 13,
+    color: Color(0xFF353535), // color 정보 없음.
+    fontWeight: FontWeight.w700,
+    height: 1.31, // 17px
+    letterSpacing: -0.65, // -5%,
+  );
+  final timeTextStyle = TextStyle(
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+    fontSize: 11,
+    color: Color(0xFFc7c7c7),
+    fontWeight: FontWeight.w400,
+    height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 12.89px, 15.03px
+    letterSpacing: -0.55, // -5%
+  );
+
   bool _isDelShow = false;
   @override
   void initState() {
@@ -43,7 +68,8 @@ class _PushListUIState extends State<PushListUI>
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: AppBar(
             automaticallyImplyLeading: true,
-            elevation: 0.0,
+            elevation: 4.0,
+            shadowColor: Color.fromRGBO(0, 0, 0, 0.2),
             leading: IconButton(
                 icon: Icon(Icons.chevron_left),
                 onPressed: () async {
@@ -51,8 +77,16 @@ class _PushListUIState extends State<PushListUI>
                 }),
             centerTitle: true,
             title: Text(
-              '받은 알림',
-              style: appBarStyle,
+              'account.appbar.title.notice'.tr, // 받은 알림 (Notifications)
+              style: appBarStyle.copyWith(
+                  fontFamily:
+                      Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+                  fontSize: 18,
+                  color: Colors.black,
+                  fontWeight: FontWeight.w900,
+                  height: Get.locale?.languageCode == 'ko'
+                      ? 1.17
+                      : 1.37), // 21.09px, 24.59px
             ),
             actions: [
               ImageButton(
@@ -100,9 +134,10 @@ class _PushListUIState extends State<PushListUI>
                             .actionDelete(id: _item.id ?? ''),
                       ),
                       Divider(
-                        thickness: 0.3,
                         height: 0,
-                      ),
+                        thickness: 0.3,
+                        color: Color(0xFFDEDEDE),
+                      )
                     ],
                   ),
                 );

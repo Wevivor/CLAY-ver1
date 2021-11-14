@@ -64,8 +64,7 @@ class PushItemWidget extends StatelessWidget {
       if ('자기계발' == badage) _icon = 'icon/medal.png';
       if ('LIKE' == badage) _icon = 'icon/hart.png';
       if ('선택안함' == badage) _icon = 'icon/no_choice.png';
-    }
-    else if ('week_start' == kind) ;
+    } else if ('week_start' == kind) ;
 
     return Container(
       child: HanListTile(
