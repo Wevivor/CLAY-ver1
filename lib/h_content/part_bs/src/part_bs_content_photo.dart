@@ -142,6 +142,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                               title: _title,
                               imgURL: _imgUrl,
                               type: 'photo',
+                              comment: _comment,
                               thumbnail: _thumbName);
 
                           await _controller.actionIns(_item);
@@ -153,9 +154,8 @@ class BottomSheetContentPhoto extends StatelessWidget
                           // await ContentAllListController.to.fetchItems();
                           // BoardListController.to.cache.clear();
                           // await BoardListController.to.fetchItems();
-
-                          if (onDone != null) onDone();
                           Get.back();
+                          if (onDone != null) onDone();
                         },
                         child: Text(
                           'com.btn.save'.tr,

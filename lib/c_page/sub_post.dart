@@ -401,7 +401,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
                 borderRadius: BorderRadius.all(Radius.circular(10)),
                 image: DecorationImage(
                     fit: BoxFit.cover,
-                    image: NetworkImage(widget.item.info.contentsImages ?? '')),
+                    image: NetworkImage(widget.item.info.thumbnails ?? '')),
                 // ),
               ),
             ),
