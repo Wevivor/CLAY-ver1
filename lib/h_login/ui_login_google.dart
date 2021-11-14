@@ -96,7 +96,8 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
     final _userInfo = HanUserInfoDto(
       userId: profile?.uid,
       profile: _profile,
-      // userPhone: '010-5391-3862',
+      locale: Get.locale?.languageCode == 'ko' ? 'ko' : 'en',
+      isPush: true,
       intro: null,
       isDisabled: false,
       snsLogin: snsLogin,
@@ -191,8 +192,6 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                   profile: _userInfo.profile
                       .copyWith(token: PushController.to.token))
               .toDto());
-          // HanUserInfoController.to.actionUpdate(
-          //     _userInfo.copyWith(token: PushController.to.token).toDto());
         }
       } on HanUserInfoException catch (e) {
         final userDto = _createUserInfo(AuthController.to.getUser, 'K');

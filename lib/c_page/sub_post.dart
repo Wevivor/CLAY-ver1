@@ -79,50 +79,51 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
         centerTitle: true,
         title: _listType == 0
             ? Container(
-                // color: Colors.red,
+                //color: Colors.red,
                 alignment: Alignment.center,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
-                      'com.bs.subtitle.title'.tr,
-                      style: baseStyle.copyWith(
-                        fontFamily: Get.locale?.languageCode == 'ko'
-                            ? 'Roboto'
-                            : 'Avenir',
-                        fontSize: 16,
-                        color: Color(0xFF353535),
-                        fontWeight: Get.locale?.languageCode == 'ko'
-                            ? FontWeight.w700
-                            : FontWeight.w800,
-                        height: Get.locale?.languageCode == 'ko'
-                            ? 1.17
-                            : 1.37, // 18.75px, 21.86px
+                    Container(
+                      alignment: Alignment.center,
+                      width: 155,
+                      child: Text(
+                        widget.item.info.contentsUrl ?? '',
+                        style: baseStyle.copyWith(
+                          fontFamily: 'Roboto',
+                          fontSize: 14,
+                          color: Color(0xFF000000),
+                          fontWeight: FontWeight.w400,
+                          height: 1.17, // 16.41px
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
                       ),
                     ), //제목
-                    Container(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ImageWidget(
-                            height: 13.5,
-                            width: 14.06,
-                            holder: Const.assets + 'icon/icon_share.png',
-                          ),
-                          Text(
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          width: 200,
+                          child: Text(
                             widget.item.info.contentsUrl ?? '',
+                            textAlign: TextAlign.center,
                             style: baseStyle.copyWith(
+                              fontFamily: 'Avenir',
                               color: Color(0xFF707070),
-                              fontSize: 14,
+                              fontSize: 10,
                               fontWeight: FontWeight.w400,
-                              decoration: TextDecoration.underline,
-                              decorationStyle: TextDecorationStyle.solid,
+                              height: 1.37, //13.66px
+                              // decoration: TextDecoration.underline,
+                              // decorationStyle: TextDecorationStyle.solid,
                             ),
                             overflow: TextOverflow.ellipsis,
+                            maxLines: 1,
                           ),
-                          widthSpace(19.0),
-                        ],
-                      ),
+                        ),
+                        //widthSpace(19.0),
+                      ],
+                      // ),
                     ),
                   ],
                 ),
@@ -210,6 +211,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     Get.back();
   }
 
+  // 메모
   Widget vwMemo(BuildContext context) {
     // Get.put(ContentCtgListController());
     final node = FocusScope.of(context);
@@ -291,6 +293,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     );
   }
 
+  // 사진/비디오
   Widget photo(BuildContext context) {
     // Get.put(PostController());
     final node = FocusScope.of(context);
@@ -414,6 +417,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     );
   }
 
+  // 웹링크
   Widget appLinkTitle() {
     final node = FocusScope.of(context);
     return Container(

@@ -6,6 +6,32 @@ import 'package:clay/h_account/models/push/push.dart';
 import 'package:clay/h_account/page/wgt_item_push.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jiffy/jiffy.dart';
+
+final pushTextStyle = TextStyle(
+    fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+    fontSize: 13,
+    color: Color(0xFF707070), // color 정보 없음.
+    fontWeight: FontWeight.w400,
+    height: 1.31, // 17px
+    letterSpacing: Get.locale?.languageCode == 'ko' ? -0.65 : 0 // -5%, null
+    );
+final classTextStyle = TextStyle(
+  fontFamily: 'Roboto',
+  fontSize: 13,
+  color: Color(0xFF353535), // color 정보 없음.
+  fontWeight: FontWeight.w700,
+  height: 1.31, // 17px
+  letterSpacing: -0.65, // -5%,
+);
+final timeTextStyle = TextStyle(
+  fontFamily: Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
+  fontSize: 11,
+  color: Color(0xFFc7c7c7),
+  fontWeight: FontWeight.w400,
+  height: Get.locale?.languageCode == 'ko' ? 1.17 : 1.37, // 12.89px, 15.03px
+  letterSpacing: -0.55, // -5%
+);
 
 class PushListUI extends StatefulWidget with AppbarHelper {
   // late PushMessage item;
@@ -101,7 +127,7 @@ class _PushListUIState extends State<PushListUI>
       backgroundColor: Colors.white,
       body: CustomScrollView(scrollDirection: Axis.vertical, slivers: <Widget>[
         SliverToBoxAdapter(
-          child: heightSpace(10.0),
+          child: heightSpace(0.0),
         ),
         GetBuilder<PushListController>(
           builder: (_) => HanListView(
