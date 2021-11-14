@@ -7,16 +7,11 @@ import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_account/models/remind/remind.dart';
-import 'package:clay/h_account/part_profile/src/btn_wide.dart';
-import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:jiffy/jiffy.dart';
-import 'package:sprintf/sprintf.dart';
 
 class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
   final _formKey = GlobalKey<FormState>();
