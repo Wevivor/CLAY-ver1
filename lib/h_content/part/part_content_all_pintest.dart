@@ -86,6 +86,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             return Container(
               padding: EdgeInsets.only(top: 6.0),
               child: ContentGridItemWidget(
+                nobadge: item.boardInfo?.boardBadge ?? '선택안함',
                 title: item.info.contentsTitle,
                 imgUrl: item.info.contentsType == 'photo'
                     ? item.info.thumbnails
@@ -95,7 +96,6 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
                   Get.to(
                       () => PostSUB(item: item, parentController: controller));
                 },
-
                 onMore: () {
                   debugPrint('======> Show BS');
                   _showBS(context, vwBoardMenu(context, item));

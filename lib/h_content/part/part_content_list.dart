@@ -3,6 +3,7 @@
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
+import 'package:clay/c_page/sub_post.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
@@ -47,6 +48,8 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
               return Column(
                 children: [
                   ContentListItemWidget(
+                    onTap: () => Get.to(() =>
+                        PostSUB(item: item, parentController: controller)),
                     onMore: () {
                       final _controller =
                           Get.put(BoardListMySelectController());
@@ -58,8 +61,10 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                     title: item.info.contentsTitle,
                     date: Jiffy(item.info.contentsCreateDate)
                         .format('yyyy-MM-dd'),
-                    contentText: item.info.contentsDescription,
-                    imgUrl: item.info.thumbnails,
+                    contentText: item.info.contentsTitle,
+                    imgUrl: item.info.contentsType == 'photo'
+                        ? item.info.thumbnails
+                        : item.info.contentsImages,
                     // holder: Const.assets + 'img/holder_img.png',
                   ),
                 ],

@@ -2,7 +2,6 @@
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
-import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -15,7 +14,7 @@ class ContentGridItemWidget extends StatelessWidget {
   final holder;
   final onMore;
   final onTap;
-  final nobadge; // TODO : [SH] 임시로 넣어 둔 변수 수정이 필요함.(그리드,리스트 구분)
+  final nobadge;
   ContentGridItemWidget({
     this.title,
     this.date,
@@ -37,8 +36,17 @@ class ContentGridItemWidget extends StatelessWidget {
     letterSpacing: -0.65, // -5%
   );
 
+  String _icon = '';
   @override
   Widget build(BuildContext context) {
+    if ('일/공부' == nobadge)
+      _icon = 'icon/pencil_small.png';
+    else if ('자기계발' == nobadge)
+      _icon = 'icon/medal_small.png';
+    else if ('LIKE' == nobadge)
+      _icon = 'icon/hart_small.png';
+    else if ('선택안함' == nobadge) _icon = 'icon/no_choice_small.png';
+
     return InkWell(
       onTap: () {
         if (onTap != null) onTap();
@@ -68,16 +76,13 @@ class ContentGridItemWidget extends StatelessWidget {
             heightSpace(11.0),
             Row(
               children: [
-                // TODO : [SH] 보드 배지 아이콘이 들어가야 함.
-                // 내보드의 보드 상세리스트 화면에는 보드 배지가 들어가지 않는다.
-                // Sample Code :   데이터를 넣어서 바꾸어야 한다.
-                if (nobadge == null)
-                  Image.asset(Const.assets + 'icon/hart_small.png'),
+                //  보드 배지 아이콘
+                if (_icon.isNotEmpty) Image.asset(Const.assets + _icon),
                 // ====================================================
                 widthSpace(3.0),
                 ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxWidth: (MySize.safeWidth / 2) - 66,
+                    maxWidth: (MySize.safeWidth / 2) - 76,
                   ),
                   child: Container(
                     child: Text(

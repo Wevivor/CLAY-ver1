@@ -62,59 +62,7 @@ class ContentAllListController extends AbsListController
     return _tmp;
   }
 
-  //---------------------------------
-  //------------------기본 CRUD 프로토콜
-  //---------------------------------
-
-  // Future<ContentsInfo> read(String id) async {
-  //   // try {
-  //   final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
-
-  //   if (_item == null) {
-  //     throw Exception('error');
-  //   }
-  //   final _post = ContentsDto.fromJson(_item).toDomain();
-
-  //   // final info = PostInfo.fromJson((_info.info));
-  //   this.item = _post.info;
-  //   update();
-  //   return _post.info;
-  // }
-
-  // Future<void> actionfresh(String id) async {
-  //   // try {
-  //   final _item = await readFb(id: id, instance: _instance, path: MENU_POS);
-
-  //   if (_item == null) {
-  //     throw Exception('error');
-  //   }
-  //   final _post = ContentsDto.fromJson(_item).toDomain();
-  //   var existIndex = cache.indexWhere(
-  //     (element) => element.id == id,
-  //   );
-
-  //   if (existIndex >= 0) {
-  //     cache[existIndex] = _post.info;
-  //   }
-
-  //   // final info = PostInfo.fromJson((_info.info));
-  //   this.item = _post;
-  //   update();
-  // }
-
-  // Future<void> actionDelete(id) async {
-  //   try {
-  //     LoadingController.to.isLoading = true;
-  //     await deleteFb(instance: _instance, path: MENU_POS, id: id);
-  //   } catch (e) {
-  //     throw Exception('error');
-  //   } finally {
-  //     update();
-  //     LoadingController.to.isLoading = false;
-  //   }
-  // }
-
-  Future<void> actionDelteItem(String id) async {
+  void actionDelteItem(String id) {
     // try {
     var existIndex = cache.indexWhere(
       (element) => element.contentsId == id,
@@ -127,7 +75,7 @@ class ContentAllListController extends AbsListController
     update();
   }
 
-  Future<void> actionUpdateItem(Contents? item) async {
+  void actionUpdateItem(Contents? item) {
     if (item != null) {
       var existIndex = cache.indexWhere(
         (element) => element.contentsId == item.contentsId,

@@ -2,26 +2,17 @@
 
 import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
-import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/c_page/sub_post.dart';
-import 'package:clay/h_account/controllers/remind_controller.dart';
-import 'package:clay/h_account/controllers/remind_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
-import 'package:clay/h_board/part_bs/src/part_bs_board_change.dart';
-import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/content_list_controller.dart';
-import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_content/part/wgt_content_grid_item.dart';
-import 'package:clay/h_content/part_bs/src/part_bs_calendar.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:share/share.dart' as share;
 
 import 'package:get/get.dart';
-import 'package:sprintf/sprintf.dart';
 
 // ignore: must_be_immutable
 class BoardPintestListPART extends StatelessWidget with AppbarHelper {
@@ -84,7 +75,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
               onTap: () async {
                 Get.to(() => PostSUB(item: item, parentController: controller));
               },
-              nobadge: 1, // TODO : [SH] 임시로 넣어 둔 변수 수정이 필요함.(그리드,리스트 구분)
+              nobadge: '',
               title: item.info.contentsTitle,
               imgUrl: item.info.contentsType == 'photo'
                   ? item.info.thumbnails

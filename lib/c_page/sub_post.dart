@@ -76,6 +76,58 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
           },
           icon: Icon(Icons.chevron_left),
         ),
+        centerTitle: true,
+        title: _listType == 0
+            ? Container(
+                // color: Colors.red,
+                alignment: Alignment.center,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'com.bs.subtitle.title'.tr,
+                      style: baseStyle.copyWith(
+                        fontFamily: Get.locale?.languageCode == 'ko'
+                            ? 'Roboto'
+                            : 'Avenir',
+                        fontSize: 16,
+                        color: Color(0xFF353535),
+                        fontWeight: Get.locale?.languageCode == 'ko'
+                            ? FontWeight.w700
+                            : FontWeight.w800,
+                        height: Get.locale?.languageCode == 'ko'
+                            ? 1.17
+                            : 1.37, // 18.75px, 21.86px
+                      ),
+                    ), //제목
+                    Container(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ImageWidget(
+                            height: 13.5,
+                            width: 14.06,
+                            holder: Const.assets + 'icon/icon_share.png',
+                          ),
+                          Text(
+                            widget.item.info.contentsUrl ?? '',
+                            style: baseStyle.copyWith(
+                              color: Color(0xFF707070),
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              decoration: TextDecoration.underline,
+                              decorationStyle: TextDecorationStyle.solid,
+                            ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          widthSpace(19.0),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : SizedBox.shrink(),
         actions: [
           if (isEdit)
             ImageButton(
@@ -364,9 +416,10 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     return Container(
       child: Column(
         children: [
+          heightSpace(6.0),
           Row(
             children: [
-              vwTitle('com.bs.subtitle.title'.tr), //제목
+              vwTitle('com.bs.subtitle.cmt'.tr), // 코멘트
               Expanded(child: Container()),
               ImageButton(
                   height: 24.0,
@@ -378,55 +431,6 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
               widthSpace(18.74),
             ],
           ),
-          heightSpace(6.0),
-          Padding(
-            padding: EdgeInsets.only(left: 19.0, right: 19.0),
-            child: Container(
-              height: 38,
-              decoration: DecoHelper.roundDeco.copyWith(
-                color: Color(0xFFF6F6F6),
-              ),
-              padding: const EdgeInsets.only(left: 12.0, right: 16.0),
-              child: TextFormField(
-                maxLines: 1,
-                onTap: () {},
-
-                // style: accountEditTextStyle,
-                decoration: kInputDecoration.copyWith(
-                  fillColor: Color(0xFFF6F6F6),
-                  hintText:
-                      'board.sub.weblink.pholder.title'.tr, // 스타트업 코딩 페스티벌
-                  hintStyle: baseStyle.copyWith(
-                    fontFamily:
-                        Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-                    fontSize: 14,
-                    color: Color(0xFF000000),
-                    fontWeight: FontWeight.w400,
-                    height: Get.locale?.languageCode == 'ko'
-                        ? 1.17
-                        : 1.37, // 16.41px, 19.12px
-                    letterSpacing: -0.7, // -5%
-                  ),
-                  isDense: true,
-                  errorText: null,
-                  errorStyle: TextStyle(
-                    color: Colors.transparent,
-                    fontSize: 0,
-                    height: 0,
-                  ),
-                ),
-                keyboardType: TextInputType.text,
-                textInputAction: TextInputAction.done,
-                onEditingComplete: () => node.unfocus(),
-                controller: ContentsController.to.titleController,
-                validator: (value) {
-                  return postTitle(value);
-                },
-              ),
-            ),
-          ),
-          heightSpace(9.0),
-          vwTitle('com.bs.subtitle.cmt'.tr), // 코멘트
           heightSpace(6.0),
           Padding(
             padding: EdgeInsets.only(left: 19.0, right: 19.0),
@@ -476,29 +480,6 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
             ),
           ),
           heightSpace(15.0),
-          Container(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                ImageWidget(
-                  height: 13.5,
-                  width: 14.06,
-                  holder: Const.assets + 'icon/icon_share.png',
-                ),
-                Text(
-                  widget.item.info.contentsUrl ?? '',
-                  style: baseStyle.copyWith(
-                    color: Color(0xFF707070),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w400,
-                    decoration: TextDecoration.underline,
-                    decorationStyle: TextDecorationStyle.solid,
-                  ),
-                ),
-                widthSpace(19.0),
-              ],
-            ),
-          ),
         ],
       ),
     );

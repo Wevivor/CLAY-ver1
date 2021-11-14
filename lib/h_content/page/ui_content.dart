@@ -3,6 +3,8 @@ import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_board/models/boards.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
+import 'package:clay/h_content/controllers/content_list_controller.dart';
+import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
 import 'package:clay/h_content/part/part_content_all_pintest.dart';
 import 'package:clay/h_search/controllers/find_controller.dart';
@@ -34,6 +36,8 @@ class _ContentUIState extends State<ContentUI>
   }
 
   Future<void> initFetch() async {
+    Get.lazyPut(() => ContentsController());
+    Get.lazyPut(() => ContentListController());
     contentAllListController.cache.clear();
     await contentAllListController.fetchItems();
 

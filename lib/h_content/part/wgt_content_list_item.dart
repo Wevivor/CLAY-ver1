@@ -15,6 +15,7 @@ class ContentListItemWidget extends StatelessWidget {
   final imgUrl; // 이미지 URL
   final holder;
   final onMore;
+  final onTap;
   ContentListItemWidget({
     this.title,
     this.date,
@@ -22,6 +23,7 @@ class ContentListItemWidget extends StatelessWidget {
     this.imgUrl,
     this.holder = 'images/no_image.png',
     this.onMore,
+    this.onTap,
   });
   final titleStyle = TextStyle(
     fontSize: 16,
@@ -85,6 +87,9 @@ class ContentListItemWidget extends StatelessWidget {
           //TODO : 위젯 없음.
 
           HanListTileNew(
+            onTap: () {
+              if (onTap != null) onTap();
+            },
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             padding: EdgeInsets.only(top: 10, bottom: 7),
