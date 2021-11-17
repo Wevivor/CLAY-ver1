@@ -25,7 +25,6 @@ class WebviewSUB extends StatelessWidget with AppbarHelper {
         ? Scaffold(
             appBar: PreferredSize(
               preferredSize: Size.fromHeight(appbarHeight),
-              //SUBJECT : 앱바의 액션
               child: AppBar(
                 automaticallyImplyLeading: false,
                 elevation: 4.0,

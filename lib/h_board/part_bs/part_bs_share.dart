@@ -37,8 +37,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
               onBack: () {
                 Get.back();
 
-                //SUBJECT: 바텀시트 색상...
-
                 if (onMenu != null) onMenu();
               },
               title:
@@ -50,7 +48,7 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
                     onTap: () async {
                       if (_shareCheck! <= 0) {
                         AppHelper.showMessage(
-                            '공유방식을 선택해 주세요'); // TODO : [SH] 현재 번역하지 않음.
+                            '공유방식을 선택해 주세요'); //  [SH] 현재 번역하지 않음.
                         return;
                       }
                       Get.back();
@@ -87,12 +85,6 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
             HanListTile(
               padding: EdgeInsets.only(left: 32.0),
               onTap: () async {
-                //SUBJECT : 공유 설정
-                //TODO: 데이터베이스고정.
-                // final _newBoard = board?.copyWith(
-                //     shareCheck: 1, info: board!.info.copyWith(shareCheck: 1));
-                // controller.boardItem = _newBoard;
-                // controller.update();
                 controller.actionChangeShare(1);
 
                 await BoardListController.to
@@ -125,12 +117,7 @@ class BottomSheetShare extends StatelessWidget with AppbarHelper {
               padding: EdgeInsets.only(left: 32.0),
               onTap: () async {
                 //SUBJECT : 공유 방법
-                //TODO: 공유....
-
-                // final _newBoard = board?.copyWith(
-                //     shareCheck: 2, info: board!.info.copyWith(shareCheck: 2));
-                // controller.boardItem = _newBoard;
-                // controller.update();
+                // 공유....
                 controller.actionChangeShare(2);
 
                 await BoardListController.to

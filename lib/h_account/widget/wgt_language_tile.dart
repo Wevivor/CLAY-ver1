@@ -37,7 +37,6 @@ class _LanguageTileWidgetState extends State<LanguageTileWidget> {
   Widget build(BuildContext context) {
     MySize().init(context);
 
-    // TODO : [SH] 한국어를 선택 했을 경우 영문과 한글 공통으로 스타일이 같다.
     final listTytleStyle_ko = baseStyle.copyWith(
       fontFamily: 'Roboto',
       fontSize: 13,

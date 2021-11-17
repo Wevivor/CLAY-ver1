@@ -330,7 +330,6 @@ class _BoardContentUIState extends State<BoardContentUI>
   }
 
   //SUBJECT: 링크
-  //TODO: 수정해야 함.
   Future<void> _actionBSShare(BuildContext context, Contents item) async {
     Get.back();
     var _url = '';
@@ -347,7 +346,6 @@ class _BoardContentUIState extends State<BoardContentUI>
   }
 
   //SUBJECT : BS: 리마인드 알림 설정
-  //TODO: 작업범위 여부 고민
   void _actionBSRemindAlarm(BuildContext context, item) {
     Get.back();
     Get.lazyPut(() => ContentsController());

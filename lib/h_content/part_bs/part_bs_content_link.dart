@@ -39,7 +39,7 @@ class BottomSheetContentLink extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+    color: Color(0xFF707070),
   );
 
   @override
@@ -218,12 +218,7 @@ class BottomSheetContentLink extends StatelessWidget
       return;
     }
 
-    //SUBJECT: 컨텐츠
-    //TODO: 링크로 추가하기
-    // final _boardInfo = BoardListMySelectController.to.boardInfo;
-
     //링크에서 정보 추출하기
-
     var data =
         await MetadataFetch.extract(_webLink); // returns a Metadata object
     final _controller = Get.put(ContentsController());

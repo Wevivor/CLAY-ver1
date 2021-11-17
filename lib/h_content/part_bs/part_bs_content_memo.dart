@@ -36,7 +36,7 @@ class BottomSheetContentMemo extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+    color: Color(0xFF707070), //
   );
 
   @override
@@ -203,7 +203,7 @@ class BottomSheetContentMemo extends StatelessWidget
     }
 
     //SUBJECT: 컨텐츠
-    //TODO: 링크로 추가하기
+    // 링크로 추가하기
     final _controller = Get.put(ContentsController());
 
     final _item = createInitDto(title: _title, memo: _memo, type: 'memo');

@@ -120,7 +120,7 @@ class RemindTextSettingSUB extends StatelessWidget
                   // style: accountEditTextStyle,
                   decoration: kRegisterDecoration.copyWith(
                     fillColor: Colors.white,
-                    // TODO : [SH] 힌트 문구가 나타나지 않는다.
+                    // [SH] 힌트 문구가 나타나지 않는다.
                     hintText: _txt.isEmpty
                         ? 'account.setting.reminder.custom.text'
                             .tr //'꼭 확인해!'와 같은 나만의 문구를 입력해 주세요.
@@ -161,17 +161,12 @@ class RemindTextSettingSUB extends StatelessWidget
                   keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.done,
                   onEditingComplete: () => node.unfocus(),
-                  //TODO: 안내문구 저장 ==> 사용자 정보롤 변경
+                  // 안내문구 저장 ==> 사용자 정보롤 변경
                   controller: RemindController.to.txtController,
                   validator: (value) {
                     return remindTitle(value);
                   },
                   onChanged: (value) {
-                    // RemindController.to.txtController.text = value;
-                    // RemindController.to.txtController
-                    //   ..selection = TextSelection.fromPosition(TextPosition(
-                    //       offset:
-                    //           RemindController.to.txtController.text.length));
                     if (value.isEmpty) {
                       RemindController.to.isTxtEditble.value = true;
                     } else {
@@ -245,7 +240,7 @@ class RemindTextSettingSUB extends StatelessWidget
       HanUserInfoController.to.userInfo =
           HanUserInfoController.to.userInfo!.copyWith(remindTxt: _txt);
       await HanUserInfoController.to.actionRemindTxt(_txt);
-      AppHelper.showMessage('리마인드 문구가 저장 되었습니다'); //TODO : [SH] 현재 번역하지 않음.
+      AppHelper.showMessage('리마인드 문구가 저장 되었습니다'); // [SH] 현재 번역하지 않음.
       // RemindController.to.txtController.clear();
       // RemindController.to.isTxtEditble.value = true;
       Get.back();

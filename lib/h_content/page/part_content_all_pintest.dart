@@ -46,7 +46,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
       if (!loading && cache.length == 0) {
         return Container(
           child: Center(
-            child: Text('아이템이 없습니다'), // TODO : [SH] 현재 번역하지 않음.
+            child: Text('아이템이 없습니다'), //  [SH] 현재 번역하지 않음.
           ),
         );
       }
@@ -61,7 +61,6 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
         itemCount: controller.hasMore
             ? controller.cache.length + 1
             : controller.cache.length,
-        // itemCount: ContentAllListController.to.cache.length,
         itemBuilder: (context, index) {
           final controller = ContentAllListController.to;
           final cache = controller.cache;
@@ -81,7 +80,6 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
               '[StaggeredGridView]: HasMore:${hasMore},${controller.cache.length},$index');
           if (index < cache.length) {
             //SUBJECT: 콘텐츠 아이템
-            //TODO
             return Container(
               padding: EdgeInsets.only(top: 6.0),
               child: ContentGridItemWidget(
@@ -206,7 +204,6 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
     );
   }
 //SUBJECT : BS: 상단 고정
-  //TODO: 데이터베이스고정.
 
   Future<void> _actionBSFixed(BuildContext context, item) async {
     final _contentsCtl = Get.put(ContentsController());
@@ -220,7 +217,6 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
   }
 
   //SUBJECT: 링크
-  //TODO: 수정해야 함.
   Future<void> _actionBSShare(BuildContext context, item) async {
     Get.back();
 
@@ -233,7 +229,6 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
   }
 
   //SUBJECT : BS: 리마인드 알림 설정
-  //TODO: 작업범위 여부 고민
   void _actionBSRemindAlarm(BuildContext context, item) {
     Get.back();
     Get.lazyPut(() => ContentsController());

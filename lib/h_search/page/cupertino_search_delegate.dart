@@ -98,8 +98,6 @@ class CupertinoSearchDelegate extends AbstractPlatformSearchDelegate {
         ),
 
         //SUBJECT: 검색
-        //TODO: 다국어
-        //WORKER: SH
         trailing: CupertinoButton(
           child: Text(
             'com.btn.cancel'.tr,

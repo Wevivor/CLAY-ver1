@@ -182,9 +182,8 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
     );
   }
 
-  //SUBJECT : 글추가 보텀다이어로그
-  //TODO: 글쓰기 메뉴 만들기
-  // TODO : [SH] TEXT가 영어일 경우 폰트 변경하기
+  //SUBJECT : 글 추가 보텀다이어로그
+  // 글쓰기 메뉴 만들기
 
   // Bottom Sheet : 추가하기
   Widget vwBoardMenu(BuildContext context) {
@@ -273,7 +272,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   }
 
   //SUBJECT : BS:
-  //TODO: 새보드 만들기.
+  // 새보드 만들기.
   void _actionBSNewBoard(BuildContext context) {
     Get.back();
 
@@ -301,7 +300,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
         ));
   }
   //SUBJECT : BS
-  //TODO: 웹 링크.
+  // 웹 링크.
 
   void _actionBSWeblink(BuildContext context) {
     Get.back();
@@ -329,7 +328,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   }
 
 //SUBJECT : BS:
-  //TODO: 사진
+  // 사진
   void _actionBSPhoto(BuildContext context) {
     Get.back();
     final _controller = Get.put(ContentsController());
@@ -355,7 +354,7 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   }
 
   //SUBJECT : BS
-  //TODO: 메모
+  // 메모
   void _actionBSMemo(BuildContext context) {
     final _controller = Get.put(ContentsController());
     _controller.initTextController();
@@ -413,21 +412,8 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
   DateTime currentBackPressTime = DateTime.now();
 
   Future<bool> onWillPop() async {
-    // DateTime now = DateTime.now();
-    // if (now.difference(currentBackPressTime) > Duration(seconds: 2)) {
-    //   currentBackPressTime = now;
-
-    //   Fluttertoast.showToast(
-    //     msg: '한번 더 백키를 누르시면 종료합니다.',
-    //     backgroundColor: Colors.black45,
-    //     textColor: Colors.white,
-    //   );
-    //   return Future.value(false);
-    // }
     Get.reset();
-    // exit(0);
     await SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
-    // SystemNavigator.pop(); //종
     return Future.value(true);
   }
 }

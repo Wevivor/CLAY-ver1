@@ -16,7 +16,6 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(appbarHeight),
-          //SUBJECT : 앱바의 액션
           child: AppBar(
             automaticallyImplyLeading: false,
             elevation: 4.0,
@@ -45,7 +44,6 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
           physics: NeverScrollableScrollPhysics(),
           children: <Widget>[
             //SUBJECT: 다국어.
-            //TODO: SH 언어 설정.
             LanguageTileWidget(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 selected: Get.locale?.languageCode == 'ko',
@@ -68,7 +66,6 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
               color: Color(0xFFDEDEDE),
             ),
             //SUBJECT: 다국어.
-            //TODO: SH 언어 설정.
             LanguageTileWidget(
                 padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                 selected: Get.locale?.languageCode == 'en',

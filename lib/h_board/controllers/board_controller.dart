@@ -54,7 +54,6 @@ class BoardController extends AbsItemController
   //     //     await insertFb(instance: _instance, path: MENU_POS, item: item);
   //
   //     final docRef = _instance.collection('$MENU_POS').doc();
-  //     //TODO 여러가지의 경우 info 인지 아닌지?
   //     final newItem = item.copyWith(
   //         boardId: docRef.id, info: item.info.copyWith(boardId: docRef.id));
   //     await docRef.set(newItem.toJson(), SetOptions(merge: true));
@@ -89,7 +88,6 @@ class BoardController extends AbsItemController
     if (profile == null) throw Exception();
 
     final _item = initItem(profile, name: name, type: type);
-    //TODO 여러가지의 경우 info 인지 아닌지?
     return FirebaseFirestore.instance
         .runTransaction((transaction) async {
           final newItem = _item.copyWith(
@@ -114,7 +112,6 @@ class BoardController extends AbsItemController
           return _item;
         })
         .then((value) => null)
-        //TODO: Exception에 추가함
         .catchError((error) {
           LoadingController.to.isLoading = false;
           debugPrint("Failed to update user followers: $error");
@@ -139,7 +136,6 @@ class BoardController extends AbsItemController
       update();
       LoadingController.to.isLoading = false;
     }).catchError((error) {
-      //TODO: Exception에 추가함
       LoadingController.to.isLoading = false;
       debugPrint("Failed to update user followers: $error");
       throw Exception('error');
@@ -167,7 +163,6 @@ class BoardController extends AbsItemController
       update();
       LoadingController.to.isLoading = false;
     }).catchError((error) {
-      //TODO: Exception에 추가함
       LoadingController.to.isLoading = false;
       debugPrint("Failed to update user followers: $error");
       throw Exception('error');

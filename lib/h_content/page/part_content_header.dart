@@ -30,7 +30,7 @@ class ContentHeaderPART extends StatelessWidget with AppbarHelper {
         children: [
           vwTitle(board.info.boardName),
           heightSpace(2.0),
-          //TODO: 날짜, 및 개수 sprinf
+          // 날짜, 및 개수 sprinf
           Container(
             padding: EdgeInsets.only(left: 3.0),
             alignment: Alignment.centerLeft,

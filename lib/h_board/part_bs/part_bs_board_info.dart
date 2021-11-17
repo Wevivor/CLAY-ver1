@@ -16,7 +16,7 @@ final msgStyle = baseStyle.copyWith(
   fontWeight: FontWeight.w400,
   height: 1.17, // line height : 16.41px
   letterSpacing: -0.7, // letter spacing : -5%
-  color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+  color: Color(0xFF707070),
 );
 
 class BottomSheetBoardInfo extends StatelessWidget

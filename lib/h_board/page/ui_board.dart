@@ -65,7 +65,6 @@ class _BoardUIState extends State<BoardUI>
         // backgroundColor:
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(appbarHeight),
-          //SUBJECT : 앱바의 액션
           child: vwAppBar(
             title: 'board.appbar.title.logo'.tr, // CLAY
 
@@ -77,7 +76,6 @@ class _BoardUIState extends State<BoardUI>
                     final _controller = Get.put(FindController());
                     _controller.cache.clear();
                     //SUBJECT: 검색
-                    //TODO : 새로 만든 검색
 
                     final _item = await showPlatformSearch(
                       context: context,

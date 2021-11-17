@@ -47,7 +47,6 @@ class FbCommonModule {
       var docRef;
       var newItem;
       docRef = instance.collection('$path').doc();
-      //TODO 여러가지의 경우 info 인지 아닌지?
       newItem =
           item.copyWith(id: docRef.id, info: item.info.copyWith(id: docRef.id));
       await docRef.set(newItem.toJson(), SetOptions(merge: true));

@@ -101,7 +101,7 @@ class _ProfileUIState extends State<ProfileUI>
                         width: 60,
                         imgUrl: null,
                         holder: Const.assets +
-                            'img/holder_img.png', // TODO : [SH] holder 이미지 요청
+                            'img/holder_img.png', // [SH] holder 이미지 요청
                       ),
                       title: Container(
                         margin: Spacing.left(5),
@@ -147,8 +147,7 @@ class _ProfileUIState extends State<ProfileUI>
                           color: Color(0xFF707070),
                         ),
                         onPressed: () {
-                          AppHelper.showMessage(
-                              '플로핑 클릭'); // TODO : [SH] 현재 번역하지 않음.
+                          AppHelper.showMessage('플로핑 클릭');
                         },
                       ),
                     ),
@@ -177,7 +176,6 @@ class _ProfileUIState extends State<ProfileUI>
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          // TODO : [SH]
                           TutorialItemWidget(
                               onTap: () {
                                 AppHelper.showMessage('튜토리얼1');
@@ -321,10 +319,7 @@ class _ProfileUIState extends State<ProfileUI>
                               ),
                             ),
                           ),
-
-                          // TODO : [SH] 패딩이 잡히지 않음
                           ListTile(
-                            //contentPadding: EdgeInsets.zero,
                             dense: true,
                             title: Container(
                               alignment: Alignment.topCenter,

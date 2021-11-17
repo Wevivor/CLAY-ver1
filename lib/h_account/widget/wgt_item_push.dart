@@ -96,7 +96,7 @@ class PushItemWidget extends StatelessWidget {
           child: Image.asset(Const.assets + _icon),
         ),
 
-        //  TODO: [SH] 피그마의 설명에 따른 코드 작성이 어려움.
+        // [SH] 피그마의 설명에 따른 코드 작성이 어려움.
         title: Expanded(
           child: Container(
             height: 40,

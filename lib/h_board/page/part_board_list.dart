@@ -42,8 +42,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                     Board item = cache[idx];
 
                     //SUBJECT:보드 만들기
-                    //TODO : 보드 위젯 이후에 작업
-                    //TODO: 공유부분을 추가해야함. 고정을 추가해야 함
+                    //공유부분을 추가해야함.
 
                     return Column(
                       children: [
@@ -63,8 +62,7 @@ class BoardListPART extends StatelessWidget with AppbarHelper {
                             BoardController.to.boardItem = item;
                             // Future.microtask()
                             _showBS(context, vwBoardMenu(context));
-                            AppHelper.showMessage(
-                                '모어'); // TODO : [SH] 현재 번역하지 않음.
+                            AppHelper.showMessage('모어'); //  [SH] 현재 번역하지 않음.
                           },
                         ),
                         heightSpace(10.0),

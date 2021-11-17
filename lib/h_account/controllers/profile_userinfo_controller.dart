@@ -24,12 +24,11 @@ class ProfileUserInfoController extends GetxController
     userInfo = null;
   }
 
+  /// 사용자 정보
   Profile toProfile() {
     final profile = userInfo?.profile;
     if (profile != null)
       return profile;
-
-    ///TODO 사용자 정보
     else
       throw Exception('사용자 정보 오류');
   }
@@ -97,7 +96,7 @@ class ProfileUserInfoController extends GetxController
     }
   }
 
-  //TODO 이미지 업로드 및 업데이터함.
+  // 이미지 업로드 및 업데이터함.
   Future<String?> actionUpload(File file) async {
     try {
       String basename = file.path.split('/').last;

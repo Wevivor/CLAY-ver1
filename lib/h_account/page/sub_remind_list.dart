@@ -167,7 +167,7 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10)),
                             ),
-                            // TODO : [SH] 시간 형식을 다시 정리해야 함. 한글 : 10월07일\n5:35 PM, 영문 : Oct. 7th\n5:35 PM
+                            //  [SH] 시간 형식을 다시 정리해야 함. 한글 : 10월07일\n5:35 PM, 영문 : Oct. 7th\n5:35 PM
                             child: Text(
                               Get.locale?.languageCode == 'ko'
                                   ? Jiffy(item.rAlarmTime)

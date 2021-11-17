@@ -115,7 +115,6 @@ class SettingUI extends StatelessWidget with AppbarHelper {
       return Scaffold(
         appBar: PreferredSize(
             preferredSize: Size.fromHeight(appbarHeight),
-            //SUBJECT : 앱바의 액션
             child: AppBar(
               automaticallyImplyLeading: false,
               elevation: 0.0,

@@ -103,7 +103,6 @@ class BoardItemWidget extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     //SUBEJCT: 오유
-                    //TODO : 이미지 조정하여 재설정해야 함
                     Container(
                       height: 28,
                       width: 24,

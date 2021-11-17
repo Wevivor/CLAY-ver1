@@ -67,7 +67,6 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     MySize().init(context);
 
     double topPadding = MediaQuery.of(context).padding.top + 0.0;
-    //TODO 컨텐트 타입.
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: true,
@@ -210,7 +209,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     }
 
     //SUBJECT: 컨텐츠
-    //TODO: 컨텐츠 수정하기
+    // 컨텐츠 수정하기
 
     await _contentsController.actionUpdateInfo(
       id: widget.item.contentsId,
@@ -673,7 +672,6 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
   }
 
   //SUBJECT : BS: 리마인드 알림 설정
-  //TODO: 작업범위 여부 고민
   void _actionBSRemindAlarm(BuildContext context, item) {
     Get.back();
     Get.lazyPut(() => ContentsController());

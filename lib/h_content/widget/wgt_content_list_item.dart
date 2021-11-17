@@ -87,9 +87,6 @@ class ContentListItemWidget extends StatelessWidget {
               ),
             ],
           ),
-          //SUBJECT : SH
-          //TODO : 위젯 없음.
-
           HanListTileNew(
             onTap: () {
               if (onTap != null) onTap();

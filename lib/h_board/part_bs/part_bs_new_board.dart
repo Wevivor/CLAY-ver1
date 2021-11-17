@@ -34,7 +34,7 @@ class BottomSheetNewBoard extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+    color: Color(0xFF707070),
   );
 
   @override
@@ -189,14 +189,11 @@ class BottomSheetNewBoard extends StatelessWidget
     }
 
     final _controller = BoardController.to;
-    //SUBJECT: 보드 타입 , 한글화 하면 안됨
-    //TODO :
     final exist = ['자기계발', '선택안함', 'LIKE', '일/공부']
         .firstWhere((element) => element == _category, orElse: () {
       return '';
     });
 
-    // SUBJECT : [SH] showMessage 같은 것은 영문으로 번역하지 않아도 될까요?
     if (exist == '') {
       LoadingController.to.isLoading = false;
       LoadingController.to.update();

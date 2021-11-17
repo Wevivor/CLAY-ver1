@@ -67,7 +67,6 @@ class ContentsController extends AbsItemController
     LoadingController.to.isLoading = true;
     return FirebaseFirestore.instance.runTransaction((transaction) async {
       final docRef = _instance.collection('$MENU_POS').doc();
-      //TODO 여러가지의 경우 info 인지 아닌지?
       final newItem = item.copyWith(
           contentsId: docRef.id,
           info: item.info.copyWith(contentsId: docRef.id));
@@ -94,7 +93,6 @@ class ContentsController extends AbsItemController
       LoadingController.to.isLoading = false;
     }).catchError((error) {
       LoadingController.to.isLoading = false;
-      //TODO: Exception에 추가함
       debugPrint("Failed to update user followers: $error");
       throw Exception('error');
     });
@@ -109,7 +107,6 @@ class ContentsController extends AbsItemController
       update();
       LoadingController.to.isLoading = false;
     }).catchError((error) {
-      //TODO: Exception에 추가함
       LoadingController.to.isLoading = false;
       debugPrint("Failed to update user followers: $error");
       throw Exception('error');
@@ -129,14 +126,10 @@ class ContentsController extends AbsItemController
 
       await updateEl(
           index: '/clay_contents/', id: item.contentsId, body: _itemJson);
-
-      //SUBJET: 에러 수정.
-      //TODO: 보드의 아이템 숫자조정
     }).then((value) {
       update();
       LoadingController.to.isLoading = false;
     }).catchError((error) {
-      //TODO: Exception에 추가함
       LoadingController.to.isLoading = false;
       debugPrint("Failed to update user followers: $error");
       throw Exception('error');
@@ -199,7 +192,6 @@ class ContentsController extends AbsItemController
       update();
       LoadingController.to.isLoading = false;
     }).catchError((error) {
-      //TODO: Exception에 추가함
       LoadingController.to.isLoading = false;
       debugPrint("Failed to update user followers: $error");
       throw Exception('error');
@@ -228,8 +220,6 @@ class ContentsController extends AbsItemController
       contentsUpdateDate: DateTime.now(),
     );
 
-    //SUBJECT comment 타입 변경 필요
-    //TODO: comment 타입 변경
     final _item = ContentsDto(
       boardInfo: boardInfo?.toDto(),
       userInfo: _profile.toDto(),

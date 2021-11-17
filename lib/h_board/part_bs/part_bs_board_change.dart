@@ -76,14 +76,11 @@ class BottomSheetBoardChange extends StatelessWidget
                   }
 
                   //SUBJECT: 컨텐츠
-                  //TODO: 링크로 추가하기
+                  // 링크로 추가하기
                   final _boardInfo = BoardListMySelectController.to.boardInfo;
 
                   final _controller = Get.put(ContentsController());
                   final _profile = HanUserInfoController.to.toProfile();
-
-                  //SUBJECT comment 타입 변경 필요
-                  //TODO: comment 타입 변경
 
                   final _item = current.copyWith(boardInfo: _boardInfo);
 

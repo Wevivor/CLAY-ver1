@@ -297,7 +297,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
   Future<void> _actionSubmit(BuildContext context) async {
     FocusScope.of(context).unfocus();
     final _comment = ContentsController.to.commentController.text;
-
+    //3차 검수시 요청으로 주석 처리함.
     // if (comment(_comment) != null || _comment.isEmpty) {
     //   AppHelper.showMessage(messages['comment'] ?? '');
     //   return;

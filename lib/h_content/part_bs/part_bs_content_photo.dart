@@ -45,7 +45,7 @@ class BottomSheetContentPhoto extends StatelessWidget
     fontWeight: FontWeight.w400,
     height: 1.17, // line height : 16.41px
     letterSpacing: -0.7, // letter spacing : -5%
-    color: Color(0xFF707070), // TODO : [SH] 피그마에 color 정보가 없음.
+    color: Color(0xFF707070),
   );
 
   @override
@@ -97,7 +97,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                           final _comment =
                               ContentsController.to.commentController.text;
 
-                          //TODO 검수과정 요청으로 주석 처리함.
+                          // 검수과정 요청으로 주석 처리함.
 
                           // if (comment(_comment) != null || _comment.isEmpty) {
                           //   LoadingController.to.isLoading = false;
@@ -115,7 +115,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                           }
 
                           //SUBJECT: 이미지 픽업
-                          //TODO: 이미지 쓰넴일 생성 및 업로드.
+                          // 이미지 쓰넴일 생성 및 업로드.
 
                           final _file = PickedImageController.to.file;
                           var _imgUrl = null;
@@ -133,7 +133,7 @@ class BottomSheetContentPhoto extends StatelessWidget
                           }
 
                           //SUBJECT: 컨텐츠
-                          //TODO: 링크로 추가하기
+                          // 링크로 추가하기
                           final _boardInfo =
                               BoardListMySelectController.to.boardInfo;
 
@@ -390,8 +390,6 @@ class BottomSheetContentPhoto extends StatelessWidget
       contentsUpdateDate: DateTime.now(),
     );
 
-    //SUBJECT 컨텐츠 타입 변경 필요
-    //TODO: comment 타입 변경
     final _item = ContentsDto(
       boardInfo: _boardInfo?.toDto(),
       userInfo: _profile.toDto(),

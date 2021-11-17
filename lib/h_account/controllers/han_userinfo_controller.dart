@@ -35,7 +35,7 @@ class HanUserInfoController extends GetxController
     if (profile != null)
       return profile;
 
-    ///TODO 사용자 정보
+    ///사용자 정보
     else
       throw Exception('사용자 정보 오류');
   }
@@ -137,9 +137,8 @@ class HanUserInfoController extends GetxController
       throw e;
     }
   }
-  //create the firestore user in users collection
-  //TODO 이미지 업로드 및 업데이터함.
 
+  // 이미지 업로드 및 업데이터함.
   Future<String?> actionUpload(File file) async {
     try {
       String basename = file.path.split('/').last;

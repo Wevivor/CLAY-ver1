@@ -203,8 +203,6 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
                 channel.id,
                 channel.name,
                 channelDescription: channel.description,
-                // TODO add a proper drawable resource to android, for now using
-                //      one that already exists in example app.
                 icon: 'assets/icon/ic_launcher.png',
               ),
             ));

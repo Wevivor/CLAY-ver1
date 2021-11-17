@@ -66,7 +66,6 @@ class RemindController extends AbsItemController with FbCommonModule {
       //     await insertFb(instance: _instance, path: MENU_POS, item: item);
 
       final docRef = _instance.collection('$MENU_POS').doc();
-      //TODO 여러가지의 경우 info 인지 아닌지?
       final newItem = item.copyWith(
         remindId: docRef.id,
       );

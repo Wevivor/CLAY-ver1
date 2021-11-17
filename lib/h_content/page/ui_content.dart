@@ -17,8 +17,7 @@ import 'package:get/get.dart';
 
 import 'part_content_all_pintest.dart';
 
-//SUBJECT: 컨텐츠 화면
-//TODO : 컨텐트
+//SUBJECT: 콘텐츠 화면
 
 // ignore: must_be_immutable
 class ContentUI extends StatefulWidget {
@@ -92,7 +91,6 @@ class _ContentUIState extends State<ContentUI>
                 width: 24.58,
                 onTap: () async {
                   //SUBJECT: 검색
-                  //TODO : 새로 만든 검색
 
                   final _controller = Get.put(FindController());
                   _controller.cache.clear();

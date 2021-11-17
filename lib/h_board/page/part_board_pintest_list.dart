@@ -40,7 +40,7 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
         if (!loading && cache.length == 0) {
           return Container(
             child: Center(
-              child: Text('아이템이 없습니다'), // TODO : [SH] 현재 번역하지 않음.
+              child: Text('아이템이 없습니다'), // [SH] 현재 번역하지 않음.
             ),
           );
         }

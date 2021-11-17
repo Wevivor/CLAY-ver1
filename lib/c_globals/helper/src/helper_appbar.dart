@@ -104,7 +104,7 @@ class AppbarHelper {
       currentBackPressTime = now;
 
       Fluttertoast.showToast(
-        msg: '한번 더 백키를 누르시면 종료합니다.', // TODO : [SH] 영문 번역
+        msg: '한번 더 백키를 누르시면 종료합니다.', // [SH] 영문 번역
         backgroundColor: Colors.black45,
         textColor: Colors.white,
       );

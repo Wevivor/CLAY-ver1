@@ -46,8 +46,6 @@ class ContentInitDtoHelper {
       contentsUpdateDate: DateTime.now(),
     );
 
-    //SUBJECT comment 타입 변경 필요
-    //TODO: comment 타입 변경
     final _item = ContentsDto(
       boardInfo: _boardInfo?.toDto(),
       userInfo: _profile.toDto(),
