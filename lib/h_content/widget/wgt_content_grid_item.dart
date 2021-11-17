@@ -15,6 +15,8 @@ class ContentGridItemWidget extends StatelessWidget {
   final onMore;
   final onTap;
   final nobadge;
+  final type;
+  final description;
   ContentGridItemWidget({
     this.title,
     this.date,
@@ -24,6 +26,8 @@ class ContentGridItemWidget extends StatelessWidget {
     this.onMore,
     this.onTap,
     this.nobadge,
+    required this.type,
+    required this.description,
   });
   static String stand_stock_image =
       'https://firebasestorage.googleapis.com/v0/b/clay-36ada.appspot.com/o/posts%2Fa00L2RmyOzYX2K5LTOJkdWyihXH3%2F9fb1361d-c090-48db-abdf-870233359fed%2F375.jpg?alt=media&token=9afcefbd-8c94-4020-b6b8-46704f01555e';
@@ -34,6 +38,13 @@ class ContentGridItemWidget extends StatelessWidget {
     fontWeight: FontWeight.normal,
     height: 0.88, // 11.45px,
     letterSpacing: -0.65, // -5%
+  );
+  final descriptionStyle = TextStyle(
+    fontSize: 11,
+    color: Color(0xFF707070),
+    fontWeight: FontWeight.normal,
+    height: 15 / 11, // 11.45px,
+    letterSpacing: -0.5, // -5%
   );
 
   String _icon = '';
@@ -57,21 +68,40 @@ class ContentGridItemWidget extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: Container(
-                decoration: DecoHelper.roundDeco.copyWith(
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  border: imgUrl == null
-                      ? Border.all(width: 1, color: Color(0xFFDEDEDE))
-                      : null,
-                  image: DecorationImage(
-                    fit: BoxFit.cover,
-                    image: Image.network(
-                      imgUrl ?? '$stand_stock_image',
-                    ).image,
-                  ),
-                ),
-              ),
+              child: type == 'memo'
+                  ? Container(
+                      width: double.infinity,
+                      decoration: DecoHelper.roundDeco.copyWith(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: imgUrl == null
+                            ? Border.all(width: 1, color: Color(0xFFDEDEDE))
+                            : null,
+                      ),
+                      padding: EdgeInsets.only(
+                          left: 14, top: 10, right: 10, bottom: 27),
+                      child: Text(
+                        description,
+                        style: descriptionStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 10,
+                      ),
+                    )
+                  : Container(
+                      decoration: DecoHelper.roundDeco.copyWith(
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        border: imgUrl == null
+                            ? Border.all(width: 1, color: Color(0xFFDEDEDE))
+                            : null,
+                        image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: Image.network(
+                            imgUrl ?? '$stand_stock_image',
+                          ).image,
+                        ),
+                      ),
+                    ),
             ),
             heightSpace(11.0),
             Row(

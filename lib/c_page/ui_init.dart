@@ -19,7 +19,7 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       Future.delayed(Duration(milliseconds: 50), () async {
-        await Jiffy.locale(Get.deviceLocale?.languageCode);
+        await Jiffy.locale(Get.locale?.languageCode);
         await HanUserInfoController.to.actionRead(AuthController.to.getUser);
         debugPrint(
             '[CLAY Share] : [ui_init: build] : ${ShareController.to.sharedText},${ShareController.to.isShare}');
@@ -46,7 +46,7 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
               ShareController.to.isShare
                   ? ShareController.to.sharedText
                   : '대기중...',
-              style: TextStyle(fontSize: 40, color: Colors.transparent),
+              style: TextStyle(fontSize: 0.0001, color: Colors.red),
             ),
           );
         }),

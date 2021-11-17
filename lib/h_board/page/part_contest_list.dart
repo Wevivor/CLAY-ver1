@@ -42,9 +42,6 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
 
               if (item == null) return Container();
 
-              //SUBJECT:보드 만들기
-              //TODO : 보드 위젯 이후에 작업
-
               return Column(
                 children: [
                   ContentListItemWidget(
@@ -65,6 +62,8 @@ class ContentListPART extends StatelessWidget with AppbarHelper {
                     imgUrl: item.info.contentsType == 'photo'
                         ? item.info.thumbnails
                         : item.info.contentsImages,
+                    type: item.info.contentsType,
+                    description: item.info.contentsDescription,
                     // holder: Const.assets + 'img/holder_img.png',
                   ),
                 ],

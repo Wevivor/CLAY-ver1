@@ -8,6 +8,7 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_kakao_login/flutter_kakao_login.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,8 @@ import 'c_page/bott_navi_controller.dart';
 import 'h_account/controllers/han_userinfo_controller.dart';
 import 'h_account/controllers/login_controller.dart';
 import 'h_account/controllers/push_controller.dart';
+import 'h_account/controllers/push_list_controller.dart';
+import 'h_account/controllers/remind_list_controller.dart';
 import 'h_account/page/ui_push_list.dart';
 import 'h_share/share_controller.dart';
 import 'h_share/ui_share_service.dart';
@@ -84,7 +87,7 @@ void main() async {
   // Const.isTest = false;
 
   await Firebase.initializeApp();
-  // await FlutterKakaoLogin().init("${Const.kakaoKey}");
+  await FlutterKakaoLogin().init("${Const.kakaoKey}");
   await initPushChannel();
   await initGetxController();
 
@@ -150,9 +153,17 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
   @override
   void initState() {
     super.initState();
-    Get.locale = Locale('en');
-    if (Get.deviceLocale?.languageCode == 'ko') {
-      Get.locale = Locale('ko');
+
+    //랭기지 로컬에서 읽어오기
+    final _language = GetStorage().read('language');
+    if (_language == null) {
+      GetStorage().write('language', 'en');
+      Get.locale = Locale('en');
+      if (Get.deviceLocale?.languageCode == 'ko') {
+        Get.locale = Locale('ko');
+      }
+    } else {
+      Get.locale = Locale(_language);
     }
 
     WidgetsBinding.instance!.addObserver(this);
@@ -179,7 +190,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     });
 
     //포그라운드 상태일 경우...
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
       RemoteNotification? notification = message.notification;
       AndroidNotification? android = message.notification?.android;
       if (notification != null && android != null && !kIsWeb) {
@@ -200,11 +211,21 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
         PushController.to.messageArguments = MessageArguments(message, true);
         final _data = message.data;
         debugPrint('[message][onMessage]${message.toString()}');
-        if (_data['route'] == 'remind')
+        if (_data['route'] == 'remind') {
+          final _controller = Get.put(RemindListController());
+
+          _controller.cache.clear();
+          await _controller.fetchItems();
+
           Get.toNamed('/remind_list');
+        }
 
         // Get.toNamed('');
         else if (_data['route'] == 'push') {
+          final _controller = Get.put(PushListController());
+
+          _controller.cache.clear();
+          await _controller.fetchItems();
           Get.toNamed('/push_list');
         }
       }
@@ -213,31 +234,52 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
     //Closed 상태에 신초받을경우
     FirebaseMessaging.instance
         .getInitialMessage()
-        .then((RemoteMessage? message) {
+        .then((RemoteMessage? message) async {
       if (message != null) {
         PushController.to.messageArguments = MessageArguments(message, true);
         debugPrint('[message][getInitialMessage]${message.toString()}');
         final _data = message.data;
-        if (_data['route'] == 'remind')
+        if (_data['route'] == 'remind') {
+          final _controller = Get.put(RemindListController());
+
+          _controller.cache.clear();
+          await _controller.fetchItems();
+
           Get.toNamed('/remind_list');
+        }
 
         // Get.toNamed('');
         else if (_data['route'] == 'push') {
+          final _controller = Get.put(PushListController());
+
+          _controller.cache.clear();
+          await _controller.fetchItems();
+
           Get.toNamed('/push_list');
         }
       }
     });
     //백그라운드 인 상태에서 푸시메시지에서 클릭이후 오픈시에.
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
       PushController.to.messageArguments = MessageArguments(message, true);
       debugPrint('[message][onMessageOpenedApp]${message.toString()}');
       final _data = message.data;
       debugPrint('[message][onMessageOpenedApp]${_data.toString()}');
-      if (_data['route'] == 'remind')
+      if (_data['route'] == 'remind') {
+        final _controller = Get.put(RemindListController());
+
+        _controller.cache.clear();
+        await _controller.fetchItems();
+
         Get.toNamed('/remind_list');
+      }
 
       // Get.toNamed('');
       else if (_data['route'] == 'push') {
+        final _controller = Get.put(PushListController());
+
+        _controller.cache.clear();
+        await _controller.fetchItems();
         Get.toNamed('/push_list');
       }
     });

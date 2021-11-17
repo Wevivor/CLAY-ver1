@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:sprintf/sprintf.dart';
 
 class PushItemWidget extends StatelessWidget {
   final iconUrl;
@@ -110,7 +111,7 @@ class PushItemWidget extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 ),
                 Text(
-                  subTitle + timetext,
+                  sprintf('%s %s', [subTitle ?? '', timetext]),
                   style: pushTextStyle,
                   overflow: TextOverflow.ellipsis,
                 ),

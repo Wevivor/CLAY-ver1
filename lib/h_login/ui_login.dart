@@ -55,7 +55,6 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                     ),
                   ),
                   heightSpace(16.0),
-
                   StackWithButton(
                     loadingId: 'K',
                     child: SnsWideWidget(
@@ -64,14 +63,6 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
                       onTap: _actionKakaoSignin,
                     ),
                   ),
-                  // heightSpace(16.0),
-                  // StackWithButton(
-                  //   child: SnsWideWidget(
-                  //     title: '',
-                  //     assetName: 'assets/sns_login/wide_kakao.png',
-                  //     onTap: _actionAppleSignin(),
-                  //   ),
-                  // ),
                   heightSpace(20.0),
                 ],
               ),
@@ -113,6 +104,8 @@ class LoginGoogleUI extends StatelessWidget with AppbarHelper {
 
     try {
       final googleUser = await AuthController.to.credntialWithGoogle();
+
+      debugPrint('[_actionGoogleSignin] : ${googleUser}');
 
       final _exist = await HanUserInfoController.to
           .actionExistByEmail(googleUser?.email ?? '', snsLogin: 'G');

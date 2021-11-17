@@ -16,6 +16,8 @@ class ContentListItemWidget extends StatelessWidget {
   final holder;
   final onMore;
   final onTap;
+  final type;
+  final description;
   ContentListItemWidget({
     this.title,
     this.date,
@@ -24,6 +26,8 @@ class ContentListItemWidget extends StatelessWidget {
     this.holder = 'images/no_image.png',
     this.onMore,
     this.onTap,
+    required this.type,
+    required this.description,
   });
   final titleStyle = TextStyle(
     fontSize: 16,
@@ -134,22 +138,49 @@ class ContentListItemWidget extends StatelessWidget {
     );
   }
 
+  final descriptionStyle = TextStyle(
+    fontSize: 11,
+    color: Color(0xFF707070),
+    fontWeight: FontWeight.normal,
+    height: 15 / 11, // 11.45px,
+    letterSpacing: -0.5, // -5%
+  );
+
   Widget boardItemTrail() {
-    return Container(
-      decoration: DecoHelper.roundDeco.copyWith(
-        color: Colors.white,
-      ),
-      width: 74,
-      height: 74,
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(5.0),
-        child: ImageWidget(
-          imgUrl: imgUrl,
-          holder: 'assets/img/holder_img.png',
-          width: 74,
-          height: 74,
-        ),
-      ),
-    );
+    return type == 'memo'
+        ? Container(
+            width: 74,
+            height: 74,
+            decoration: DecoHelper.roundDeco.copyWith(
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              border: imgUrl == null
+                  ? Border.all(width: 1, color: Color(0xFFDEDEDE))
+                  : null,
+            ),
+            padding: EdgeInsets.only(left: 7, top: 5, right: 5, bottom: 13),
+            child: Text(
+              description,
+              style: descriptionStyle,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 3,
+            ),
+          )
+        : Container(
+            decoration: DecoHelper.roundDeco.copyWith(
+              color: Colors.white,
+            ),
+            width: 74,
+            height: 74,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(5.0),
+              child: ImageWidget(
+                imgUrl: imgUrl,
+                holder: 'assets/img/holder_img.png',
+                width: 74,
+                height: 74,
+              ),
+            ),
+          );
   }
 }

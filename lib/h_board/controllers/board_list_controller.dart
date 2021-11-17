@@ -16,7 +16,6 @@ class BoardListController extends AbsListController
   }) : super(pageSize = 30) {
     _instance = FirebaseFirestore.instance;
     _selected.value = 0;
-    // fetchItems();
   }
   int get selected => _selected.value;
   set selected(int value) => _selected.value = value;

@@ -148,9 +148,8 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                       final size = controller.cache.length;
                       Remind item = cache[idx];
 
-                      //SUBJECT:보드 만들기
-                      //TODO : 보드 위젯 이후에 작업
-                      //TODO: 공유부분을 추가해야함. 고정을 추가해야 함
+                      debugPrint(
+                          '[ RemindListController ] : ${item.rAlarmTime}');
 
                       return Column(children: [
                         HanListTile(
@@ -160,8 +159,7 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                             width: 52,
                             height: 50,
                             alignment: Alignment.center,
-                            // padding:
-                            //     EdgeInsets.only(left: 6, top: 12, bottom: 12),'
+
                             margin: EdgeInsets.only(left: 2.0),
                             decoration: BoxDecoration(
                               color: Color(0xFFF6F6F6),
@@ -173,9 +171,9 @@ class RemindListSUB extends StatelessWidget with AppbarHelper, BSValidator {
                             child: Text(
                               Get.locale?.languageCode == 'ko'
                                   ? Jiffy(item.rAlarmTime)
-                                      .format('MM월dd일 HH:MM a')
+                                      .format('MM월dd일 hh:mm a')
                                   : Jiffy(item.rAlarmTime)
-                                      .format('MMM. do HH:MM a'),
+                                      .format('MMM. do hh:mm a'),
                               textAlign: TextAlign.center,
                               style: dateStyle,
                             ),

@@ -11,7 +11,9 @@ class SnsWideWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap(),
+      onTap: () {
+        if (onTap != null) onTap();
+      },
       child: Container(
         alignment: FractionalOffset.center,
         child: Stack(

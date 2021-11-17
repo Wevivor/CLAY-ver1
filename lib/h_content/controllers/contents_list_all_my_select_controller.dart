@@ -20,7 +20,6 @@ class ContentsListAllMySelectController extends AbsListController
     _instance = FirebaseFirestore.instance;
     _selected.value = -1;
     boardInfo = null;
-    // fetchItems();
   }
   int get selected => _selected.value;
   set selected(int value) => _selected.value = value;

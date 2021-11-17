@@ -57,6 +57,7 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
 
                   final _title = 'title'.tr;
                   final _userinfo = HanUserInfoController.to.userInfo;
+                  GetStorage().write('language', 'ko');
                   await HanUserInfoController.to
                       .actionUpdate(_userinfo!.copyWith(locale: 'ko').toDto());
                   debugPrint('================= Locale: ${_title}');
@@ -78,6 +79,8 @@ class LanguageSUB extends StatelessWidget with AppbarHelper {
 
                   final _title = 'title'.tr;
                   final _userinfo = HanUserInfoController.to.userInfo;
+                  GetStorage().write('language', 'en');
+
                   await HanUserInfoController.to
                       .actionUpdate(_userinfo!.copyWith(locale: 'en').toDto());
 

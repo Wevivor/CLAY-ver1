@@ -18,7 +18,6 @@ class BoardListMySelectController extends AbsListController
     _instance = FirebaseFirestore.instance;
     _selected.value = -1;
     boardInfo = null;
-    // fetchItems();
   }
   int get selected => _selected.value;
   set selected(int value) => _selected.value = value;
@@ -39,6 +38,12 @@ class BoardListMySelectController extends AbsListController
               "match": {"board_creator.user_id": AuthController.to.getUser?.uid}
             }
           ],
+          if (searchTerm != null && searchTerm.isNotEmpty)
+            "must_not": [
+              {
+                "match": {"info.board_id": searchTerm}
+              }
+            ],
         },
       },
       "sort": [

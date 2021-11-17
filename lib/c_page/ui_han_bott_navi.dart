@@ -10,6 +10,7 @@ import 'package:clay/h_board/page/ui_board.dart';
 import 'package:clay/h_board/part_bs/part_bs_new_board.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
+import 'package:clay/h_content/controllers/contents_list_all_my_select_controller.dart';
 import 'package:clay/h_content/page/ui_content.dart';
 import 'package:clay/h_content/part_bs/part_bs.dart';
 import 'package:flutter/material.dart';
@@ -85,9 +86,16 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                       holder: _index == 0
                           ? 'assets/icon/myboard_on.png'
                           : 'assets/icon/myboard_off.png',
-                      onTap: () {
+                      onTap: () async {
+                        Get.lazyPut(() => ContentsListAllMySelectController());
+                        ContentsListAllMySelectController.to.selected = 0;
+
+                        BoardListController.to.cache.clear();
+                        await BoardListController.to.fetchItems();
                         BottomNaviController.to.index = 0;
                         BottomNaviController.to.update();
+
+                        BoardListController.to.selected = 0;
                       },
                     ),
                   ),
@@ -100,11 +108,15 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                         ? 'assets/icon/mycontents_on.png'
                         : 'assets/icon/mycontents_off.png',
                     onTap: () async {
+                      Get.lazyPut(() => ContentsListAllMySelectController());
+                      ContentsListAllMySelectController.to.selected = 0;
+
                       final contentAllListController = Get.put(
                         ContentAllListController(),
                       );
                       contentAllListController.cache.clear();
                       await contentAllListController.fetchItems();
+
                       BottomNaviController.to.index = 1;
                       BottomNaviController.to.update();
                     },
@@ -154,10 +166,10 @@ class _HanBottomNavigationBarState extends State<HanBottomNavigationBar>
                     backgroundColor: Colors.black,
                     // foregroundColor: Colors.white,
                     splashColor: Colors.black,
-                    onPressed: () {
+                    onPressed: () async {
                       Get.put(BoardListMySelectController());
                       BoardListMySelectController.to.cache.clear();
-                      BoardListMySelectController.to.fetchItems();
+                      await BoardListMySelectController.to.fetchItems();
                       _showBS(context, vwBoardMenu(context));
                     },
                   ),

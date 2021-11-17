@@ -207,10 +207,11 @@ class BottomSheetContentLink extends StatelessWidget
     }
     final _comment = ContentsController.to.commentController.text;
 
-    if (comment(_comment) != null || _comment.isEmpty) {
-      AppHelper.showMessage(messages['comment'] ?? '');
-      return;
-    }
+    //TODO 검수과정에서 요청으로 주석처리함
+    // if (comment(_comment) != null || _comment.isEmpty) {
+    //   AppHelper.showMessage(messages['comment'] ?? '');
+    //   return;
+    // }
 
     if (BoardListMySelectController.to.selected < 0) {
       AppHelper.showMessage(messages['board_select'] ?? '');

@@ -127,10 +127,10 @@ class _BNBarWidgetState extends State<BNBarWidget> with AppbarHelper {
           backgroundColor: Colors.black,
           // foregroundColor: Colors.white,
           splashColor: Colors.black,
-          onPressed: () {
+          onPressed: () async {
             Get.put(BoardListMySelectController());
             BoardListMySelectController.to.cache.clear();
-            BoardListMySelectController.to.fetchItems();
+            await BoardListMySelectController.to.fetchItems();
             // _showBS(context, vwBoardMenu(context));
           },
         ),

@@ -51,6 +51,10 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
         widget.item.info.contentsComment ?? '';
     _contentsController.titleController.text =
         widget.item.info.contentsTitle ?? '';
+
+    if (widget.item.info.contentsType == 'memo')
+      _contentsController.memoController.text =
+          widget.item.info.contentsDescription ?? '';
   }
 
   @override
@@ -182,6 +186,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
           AppHelper.showMessage(messages['comment'] ?? '');
           return;
         }
+
         _info = widget.item.info.copyWith(
           contentsTitle: _title,
           contentsComment: _comment,
@@ -190,8 +195,15 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
         break;
 
       case 2:
+        final _memo = ContentsController.to.memoController.text;
+
+        if (memo(_memo) != null || _memo.isEmpty) {
+          AppHelper.showMessage(messages['_memo'] ?? '');
+          return;
+        }
         _info = widget.item.info.copyWith(
           contentsTitle: _title,
+          contentsDescription: _memo,
         );
 
         break;
@@ -265,26 +277,33 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
           ),
         ),
         heightSpace(20.0),
-        Expanded(
-          child: Container(
-            color: Color(0xFFF9F9F9),
-            padding: EdgeInsets.all(25.0),
-            width: MediaQuery.of(context).size.width,
-            //height: 189,
-            child: Text(
-              widget.item.info.contentsDescription ?? '',
-              style: baseStyle.copyWith(
-                color: Color(0xFF707070),
-                fontFamily:
-                    Get.locale?.languageCode == 'ko' ? 'Roboto' : 'Avenir',
-                fontSize: 14,
-                fontWeight: FontWeight.w400,
-                height: Get.locale?.languageCode == 'ko'
-                    ? 1.43
-                    : 1.43, // 20px, 20px
-                letterSpacing: -0.7, // -5%
+        Container(
+          color: Color(0xffF9F9F9),
+          height: 300,
+          padding: EdgeInsets.only(left: 19.0, right: 19.0),
+          child: TextFormField(
+            maxLines: 15,
+            onTap: () {},
+            // style: accountEditTextStyle,
+            decoration: kInputDecoration.copyWith(
+              fillColor: Color(0xFFF6F6F6),
+              hintText: 'board.bs.sub.pholder.memo'.tr,
+              hintStyle: msgStyle,
+              isDense: true,
+              errorText: null,
+              errorStyle: TextStyle(
+                color: Colors.transparent,
+                fontSize: 0,
+                height: 0,
               ),
             ),
+            keyboardType: TextInputType.multiline,
+            textInputAction: TextInputAction.newline,
+            onEditingComplete: () => node.unfocus(),
+            controller: ContentsController.to.memoController,
+            validator: (value) {
+              return memo(value);
+            },
           ),
         ),
       ],
@@ -633,8 +652,6 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
       ],
     );
   }
-//SUBJECT : BS: 상단 고정
-  //TODO: 데이터베이스고정.
 
   Future<void> _actionBSFixed(BuildContext context, item) async {
     final _contentsCtl = Get.put(ContentsController());
@@ -649,8 +666,6 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     });
   }
 
-  //SUBJECT: 링크
-  //TODO: 수정해야 함.
   Future<void> _actionBSShare(BuildContext context, item) async {
     Get.back();
     final _boardUrl = sprintf('%s/%s', [Const.clayBaseUrl, item.contentsId]);
@@ -681,7 +696,7 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
     final _controller = Get.put(BoardListMySelectController());
     _controller.cache.clear();
     _controller.selected = -1;
-    _controller.fetchItems();
+    await _controller.fetchItems();
     _showBS(
         context,
         BottomSheetBoardChange(

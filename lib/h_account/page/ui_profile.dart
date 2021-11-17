@@ -50,14 +50,11 @@ class _ProfileUIState extends State<ProfileUI>
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(appbarHeight),
-        //SUBJECT : 앱바의 액션
         child: AppBar(
           automaticallyImplyLeading: true,
           elevation: 0.0,
           leading: IconButton(
-            onPressed: () {
-              Get.back();
-            },
+            onPressed: () => Get.back(),
             icon: Icon(Icons.chevron_left),
           ),
           centerTitle: true,
@@ -72,9 +69,7 @@ class _ProfileUIState extends State<ProfileUI>
             ImageButton(
                 height: 17.0,
                 width: 15.0,
-                onTap: () async {
-                  Get.toNamed('/push_list');
-                },
+                onTap: () => _gotoPush(context),
                 holder: _isPush > 0
                     ? 'assets/icon/ph_bell-ringing_red.png'
                     : 'assets/icon/ph_bell-ringing.png'),
@@ -93,8 +88,6 @@ class _ProfileUIState extends State<ProfileUI>
                 children: <Widget>[
                   heightSpace(27.0), // 83 - preferredSize(56)
 
-                  //SUBJECT: 프로필 정보
-                  //TODO: 프로필 정보
                   //// ---------------------------------
                   /// 프로파일 정보
                   //// ---------------------------------
@@ -103,9 +96,6 @@ class _ProfileUIState extends State<ProfileUI>
                     padding: EdgeInsets.only(left: 10, right: 0.0),
                     child: HanListTile(
                       leading: ImageCircleWidget(
-                        onTap: () {
-                          // if (onTap != null) onTap!();
-                        },
                         isAll: true,
                         height: 60,
                         width: 60,
@@ -245,8 +235,6 @@ class _ProfileUIState extends State<ProfileUI>
                           //공지사항
                           ListTile(
                             onTap: () {
-                              //SUBJECT: 번역, 스타일
-                              //WORKER: SH
                               Get.to(() => WebviewSUB(
                                   url: 'http://clayapp.co/notice/',
                                   title: 'account.appbar.title.announce'.tr));
@@ -263,10 +251,7 @@ class _ProfileUIState extends State<ProfileUI>
 
                           //설정
                           ListTile(
-                            onTap: () {
-                              Get.lazyPut(() => AlarmController());
-                              Get.toNamed('/setting');
-                            },
+                            onTap: () => _gotoSetting(context),
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,
                             title: vaTitle('account.body.subtitle.setting'.tr),
@@ -279,13 +264,7 @@ class _ProfileUIState extends State<ProfileUI>
 
                           //리마인드 알림 설정
                           ListTile(
-                            onTap: () {
-                              final _ctl = Get.put(RemindListController());
-                              _ctl.cache.clear();
-                              _ctl.fetchItems();
-
-                              Get.toNamed('/remind_list');
-                            },
+                            onTap: () => _gotoRemind(context),
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,
                             title: vaTitle('account.body.subtitle.reminder'.tr),
@@ -298,14 +277,9 @@ class _ProfileUIState extends State<ProfileUI>
 
                           //문의하기 / 도움말
                           ListTile(
-                            onTap: () {
-                              //SUBJECT: 번역, 스타일
-                              //WORKER: SH
-                              //TODO: 자료가 없어서 미루어 둠.
-                              Get.to(() => WebviewSUB(
-                                  url: 'http://clayapp.co/notice/',
-                                  title: 'account.body.subtitle.help'.tr));
-                            },
+                            onTap: () => Get.to(() => WebviewSUB(
+                                url: 'http://clayapp.co/notice/',
+                                title: 'account.body.subtitle.help'.tr)),
                             contentPadding: EdgeInsets.only(left: 20),
                             dense: true,
                             title: vaTitle('account.body.subtitle.help'.tr),
@@ -322,24 +296,7 @@ class _ProfileUIState extends State<ProfileUI>
                         shrinkWrap: true,
                         children: [
                           ListTile(
-                            onTap: () async {
-                              final _loginKind =
-                                  HanUserInfoController.to.userInfo?.snsLogin;
-
-                              if ('K' == _loginKind) {
-                                FlutterKakaoLogin kakaoSignIn =
-                                    new FlutterKakaoLogin();
-
-                                kakaoSignIn.logOut();
-                              } else if ('G' == _loginKind) {
-                                GoogleSignIn googleSignIn = new GoogleSignIn();
-                                googleSignIn.isSignedIn().then((value) {
-                                  if (value) googleSignIn.signOut();
-                                });
-                              }
-                              await FirebaseAuth.instance.signOut();
-                              Get.offAllNamed('start');
-                            },
+                            onTap: () => _gotoLogin(context),
                             contentPadding: EdgeInsets.zero,
                             dense: true,
                             title: Container(
@@ -387,6 +344,48 @@ class _ProfileUIState extends State<ProfileUI>
       ),
       // bottomNavigationBar: BNBarWidget(),
     );
+  }
+
+  void _gotoRemind(BuildContext context) {
+    final _ctl = Get.put(RemindListController());
+    _ctl.cache.clear();
+    _ctl.fetchItems();
+
+    Get.toNamed('/remind_list');
+  }
+
+  Future<void> _gotoSetting(BuildContext context) async {
+    Get.lazyPut(() => AlarmController());
+    Get.toNamed('/setting');
+    return;
+  }
+
+  Future<void> _gotoPush(BuildContext context) async {
+    final _controller = Get.put(PushListController());
+
+    _controller.cache.clear();
+    await _controller.fetchItems();
+
+    Get.toNamed('/push_list');
+    return;
+  }
+
+  Future<void> _gotoLogin(BuildContext context) async {
+    final _loginKind = HanUserInfoController.to.userInfo?.snsLogin;
+
+    if ('K' == _loginKind) {
+      FlutterKakaoLogin kakaoSignIn = new FlutterKakaoLogin();
+
+      kakaoSignIn.logOut();
+    } else if ('G' == _loginKind) {
+      GoogleSignIn googleSignIn = new GoogleSignIn();
+      googleSignIn.isSignedIn().then((value) {
+        if (value) googleSignIn.signOut();
+      });
+    }
+    await FirebaseAuth.instance.signOut();
+    Get.offAllNamed('/login');
+    return;
   }
 
   Widget vwTitle(final title) {

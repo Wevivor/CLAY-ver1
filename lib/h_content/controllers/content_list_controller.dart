@@ -17,7 +17,6 @@ class ContentListController extends AbsListController
     _instance = FirebaseFirestore.instance;
     _storage = FirebaseStorage.instance;
     _boardId = '';
-    // fetchItems();
   }
   String get boardId => _boardId;
   set boardId(String value) => _boardId = value;

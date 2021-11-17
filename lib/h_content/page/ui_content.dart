@@ -42,9 +42,9 @@ class _ContentUIState extends State<ContentUI>
     contentAllListController.cache.clear();
     await contentAllListController.fetchItems();
 
+    contentsListAllMySelectController.selected = 0;
     contentsListAllMySelectController.cache.clear();
     await contentsListAllMySelectController.fetchItems();
-    contentsListAllMySelectController.selected = 0;
   }
 
   final contentsListAllMySelectController = Get.put(

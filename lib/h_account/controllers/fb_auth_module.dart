@@ -16,6 +16,7 @@ mixin FbAuthModule {
     // final _sigin = Const.getGoogleSign();
     final _sigin = GoogleSignIn();
     final googleUser = await _sigin.signIn();
+
     if (googleUser == null) {
       throw FirebaseAuthException(
           code: 'user-cancelled',

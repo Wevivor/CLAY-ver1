@@ -7,6 +7,7 @@ import 'package:clay/h_board/controllers/board_controller.dart';
 import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/models/boards.dart';
+import 'package:clay/h_board/page/part_contest_list.dart';
 import 'package:clay/h_board/part_bs/helper_bs_function.dart';
 import 'package:clay/h_board/part_bs/part_bs.dart';
 import 'package:clay/h_board/part_bs/part_bs_share.dart';
@@ -14,7 +15,6 @@ import 'package:clay/h_content/controllers/content_list_controller.dart';
 import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_content/models/contents.dart';
 import 'package:clay/h_content/page/part_content_header.dart';
-import 'package:clay/h_content/page/part_content_list.dart';
 import 'package:clay/h_content/part_bs/part_bs.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -338,6 +338,8 @@ class _BoardContentUIState extends State<BoardContentUI>
       _url = sprintf('%s', [item.info.contentsImages]);
     else if (item.info.contentsType == 'link')
       _url = sprintf('%s', [item.info.contentsUrl]);
+    else if (item.info.contentsType == 'memo')
+      _url = sprintf('%s', [item.info.contentsDescription]);
     else
       _url = sprintf('%s/%s', [Const.clayBaseUrl, item.info.contentsId]);
 
@@ -368,7 +370,7 @@ class _BoardContentUIState extends State<BoardContentUI>
     final _controller = Get.put(BoardListMySelectController());
     _controller.cache.clear();
     _controller.selected = -1;
-    _controller.fetchItems();
+    await _controller.fetchItems();
     showBS(
         context,
         BottomSheetBoardChange(

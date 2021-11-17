@@ -298,10 +298,10 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     FocusScope.of(context).unfocus();
     final _comment = ContentsController.to.commentController.text;
 
-    if (comment(_comment) != null || _comment.isEmpty) {
-      AppHelper.showMessage(messages['comment'] ?? '');
-      return;
-    }
+    // if (comment(_comment) != null || _comment.isEmpty) {
+    //   AppHelper.showMessage(messages['comment'] ?? '');
+    //   return;
+    // }
 
     if (BoardListMySelectController.to.selected < 0) {
       AppHelper.showMessage(messages['board_select'] ?? '');

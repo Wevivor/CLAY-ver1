@@ -97,12 +97,14 @@ class BottomSheetContentPhoto extends StatelessWidget
                           final _comment =
                               ContentsController.to.commentController.text;
 
-                          if (comment(_comment) != null || _comment.isEmpty) {
-                            LoadingController.to.isLoading = false;
-                            LoadingController.to.update();
-                            AppHelper.showMessage(messages['comment'] ?? '');
-                            return;
-                          }
+                          //TODO 검수과정 요청으로 주석 처리함.
+
+                          // if (comment(_comment) != null || _comment.isEmpty) {
+                          //   LoadingController.to.isLoading = false;
+                          //   LoadingController.to.update();
+                          //   AppHelper.showMessage(messages['comment'] ?? '');
+                          //   return;
+                          // }
 
                           if (BoardListMySelectController.to.selected < 0) {
                             LoadingController.to.isLoading = false;
@@ -148,11 +150,6 @@ class BottomSheetContentPhoto extends StatelessWidget
                           LoadingController.to.isLoading = false;
                           LoadingController.to.update();
 
-                          // Get.lazyPut(() => ContentAllListController());
-                          // ContentAllListController.to.cache.clear();
-                          // await ContentAllListController.to.fetchItems();
-                          // BoardListController.to.cache.clear();
-                          // await BoardListController.to.fetchItems();
                           Get.back();
                           if (onDone != null) onDone();
                         },

@@ -26,7 +26,6 @@ class CupertinoSearchDelegate extends AbstractPlatformSearchDelegate {
   }
 
   Widget buildResults(BuildContext context) {
-    fetchSearch();
     return GetBuilder<FindController>(
         builder: (_) => SearchInitPART(
               delegate: this,
@@ -37,7 +36,6 @@ class CupertinoSearchDelegate extends AbstractPlatformSearchDelegate {
   @override
   Widget buildSuggestions(BuildContext context) {
     fetchSearch();
-    // return GetBuilder<FindController>(builder: (_) => SearchInitPART());
     return GetBuilder<FindController>(
         builder: (_) => SearchInitPART(
               delegate: this,
@@ -93,6 +91,7 @@ class CupertinoSearchDelegate extends AbstractPlatformSearchDelegate {
             ), // 15.23px, 17.76px,
             focusNode: focusNode,
             onSubmitted: (String _) {
+              search(query);
               showResults(context);
             },
           ),

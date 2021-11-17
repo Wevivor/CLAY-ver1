@@ -85,6 +85,8 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
             return Container(
               padding: EdgeInsets.only(top: 6.0),
               child: ContentGridItemWidget(
+                type: item.info.contentsType,
+                description: item.info.contentsDescription,
                 nobadge: item.boardInfo?.boardBadge ?? '선택안함',
                 title: item.info.contentsTitle,
                 imgUrl: item.info.contentsType == 'photo'
@@ -108,8 +110,13 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
               return Container(
                 padding: EdgeInsets.only(top: 6.0),
                 child: ContentGridItemWidget(
+                  type: item.info.contentsType,
+                  description: item.info.contentsDescription,
                   title: item.info.contentsTitle,
-                  imgUrl: item.info.contentsImages,
+                  imgUrl: item.info.contentsType == 'photo'
+                      ? item.info.thumbnails
+                      : item.info.contentsImages,
+                  // imgUrl: item.info.contentsImages,
                   // imgUrl: item.info.thumbnails,
                   contentText: item.info.contentsTitle,
                   onTap: () {
@@ -216,7 +223,12 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
   //TODO: 수정해야 함.
   Future<void> _actionBSShare(BuildContext context, item) async {
     Get.back();
-    final _boardUrl = sprintf('%s', [item.info.contentsUrl]);
+
+    var _boardUrl = sprintf('%s', [item.info.contentsUrl]);
+    if (item.info.contentsType == 'memo') {
+      _boardUrl = sprintf('%s', [item.info.contentsDescription]);
+    }
+
     await share.Share.share(_boardUrl);
   }
 
@@ -244,7 +256,7 @@ class ContentAllPintestPART extends StatelessWidget with AppbarHelper {
     final _controller = Get.put(BoardListMySelectController());
     _controller.cache.clear();
     _controller.selected = -1;
-    _controller.fetchItems();
+    await _controller.fetchItems(term: item.boardInfo.boardId);
     _showBS(
         context,
         BottomSheetBoardChange(

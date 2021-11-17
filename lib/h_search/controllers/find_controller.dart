@@ -33,6 +33,7 @@ class FindController extends AbsListController with ElCommonModule {
     ///----- BOARD 에서 검색 ------------------
     var brdQueryList = [
       {
+        // "match_all": {}
         "match": {"board_creator.user_id": AuthController.to.getUser?.uid}
       }
     ];
@@ -64,6 +65,7 @@ class FindController extends AbsListController with ElCommonModule {
     //보드 카운드 입력하기
     var countList = [
       {
+        // "match_all": {}
         "match": {"user_info.user_id": AuthController.to.getUser?.uid}
       }
     ];

@@ -76,24 +76,20 @@ class BoardPintestListPART extends StatelessWidget with AppbarHelper {
                 Get.to(() => PostSUB(item: item, parentController: controller));
               },
               nobadge: '',
+              type: item.info.contentsType,
+              description: item.info.contentsDescription,
               title: item.info.contentsTitle,
               imgUrl: item.info.contentsType == 'photo'
                   ? item.info.thumbnails
                   : item.info.contentsImages,
               contentText: item.info.contentsTitle,
-              // imgUrl: item.info.thumbnails,
-
-              onMore: () {
+              onMore: () async {
                 final _controller = Get.put(BoardListMySelectController());
                 _controller.cache.clear();
                 _controller.selected = -1;
-                _controller.fetchItems();
+                await _controller.fetchItems();
 
                 if (onMore != null) onMore(item);
-                // _showBS(
-                //   context,
-                //   vwBoardMenu(context, item),
-                // );
               },
             );
           },
