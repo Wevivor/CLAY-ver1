@@ -85,6 +85,7 @@ class ContentAllListController extends AbsListController
         cache[existIndex] = item;
       }
     }
+    update();
   }
 
   Future<void> actionRefresh() async {

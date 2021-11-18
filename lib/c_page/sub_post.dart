@@ -6,6 +6,7 @@ import 'package:clay/c_globals/utils/utils.dart';
 import 'package:clay/c_globals/widgets/widgets.dart';
 import 'package:clay/h_account/controllers/remind_controller.dart';
 import 'package:clay/h_account/controllers/remind_list_controller.dart';
+import 'package:clay/h_board/controllers/board_list_controller.dart';
 import 'package:clay/h_board/controllers/board_list_my_select_controller.dart';
 import 'package:clay/h_board/part_bs/part_bs.dart';
 import 'package:clay/h_content/controllers/content_all_list_controller.dart';
@@ -186,10 +187,11 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
           return;
         }
 
-        _info = widget.item.info.copyWith(
+        _info = widget.item.copyWith(
+            info: widget.item.info.copyWith(
           contentsTitle: _title,
           contentsComment: _comment,
-        );
+        ));
 
         break;
 
@@ -200,22 +202,23 @@ class _PostSUBState extends State<PostSUB> with AppbarHelper, BSValidator {
           AppHelper.showMessage(messages['_memo'] ?? '');
           return;
         }
-        _info = widget.item.info.copyWith(
+        _info = widget.item.copyWith(
+            info: widget.item.info.copyWith(
           contentsTitle: _title,
           contentsDescription: _memo,
-        );
+        ));
 
         break;
     }
 
     //SUBJECT: 컨텐츠
     // 컨텐츠 수정하기
-
-    await _contentsController.actionUpdateInfo(
-      id: widget.item.contentsId,
-      info: _info.toDto(),
+    await _contentsController.actionContentsUpdate(
+      // id: widget.item.contentsId,
+      _info.toDto(),
     );
-    widget.parentController.actionUpdateItem(widget.item.copyWith(info: _info));
+    widget.parentController
+        .actionUpdateItem(widget.item.copyWith(info: _info.info));
 
     Get.back();
   }
