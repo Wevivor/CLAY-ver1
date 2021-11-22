@@ -2,6 +2,7 @@ import 'package:clay/c_config/config.dart';
 import 'package:clay/c_globals/controllers/src/auth_controller.dart';
 import 'package:clay/c_globals/helper/helpers.dart';
 import 'package:clay/h_account/controllers/han_userinfo_controller.dart';
+import 'package:clay/h_content/controllers/contents_controller.dart';
 import 'package:clay/h_share/share_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,6 +17,8 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
   @override
   void initState() {
     super.initState();
+    Get.lazyPut(() => ContentsController());
+    ContentsController.to.initTextController();
 
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       Future.delayed(Duration(milliseconds: 50), () async {
@@ -23,8 +26,10 @@ class _InitUIState extends State<InitUI> with AppbarHelper {
         await HanUserInfoController.to.actionRead(AuthController.to.getUser);
         debugPrint(
             '[CLAY Share] : [ui_init: build] : ${ShareController.to.sharedText},${ShareController.to.isShare}');
-        if (ShareController.to.isShare) {
+        if (ShareController.to.isShare &&
+            ShareController.to.sharedText.isNotEmpty) {
           debugPrint("[ onAddPostFrameCallback] ${ShareController.to.isShare}");
+
           AppHelper.goto('/share_service');
         } else {
           var route = '/main_menu';

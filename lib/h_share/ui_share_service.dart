@@ -28,6 +28,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     Get.put(ContentsController());
     Get.put(BoardController());
     Get.put(BoardListMySelectController());
+    ContentsController.to.initTextController();
     initFetch();
     debugPrint('ShareServiceUI  ======== ');
     // delaySetSysyemUIOverlays(500);
@@ -310,6 +311,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     isExit = false;
 
     final _link = ShareController.to.sharedText;
+    debugPrint('[_actionSubmit] [LINK] : ${_link}');
     var data = await MetadataFetch.extract(_link);
 
     //SUBJECT: 컨텐츠
@@ -329,6 +331,7 @@ class _ShareServiceUIState extends State<ShareServiceUI>
     );
 
     await _controller.actionIns(_item);
+
     Get.back();
     await DialogHelper.MessageDialog(context,
         (context) => ShareDoneDialog(boardName: _boardInfo?.boardName ?? ''));

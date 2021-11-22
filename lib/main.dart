@@ -304,11 +304,13 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver {
       ShareController.to.sharedText = sharedData;
       ShareController.to.isShare = true;
       ShareController.to.update();
-    } else {
-      ShareController.to.sharedText = '';
-      ShareController.to.isShare = false;
-      // ShareController.to.update();
     }
+
+    // else {
+    //   ShareController.to.sharedText = '';
+    //   ShareController.to.isShare = false;
+    //   // ShareController.to.update();
+    // }
   }
 
   // @override
